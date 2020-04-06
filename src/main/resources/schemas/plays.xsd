@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.boardgamegeek.com/xmlapi2/plays"
+           xmlns:plays="http://www.boardgamegeek.com/xmlapi2/plays"
+           elementFormDefault="qualified">
+
+  <xs:simpleType name="positiveInteger">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="booleanInteger">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="localDateString">
+    <xs:restriction base="xs:string">
+      <!-- 2020-01-11 -->
+      <xs:pattern
+          value="[1-9][0-9]{3}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])"/>
+      <xs:length value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="itemTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="thing"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="itemSubtypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="boardgame"/>
+      <xs:enumeration value="boardgameexpansion"/>
+      <xs:enumeration value="boardgameaccessory"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="stringValue">
+    <xs:attribute name="value" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="subtypeValue">
+    <xs:attribute name="value" type="plays:itemSubtypeEnum"/>
+  </xs:complexType>
+
+  <xs:complexType name="subtypes">
+    <xs:sequence>
+      <xs:element name="subtype" type="plays:subtypeValue" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="item">
+    <xs:sequence>
+      <xs:element name="subtypes" type="plays:subtypes"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="objecttype" type="plays:itemTypeEnum"/>
+    <xs:attribute name="objectid" type="xs:integer"/>
+  </xs:complexType>
+
+  <xs:complexType name="player">
+    <xs:attribute name="username" type="xs:string"/>
+    <xs:attribute name="userid" type="xs:integer"/>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="startposition" type="xs:integer"/>
+    <xs:attribute name="color" type="xs:string"/>
+    <xs:attribute name="score" type="xs:integer"/>
+    <xs:attribute name="new" type="plays:booleanInteger"/>
+    <xs:attribute name="rating" type="xs:positiveInteger"/>
+    <xs:attribute name="win" type="plays:booleanInteger"/>
+  </xs:complexType>
+
+  <xs:complexType name="players">
+    <xs:sequence>
+      <xs:element name="player" type="plays:player" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="play">
+    <xs:sequence>
+      <xs:element name="item" type="plays:item"/>
+      <xs:element name="comments" type="xs:string" minOccurs="0"/>
+      <xs:element name="players" type="plays:players" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:integer"/>
+    <xs:attribute name="date" type="plays:localDateString"/>
+    <xs:attribute name="quantity" type="xs:positiveInteger"/>
+    <xs:attribute name="length" type="plays:positiveInteger"/>
+    <xs:attribute name="incomplete" type="plays:booleanInteger"/>
+    <xs:attribute name="nowinstats" type="plays:booleanInteger"/>
+    <xs:attribute name="location" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="plays">
+    <xs:sequence>
+      <xs:element name="play" type="plays:play" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="username" type="xs:string"/>
+    <xs:attribute name="userid" type="xs:integer"/>
+    <xs:attribute name="total" type="plays:positiveInteger"/>
+    <xs:attribute name="page" type="xs:positiveInteger"/>
+    <xs:attribute name="termsofuse" type="xs:anyURI"/>
+  </xs:complexType>
+
+  <xs:element name="plays" type="plays:plays"/>
+
+</xs:schema>

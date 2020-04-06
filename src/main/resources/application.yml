@@ -1,0 +1,8 @@
+server:
+  port: 8088
+  servlet:
+    context-path: /bgg-api
+
+management:
+  serveR:
+    port: 8089
