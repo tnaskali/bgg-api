@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:search="http://www.boardgamegeek.com/xmlapi2/search"
+           targetNamespace="http://www.boardgamegeek.com/xmlapi2/search"
+           elementFormDefault="qualified">
+
+  <xs:simpleType name="positiveInteger">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="nameTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="primary"/>
+      <xs:enumeration value="alternate"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="typeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="boardgame"/>
+      <xs:enumeration value="boardgameexpansion"/>
+      <xs:enumeration value="boardgameaccessory"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="yearString">
+    <xs:restriction base="xs:string">
+      <!-- 2020 -->
+      <xs:pattern value="[1-9][0-9]{3}"/>
+      <xs:length value="4"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="yearStringValue">
+    <xs:attribute name="value" type="search:yearString"/>
+  </xs:complexType>
+
+  <xs:complexType name="name">
+    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="value" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="item">
+    <xs:sequence>
+      <xs:element name="name" type="search:name"/>
+      <xs:element name="yearpublished" type="search:yearString" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="id" type="xs:integer"/>
+  </xs:complexType>
+
+  <xs:complexType name="items">
+    <xs:sequence>
+      <xs:element name="item" type="search:item" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="total" type="search:positiveInteger"/>
+    <xs:attribute name="termsofuse" type="xs:anyURI"/>
+  </xs:complexType>
+
+  <xs:element name="items" type="search:items"/>
+
+</xs:schema>

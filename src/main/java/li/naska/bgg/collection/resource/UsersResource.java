@@ -1,22 +1,28 @@
 package li.naska.bgg.collection.resource;
 
-import com.boardgamegeek.xmlapi2.items.ItemSubtypeEnum;
-import com.boardgamegeek.xmlapi2.items.Items;
+import com.boardgamegeek.xmlapi2.collection.ItemSubtypeEnum;
+import com.boardgamegeek.xmlapi2.collection.Items;
 import com.boardgamegeek.xmlapi2.plays.ItemTypeEnum;
 import com.boardgamegeek.xmlapi2.plays.Plays;
+import com.boardgamegeek.xmlapi2.user.ListDomainEnum;
+import com.boardgamegeek.xmlapi2.user.User;
 import li.naska.bgg.collection.service.CollectionService;
 import li.naska.bgg.collection.service.PlaysService;
+import li.naska.bgg.collection.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.util.Map.Entry;
 import java.util.AbstractMap.SimpleEntry;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -32,10 +38,38 @@ public class UsersResource {
   @Autowired
   private PlaysService playsService;
 
+  @Autowired
+  private UsersService usersService;
+
+  @GetMapping(value = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<User> getUser(
+      @PathVariable(value = "username") String username,
+      @RequestParam(value = "buddies", required = false) Optional<Boolean> buddies,
+      @RequestParam(value = "guilds", required = false) Optional<Boolean> guilds,
+      @RequestParam(value = "hot", required = false) Optional<Boolean> hot,
+      @RequestParam(value = "top", required = false) Optional<Boolean> top,
+      @RequestParam(value = "domain", required = false) Optional<ListDomainEnum> domain,
+      @RequestParam(value = "page", required = false) Optional<Integer> page
+  ) {
+    Stream<Entry<String, Optional<String>>> stream = Stream.of(
+        new SimpleEntry<>("buddies", buddies.map(e -> e ? "1" : "0")),
+        new SimpleEntry<>("guilds", guilds.map(e -> e ? "1" : "0")),
+        new SimpleEntry<>("hot", hot.map(e -> e ? "1" : "0")),
+        new SimpleEntry<>("top", top.map(e -> e ? "1" : "0")),
+        new SimpleEntry<>("domain", domain.map(ListDomainEnum::value)),
+        new SimpleEntry<>("page", page.map(Object::toString))
+    );
+    Map<String, String> params = stream
+        .filter(e -> e.getValue().isPresent())
+        .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue().get()));
+    ResponseEntity<User> response = usersService.getUser(username, params);
+    return new ResponseEntity<>(response.getBody(), response.getStatusCode());
+  }
+
   @GetMapping(value = "/{username}/plays", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Plays> getPlays(
       @PathVariable(value = "username") String username,
-      @RequestParam(value = "id", required = false) Optional<List<Integer>> id,
+      @RequestParam(value = "id", required = false) Optional<Integer> id,
       @RequestParam(value = "type", required = false) Optional<ItemTypeEnum> type,
       @RequestParam(value = "mindate", required = false) Optional<LocalDate> mindate,
       @RequestParam(value = "maxdate", required = false) Optional<LocalDate> maxdate,
@@ -44,16 +78,16 @@ public class UsersResource {
   ) {
     Stream<Entry<String, Optional<String>>> stream = Stream.of(
         // BGG API: format="comma-separated"
-        new SimpleEntry<>("id", id.map(e -> e.stream().map(Object::toString).collect(Collectors.joining(",")))),
-        new SimpleEntry<>("type", type.map(e -> e.value())),
-        new SimpleEntry<>("mindate", mindate.map(e -> LOCALDATETIME_FORMATTER.format(e))),
-        new SimpleEntry<>("maxdate", maxdate.map(e -> LOCALDATETIME_FORMATTER.format(e))),
-        new SimpleEntry<>("subtype", type.map(e -> e.value())),
+        new SimpleEntry<>("id", id.map(Object::toString)),
+        new SimpleEntry<>("type", type.map(ItemTypeEnum::value)),
+        new SimpleEntry<>("mindate", mindate.map(LOCALDATETIME_FORMATTER::format)),
+        new SimpleEntry<>("maxdate", maxdate.map(LOCALDATETIME_FORMATTER::format)),
+        new SimpleEntry<>("subtype", subtype.map(com.boardgamegeek.xmlapi2.plays.ItemSubtypeEnum::value)),
         new SimpleEntry<>("page", page.map(Object::toString))
     );
     Map<String, String> params = stream
         .filter(e -> e.getValue().isPresent())
-        .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue().get()));
+        .collect(Collectors.toMap(Entry::getKey, e -> e.getValue().get()));
     ResponseEntity<Plays> response = playsService.getPlays(username, params);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }
@@ -97,8 +131,8 @@ public class UsersResource {
         new SimpleEntry<>("stats", stats.map(e -> e ? "1" : "0")),
         // BGG API: format="comma-separated"
         new SimpleEntry<>("id", id.map(e -> e.stream().map(Object::toString).collect(Collectors.joining(",")))),
-        new SimpleEntry<>("subtype", subtype.map(e -> e.value())),
-        new SimpleEntry<>("excludesubtype", excludesubtype.map(e -> e.value())),
+        new SimpleEntry<>("subtype", subtype.map(ItemSubtypeEnum::value)),
+        new SimpleEntry<>("excludesubtype", excludesubtype.map(ItemSubtypeEnum::value)),
         new SimpleEntry<>("own", own.map(e -> e ? "1" : "0")),
         new SimpleEntry<>("rated", rated.map(e -> e ? "1" : "0")),
         new SimpleEntry<>("played", played.map(e -> e ? "1" : "0")),
@@ -113,21 +147,21 @@ public class UsersResource {
         new SimpleEntry<>("prevowned", prevowned.map(e -> e ? "1" : "0")),
         new SimpleEntry<>("hasparts", hasparts.map(e -> e ? "1" : "0")),
         new SimpleEntry<>("wantparts", wantparts.map(e -> e ? "1" : "0")),
-        new SimpleEntry<>("minrating", minrating.map(e -> e.setScale(5).toPlainString())),
+        new SimpleEntry<>("minrating", minrating.map(e -> e.setScale(5, RoundingMode.FLOOR).toPlainString())),
         // BGG API: name="rating"
-        new SimpleEntry<>("rating", maxrating.map(e -> e.setScale(5).toPlainString())),
-        new SimpleEntry<>("minbggrating", minbggrating.map(e -> e.setScale(5).toPlainString())),
+        new SimpleEntry<>("rating", maxrating.map(e -> e.setScale(5, RoundingMode.FLOOR).toPlainString())),
+        new SimpleEntry<>("minbggrating", minbggrating.map(e -> e.setScale(5, RoundingMode.FLOOR).toPlainString())),
         // BGG API: name="bggrating"
-        new SimpleEntry<>("bggrating", maxbggrating.map(e -> e.setScale(5).toPlainString())),
+        new SimpleEntry<>("bggrating", maxbggrating.map(e -> e.setScale(5, RoundingMode.FLOOR).toPlainString())),
         new SimpleEntry<>("minplays", minplays.map(Object::toString)),
         new SimpleEntry<>("maxplays", maxplays.map(Object::toString)),
         new SimpleEntry<>("showprivate", showprivate.map(e -> e ? "1" : "0")),
         new SimpleEntry<>("collid", collid.map(Object::toString)),
-        new SimpleEntry<>("modifiedsince", modifiedsince.map(e -> LOCALDATETIME_FORMATTER.format(e)))
+        new SimpleEntry<>("modifiedsince", modifiedsince.map(LOCALDATETIME_FORMATTER::format))
     );
     Map<String, String> params = stream
         .filter(e -> e.getValue().isPresent())
-        .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue().get()));
+        .collect(Collectors.toMap(Entry::getKey, e -> e.getValue().get()));
     ResponseEntity<Items> response = collectionService.getItems(username, params);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }

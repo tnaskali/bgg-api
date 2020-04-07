@@ -48,7 +48,6 @@
       <artifactId>jaxb2-basics-runtime</artifactId>
       <version>0.12.0</version>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -69,70 +68,74 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
 
+      <!--      <plugin>-->
+      <!--        <groupId>org.jvnet.jaxb2.maven2</groupId>-->
+      <!--        <artifactId>maven-jaxb2-plugin</artifactId>-->
+      <!--        <version>0.14.0</version>-->
+      <!--        <executions>-->
+      <!--          <execution>-->
+      <!--            <id>generate-sources</id>-->
+      <!--            <goals>-->
+      <!--              <goal>generate</goal>-->
+      <!--            </goals>-->
+      <!--            <configuration>-->
+      <!--              <schemaDirectory>src/main/resources/schemas</schemaDirectory>-->
+      <!--              <schemaIncludes>-->
+      <!--                <include>*.xsd</include>-->
+      <!--              </schemaIncludes>-->
+      <!--              <bindingDirectory>src/main/resources/bindings</bindingDirectory>-->
+      <!--              <bindingIncludes>-->
+      <!--                <include>*.xjb</include>-->
+      <!--              </bindingIncludes>-->
+      <!--              <generateDirectory>target/generated-sources/xjc</generateDirectory>-->
+      <!--            </configuration>-->
+      <!--          </execution>-->
+      <!--        </executions>-->
+      <!--        <configuration>-->
+      <!--          <extension>true</extension>-->
+      <!--          <args>-->
+      <!--            <arg>-XtoString</arg>-->
+      <!--            <arg>-Xequals</arg>-->
+      <!--            <arg>-XhashCode</arg>-->
+      <!--            <arg>-Xsimplify</arg>-->
+      <!--            <arg>-Xsimplify-usePluralForm=true</arg>-->
+      <!--          </args>-->
+      <!--          <plugins>-->
+      <!--            <plugin>-->
+      <!--              <groupId>org.jvnet.jaxb2_commons</groupId>-->
+      <!--              <artifactId>jaxb2-basics</artifactId>-->
+      <!--              <version>0.12.0</version>-->
+      <!--            </plugin>-->
+      <!--          </plugins>-->
+      <!--        </configuration>-->
+      <!--      </plugin>-->
       <plugin>
-        <groupId>org.jvnet.jaxb2.maven2</groupId>
-        <artifactId>maven-jaxb2-plugin</artifactId>
-        <version>0.14.0</version>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jaxb2-maven-plugin</artifactId>
+        <version>2.5.0</version>
         <executions>
           <execution>
-            <id>generate-sources</id>
+            <id>xjc</id>
             <goals>
-              <goal>generate</goal>
+              <goal>xjc</goal>
             </goals>
-            <configuration>
-              <schemaDirectory>src/main/resources/schemas</schemaDirectory>
-              <schemaIncludes>
-                <include>*.xsd</include>
-              </schemaIncludes>
-              <bindingDirectory>src/main/resources/bindings</bindingDirectory>
-              <bindingIncludes>
-                <include>*.xjb</include>
-              </bindingIncludes>
-              <generateDirectory>target/generated-sources/xjc</generateDirectory>
-            </configuration>
           </execution>
         </executions>
         <configuration>
-          <extension>true</extension>
-          <args>
-            <arg>-XtoString</arg>
-            <arg>-Xequals</arg>
-            <arg>-XhashCode</arg>
-            <arg>-Xsimplify</arg>
-            <arg>-Xsimplify-usePluralForm=true</arg>
-          </args>
-          <plugins>
-            <plugin>
-              <groupId>org.jvnet.jaxb2_commons</groupId>
-              <artifactId>jaxb2-basics</artifactId>
-              <version>0.12.0</version>
-            </plugin>
-          </plugins>
+          <xjbSources>
+            <xjbSource>src/main/resources/bindings/global.xjb</xjbSource>
+          </xjbSources>
+          <sources>
+            <source>src/main/resources/schemas/collection.xsd</source>
+            <source>src/main/resources/schemas/guild.xsd</source>
+            <source>src/main/resources/schemas/hot.xsd</source>
+            <source>src/main/resources/schemas/plays.xsd</source>
+            <source>src/main/resources/schemas/search.xsd</source>
+            <source>src/main/resources/schemas/thing.xsd</source>
+            <source>src/main/resources/schemas/user.xsd</source>
+          </sources>
         </configuration>
       </plugin>
-<!--      <plugin>-->
-<!--        <groupId>org.codehaus.mojo</groupId>-->
-<!--        <artifactId>jaxb2-maven-plugin</artifactId>-->
-<!--        <version>2.5.0</version>-->
-<!--        <executions>-->
-<!--          <execution>-->
-<!--            <id>xjc</id>-->
-<!--            <goals>-->
-<!--              <goal>xjc</goal>-->
-<!--            </goals>-->
-<!--          </execution>-->
-<!--        </executions>-->
-<!--        <configuration>-->
-<!--          <xjbSources>-->
-<!--            <xjbSource>src/main/resources/bindings/global.xjb</xjbSource>-->
-<!--          </xjbSources>-->
-<!--          <sources>-->
-<!--            <source>src/main/resources/schemas/hot.xsd</source>-->
-<!--            <source>src/main/resources/schemas/items.xsd</source>-->
-<!--            <source>src/main/resources/schemas/plays.xsd</source>-->
-<!--          </sources>-->
-<!--        </configuration>-->
-<!--      </plugin>-->
     </plugins>
   </build>
 

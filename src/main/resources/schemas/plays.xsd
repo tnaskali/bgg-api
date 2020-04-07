@@ -29,6 +29,7 @@
   <xs:simpleType name="itemTypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="thing"/>
+      <xs:enumeration value="family"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -37,6 +38,7 @@
       <xs:enumeration value="boardgame"/>
       <xs:enumeration value="boardgameexpansion"/>
       <xs:enumeration value="boardgameaccessory"/>
+      <xs:enumeration value="boardgameimplementation"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -67,9 +69,9 @@
     <xs:attribute name="username" type="xs:string"/>
     <xs:attribute name="userid" type="xs:integer"/>
     <xs:attribute name="name" type="xs:string"/>
-    <xs:attribute name="startposition" type="xs:integer"/>
+    <xs:attribute name="startposition" type="xs:string"/>
     <xs:attribute name="color" type="xs:string"/>
-    <xs:attribute name="score" type="xs:integer"/>
+    <xs:attribute name="score" type="xs:string"/>
     <xs:attribute name="new" type="plays:booleanInteger"/>
     <xs:attribute name="rating" type="xs:positiveInteger"/>
     <xs:attribute name="win" type="plays:booleanInteger"/>

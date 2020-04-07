@@ -4,17 +4,11 @@
            xmlns:hot="http://www.boardgamegeek.com/xmlapi2/hot"
            elementFormDefault="qualified">
 
-  <xs:simpleType name="positiveInteger">
-    <xs:restriction base="xs:int">
-      <xs:minInclusive value="0"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="itemSubtypeEnum">
+  <xs:simpleType name="itemTypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="boardgame"/>
-      <xs:enumeration value="boardgameexpansion"/>
-      <xs:enumeration value="boardgameaccessory"/>
+      <xs:enumeration value="boardgameperson"/>
+      <xs:enumeration value="boardgamecompany"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -22,8 +16,8 @@
     <xs:attribute name="value" type="xs:string"/>
   </xs:complexType>
 
-  <xs:complexType name="positiveIntegerValue">
-    <xs:attribute name="value" type="xs:positiveInteger"/>
+  <xs:complexType name="integerValue">
+    <xs:attribute name="value" type="xs:integer"/>
   </xs:complexType>
 
   <xs:complexType name="uriValue">
@@ -34,7 +28,7 @@
     <xs:sequence>
       <xs:element name="thumbnail" type="hot:uriValue"/>
       <xs:element name="name" type="hot:stringValue"/>
-      <xs:element name="yearpublished" type="xs:integer" minOccurs="0"/>
+      <xs:element name="yearpublished" type="hot:integerValue" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:integer"/>
     <xs:attribute name="rank" type="xs:positiveInteger"/>

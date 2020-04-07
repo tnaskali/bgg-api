@@ -2,35 +2,43 @@
 <jaxb:bindings xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
                xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
                xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
-               xmlns:simplify="http://jaxb2-commons.dev.java.net/basic/simplify"
                xs:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd"
                jaxb:extensionBindingPrefixes="xjc simplify"
                jaxb:version="2.0">
 
-<!--    <jaxb:bindings schemaLocation="../schemas/items.xsd">-->
+<!--    <jaxb:bindings schemaLocation="../schemas/collection.xsd">-->
 <!--      <jaxb:serializable uid="1"/>-->
 <!--      <xjc:javaType name="java.time.LocalDateTime"-->
-<!--                    adapter="li.naska.bgg.collection.util.StringToLocalDateTimeAdapter"/>-->
-<!--      <xjc:javaType name="java.time.ZonedDateTime"-->
-<!--                    adapter="li.naska.bgg.collection.util.StringToZonedDateTimeAdapter"/>-->
-<!--    </jaxb:bindings>-->
+  <!--                    adapter="li.naska.bgg.collection.util.StringToLocalDateTimeAdapter"/>-->
+  <!--      <xjc:javaType name="java.time.ZonedDateTime"-->
+  <!--                    adapter="li.naska.bgg.collection.util.StringToZonedDateTimeAdapter"/>-->
+  <!--    </jaxb:bindings>-->
 
-<!--  <jaxb:bindings schemaLocation="../schemas/items.xsd"-->
-<!--                 node="xs:complexType[@name='versionItem']/xs:choice">-->
-<!--    <simplify:as-element-property/>-->
-<!--  </jaxb:bindings>-->
+  <!--  <jaxb:bindings schemaLocation="../schemas/collection.xsd"-->
+  <!--                 node="xs:complexType[@name='versionItem']/xs:choice">-->
+  <!--    <simplify:as-element-property/>-->
+  <!--  </jaxb:bindings>-->
 
-  <jaxb:globalBindings xmlns:items="http://www.boardgamegeek.com/xmlapi2/items"
-                       xmlns:plays="http://www.boardgamegeek.com/xmlapi2/plays">
+  <jaxb:globalBindings xmlns:collection="http://www.boardgamegeek.com/xmlapi2/collection"
+                       xmlns:guild="http://www.boardgamegeek.com/xmlapi2/guild"
+                       xmlns:plays="http://www.boardgamegeek.com/xmlapi2/plays"
+                       xmlns:user="http://www.boardgamegeek.com/xmlapi2/user">
     <jaxb:serializable uid="1"/>
+    <!--    <xjc:simple/>-->
     <xjc:javaType name="java.time.LocalDateTime"
-                  xmlType="items:localDateTimeString"
+                  xmlType="collection:localDateTimeString"
                   adapter="li.naska.bgg.collection.util.StringToLocalDateTimeAdapter"/>
     <xjc:javaType name="java.time.ZonedDateTime"
-                  xmlType="items:zonedDateTimeString"
+                  xmlType="collection:zonedDateTimeString"
+                  adapter="li.naska.bgg.collection.util.StringToZonedDateTimeAdapter"/>
+    <xjc:javaType name="java.time.ZonedDateTime"
+                  xmlType="guild:zonedDateTimeString"
                   adapter="li.naska.bgg.collection.util.StringToZonedDateTimeAdapter"/>
     <xjc:javaType name="java.time.LocalDate"
                   xmlType="plays:localDateString"
+                  adapter="li.naska.bgg.collection.util.StringToLocalDateAdapter"/>
+    <xjc:javaType name="java.time.LocalDate"
+                  xmlType="user:localDateString"
                   adapter="li.naska.bgg.collection.util.StringToLocalDateAdapter"/>
   </jaxb:globalBindings>
 

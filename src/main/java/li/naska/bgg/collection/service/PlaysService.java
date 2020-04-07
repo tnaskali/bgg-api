@@ -1,7 +1,5 @@
 package li.naska.bgg.collection.service;
 
-import com.boardgamegeek.xmlapi2.items.ItemSubtypeEnum;
-import com.boardgamegeek.xmlapi2.items.Items;
 import com.boardgamegeek.xmlapi2.plays.Plays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +26,17 @@ public class PlaysService {
         .entrySet()
         .stream()
         .map(entry -> String.format("&%s=%s", entry.getKey(), entry.getValue()))
-        .reduce(String::concat);
+        .collect(Collectors.joining());
+    String url = PLAYS_ENDPOINT_URL + urlParams;
+    return restTemplate.getForEntity(url, Plays.class);
+  }
+
+  public ResponseEntity<Plays> getPlays(Integer id, String type, Map<String, String> extraParams) {
+    String urlParams = String.format("?id=%d&type=%s", id, type) + extraParams
+        .entrySet()
+        .stream()
+        .map(entry -> String.format("&%s=%s", entry.getKey(), entry.getValue()))
+        .collect(Collectors.joining());
     String url = PLAYS_ENDPOINT_URL + urlParams;
     return restTemplate.getForEntity(url, Plays.class);
   }

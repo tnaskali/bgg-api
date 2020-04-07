@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:user="http://www.boardgamegeek.com/xmlapi2/user"
+           targetNamespace="http://www.boardgamegeek.com/xmlapi2/user"
+           elementFormDefault="qualified">
+
+  <xs:simpleType name="positiveInteger">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="yearString">
+    <xs:restriction base="xs:string">
+      <!-- 2020 -->
+      <xs:pattern value="[1-9][0-9]{3}"/>
+      <xs:length value="4"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="localDateString">
+    <xs:restriction base="xs:string">
+      <!-- 2020-01-11 -->
+      <xs:pattern value="[1-9][0-9]{3}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])"/>
+      <xs:length value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="listDomainEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="boardgame"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="stringValue">
+    <xs:attribute name="value" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="rankingItem">
+    <xs:attribute name="rank" type="xs:string"/>
+    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="name" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="ranking">
+    <xs:sequence>
+      <xs:element name="item" type="user:rankingItem" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="domain" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="buddy">
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="buddies">
+    <xs:sequence>
+      <xs:element name="buddy" type="user:buddy" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="total" type="user:positiveInteger"/>
+    <xs:attribute name="page" type="xs:positiveInteger"/>
+  </xs:complexType>
+
+  <xs:complexType name="guild">
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="guilds">
+    <xs:sequence>
+      <xs:element name="guild" type="user:guild" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="total" type="user:positiveInteger"/>
+    <xs:attribute name="page" type="xs:positiveInteger"/>
+  </xs:complexType>
+
+  <xs:complexType name="user">
+    <xs:sequence>
+      <xs:element name="firstname" type="user:stringValue"/>
+      <xs:element name="lastname" type="user:stringValue"/>
+      <xs:element name="avatarlink" type="user:stringValue"/>
+      <xs:element name="yearregistered" type="user:yearString"/>
+      <xs:element name="lastlogin" type="user:localDateString"/>
+      <xs:element name="stateorprovince" type="user:stringValue"/>
+      <xs:element name="country" type="user:stringValue"/>
+      <xs:element name="webaddress" type="xs:anyURI"/>
+      <xs:element name="xboxaccount" type="user:stringValue"/>
+      <xs:element name="wiiaccount" type="user:stringValue"/>
+      <xs:element name="psnaccount" type="user:stringValue"/>
+      <xs:element name="battlenetaccount" type="user:stringValue"/>
+      <xs:element name="steamaccount" type="user:stringValue"/>
+      <xs:element name="traderating" type="user:stringValue"/>
+      <xs:element name="buddies" type="user:buddies" minOccurs="0"/>
+      <xs:element name="guilds" type="user:guilds" minOccurs="0"/>
+      <xs:element name="top" type="user:ranking" minOccurs="0"/>
+      <xs:element name="hot" type="user:ranking" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="termsofuse" type="xs:anyURI"/>
+  </xs:complexType>
+
+  <xs:element name="user" type="user:user"/>
+
+</xs:schema>

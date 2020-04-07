@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:guild="http://www.boardgamegeek.com/xmlapi2/guild"
+           targetNamespace="http://www.boardgamegeek.com/xmlapi2/guild"
+           elementFormDefault="qualified">
+
+  <xs:simpleType name="zonedDateTimeString">
+    <xs:restriction base="xs:string">
+      <!-- Wed, 01 Apr 2020 19:50:39 +0000 -->
+      <xs:pattern
+          value="(Mon|Tue|Wed|Thu|Fri|Sat|Sun),(0[1-9]|[1-2][0-9]|3[0-1]) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) [1-9][0-9]{3} ([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60) [+|-]([0-1][0-9]|2[0-3])[0-5][0-9]"/>
+      <xs:length value="31"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="sortTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="username"/>
+      <xs:enumeration value="date"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="location">
+    <xs:sequence>
+      <xs:element name="addr1" type="xs:string"/>
+      <xs:element name="addr2" type="xs:string"/>
+      <xs:element name="city" type="xs:string"/>
+      <xs:element name="stateorprovince" type="xs:string"/>
+      <xs:element name="postalcode" type="xs:string"/>
+      <xs:element name="country" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="member">
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="date" type="guild:zonedDateTimeString"/>
+  </xs:complexType>
+
+  <xs:complexType name="members">
+    <xs:sequence>
+      <xs:element name="member" type="guild:member" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="count" type="xs:positiveInteger"/>
+    <xs:attribute name="page" type="xs:positiveInteger"/>
+  </xs:complexType>
+
+  <xs:complexType name="guild">
+    <xs:sequence>
+      <xs:element name="category" type="xs:string"/>
+      <xs:element name="website" type="xs:anyURI"/>
+      <xs:element name="manager" type="xs:string"/>
+      <xs:element name="description" type="xs:string"/>
+      <xs:element name="location" type="guild:location"/>
+      <xs:element name="members" type="guild:members" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:integer"/>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="created" type="guild:zonedDateTimeString"/>
+    <xs:attribute name="termsofuse" type="xs:anyURI"/>
+  </xs:complexType>
+
+  <xs:element name="guild" type="guild:guild"/>
+
+</xs:schema>
