@@ -1,15 +1,15 @@
-package li.naska.bgg.collection.resource;
+package li.naska.bgg.resource;
 
 
-import com.boardgamegeek.xmlapi2.hot.ItemTypeEnum;
-import com.boardgamegeek.xmlapi2.plays.ItemSubtypeEnum;
-import com.boardgamegeek.xmlapi2.plays.Plays;
-import com.boardgamegeek.xmlapi2.thing.Items;
-import com.boardgamegeek.xmlapi2.thing.TypeEnum;
-import li.naska.bgg.collection.service.HotItemsService;
-import li.naska.bgg.collection.service.PlaysService;
-import li.naska.bgg.collection.service.SearchService;
-import li.naska.bgg.collection.service.ThingsService;
+import com.boardgamegeek.hot.ItemTypeEnum;
+import com.boardgamegeek.plays.ItemSubtypeEnum;
+import com.boardgamegeek.plays.Plays;
+import com.boardgamegeek.thing.Items;
+import com.boardgamegeek.thing.TypeEnum;
+import li.naska.bgg.service.HotItemsService;
+import li.naska.bgg.service.PlaysService;
+import li.naska.bgg.service.SearchService;
+import li.naska.bgg.service.ThingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -43,25 +43,25 @@ public class ThingsResource {
   private ThingsService thingsService;
 
   @GetMapping(value = "/hot", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<com.boardgamegeek.xmlapi2.hot.Items> getThings() {
-    ResponseEntity<com.boardgamegeek.xmlapi2.hot.Items> response = hotItemsService.getItems(ItemTypeEnum.BOARDGAME);
+  public ResponseEntity<com.boardgamegeek.hot.Items> getThings() {
+    ResponseEntity<com.boardgamegeek.hot.Items> response = hotItemsService.getItems(ItemTypeEnum.BOARDGAME);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }
 
   @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<com.boardgamegeek.xmlapi2.search.Items> searchThings(
+  public ResponseEntity<com.boardgamegeek.search.Items> searchThings(
       @RequestParam(value = "query") String query,
-      @RequestParam(value = "type", required = false) Optional<List<com.boardgamegeek.xmlapi2.search.TypeEnum>> types,
+      @RequestParam(value = "type", required = false) Optional<List<com.boardgamegeek.search.TypeEnum>> types,
       @RequestParam(value = "exact", required = false) Optional<Boolean> exact
   ) {
     Stream<Map.Entry<String, Optional<String>>> stream = Stream.of(
-        new AbstractMap.SimpleEntry<>("type", types.map(e -> e.stream().map(com.boardgamegeek.xmlapi2.search.TypeEnum::value).collect(Collectors.joining(",")))),
+        new AbstractMap.SimpleEntry<>("type", types.map(e -> e.stream().map(com.boardgamegeek.search.TypeEnum::value).collect(Collectors.joining(",")))),
         new AbstractMap.SimpleEntry<>("exact", exact.map(e -> e ? "1" : "0"))
     );
     Map<String, String> params = stream
         .filter(e -> e.getValue().isPresent())
         .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get()));
-    ResponseEntity<com.boardgamegeek.xmlapi2.search.Items> response = searchService.getItems(query, params);
+    ResponseEntity<com.boardgamegeek.search.Items> response = searchService.getItems(query, params);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }
 
@@ -133,7 +133,7 @@ public class ThingsResource {
       @RequestParam(value = "username", required = false) Optional<String> username,
       @RequestParam(value = "mindate", required = false) Optional<LocalDate> mindate,
       @RequestParam(value = "maxdate", required = false) Optional<LocalDate> maxdate,
-      @RequestParam(value = "subtype", required = false) Optional<com.boardgamegeek.xmlapi2.plays.ItemSubtypeEnum> subtype,
+      @RequestParam(value = "subtype", required = false) Optional<com.boardgamegeek.plays.ItemSubtypeEnum> subtype,
       @RequestParam(value = "page", required = false) Optional<Integer> page
   ) {
     Stream<Map.Entry<String, Optional<String>>> stream = Stream.of(
@@ -145,7 +145,7 @@ public class ThingsResource {
     Map<String, String> params = stream
         .filter(e -> e.getValue().isPresent())
         .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue().get()));
-    ResponseEntity<Plays> response = playsService.getPlays(id, com.boardgamegeek.xmlapi2.plays.ItemTypeEnum.THING.value(), params);
+    ResponseEntity<Plays> response = playsService.getPlays(id, com.boardgamegeek.plays.ItemTypeEnum.THING.value(), params);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }
 

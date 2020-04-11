@@ -1,4 +1,4 @@
-package li.naska.bgg.collection.util;
+package li.naska.bgg.util;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.time.LocalDate;

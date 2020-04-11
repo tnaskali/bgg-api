@@ -1,8 +1,8 @@
-package li.naska.bgg.collection.resource;
+package li.naska.bgg.resource;
 
-import com.boardgamegeek.xmlapi2.guild.Guild;
-import com.boardgamegeek.xmlapi2.guild.SortTypeEnum;
-import li.naska.bgg.collection.service.GuildsService;
+import com.boardgamegeek.guild.Guild;
+import com.boardgamegeek.guild.SortTypeEnum;
+import li.naska.bgg.service.GuildsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

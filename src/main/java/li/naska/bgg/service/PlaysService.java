@@ -1,6 +1,6 @@
-package li.naska.bgg.collection.service;
+package li.naska.bgg.service;
 
-import com.boardgamegeek.xmlapi2.plays.Plays;
+import com.boardgamegeek.plays.Plays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

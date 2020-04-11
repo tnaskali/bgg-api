@@ -1,30 +1,9 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://www.boardgamegeek.com/xmlapi2/plays"
-           xmlns:plays="http://www.boardgamegeek.com/xmlapi2/plays"
+           xmlns:common="http://www.boardgamegeek.com/common"
+           xmlns:plays="http://www.boardgamegeek.com/plays"
+           targetNamespace="http://www.boardgamegeek.com/plays"
            elementFormDefault="qualified">
-
-  <xs:simpleType name="positiveInteger">
-    <xs:restriction base="xs:int">
-      <xs:minInclusive value="0"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="booleanInteger">
-    <xs:restriction base="xs:int">
-      <xs:minInclusive value="0"/>
-      <xs:maxInclusive value="1"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="localDateString">
-    <xs:restriction base="xs:string">
-      <!-- 2020-01-11 -->
-      <xs:pattern
-          value="[1-9][0-9]{3}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])"/>
-      <xs:length value="10"/>
-    </xs:restriction>
-  </xs:simpleType>
 
   <xs:simpleType name="itemTypeEnum">
     <xs:restriction base="xs:string">
@@ -72,9 +51,9 @@
     <xs:attribute name="startposition" type="xs:string"/>
     <xs:attribute name="color" type="xs:string"/>
     <xs:attribute name="score" type="xs:string"/>
-    <xs:attribute name="new" type="plays:booleanInteger"/>
+    <xs:attribute name="new" type="common:booleanInteger"/>
     <xs:attribute name="rating" type="xs:positiveInteger"/>
-    <xs:attribute name="win" type="plays:booleanInteger"/>
+    <xs:attribute name="win" type="common:booleanInteger"/>
   </xs:complexType>
 
   <xs:complexType name="players">
@@ -90,11 +69,11 @@
       <xs:element name="players" type="plays:players" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:integer"/>
-    <xs:attribute name="date" type="plays:localDateString"/>
+    <xs:attribute name="date" type="common:localDate"/>
     <xs:attribute name="quantity" type="xs:positiveInteger"/>
-    <xs:attribute name="length" type="plays:positiveInteger"/>
-    <xs:attribute name="incomplete" type="plays:booleanInteger"/>
-    <xs:attribute name="nowinstats" type="plays:booleanInteger"/>
+    <xs:attribute name="length" type="common:positiveInteger"/>
+    <xs:attribute name="incomplete" type="common:booleanInteger"/>
+    <xs:attribute name="nowinstats" type="common:booleanInteger"/>
     <xs:attribute name="location" type="xs:string"/>
   </xs:complexType>
 
@@ -104,7 +83,7 @@
     </xs:sequence>
     <xs:attribute name="username" type="xs:string"/>
     <xs:attribute name="userid" type="xs:integer"/>
-    <xs:attribute name="total" type="plays:positiveInteger"/>
+    <xs:attribute name="total" type="common:positiveInteger"/>
     <xs:attribute name="page" type="xs:positiveInteger"/>
     <xs:attribute name="termsofuse" type="xs:anyURI"/>
   </xs:complexType>

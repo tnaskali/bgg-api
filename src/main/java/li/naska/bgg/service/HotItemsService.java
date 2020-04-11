@@ -1,7 +1,7 @@
-package li.naska.bgg.collection.service;
+package li.naska.bgg.service;
 
-import com.boardgamegeek.xmlapi2.hot.ItemTypeEnum;
-import com.boardgamegeek.xmlapi2.hot.Items;
+import com.boardgamegeek.hot.ItemTypeEnum;
+import com.boardgamegeek.hot.Items;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://www.boardgamegeek.com/xmlapi2/hot"
-           xmlns:hot="http://www.boardgamegeek.com/xmlapi2/hot"
+           xmlns:common="http://www.boardgamegeek.com/common"
+           xmlns:hot="http://www.boardgamegeek.com/hot"
+           targetNamespace="http://www.boardgamegeek.com/hot"
            elementFormDefault="qualified">
 
   <xs:simpleType name="itemTypeEnum">
@@ -12,23 +13,11 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:complexType name="stringValue">
-    <xs:attribute name="value" type="xs:string"/>
-  </xs:complexType>
-
-  <xs:complexType name="integerValue">
-    <xs:attribute name="value" type="xs:integer"/>
-  </xs:complexType>
-
-  <xs:complexType name="uriValue">
-    <xs:attribute name="value" type="xs:anyURI"/>
-  </xs:complexType>
-
   <xs:complexType name="item">
     <xs:sequence>
-      <xs:element name="thumbnail" type="hot:uriValue"/>
-      <xs:element name="name" type="hot:stringValue"/>
-      <xs:element name="yearpublished" type="hot:integerValue" minOccurs="0"/>
+      <xs:element name="thumbnail" type="common:uriValue"/>
+      <xs:element name="name" type="common:stringValue"/>
+      <xs:element name="yearpublished" type="common:integerValue" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:integer"/>
     <xs:attribute name="rank" type="xs:positiveInteger"/>

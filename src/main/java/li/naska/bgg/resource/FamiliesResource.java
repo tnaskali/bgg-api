@@ -1,9 +1,9 @@
-package li.naska.bgg.collection.resource;
+package li.naska.bgg.resource;
 
-import com.boardgamegeek.xmlapi2.plays.ItemSubtypeEnum;
-import com.boardgamegeek.xmlapi2.plays.ItemTypeEnum;
-import com.boardgamegeek.xmlapi2.plays.Plays;
-import li.naska.bgg.collection.service.PlaysService;
+import com.boardgamegeek.plays.ItemSubtypeEnum;
+import com.boardgamegeek.plays.ItemTypeEnum;
+import com.boardgamegeek.plays.Plays;
+import li.naska.bgg.service.PlaysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

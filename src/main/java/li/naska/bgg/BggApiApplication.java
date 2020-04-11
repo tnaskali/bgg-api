@@ -1,4 +1,4 @@
-package li.naska.bgg.collection;
+package li.naska.bgg;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,6 +1,6 @@
-package li.naska.bgg.collection.service;
+package li.naska.bgg.service;
 
-import com.boardgamegeek.xmlapi2.thing.Items;
+import com.boardgamegeek.search.Items;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -10,25 +10,26 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class ThingsService {
+public class SearchService {
 
   private static final String BGG_URL = "https://www.boardgamegeek.com/xmlapi2";
 
-  private static final String THINGS_ENDPOINT_PATH = "/thing";
+  private static final String SEARCH_ENDPOINT_PATH = "/search";
 
-  private static final String THINGS_ENDPOINT_URL = BGG_URL + THINGS_ENDPOINT_PATH;
+  private static final String SEARCH_ENDPOINT_URL = BGG_URL + SEARCH_ENDPOINT_PATH;
 
   @Autowired
   public RestTemplate restTemplate;
 
-  public ResponseEntity<Items> getThings(String commaSeparatedIds, Map<String, String> extraParams) {
-    String urlParams = String.format("?id=%s", commaSeparatedIds) + extraParams
+  public ResponseEntity<Items> getItems(String query, Map<String, String> extraParams) {
+    String urlParams = String.format("?query=%s", query) + extraParams
         .entrySet()
         .stream()
         .map(entry -> String.format("&%s=%s", entry.getKey(), entry.getValue()))
         .collect(Collectors.joining());
-    String url = THINGS_ENDPOINT_URL + urlParams;
+    String url = SEARCH_ENDPOINT_URL + urlParams;
     return restTemplate.getForEntity(url, Items.class);
   }
+
 
 }

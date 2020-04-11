@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:common="http://www.boardgamegeek.com/common"
+           targetNamespace="http://www.boardgamegeek.com/common"
+           elementFormDefault="qualified">
+
+  <xs:simpleType name="positiveInteger">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="booleanInteger">
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="fiveFractionDigitsPositiveDecimal">
+    <xs:restriction base="xs:decimal">
+      <xs:fractionDigits value="5"/>
+      <xs:minInclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="year">
+    <xs:restriction base="xs:string">
+      <!-- 2020 -->
+      <xs:pattern value="[1-9][0-9]{3}"/>
+      <xs:length value="4"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="localDate">
+    <xs:restriction base="xs:string">
+      <!-- 2020-01-11 -->
+      <xs:pattern
+          value="[1-9][0-9]{3}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])"/>
+      <xs:length value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="localDateTime">
+    <xs:restriction base="xs:string">
+      <!-- 2020-01-11 11:15:53 -->
+      <xs:pattern
+          value="[1-9][0-9]{3}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01]) ([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60)"/>
+      <xs:length value="19"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="zonedDateTime">
+    <xs:restriction base="xs:string">
+      <!-- Wed, 01 Apr 2020 19:50:39 +0000 -->
+      <xs:pattern
+          value="(Mon|Tue|Wed|Thu|Fri|Sat|Sun),(0[1-9]|[1-2][0-9]|3[0-1]) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) [1-9][0-9]{3} ([0-1][0-9]|2[0-3]):[0-5][0-9]:([0-5][0-9]|60) [+|-]([0-1][0-9]|2[0-3])[0-5][0-9]"/>
+      <xs:length value="31"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="positiveIntegerValue">
+    <xs:attribute name="value" type="common:positiveInteger"/>
+  </xs:complexType>
+
+  <xs:complexType name="integerValue">
+    <xs:attribute name="value" type="xs:integer"/>
+  </xs:complexType>
+
+  <xs:complexType name="decimalValue">
+    <xs:attribute name="value" type="common:fiveFractionDigitsPositiveDecimal"/>
+  </xs:complexType>
+
+  <xs:complexType name="stringValue">
+    <xs:attribute name="value" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="uriValue">
+    <xs:attribute name="value" type="xs:anyURI"/>
+  </xs:complexType>
+
+  <xs:complexType name="yearValue">
+    <xs:attribute name="value" type="common:year"/>
+  </xs:complexType>
+
+  <xs:complexType name="localDateValue">
+    <xs:attribute name="value" type="common:localDate"/>
+  </xs:complexType>
+
+</xs:schema>

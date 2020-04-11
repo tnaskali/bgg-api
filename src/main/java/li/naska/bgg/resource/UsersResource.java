@@ -1,14 +1,14 @@
-package li.naska.bgg.collection.resource;
+package li.naska.bgg.resource;
 
-import com.boardgamegeek.xmlapi2.collection.ItemSubtypeEnum;
-import com.boardgamegeek.xmlapi2.collection.Items;
-import com.boardgamegeek.xmlapi2.plays.ItemTypeEnum;
-import com.boardgamegeek.xmlapi2.plays.Plays;
-import com.boardgamegeek.xmlapi2.user.ListDomainEnum;
-import com.boardgamegeek.xmlapi2.user.User;
-import li.naska.bgg.collection.service.CollectionService;
-import li.naska.bgg.collection.service.PlaysService;
-import li.naska.bgg.collection.service.UsersService;
+import com.boardgamegeek.collection.ItemSubtypeEnum;
+import com.boardgamegeek.collection.Items;
+import com.boardgamegeek.plays.ItemTypeEnum;
+import com.boardgamegeek.plays.Plays;
+import com.boardgamegeek.user.ListDomainEnum;
+import com.boardgamegeek.user.User;
+import li.naska.bgg.service.CollectionService;
+import li.naska.bgg.service.PlaysService;
+import li.naska.bgg.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -73,7 +73,7 @@ public class UsersResource {
       @RequestParam(value = "type", required = false) Optional<ItemTypeEnum> type,
       @RequestParam(value = "mindate", required = false) Optional<LocalDate> mindate,
       @RequestParam(value = "maxdate", required = false) Optional<LocalDate> maxdate,
-      @RequestParam(value = "subtype", required = false) Optional<com.boardgamegeek.xmlapi2.plays.ItemSubtypeEnum> subtype,
+      @RequestParam(value = "subtype", required = false) Optional<com.boardgamegeek.plays.ItemSubtypeEnum> subtype,
       @RequestParam(value = "page", required = false) Optional<Integer> page
   ) {
     Stream<Entry<String, Optional<String>>> stream = Stream.of(
@@ -82,7 +82,7 @@ public class UsersResource {
         new SimpleEntry<>("type", type.map(ItemTypeEnum::value)),
         new SimpleEntry<>("mindate", mindate.map(LOCALDATETIME_FORMATTER::format)),
         new SimpleEntry<>("maxdate", maxdate.map(LOCALDATETIME_FORMATTER::format)),
-        new SimpleEntry<>("subtype", subtype.map(com.boardgamegeek.xmlapi2.plays.ItemSubtypeEnum::value)),
+        new SimpleEntry<>("subtype", subtype.map(com.boardgamegeek.plays.ItemSubtypeEnum::value)),
         new SimpleEntry<>("page", page.map(Object::toString))
     );
     Map<String, String> params = stream
