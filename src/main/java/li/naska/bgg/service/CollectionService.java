@@ -1,7 +1,7 @@
 package li.naska.bgg.service;
 
 import com.boardgamegeek.collection.Collection;
-import com.boardgamegeek.collection.CollectionItemSubtype;
+import com.boardgamegeek.enums.ObjectSubtype;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +23,9 @@ public class CollectionService {
   public RestTemplate restTemplate;
 
   public ResponseEntity<Collection> getItems(String username, Map<String, String> extraParams) {
-    if (!extraParams.containsKey("subtype") || CollectionItemSubtype.BOARDGAME.value().equals(extraParams.get("subtype"))) {
+    if (!extraParams.containsKey("subtype") || ObjectSubtype.BOARDGAME.value().equals(extraParams.get("subtype"))) {
       // bug in the BBG XML API
-      extraParams.put("excludesubtype", CollectionItemSubtype.BOARDGAMEEXPANSION.value());
+      extraParams.put("excludesubtype", ObjectSubtype.BOARDGAMEEXPANSION.value());
     }
     String urlParams = String.format("?username=%s", username) + extraParams
         .entrySet()

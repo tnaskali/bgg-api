@@ -1,71 +1,26 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:common="http://www.boardgamegeek.com/common"
+           xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:collection="http://www.boardgamegeek.com/collection"
            targetNamespace="http://www.boardgamegeek.com/collection"
            elementFormDefault="qualified">
 
-  <xs:simpleType name="collectionItemType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="thing"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="collectionItemSubtype">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="boardgame"/>
-      <xs:enumeration value="boardgameexpansion"/>
-      <xs:enumeration value="boardgameaccessory"/>
-      <xs:enumeration value="rpgitem"/>
-      <xs:enumeration value="rpgissue"/>
-      <xs:enumeration value="videogame"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="versionType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="boardgameversion"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="nameType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="primary"/>
-      <xs:enumeration value="alternate"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="linkType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="boardgameversion"/>
-      <xs:enumeration value="boardgamepublisher"/>
-      <xs:enumeration value="boardgameartist"/>
-      <xs:enumeration value="language"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="rankType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="subtype"/>
-      <xs:enumeration value="family"/>
-    </xs:restriction>
-  </xs:simpleType>
-
   <xs:complexType name="name">
-    <xs:attribute name="type" type="collection:nameType"/>
+    <xs:attribute name="type" type="enums:nameType"/>
     <xs:attribute name="sortindex" type="xs:nonNegativeInteger"/>
     <xs:attribute name="value" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="link">
-    <xs:attribute name="type" type="collection:linkType"/>
+    <xs:attribute name="type" type="enums:linkType"/>
     <xs:attribute name="id" type="xs:integer"/>
     <xs:attribute name="value" type="xs:string"/>
     <xs:attribute name="inbound" type="xs:boolean"/>
   </xs:complexType>
 
   <xs:complexType name="rank">
-    <xs:attribute name="type" type="collection:rankType"/>
+    <xs:attribute name="type" type="enums:rankType"/>
     <xs:attribute name="id" type="xs:integer"/>
     <xs:attribute name="name" type="xs:string"/>
     <xs:attribute name="friendlyname" type="xs:string"/>
@@ -128,7 +83,7 @@
       <xs:element name="depth" type="common:decimalValue"/>
       <xs:element name="weight" type="common:decimalValue"/>
     </xs:choice>
-    <xs:attribute name="type" type="collection:versionType"/>
+    <xs:attribute name="type" type="enums:versionType"/>
     <xs:attribute name="id" type="xs:integer"/>
   </xs:complexType>
 
@@ -151,9 +106,9 @@
       <xs:element name="version" type="collection:version" minOccurs="0">
       </xs:element>
     </xs:sequence>
-    <xs:attribute name="objecttype" type="collection:collectionItemType"/>
+    <xs:attribute name="objecttype" type="enums:objectType"/>
     <xs:attribute name="objectid" type="xs:integer"/>
-    <xs:attribute name="subtype" type="collection:collectionItemSubtype"/>
+    <xs:attribute name="subtype" type="enums:objectSubtype"/>
     <xs:attribute name="collid" type="xs:integer"/>
   </xs:complexType>
 

@@ -1,9 +1,9 @@
 package li.naska.bgg.resource;
 
+import com.boardgamegeek.enums.FamilyType;
+import com.boardgamegeek.enums.ObjectSubtype;
+import com.boardgamegeek.enums.ObjectType;
 import com.boardgamegeek.family.Families;
-import com.boardgamegeek.family.FamilyType;
-import com.boardgamegeek.plays.PlayItemSubtype;
-import com.boardgamegeek.plays.PlayItemType;
 import com.boardgamegeek.plays.Plays;
 import li.naska.bgg.service.FamiliesService;
 import li.naska.bgg.service.PlaysService;
@@ -54,19 +54,20 @@ public class FamiliesResource {
       @RequestParam(value = "username", required = false) Optional<String> username,
       @RequestParam(value = "mindate", required = false) Optional<LocalDate> mindate,
       @RequestParam(value = "maxdate", required = false) Optional<LocalDate> maxdate,
-      @RequestParam(value = "subtype", required = false) Optional<PlayItemSubtype> subtype,
+      @RequestParam(value = "subtype", required = false) Optional<ObjectSubtype> subtype,
       @RequestParam(value = "page", required = false) Optional<Integer> page
   ) {
     Stream<Map.Entry<String, Optional<String>>> stream = Stream.of(
+        new AbstractMap.SimpleEntry<>("username", username),
         new AbstractMap.SimpleEntry<>("mindate", mindate.map(LOCALDATE_FORMATTER::format)),
         new AbstractMap.SimpleEntry<>("maxdate", maxdate.map(LOCALDATE_FORMATTER::format)),
-        new AbstractMap.SimpleEntry<>("subtype", subtype.map(PlayItemSubtype::value)),
+        new AbstractMap.SimpleEntry<>("subtype", subtype.map(ObjectSubtype::value)),
         new AbstractMap.SimpleEntry<>("page", page.map(Object::toString))
     );
     Map<String, String> params = stream
         .filter(e -> e.getValue().isPresent())
         .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get()));
-    ResponseEntity<Plays> response = playsService.getPlays(id, PlayItemType.FAMILY.value(), params);
+    ResponseEntity<Plays> response = playsService.getPlays(id, ObjectType.FAMILY.value(), params);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }
 

@@ -1,6 +1,6 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.hot.HotItemType;
+import com.boardgamegeek.enums.HotItemType;
 import com.boardgamegeek.hot.HotItems;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

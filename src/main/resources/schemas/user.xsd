@@ -5,14 +5,6 @@
            targetNamespace="http://www.boardgamegeek.com/user"
            elementFormDefault="qualified">
 
-  <xs:simpleType name="domain">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="boardgame"/>
-      <xs:enumeration value="rpg"/>
-      <xs:enumeration value="videogame"/>
-    </xs:restriction>
-  </xs:simpleType>
-
   <xs:complexType name="rankingItem">
     <xs:attribute name="rank" type="xs:string"/>
     <xs:attribute name="type" type="xs:string"/>

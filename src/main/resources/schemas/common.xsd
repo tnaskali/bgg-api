@@ -13,17 +13,16 @@
 
   <xs:simpleType name="year">
     <xs:restriction base="xs:string">
-      <!-- 2020 -->
-      <xs:pattern value="[1-9][0-9]{3}"/>
-      <xs:maxLength value="4"/>
+      <!-- 2020 | -2200 -->
+      <xs:pattern value="-?[1-9][0-9]{3}"/>
+      <xs:maxLength value="5"/>
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="localDate">
     <xs:restriction base="xs:string">
       <!-- 2020-01-11 -->
-      <xs:pattern
-          value="[1-9][0-9]{3}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])"/>
+      <xs:pattern value="[1-9][0-9]{3}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])"/>
       <xs:length value="10"/>
     </xs:restriction>
   </xs:simpleType>

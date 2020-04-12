@@ -1,7 +1,7 @@
 package li.naska.bgg.resource;
 
+import com.boardgamegeek.enums.ObjectType;
 import com.boardgamegeek.forum.Forum;
-import com.boardgamegeek.forumlist.ForumType;
 import com.boardgamegeek.forumlist.Forums;
 import li.naska.bgg.service.ForumListsService;
 import li.naska.bgg.service.ForumsService;
@@ -32,7 +32,7 @@ public class ForumsResource {
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Forums> getForum(
       @PathVariable(value = "id") Integer id,
-      @RequestParam(value = "type") ForumType type
+      @RequestParam(value = "type") ObjectType type
   ) {
     ResponseEntity<Forums> response = forumListsService.getForums(id, type);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());

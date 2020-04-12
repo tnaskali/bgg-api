@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:enums="http://www.boardgamegeek.com/enums"
+           targetNamespace="http://www.boardgamegeek.com/enums"
+           elementFormDefault="qualified">
+
+  <xs:simpleType name="domainType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="boardgame"/>
+      <xs:enumeration value="rpg"/>
+      <xs:enumeration value="videogame"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="familyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="boardgamefamily"/>
+      <xs:enumeration value="rpg"/>
+      <xs:enumeration value="rpgperiodical"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="hotItemType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="boardgame"/>
+      <xs:enumeration value="boardgamecompany"/>
+      <xs:enumeration value="boardgameperson"/>
+      <xs:enumeration value="rpg"/>
+      <xs:enumeration value="rpgcompany"/>
+      <xs:enumeration value="rpgperson"/>
+      <xs:enumeration value="videogame"/>
+      <xs:enumeration value="videogamecompany"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="linkType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="boardgameartist"/>
+      <xs:enumeration value="boardgamepublisher"/>
+      <xs:enumeration value="boardgameversion"/>
+      <xs:enumeration value="language"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="nameType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="alternate"/>
+      <xs:enumeration value="primary"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="objectType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="family"/>
+      <xs:enumeration value="thing"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="objectSubtype">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="boardgame"/>
+      <xs:enumeration value="boardgameaccessory"/>
+      <xs:enumeration value="boardgameexpansion"/>
+      <xs:enumeration value="boardgameimplementation"/>
+      <xs:enumeration value="boardgameintegration"/>
+      <xs:enumeration value="rpgissue"/>
+      <xs:enumeration value="rpgitem"/>
+      <xs:enumeration value="videogame"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="rankType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="subtype"/>
+      <xs:enumeration value="family"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="sortType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="date"/>
+      <xs:enumeration value="username"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="versionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="boardgameversion"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="objectSubtypeValue">
+    <xs:attribute name="value" type="enums:objectSubtype"/>
+  </xs:complexType>
+
+</xs:schema>

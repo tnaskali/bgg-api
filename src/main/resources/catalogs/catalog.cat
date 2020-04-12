@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <catalog xmlns="http://www.boardgamegeek.com/catalog">
-  <public publicId="http://www.boardgamegeek.com/common" uri="../schemas/common.xsd"/>
   <public publicId="http://www.boardgamegeek.com/collection" uri="../schemas/collection.xsd"/>
+  <public publicId="http://www.boardgamegeek.com/common" uri="../schemas/common.xsd"/>
+  <public publicId="http://www.boardgamegeek.com/enums" uri="../schemas/enums.xsd"/>
   <public publicId="http://www.boardgamegeek.com/family" uri="../schemas/family.xsd"/>
   <public publicId="http://www.boardgamegeek.com/forum" uri="../schemas/forum.xsd"/>
   <public publicId="http://www.boardgamegeek.com/forumlist" uri="../schemas/forumlist.xsd"/>

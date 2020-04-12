@@ -1,11 +1,10 @@
 package li.naska.bgg.resource;
 
 import com.boardgamegeek.collection.Collection;
-import com.boardgamegeek.collection.CollectionItemSubtype;
-import com.boardgamegeek.plays.PlayItemSubtype;
-import com.boardgamegeek.plays.PlayItemType;
+import com.boardgamegeek.enums.DomainType;
+import com.boardgamegeek.enums.ObjectSubtype;
+import com.boardgamegeek.enums.ObjectType;
 import com.boardgamegeek.plays.Plays;
-import com.boardgamegeek.user.Domain;
 import com.boardgamegeek.user.User;
 import li.naska.bgg.service.CollectionService;
 import li.naska.bgg.service.PlaysService;
@@ -49,7 +48,7 @@ public class UsersResource {
       @RequestParam(value = "guilds", required = false) Optional<Boolean> guilds,
       @RequestParam(value = "hot", required = false) Optional<Boolean> hot,
       @RequestParam(value = "top", required = false) Optional<Boolean> top,
-      @RequestParam(value = "domain", required = false) Optional<Domain> domain,
+      @RequestParam(value = "domain", required = false) Optional<DomainType> domain,
       @RequestParam(value = "page", required = false) Optional<Integer> page
   ) {
     Stream<Entry<String, Optional<String>>> stream = Stream.of(
@@ -57,7 +56,7 @@ public class UsersResource {
         new SimpleEntry<>("guilds", guilds.map(e -> e ? "1" : "0")),
         new SimpleEntry<>("hot", hot.map(e -> e ? "1" : "0")),
         new SimpleEntry<>("top", top.map(e -> e ? "1" : "0")),
-        new SimpleEntry<>("domain", domain.map(Domain::value)),
+        new SimpleEntry<>("domain", domain.map(DomainType::value)),
         new SimpleEntry<>("page", page.map(Object::toString))
     );
     Map<String, String> params = stream
@@ -71,19 +70,19 @@ public class UsersResource {
   public ResponseEntity<Plays> getPlays(
       @PathVariable(value = "username") String username,
       @RequestParam(value = "id", required = false) Optional<Integer> id,
-      @RequestParam(value = "type", required = false) Optional<PlayItemType> type,
+      @RequestParam(value = "type", required = false) Optional<ObjectType> type,
       @RequestParam(value = "mindate", required = false) Optional<LocalDate> mindate,
       @RequestParam(value = "maxdate", required = false) Optional<LocalDate> maxdate,
-      @RequestParam(value = "subtype", required = false) Optional<PlayItemSubtype> subtype,
+      @RequestParam(value = "subtype", required = false) Optional<ObjectSubtype> subtype,
       @RequestParam(value = "page", required = false) Optional<Integer> page
   ) {
     Stream<Entry<String, Optional<String>>> stream = Stream.of(
         // BGG API: format="comma-separated"
         new SimpleEntry<>("id", id.map(Object::toString)),
-        new SimpleEntry<>("type", type.map(PlayItemType::value)),
+        new SimpleEntry<>("type", type.map(ObjectType::value)),
         new SimpleEntry<>("mindate", mindate.map(LOCALDATE_FORMATTER::format)),
         new SimpleEntry<>("maxdate", maxdate.map(LOCALDATE_FORMATTER::format)),
-        new SimpleEntry<>("subtype", subtype.map(PlayItemSubtype::value)),
+        new SimpleEntry<>("subtype", subtype.map(ObjectSubtype::value)),
         new SimpleEntry<>("page", page.map(Object::toString))
     );
     Map<String, String> params = stream
@@ -97,8 +96,8 @@ public class UsersResource {
   public ResponseEntity<Collection> getItems(
       @PathVariable(value = "username") String username,
       @RequestParam(value = "version", required = false) Optional<Boolean> version,
-      @RequestParam(value = "subtype", required = false) Optional<CollectionItemSubtype> subtype,
-      @RequestParam(value = "excludesubtype", required = false) Optional<CollectionItemSubtype> excludesubtype,
+      @RequestParam(value = "subtype", required = false) Optional<ObjectSubtype> subtype,
+      @RequestParam(value = "excludesubtype", required = false) Optional<ObjectSubtype> excludesubtype,
       @RequestParam(value = "id", required = false) Optional<List<Integer>> id,
       @RequestParam(value = "brief", required = false) Optional<Boolean> brief,
       @RequestParam(value = "stats", required = false) Optional<Boolean> stats,
@@ -132,8 +131,8 @@ public class UsersResource {
         new SimpleEntry<>("stats", stats.map(e -> e ? "1" : "0")),
         // BGG API: format="comma-separated"
         new SimpleEntry<>("id", id.map(e -> e.stream().map(Object::toString).collect(Collectors.joining(",")))),
-        new SimpleEntry<>("subtype", subtype.map(CollectionItemSubtype::value)),
-        new SimpleEntry<>("excludesubtype", excludesubtype.map(CollectionItemSubtype::value)),
+        new SimpleEntry<>("subtype", subtype.map(ObjectSubtype::value)),
+        new SimpleEntry<>("excludesubtype", excludesubtype.map(ObjectSubtype::value)),
         new SimpleEntry<>("own", own.map(e -> e ? "1" : "0")),
         new SimpleEntry<>("rated", rated.map(e -> e ? "1" : "0")),
         new SimpleEntry<>("played", played.map(e -> e ? "1" : "0")),

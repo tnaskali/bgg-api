@@ -4,13 +4,6 @@
            targetNamespace="http://www.boardgamegeek.com/forumlist"
            elementFormDefault="qualified">
 
-  <xs:simpleType name="forumType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="thing"/>
-      <xs:enumeration value="family"/>
-    </xs:restriction>
-  </xs:simpleType>
-
   <xs:complexType name="forum">
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="groupid" type="xs:integer"/>

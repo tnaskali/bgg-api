@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:common="http://www.boardgamegeek.com/common"
            xmlns:thread="http://www.boardgamegeek.com/thread"
            targetNamespace="http://www.boardgamegeek.com/thread"
            elementFormDefault="qualified">
@@ -12,8 +13,8 @@
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="username" type="xs:string"/>
     <xs:attribute name="link" type="xs:anyURI"/>
-    <xs:attribute name="postdate" type="xs:dateTime"/>
-    <xs:attribute name="editdate" type="xs:dateTime"/>
+    <xs:attribute name="postdate" type="common:localDateTime"/>
+    <xs:attribute name="editdate" type="common:localDateTime"/>
     <xs:attribute name="numedits" type="xs:integer"/>
   </xs:complexType>
 

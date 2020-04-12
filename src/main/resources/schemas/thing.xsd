@@ -5,17 +5,6 @@
            targetNamespace="http://www.boardgamegeek.com/thing"
            elementFormDefault="qualified">
 
-  <xs:simpleType name="thingType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="boardgame"/>
-      <xs:enumeration value="boardgameaccessory"/>
-      <xs:enumeration value="boardgameexpansion"/>
-      <xs:enumeration value="rpgissue"/>
-      <xs:enumeration value="rpgitem"/>
-      <xs:enumeration value="videogame"/>
-    </xs:restriction>
-  </xs:simpleType>
-
   <xs:complexType name="name">
     <xs:attribute name="type" type="xs:string"/>
     <xs:attribute name="sortindex" type="xs:integer"/>

@@ -5,13 +5,6 @@
            targetNamespace="http://www.boardgamegeek.com/guild"
            elementFormDefault="qualified">
 
-  <xs:simpleType name="sortType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="username"/>
-      <xs:enumeration value="date"/>
-    </xs:restriction>
-  </xs:simpleType>
-
   <xs:complexType name="location">
     <xs:sequence>
       <xs:element name="addr1" type="xs:string"/>

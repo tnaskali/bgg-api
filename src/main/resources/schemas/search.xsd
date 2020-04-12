@@ -1,29 +1,13 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:common="http://www.boardgamegeek.com/common"
+           xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:search="http://www.boardgamegeek.com/search"
            targetNamespace="http://www.boardgamegeek.com/search"
            elementFormDefault="qualified">
 
-  <xs:simpleType name="nameType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="primary"/>
-      <xs:enumeration value="alternate"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="searchType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="boardgame"/>
-      <xs:enumeration value="boardgameexpansion"/>
-      <xs:enumeration value="boardgameaccessory"/>
-      <xs:enumeration value="rpgitem"/>
-      <xs:enumeration value="videogame"/>
-    </xs:restriction>
-  </xs:simpleType>
-
   <xs:complexType name="name">
-    <xs:attribute name="type" type="search:nameType"/>
+    <xs:attribute name="type" type="enums:nameType"/>
     <xs:attribute name="value" type="xs:string"/>
   </xs:complexType>
 

@@ -1,42 +1,23 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:common="http://www.boardgamegeek.com/common"
+           xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:plays="http://www.boardgamegeek.com/plays"
            targetNamespace="http://www.boardgamegeek.com/plays"
            elementFormDefault="qualified">
-
-  <xs:simpleType name="playItemType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="thing"/>
-      <xs:enumeration value="family"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="playItemSubtype">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="boardgame"/>
-      <xs:enumeration value="boardgameexpansion"/>
-      <xs:enumeration value="boardgameaccessory"/>
-      <xs:enumeration value="boardgameimplementation"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:complexType name="subtypeValue">
-    <xs:attribute name="value" type="plays:playItemSubtype"/>
-  </xs:complexType>
 
   <xs:complexType name="item">
     <xs:sequence>
       <xs:element name="subtypes">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="subtype" type="plays:subtypeValue" maxOccurs="unbounded"/>
+            <xs:element name="subtype" type="enums:objectSubtypeValue" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
     </xs:sequence>
     <xs:attribute name="name" type="xs:string"/>
-    <xs:attribute name="objecttype" type="plays:playItemType"/>
+    <xs:attribute name="objecttype" type="enums:objectType"/>
     <xs:attribute name="objectid" type="xs:integer"/>
   </xs:complexType>
 

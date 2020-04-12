@@ -1,6 +1,6 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.forumlist.ForumType;
+import com.boardgamegeek.enums.ObjectType;
 import com.boardgamegeek.forumlist.Forums;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +19,7 @@ public class ForumListsService {
   @Autowired
   public RestTemplate restTemplate;
 
-  public ResponseEntity<Forums> getForums(Integer id, ForumType type) {
+  public ResponseEntity<Forums> getForums(Integer id, ObjectType type) {
     String urlParams = String.format("?id=%d&type=%s", id, type.value());
     String url = baseurl + FORUMLISTS_ENDPOINT_PATH + urlParams;
     return restTemplate.getForEntity(url, Forums.class);
