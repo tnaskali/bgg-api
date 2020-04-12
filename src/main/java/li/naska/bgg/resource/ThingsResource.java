@@ -119,7 +119,6 @@ public class ThingsResource {
         new AbstractMap.SimpleEntry<>("stats", stats.map(e -> e ? "1" : "0")),
         new AbstractMap.SimpleEntry<>("historical", historical.map(e -> e ? "1" : "0")),
         new AbstractMap.SimpleEntry<>("marketplace", marketplace.map(e -> e ? "1" : "0")),
-        new AbstractMap.SimpleEntry<>("versions", versions.map(e -> e ? "1" : "0")),
         new AbstractMap.SimpleEntry<>("comments", comments.map(e -> e ? "1" : "0")),
         new AbstractMap.SimpleEntry<>("ratingcomments", ratingcomments.map(e -> e ? "1" : "0"))
     );
