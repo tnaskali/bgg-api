@@ -12,10 +12,12 @@ import org.springframework.web.client.RestTemplate;
 public class ForumListsService {
 
   private static final String FORUMLISTS_ENDPOINT_PATH = "/forumlist";
-  @Autowired
-  public RestTemplate restTemplate;
+
   @Value("${bgg.api.v2.baseurl-bgs}")
   private String baseurl;
+
+  @Autowired
+  public RestTemplate restTemplate;
 
   public ResponseEntity<Forums> getForums(Integer id, ForumType type) {
     String urlParams = String.format("?id=%d&type=%s", id, type.value());

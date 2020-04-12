@@ -14,10 +14,12 @@ import java.util.stream.Collectors;
 public class ForumsService {
 
   private static final String FORUMS_ENDPOINT_PATH = "/forum";
-  @Autowired
-  public RestTemplate restTemplate;
+
   @Value("${bgg.api.v2.baseurl-bgs}")
   private String baseurl;
+
+  @Autowired
+  public RestTemplate restTemplate;
 
   public ResponseEntity<Forum> getForum(Integer id, Map<String, String> extraParams) {
     String urlParams = String.format("?id=%d", id) + extraParams

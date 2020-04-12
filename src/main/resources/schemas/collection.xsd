@@ -115,7 +115,7 @@
     <xs:attribute name="lastmodified" type="common:localDateTime"/>
   </xs:complexType>
 
-  <xs:complexType name="version">
+  <xs:complexType name="versionItem">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element name="thumbnail" type="xs:anyURI"/>
       <xs:element name="image" type="xs:anyURI"/>
@@ -132,6 +132,12 @@
     <xs:attribute name="id" type="xs:integer"/>
   </xs:complexType>
 
+  <xs:complexType name="version">
+    <xs:sequence>
+      <xs:element name="item" type="collection:versionItem"/>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="item">
     <xs:sequence>
       <xs:element name="name" type="common:sortIndexString"/>
@@ -142,12 +148,7 @@
       <xs:element name="stats" type="collection:stats" minOccurs="0"/>
       <xs:element name="status" type="collection:status"/>
       <xs:element name="numplays" type="xs:nonNegativeInteger"/>
-      <xs:element name="version" minOccurs="0">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="item" type="collection:version"/>
-          </xs:sequence>
-        </xs:complexType>
+      <xs:element name="version" type="collection:version" minOccurs="0">
       </xs:element>
     </xs:sequence>
     <xs:attribute name="objecttype" type="collection:collectionItemType"/>

@@ -14,10 +14,12 @@ import java.util.stream.Collectors;
 public class ThreadsService {
 
   private static final String THREADS_ENDPOINT_PATH = "/thread";
-  @Autowired
-  public RestTemplate restTemplate;
+
   @Value("${bgg.api.v2.baseurl-bgs}")
   private String baseurl;
+
+  @Autowired
+  public RestTemplate restTemplate;
 
   public ResponseEntity<Thread> getThread(Integer id, Map<String, String> extraParams) {
     String urlParams = String.format("?id=%d", id) + extraParams

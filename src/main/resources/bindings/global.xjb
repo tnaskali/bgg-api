@@ -23,7 +23,7 @@
   </jaxb:globalBindings>
 
   <jaxb:bindings schemaLocation="../schemas/collection.xsd"
-                 node="xs:complexType[@name='version']/xs:choice/xs:element[@name='thumbnail']">
+                 node="xs:complexType[@name='versionItem']/xs:choice/xs:element[@name='thumbnail']">
     <simplify:as-element-property/>
   </jaxb:bindings>
 

@@ -14,10 +14,12 @@ import java.util.stream.Collectors;
 public class FamiliesService {
 
   private static final String FAMILIES_ENDPOINT_PATH = "/family";
-  @Autowired
-  public RestTemplate restTemplate;
+
   @Value("${bgg.api.v2.baseurl-bgs}")
   private String baseurl;
+
+  @Autowired
+  public RestTemplate restTemplate;
 
   public ResponseEntity<Families> getFamily(Integer id, Map<String, String> extraParams) {
     String urlParams = String.format("?id=%d", id) + extraParams
