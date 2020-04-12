@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:family="http://www.boardgamegeek.com/family"
+           targetNamespace="http://www.boardgamegeek.com/family"
+           elementFormDefault="qualified">
+
+  <xs:simpleType name="familyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="rpg"/>
+      <xs:enumeration value="rpgperiodical"/>
+      <xs:enumeration value="boardgamefamily"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="name">
+    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="sortindex" type="xs:integer"/>
+    <xs:attribute name="value" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="link">
+    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="id" type="xs:integer"/>
+    <xs:attribute name="value" type="xs:string"/>
+    <xs:attribute name="inbound" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="family">
+    <xs:sequence>
+      <xs:element name="thumbnail" type="xs:anyURI"/>
+      <xs:element name="image" type="xs:anyURI"/>
+      <xs:element name="name" type="family:name" maxOccurs="unbounded"/>
+      <xs:element name="description" type="xs:string"/>
+      <xs:element name="link" type="family:link" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="id" type="xs:integer"/>
+  </xs:complexType>
+
+  <xs:complexType name="families">
+    <xs:sequence>
+      <xs:element name="item" type="family:family" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="termsofuse" type="xs:anyURI"/>
+  </xs:complexType>
+
+  <xs:element name="items" type="family:families"/>
+
+</xs:schema>

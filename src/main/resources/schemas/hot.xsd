@@ -5,15 +5,20 @@
            targetNamespace="http://www.boardgamegeek.com/hot"
            elementFormDefault="qualified">
 
-  <xs:simpleType name="itemTypeEnum">
+  <xs:simpleType name="hotItemType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="boardgame"/>
       <xs:enumeration value="boardgameperson"/>
       <xs:enumeration value="boardgamecompany"/>
+      <xs:enumeration value="rpg"/>
+      <xs:enumeration value="rpgperson"/>
+      <xs:enumeration value="rpgcompany"/>
+      <xs:enumeration value="videogame"/>
+      <xs:enumeration value="videogamecompany"/>
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:complexType name="item">
+  <xs:complexType name="hotItem">
     <xs:sequence>
       <xs:element name="thumbnail" type="common:uriValue"/>
       <xs:element name="name" type="common:stringValue"/>
@@ -23,13 +28,13 @@
     <xs:attribute name="rank" type="xs:positiveInteger"/>
   </xs:complexType>
 
-  <xs:complexType name="items">
+  <xs:complexType name="hotItems">
     <xs:sequence>
-      <xs:element name="item" type="hot:item" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="item" type="hot:hotItem" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="termsofuse" type="xs:anyURI"/>
   </xs:complexType>
 
-  <xs:element name="items" type="hot:items"/>
+  <xs:element name="items" type="hot:hotItems"/>
 
 </xs:schema>

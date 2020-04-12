@@ -23,30 +23,18 @@
   </jaxb:globalBindings>
 
   <jaxb:bindings schemaLocation="../schemas/collection.xsd"
-                 node="xs:complexType[@name='versionItem']/xs:choice/xs:element[@name='thumbnail']">
+                 node="xs:complexType[@name='version']/xs:choice/xs:element[@name='thumbnail']">
     <simplify:as-element-property/>
   </jaxb:bindings>
 
   <jaxb:bindings schemaLocation="../schemas/thing.xsd"
-                 node="xs:complexType[@name='versionItem']/xs:choice/xs:element[@name='thumbnail']">
+                 node="xs:complexType[@name='version']/xs:choice/xs:element[@name='thumbnail']">
     <simplify:as-element-property/>
   </jaxb:bindings>
 
   <jaxb:bindings schemaLocation="../schemas/thing.xsd"
-                 node="xs:complexType[@name='item']/xs:choice/xs:element[@name='thumbnail']">
+                 node="xs:complexType[@name='thing']/xs:choice/xs:element[@name='thumbnail']">
     <simplify:as-element-property/>
   </jaxb:bindings>
-
-  <!--  <jaxb:bindings schemaLocation="../schemas/collection.xsd" node="//xs:schema">-->
-  <!--    <jaxb:schemaBindings>-->
-  <!--      <jaxb:package name="com.boardgamegeek.collection"/>-->
-  <!--    </jaxb:schemaBindings>-->
-  <!--  </jaxb:bindings>-->
-
-  <!--  <jaxb:bindings schemaLocation="../schemas/guild.xsd" node="//xs:schema">-->
-  <!--    <jaxb:schemaBindings>-->
-  <!--      <jaxb:package name="com.boardgamegeek.guild"/>-->
-  <!--    </jaxb:schemaBindings>-->
-  <!--  </jaxb:bindings>-->
 
 </jaxb:bindings>

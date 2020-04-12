@@ -5,27 +5,29 @@
            targetNamespace="http://www.boardgamegeek.com/search"
            elementFormDefault="qualified">
 
-  <xs:simpleType name="nameTypeEnum">
+  <xs:simpleType name="nameType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="primary"/>
       <xs:enumeration value="alternate"/>
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="typeEnum">
+  <xs:simpleType name="searchType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="boardgame"/>
       <xs:enumeration value="boardgameexpansion"/>
       <xs:enumeration value="boardgameaccessory"/>
+      <xs:enumeration value="rpgitem"/>
+      <xs:enumeration value="videogame"/>
     </xs:restriction>
   </xs:simpleType>
 
   <xs:complexType name="name">
-    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="type" type="search:nameType"/>
     <xs:attribute name="value" type="xs:string"/>
   </xs:complexType>
 
-  <xs:complexType name="item">
+  <xs:complexType name="result">
     <xs:sequence>
       <xs:element name="name" type="search:name"/>
       <xs:element name="yearpublished" type="common:year" minOccurs="0"/>
@@ -34,14 +36,14 @@
     <xs:attribute name="id" type="xs:integer"/>
   </xs:complexType>
 
-  <xs:complexType name="items">
+  <xs:complexType name="results">
     <xs:sequence>
-      <xs:element name="item" type="search:item" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="item" type="search:result" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="total" type="common:positiveInteger"/>
+    <xs:attribute name="total" type="xs:nonNegativeInteger"/>
     <xs:attribute name="termsofuse" type="xs:anyURI"/>
   </xs:complexType>
 
-  <xs:element name="items" type="search:items"/>
+  <xs:element name="items" type="search:results"/>
 
 </xs:schema>

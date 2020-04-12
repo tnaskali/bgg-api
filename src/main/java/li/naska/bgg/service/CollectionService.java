@@ -1,8 +1,9 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.collection.ItemSubtypeEnum;
-import com.boardgamegeek.collection.Items;
+import com.boardgamegeek.collection.Collection;
+import com.boardgamegeek.collection.CollectionItemSubtype;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -13,27 +14,26 @@ import java.util.stream.Collectors;
 @Service
 public class CollectionService {
 
-  private static final String BGG_URL = "https://www.boardgamegeek.com/xmlapi2";
-
   private static final String COLLECTION_ENDPOINT_PATH = "/collection";
 
-  private static final String COLLECTION_ENDPOINT_URL = BGG_URL + COLLECTION_ENDPOINT_PATH;
+  @Value("${bgg.api.v2.baseurl-bgs}")
+  private String baseurl;
 
   @Autowired
   public RestTemplate restTemplate;
 
-  public ResponseEntity<Items> getItems(String username, Map<String, String> extraParams) {
-    if (!extraParams.containsKey("subtype") || ItemSubtypeEnum.BOARDGAME.value().equals(extraParams.get("subtype"))) {
+  public ResponseEntity<Collection> getItems(String username, Map<String, String> extraParams) {
+    if (!extraParams.containsKey("subtype") || CollectionItemSubtype.BOARDGAME.value().equals(extraParams.get("subtype"))) {
       // bug in the BBG XML API
-      extraParams.put("excludesubtype", ItemSubtypeEnum.BOARDGAMEEXPANSION.value());
+      extraParams.put("excludesubtype", CollectionItemSubtype.BOARDGAMEEXPANSION.value());
     }
     String urlParams = String.format("?username=%s", username) + extraParams
         .entrySet()
         .stream()
         .map(entry -> String.format("&%s=%s", entry.getKey(), entry.getValue()))
         .collect(Collectors.joining());
-    String url = COLLECTION_ENDPOINT_URL + urlParams;
-    return restTemplate.getForEntity(url, Items.class);
+    String url = baseurl + COLLECTION_ENDPOINT_PATH + urlParams;
+    return restTemplate.getForEntity(url, Collection.class);
   }
 
 }

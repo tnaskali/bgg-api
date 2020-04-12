@@ -5,7 +5,7 @@
            targetNamespace="http://www.boardgamegeek.com/guild"
            elementFormDefault="qualified">
 
-  <xs:simpleType name="sortTypeEnum">
+  <xs:simpleType name="sortType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="username"/>
       <xs:enumeration value="date"/>
@@ -28,14 +28,6 @@
     <xs:attribute name="date" type="common:zonedDateTime"/>
   </xs:complexType>
 
-  <xs:complexType name="members">
-    <xs:sequence>
-      <xs:element name="member" type="guild:member" maxOccurs="unbounded"/>
-    </xs:sequence>
-    <xs:attribute name="count" type="xs:positiveInteger"/>
-    <xs:attribute name="page" type="xs:positiveInteger"/>
-  </xs:complexType>
-
   <xs:complexType name="guild">
     <xs:sequence>
       <xs:element name="category" type="xs:string"/>
@@ -43,7 +35,15 @@
       <xs:element name="manager" type="xs:string"/>
       <xs:element name="description" type="xs:string"/>
       <xs:element name="location" type="guild:location"/>
-      <xs:element name="members" type="guild:members" minOccurs="0"/>
+      <xs:element name="members" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="member" type="guild:member" maxOccurs="unbounded"/>
+          </xs:sequence>
+          <xs:attribute name="count" type="xs:positiveInteger"/>
+          <xs:attribute name="page" type="xs:positiveInteger"/>
+        </xs:complexType>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name="id" type="xs:integer"/>
     <xs:attribute name="name" type="xs:string"/>

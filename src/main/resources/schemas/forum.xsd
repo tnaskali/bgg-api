@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:forum="http://www.boardgamegeek.com/forum"
+           targetNamespace="http://www.boardgamegeek.com/forum"
+           elementFormDefault="qualified">
+
+  <xs:complexType name="thread">
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="subject" type="xs:string"/>
+    <xs:attribute name="author" type="xs:string"/>
+    <xs:attribute name="numarticles" type="xs:integer"/>
+    <xs:attribute name="postdate" type="xs:string"/>
+    <xs:attribute name="lastpostdate" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="forum">
+    <xs:sequence>
+      <xs:element name="threads">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="thread" type="forum:thread" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="title" type="xs:string"/>
+    <xs:attribute name="numthreads" type="xs:integer"/>
+    <xs:attribute name="numposts" type="xs:integer"/>
+    <xs:attribute name="lastpostdate" type="xs:string"/>
+    <xs:attribute name="noposting" type="xs:integer"/>
+    <xs:attribute name="termsofuse" type="xs:anyURI"/>
+  </xs:complexType>
+
+  <xs:element name="forum" type="forum:forum"/>
+
+</xs:schema>

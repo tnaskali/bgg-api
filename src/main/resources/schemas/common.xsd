@@ -4,23 +4,10 @@
            targetNamespace="http://www.boardgamegeek.com/common"
            elementFormDefault="qualified">
 
-  <xs:simpleType name="positiveInteger">
-    <xs:restriction base="xs:int">
-      <xs:minInclusive value="0"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="booleanInteger">
-    <xs:restriction base="xs:int">
-      <xs:minInclusive value="0"/>
-      <xs:maxInclusive value="1"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="fiveFractionDigitsPositiveDecimal">
+  <xs:simpleType name="nonNegativeDecimal">
     <xs:restriction base="xs:decimal">
-      <xs:fractionDigits value="5"/>
       <xs:minInclusive value="0"/>
+      <xs:fractionDigits value="5"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -28,7 +15,7 @@
     <xs:restriction base="xs:string">
       <!-- 2020 -->
       <xs:pattern value="[1-9][0-9]{3}"/>
-      <xs:length value="4"/>
+      <xs:maxLength value="4"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -59,16 +46,20 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:complexType name="positiveIntegerValue">
-    <xs:attribute name="value" type="common:positiveInteger"/>
-  </xs:complexType>
-
   <xs:complexType name="integerValue">
     <xs:attribute name="value" type="xs:integer"/>
   </xs:complexType>
 
+  <xs:complexType name="nonNegativeIntegerValue">
+    <xs:attribute name="value" type="xs:nonNegativeInteger"/>
+  </xs:complexType>
+
   <xs:complexType name="decimalValue">
-    <xs:attribute name="value" type="common:fiveFractionDigitsPositiveDecimal"/>
+    <xs:attribute name="value" type="xs:decimal"/>
+  </xs:complexType>
+
+  <xs:complexType name="nonNegativeDecimalValue">
+    <xs:attribute name="value" type="common:nonNegativeDecimal"/>
   </xs:complexType>
 
   <xs:complexType name="stringValue">
@@ -85,6 +76,18 @@
 
   <xs:complexType name="localDateValue">
     <xs:attribute name="value" type="common:localDate"/>
+  </xs:complexType>
+
+  <xs:complexType name="localDateTimeValue">
+    <xs:attribute name="value" type="common:localDateTime"/>
+  </xs:complexType>
+
+  <xs:complexType name="sortIndexString">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="sortindex" type="xs:nonNegativeInteger"/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
 
 </xs:schema>

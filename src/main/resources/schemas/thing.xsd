@@ -5,11 +5,14 @@
            targetNamespace="http://www.boardgamegeek.com/thing"
            elementFormDefault="qualified">
 
-  <xs:simpleType name="typeEnum">
+  <xs:simpleType name="thingType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="boardgame"/>
-      <xs:enumeration value="boardgameexpansion"/>
       <xs:enumeration value="boardgameaccessory"/>
+      <xs:enumeration value="boardgameexpansion"/>
+      <xs:enumeration value="rpgissue"/>
+      <xs:enumeration value="rpgitem"/>
+      <xs:enumeration value="videogame"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -26,18 +29,18 @@
     <xs:attribute name="inbound" type="xs:string"/>
   </xs:complexType>
 
+  <xs:complexType name="result">
+    <xs:attribute name="value" type="xs:string"/>
+    <xs:attribute name="numvotes" type="xs:integer"/>
+    <xs:attribute name="level" type="xs:integer"/>
+  </xs:complexType>
+
   <xs:complexType name="poll">
     <xs:sequence>
       <xs:element name="results" maxOccurs="unbounded">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="result" maxOccurs="unbounded">
-              <xs:complexType>
-                <xs:attribute name="value" type="xs:string"/>
-                <xs:attribute name="numvotes" type="xs:integer"/>
-                <xs:attribute name="level" type="xs:integer"/>
-              </xs:complexType>
-            </xs:element>
+            <xs:element name="result" type="thing:result" maxOccurs="unbounded"/>
           </xs:sequence>
           <xs:attribute name="numplayers" type="xs:string"/>
         </xs:complexType>
@@ -59,14 +62,8 @@
     <xs:attribute name="postdate" type="common:localDateTime"/>
   </xs:complexType>
 
-  <xs:complexType name="videos">
-    <xs:sequence>
-      <xs:element name="video" type="thing:video" maxOccurs="unbounded"/>
-    </xs:sequence>
-    <xs:attribute name="total" type="xs:integer"/>
-  </xs:complexType>
 
-  <xs:complexType name="versionItem">
+  <xs:complexType name="version">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element name="thumbnail" type="xs:anyURI"/>
       <xs:element name="image" type="xs:anyURI"/>
@@ -89,6 +86,15 @@
     <xs:attribute name="value" type="xs:string"/>
   </xs:complexType>
 
+  <xs:complexType name="rank">
+    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="id" type="xs:integer"/>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="friendlyname" type="xs:string"/>
+    <xs:attribute name="value" type="xs:string"/>
+    <xs:attribute name="bayesaverage" type="xs:string"/>
+  </xs:complexType>
+
   <xs:complexType name="ratings">
     <xs:sequence>
       <xs:element name="usersrated" type="common:integerValue"/>
@@ -97,16 +103,7 @@
       <xs:element name="ranks">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="rank">
-              <xs:complexType>
-                <xs:attribute name="type" type="xs:string"/>
-                <xs:attribute name="id" type="xs:integer"/>
-                <xs:attribute name="name" type="xs:string"/>
-                <xs:attribute name="friendlyname" type="xs:string"/>
-                <xs:attribute name="value" type="xs:string"/>
-                <xs:attribute name="bayesaverage" type="xs:string"/>
-              </xs:complexType>
-            </xs:element>
+            <xs:element name="rank" type="thing:rank"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -143,7 +140,7 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="item">
+  <xs:complexType name="thing">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element name="thumbnail" type="xs:anyURI"/>
       <xs:element name="image" type="xs:anyURI"/>
@@ -160,11 +157,18 @@
       <xs:element name="poll" type="thing:poll"/>
       <xs:element name="playingtime" type="common:stringValue"/>
       <xs:element name="minage" type="common:integerValue"/>
-      <xs:element name="videos" type="thing:videos"/>
+      <xs:element name="videos">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="video" type="thing:video" maxOccurs="unbounded"/>
+          </xs:sequence>
+          <xs:attribute name="total" type="xs:integer"/>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="versions">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="item" type="thing:versionItem" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="item" type="thing:version" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -197,13 +201,13 @@
     <xs:attribute name="id" type="xs:integer"/>
   </xs:complexType>
 
-  <xs:complexType name="items">
+  <xs:complexType name="things">
     <xs:sequence>
-      <xs:element name="item" type="thing:item" maxOccurs="unbounded"/>
+      <xs:element name="item" type="thing:thing" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="termsofuse" type="xs:anyURI"/>
   </xs:complexType>
 
-  <xs:element name="items" type="thing:items"/>
+  <xs:element name="items" type="thing:things"/>
 
 </xs:schema>

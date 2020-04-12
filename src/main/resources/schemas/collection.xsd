@@ -5,34 +5,37 @@
            targetNamespace="http://www.boardgamegeek.com/collection"
            elementFormDefault="qualified">
 
-  <xs:simpleType name="itemTypeEnum">
+  <xs:simpleType name="collectionItemType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="thing"/>
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="itemSubtypeEnum">
+  <xs:simpleType name="collectionItemSubtype">
     <xs:restriction base="xs:string">
       <xs:enumeration value="boardgame"/>
       <xs:enumeration value="boardgameexpansion"/>
       <xs:enumeration value="boardgameaccessory"/>
+      <xs:enumeration value="rpgitem"/>
+      <xs:enumeration value="rpgissue"/>
+      <xs:enumeration value="videogame"/>
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="versionTypeEnum">
+  <xs:simpleType name="versionType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="boardgameversion"/>
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="versionNameTypeEnum">
+  <xs:simpleType name="nameType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="primary"/>
       <xs:enumeration value="alternate"/>
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="linkTypeEnum">
+  <xs:simpleType name="linkType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="boardgameversion"/>
       <xs:enumeration value="boardgamepublisher"/>
@@ -41,7 +44,7 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="rankTypeEnum">
+  <xs:simpleType name="rankType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="subtype"/>
       <xs:enumeration value="family"/>
@@ -49,28 +52,20 @@
   </xs:simpleType>
 
   <xs:complexType name="name">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute name="sortindex" type="common:positiveInteger"/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-
-  <xs:complexType name="versionName">
-    <xs:attribute name="type" type="collection:versionNameTypeEnum"/>
-    <xs:attribute name="sortindex" type="common:positiveInteger"/>
+    <xs:attribute name="type" type="collection:nameType"/>
+    <xs:attribute name="sortindex" type="xs:nonNegativeInteger"/>
     <xs:attribute name="value" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="link">
-    <xs:attribute name="type" type="collection:linkTypeEnum"/>
+    <xs:attribute name="type" type="collection:linkType"/>
     <xs:attribute name="id" type="xs:integer"/>
     <xs:attribute name="value" type="xs:string"/>
     <xs:attribute name="inbound" type="xs:boolean"/>
   </xs:complexType>
 
   <xs:complexType name="rank">
-    <xs:attribute name="type" type="collection:rankTypeEnum"/>
+    <xs:attribute name="type" type="collection:rankType"/>
     <xs:attribute name="id" type="xs:integer"/>
     <xs:attribute name="name" type="xs:string"/>
     <xs:attribute name="friendlyname" type="xs:string"/>
@@ -78,20 +73,20 @@
     <xs:attribute name="bayesaverage" type="xs:string"/>
   </xs:complexType>
 
-  <xs:complexType name="ranks">
-    <xs:sequence>
-      <xs:element name="rank" type="collection:rank" maxOccurs="unbounded"/>
-    </xs:sequence>
-  </xs:complexType>
-
   <xs:complexType name="rating">
     <xs:sequence>
-      <xs:element name="usersrated" type="common:positiveIntegerValue"/>
+      <xs:element name="usersrated" type="common:nonNegativeIntegerValue"/>
       <xs:element name="average" type="common:decimalValue"/>
       <xs:element name="bayesaverage" type="common:decimalValue"/>
       <xs:element name="stddev" type="common:decimalValue"/>
       <xs:element name="median" type="common:decimalValue"/>
-      <xs:element name="ranks" type="collection:ranks"/>
+      <xs:element name="ranks">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="rank" type="collection:rank" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name="value" type="xs:string"/>
   </xs:complexType>
@@ -100,32 +95,32 @@
     <xs:sequence>
       <xs:element name="rating" type="collection:rating"/>
     </xs:sequence>
-    <xs:attribute name="minplayers" type="common:positiveInteger"/>
-    <xs:attribute name="maxplayers" type="common:positiveInteger"/>
-    <xs:attribute name="minplaytime" type="common:positiveInteger"/>
-    <xs:attribute name="maxplaytime" type="common:positiveInteger"/>
-    <xs:attribute name="playingtime" type="common:positiveInteger"/>
-    <xs:attribute name="numowned" type="common:positiveInteger"/>
+    <xs:attribute name="minplayers" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="maxplayers" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="minplaytime" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="maxplaytime" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="playingtime" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="numowned" type="xs:nonNegativeInteger"/>
   </xs:complexType>
 
   <xs:complexType name="status">
-    <xs:attribute name="own" type="common:booleanInteger"/>
-    <xs:attribute name="prevowned" type="common:booleanInteger"/>
-    <xs:attribute name="fortrade" type="common:booleanInteger"/>
-    <xs:attribute name="want" type="common:booleanInteger"/>
-    <xs:attribute name="wanttoplay" type="common:booleanInteger"/>
-    <xs:attribute name="wanttobuy" type="common:booleanInteger"/>
-    <xs:attribute name="wishlist" type="common:booleanInteger"/>
-    <xs:attribute name="preordered" type="common:booleanInteger"/>
+    <xs:attribute name="own" type="xs:boolean"/>
+    <xs:attribute name="prevowned" type="xs:boolean"/>
+    <xs:attribute name="fortrade" type="xs:boolean"/>
+    <xs:attribute name="want" type="xs:boolean"/>
+    <xs:attribute name="wanttoplay" type="xs:boolean"/>
+    <xs:attribute name="wanttobuy" type="xs:boolean"/>
+    <xs:attribute name="wishlist" type="xs:boolean"/>
+    <xs:attribute name="preordered" type="xs:boolean"/>
     <xs:attribute name="lastmodified" type="common:localDateTime"/>
   </xs:complexType>
 
-  <xs:complexType name="versionItem">
+  <xs:complexType name="version">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element name="thumbnail" type="xs:anyURI"/>
       <xs:element name="image" type="xs:anyURI"/>
-      <xs:element name="name" type="collection:versionName"/>
-      <xs:element name="yearpublished" type="common:stringValue"/>
+      <xs:element name="name" type="collection:name"/>
+      <xs:element name="yearpublished" type="common:yearValue"/>
       <xs:element name="link" type="collection:link"/>
       <xs:element name="productcode" type="common:stringValue"/>
       <xs:element name="width" type="common:decimalValue"/>
@@ -133,43 +128,43 @@
       <xs:element name="depth" type="common:decimalValue"/>
       <xs:element name="weight" type="common:decimalValue"/>
     </xs:choice>
-    <xs:attribute name="type" type="collection:versionTypeEnum"/>
+    <xs:attribute name="type" type="collection:versionType"/>
     <xs:attribute name="id" type="xs:integer"/>
-  </xs:complexType>
-
-  <xs:complexType name="version">
-    <xs:sequence>
-      <xs:element name="item" type="collection:versionItem"/>
-    </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="item">
     <xs:sequence>
-      <xs:element name="name" type="collection:name"/>
+      <xs:element name="name" type="common:sortIndexString"/>
       <xs:element name="originalname" type="xs:string" minOccurs="0"/>
       <xs:element name="yearpublished" type="xs:string" minOccurs="0"/>
       <xs:element name="image" type="xs:anyURI" minOccurs="0"/>
       <xs:element name="thumbnail" type="xs:anyURI" minOccurs="0"/>
       <xs:element name="stats" type="collection:stats" minOccurs="0"/>
       <xs:element name="status" type="collection:status"/>
-      <xs:element name="numplays" type="common:positiveInteger"/>
-      <xs:element name="version" type="collection:version" minOccurs="0"/>
+      <xs:element name="numplays" type="xs:nonNegativeInteger"/>
+      <xs:element name="version" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="item" type="collection:version"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:sequence>
-    <xs:attribute name="objecttype" type="collection:itemTypeEnum"/>
+    <xs:attribute name="objecttype" type="collection:collectionItemType"/>
     <xs:attribute name="objectid" type="xs:integer"/>
-    <xs:attribute name="subtype" type="collection:itemSubtypeEnum"/>
+    <xs:attribute name="subtype" type="collection:collectionItemSubtype"/>
     <xs:attribute name="collid" type="xs:integer"/>
   </xs:complexType>
 
-  <xs:complexType name="items">
+  <xs:complexType name="collection">
     <xs:sequence>
       <xs:element name="item" type="collection:item" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="totalitems" type="common:positiveInteger"/>
+    <xs:attribute name="totalitems" type="xs:nonNegativeInteger"/>
     <xs:attribute name="termsofuse" type="xs:anyURI"/>
     <xs:attribute name="pubdate" type="common:zonedDateTime"/>
   </xs:complexType>
 
-  <xs:element name="items" type="collection:items"/>
+  <xs:element name="items" type="collection:collection"/>
 
 </xs:schema>

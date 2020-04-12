@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:forumlist="http://www.boardgamegeek.com/forumlist"
+           targetNamespace="http://www.boardgamegeek.com/forumlist"
+           elementFormDefault="qualified">
+
+  <xs:simpleType name="forumType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="thing"/>
+      <xs:enumeration value="family"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="forum">
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="groupid" type="xs:integer"/>
+    <xs:attribute name="title" type="xs:string"/>
+    <xs:attribute name="noposting" type="xs:integer"/>
+    <xs:attribute name="description" type="xs:string"/>
+    <xs:attribute name="numthreads" type="xs:integer"/>
+    <xs:attribute name="numposts" type="xs:integer"/>
+    <xs:attribute name="lastpostdate" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="forums">
+    <xs:sequence>
+      <xs:element name="forum" type="forumlist:forum" minOccurs="0" maxOccurs="unbounded">
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="termsofuse" type="xs:anyURI"/>
+  </xs:complexType>
+
+  <xs:element name="forums" type="forumlist:forums"/>
+
+</xs:schema>

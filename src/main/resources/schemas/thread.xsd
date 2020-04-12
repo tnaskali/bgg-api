@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:thread="http://www.boardgamegeek.com/thread"
+           targetNamespace="http://www.boardgamegeek.com/thread"
+           elementFormDefault="qualified">
+
+  <xs:complexType name="article">
+    <xs:sequence>
+      <xs:element name="subject" type="xs:string"/>
+      <xs:element name="body" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="username" type="xs:string"/>
+    <xs:attribute name="link" type="xs:anyURI"/>
+    <xs:attribute name="postdate" type="xs:dateTime"/>
+    <xs:attribute name="editdate" type="xs:dateTime"/>
+    <xs:attribute name="numedits" type="xs:integer"/>
+  </xs:complexType>
+
+  <xs:complexType name="thread">
+    <xs:sequence>
+      <xs:element name="subject" type="xs:string"/>
+      <xs:element name="articles">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="article" type="thread:article" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="numarticles" type="xs:integer"/>
+    <xs:attribute name="link" type="xs:anyURI"/>
+    <xs:attribute name="termsofuse" type="xs:anyURI"/>
+  </xs:complexType>
+
+  <xs:element name="thread" type="thread:thread"/>
+
+</xs:schema>
