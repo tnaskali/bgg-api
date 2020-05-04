@@ -1,7 +1,7 @@
 bgg:
   api:
     v1:
-      baseurl-bgs: http://www.boardgamegeek.com/xmlapi
+      baseurl-bgs: https://www.boardgamegeek.com/xmlapi
     v2:
       baseurl-bgs: https://www.boardgamegeek.com/xmlapi2
       baseurl-rpgs: https://www.rpggeek.com/xmlapi2

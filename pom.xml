@@ -15,6 +15,40 @@
   <name>bgg-api</name>
   <description>API for BGG</description>
 
+  <url>https://github.com/tnaskali/bgg-api</url>
+
+  <scm>
+    <url>http://github.com/tnaskali/bgg-api</url>
+    <connection>scm:git:git://github.com/tnaskali/bgg-api.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/tnaskali/bgg-api.git</developerConnection>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>http://github.com/tnaskali/bgg-api/issues</url>
+  </issueManagement>
+
+  <licenses>
+    <license>
+      <name>GNU General Public License (GPL)</name>
+      <url>http://www.gnu.org/licenses/gpl.txt</url>
+    </license>
+  </licenses>
+
+  <organization>
+    <url>www.naska.li</url>
+    <name>Thomas Naskali</name>
+  </organization>
+
+  <developers>
+    <developer>
+      <name>Thomas Naskali</name>
+      <email>thomas@naska.li</email>
+      <id>tnaskali</id>
+      <url>http://github.com/tnaskali</url>
+    </developer>
+  </developers>
+
   <properties>
     <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,10 +59,6 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-cache</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -63,54 +93,62 @@
   </dependencies>
 
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.jvnet.jaxb2.maven2</groupId>
+          <artifactId>maven-jaxb2-plugin</artifactId>
+          <version>0.14.0</version>
+          <executions>
+            <execution>
+              <id>generate-sources</id>
+              <goals>
+                <goal>generate</goal>
+              </goals>
+              <configuration>
+                <schemaDirectory>src/main/resources/schemas</schemaDirectory>
+                <schemaIncludes>
+                  <include>*.xsd</include>
+                </schemaIncludes>
+                <bindingDirectory>src/main/resources/bindings</bindingDirectory>
+                <bindingIncludes>
+                  <include>*.xjb</include>
+                </bindingIncludes>
+                <generateDirectory>target/generated-sources/xjc</generateDirectory>
+              </configuration>
+            </execution>
+          </executions>
+          <configuration>
+            <strict>false</strict>
+            <catalog>src/main/resources/catalogs/catalog.cat</catalog>
+            <extension>true</extension>
+            <args>
+              <arg>-XtoString</arg>
+              <arg>-Xequals</arg>
+              <arg>-XhashCode</arg>
+              <arg>-Xsimplify</arg>
+              <arg>-Xsimplify-usePluralForm=true</arg>
+            </args>
+            <plugins>
+              <plugin>
+                <groupId>org.jvnet.jaxb2_commons</groupId>
+                <artifactId>jaxb2-basics</artifactId>
+                <version>0.12.0</version>
+              </plugin>
+            </plugins>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
-
       <plugin>
         <groupId>org.jvnet.jaxb2.maven2</groupId>
         <artifactId>maven-jaxb2-plugin</artifactId>
-        <version>0.14.0</version>
-        <executions>
-          <execution>
-            <id>generate-sources</id>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-            <configuration>
-              <schemaDirectory>src/main/resources/schemas</schemaDirectory>
-              <schemaIncludes>
-                <include>*.xsd</include>
-              </schemaIncludes>
-              <bindingDirectory>src/main/resources/bindings</bindingDirectory>
-              <bindingIncludes>
-                <include>*.xjb</include>
-              </bindingIncludes>
-              <generateDirectory>target/generated-sources/xjc</generateDirectory>
-            </configuration>
-          </execution>
-        </executions>
-        <configuration>
-          <strict>false</strict>
-          <catalog>src/main/resources/catalogs/catalog.cat</catalog>
-          <extension>true</extension>
-          <args>
-            <arg>-XtoString</arg>
-            <arg>-Xequals</arg>
-            <arg>-XhashCode</arg>
-            <arg>-Xsimplify</arg>
-            <arg>-Xsimplify-usePluralForm=true</arg>
-          </args>
-          <plugins>
-            <plugin>
-              <groupId>org.jvnet.jaxb2_commons</groupId>
-              <artifactId>jaxb2-basics</artifactId>
-              <version>0.12.0</version>
-            </plugin>
-          </plugins>
-        </configuration>
       </plugin>
     </plugins>
   </build>
