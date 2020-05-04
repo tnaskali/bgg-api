@@ -22,7 +22,7 @@ public class GeeklistsService {
     String urlParams = extraParams
         .entrySet()
         .stream()
-        .map(entry -> String.format("&%s=%s", entry.getKey(), entry.getValue()))
+        .map(entry -> String.format("%s=%s", entry.getKey(), entry.getValue()))
         .reduce((x, y) -> String.format("%s&%s", x, y))
         .map(s -> String.format("?%s", s))
         .orElse("");
