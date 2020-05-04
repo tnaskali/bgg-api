@@ -28,12 +28,6 @@ public class GeeklistsService {
         .orElse("");
     String urlIdPath = String.format("/%d", id);
     String url = baseurl + GEEKLISTS_ENDPOINT_PATH + urlIdPath + urlParams;
-
-    //HttpHeaders headers = new HttpHeaders();
-    //headers.setAccept(Collections.singletonList(MediaType.APPLICATION_XML));
-    //HttpEntity<Void> entity = new HttpEntity<>(null, headers);
-
-    //return restTemplate.exchange(url, HttpMethod.GET, entity, Geeklist.class);
     return restTemplate.getForEntity(url, Geeklist.class);
   }
 
