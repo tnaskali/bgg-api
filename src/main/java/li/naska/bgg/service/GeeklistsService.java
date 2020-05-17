@@ -13,10 +13,12 @@ import java.util.Map;
 public class GeeklistsService {
 
   private static final String GEEKLISTS_ENDPOINT_PATH = "/geeklist";
-  @Autowired
-  public RestTemplate restTemplate;
+
   @Value("${bgg.api.v1.baseurl-bgs}")
   private String baseurl;
+
+  @Autowired
+  public RestTemplate restTemplate;
 
   public ResponseEntity<Geeklist> getGeeklist(Integer id, Map<String, String> extraParams) {
     String urlParams = extraParams
