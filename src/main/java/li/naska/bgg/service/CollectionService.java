@@ -61,7 +61,7 @@ public class CollectionService {
         waitFor(waitSeconds);
         return tryResponse(responseSupplier, waitSeconds * 2, maxRetries - 1);
       } else {
-        return ResponseEntity.status(HttpStatus.GATEWAY_TIMEOUT).build();
+        return ResponseEntity.status(HttpStatus.REQUEST_TIMEOUT).build();
       }
     } else {
       return response;
