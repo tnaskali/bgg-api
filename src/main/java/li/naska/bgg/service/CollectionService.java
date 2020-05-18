@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -28,9 +29,9 @@ public class CollectionService {
   @Autowired
   public RestTemplate restTemplate;
 
-  private static void waitFor(int millis) {
+  private static void waitFor(int seconds) {
     try {
-      Thread.sleep(millis);
+      TimeUnit.SECONDS.sleep(seconds);
     } catch (InterruptedException ie) {
       LOGGER.debug("sleep was interrupted", ie);
     }
@@ -48,16 +49,17 @@ public class CollectionService {
         .collect(Collectors.joining());
     final String url = baseurl + COLLECTION_ENDPOINT_PATH + urlParams;
 
-    // BGG might queue the request
-    return tryResponse(() -> restTemplate.getForEntity(url, Collection.class), 1000, 4);
+    return tryResponse(() -> restTemplate.getForEntity(url, Collection.class), 1, 4);
   }
 
-  private ResponseEntity<Collection> tryResponse(Supplier<ResponseEntity<Collection>> responseSupplier, int waitMillis, int maxRetries) {
+  private ResponseEntity<Collection> tryResponse(Supplier<ResponseEntity<Collection>> responseSupplier, int waitSeconds, int maxRetries) {
     ResponseEntity<Collection> response = responseSupplier.get();
     if (response.getStatusCode() == HttpStatus.ACCEPTED) {
+      // BGG might queue the request
       if (maxRetries > 0) {
-        waitFor(waitMillis);
-        return tryResponse(responseSupplier, waitMillis * 2, maxRetries - 1);
+        // Try after an inreasingly long delay to not stress the BGG server too much
+        waitFor(waitSeconds);
+        return tryResponse(responseSupplier, waitSeconds * 2, maxRetries - 1);
       } else {
         return ResponseEntity.status(HttpStatus.GATEWAY_TIMEOUT).build();
       }
