@@ -6,17 +6,17 @@
            elementFormDefault="qualified">
 
   <xs:complexType name="rankingItem">
-    <xs:attribute name="rank" type="xs:string"/>
-    <xs:attribute name="type" type="xs:string"/>
-    <xs:attribute name="id" type="xs:string"/>
-    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="rank" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="ranking">
     <xs:sequence>
-      <xs:element name="item" type="user:rankingItem" maxOccurs="unbounded"/>
+      <xs:element name="item" type="user:rankingItem" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="domain" type="xs:string"/>
+    <xs:attribute name="domain" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="buddy">
@@ -27,6 +27,22 @@
   <xs:complexType name="guild">
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="buddies">
+    <xs:sequence>
+      <xs:element name="buddy" type="user:buddy" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="total" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="page" type="xs:positiveInteger" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="guilds">
+    <xs:sequence>
+      <xs:element name="guild" type="user:guild" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="total" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="page" type="xs:positiveInteger" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="user">
@@ -45,30 +61,14 @@
       <xs:element name="battlenetaccount" type="common:stringValue"/>
       <xs:element name="steamaccount" type="common:stringValue"/>
       <xs:element name="traderating" type="common:stringValue"/>
-      <xs:element name="buddies" minOccurs="0">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="buddy" type="user:buddy" minOccurs="0" maxOccurs="unbounded"/>
-          </xs:sequence>
-          <xs:attribute name="total" type="xs:nonNegativeInteger"/>
-          <xs:attribute name="page" type="xs:positiveInteger"/>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="guilds" minOccurs="0">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="guild" type="user:guild" minOccurs="0" maxOccurs="unbounded"/>
-          </xs:sequence>
-          <xs:attribute name="total" type="xs:nonNegativeInteger"/>
-          <xs:attribute name="page" type="xs:positiveInteger"/>
-        </xs:complexType>
-      </xs:element>
+      <xs:element name="buddies" type="user:buddies" minOccurs="0"/>
+      <xs:element name="guilds" type="user:guilds" minOccurs="0"/>
       <xs:element name="top" type="user:ranking" minOccurs="0"/>
       <xs:element name="hot" type="user:ranking" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="id" type="common:nillableInteger" use="required"/> <!-- will be empty if user doesn't exist -->
     <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="termsofuse" type="xs:anyURI"/>
+    <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
 
   <xs:element name="user" type="user:user"/>

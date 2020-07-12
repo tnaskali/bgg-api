@@ -6,23 +6,22 @@
 
   <xs:complexType name="forum">
     <xs:attribute name="id" type="xs:integer" use="required"/>
-    <xs:attribute name="groupid" type="xs:integer"/>
-    <xs:attribute name="title" type="xs:string"/>
-    <xs:attribute name="noposting" type="xs:integer"/>
-    <xs:attribute name="description" type="xs:string"/>
-    <xs:attribute name="numthreads" type="xs:integer"/>
-    <xs:attribute name="numposts" type="xs:integer"/>
-    <xs:attribute name="lastpostdate" type="xs:string"/>
+    <xs:attribute name="groupid" type="xs:integer" use="required"/>
+    <xs:attribute name="title" type="xs:string" use="required"/>
+    <xs:attribute name="noposting" type="xs:integer" use="required"/>
+    <xs:attribute name="description" type="xs:string" use="required"/>
+    <xs:attribute name="numthreads" type="xs:integer" use="required"/>
+    <xs:attribute name="numposts" type="xs:integer" use="required"/>
+    <xs:attribute name="lastpostdate" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="forums">
     <xs:sequence>
-      <xs:element name="forum" type="forumlist:forum" minOccurs="0" maxOccurs="unbounded">
-      </xs:element>
+      <xs:element name="forum" type="forumlist:forum" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
-    <xs:attribute name="termsofuse" type="xs:anyURI"/>
+    <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
 
   <xs:element name="forums" type="forumlist:forums"/>

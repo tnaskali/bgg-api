@@ -9,11 +9,11 @@
   <xs:complexType name="comment">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute name="username" type="xs:string"/>
-        <xs:attribute name="date" type="common:zonedDateTime"/>
-        <xs:attribute name="postdate" type="common:zonedDateTime"/>
-        <xs:attribute name="editdate" type="common:zonedDateTime"/>
-        <xs:attribute name="thumbs" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="username" type="xs:string" use="required"/>
+        <xs:attribute name="date" type="common:zonedDateTime" use="required"/>
+        <xs:attribute name="postdate" type="common:zonedDateTime" use="required"/>
+        <xs:attribute name="editdate" type="common:zonedDateTime" use="required"/>
+        <xs:attribute name="thumbs" type="xs:nonNegativeInteger" use="required"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -23,16 +23,16 @@
       <xs:element name="body" type="xs:string"/>
       <xs:element name="comment" type="geeklist:comment" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="id" type="xs:nonNegativeInteger"/>
-    <xs:attribute name="objecttype" type="enums:objectType"/>
-    <xs:attribute name="subtype" type="enums:objectSubtype"/>
-    <xs:attribute name="objectid" type="xs:nonNegativeInteger"/>
-    <xs:attribute name="objectname" type="xs:string"/>
-    <xs:attribute name="username" type="xs:string"/>
-    <xs:attribute name="postdate" type="common:zonedDateTime"/>
-    <xs:attribute name="editdate" type="common:zonedDateTime"/>
-    <xs:attribute name="thumbs" type="xs:nonNegativeInteger"/>
-    <xs:attribute name="imageid" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="id" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="objecttype" type="enums:objectType" use="required"/>
+    <xs:attribute name="subtype" type="enums:objectSubtype" use="required"/>
+    <xs:attribute name="objectid" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="objectname" type="xs:string" use="required"/>
+    <xs:attribute name="username" type="xs:string" use="required"/>
+    <xs:attribute name="postdate" type="common:zonedDateTime" use="required"/>
+    <xs:attribute name="editdate" type="common:zonedDateTime" use="required"/>
+    <xs:attribute name="thumbs" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="imageid" type="xs:nonNegativeInteger" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="geeklist">
@@ -49,8 +49,8 @@
       <xs:element name="comment" type="geeklist:comment" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="item" type="geeklist:item" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="id" type="xs:nonNegativeInteger"/>
-    <xs:attribute name="termsofuse" type="xs:anyURI"/>
+    <xs:attribute name="id" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
 
   <xs:element name="geeklist" type="geeklist:geeklist"/>

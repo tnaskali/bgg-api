@@ -90,7 +90,7 @@
   </xs:simpleType>
 
   <xs:complexType name="objectSubtypeValue">
-    <xs:attribute name="value" type="enums:objectSubtype"/>
+    <xs:attribute name="value" type="enums:objectSubtype" use="required"/>
   </xs:complexType>
 
 </xs:schema>

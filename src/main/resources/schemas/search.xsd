@@ -6,8 +6,8 @@
            elementFormDefault="qualified">
 
   <xs:complexType name="name">
-    <xs:attribute name="type" type="enums:nameType"/>
-    <xs:attribute name="value" type="xs:string"/>
+    <xs:attribute name="type" type="enums:nameType" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="result">
@@ -15,16 +15,16 @@
       <xs:element name="name" type="search:name"/>
       <xs:element name="yearpublished" type="xs:integer" minOccurs="0"/>
     </xs:sequence>
-    <xs:attribute name="type" type="xs:string"/>
-    <xs:attribute name="id" type="xs:integer"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="results">
     <xs:sequence>
       <xs:element name="item" type="search:result" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="total" type="xs:nonNegativeInteger"/>
-    <xs:attribute name="termsofuse" type="xs:anyURI"/>
+    <xs:attribute name="total" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
 
   <xs:element name="items" type="search:results"/>

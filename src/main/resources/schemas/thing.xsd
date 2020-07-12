@@ -6,51 +6,50 @@
            elementFormDefault="qualified">
 
   <xs:complexType name="name">
-    <xs:attribute name="type" type="xs:string"/>
-    <xs:attribute name="sortindex" type="xs:integer"/>
-    <xs:attribute name="value" type="xs:string"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="sortindex" type="xs:integer" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="link">
-    <xs:attribute name="type" type="xs:string"/>
-    <xs:attribute name="id" type="xs:integer"/>
-    <xs:attribute name="value" type="xs:string"/>
-    <xs:attribute name="inbound" type="xs:string"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="inbound" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="result">
-    <xs:attribute name="value" type="xs:string"/>
-    <xs:attribute name="numvotes" type="xs:integer"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="numvotes" type="xs:integer" use="required"/>
     <xs:attribute name="level" type="xs:integer"/>
+  </xs:complexType>
+
+  <xs:complexType name="results">
+    <xs:sequence>
+      <xs:element name="result" type="thing:result" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="numplayers" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="poll">
     <xs:sequence>
-      <xs:element name="results" maxOccurs="unbounded">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="result" type="thing:result" maxOccurs="unbounded"/>
-          </xs:sequence>
-          <xs:attribute name="numplayers" type="xs:string"/>
-        </xs:complexType>
-      </xs:element>
+      <xs:element name="results" type="thing:results" minOccurs="0"/>
     </xs:sequence>
-    <xs:attribute name="name" type="xs:string"/>
-    <xs:attribute name="title" type="xs:string"/>
-    <xs:attribute name="totalvotes" type="xs:string"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="title" type="xs:string" use="required"/>
+    <xs:attribute name="totalvotes" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="video">
-    <xs:attribute name="id" type="xs:integer"/>
-    <xs:attribute name="title" type="xs:string"/>
-    <xs:attribute name="category" type="xs:string"/>
-    <xs:attribute name="language" type="xs:string"/>
-    <xs:attribute name="link" type="xs:anyURI"/>
-    <xs:attribute name="username" type="xs:string"/>
-    <xs:attribute name="userid" type="xs:integer"/>
-    <xs:attribute name="postdate" type="common:localDateTime"/>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="title" type="xs:string" use="required"/>
+    <xs:attribute name="category" type="xs:string" use="required"/>
+    <xs:attribute name="language" type="xs:string" use="required"/>
+    <xs:attribute name="link" type="xs:anyURI" use="required"/>
+    <xs:attribute name="username" type="xs:string" use="required"/>
+    <xs:attribute name="userid" type="xs:integer" use="required"/>
+    <xs:attribute name="postdate" type="common:localDateTime" use="required"/>
   </xs:complexType>
-
 
   <xs:complexType name="version">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
@@ -65,23 +64,29 @@
       <xs:element name="depth" type="common:decimalValue"/>
       <xs:element name="weight" type="common:decimalValue"/>
     </xs:choice>
-    <xs:attribute name="type" type="xs:string"/>
-    <xs:attribute name="id" type="xs:integer"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="comment">
-    <xs:attribute name="username" type="xs:string"/>
-    <xs:attribute name="rating" type="xs:string"/>
-    <xs:attribute name="value" type="xs:string"/>
+    <xs:attribute name="username" type="xs:string" use="required"/>
+    <xs:attribute name="rating" type="xs:string" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="rank">
-    <xs:attribute name="type" type="xs:string"/>
-    <xs:attribute name="id" type="xs:integer"/>
-    <xs:attribute name="name" type="xs:string"/>
-    <xs:attribute name="friendlyname" type="xs:string"/>
-    <xs:attribute name="value" type="xs:string"/>
-    <xs:attribute name="bayesaverage" type="xs:string"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="friendlyname" type="xs:string" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="bayesaverage" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="ranks">
+    <xs:sequence>
+      <xs:element name="rank" type="thing:rank" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="ratings">
@@ -89,13 +94,7 @@
       <xs:element name="usersrated" type="common:integerValue"/>
       <xs:element name="average" type="common:decimalValue"/>
       <xs:element name="bayesaverage" type="common:decimalValue"/>
-      <xs:element name="ranks">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="rank" type="thing:rank"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
+      <xs:element name="ranks" type="thing:ranks" minOccurs="0"/>
       <xs:element name="stddev" type="common:decimalValue"/>
       <xs:element name="median" type="common:decimalValue"/>
       <xs:element name="owned" type="common:integerValue"/>
@@ -106,26 +105,60 @@
       <xs:element name="numweights" type="common:integerValue"/>
       <xs:element name="averageweight" type="common:decimalValue"/>
     </xs:sequence>
-    <xs:attribute name="date" type="xs:string"/>
+    <xs:attribute name="date" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="listingPrice">
+    <xs:attribute name="currency" type="xs:string" use="required"/>
+    <xs:attribute name="value" type="xs:decimal" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="listingLink">
+    <xs:attribute name="href" type="xs:anyURI" use="required"/>
+    <xs:attribute name="title" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="listing">
     <xs:sequence>
       <xs:element name="listdate" type="common:stringValue"/>
-      <xs:element name="price">
-        <xs:complexType>
-          <xs:attribute name="currency" type="xs:string"/>
-          <xs:attribute name="value" type="xs:decimal"/>
-        </xs:complexType>
-      </xs:element>
+      <xs:element name="price" type="thing:listingPrice"/>
       <xs:element name="condition" type="common:stringValue"/>
       <xs:element name="notes" type="common:stringValue"/>
-      <xs:element name="link">
-        <xs:complexType>
-          <xs:attribute name="href" type="xs:anyURI"/>
-          <xs:attribute name="title" type="xs:string"/>
-        </xs:complexType>
-      </xs:element>
+      <xs:element name="link" type="thing:listingLink"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="videos">
+    <xs:sequence>
+      <xs:element name="video" type="thing:video" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="total" type="xs:integer" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="versions">
+    <xs:sequence>
+      <xs:element name="item" type="thing:version" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="comments">
+    <xs:sequence>
+      <xs:element name="comment" type="thing:comment" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="page" type="xs:string" use="required"/>
+    <xs:attribute name="totalitems" type="xs:integer" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="statistics">
+    <xs:sequence>
+      <xs:element name="ratings" type="thing:ratings" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="page" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="marketplacelistings">
+    <xs:sequence>
+      <xs:element name="listing" type="thing:listing" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -146,55 +179,21 @@
       <xs:element name="poll" type="thing:poll"/>
       <xs:element name="playingtime" type="common:stringValue"/>
       <xs:element name="minage" type="common:integerValue"/>
-      <xs:element name="videos">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="video" type="thing:video" maxOccurs="unbounded"/>
-          </xs:sequence>
-          <xs:attribute name="total" type="xs:integer"/>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="versions">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="item" type="thing:version" minOccurs="0" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="comments">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="comment" type="thing:comment" minOccurs="0" maxOccurs="unbounded"/>
-          </xs:sequence>
-          <xs:attribute name="page" type="xs:string"/>
-          <xs:attribute name="totalitems" type="xs:integer"/>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="statistics">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="ratings" type="thing:ratings" maxOccurs="unbounded"/>
-          </xs:sequence>
-          <xs:attribute name="page" type="xs:string"/>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="marketplacelistings">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="listing" type="thing:listing" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
+      <xs:element name="videos" type="thing:videos"/>
+      <xs:element name="versions" type="thing:versions"/>
+      <xs:element name="comments" type="thing:comments"/>
+      <xs:element name="statistics" type="thing:statistics"/>
+      <xs:element name="marketplacelistings" type="thing:marketplacelistings"/>
     </xs:choice>
-    <xs:attribute name="type" type="xs:string"/>
-    <xs:attribute name="id" type="xs:integer"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="things">
     <xs:sequence>
-      <xs:element name="item" type="thing:thing" maxOccurs="unbounded"/>
+      <xs:element name="item" type="thing:thing" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="termsofuse" type="xs:anyURI"/>
+    <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
 
   <xs:element name="items" type="thing:things"/>

@@ -17,8 +17,16 @@
   </xs:complexType>
 
   <xs:complexType name="member">
-    <xs:attribute name="name" type="xs:string"/>
-    <xs:attribute name="date" type="common:zonedDateTime"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="date" type="common:zonedDateTime" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="members">
+    <xs:sequence>
+      <xs:element name="member" type="guild:member" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="count" type="xs:positiveInteger" use="required"/>
+    <xs:attribute name="page" type="xs:positiveInteger" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="guild">
@@ -28,20 +36,12 @@
       <xs:element name="manager" type="xs:string"/>
       <xs:element name="description" type="xs:string"/>
       <xs:element name="location" type="guild:location"/>
-      <xs:element name="members" minOccurs="0">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="member" type="guild:member" maxOccurs="unbounded"/>
-          </xs:sequence>
-          <xs:attribute name="count" type="xs:positiveInteger"/>
-          <xs:attribute name="page" type="xs:positiveInteger"/>
-        </xs:complexType>
-      </xs:element>
+      <xs:element name="members" type="guild:members" minOccurs="0"/>
     </xs:sequence>
-    <xs:attribute name="id" type="xs:integer"/>
-    <xs:attribute name="name" type="xs:string"/>
-    <xs:attribute name="created" type="common:zonedDateTime"/>
-    <xs:attribute name="termsofuse" type="xs:anyURI"/>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="created" type="common:zonedDateTime" use="required"/>
+    <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
 
   <xs:element name="guild" type="guild:guild"/>

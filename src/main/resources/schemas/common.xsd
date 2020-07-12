@@ -44,45 +44,45 @@
   </xs:simpleType>
 
   <xs:complexType name="integerValue">
-    <xs:attribute name="value" type="xs:integer"/>
+    <xs:attribute name="value" type="xs:integer" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="nonNegativeIntegerValue">
-    <xs:attribute name="value" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="value" type="xs:nonNegativeInteger" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="decimalValue">
-    <xs:attribute name="value" type="xs:decimal"/>
+    <xs:attribute name="value" type="xs:decimal" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="nonNegativeDecimalValue">
-    <xs:attribute name="value" type="common:nonNegativeDecimal"/>
+    <xs:attribute name="value" type="common:nonNegativeDecimal" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="stringValue">
-    <xs:attribute name="value" type="xs:string"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="uriValue">
-    <xs:attribute name="value" type="xs:anyURI"/>
+    <xs:attribute name="value" type="xs:anyURI" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="nillableIntegerValue">
-    <xs:attribute name="value" type="common:nillableInteger"/>
+    <xs:attribute name="value" type="common:nillableInteger" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="localDateValue">
-    <xs:attribute name="value" type="common:localDate"/>
+    <xs:attribute name="value" type="common:localDate" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="localDateTimeValue">
-    <xs:attribute name="value" type="common:localDateTime"/>
+    <xs:attribute name="value" type="common:localDateTime" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="sortIndexString">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute name="sortindex" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="sortindex" type="xs:nonNegativeInteger" use="required"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
