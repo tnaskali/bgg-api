@@ -3,6 +3,7 @@ package li.naska.bgg.service;
 import com.boardgamegeek.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -28,7 +29,12 @@ public class UsersService {
         .map(entry -> String.format("&%s=%s", entry.getKey(), entry.getValue()))
         .collect(Collectors.joining());
     String url = baseurl + USERS_ENDPOINT_PATH + urlParams;
-    return restTemplate.getForEntity(url, User.class);
+    ResponseEntity<User> result = restTemplate.getForEntity(url, User.class);
+    if (result.getStatusCode() == HttpStatus.OK && result.getBody().getId() == null) {
+      return ResponseEntity.notFound().build();
+    } else {
+      return result;
+    }
   }
 
 }

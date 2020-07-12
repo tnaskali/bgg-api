@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:common="http://www.boardgamegeek.com/common"
            xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:search="http://www.boardgamegeek.com/search"
            targetNamespace="http://www.boardgamegeek.com/search"
@@ -14,7 +13,7 @@
   <xs:complexType name="result">
     <xs:sequence>
       <xs:element name="name" type="search:name"/>
-      <xs:element name="yearpublished" type="common:year" minOccurs="0"/>
+      <xs:element name="yearpublished" type="xs:integer" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="type" type="xs:string"/>
     <xs:attribute name="id" type="xs:integer"/>

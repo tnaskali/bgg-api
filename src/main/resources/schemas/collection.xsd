@@ -75,7 +75,7 @@
       <xs:element name="thumbnail" type="xs:anyURI"/>
       <xs:element name="image" type="xs:anyURI"/>
       <xs:element name="name" type="collection:name"/>
-      <xs:element name="yearpublished" type="common:yearValue"/>
+      <xs:element name="yearpublished" type="common:integerValue"/>
       <xs:element name="link" type="collection:link"/>
       <xs:element name="productcode" type="common:stringValue"/>
       <xs:element name="width" type="common:decimalValue"/>

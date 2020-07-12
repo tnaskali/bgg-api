@@ -11,11 +11,9 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="year">
+  <xs:simpleType name="nillableInteger">
     <xs:restriction base="xs:string">
-      <!-- 2020 | -2200 -->
-      <xs:pattern value="-?[1-9][0-9]{3}"/>
-      <xs:maxLength value="5"/>
+      <xs:pattern value="0|-?[1-9][0-9]*"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -69,8 +67,8 @@
     <xs:attribute name="value" type="xs:anyURI"/>
   </xs:complexType>
 
-  <xs:complexType name="yearValue">
-    <xs:attribute name="value" type="common:year"/>
+  <xs:complexType name="nillableIntegerValue">
+    <xs:attribute name="value" type="common:nillableInteger"/>
   </xs:complexType>
 
   <xs:complexType name="localDateValue">

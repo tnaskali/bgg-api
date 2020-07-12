@@ -20,6 +20,9 @@
     <xjc:javaType name="java.time.ZonedDateTime"
                   xmlType="common:zonedDateTime"
                   adapter="li.naska.bgg.util.StringToZonedDateTimeAdapter"/>
+    <xjc:javaType name="java.lang.Integer"
+                  xmlType="common:nillableInteger"
+                  adapter="li.naska.bgg.util.EmptyStringToNullableIntegerAdapter"/>
   </jaxb:globalBindings>
 
   <jaxb:bindings schemaLocation="../schemas/collection.xsd"
