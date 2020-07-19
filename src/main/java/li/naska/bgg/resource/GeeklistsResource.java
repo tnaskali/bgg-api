@@ -1,7 +1,7 @@
 package li.naska.bgg.resource;
 
 import com.boardgamegeek.geeklist.Geeklist;
-import li.naska.bgg.service.GeeklistsService;
+import li.naska.bgg.repository.BggGeeklistsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 public class GeeklistsResource {
 
   @Autowired
-  private GeeklistsService geeklistsService;
+  private BggGeeklistsService bggGeeklistsService;
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Geeklist> getGeeklist(
@@ -31,7 +31,7 @@ public class GeeklistsResource {
     Map<String, String> params = stream
         .filter(e -> e.getValue().isPresent())
         .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get()));
-    ResponseEntity<Geeklist> response = geeklistsService.getGeeklist(id, params);
+    ResponseEntity<Geeklist> response = bggGeeklistsService.getGeeklist(id, params);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }
 

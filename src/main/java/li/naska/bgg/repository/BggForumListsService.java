@@ -1,4 +1,4 @@
-package li.naska.bgg.service;
+package li.naska.bgg.repository;
 
 import com.boardgamegeek.enums.ObjectType;
 import com.boardgamegeek.forumlist.Forums;
@@ -9,19 +9,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class ForumListsService {
+public class BggForumListsService {
 
-  private static final String FORUMLISTS_ENDPOINT_PATH = "/forumlist";
-
-  @Value("${bgg.api.v2.baseurl-bgs}")
-  private String baseurl;
+  @Value("${bgg.endpoints.forumlist.read}")
+  private String forumlistReadEndpoint;
 
   @Autowired
   public RestTemplate restTemplate;
 
   public ResponseEntity<Forums> getForums(Integer id, ObjectType type) {
     String urlParams = String.format("?id=%d&type=%s", id, type.value());
-    String url = baseurl + FORUMLISTS_ENDPOINT_PATH + urlParams;
+    String url = forumlistReadEndpoint + urlParams;
     return restTemplate.getForEntity(url, Forums.class);
   }
 

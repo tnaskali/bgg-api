@@ -1,4 +1,4 @@
-package li.naska.bgg.service;
+package li.naska.bgg.repository;
 
 import com.boardgamegeek.collection.Collection;
 import com.boardgamegeek.enums.ObjectSubtype;
@@ -17,14 +17,12 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Service
-public class CollectionService {
+public class BggCollectionService {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(CollectionService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(BggCollectionService.class);
 
-  private static final String COLLECTION_ENDPOINT_PATH = "/collection";
-
-  @Value("${bgg.api.v2.baseurl-bgs}")
-  private String baseurl;
+  @Value("${bgg.endpoints.collection.read}")
+  private String collectionReadEndpoint;
 
   @Autowired
   public RestTemplate restTemplate;
@@ -47,7 +45,7 @@ public class CollectionService {
         .stream()
         .map(entry -> String.format("&%s=%s", entry.getKey(), entry.getValue()))
         .collect(Collectors.joining());
-    final String url = baseurl + COLLECTION_ENDPOINT_PATH + urlParams;
+    final String url = collectionReadEndpoint + urlParams;
 
     return tryResponse(() -> restTemplate.getForEntity(url, Collection.class), 1, 4);
   }

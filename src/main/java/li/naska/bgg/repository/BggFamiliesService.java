@@ -1,6 +1,6 @@
-package li.naska.bgg.service;
+package li.naska.bgg.repository;
 
-import com.boardgamegeek.thread.Thread;
+import com.boardgamegeek.family.Families;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -11,24 +11,22 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class ThreadsService {
+public class BggFamiliesService {
 
-  private static final String THREADS_ENDPOINT_PATH = "/thread";
-
-  @Value("${bgg.api.v2.baseurl-bgs}")
-  private String baseurl;
+  @Value("${bgg.endpoints.family.read}")
+  private String familyReadEndpoint;
 
   @Autowired
   public RestTemplate restTemplate;
 
-  public ResponseEntity<Thread> getThread(Integer id, Map<String, String> extraParams) {
+  public ResponseEntity<Families> getFamily(Integer id, Map<String, String> extraParams) {
     String urlParams = String.format("?id=%d", id) + extraParams
         .entrySet()
         .stream()
         .map(entry -> String.format("&%s=%s", entry.getKey(), entry.getValue()))
         .collect(Collectors.joining());
-    String url = baseurl + THREADS_ENDPOINT_PATH + urlParams;
-    return restTemplate.getForEntity(url, Thread.class);
+    String url = familyReadEndpoint + urlParams;
+    return restTemplate.getForEntity(url, Families.class);
   }
 
 }

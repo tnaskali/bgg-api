@@ -8,10 +8,10 @@ import com.boardgamegeek.hot.HotItems;
 import com.boardgamegeek.plays.Plays;
 import com.boardgamegeek.search.Results;
 import com.boardgamegeek.thing.Things;
-import li.naska.bgg.service.HotItemsService;
-import li.naska.bgg.service.PlaysService;
-import li.naska.bgg.service.SearchService;
-import li.naska.bgg.service.ThingsService;
+import li.naska.bgg.repository.BggHotItemsService;
+import li.naska.bgg.repository.BggPlaysService;
+import li.naska.bgg.repository.BggSearchService;
+import li.naska.bgg.repository.BggThingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -33,20 +33,20 @@ public class ThingsResource {
   private static final DateTimeFormatter LOCALDATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
   @Autowired
-  private HotItemsService hotItemsService;
+  private BggHotItemsService bggHotItemsService;
 
   @Autowired
-  private PlaysService playsService;
+  private BggPlaysService bggPlaysService;
 
   @Autowired
-  private SearchService searchService;
+  private BggSearchService bggSearchService;
 
   @Autowired
-  private ThingsService thingsService;
+  private BggThingsService bggThingsService;
 
   @GetMapping(value = "/hot", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<HotItems> getThings() {
-    ResponseEntity<HotItems> response = hotItemsService.getItems(HotItemType.BOARDGAME);
+    ResponseEntity<HotItems> response = bggHotItemsService.getItems(HotItemType.BOARDGAME);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }
 
@@ -63,7 +63,7 @@ public class ThingsResource {
     Map<String, String> params = stream
         .filter(e -> e.getValue().isPresent())
         .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get()));
-    ResponseEntity<Results> response = searchService.getItems(query, params);
+    ResponseEntity<Results> response = bggSearchService.getItems(query, params);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }
 
@@ -97,7 +97,7 @@ public class ThingsResource {
     Map<String, String> params = stream
         .filter(e -> e.getValue().isPresent())
         .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get()));
-    ResponseEntity<Things> response = thingsService.getThings(ids.stream().map(Object::toString).collect(Collectors.joining(",")), params);
+    ResponseEntity<Things> response = bggThingsService.getThings(ids.stream().map(Object::toString).collect(Collectors.joining(",")), params);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }
 
@@ -124,7 +124,7 @@ public class ThingsResource {
     Map<String, String> params = stream
         .filter(e -> e.getValue().isPresent())
         .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get()));
-    ResponseEntity<Things> response = thingsService.getThings(id.toString(), params);
+    ResponseEntity<Things> response = bggThingsService.getThings(id.toString(), params);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }
 
@@ -147,7 +147,7 @@ public class ThingsResource {
     Map<String, String> params = stream
         .filter(e -> e.getValue().isPresent())
         .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue().get()));
-    ResponseEntity<Plays> response = playsService.getPlays(id, ObjectType.THING.value(), params);
+    ResponseEntity<Plays> response = bggPlaysService.getPlays(id, ObjectType.THING.value(), params);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }
 

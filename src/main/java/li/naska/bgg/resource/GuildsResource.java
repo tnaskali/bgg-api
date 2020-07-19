@@ -2,7 +2,7 @@ package li.naska.bgg.resource;
 
 import com.boardgamegeek.enums.SortType;
 import com.boardgamegeek.guild.Guild;
-import li.naska.bgg.service.GuildsService;
+import li.naska.bgg.repository.BggGuildsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 public class GuildsResource {
 
   @Autowired
-  private GuildsService guildService;
+  private BggGuildsService bggGuildsService;
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Guild> getGuild(
@@ -36,7 +36,7 @@ public class GuildsResource {
     Map<String, String> params = stream
         .filter(e -> e.getValue().isPresent())
         .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get()));
-    ResponseEntity<Guild> response = guildService.getGuild(id, params);
+    ResponseEntity<Guild> response = bggGuildsService.getGuild(id, params);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }
 

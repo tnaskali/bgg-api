@@ -1,11 +1,43 @@
 bgg:
+  web:
+    baseurl-bgs: https://www.boardgamegeek.com
+    baseurl-rpgs: https://www.rpggeek.com
+    baseurl-vgs: https://www.videogamegeek.com
   api:
     v1:
-      baseurl-bgs: https://www.boardgamegeek.com/xmlapi
+      baseurl-bgs: ${bgg.web.baseurl-bgs}/xmlapi
     v2:
-      baseurl-bgs: https://www.boardgamegeek.com/xmlapi2
-      baseurl-rpgs: https://www.rpggeek.com/xmlapi2
-      baseurl-vgs: https://www.videogamegeek.com/xmlapi2
+      baseurl-bgs: ${bgg.web.baseurl-bgs}/xmlapi2
+      baseurl-rpgs: ${bgg.web.baseurl-rpgs}/xmlapi2
+      baseurl-vgs: ${bgg.web.baseurl-vgs}/xmlapi2
+  endpoints:
+    collection:
+      read: ${bgg.api.v2.baseurl-bgs}/collection
+    family:
+      read: ${bgg.api.v2.baseurl-bgs}/family
+    forum:
+      read: ${bgg.api.v2.baseurl-bgs}/forum
+    forumlist:
+      read: ${bgg.api.v2.baseurl-bgs}/forumlist
+    geeklist:
+      read: ${bgg.api.v1.baseurl-bgs}/geeklist
+    guild:
+      read: ${bgg.api.v2.baseurl-bgs}/guild
+    hot:
+      read: ${bgg.api.v2.baseurl-bgs}/hot
+    play:
+      read: ${bgg.web.baseurl-bgs}/play/details/{id}
+    plays:
+      read: ${bgg.api.v2.baseurl-bgs}/plays
+      write: ${bgg.web.baseurl-bgs}/geekplay.php
+    search:
+      read: ${bgg.api.v2.baseurl-bgs}/search
+    thing:
+      read: ${bgg.api.v2.baseurl-bgs}/thing
+    thread:
+      read: ${bgg.api.v2.baseurl-bgs}/thread
+    user:
+      read: ${bgg.api.v2.baseurl-bgs}/user
 
 management:
   server:

@@ -1,4 +1,4 @@
-package li.naska.bgg.service;
+package li.naska.bgg.repository;
 
 import com.boardgamegeek.geeklist.Geeklist;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +10,10 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Map;
 
 @Service
-public class GeeklistsService {
+public class BggGeeklistsService {
 
-  private static final String GEEKLISTS_ENDPOINT_PATH = "/geeklist";
-
-  @Value("${bgg.api.v1.baseurl-bgs}")
-  private String baseurl;
+  @Value("${bgg.endpoints.geeklist.read}")
+  private String geeklistReadEndpoint;
 
   @Autowired
   public RestTemplate restTemplate;
@@ -29,7 +27,7 @@ public class GeeklistsService {
         .map(s -> String.format("?%s", s))
         .orElse("");
     String urlIdPath = String.format("/%d", id);
-    String url = baseurl + GEEKLISTS_ENDPOINT_PATH + urlIdPath + urlParams;
+    String url = geeklistReadEndpoint + urlIdPath + urlParams;
     return restTemplate.getForEntity(url, Geeklist.class);
   }
 

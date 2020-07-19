@@ -1,7 +1,7 @@
 package li.naska.bgg.resource;
 
 import com.boardgamegeek.thread.Thread;
-import li.naska.bgg.service.ThreadsService;
+import li.naska.bgg.repository.BggThreadsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public class ThreadsResource {
   private static final DateTimeFormatter LOCALDATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'%20'HH'%3A'mm'%3A'ss");
 
   @Autowired
-  private ThreadsService threadsService;
+  private BggThreadsService bggThreadsService;
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Thread> getThread(
@@ -43,7 +43,7 @@ public class ThreadsResource {
     Map<String, String> params = stream
         .filter(e -> e.getValue().isPresent())
         .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get()));
-    ResponseEntity<Thread> response = threadsService.getThread(id, params);
+    ResponseEntity<Thread> response = bggThreadsService.getThread(id, params);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }
 

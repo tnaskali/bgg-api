@@ -1,4 +1,4 @@
-package li.naska.bgg.service;
+package li.naska.bgg.repository;
 
 import com.boardgamegeek.guild.Guild;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +11,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class GuildsService {
+public class BggGuildsService {
 
-  private static final String GUILDS_ENDPOINT_PATH = "/guild";
-
-  @Value("${bgg.api.v2.baseurl-bgs}")
-  private String baseurl;
+  @Value("${bgg.endpoints.guild.read}")
+  private String guildReadEndpoint;
 
   @Autowired
   public RestTemplate restTemplate;
@@ -27,7 +25,7 @@ public class GuildsService {
         .stream()
         .map(entry -> String.format("&%s=%s", entry.getKey(), entry.getValue()))
         .collect(Collectors.joining());
-    String url = baseurl + GUILDS_ENDPOINT_PATH + urlParams;
+    String url = guildReadEndpoint + urlParams;
     return restTemplate.getForEntity(url, Guild.class);
   }
 

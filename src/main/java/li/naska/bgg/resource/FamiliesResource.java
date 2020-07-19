@@ -5,8 +5,8 @@ import com.boardgamegeek.enums.ObjectSubtype;
 import com.boardgamegeek.enums.ObjectType;
 import com.boardgamegeek.family.Families;
 import com.boardgamegeek.plays.Plays;
-import li.naska.bgg.service.FamiliesService;
-import li.naska.bgg.service.PlaysService;
+import li.naska.bgg.repository.BggFamiliesService;
+import li.naska.bgg.repository.BggPlaysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,10 +28,10 @@ public class FamiliesResource {
   private static final DateTimeFormatter LOCALDATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
   @Autowired
-  private PlaysService playsService;
+  private BggPlaysService bggPlaysService;
 
   @Autowired
-  private FamiliesService familiesService;
+  private BggFamiliesService bggFamiliesService;
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Families> getFamily(
@@ -44,7 +44,7 @@ public class FamiliesResource {
     Map<String, String> params = stream
         .filter(e -> e.getValue().isPresent())
         .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get()));
-    ResponseEntity<Families> response = familiesService.getFamily(id, params);
+    ResponseEntity<Families> response = bggFamiliesService.getFamily(id, params);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }
 
@@ -67,7 +67,7 @@ public class FamiliesResource {
     Map<String, String> params = stream
         .filter(e -> e.getValue().isPresent())
         .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get()));
-    ResponseEntity<Plays> response = playsService.getPlays(id, ObjectType.FAMILY.value(), params);
+    ResponseEntity<Plays> response = bggPlaysService.getPlays(id, ObjectType.FAMILY.value(), params);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }
 

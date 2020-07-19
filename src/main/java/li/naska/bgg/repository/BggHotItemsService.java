@@ -1,4 +1,4 @@
-package li.naska.bgg.service;
+package li.naska.bgg.repository;
 
 import com.boardgamegeek.enums.HotItemType;
 import com.boardgamegeek.hot.HotItems;
@@ -9,18 +9,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class HotItemsService {
+public class BggHotItemsService {
 
-  private static final String HOTITEMS_ENDPOINT_PATH = "/hot";
-
-  @Value("${bgg.api.v2.baseurl-bgs}")
-  private String baseurl;
+  @Value("${bgg.endpoints.hot.read}")
+  private String hotReadEndpoint;
 
   @Autowired
   public RestTemplate restTemplate;
 
   public ResponseEntity<HotItems> getItems(HotItemType type) {
-    String url = baseurl + HOTITEMS_ENDPOINT_PATH + String.format("?type=%s", type.value());
+    String url = hotReadEndpoint + String.format("?type=%s", type.value());
     return restTemplate.getForEntity(url, HotItems.class);
   }
 

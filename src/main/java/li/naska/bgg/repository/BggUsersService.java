@@ -1,4 +1,4 @@
-package li.naska.bgg.service;
+package li.naska.bgg.repository;
 
 import com.boardgamegeek.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +12,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class UsersService {
+public class BggUsersService {
 
-  private static final String USERS_ENDPOINT_PATH = "/user";
-
-  @Value("${bgg.api.v2.baseurl-bgs}")
-  private String baseurl;
+  @Value("${bgg.endpoints.user.read}")
+  private String userReadEndpoint;
 
   @Autowired
   public RestTemplate restTemplate;
@@ -28,7 +26,7 @@ public class UsersService {
         .stream()
         .map(entry -> String.format("&%s=%s", entry.getKey(), entry.getValue()))
         .collect(Collectors.joining());
-    String url = baseurl + USERS_ENDPOINT_PATH + urlParams;
+    String url = userReadEndpoint + urlParams;
     ResponseEntity<User> result = restTemplate.getForEntity(url, User.class);
     if (result.getStatusCode() == HttpStatus.OK && result.getBody().getId() == null) {
       return ResponseEntity.notFound().build();

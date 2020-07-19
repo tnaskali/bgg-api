@@ -6,13 +6,15 @@ import com.boardgamegeek.enums.ObjectSubtype;
 import com.boardgamegeek.enums.ObjectType;
 import com.boardgamegeek.plays.Plays;
 import com.boardgamegeek.user.User;
-import li.naska.bgg.service.CollectionService;
-import li.naska.bgg.service.PlaysService;
-import li.naska.bgg.service.UsersService;
+import li.naska.bgg.repository.BggCollectionService;
+import li.naska.bgg.repository.BggPlaysService;
+import li.naska.bgg.repository.BggUsersService;
+import li.naska.bgg.repository.model.plays.BggPlayParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -33,13 +35,13 @@ public class UsersResource {
   private static final DateTimeFormatter LOCALDATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
   @Autowired
-  private CollectionService collectionService;
+  private BggCollectionService bggCollectionService;
 
   @Autowired
-  private PlaysService playsService;
+  private BggPlaysService bggPlaysService;
 
   @Autowired
-  private UsersService usersService;
+  private BggUsersService bggUsersService;
 
   @GetMapping(value = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<User> getUser(
@@ -62,7 +64,7 @@ public class UsersResource {
     Map<String, String> params = stream
         .filter(e -> e.getValue().isPresent())
         .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue().get()));
-    ResponseEntity<User> response = usersService.getUser(username, params);
+    ResponseEntity<User> response = bggUsersService.getUser(username, params);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }
 
@@ -88,8 +90,19 @@ public class UsersResource {
     Map<String, String> params = stream
         .filter(e -> e.getValue().isPresent())
         .collect(Collectors.toMap(Entry::getKey, e -> e.getValue().get()));
-    ResponseEntity<Plays> response = playsService.getPlays(username, params);
+    ResponseEntity<Plays> response = bggPlaysService.getPlays(username, params);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
+  }
+
+  @PostMapping(value = "/{username}/plays", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Integer> createPlay(
+      @PathVariable(value = "username") String username,
+      @RequestParam(value = "sessionid") String sessionId,
+      @RequestBody BggPlayParameters play,
+      UriComponentsBuilder uri
+  ) {
+    Integer playId = bggPlaysService.logPlay(username, sessionId, play);
+    return ResponseEntity.created(uri.replacePath("/plays/{id}").buildAndExpand(playId).toUri()).build();
   }
 
   @GetMapping(value = "/{username}/items", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -162,7 +175,7 @@ public class UsersResource {
     Map<String, String> params = stream
         .filter(e -> e.getValue().isPresent())
         .collect(Collectors.toMap(Entry::getKey, e -> e.getValue().get()));
-    ResponseEntity<Collection> response = collectionService.getItems(username, params);
+    ResponseEntity<Collection> response = bggCollectionService.getItems(username, params);
     return new ResponseEntity<>(response.getBody(), response.getStatusCode());
   }
 
