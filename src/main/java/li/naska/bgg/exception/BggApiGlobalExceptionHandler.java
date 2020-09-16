@@ -1,6 +1,6 @@
 package li.naska.bgg.exception;
 
-import li.naska.bgg.exception.model.BggApiErrorProperties;
+import li.naska.bgg.exception.model.BggApiError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,7 +14,7 @@ import java.time.ZonedDateTime;
 public class BggApiGlobalExceptionHandler {
 
   @ExceptionHandler(Exception.class)
-  public ResponseEntity<BggApiErrorProperties> handle(Exception ex, HttpServletRequest request, HttpServletResponse response) {
+  public ResponseEntity<BggApiError> handle(Exception ex, HttpServletRequest request, HttpServletResponse response) {
     if (ex instanceof IllegalArgumentException || ex instanceof BggBadRequestError) {
       return respondWith(HttpStatus.BAD_REQUEST, ex.getMessage(), request.getRequestURI());
     } else if (ex instanceof BggResourceNotFoundError) {
@@ -32,8 +32,8 @@ public class BggApiGlobalExceptionHandler {
     }
   }
 
-  private ResponseEntity<BggApiErrorProperties> respondWith(HttpStatus httpStatus, String message, String path) {
-    BggApiErrorProperties body = new BggApiErrorProperties();
+  private ResponseEntity<BggApiError> respondWith(HttpStatus httpStatus, String message, String path) {
+    BggApiError body = new BggApiError();
     body.setMessage(message);
     body.setTimestamp(ZonedDateTime.now());
     body.setPath(path);

@@ -11,7 +11,7 @@ import li.naska.bgg.exception.BggAuthenticationRequiredError;
 import li.naska.bgg.exception.BggBadRequestError;
 import li.naska.bgg.exception.BggResourceNotFoundError;
 import li.naska.bgg.exception.BggResourceNotOwnedError;
-import li.naska.bgg.repository.model.plays.BggPlayParameters;
+import li.naska.bgg.repository.model.plays.BggPlay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -56,17 +56,21 @@ public class BggPlaysService {
     return restTemplate.getForEntity(url, Plays.class);
   }
 
-  public Integer createPlay(String username, BggPlayParameters play) {
-    ObjectNode node = new ObjectMapper().valueToTree(play);
-    node.put("ajax", 1);
-    node.put("action", "save");
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_JSON);
-    headers.setAccept(singletonList(MediaType.APPLICATION_JSON));
+  public Integer savePlay(String username, Integer id, BggPlay play) {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     if (!auth.getPrincipal().equals(username)) {
       throw new BggResourceNotOwnedError("resource belongs to another user");
     }
+    ObjectNode node = new ObjectMapper().valueToTree(play);
+    node.put("ajax", 1);
+    node.put("action", "save");
+    if (id != null) {
+      node.put("playid", id);
+      node.put("version", 2);
+    }
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    headers.setAccept(singletonList(MediaType.APPLICATION_JSON));
     String sessionCookie = (String) auth.getDetails();
     headers.set("Cookie", String.format("SessionID=%s; bggusername=%s", sessionCookie, username));
     HttpEntity<ObjectNode> request = new HttpEntity<>(node, headers);
@@ -86,15 +90,14 @@ public class BggPlaysService {
   }
 
   public void deletePlay(String username, Integer playId) {
-    ObjectNode node = new ObjectMapper().createObjectNode();
-    node.put("action", "delete");
-    node.put("finalize", "1");
-    node.put("B1", "Yes");
-    node.put("playid", playId.toString());
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     if (!auth.getPrincipal().equals(username)) {
       throw new BggResourceNotOwnedError("resource belongs to another user");
     }
+    ObjectNode node = new ObjectMapper().createObjectNode();
+    node.put("action", "delete");
+    node.put("finalize", "1");
+    node.put("playid", playId.toString());
     HttpHeaders requestHeaders = new HttpHeaders();
     requestHeaders.setContentType(MediaType.APPLICATION_JSON);
     requestHeaders.setAccept(singletonList(MediaType.APPLICATION_JSON));

@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import li.naska.bgg.repository.BggCollectionService;
 import li.naska.bgg.repository.BggPlaysService;
 import li.naska.bgg.repository.BggUsersService;
-import li.naska.bgg.repository.model.plays.BggPlayParameters;
+import li.naska.bgg.repository.model.plays.BggPlay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -107,12 +107,23 @@ public class UsersResource {
   @Operation(security = @SecurityRequirement(name = "basicAuth"))
   public ResponseEntity<Map<String, Object>> createPlay(
       @PathVariable(value = "username") String username,
-      @RequestBody BggPlayParameters play,
+      @RequestBody BggPlay play,
       UriComponentsBuilder uri
   ) {
-    Integer playId = bggPlaysService.createPlay(username, play);
+    Integer playId = bggPlaysService.savePlay(username, null, play);
     return ResponseEntity.created(uri.replacePath("/plays/{id}").buildAndExpand(playId).toUri())
         .body(Collections.singletonMap("playid", playId));
+  }
+
+  @PutMapping(value = "/{username}/plays/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  @Operation(security = @SecurityRequirement(name = "basicAuth"))
+  public ResponseEntity<Map<String, Object>> updatePlay(
+      @PathVariable(value = "username") String username,
+      @PathVariable(value = "id") Integer id,
+      @RequestBody BggPlay play
+  ) {
+    Integer playId = bggPlaysService.savePlay(username, id, play);
+    return ResponseEntity.ok(Collections.singletonMap("playid", playId));
   }
 
   @DeleteMapping(value = "/{username}/plays/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

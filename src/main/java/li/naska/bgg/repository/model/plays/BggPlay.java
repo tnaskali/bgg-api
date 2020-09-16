@@ -13,13 +13,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class BggPlayParameters {
+public class BggPlay {
   @JsonProperty(value = "playdate", required = true)
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   @JsonDeserialize(using = LocalDateDeserializer.class)
   @JsonSerialize(using = LocalDateSerializer.class)
   private LocalDate date;
-  @JsonProperty(value = "comment")
+  @JsonProperty(value = "comments")
   private String comments;
   @JsonProperty(value = "length")
   private Integer durationInMinutes;

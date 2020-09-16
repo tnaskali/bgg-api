@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.ZonedDateTime;
 
 @Data
-public class BggApiErrorProperties {
+public class BggApiError {
 
   @JsonProperty
   private ZonedDateTime timestamp;
