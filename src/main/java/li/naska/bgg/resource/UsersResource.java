@@ -6,6 +6,12 @@ import com.boardgamegeek.enums.ObjectSubtype;
 import com.boardgamegeek.enums.ObjectType;
 import com.boardgamegeek.plays.Plays;
 import com.boardgamegeek.user.User;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import li.naska.bgg.repository.BggCollectionService;
 import li.naska.bgg.repository.BggPlaysService;
 import li.naska.bgg.repository.BggUsersService;
@@ -31,6 +37,8 @@ import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/api/v1/users")
+@OpenAPIDefinition(info = @Info(title = "BGG API", version = "v1"))
+@SecurityScheme(name = "basicAuth", type = SecuritySchemeType.HTTP, scheme = "basic")
 public class UsersResource {
 
   private static final DateTimeFormatter LOCALDATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -96,6 +104,7 @@ public class UsersResource {
   }
 
   @PostMapping(value = "/{username}/plays", produces = MediaType.APPLICATION_JSON_VALUE)
+  @Operation(security = @SecurityRequirement(name = "basicAuth"))
   public ResponseEntity<Map<String, Object>> createPlay(
       @PathVariable(value = "username") String username,
       @RequestBody BggPlayParameters play,
@@ -107,6 +116,7 @@ public class UsersResource {
   }
 
   @DeleteMapping(value = "/{username}/plays/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  @Operation(security = @SecurityRequirement(name = "basicAuth"))
   public ResponseEntity<Map<String, Object>> deletePlay(
       @PathVariable(value = "username") String username,
       @PathVariable(value = "id") Integer id
