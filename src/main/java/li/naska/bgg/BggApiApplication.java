@@ -16,7 +16,7 @@ public class BggApiApplication {
   @Bean
   public GroupedOpenApi publicApi() {
     return GroupedOpenApi.builder()
-        .group("public")
+        .group("bgg-api")
         .pathsToExclude("/error")
         .build();
   }

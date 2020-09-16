@@ -23,6 +23,8 @@ bgg:
       read: ${bgg.api.v1.baseurl-bgs}/geeklist
     guild:
       read: ${bgg.api.v2.baseurl-bgs}/guild
+    login:
+      write: ${bgg.web.baseurl-bgs}/login
     hot:
       read: ${bgg.api.v2.baseurl-bgs}/hot
     play:

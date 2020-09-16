@@ -9,13 +9,14 @@ import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.Option;
 import li.naska.bgg.exception.BggAuthenticationRequiredError;
 import li.naska.bgg.exception.BggBadRequestError;
+import li.naska.bgg.exception.BggResourceNotFoundError;
+import li.naska.bgg.exception.BggResourceNotOwnedError;
 import li.naska.bgg.repository.model.plays.BggPlayParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -29,11 +30,11 @@ import static java.util.Collections.singletonList;
 public class BggPlaysService {
 
   @Autowired
-  public RestTemplate restTemplate;
+  private RestTemplate restTemplate;
   @Value("${bgg.endpoints.plays.read}")
   private String playsReadEndpoint;
   @Value("${bgg.endpoints.plays.write}")
-  private String playsWriteEnpoint;
+  private String playsWriteEndpoint;
 
   public ResponseEntity<Plays> getPlays(String username, Map<String, String> extraParams) {
     String urlParams = String.format("?username=%s", username) + extraParams
@@ -55,16 +56,21 @@ public class BggPlaysService {
     return restTemplate.getForEntity(url, Plays.class);
   }
 
-  public Integer logPlay(String username, String sessionId, BggPlayParameters play) {
+  public Integer createPlay(String username, BggPlayParameters play) {
     ObjectNode node = new ObjectMapper().valueToTree(play);
     node.put("ajax", 1);
     node.put("action", "save");
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     headers.setAccept(singletonList(MediaType.APPLICATION_JSON));
-    headers.set("Cookie", String.format("SessionID=%s; bggusername=%s", sessionId, username));
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    if (!auth.getPrincipal().equals(username)) {
+      throw new BggResourceNotOwnedError("resource belongs to another user");
+    }
+    String sessionCookie = (String) auth.getDetails();
+    headers.set("Cookie", String.format("SessionID=%s; bggusername=%s", sessionCookie, username));
     HttpEntity<ObjectNode> request = new HttpEntity<>(node, headers);
-    ResponseEntity<String> response = restTemplate.postForEntity(playsWriteEnpoint, request, String.class);
+    ResponseEntity<String> response = restTemplate.postForEntity(playsWriteEndpoint, request, String.class);
     Configuration conf = Configuration.defaultConfiguration().addOptions(Option.DEFAULT_PATH_LEAF_TO_NULL);
     DocumentContext documentContext = JsonPath.using(conf).parse(response.getBody());
     Integer playId = documentContext.read("$.playid", Integer.class);
@@ -79,12 +85,26 @@ public class BggPlaysService {
     }
   }
 
-  public ResponseEntity<String> logPlay(String username, String sessionId, String body) {
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_JSON);
-    headers.set("Cookie", String.format("SessionID=%s; bggusername=%s", sessionId, username));
-    HttpEntity<String> request = new HttpEntity<>(body, headers);
-    return restTemplate.postForEntity(playsWriteEnpoint, request, String.class);
+  public void deletePlay(String username, Integer playId) {
+    ObjectNode node = new ObjectMapper().createObjectNode();
+    node.put("action", "delete");
+    node.put("finalize", "1");
+    node.put("B1", "Yes");
+    node.put("playid", playId.toString());
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    if (!auth.getPrincipal().equals(username)) {
+      throw new BggResourceNotOwnedError("resource belongs to another user");
+    }
+    HttpHeaders requestHeaders = new HttpHeaders();
+    requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+    requestHeaders.setAccept(singletonList(MediaType.APPLICATION_JSON));
+    String sessionCookie = (String) auth.getDetails();
+    requestHeaders.set("Cookie", String.format("SessionID=%s; bggusername=%s", sessionCookie, username));
+    HttpEntity<ObjectNode> request = new HttpEntity<>(node, requestHeaders);
+    ResponseEntity<String> response = restTemplate.postForEntity(playsWriteEndpoint, request, String.class);
+    if (response.getStatusCode() != HttpStatus.FOUND) {
+      throw new BggResourceNotFoundError("play not found");
+    }
   }
 
 }

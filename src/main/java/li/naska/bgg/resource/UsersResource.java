@@ -21,6 +21,7 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.AbstractMap.SimpleEntry;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -95,14 +96,23 @@ public class UsersResource {
   }
 
   @PostMapping(value = "/{username}/plays", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Integer> createPlay(
+  public ResponseEntity<Map<String, Object>> createPlay(
       @PathVariable(value = "username") String username,
-      @RequestParam(value = "sessionid") String sessionId,
       @RequestBody BggPlayParameters play,
       UriComponentsBuilder uri
   ) {
-    Integer playId = bggPlaysService.logPlay(username, sessionId, play);
-    return ResponseEntity.created(uri.replacePath("/plays/{id}").buildAndExpand(playId).toUri()).build();
+    Integer playId = bggPlaysService.createPlay(username, play);
+    return ResponseEntity.created(uri.replacePath("/plays/{id}").buildAndExpand(playId).toUri())
+        .body(Collections.singletonMap("playid", playId));
+  }
+
+  @DeleteMapping(value = "/{username}/plays/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Map<String, Object>> deletePlay(
+      @PathVariable(value = "username") String username,
+      @PathVariable(value = "id") Integer id
+  ) {
+    bggPlaysService.deletePlay(username, id);
+    return ResponseEntity.ok(Collections.singletonMap("playid", id));
   }
 
   @GetMapping(value = "/{username}/items", produces = MediaType.APPLICATION_JSON_VALUE)
