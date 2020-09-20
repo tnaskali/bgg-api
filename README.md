@@ -19,7 +19,7 @@ Steps :
 The games logging API will prompt for your BGG username and password. These will be transmitted in clear using unsecured HTTP protocol from your browser to the locally running Spring Boot application and will only be kept in memory for the duration of the session. Then the API will use a secure HTTPS connection to perform authentication to boardgamegeek.com.
 
 # Terms of use
-This is just a bridge to BoardGameGeek's API, so their terms of use still apply. Be sure to read them before decisding to use this API.
+This is just a bridge to BoardGameGeek's API, so [their terms of use](https://boardgamegeek.com/wiki/page/XML_API_Terms_of_Use#) still apply. Be sure to read them before deciding to use this API.
 
 # Credits and inspirations
 - BGG's XML API 2 : https://boardgamegeek.com/wiki/page/BGG_XML_API2
