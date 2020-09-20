@@ -12,10 +12,10 @@ import li.naska.bgg.exception.BggBadRequestError;
 import li.naska.bgg.exception.BggResourceNotFoundError;
 import li.naska.bgg.exception.BggResourceNotOwnedError;
 import li.naska.bgg.repository.model.plays.BggPlay;
+import li.naska.bgg.security.BggAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -35,6 +35,10 @@ public class BggPlaysService {
   private String playsReadEndpoint;
   @Value("${bgg.endpoints.plays.write}")
   private String playsWriteEndpoint;
+
+  private static BggAuthenticationToken getAuthentication() {
+    return (BggAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+  }
 
   public ResponseEntity<Plays> getPlays(String username, Map<String, String> extraParams) {
     String urlParams = String.format("?username=%s", username) + extraParams
@@ -57,7 +61,7 @@ public class BggPlaysService {
   }
 
   public Integer savePlay(String username, Integer id, BggPlay play) {
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    BggAuthenticationToken auth = getAuthentication();
     if (!auth.getPrincipal().equals(username)) {
       throw new BggResourceNotOwnedError("resource belongs to another user");
     }
@@ -71,8 +75,7 @@ public class BggPlaysService {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     headers.setAccept(singletonList(MediaType.APPLICATION_JSON));
-    String sessionCookie = (String) auth.getDetails();
-    headers.set("Cookie", String.format("SessionID=%s; bggusername=%s", sessionCookie, username));
+    headers.set("Cookie", auth.buildBggRequestHeader());
     HttpEntity<ObjectNode> request = new HttpEntity<>(node, headers);
     ResponseEntity<String> response = restTemplate.postForEntity(playsWriteEndpoint, request, String.class);
     Configuration conf = Configuration.defaultConfiguration().addOptions(Option.DEFAULT_PATH_LEAF_TO_NULL);
@@ -90,7 +93,7 @@ public class BggPlaysService {
   }
 
   public void deletePlay(String username, Integer playId) {
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    BggAuthenticationToken auth = getAuthentication();
     if (!auth.getPrincipal().equals(username)) {
       throw new BggResourceNotOwnedError("resource belongs to another user");
     }
@@ -101,8 +104,7 @@ public class BggPlaysService {
     HttpHeaders requestHeaders = new HttpHeaders();
     requestHeaders.setContentType(MediaType.APPLICATION_JSON);
     requestHeaders.setAccept(singletonList(MediaType.APPLICATION_JSON));
-    String sessionCookie = (String) auth.getDetails();
-    requestHeaders.set("Cookie", String.format("SessionID=%s; bggusername=%s", sessionCookie, username));
+    requestHeaders.set("Cookie", auth.buildBggRequestHeader());
     HttpEntity<ObjectNode> request = new HttpEntity<>(node, requestHeaders);
     ResponseEntity<String> response = restTemplate.postForEntity(playsWriteEndpoint, request, String.class);
     if (response.getStatusCode() != HttpStatus.FOUND) {
