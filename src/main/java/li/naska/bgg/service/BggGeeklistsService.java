@@ -1,4 +1,4 @@
-package li.naska.bgg.repository;
+package li.naska.bgg.service;
 
 import com.boardgamegeek.geeklist.Geeklist;
 import org.springframework.beans.factory.annotation.Autowired;

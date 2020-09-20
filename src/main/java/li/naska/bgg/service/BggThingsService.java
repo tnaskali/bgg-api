@@ -1,6 +1,6 @@
-package li.naska.bgg.repository;
+package li.naska.bgg.service;
 
-import com.boardgamegeek.search.Results;
+import com.boardgamegeek.thing.Things;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -11,23 +11,22 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class BggSearchService {
+public class BggThingsService {
 
-  @Value("${bgg.endpoints.search.read}")
-  private String searchReadEndpoint;
+  @Value("${bgg.endpoints.thing.read}")
+  private String thingReadEndpoint;
 
   @Autowired
   public RestTemplate restTemplate;
 
-  public ResponseEntity<Results> getItems(String query, Map<String, String> extraParams) {
-    String urlParams = String.format("?query=%s", query) + extraParams
+  public ResponseEntity<Things> getThings(String commaSeparatedIds, Map<String, String> extraParams) {
+    String urlParams = String.format("?id=%s", commaSeparatedIds) + extraParams
         .entrySet()
         .stream()
         .map(entry -> String.format("&%s=%s", entry.getKey(), entry.getValue()))
         .collect(Collectors.joining());
-    String url = searchReadEndpoint + urlParams;
-    return restTemplate.getForEntity(url, Results.class);
+    String url = thingReadEndpoint + urlParams;
+    return restTemplate.getForEntity(url, Things.class);
   }
-
 
 }

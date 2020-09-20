@@ -1,7 +1,7 @@
 package li.naska.bgg.resource;
 
 import com.boardgamegeek.geeklist.Geeklist;
-import li.naska.bgg.repository.BggGeeklistsService;
+import li.naska.bgg.service.BggGeeklistsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package li.naska.bgg.repository;
+package li.naska.bgg.service;
 
 import com.boardgamegeek.collection.Collection;
 import com.boardgamegeek.enums.ObjectSubtype;

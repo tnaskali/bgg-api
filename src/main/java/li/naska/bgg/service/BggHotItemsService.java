@@ -1,4 +1,4 @@
-package li.naska.bgg.repository;
+package li.naska.bgg.service;
 
 import com.boardgamegeek.enums.HotItemType;
 import com.boardgamegeek.hot.HotItems;

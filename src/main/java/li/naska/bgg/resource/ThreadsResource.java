@@ -1,7 +1,6 @@
 package li.naska.bgg.resource;
 
-import com.boardgamegeek.thread.Thread;
-import li.naska.bgg.repository.BggThreadsService;
+import li.naska.bgg.service.BggThreadsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

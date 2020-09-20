@@ -1,4 +1,4 @@
-package li.naska.bgg.repository;
+package li.naska.bgg.service;
 
 import com.boardgamegeek.plays.Plays;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,8 +11,8 @@ import li.naska.bgg.exception.BggAuthenticationRequiredError;
 import li.naska.bgg.exception.BggBadRequestError;
 import li.naska.bgg.exception.BggResourceNotFoundError;
 import li.naska.bgg.exception.BggResourceNotOwnedError;
-import li.naska.bgg.repository.model.plays.BggPlay;
 import li.naska.bgg.security.BggAuthenticationToken;
+import li.naska.bgg.service.model.plays.BggPlay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;

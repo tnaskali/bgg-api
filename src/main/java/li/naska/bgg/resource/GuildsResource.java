@@ -2,7 +2,7 @@ package li.naska.bgg.resource;
 
 import com.boardgamegeek.enums.SortType;
 import com.boardgamegeek.guild.Guild;
-import li.naska.bgg.repository.BggGuildsService;
+import li.naska.bgg.service.BggGuildsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
