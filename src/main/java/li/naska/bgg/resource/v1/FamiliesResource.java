@@ -1,4 +1,4 @@
-package li.naska.bgg.resource;
+package li.naska.bgg.resource.v1;
 
 import com.boardgamegeek.enums.FamilyType;
 import com.boardgamegeek.enums.ObjectSubtype;

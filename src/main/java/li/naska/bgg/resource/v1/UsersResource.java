@@ -1,4 +1,4 @@
-package li.naska.bgg.resource;
+package li.naska.bgg.resource.v1;
 
 import com.boardgamegeek.collection.Collection;
 import com.boardgamegeek.enums.DomainType;

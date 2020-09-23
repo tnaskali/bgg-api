@@ -1,4 +1,4 @@
-package li.naska.bgg.resource;
+package li.naska.bgg.resource.v1;
 
 import com.boardgamegeek.geeklist.Geeklist;
 import li.naska.bgg.service.BggGeeklistsService;
