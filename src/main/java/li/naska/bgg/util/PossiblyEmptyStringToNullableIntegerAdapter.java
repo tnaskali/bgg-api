@@ -4,7 +4,7 @@ import org.apache.logging.log4j.util.Strings;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-public class EmptyStringToNullableIntegerAdapter extends XmlAdapter<String, Integer> {
+public class PossiblyEmptyStringToNullableIntegerAdapter extends XmlAdapter<String, Integer> {
 
   @Override
   public Integer unmarshal(String string) {
