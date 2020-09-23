@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:forumlist="http://www.boardgamegeek.com/forumlist"
-           targetNamespace="http://www.boardgamegeek.com/forumlist"
-           elementFormDefault="qualified">
+           targetNamespace="http://www.boardgamegeek.com/forumlist">
 
   <xs:complexType name="forum">
     <xs:attribute name="id" type="xs:integer" use="required"/>

@@ -3,8 +3,7 @@
            xmlns:common="http://www.boardgamegeek.com/common"
            xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:collection="http://www.boardgamegeek.com/collection"
-           targetNamespace="http://www.boardgamegeek.com/collection"
-           elementFormDefault="qualified">
+           targetNamespace="http://www.boardgamegeek.com/collection">
 
   <xs:complexType name="name">
     <xs:attribute name="type" type="enums:nameType" use="required"/>

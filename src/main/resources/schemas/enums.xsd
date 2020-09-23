@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:enums="http://www.boardgamegeek.com/enums"
-           targetNamespace="http://www.boardgamegeek.com/enums"
-           elementFormDefault="qualified">
+           targetNamespace="http://www.boardgamegeek.com/enums">
 
   <xs:simpleType name="domainType">
     <xs:restriction base="xs:string">

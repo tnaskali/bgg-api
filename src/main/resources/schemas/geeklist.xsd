@@ -3,8 +3,7 @@
            xmlns:common="http://www.boardgamegeek.com/common"
            xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:geeklist="http://www.boardgamegeek.com/geeklist"
-           targetNamespace="http://www.boardgamegeek.com/geeklist"
-           elementFormDefault="qualified">
+           targetNamespace="http://www.boardgamegeek.com/geeklist">
 
   <xs:complexType name="comment">
     <xs:simpleContent>

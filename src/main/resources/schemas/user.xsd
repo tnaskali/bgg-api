@@ -2,8 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:common="http://www.boardgamegeek.com/common"
            xmlns:user="http://www.boardgamegeek.com/user"
-           targetNamespace="http://www.boardgamegeek.com/user"
-           elementFormDefault="qualified">
+           targetNamespace="http://www.boardgamegeek.com/user">
 
   <xs:complexType name="rankingItem">
     <xs:attribute name="rank" type="xs:string" use="required"/>

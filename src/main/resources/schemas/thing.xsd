@@ -2,8 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:common="http://www.boardgamegeek.com/common"
            xmlns:thing="http://www.boardgamegeek.com/thing"
-           targetNamespace="http://www.boardgamegeek.com/thing"
-           elementFormDefault="qualified">
+           targetNamespace="http://www.boardgamegeek.com/thing">
 
   <xs:complexType name="name">
     <xs:attribute name="type" type="xs:string" use="required"/>

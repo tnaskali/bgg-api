@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:family="http://www.boardgamegeek.com/family"
-           targetNamespace="http://www.boardgamegeek.com/family"
-           elementFormDefault="qualified">
+           targetNamespace="http://www.boardgamegeek.com/family">
 
   <xs:complexType name="name">
     <xs:attribute name="type" type="xs:string" use="required"/>

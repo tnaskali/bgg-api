@@ -2,8 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:search="http://www.boardgamegeek.com/search"
-           targetNamespace="http://www.boardgamegeek.com/search"
-           elementFormDefault="qualified">
+           targetNamespace="http://www.boardgamegeek.com/search">
 
   <xs:complexType name="name">
     <xs:attribute name="type" type="enums:nameType" use="required"/>

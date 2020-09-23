@@ -3,8 +3,7 @@
            xmlns:common="http://www.boardgamegeek.com/common"
            xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:plays="http://www.boardgamegeek.com/plays"
-           targetNamespace="http://www.boardgamegeek.com/plays"
-           elementFormDefault="qualified">
+           targetNamespace="http://www.boardgamegeek.com/plays">
 
   <xs:complexType name="subtype">
     <xs:sequence>

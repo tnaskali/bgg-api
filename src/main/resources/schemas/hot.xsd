@@ -2,8 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:common="http://www.boardgamegeek.com/common"
            xmlns:hot="http://www.boardgamegeek.com/hot"
-           targetNamespace="http://www.boardgamegeek.com/hot"
-           elementFormDefault="qualified">
+           targetNamespace="http://www.boardgamegeek.com/hot">
 
   <xs:complexType name="hotItem">
     <xs:sequence>
