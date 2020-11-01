@@ -1,4 +1,4 @@
-package li.naska.bgg.service.model.plays;
+package li.naska.bgg.model.plays;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,15 +6,19 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import li.naska.bgg.service.model.common.BggObjectType;
+import li.naska.bgg.model.common.BggObjectType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class BggPlay {
-  @JsonProperty(value = "playdate", required = true)
+  @JsonProperty(value = "date", required = true)
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   @JsonDeserialize(using = LocalDateDeserializer.class)
   @JsonSerialize(using = LocalDateSerializer.class)
@@ -32,7 +36,7 @@ public class BggPlay {
   @JsonProperty(value = "quantity")
   private Integer numberOfPlays;
   @JsonProperty(value = "players")
-  private List<BggPlayerParameter> players;
+  private List<BggPlayer> players;
   @JsonProperty(value = "twitter", required = true)
   private boolean publishOnTwitter;
   @JsonProperty(value = "incomplete", required = true)
@@ -41,7 +45,9 @@ public class BggPlay {
   private boolean ignoreInStats;
 
   @Data
-  public static class BggPlayerParameter {
+  @NoArgsConstructor
+  @AllArgsConstructor
+  public static class BggPlayer {
     @JsonProperty(value = "username", required = true)
     private String bggUsername;
     @JsonProperty(value = "name", required = true)

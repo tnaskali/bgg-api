@@ -4,6 +4,9 @@ bgg:
     baseurl-rpgs: https://www.rpggeek.com
     baseurl-vgs: https://www.videogamegeek.com
   api:
+    geekplay: ${bgg.web.baseurl-bgs}/geekplay.php
+    xmlapi: ${bgg.web.baseurl-bgs}/xmlapi
+    xmlapi2: ${bgg.web.baseurl-bgs}/xmlapi2
     v1:
       baseurl-bgs: ${bgg.web.baseurl-bgs}/xmlapi
     v2:

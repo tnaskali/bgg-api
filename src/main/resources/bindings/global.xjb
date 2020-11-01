@@ -25,6 +25,10 @@
     <xjc:javaType name="java.lang.Integer"
                   xmlType="common:nillableInteger"
                   adapter="li.naska.bgg.util.PossiblyEmptyStringToNullableIntegerAdapter"/>
+    <jaxb:javaType name="java.lang.Integer"
+                   xmlType="xs:positiveInteger"/>
+    <jaxb:javaType name="java.lang.Integer"
+                   xmlType="xs:integer"/>
   </jaxb:globalBindings>
 
   <jaxb:bindings schemaLocation="../schemas/collection.xsd"

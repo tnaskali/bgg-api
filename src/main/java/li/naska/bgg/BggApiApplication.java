@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = { "com.boardgamegeek.geekplay", "li.naska.bgg" })
 @OpenAPIDefinition(info = @Info(title = "BGG API", version = "v1"))
 @SecurityScheme(name = "basicAuth", type = SecuritySchemeType.HTTP, scheme = "basic")
 public class BggApiApplication {

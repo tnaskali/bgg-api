@@ -4,6 +4,8 @@ import com.boardgamegeek.collection.Collection;
 import com.boardgamegeek.enums.DomainType;
 import com.boardgamegeek.enums.ObjectSubtype;
 import com.boardgamegeek.enums.ObjectType;
+import com.boardgamegeek.geekplay.plays.PlaysService;
+import com.boardgamegeek.geekplay.plays.Play;
 import com.boardgamegeek.plays.Plays;
 import com.boardgamegeek.user.User;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,7 +13,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import li.naska.bgg.service.BggCollectionService;
 import li.naska.bgg.service.BggPlaysService;
 import li.naska.bgg.service.BggUsersService;
-import li.naska.bgg.service.model.plays.BggPlay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,9 @@ public class UsersResource {
 
   @Autowired
   private BggPlaysService bggPlaysService;
+
+  @Autowired
+  private PlaysService geekplayService;
 
   @Autowired
   private BggUsersService bggUsersService;
@@ -99,25 +103,25 @@ public class UsersResource {
 
   @PostMapping(value = "/{username}/plays", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(security = @SecurityRequirement(name = "basicAuth"))
-  public ResponseEntity<Map<String, Object>> createPlay(
+  public ResponseEntity<Play> createPlay(
       @PathVariable(value = "username") String username,
-      @RequestBody BggPlay play,
+      @RequestBody Play play,
       UriComponentsBuilder uri
   ) {
-    Integer playId = bggPlaysService.savePlay(username, null, play);
-    return ResponseEntity.created(uri.replacePath("/plays/{id}").buildAndExpand(playId).toUri())
-        .body(Collections.singletonMap("playid", playId));
+    Play result = geekplayService.savePlay(username, play);
+    return ResponseEntity.created(uri.replacePath("/plays/{id}").buildAndExpand(result.getPlayid()).toUri())
+        .body(result);
   }
 
   @PutMapping(value = "/{username}/plays/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(security = @SecurityRequirement(name = "basicAuth"))
-  public ResponseEntity<Map<String, Object>> updatePlay(
+  public ResponseEntity<Play> updatePlay(
       @PathVariable(value = "username") String username,
       @PathVariable(value = "id") Integer id,
-      @RequestBody BggPlay play
+      @RequestBody Play play
   ) {
-    Integer playId = bggPlaysService.savePlay(username, id, play);
-    return ResponseEntity.ok(Collections.singletonMap("playid", playId));
+    Play result = geekplayService.savePlay(username, play);
+    return ResponseEntity.ok(play);
   }
 
   @DeleteMapping(value = "/{username}/plays/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -126,7 +130,7 @@ public class UsersResource {
       @PathVariable(value = "username") String username,
       @PathVariable(value = "id") Integer id
   ) {
-    bggPlaysService.deletePlay(username, id);
+    geekplayService.deletePlay(username, id);
     return ResponseEntity.ok(Collections.singletonMap("playid", id));
   }
 
