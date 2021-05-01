@@ -4,9 +4,12 @@ import com.boardgamegeek.enums.HotItemType;
 import com.boardgamegeek.hot.HotItems;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class BggHotItemsService {
@@ -15,11 +18,16 @@ public class BggHotItemsService {
   private String hotReadEndpoint;
 
   @Autowired
-  public RestTemplate restTemplate;
+  public WebClient webClient;
 
   public ResponseEntity<HotItems> getItems(HotItemType type) {
     String url = hotReadEndpoint + String.format("?type=%s", type.value());
-    return restTemplate.getForEntity(url, HotItems.class);
+    return webClient.get()
+            .uri(url)
+            .accept(MediaType.APPLICATION_XML)
+            .acceptCharset(StandardCharsets.UTF_8)
+            .exchangeToMono(c -> c.toEntity(HotItems.class))
+            .block();
   }
 
 }

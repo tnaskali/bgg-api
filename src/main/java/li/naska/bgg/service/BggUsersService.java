@@ -4,10 +4,12 @@ import com.boardgamegeek.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -18,16 +20,21 @@ public class BggUsersService {
   private String userReadEndpoint;
 
   @Autowired
-  public RestTemplate restTemplate;
+  public WebClient webClient;
 
   public ResponseEntity<User> getUser(String username, Map<String, String> extraParams) {
     String urlParams = String.format("?name=%s", username) + extraParams
-        .entrySet()
-        .stream()
-        .map(entry -> String.format("&%s=%s", entry.getKey(), entry.getValue()))
-        .collect(Collectors.joining());
+            .entrySet()
+            .stream()
+            .map(entry -> String.format("&%s=%s", entry.getKey(), entry.getValue()))
+            .collect(Collectors.joining());
     String url = userReadEndpoint + urlParams;
-    ResponseEntity<User> result = restTemplate.getForEntity(url, User.class);
+    ResponseEntity<User> result = webClient.get()
+            .uri(url)
+            .accept(MediaType.APPLICATION_XML)
+            .acceptCharset(StandardCharsets.UTF_8)
+            .exchangeToMono(c -> c.toEntity(User.class))
+            .block();
     if (result.getStatusCode() == HttpStatus.OK && result.getBody().getId() == null) {
       return ResponseEntity.notFound().build();
     } else {

@@ -15,24 +15,27 @@ import li.naska.bgg.security.BggAuthenticationToken;
 import li.naska.bgg.service.model.plays.BggPlay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static java.util.Collections.singletonList;
 
 @Service
 public class BggPlaysService {
 
   @Autowired
-  private RestTemplate restTemplate;
+  private WebClient webClient;
+
   @Value("${bgg.endpoints.plays.read}")
   private String playsReadEndpoint;
+
   @Value("${bgg.endpoints.plays.write}")
   private String playsWriteEndpoint;
 
@@ -42,22 +45,32 @@ public class BggPlaysService {
 
   public ResponseEntity<Plays> getPlays(String username, Map<String, String> extraParams) {
     String urlParams = String.format("?username=%s", username) + extraParams
-        .entrySet()
-        .stream()
-        .map(entry -> String.format("&%s=%s", entry.getKey(), entry.getValue()))
-        .collect(Collectors.joining());
+            .entrySet()
+            .stream()
+            .map(entry -> String.format("&%s=%s", entry.getKey(), entry.getValue()))
+            .collect(Collectors.joining());
     String url = playsReadEndpoint + urlParams;
-    return restTemplate.getForEntity(url, Plays.class);
+    return webClient.get()
+            .uri(url)
+            .accept(MediaType.APPLICATION_XML)
+            .acceptCharset(StandardCharsets.UTF_8)
+            .exchangeToMono(c -> c.toEntity(Plays.class))
+            .block();
   }
 
   public ResponseEntity<Plays> getPlays(Integer id, String type, Map<String, String> extraParams) {
     String urlParams = String.format("?id=%d&type=%s", id, type) + extraParams
-        .entrySet()
-        .stream()
-        .map(entry -> String.format("&%s=%s", entry.getKey(), entry.getValue()))
-        .collect(Collectors.joining());
+            .entrySet()
+            .stream()
+            .map(entry -> String.format("&%s=%s", entry.getKey(), entry.getValue()))
+            .collect(Collectors.joining());
     String url = playsReadEndpoint + urlParams;
-    return restTemplate.getForEntity(url, Plays.class);
+    return webClient.get()
+            .uri(url)
+            .accept(MediaType.APPLICATION_XML)
+            .acceptCharset(StandardCharsets.UTF_8)
+            .exchangeToMono(c -> c.toEntity(Plays.class))
+            .block();
   }
 
   public Integer savePlay(String username, Integer id, BggPlay play) {
@@ -72,12 +85,15 @@ public class BggPlaysService {
       node.put("playid", id);
       node.put("version", 2);
     }
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_JSON);
-    headers.setAccept(singletonList(MediaType.APPLICATION_JSON));
-    headers.set("Cookie", auth.buildBggRequestHeader());
-    HttpEntity<ObjectNode> request = new HttpEntity<>(node, headers);
-    ResponseEntity<String> response = restTemplate.postForEntity(playsWriteEndpoint, request, String.class);
+    ResponseEntity<String> response = webClient.post()
+            .uri(playsWriteEndpoint)
+            .header("Cookie", auth.buildBggRequestHeader())
+            .accept(MediaType.APPLICATION_JSON)
+            .acceptCharset(StandardCharsets.UTF_8)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(node)
+            .exchangeToMono(c -> c.toEntity(String.class))
+            .block();
     Configuration conf = Configuration.defaultConfiguration().addOptions(Option.DEFAULT_PATH_LEAF_TO_NULL);
     DocumentContext documentContext = JsonPath.using(conf).parse(response.getBody());
     Integer playId = documentContext.read("$.playid", Integer.class);
@@ -101,12 +117,15 @@ public class BggPlaysService {
     node.put("action", "delete");
     node.put("finalize", "1");
     node.put("playid", playId.toString());
-    HttpHeaders requestHeaders = new HttpHeaders();
-    requestHeaders.setContentType(MediaType.APPLICATION_JSON);
-    requestHeaders.setAccept(singletonList(MediaType.APPLICATION_JSON));
-    requestHeaders.set("Cookie", auth.buildBggRequestHeader());
-    HttpEntity<ObjectNode> request = new HttpEntity<>(node, requestHeaders);
-    ResponseEntity<String> response = restTemplate.postForEntity(playsWriteEndpoint, request, String.class);
+    ResponseEntity<String> response = webClient.post()
+            .uri(playsWriteEndpoint)
+            .header("Cookie", auth.buildBggRequestHeader())
+            .accept(MediaType.APPLICATION_JSON)
+            .acceptCharset(StandardCharsets.UTF_8)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(node)
+            .exchangeToMono(c -> c.toEntity(String.class))
+            .block();
     if (response.getStatusCode() != HttpStatus.FOUND) {
       throw new BggResourceNotFoundError("play not found");
     }

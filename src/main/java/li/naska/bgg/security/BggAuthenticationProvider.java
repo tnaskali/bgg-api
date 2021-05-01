@@ -1,7 +1,10 @@
 package li.naska.bgg.security;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
@@ -9,7 +12,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
@@ -25,14 +28,17 @@ public class BggAuthenticationProvider implements AuthenticationProvider {
 
     String username = authentication.getName();
     String password = authentication.getCredentials().toString();
-
-    RestTemplate restTemplate = new RestTemplate();
-    HttpHeaders requestHeaders = new HttpHeaders();
-    requestHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
     MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
     formData.add("username", username);
     formData.add("password", password);
-    ResponseEntity<String> response = restTemplate.exchange(loginEndpoint, HttpMethod.POST, new HttpEntity<>(formData, requestHeaders), String.class);
+
+    WebClient webClient = WebClient.builder().build();
+    ResponseEntity<String> response = webClient.post()
+            .uri(loginEndpoint)
+            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+            .bodyValue(formData)
+            .exchangeToMono(c -> c.toEntity(String.class))
+            .block();
     if (response.getStatusCode() != HttpStatus.OK) {
       throw new AuthenticationServiceException("Remote authentication failed");
     }
