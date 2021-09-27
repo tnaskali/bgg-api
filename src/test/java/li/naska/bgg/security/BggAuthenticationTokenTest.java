@@ -52,7 +52,7 @@ class BggAuthenticationTokenTest {
         "bggpassword=bar;"
     );
 
-    assertThatThrownBy(() -> new BggAuthenticationToken(cookies)).hasMessage("no sessionId cookie");
+    assertThatThrownBy(() -> new BggAuthenticationToken(cookies)).hasMessage("no SessionId cookie");
   }
 
 }
