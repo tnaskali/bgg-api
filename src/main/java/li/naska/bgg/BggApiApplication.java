@@ -8,7 +8,6 @@ import org.springdoc.core.GroupedOpenApi;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.reactive.function.client.WebClient;
 
 @SpringBootApplication
 @OpenAPIDefinition(info = @Info(title = "BGG API", version = "v1"))
@@ -26,10 +25,5 @@ public class BggApiApplication {
         .pathsToExclude("/error")
         .build();
   }
-
-    @Bean
-    public WebClient webClient() {
-        return WebClient.builder().build();
-    }
 
 }

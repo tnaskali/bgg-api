@@ -1,4 +1,4 @@
-package li.naska.bgg.service.model.common;
+package li.naska.bgg.repository.model.common;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 

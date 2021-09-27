@@ -41,6 +41,8 @@ bgg:
     user:
       read: ${bgg.api.v2.baseurl-bgs}/user
 
+debug: true
+
 management:
   server:
     port: 8089
@@ -48,4 +50,7 @@ management:
 server:
   port: 8088
   servlet:
+    session:
+      cookie:
+        max-age: 30
     context-path: /bgg-api

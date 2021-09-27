@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
@@ -13,37 +12,40 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
 @Component
 public class BggAuthenticationProvider implements AuthenticationProvider {
 
-  @Value("${bgg.endpoints.login.write}")
-  private String loginEndpoint;
+  private final WebClient webClient;
+
+  public BggAuthenticationProvider(WebClient.Builder builder,
+                                   @Value("${bgg.endpoints.login.write}") String loginEndpoint) {
+    webClient = builder
+        .baseUrl(loginEndpoint)
+        .build();
+  }
 
   @Override
-  public Authentication authenticate(Authentication authentication)
-      throws AuthenticationException {
-
-    String username = authentication.getName();
-    String password = authentication.getCredentials().toString();
+  public Authentication authenticate(Authentication authentication) throws AuthenticationException {
     MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
-    formData.add("username", username);
-    formData.add("password", password);
+    formData.add("action", "login");
+    formData.add("username", authentication.getName());
+    formData.add("password", authentication.getCredentials().toString());
 
-    WebClient webClient = WebClient.builder().build();
-    ResponseEntity<String> response = webClient.post()
-            .uri(loginEndpoint)
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .bodyValue(formData)
-            .exchangeToMono(c -> c.toEntity(String.class))
-            .block();
-    if (response.getStatusCode() != HttpStatus.OK) {
-      throw new AuthenticationServiceException("Remote authentication failed");
-    }
-    List<String> cookies = response.getHeaders().get(HttpHeaders.SET_COOKIE);
-    return new BggAuthenticationToken(cookies);
+    Mono<List<String>> result = webClient
+        .post()
+        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+        .bodyValue(formData)
+        .retrieve()
+        .onStatus(
+            status -> status != HttpStatus.OK,
+            response -> Mono.error(new AuthenticationServiceException("Remote authentication failed")))
+        .toEntity(String.class)
+        .map(response -> response.getHeaders().get(HttpHeaders.SET_COOKIE));
+    return new BggAuthenticationToken(result.block());
   }
 
   @Override

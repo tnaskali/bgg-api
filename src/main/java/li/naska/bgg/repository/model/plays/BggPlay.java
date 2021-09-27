@@ -1,4 +1,4 @@
-package li.naska.bgg.service.model.plays;
+package li.naska.bgg.repository.model.plays;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import li.naska.bgg.service.model.common.BggObjectType;
+import li.naska.bgg.repository.model.common.BggObjectType;
 import lombok.Data;
 
 import java.time.LocalDate;

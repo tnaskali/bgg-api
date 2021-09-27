@@ -29,7 +29,7 @@ public class BggAuthenticationToken extends AbstractAuthenticationToken {
         .map(SESSIONID_COOKIE_PATTERN::matcher)
         .flatMap(e -> e.find() ? Stream.of(e.group(1)) : Stream.empty())
         .findFirst()
-        .orElseThrow(() -> new AuthenticationServiceException("no sessionId cookie"));
+        .orElseThrow(() -> new AuthenticationServiceException("no SessionId cookie"));
     setDetails(bggSessionId);
     bggUsername = cookies.stream()
         .map(BGGUSERNAME_COOKIE_PATTERN::matcher)

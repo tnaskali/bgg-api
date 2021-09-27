@@ -4,151 +4,132 @@ package li.naska.bgg.resource.v1;
 import com.boardgamegeek.enums.HotItemType;
 import com.boardgamegeek.enums.ObjectSubtype;
 import com.boardgamegeek.enums.ObjectType;
+import com.boardgamegeek.forumlist.Forums;
 import com.boardgamegeek.hot.HotItems;
 import com.boardgamegeek.plays.Plays;
 import com.boardgamegeek.search.Results;
 import com.boardgamegeek.thing.Things;
-import li.naska.bgg.service.BggHotItemsService;
-import li.naska.bgg.service.BggPlaysService;
-import li.naska.bgg.service.BggSearchService;
-import li.naska.bgg.service.BggThingsService;
+import li.naska.bgg.repository.*;
+import li.naska.bgg.repository.model.BggForumsParameters;
+import li.naska.bgg.repository.model.BggItemPlaysParameters;
+import li.naska.bgg.repository.model.BggSearchParameters;
+import li.naska.bgg.repository.model.BggThingsParameters;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.AbstractMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/api/v1/things")
 public class ThingsResource {
 
-  private static final DateTimeFormatter LOCALDATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+  @Autowired
+  private BggHotItemsRepository bggHotItemsService;
 
   @Autowired
-  private BggHotItemsService bggHotItemsService;
+  private BggSearchRepository bggSearchService;
 
   @Autowired
-  private BggPlaysService bggPlaysService;
+  private BggThingsRepository bggThingsService;
 
   @Autowired
-  private BggSearchService bggSearchService;
+  private BggPlaysRepository bggPlaysService;
 
   @Autowired
-  private BggThingsService bggThingsService;
+  private BggForumListsRepository bggForumListsService;
 
   @GetMapping(value = "/hot", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<HotItems> getThings() {
-    ResponseEntity<HotItems> response = bggHotItemsService.getItems(HotItemType.BOARDGAME);
-    return new ResponseEntity<>(response.getBody(), response.getStatusCode());
+  public Mono<HotItems> getThings() {
+    return bggHotItemsService.getItems(HotItemType.BOARDGAME);
   }
 
   @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Results> searchThings(
+  public Mono<Results> searchThings(
       @RequestParam(value = "query") String query,
-      @RequestParam(value = "type", required = false) Optional<List<ObjectSubtype>> types,
-      @RequestParam(value = "exact", required = false) Optional<Boolean> exact
+      @RequestParam(value = "type", required = false) List<ObjectSubtype> types,
+      @RequestParam(value = "exact", required = false) Boolean exact
   ) {
-    Stream<Map.Entry<String, Optional<String>>> stream = Stream.of(
-        new AbstractMap.SimpleEntry<>("type", types.map(e -> e.stream().map(ObjectSubtype::value).collect(Collectors.joining(",")))),
-        new AbstractMap.SimpleEntry<>("exact", exact.map(e -> e ? "1" : "0"))
-    );
-    Map<String, String> params = stream
-        .filter(e -> e.getValue().isPresent())
-        .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get()));
-    ResponseEntity<Results> response = bggSearchService.getItems(query, params);
-    return new ResponseEntity<>(response.getBody(), response.getStatusCode());
+    BggSearchParameters parameters = new BggSearchParameters(query);
+    parameters.setTypes(types);
+    parameters.setExact(exact);
+    return bggSearchService.getItems(parameters);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Things> getThings(
+  public Mono<Things> getThings(
       @RequestParam(value = "id") List<Integer> ids,
-      @RequestParam(value = "type", required = false) Optional<List<ObjectSubtype>> types,
-      @RequestParam(value = "versions", required = false) Optional<Boolean> versions,
-      @RequestParam(value = "videos", required = false) Optional<Boolean> videos,
-      @RequestParam(value = "stats", required = false) Optional<Boolean> stats,
-      @RequestParam(value = "historical", required = false) Optional<Boolean> historical,
-      @RequestParam(value = "marketplace", required = false) Optional<Boolean> marketplace,
-      @RequestParam(value = "comments", required = false) Optional<Boolean> comments,
-      @RequestParam(value = "ratingcomments", required = false) Optional<Boolean> ratingcomments,
-      @RequestParam(value = "page", required = false) Optional<Integer> page,
-      @RequestParam(value = "pagesize", required = false) Optional<Integer> pagesize
+      @RequestParam(value = "type", required = false) List<ObjectSubtype> types,
+      @RequestParam(value = "versions", required = false) Boolean versions,
+      @RequestParam(value = "videos", required = false) Boolean videos,
+      @RequestParam(value = "stats", required = false) Boolean stats,
+      @RequestParam(value = "marketplace", required = false) Boolean marketplace,
+      @RequestParam(value = "comments", required = false) Boolean comments,
+      @RequestParam(value = "ratingcomments", required = false) Boolean ratingcomments,
+      @RequestParam(value = "page", required = false) Integer page,
+      @RequestParam(value = "pagesize", required = false) Integer pagesize
   ) {
-    Stream<Map.Entry<String, Optional<String>>> stream = Stream.of(
-        new AbstractMap.SimpleEntry<>("type", types.map(e -> e.stream().map(ObjectSubtype::value).collect(Collectors.joining(",")))),
-        new AbstractMap.SimpleEntry<>("versions", versions.map(e -> e ? "1" : "0")),
-        new AbstractMap.SimpleEntry<>("videos", videos.map(e -> e ? "1" : "0")),
-        new AbstractMap.SimpleEntry<>("stats", stats.map(e -> e ? "1" : "0")),
-        new AbstractMap.SimpleEntry<>("historical", historical.map(e -> e ? "1" : "0")),
-        new AbstractMap.SimpleEntry<>("marketplace", marketplace.map(e -> e ? "1" : "0")),
-        new AbstractMap.SimpleEntry<>("versions", versions.map(e -> e ? "1" : "0")),
-        new AbstractMap.SimpleEntry<>("comments", comments.map(e -> e ? "1" : "0")),
-        new AbstractMap.SimpleEntry<>("ratingcomments", ratingcomments.map(e -> e ? "1" : "0")),
-        new AbstractMap.SimpleEntry<>("page", page.map(Object::toString)),
-        new AbstractMap.SimpleEntry<>("pagesize", pagesize.map(Object::toString))
-    );
-    Map<String, String> params = stream
-        .filter(e -> e.getValue().isPresent())
-        .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get()));
-    ResponseEntity<Things> response = bggThingsService.getThings(ids.stream().map(Object::toString).collect(Collectors.joining(",")), params);
-    return new ResponseEntity<>(response.getBody(), response.getStatusCode());
+    BggThingsParameters parameters = new BggThingsParameters(ids);
+    parameters.setType(types);
+    parameters.setVersions(versions);
+    parameters.setVideos(videos);
+    parameters.setStats(stats);
+    parameters.setMarketplace(marketplace);
+    parameters.setComments(comments);
+    parameters.setRatingcomments(ratingcomments);
+    parameters.setPage(page);
+    parameters.setPagesize(pagesize);
+    return bggThingsService.getThings(parameters);
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Things> getThing(
+  public Mono<Things> getThing(
       @PathVariable(value = "id") Integer id,
-      @RequestParam(value = "versions", required = false) Optional<Boolean> versions,
-      @RequestParam(value = "videos", required = false) Optional<Boolean> videos,
-      @RequestParam(value = "stats", required = false) Optional<Boolean> stats,
-      @RequestParam(value = "historical", required = false) Optional<Boolean> historical,
-      @RequestParam(value = "marketplace", required = false) Optional<Boolean> marketplace,
-      @RequestParam(value = "comments", required = false) Optional<Boolean> comments,
-      @RequestParam(value = "ratingcomments", required = false) Optional<Boolean> ratingcomments
+      @RequestParam(value = "versions", required = false) Boolean versions,
+      @RequestParam(value = "videos", required = false) Boolean videos,
+      @RequestParam(value = "stats", required = false) Boolean stats,
+      @RequestParam(value = "marketplace", required = false) Boolean marketplace,
+      @RequestParam(value = "comments", required = false) Boolean comments,
+      @RequestParam(value = "ratingcomments", required = false) Boolean ratingcomments
   ) {
-    Stream<Map.Entry<String, Optional<String>>> stream = Stream.of(
-        new AbstractMap.SimpleEntry<>("versions", versions.map(e -> e ? "1" : "0")),
-        new AbstractMap.SimpleEntry<>("videos", videos.map(e -> e ? "1" : "0")),
-        new AbstractMap.SimpleEntry<>("stats", stats.map(e -> e ? "1" : "0")),
-        new AbstractMap.SimpleEntry<>("historical", historical.map(e -> e ? "1" : "0")),
-        new AbstractMap.SimpleEntry<>("marketplace", marketplace.map(e -> e ? "1" : "0")),
-        new AbstractMap.SimpleEntry<>("comments", comments.map(e -> e ? "1" : "0")),
-        new AbstractMap.SimpleEntry<>("ratingcomments", ratingcomments.map(e -> e ? "1" : "0"))
-    );
-    Map<String, String> params = stream
-        .filter(e -> e.getValue().isPresent())
-        .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get()));
-    ResponseEntity<Things> response = bggThingsService.getThings(id.toString(), params);
-    return new ResponseEntity<>(response.getBody(), response.getStatusCode());
+    BggThingsParameters parameters = new BggThingsParameters(Collections.singletonList(id));
+    parameters.setVersions(versions);
+    parameters.setVideos(videos);
+    parameters.setStats(stats);
+    parameters.setMarketplace(marketplace);
+    parameters.setComments(comments);
+    parameters.setRatingcomments(ratingcomments);
+    return bggThingsService.getThings(parameters);
+  }
+
+  @GetMapping(value = "/{id}/forums", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<Forums> getForums(
+      @PathVariable(value = "id") Integer id
+  ) {
+    BggForumsParameters parameters = new BggForumsParameters(id, ObjectType.THING);
+    return bggForumListsService.getForums(parameters);
   }
 
   @GetMapping(value = "/{id}/plays", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Plays> getPlays(
+  public Mono<Plays> getPlays(
       @PathVariable(value = "id") Integer id,
-      @RequestParam(value = "username", required = false) Optional<String> username,
-      @RequestParam(value = "mindate", required = false) Optional<LocalDate> mindate,
-      @RequestParam(value = "maxdate", required = false) Optional<LocalDate> maxdate,
-      @RequestParam(value = "subtype", required = false) Optional<ObjectSubtype> subtype,
-      @RequestParam(value = "page", required = false) Optional<Integer> page
+      @RequestParam(value = "username", required = false) String username,
+      @RequestParam(value = "mindate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate mindate,
+      @RequestParam(value = "maxdate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate maxdate,
+      @RequestParam(value = "subtype", required = false) ObjectSubtype subtype,
+      @RequestParam(value = "page", required = false) Integer page
   ) {
-    Stream<Map.Entry<String, Optional<String>>> stream = Stream.of(
-        new AbstractMap.SimpleEntry<>("username", username),
-        new AbstractMap.SimpleEntry<>("mindate", mindate.map(LOCALDATE_FORMATTER::format)),
-        new AbstractMap.SimpleEntry<>("maxdate", maxdate.map(LOCALDATE_FORMATTER::format)),
-        new AbstractMap.SimpleEntry<>("subtype", subtype.map(ObjectSubtype::value)),
-        new AbstractMap.SimpleEntry<>("page", page.map(Object::toString))
-    );
-    Map<String, String> params = stream
-        .filter(e -> e.getValue().isPresent())
-        .collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue().get()));
-    ResponseEntity<Plays> response = bggPlaysService.getPlays(id, ObjectType.THING.value(), params);
-    return new ResponseEntity<>(response.getBody(), response.getStatusCode());
+    BggItemPlaysParameters parameters = new BggItemPlaysParameters(id, ObjectType.THING);
+    parameters.setUsername(username);
+    parameters.setMindate(mindate);
+    parameters.setMaxdate(maxdate);
+    parameters.setSubtype(subtype);
+    parameters.setPage(page);
+    return bggPlaysService.getPlays(parameters);
   }
 
 }

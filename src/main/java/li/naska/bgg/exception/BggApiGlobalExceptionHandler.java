@@ -27,6 +27,8 @@ public class BggApiGlobalExceptionHandler {
       return respondWith(HttpStatus.FORBIDDEN, ex.getMessage(), request.getRequestURI());
     } else if (ex instanceof IllegalStateException || ex instanceof BggUnexpectedResponseException) {
       return respondWith(HttpStatus.EXPECTATION_FAILED, ex.getMessage(), request.getRequestURI());
+    } else if (ex instanceof BggResponseNotReadyException) {
+      return respondWith(HttpStatus.REQUEST_TIMEOUT, ex.getMessage(), request.getRequestURI());
     } else {
       return respondWith(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), request.getRequestURI());
     }

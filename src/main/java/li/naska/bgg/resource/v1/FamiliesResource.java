@@ -4,71 +4,70 @@ import com.boardgamegeek.enums.FamilyType;
 import com.boardgamegeek.enums.ObjectSubtype;
 import com.boardgamegeek.enums.ObjectType;
 import com.boardgamegeek.family.Families;
+import com.boardgamegeek.forumlist.Forums;
 import com.boardgamegeek.plays.Plays;
-import li.naska.bgg.service.BggFamiliesService;
-import li.naska.bgg.service.BggPlaysService;
+import li.naska.bgg.repository.BggFamiliesRepository;
+import li.naska.bgg.repository.BggForumListsRepository;
+import li.naska.bgg.repository.BggPlaysRepository;
+import li.naska.bgg.repository.model.BggFamiliesParameters;
+import li.naska.bgg.repository.model.BggForumsParameters;
+import li.naska.bgg.repository.model.BggItemPlaysParameters;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.AbstractMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/api/v1/families")
 public class FamiliesResource {
 
-  private static final DateTimeFormatter LOCALDATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+  @Autowired
+  private BggFamiliesRepository bggFamiliesService;
 
   @Autowired
-  private BggPlaysService bggPlaysService;
+  private BggPlaysRepository bggPlaysService;
 
   @Autowired
-  private BggFamiliesService bggFamiliesService;
+  private BggForumListsRepository bggForumListsService;
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Families> getFamily(
+  public Mono<Families> getFamilies(
       @PathVariable(value = "id") Integer id,
-      @RequestParam(value = "types", required = false) Optional<List<FamilyType>> types
+      @RequestParam(value = "types", required = false) List<FamilyType> types
   ) {
-    Stream<Map.Entry<String, Optional<String>>> stream = Stream.of(
-        new AbstractMap.SimpleEntry<>("type", types.map(l -> l.stream().map(FamilyType::value).collect(Collectors.joining(","))))
-    );
-    Map<String, String> params = stream
-        .filter(e -> e.getValue().isPresent())
-        .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get()));
-    ResponseEntity<Families> response = bggFamiliesService.getFamily(id, params);
-    return new ResponseEntity<>(response.getBody(), response.getStatusCode());
+    BggFamiliesParameters parameters = new BggFamiliesParameters(id);
+    parameters.setTypes(types);
+    return bggFamiliesService.getFamily(parameters);
+  }
+
+  @GetMapping(value = "/{id}/forums", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<Forums> getForums(
+      @PathVariable(value = "id") Integer id
+  ) {
+    BggForumsParameters parameters = new BggForumsParameters(id, ObjectType.FAMILY);
+    return bggForumListsService.getForums(parameters);
   }
 
   @GetMapping(value = "/{id}/plays", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Plays> getPlays(
+  public Mono<Plays> getPlays(
       @PathVariable(value = "id") Integer id,
-      @RequestParam(value = "username", required = false) Optional<String> username,
-      @RequestParam(value = "mindate", required = false) Optional<LocalDate> mindate,
-      @RequestParam(value = "maxdate", required = false) Optional<LocalDate> maxdate,
-      @RequestParam(value = "subtype", required = false) Optional<ObjectSubtype> subtype,
-      @RequestParam(value = "page", required = false) Optional<Integer> page
+      @RequestParam(value = "username", required = false) String username,
+      @RequestParam(value = "mindate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate mindate,
+      @RequestParam(value = "maxdate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate maxdate,
+      @RequestParam(value = "subtype", required = false) ObjectSubtype subtype,
+      @RequestParam(value = "page", required = false) Integer page
   ) {
-    Stream<Map.Entry<String, Optional<String>>> stream = Stream.of(
-        new AbstractMap.SimpleEntry<>("username", username),
-        new AbstractMap.SimpleEntry<>("mindate", mindate.map(LOCALDATE_FORMATTER::format)),
-        new AbstractMap.SimpleEntry<>("maxdate", maxdate.map(LOCALDATE_FORMATTER::format)),
-        new AbstractMap.SimpleEntry<>("subtype", subtype.map(ObjectSubtype::value)),
-        new AbstractMap.SimpleEntry<>("page", page.map(Object::toString))
-    );
-    Map<String, String> params = stream
-        .filter(e -> e.getValue().isPresent())
-        .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().get()));
-    ResponseEntity<Plays> response = bggPlaysService.getPlays(id, ObjectType.FAMILY.value(), params);
-    return new ResponseEntity<>(response.getBody(), response.getStatusCode());
+    BggItemPlaysParameters parameters = new BggItemPlaysParameters(id, ObjectType.FAMILY);
+    parameters.setUsername(username);
+    parameters.setMindate(mindate);
+    parameters.setMaxdate(maxdate);
+    parameters.setSubtype(subtype);
+    parameters.setPage(page);
+    return bggPlaysService.getPlays(parameters);
   }
 
 }
