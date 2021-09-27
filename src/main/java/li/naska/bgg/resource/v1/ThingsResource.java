@@ -44,8 +44,10 @@ public class ThingsResource {
   private BggForumListsRepository bggForumListsService;
 
   @GetMapping(value = "/hot", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<HotItems> getThings() {
-    return bggHotItemsService.getItems(HotItemType.BOARDGAME);
+  public Mono<HotItems> getThings(
+      @RequestParam(value = "type") HotItemType type
+  ) {
+    return bggHotItemsService.getItems(type);
   }
 
   @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
