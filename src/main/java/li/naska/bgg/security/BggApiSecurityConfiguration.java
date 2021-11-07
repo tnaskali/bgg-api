@@ -1,41 +1,35 @@
 package li.naska.bgg.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.web.server.SecurityWebFilterChain;
 
-@EnableWebSecurity
+@EnableWebFluxSecurity
 @Configuration
-public class BggApiSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class BggApiSecurityConfiguration {
 
   @Autowired
-  private BggAuthenticationProvider authProvider;
+  private BggAuthenticationManager authenticationManager;
 
-  @Override
-  protected void configure(AuthenticationManagerBuilder auth) {
-    auth.authenticationProvider(authProvider);
-  }
-
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    http
-        .sessionManagement()
-        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-        .and()
+  @Bean
+  public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+    return http
+        .authenticationManager(authenticationManager)
         .csrf()
         .disable()
-        .authorizeRequests()
-        .antMatchers(HttpMethod.GET)
+        .authorizeExchange()
+        .pathMatchers(HttpMethod.GET)
         .permitAll()
-        .anyRequest()
+        .anyExchange()
         .authenticated()
         .and()
-        .httpBasic();
+        .httpBasic()
+        .and()
+        .build();
   }
 
 }

@@ -3,10 +3,10 @@ package li.naska.bgg.security;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.util.Assert;
 
-import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 public class BggAuthenticationToken extends AbstractAuthenticationToken {
 
@@ -20,27 +20,27 @@ public class BggAuthenticationToken extends AbstractAuthenticationToken {
 
   private final String bggPassword;
 
-  public BggAuthenticationToken(List<String> cookies) {
+  public BggAuthenticationToken(String sessionCookie, String usernameCookie, String passwordCookie) {
     super(AuthorityUtils.NO_AUTHORITIES);
-    if (cookies == null) {
-      throw new AuthenticationServiceException("no cookies");
+    Assert.notNull(sessionCookie, "sessionId cookie is null");
+    Assert.notNull(usernameCookie, "username cookie is null");
+    Assert.notNull(passwordCookie, "password cookie is null");
+    Matcher matcher = SESSIONID_COOKIE_PATTERN.matcher(sessionCookie);
+    if (!matcher.find()) {
+      throw new AuthenticationServiceException("SessionId not found in cookie");
     }
-    String bggSessionId = cookies.stream()
-        .map(SESSIONID_COOKIE_PATTERN::matcher)
-        .flatMap(e -> e.find() ? Stream.of(e.group(1)) : Stream.empty())
-        .findFirst()
-        .orElseThrow(() -> new AuthenticationServiceException("no SessionId cookie"));
+    String bggSessionId = matcher.group(1);
     setDetails(bggSessionId);
-    bggUsername = cookies.stream()
-        .map(BGGUSERNAME_COOKIE_PATTERN::matcher)
-        .flatMap(e -> e.find() ? Stream.of(e.group(1)) : Stream.empty())
-        .findFirst()
-        .orElseThrow(() -> new AuthenticationServiceException("no username cookie"));
-    bggPassword = cookies.stream()
-        .map(BGGPASSWORD_COOKIE_PATTERN::matcher)
-        .flatMap(e -> e.find() ? Stream.of(e.group(1)) : Stream.empty())
-        .findFirst()
-        .orElseThrow(() -> new AuthenticationServiceException("no password cookie"));
+    Matcher usernameMatcher = BGGUSERNAME_COOKIE_PATTERN.matcher(usernameCookie);
+    if (!usernameMatcher.find()) {
+      throw new AuthenticationServiceException("bggusername not found in cookie");
+    }
+    this.bggUsername = usernameMatcher.group(1);
+    Matcher passwordMatcher = BGGPASSWORD_COOKIE_PATTERN.matcher(passwordCookie);
+    if (!passwordMatcher.find()) {
+      throw new AuthenticationServiceException("bggpassword not found in cookie");
+    }
+    this.bggPassword = passwordMatcher.group(1);
     setAuthenticated(true);
   }
 

@@ -1,84 +1,90 @@
 package li.naska.bgg.repository;
 
 import com.boardgamegeek.plays.Plays;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import li.naska.bgg.exception.BggAuthenticationRequiredError;
-import li.naska.bgg.exception.BggBadRequestError;
 import li.naska.bgg.repository.model.BggItemPlaysParameters;
 import li.naska.bgg.repository.model.BggUserPlaysParameters;
 import li.naska.bgg.repository.model.plays.BggPlay;
 import li.naska.bgg.security.BggAuthenticationToken;
-import li.naska.bgg.util.QueryParamFunctions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.reactive.function.client.ClientRequest;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Repository
 public class BggPlaysRepository {
 
-  private final WebClient readWebClient;
+  private final WebClient playsWebClient;
 
-  private final WebClient writeWebClient;
+  private final WebClient geekplayWebClient;
 
   public BggPlaysRepository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.plays.read}") String playsReadEndpoint,
-      @Value("${bgg.endpoints.plays.write}") String playsWriteEndpoint) {
-    this.readWebClient = builder.baseUrl(playsReadEndpoint).build();
-    this.writeWebClient = builder.baseUrl(playsWriteEndpoint)
-        .filter((request, next) -> next.exchange(
-            ClientRequest.from(request)
-                .headers((headers) -> headers.set("Cookie", getAuthentication().buildBggRequestHeader()))
-                .build()))
-        .build();
+      @Value("${bgg.endpoints.plays}") String playsEndpoint,
+      @Value("${bgg.endpoints.geekplay}") String geekplayEndpoint) {
+    this.playsWebClient = builder.baseUrl(playsEndpoint).build();
+    this.geekplayWebClient = builder.baseUrl(geekplayEndpoint).build();
   }
 
-  private static BggAuthenticationToken getAuthentication() {
-    return (BggAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+  private static ResponseStatusException unauthorizedWrongUser() {
+    return new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Wrong user");
   }
 
-  private static MultiValueMap<String, String> extractUserPlayParams(BggUserPlaysParameters params) {
-    MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-    map.set("username", params.getUsername());
-    Optional.ofNullable(params.getId()).map(Object::toString).ifPresent(e -> map.set("id", e));
-    Optional.ofNullable(params.getType()).map(QueryParamFunctions.BGG_OBJECT_TYPE_FUNCTION).ifPresent(e -> map.set("type", e));
-    Optional.ofNullable(params.getMindate()).map(QueryParamFunctions.BGG_LOCALDATE_FUNCTION).ifPresent(e -> map.set("mindate", e));
-    Optional.ofNullable(params.getMaxdate()).map(QueryParamFunctions.BGG_LOCALDATE_FUNCTION).ifPresent(e -> map.set("maxdate", e));
-    Optional.ofNullable(params.getSubtype()).map(QueryParamFunctions.BGG_OBJECT_SUBTYPE_FUNCTION).ifPresent(e -> map.set("subtype", e));
-    Optional.ofNullable(params.getPage()).map(Object::toString).ifPresent(e -> map.set("page", e));
-    return map;
+  private static ResponseStatusException fromMapBody(Map<String, Object> body) {
+    String error = (String) body.get("error");
+    if ("You must login to save plays".equals(error)) {
+      return new ResponseStatusException(HttpStatus.NETWORK_AUTHENTICATION_REQUIRED, "You must login to save plays");
+    } else {
+      return new ResponseStatusException(HttpStatus.BAD_REQUEST, Optional.ofNullable(error).orElse("Unknown remote error"));
+    }
   }
 
-  private static MultiValueMap<String, String> extractItemPlayParams(BggItemPlaysParameters params) {
-    MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-    map.set("id", params.getId().toString());
-    map.set("type", params.getType().value());
-    Optional.ofNullable(params.getUsername()).ifPresent(e -> map.set("username", e));
-    Optional.ofNullable(params.getMindate()).map(QueryParamFunctions.BGG_LOCALDATE_FUNCTION).ifPresent(e -> map.set("mindate", e));
-    Optional.ofNullable(params.getMaxdate()).map(QueryParamFunctions.BGG_LOCALDATE_FUNCTION).ifPresent(e -> map.set("maxdate", e));
-    Optional.ofNullable(params.getSubtype()).map(QueryParamFunctions.BGG_OBJECT_SUBTYPE_FUNCTION).ifPresent(e -> map.set("subtype", e));
-    Optional.ofNullable(params.getPage()).map(Object::toString).ifPresent(e -> map.set("page", e));
-    return map;
+  private static ResponseStatusException fromHtmlBody(String error) {
+    if (error == null) {
+      return new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unknown remote error");
+    }
+    Matcher matcher = Pattern.compile("<div class='messagebox error'>\\s*(.+)\\s*</div>").matcher(error);
+    String statusText = matcher.find() ? matcher.group(1) : "Unknown remote error";
+    if ("Play does not exist.".equals(statusText)) {
+      return new ResponseStatusException(HttpStatus.NOT_FOUND, "Play does not exist");
+    } else if ("Invalid action".equals(statusText)) {
+      return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid action");
+    } else if ("You are not permitted to edit this play.".equals(statusText)) {
+      return new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You are not permitted to edit this play");
+    } else if ("You can't delete this play".equals(statusText)) {
+      return new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You can't delete this play");
+    } else {
+      return new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, statusText != null ? statusText : "Unknown remote error");
+    }
+  }
+
+  private Mono<BggAuthenticationToken> authentication() {
+    return ReactiveSecurityContextHolder.getContext().map(
+        context -> (BggAuthenticationToken) context.getAuthentication()
+    );
   }
 
   public Mono<Plays> getPlays(BggUserPlaysParameters parameters) {
-    return readWebClient
+    return playsWebClient
         .get()
         .uri(uriBuilder -> uriBuilder
-            .queryParams(extractUserPlayParams(parameters))
+            .queryParams(parameters.toMultiValueMap())
             .build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
@@ -87,10 +93,10 @@ public class BggPlaysRepository {
   }
 
   public Mono<Plays> getPlays(BggItemPlaysParameters parameters) {
-    return readWebClient
+    return playsWebClient
         .get()
         .uri(uriBuilder -> uriBuilder
-            .queryParams(extractItemPlayParams(parameters))
+            .queryParams(parameters.toMultiValueMap())
             .build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
@@ -98,58 +104,72 @@ public class BggPlaysRepository {
         .bodyToMono(Plays.class);
   }
 
-  public Mono<String> savePlay(String username, Integer id, BggPlay play) {
-    ObjectNode node = new ObjectMapper().valueToTree(play);
-    node.put("ajax", 1);
-    node.put("action", "save");
+  public Mono<Map<String, Object>> savePlay(String username, Integer id, BggPlay play) {
+    ObjectNode requestBody = new ObjectMapper().valueToTree(play);
+    requestBody.put("ajax", 1);
+    requestBody.put("action", "save");
     if (id != null) {
-      node.put("playid", id);
-      node.put("version", 2);
+      requestBody.put("playid", id);
+      requestBody.put("version", 2);
     }
-    return writeWebClient
-        .post()
-        .uri(uriBuilder -> uriBuilder
-            .queryParam("username", username)
-            .build())
-        .accept(MediaType.APPLICATION_JSON)
-        .acceptCharset(StandardCharsets.UTF_8)
-        .contentType(MediaType.APPLICATION_JSON)
-        .bodyValue(node)
-        .retrieve()
-        .bodyToMono(Map.class)
-        .flatMap(b -> {
-          String playId = (String) b.get("playid");
-          if (playId != null) {
-            return Mono.just(playId);
+    return authentication()
+        .flatMap(auth -> auth.getPrincipal().equals(username)
+            ? Mono.just(auth)
+            : Mono.error(unauthorizedWrongUser()))
+        .flatMap(auth -> geekplayWebClient
+            .post()
+            .accept(MediaType.APPLICATION_JSON)
+            .acceptCharset(StandardCharsets.UTF_8)
+            .contentType(MediaType.APPLICATION_JSON)
+            .header("Cookie", auth.buildBggRequestHeader())
+            .bodyValue(requestBody)
+            .retrieve()
+            .toEntity(String.class)
+            .flatMap(
+                entity -> MediaType.TEXT_HTML.equalsTypeAndSubtype(entity.getHeaders().getContentType())
+                    ? Mono.error(fromHtmlBody(entity.getBody()))
+                    : Mono.just(Objects.requireNonNull(entity.getBody()))))
+        .map(responseBody -> {
+          try {
+            return new ObjectMapper().readValue(responseBody, new TypeReference<Map<String, Object>>() {
+            });
+          } catch (JsonProcessingException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
           }
-          String error = (String) b.get("error");
-          if ("you must login to save plays".equals(error)) {
-            return Mono.error(new BggAuthenticationRequiredError(error));
-          } else {
-            return Mono.error(new BggBadRequestError(Optional.ofNullable(error).orElse("unknown")));
-          }
-        });
+        })
+        .flatMap(responseBody -> Optional.of(responseBody.get("playid"))
+            .map(element -> Mono.just(responseBody))
+            .orElseGet(() -> Mono.error(fromMapBody(responseBody))));
   }
 
-  public Mono<String> deletePlay(String username, Integer playId) {
-    ObjectNode node = new ObjectMapper().createObjectNode();
-    node.put("action", "delete");
-    node.put("finalize", "1");
-    node.put("playid", playId.toString());
-    return writeWebClient
-        .post()
-        .uri(uriBuilder -> uriBuilder
-            .queryParam("username", username)
-            .build())
-        .accept(MediaType.APPLICATION_JSON)
-        .acceptCharset(StandardCharsets.UTF_8)
-        .contentType(MediaType.APPLICATION_JSON)
-        .bodyValue(node)
-        .retrieve()
-        .onStatus(
-            status -> status != HttpStatus.FOUND,
-            response -> Mono.empty())
-        .bodyToMono(String.class);
+  public Mono<Map<String, Object>> deletePlay(String username, Integer playId) {
+    Map<String, Object> requestBody = new HashMap<>();
+    requestBody.put("ajax", 1);
+    requestBody.put("action", "delete");
+    requestBody.put("finalize", "1");
+    requestBody.put("playid", playId.toString());
+    return authentication()
+        .flatMap(auth -> auth.getPrincipal().equals(username)
+            ? Mono.just(auth)
+            : Mono.error(unauthorizedWrongUser()))
+        .flatMap(auth -> geekplayWebClient
+            .post()
+            .accept(MediaType.APPLICATION_JSON)
+            .acceptCharset(StandardCharsets.UTF_8)
+            .contentType(MediaType.APPLICATION_JSON)
+            .header("Cookie", auth.buildBggRequestHeader())
+            .bodyValue(requestBody)
+            .retrieve()
+            .toEntity(String.class)
+            .flatMap(
+                entity -> MediaType.TEXT_HTML.equalsTypeAndSubtype(entity.getHeaders().getContentType())
+                    ? Mono.error(fromHtmlBody(entity.getBody()))
+                    : Mono.just(Objects.requireNonNull(entity.getBody()))))
+        .map(responseBody -> {
+          Map<String, Object> play = new HashMap<>();
+          play.put("playid", Integer.parseInt(responseBody));
+          return play;
+        });
   }
 
 }

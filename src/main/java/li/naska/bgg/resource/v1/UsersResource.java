@@ -19,13 +19,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -82,17 +82,16 @@ public class UsersResource {
 
   @PostMapping(value = "/{username}/plays", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(security = @SecurityRequirement(name = "basicAuth"))
-  public Mono<String> createPlay(
+  public Mono<Map<String, Object>> createPlay(
       @PathVariable(value = "username") String username,
-      @RequestBody BggPlay play,
-      UriComponentsBuilder uri
+      @RequestBody BggPlay play
   ) {
     return bggPlaysService.savePlay(username, null, play);
   }
 
   @PutMapping(value = "/{username}/plays/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(security = @SecurityRequirement(name = "basicAuth"))
-  public Mono<String> updatePlay(
+  public Mono<Map<String, Object>> updatePlay(
       @PathVariable(value = "username") String username,
       @PathVariable(value = "id") Integer id,
       @RequestBody BggPlay play
@@ -102,7 +101,7 @@ public class UsersResource {
 
   @DeleteMapping(value = "/{username}/plays/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(security = @SecurityRequirement(name = "basicAuth"))
-  public Mono<String> deletePlay(
+  public Mono<Map<String, Object>> deletePlay(
       @PathVariable(value = "username") String username,
       @PathVariable(value = "id") Integer id
   ) {

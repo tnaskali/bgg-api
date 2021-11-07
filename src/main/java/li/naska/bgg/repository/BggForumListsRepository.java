@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
@@ -20,22 +18,15 @@ public class BggForumListsRepository {
 
   public BggForumListsRepository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.forumlist.read}") String forumlistReadEndpoint) {
-    this.webClient = builder.baseUrl(forumlistReadEndpoint).build();
-  }
-
-  private static MultiValueMap<String, String> extractThreadsParams(BggForumsParameters params) {
-    MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-    map.set("id", params.getId().toString());
-    map.set("type", params.getType().value());
-    return map;
+      @Value("${bgg.endpoints.forumlist}") String forumListEndpoint) {
+    this.webClient = builder.baseUrl(forumListEndpoint).build();
   }
 
   public Mono<Forums> getForums(BggForumsParameters parameters) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
-            .queryParams(extractThreadsParams(parameters))
+            .queryParams(parameters.toMultiValueMap())
             .build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)

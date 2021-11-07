@@ -11,35 +11,21 @@ bgg:
       baseurl-rpgs: ${bgg.web.baseurl-rpgs}/xmlapi2
       baseurl-vgs: ${bgg.web.baseurl-vgs}/xmlapi2
   endpoints:
-    collection:
-      read: ${bgg.api.v2.baseurl-bgs}/collection
-    family:
-      read: ${bgg.api.v2.baseurl-bgs}/family
-    forum:
-      read: ${bgg.api.v2.baseurl-bgs}/forum
-    forumlist:
-      read: ${bgg.api.v2.baseurl-bgs}/forumlist
-    geeklist:
-      read: ${bgg.api.v1.baseurl-bgs}/geeklist
-    guild:
-      read: ${bgg.api.v2.baseurl-bgs}/guild
-    login:
-      write: ${bgg.web.baseurl-bgs}/login
-    hot:
-      read: ${bgg.api.v2.baseurl-bgs}/hot
-    play:
-      read: ${bgg.web.baseurl-bgs}/play/details/{id}
-    plays:
-      read: ${bgg.api.v2.baseurl-bgs}/plays
-      write: ${bgg.web.baseurl-bgs}/geekplay.php
-    search:
-      read: ${bgg.api.v2.baseurl-bgs}/search
-    thing:
-      read: ${bgg.api.v2.baseurl-bgs}/thing
-    thread:
-      read: ${bgg.api.v2.baseurl-bgs}/thread
-    user:
-      read: ${bgg.api.v2.baseurl-bgs}/user
+    collection: ${bgg.api.v2.baseurl-bgs}/collection
+    family: ${bgg.api.v2.baseurl-bgs}/family
+    forum: ${bgg.api.v2.baseurl-bgs}/forum
+    forumlist: ${bgg.api.v2.baseurl-bgs}/forumlist
+    geeklist: ${bgg.api.v1.baseurl-bgs}/geeklist
+    guild: ${bgg.api.v2.baseurl-bgs}/guild
+    login: ${bgg.web.baseurl-bgs}/login/api/v1
+    hot: ${bgg.api.v2.baseurl-bgs}/hot
+    play: ${bgg.web.baseurl-bgs}/play/details/{id}
+    plays: ${bgg.api.v2.baseurl-bgs}/plays
+    geekplay: ${bgg.web.baseurl-bgs}/geekplay.php
+    search: ${bgg.api.v2.baseurl-bgs}/search
+    thing: ${bgg.api.v2.baseurl-bgs}/thing
+    thread: ${bgg.api.v2.baseurl-bgs}/thread
+    user: ${bgg.api.v2.baseurl-bgs}/user
 
 debug: true
 
@@ -49,8 +35,7 @@ management:
 
 server:
   port: 8088
-  servlet:
-    session:
-      cookie:
-        max-age: 30
-    context-path: /bgg-api
+
+spring:
+  webflux:
+    base-path: /bgg-api

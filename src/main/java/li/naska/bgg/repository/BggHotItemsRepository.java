@@ -18,8 +18,8 @@ public class BggHotItemsRepository {
 
   public BggHotItemsRepository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.hot.read}") String hotReadEndpoint) {
-    this.webClient = builder.baseUrl(hotReadEndpoint).build();
+      @Value("${bgg.endpoints.hot}") String hotEndpoint) {
+    this.webClient = builder.baseUrl(hotEndpoint).build();
   }
 
   public Mono<HotItems> getItems(HotItemType type) {
