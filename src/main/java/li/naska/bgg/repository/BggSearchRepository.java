@@ -1,6 +1,5 @@
 package li.naska.bgg.repository;
 
-import com.boardgamegeek.search.Results;
 import li.naska.bgg.repository.model.BggSearchParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +21,7 @@ public class BggSearchRepository {
     this.webClient = builder.baseUrl(searchEndpoint).build();
   }
 
-  public Mono<Results> getItems(BggSearchParameters parameters) {
+  public Mono<String> getResults(BggSearchParameters parameters) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -31,7 +30,7 @@ public class BggSearchRepository {
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
-        .bodyToMono(Results.class);
+        .bodyToMono(String.class);
   }
 
 }

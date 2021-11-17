@@ -11,7 +11,7 @@ import java.util.Optional;
 @Data
 public class BggGuildParameters {
 
-  private final Integer id;
+  private Integer id;
 
   private Boolean members;
 
@@ -21,10 +21,10 @@ public class BggGuildParameters {
 
   public MultiValueMap<String, String> toMultiValueMap() {
     MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-    map.set("id", getId().toString());
-    Optional.ofNullable(getMembers()).map(ToStringParamFunctions.BGG_BOOLEAN_FUNCTION).ifPresent(e -> map.set("members", e));
-    Optional.ofNullable(getSort()).map(ToStringParamFunctions.BGG_SORT_TYPE_FUNCTION).ifPresent(e -> map.set("sort", e));
-    Optional.ofNullable(getPage()).map(Object::toString).ifPresent(e -> map.set("page", e));
+    Optional.ofNullable(getId()).ifPresent(e -> map.add("id", e.toString()));
+    Optional.ofNullable(getMembers()).map(ToStringParamFunctions.BGG_BOOLEAN_FUNCTION).ifPresent(e -> map.add("members", e));
+    Optional.ofNullable(getSort()).ifPresent(e -> map.add("sort", e.toString()));
+    Optional.ofNullable(getPage()).ifPresent(e -> map.add("page", e.toString()));
     return map;
   }
 
