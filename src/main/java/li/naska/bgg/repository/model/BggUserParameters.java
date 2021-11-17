@@ -11,7 +11,7 @@ import java.util.Optional;
 @Data
 public class BggUserParameters {
 
-  private final String username;
+  private String username;
 
   private Boolean buddies;
 
@@ -27,13 +27,13 @@ public class BggUserParameters {
 
   public MultiValueMap<String, String> toMultiValueMap() {
     MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-    map.set("name", getUsername());
-    Optional.ofNullable(getBuddies()).map(ToStringParamFunctions.BGG_BOOLEAN_FUNCTION).ifPresent(e -> map.set("buddies", e));
-    Optional.ofNullable(getGuilds()).map(ToStringParamFunctions.BGG_BOOLEAN_FUNCTION).ifPresent(e -> map.set("guilds", e));
-    Optional.ofNullable(getHot()).map(ToStringParamFunctions.BGG_BOOLEAN_FUNCTION).ifPresent(e -> map.set("hot", e));
-    Optional.ofNullable(getTop()).map(ToStringParamFunctions.BGG_BOOLEAN_FUNCTION).ifPresent(e -> map.set("top", e));
-    Optional.ofNullable(getDomain()).map(ToStringParamFunctions.BGG_DOMAIN_TYPE_FUNCTION).ifPresent(e -> map.set("domain", e));
-    Optional.ofNullable(getPage()).map(Object::toString).ifPresent(e -> map.set("page", e));
+    Optional.ofNullable(getUsername()).ifPresent(e -> map.add("name", e));
+    Optional.ofNullable(getBuddies()).map(ToStringParamFunctions.BGG_BOOLEAN_FUNCTION).ifPresent(e -> map.add("buddies", e));
+    Optional.ofNullable(getGuilds()).map(ToStringParamFunctions.BGG_BOOLEAN_FUNCTION).ifPresent(e -> map.add("guilds", e));
+    Optional.ofNullable(getHot()).map(ToStringParamFunctions.BGG_BOOLEAN_FUNCTION).ifPresent(e -> map.add("hot", e));
+    Optional.ofNullable(getTop()).map(ToStringParamFunctions.BGG_BOOLEAN_FUNCTION).ifPresent(e -> map.add("top", e));
+    Optional.ofNullable(getDomain()).ifPresent(e -> map.add("domain", e.toString()));
+    Optional.ofNullable(getPage()).ifPresent(e -> map.add("page", e.toString()));
     return map;
   }
 

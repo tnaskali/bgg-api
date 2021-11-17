@@ -1,15 +1,15 @@
 package li.naska.bgg.repository;
 
-import com.boardgamegeek.collection.Collection;
 import com.boardgamegeek.enums.ObjectSubtype;
 import li.naska.bgg.exception.BggResponseNotReadyException;
-import li.naska.bgg.repository.model.BggUserItemsParameters;
+import li.naska.bgg.repository.model.BggCollectionParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
 
@@ -27,10 +27,10 @@ public class BggCollectionRepository {
     this.webClient = builder.baseUrl(collectionEndpoint).build();
   }
 
-  public Mono<Collection> getItems(BggUserItemsParameters params) {
+  public Mono<String> getCollection(BggCollectionParameters params) {
     // handle subtype bug in the BBG XML API
-    if (params.getSubtype() == null || params.getSubtype().equals(ObjectSubtype.BOARDGAME)) {
-      params.setExcludesubtype(ObjectSubtype.BOARDGAMEEXPANSION);
+    if (params.getSubtype() == null || params.getSubtype().equals(ObjectSubtype.boardgame)) {
+      params.setExcludesubtype(ObjectSubtype.boardgameexpansion);
     }
 
     return webClient
@@ -45,10 +45,15 @@ public class BggCollectionRepository {
             // BGG might queue the request
             status -> status == HttpStatus.ACCEPTED,
             response -> Mono.error(new BggResponseNotReadyException()))
-        .bodyToMono(Collection.class)
+        .bodyToMono(String.class)
         .retryWhen(
             Retry.backoff(6, Duration.ofSeconds(5))
-                .filter(throwable -> throwable instanceof BggResponseNotReadyException));
+                .filter(throwable -> throwable instanceof BggResponseNotReadyException))
+        .doOnNext(body -> {
+          if (body.equals("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\" ?>\n<errors>\n\t<error>\n\t\t<message>Invalid username specified</message>\n\t</error>\n</errors>")) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Collection not found");
+          }
+        });
   }
 
 }

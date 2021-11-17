@@ -8,21 +8,22 @@ import org.springframework.util.MultiValueMap;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Data
 public class BggSearchParameters {
 
-  private final String query;
+  private String query;
 
-  private List<ObjectSubtype> types;
+  private List<ObjectSubtype> type;
 
   private Boolean exact;
 
   public MultiValueMap<String, String> toMultiValueMap() {
     MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-    map.set("query", getQuery());
-    Optional.ofNullable(getTypes()).map(ToStringParamFunctions.BGG_OBJECT_SUBTYPE_LIST_FUNCTION).ifPresent(e -> map.set("type", e));
-    Optional.ofNullable(getExact()).map(ToStringParamFunctions.BGG_BOOLEAN_FUNCTION).ifPresent(e -> map.set("exact", e));
+    Optional.ofNullable(getQuery()).ifPresent(e -> map.add("query", e));
+    Optional.ofNullable(getType()).ifPresent(l -> map.add("type", l.stream().map(Object::toString).collect(Collectors.joining(","))));
+    Optional.ofNullable(getExact()).map(ToStringParamFunctions.BGG_BOOLEAN_FUNCTION).ifPresent(e -> map.add("exact", e));
     return map;
   }
 

@@ -1,5 +1,6 @@
 package li.naska.bgg;
 
+import io.swagger.v3.core.util.PrimitiveType;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -15,14 +16,23 @@ import org.springframework.context.annotation.Bean;
 public class BggApiApplication {
 
   public static void main(String[] args) {
+    PrimitiveType.customClasses().put("java.time.LocalTime", PrimitiveType.PARTIAL_TIME);
     SpringApplication.run(BggApiApplication.class, args);
   }
 
   @Bean
-  public GroupedOpenApi publicApi() {
+  public GroupedOpenApi bggApiV0() {
     return GroupedOpenApi.builder()
-        .group("bgg-api")
-        .pathsToExclude("/error")
+        .group("v0")
+        .pathsToMatch("/api/v0/**")
+        .build();
+  }
+
+  @Bean
+  public GroupedOpenApi bggApiV1() {
+    return GroupedOpenApi.builder()
+        .group("v1")
+        .pathsToMatch("/api/v1/**")
         .build();
   }
 
