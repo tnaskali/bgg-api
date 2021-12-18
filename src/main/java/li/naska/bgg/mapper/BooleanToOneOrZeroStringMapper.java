@@ -4,7 +4,9 @@ import org.mapstruct.Mapper;
 
 import java.util.Optional;
 
-@Mapper(componentModel = "spring")
+import static org.mapstruct.MappingConstants.ComponentModel;
+
+@Mapper(componentModel = ComponentModel.SPRING)
 public class BooleanToOneOrZeroStringMapper {
 
   public String asString(Boolean booleanValue) {

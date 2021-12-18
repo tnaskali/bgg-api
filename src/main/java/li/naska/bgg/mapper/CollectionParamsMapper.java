@@ -9,8 +9,10 @@ import org.mapstruct.ReportingPolicy;
 
 import java.time.format.DateTimeFormatter;
 
+import static org.mapstruct.MappingConstants.ComponentModel;
+
 @Mapper(
-    componentModel = "spring",
+    componentModel = ComponentModel.SPRING,
     unmappedTargetPolicy = ReportingPolicy.ERROR,
     unmappedSourcePolicy = ReportingPolicy.ERROR,
     uses = {
@@ -23,7 +25,7 @@ public interface CollectionParamsMapper {
   static String getModifiedsince(CollectionParams s) {
     if (s.getModifiedsincedate() != null) {
       if (s.getModifiedsincetime() != null) {
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd+HH:mm:ss").format(s.getModifiedsincedate().atTime(s.getModifiedsincetime()));
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(s.getModifiedsincedate().atTime(s.getModifiedsincetime()));
       } else {
         return DateTimeFormatter.ofPattern("yyyy-MM-dd").format(s.getModifiedsincedate());
       }

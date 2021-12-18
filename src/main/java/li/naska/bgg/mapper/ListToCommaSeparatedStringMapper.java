@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring")
+import static org.mapstruct.MappingConstants.ComponentModel;
+
+@Mapper(componentModel = ComponentModel.SPRING)
 public class ListToCommaSeparatedStringMapper {
 
   public String asString(List<?> listValue) {

@@ -6,8 +6,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
+import static org.mapstruct.MappingConstants.ComponentModel;
+
 @Mapper(
-    componentModel = "spring",
+    componentModel = ComponentModel.SPRING,
     unmappedTargetPolicy = ReportingPolicy.ERROR,
     unmappedSourcePolicy = ReportingPolicy.ERROR,
     uses = {

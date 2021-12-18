@@ -5,8 +5,10 @@ import li.naska.bgg.resource.v3.model.FamiliesParams;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
+import static org.mapstruct.MappingConstants.ComponentModel;
+
 @Mapper(
-    componentModel = "spring",
+    componentModel = ComponentModel.SPRING,
     unmappedTargetPolicy = ReportingPolicy.ERROR,
     unmappedSourcePolicy = ReportingPolicy.ERROR,
     uses = {

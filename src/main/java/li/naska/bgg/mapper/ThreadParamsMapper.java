@@ -9,8 +9,10 @@ import org.mapstruct.ReportingPolicy;
 
 import java.time.format.DateTimeFormatter;
 
+import static org.mapstruct.MappingConstants.ComponentModel;
+
 @Mapper(
-    componentModel = "spring",
+    componentModel = ComponentModel.SPRING,
     unmappedTargetPolicy = ReportingPolicy.ERROR,
     unmappedSourcePolicy = ReportingPolicy.ERROR
 )
@@ -19,7 +21,7 @@ public interface ThreadParamsMapper {
   static String getMinarticledate(ThreadParams s) {
     if (s.getMinarticledate() != null) {
       if (s.getMinarticletime() != null) {
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd+HH:mm:ss").format(s.getMinarticledate().atTime(s.getMinarticletime()));
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(s.getMinarticledate().atTime(s.getMinarticletime()));
       } else {
         return DateTimeFormatter.ofPattern("yyyy-MM-dd").format(s.getMinarticledate());
       }
