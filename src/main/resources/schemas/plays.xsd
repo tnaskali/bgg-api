@@ -5,9 +5,13 @@
            xmlns:plays="http://www.boardgamegeek.com/plays"
            targetNamespace="http://www.boardgamegeek.com/plays">
 
+  <xs:complexType name="subtypeValue">
+    <xs:attribute name="value" type="enums:itemSubtype" use="required"/>
+  </xs:complexType>
+
   <xs:complexType name="subtype">
     <xs:sequence>
-      <xs:element name="subtype" type="enums:objectSubtypeValue" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="subtype" type="plays:subtypeValue" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -16,7 +20,7 @@
       <xs:element name="subtypes" type="plays:subtype" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="objecttype" type="enums:objectType" use="required"/>
+    <xs:attribute name="objecttype" type="enums:itemType" use="required"/>
     <xs:attribute name="objectid" type="xs:integer" use="required"/>
   </xs:complexType>
 

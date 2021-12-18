@@ -1,8 +1,8 @@
 package li.naska.bgg.repository;
 
-import com.boardgamegeek.enums.ObjectSubtype;
 import li.naska.bgg.exception.BggResponseNotReadyException;
-import li.naska.bgg.repository.model.BggCollectionParameters;
+import li.naska.bgg.repository.model.BggCollectionQueryParams;
+import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -16,6 +16,24 @@ import reactor.util.retry.Retry;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 
+/**
+ * Collection
+ * <p>
+ * Request details about a user's collection.
+ * <br/>
+ * Note that you should check the response status code... if it's 202 (vs. 200) then it indicates BGG has queued your
+ * request and you need to keep retrying (hopefully w/some delay between tries) until the status is not 202. More info
+ * at <a href="https://boardgamegeek.com/thread/1188687/export-collections-has-been-updated-xmlapi-develop">Export
+ * collections has been updated (XMLAPI developers read this)</a>
+ * <br/>
+ * Note that the default (or using subtype=boardgame) returns both boardgame and boardgameexpansion's in your
+ * collection... but incorrectly gives subtype=boardgame for the expansions. Workaround is to use
+ * excludesubtype=boardgameexpansion and make a 2nd call asking for subtype=boardgameexpansion
+ * <p>
+ * Base URI: /xmlapi2/collection?parameters
+ *
+ * @see <a href="https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc11">BGG_XML_API2</a>
+ */
 @Repository
 public class BggCollectionRepository {
 
@@ -27,16 +45,11 @@ public class BggCollectionRepository {
     this.webClient = builder.baseUrl(collectionEndpoint).build();
   }
 
-  public Mono<String> getCollection(BggCollectionParameters params) {
-    // handle subtype bug in the BBG XML API
-    if (params.getSubtype() == null || params.getSubtype().equals(ObjectSubtype.boardgame)) {
-      params.setExcludesubtype(ObjectSubtype.boardgameexpansion);
-    }
-
+  public Mono<String> getCollection(BggCollectionQueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
-            .queryParams(params.toMultiValueMap())
+            .queryParams(QueryParameters.fromPojo(params))
             .build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)

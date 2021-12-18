@@ -1,22 +1,26 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.geekplay.Play;
 import com.boardgamegeek.plays.Plays;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import li.naska.bgg.repository.BggGeekplayRepository;
+import li.naska.bgg.mapper.GeekplayParamsMapper;
+import li.naska.bgg.mapper.PlaysParamsMapper;
+import li.naska.bgg.repository.BggGeekplaysRepository;
 import li.naska.bgg.repository.BggPlaysRepository;
-import li.naska.bgg.repository.model.BggPlaysParameters;
+import li.naska.bgg.repository.model.BggGeekplayRequestBody;
+import li.naska.bgg.repository.model.BggGeekplayResponseBody;
+import li.naska.bgg.repository.model.BggPlaysQueryParams;
+import li.naska.bgg.resource.v3.model.Play;
+import li.naska.bgg.resource.v3.model.PlaysParams;
+import li.naska.bgg.security.BggAuthenticationToken;
 import li.naska.bgg.util.XmlProcessor;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
-import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class PlaysService {
@@ -25,28 +29,74 @@ public class PlaysService {
   private BggPlaysRepository playsRepository;
 
   @Autowired
-  private BggGeekplayRepository geekplayRepository;
+  private PlaysParamsMapper playsParamsMapper;
 
-  public Mono<Plays> getPlays(BggPlaysParameters parameters) {
-    return playsRepository.getPlays(parameters)
+  @Autowired
+  private BggGeekplaysRepository geekplaysRepository;
+
+  @Autowired
+  private GeekplayParamsMapper geekplayParamsMapper;
+
+  private Mono<BggAuthenticationToken> authentication() {
+    return ReactiveSecurityContextHolder.getContext().map(
+        context -> (BggAuthenticationToken) context.getAuthentication()
+    );
+  }
+
+  public Mono<Plays> getPlays(PlaysParams params) {
+    BggPlaysQueryParams bggParams = playsParamsMapper.toBggModel(params);
+    return playsRepository.getPlays(bggParams)
         .map(xml -> new XmlProcessor(xml).toJavaObject(Plays.class));
   }
 
   @SneakyThrows
-  public Mono<Map<String, Object>> savePlay(String username, Integer id, Play play) {
-    return geekplayRepository.savePlay(username, id, play)
-        .map(body -> {
-          try {
-            return new ObjectMapper().readValue(body, new TypeReference<Map<String, Object>>() {
-            });
-          } catch (JsonProcessingException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
-          }
+  public Mono<BggGeekplayResponseBody> createPlay(String username, Play play) {
+    return authentication()
+        .flatMap(authn -> authn.getPrincipal().equals(username)
+            ? Mono.just(authn)
+            : Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Wrong user")))
+        .flatMap(authn -> {
+          BggGeekplayRequestBody parameters = geekplayParamsMapper.toBggModel(play);
+          parameters.setAction("save");
+          parameters.setAjax(1);
+          String cookie = authn.buildBggRequestHeader();
+          return geekplaysRepository.updateGeekplay(cookie, parameters);
         });
   }
 
-  public Mono<String> deletePlay(String username, Integer playId) {
-    return geekplayRepository.deletePlay(username, playId);
+  @SneakyThrows
+  public Mono<BggGeekplayResponseBody> updatePlay(String username, Integer id, Play play) {
+    if (!Objects.equals(id, play.getId())) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Play ID mismatch");
+    }
+    return authentication()
+        .flatMap(authn -> authn.getPrincipal().equals(username)
+            ? Mono.just(authn)
+            : Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Wrong user")))
+        .flatMap(authn -> {
+          BggGeekplayRequestBody parameters = geekplayParamsMapper.toBggModel(play);
+          parameters.setAction("save");
+          parameters.setAjax(1);
+          parameters.setVersion(2);
+          String cookie = authn.buildBggRequestHeader();
+          return geekplaysRepository.updateGeekplay(cookie, parameters);
+        });
+  }
+
+  public Mono<BggGeekplayResponseBody> deletePlay(String username, Integer id) {
+    return authentication()
+        .flatMap(authn -> authn.getPrincipal().equals(username)
+            ? Mono.just(authn)
+            : Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Wrong user")))
+        .flatMap(authn -> {
+          BggGeekplayRequestBody parameters = new BggGeekplayRequestBody();
+          parameters.setPlayid(id);
+          parameters.setAction("delete");
+          parameters.setAjax(1);
+          parameters.setFinalize(1);
+          String cookie = authn.buildBggRequestHeader();
+          return geekplaysRepository.updateGeekplay(cookie, parameters);
+        });
   }
 
 }

@@ -1,15 +1,11 @@
 bgg:
   web:
     baseurl-bgs: https://www.boardgamegeek.com
-    baseurl-rpgs: https://www.rpggeek.com
-    baseurl-vgs: https://www.videogamegeek.com
   api:
     v1:
       baseurl-bgs: ${bgg.web.baseurl-bgs}/xmlapi
     v2:
       baseurl-bgs: ${bgg.web.baseurl-bgs}/xmlapi2
-      baseurl-rpgs: ${bgg.web.baseurl-rpgs}/xmlapi2
-      baseurl-vgs: ${bgg.web.baseurl-vgs}/xmlapi2
   endpoints:
     collection: ${bgg.api.v2.baseurl-bgs}/collection
     family: ${bgg.api.v2.baseurl-bgs}/family
@@ -19,7 +15,6 @@ bgg:
     guild: ${bgg.api.v2.baseurl-bgs}/guild
     login: ${bgg.web.baseurl-bgs}/login/api/v1
     hot: ${bgg.api.v2.baseurl-bgs}/hot
-    play: ${bgg.web.baseurl-bgs}/play/details/{id}
     plays: ${bgg.api.v2.baseurl-bgs}/plays
     geekplay: ${bgg.web.baseurl-bgs}/geekplay.php
     search: ${bgg.api.v2.baseurl-bgs}/search
@@ -27,7 +22,7 @@ bgg:
     thread: ${bgg.api.v2.baseurl-bgs}/thread
     user: ${bgg.api.v2.baseurl-bgs}/user
 
-debug: true
+debug: false
 
 management:
   server:
@@ -37,5 +32,7 @@ server:
   port: 8088
 
 spring:
+  codec:
+    max-in-memory-size: 16MB
   webflux:
     base-path: /bgg-api

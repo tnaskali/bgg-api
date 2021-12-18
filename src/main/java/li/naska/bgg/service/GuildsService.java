@@ -1,8 +1,10 @@
 package li.naska.bgg.service;
 
 import com.boardgamegeek.guild.Guild;
-import li.naska.bgg.repository.BggGuildRepository;
-import li.naska.bgg.repository.model.BggGuildParameters;
+import li.naska.bgg.mapper.GuildsParamsMapper;
+import li.naska.bgg.repository.BggGuildsRepository;
+import li.naska.bgg.repository.model.BggGuildQueryParams;
+import li.naska.bgg.resource.v3.model.GuildParams;
 import li.naska.bgg.util.XmlProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +14,14 @@ import reactor.core.publisher.Mono;
 public class GuildsService {
 
   @Autowired
-  private BggGuildRepository guildRepository;
+  private BggGuildsRepository guildsRepository;
 
-  public Mono<Guild> getGuild(BggGuildParameters parameters) {
-    return guildRepository.getGuild(parameters)
+  @Autowired
+  private GuildsParamsMapper guildsParamsMapper;
+
+  public Mono<Guild> getGuild(GuildParams params) {
+    BggGuildQueryParams bggParams = guildsParamsMapper.toBggModel(params);
+    return guildsRepository.getGuild(bggParams)
         .map(xml -> new XmlProcessor(xml).toJavaObject(Guild.class));
   }
 

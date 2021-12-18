@@ -12,7 +12,7 @@
   </xs:complexType>
 
   <xs:complexType name="link">
-    <xs:attribute name="type" type="enums:linkType" use="required"/>
+    <xs:attribute name="type" type="enums:versionLinkType" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="value" type="xs:string" use="required"/>
     <xs:attribute name="inbound" type="xs:boolean" use="required"/>
@@ -105,9 +105,9 @@
       <xs:element name="version" type="collection:version" minOccurs="0">
       </xs:element>
     </xs:sequence>
-    <xs:attribute name="objecttype" type="enums:objectType" use="required"/>
+    <xs:attribute name="objecttype" type="enums:itemType" use="required"/>
     <xs:attribute name="objectid" type="xs:integer" use="required"/>
-    <xs:attribute name="subtype" type="enums:objectSubtype" use="required"/>
+    <xs:attribute name="subtype" type="enums:collectionItemSubtype" use="required"/>
     <xs:attribute name="collid" type="xs:integer" use="required"/>
   </xs:complexType>
 
