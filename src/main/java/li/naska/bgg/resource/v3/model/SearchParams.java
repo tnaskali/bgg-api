@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
-public class ResultsParams {
+public class SearchParams {
 
   @NotNull
   private String query;

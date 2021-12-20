@@ -3,6 +3,7 @@ package li.naska.bgg.mapper;
 import li.naska.bgg.repository.model.BggGuildQueryParams;
 import li.naska.bgg.resource.v3.model.GuildParams;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 import static org.mapstruct.MappingConstants.ComponentModel;
@@ -17,6 +18,7 @@ import static org.mapstruct.MappingConstants.ComponentModel;
 )
 public interface GuildsParamsMapper {
 
+  @Mapping(target = "id", ignore = true)
   BggGuildQueryParams toBggModel(GuildParams source);
 
 }

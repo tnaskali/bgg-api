@@ -3,14 +3,16 @@ package li.naska.bgg.repository.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BggThingsQueryParams {
+
+  @AssertTrue(message = "only one of comments and ratingcomments is allowed")
+  private boolean isCommentsValid() {
+    return !("1".equals(comments) && "1".equals(ratingcomments));
+  }
 
   /**
    * id=NNN

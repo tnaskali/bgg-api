@@ -1,8 +1,9 @@
 package li.naska.bgg.mapper;
 
-import li.naska.bgg.repository.model.BggSearchQueryParams;
-import li.naska.bgg.resource.v3.model.ResultsParams;
+import li.naska.bgg.repository.model.BggFamiliesQueryParams;
+import li.naska.bgg.resource.v3.model.FamilyParams;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 import static org.mapstruct.MappingConstants.ComponentModel;
@@ -12,12 +13,12 @@ import static org.mapstruct.MappingConstants.ComponentModel;
     unmappedTargetPolicy = ReportingPolicy.ERROR,
     unmappedSourcePolicy = ReportingPolicy.ERROR,
     uses = {
-        BooleanToOneOrZeroStringMapper.class,
         ListToCommaSeparatedStringMapper.class
     }
 )
-public interface ResultsParamsMapper {
+public interface FamilyParamsMapper {
 
-  BggSearchQueryParams toBggModel(ResultsParams source);
+  @Mapping(target = "id", ignore = true)
+  BggFamiliesQueryParams toBggModel(FamilyParams source);
 
 }

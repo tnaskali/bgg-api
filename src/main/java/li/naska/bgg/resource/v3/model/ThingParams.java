@@ -3,16 +3,12 @@ package li.naska.bgg.resource.v3.model;
 import com.boardgamegeek.enums.ThingType;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
-public class ThingsParams {
+public class ThingParams {
 
-  @NotNull
-  private List<Integer> ids;
-
-  private List<ThingType> types;
+  private List<ThingType> type;
 
   private Boolean versions;
 

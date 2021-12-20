@@ -36,3 +36,7 @@ spring:
     max-in-memory-size: 16MB
   webflux:
     base-path: /bgg-api
+
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true

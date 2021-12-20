@@ -19,8 +19,9 @@ public class GuildsService {
   @Autowired
   private GuildsParamsMapper guildsParamsMapper;
 
-  public Mono<Guild> getGuild(GuildParams params) {
+  public Mono<Guild> getGuild(Integer id, GuildParams params) {
     BggGuildQueryParams bggParams = guildsParamsMapper.toBggModel(params);
+    bggParams.setId(id);
     return guildsRepository.getGuild(bggParams)
         .map(xml -> new XmlProcessor(xml).toJavaObject(Guild.class));
   }

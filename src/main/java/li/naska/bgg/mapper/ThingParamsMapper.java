@@ -1,7 +1,7 @@
 package li.naska.bgg.mapper;
 
 import li.naska.bgg.repository.model.BggThingsQueryParams;
-import li.naska.bgg.resource.v3.model.ThingsParams;
+import li.naska.bgg.resource.v3.model.ThingParams;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
@@ -17,13 +17,12 @@ import static org.mapstruct.MappingConstants.ComponentModel;
         ListToCommaSeparatedStringMapper.class
     }
 )
-public interface ThingsParamsMapper {
+public interface ThingParamsMapper {
 
-  @Mapping(target = "id", source = "ids")
-  @Mapping(target = "type", source = "types")
+  @Mapping(target = "id", ignore = true)
   @Mapping(target = "historical", ignore = true)
   @Mapping(target = "from", ignore = true)
   @Mapping(target = "to", ignore = true)
-  BggThingsQueryParams toBggModel(ThingsParams source);
+  BggThingsQueryParams toBggModel(ThingParams source);
 
 }

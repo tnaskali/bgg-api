@@ -10,6 +10,9 @@
 
   <jaxb:globalBindings>
     <jaxb:serializable uid="1"/>
+    <xjc:javaType name="java.lang.Integer"
+                  xmlType="xs:integer"
+                  adapter="li.naska.bgg.util.IntegerToIntegerAdapter"/>
     <xjc:javaType name="java.time.ZonedDateTime"
                   xmlType="xs:dateTime"
                   adapter="li.naska.bgg.util.DateTimeToZonedDateTimeAdapter"/>

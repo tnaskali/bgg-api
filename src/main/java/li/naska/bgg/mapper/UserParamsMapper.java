@@ -13,13 +13,12 @@ import static org.mapstruct.MappingConstants.ComponentModel;
     unmappedTargetPolicy = ReportingPolicy.ERROR,
     unmappedSourcePolicy = ReportingPolicy.ERROR,
     uses = {
-        BooleanToOneOrZeroStringMapper.class,
-        ListToCommaSeparatedStringMapper.class
+        BooleanToOneOrZeroStringMapper.class
     }
 )
 public interface UserParamsMapper {
 
-  @Mapping(target = "name", source = "username")
+  @Mapping(target = "name", ignore = true)
   BggUserQueryParams toBggModel(UserParams source);
 
 }

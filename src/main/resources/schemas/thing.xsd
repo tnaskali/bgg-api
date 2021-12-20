@@ -15,7 +15,14 @@
     <xs:attribute name="type" type="enums:thingLinkType" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="value" type="xs:string" use="required"/>
-    <xs:attribute name="inbound" type="xs:string" use="required"/>
+    <xs:attribute name="inbound" type="xs:boolean"/>
+  </xs:complexType>
+
+  <xs:complexType name="versionLink">
+    <xs:attribute name="type" type="enums:versionLinkType" use="required"/>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="inbound" type="xs:boolean"/>
   </xs:complexType>
 
   <xs:complexType name="result">
@@ -33,11 +40,11 @@
 
   <xs:complexType name="poll">
     <xs:sequence>
-      <xs:element name="results" type="thing:results" minOccurs="0"/>
+      <xs:element name="results" type="thing:results" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="title" type="xs:string" use="required"/>
-    <xs:attribute name="totalvotes" type="xs:string" use="required"/>
+    <xs:attribute name="totalvotes" type="xs:integer" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="video">
@@ -48,7 +55,7 @@
     <xs:attribute name="link" type="xs:anyURI" use="required"/>
     <xs:attribute name="username" type="xs:string" use="required"/>
     <xs:attribute name="userid" type="xs:integer" use="required"/>
-    <xs:attribute name="postdate" type="common:localDateTime" use="required"/>
+    <xs:attribute name="postdate" type="common:zonedDateTime" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="version">
@@ -56,8 +63,8 @@
       <xs:element name="thumbnail" type="xs:anyURI"/>
       <xs:element name="image" type="xs:anyURI"/>
       <xs:element name="name" type="thing:name"/>
-      <xs:element name="yearpublished" type="common:stringValue"/>
-      <xs:element name="link" type="thing:link"/>
+      <xs:element name="yearpublished" type="common:integerValue"/>
+      <xs:element name="link" type="thing:versionLink"/>
       <xs:element name="productcode" type="common:stringValue"/>
       <xs:element name="width" type="common:decimalValue"/>
       <xs:element name="length" type="common:decimalValue"/>
@@ -79,8 +86,8 @@
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="friendlyname" type="xs:string" use="required"/>
-    <xs:attribute name="value" type="xs:string" use="required"/>
-    <xs:attribute name="bayesaverage" type="xs:string" use="required"/>
+    <xs:attribute name="value" type="xs:integer" use="required"/>
+    <xs:attribute name="bayesaverage" type="xs:decimal" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="ranks">
@@ -120,7 +127,7 @@
 
   <xs:complexType name="listing">
     <xs:sequence>
-      <xs:element name="listdate" type="common:stringValue"/>
+      <xs:element name="listdate" type="common:zonedDateTimeValue"/>
       <xs:element name="price" type="thing:listingPrice"/>
       <xs:element name="condition" type="common:stringValue"/>
       <xs:element name="notes" type="common:stringValue"/>
@@ -168,16 +175,18 @@
       <xs:element name="image" type="xs:anyURI"/>
       <xs:element name="name" type="thing:name"/>
       <xs:element name="description" type="xs:string"/>
-      <xs:element name="yearpublished" type="common:stringValue"/>
+      <xs:element name="yearpublished" type="common:integerValue"/>
       <xs:element name="datepublished" type="common:stringValue"/>
-      <xs:element name="releasedate" type="common:localDateValue"/>
+      <xs:element name="issueindex" type="common:integerValue"/>
       <xs:element name="minplayers" type="common:integerValue"/>
       <xs:element name="maxplayers" type="common:integerValue"/>
+      <xs:element name="releasedate" type="common:localDateValue"/>
       <xs:element name="link" type="thing:link"/>
       <xs:element name="seriescode" type="common:stringValue"/>
-      <xs:element name="issueindex" type="common:stringValue"/>
       <xs:element name="poll" type="thing:poll"/>
-      <xs:element name="playingtime" type="common:stringValue"/>
+      <xs:element name="playingtime" type="common:integerValue"/>
+      <xs:element name="minplaytime" type="common:integerValue"/>
+      <xs:element name="maxplaytime" type="common:integerValue"/>
       <xs:element name="minage" type="common:integerValue"/>
       <xs:element name="videos" type="thing:videos"/>
       <xs:element name="versions" type="thing:versions"/>

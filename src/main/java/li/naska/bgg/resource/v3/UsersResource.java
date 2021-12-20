@@ -8,10 +8,10 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import li.naska.bgg.repository.model.BggGeekplayResponseBody;
 import li.naska.bgg.resource.v3.model.CollectionParams;
 import li.naska.bgg.resource.v3.model.Play;
-import li.naska.bgg.resource.v3.model.PlaysParams;
 import li.naska.bgg.resource.v3.model.UserParams;
-import li.naska.bgg.service.ItemsService;
+import li.naska.bgg.resource.v3.model.UserPlaysParams;
 import li.naska.bgg.service.PlaysService;
+import li.naska.bgg.service.ThingsService;
 import li.naska.bgg.service.UsersService;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,50 +35,53 @@ public class UsersResource {
   private UsersService userService;
 
   @Autowired
-  private ItemsService itemsService;
+  private ThingsService thingsService;
 
   @GetMapping(value = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<User> getUser(@ParameterObject @Validated UserParams parameters) {
-    return userService.getUser(parameters);
+  public Mono<User> getUser(
+      @NotNull @PathVariable String username,
+      @ParameterObject @Validated UserParams parameters) {
+    return userService.getUser(username, parameters);
   }
 
   @GetMapping(value = "/{username}/plays", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<Plays> getPlays(@ParameterObject @Validated PlaysParams parameters) {
-    return playsService.getPlays(parameters);
+  public Mono<Plays> getPlays(
+      @NotNull @PathVariable String username,
+      @ParameterObject @Validated UserPlaysParams parameters) {
+    return playsService.getUserPlays(username, parameters);
   }
 
   @PostMapping(value = "/{username}/plays", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.CREATED)
   @Operation(security = @SecurityRequirement(name = "basicAuth"))
   public Mono<BggGeekplayResponseBody> createPlay(
-      @NotNull @PathVariable(value = "username") String username,
-      @ParameterObject @Validated @RequestBody Play parameters
-  ) {
-    return playsService.createPlay(username, parameters);
+      @NotNull @PathVariable String username,
+      @ParameterObject @Validated @RequestBody Play requestBody) {
+    return playsService.createPlay(username, requestBody);
   }
 
   @PutMapping(value = "/{username}/plays/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(security = @SecurityRequirement(name = "basicAuth"))
   public Mono<BggGeekplayResponseBody> updatePlay(
-      @NotNull @PathVariable(value = "username") String username,
-      @NotNull @PathVariable(value = "id") Integer id,
-      @ParameterObject @Validated @RequestBody Play parameters
-  ) {
-    return playsService.updatePlay(username, id, parameters);
+      @NotNull @PathVariable String username,
+      @NotNull @PathVariable Integer id,
+      @ParameterObject @Validated @RequestBody Play requestBody) {
+    return playsService.updatePlay(username, id, requestBody);
   }
 
   @DeleteMapping(value = "/{username}/plays/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(security = @SecurityRequirement(name = "basicAuth"))
   public Mono<BggGeekplayResponseBody> deletePlay(
-      @NotNull @PathVariable(value = "username") String username,
-      @NotNull @PathVariable(value = "id") Integer id
-  ) {
+      @NotNull @PathVariable String username,
+      @NotNull @PathVariable Integer id) {
     return playsService.deletePlay(username, id);
   }
 
-  @GetMapping(value = "/{username}/items", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<Collection> getItems(@ParameterObject @Validated CollectionParams parameters) {
-    return itemsService.getCollection(parameters);
+  @GetMapping(value = "/{username}/things", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<Collection> getThings(
+      @NotNull @PathVariable String username,
+      @ParameterObject @Validated CollectionParams queryParameters) {
+    return thingsService.getThings(username, queryParameters);
   }
 
 }

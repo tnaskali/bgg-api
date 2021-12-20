@@ -78,6 +78,10 @@
     <xs:attribute name="value" type="common:localDateTime" use="required"/>
   </xs:complexType>
 
+  <xs:complexType name="zonedDateTimeValue">
+    <xs:attribute name="value" type="common:zonedDateTime" use="required"/>
+  </xs:complexType>
+
   <xs:complexType name="sortIndexString">
     <xs:simpleContent>
       <xs:extension base="xs:string">

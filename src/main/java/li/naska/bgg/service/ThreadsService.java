@@ -19,8 +19,9 @@ public class ThreadsService {
   @Autowired
   private ThreadParamsMapper threadParamsMapper;
 
-  public Mono<Thread> getThread(ThreadParams params) {
+  public Mono<Thread> getThread(Integer id, ThreadParams params) {
     BggThreadQueryParams bggParams = threadParamsMapper.toBggModel(params);
+    bggParams.setId(id);
     return threadsRepository.getThread(bggParams)
         .map(xml -> new XmlProcessor(xml).toJavaObject(Thread.class));
   }

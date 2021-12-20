@@ -22,12 +22,12 @@ import static org.mapstruct.MappingConstants.ComponentModel;
 )
 public interface CollectionParamsMapper {
 
-  static String getModifiedsince(CollectionParams s) {
-    if (s.getModifiedsincedate() != null) {
-      if (s.getModifiedsincetime() != null) {
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(s.getModifiedsincedate().atTime(s.getModifiedsincetime()));
+  default String getModifiedsince(CollectionParams source) {
+    if (source.getModifiedsincedate() != null) {
+      if (source.getModifiedsincetime() != null) {
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(source.getModifiedsincedate().atTime(source.getModifiedsincetime()));
       } else {
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd").format(s.getModifiedsincedate());
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd").format(source.getModifiedsincedate());
       }
     } else {
       return null;
@@ -35,10 +35,12 @@ public interface CollectionParamsMapper {
   }
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"modifiedsincedate", "modifiedsincetime"})
+  @Mapping(target = "username", ignore = true)
   @Mapping(target = "excludesubtype", ignore = true)
+  @Mapping(target = "id", source = "ids")
   @Mapping(target = "rating", source = "maxrating")
   @Mapping(target = "bggrating", source = "maxbggrating")
-  @Mapping(target = "modifiedsince", expression = "java(CollectionParamsMapper.getModifiedsince(source))")
+  @Mapping(target = "modifiedsince", expression = "java(getModifiedsince(source))")
   BggCollectionQueryParams toBggModel(CollectionParams source);
 
 }

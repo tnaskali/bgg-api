@@ -18,7 +18,7 @@ import static org.mapstruct.MappingConstants.ComponentModel;
 )
 public interface ThreadParamsMapper {
 
-  static String getMinarticledate(ThreadParams s) {
+  default String getMinarticledate(ThreadParams s) {
     if (s.getMinarticledate() != null) {
       if (s.getMinarticletime() != null) {
         return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(s.getMinarticledate().atTime(s.getMinarticletime()));
@@ -31,8 +31,9 @@ public interface ThreadParamsMapper {
   }
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"minarticledate", "minarticletime"})
+  @Mapping(target = "id", ignore = true)
   @Mapping(target = "username", ignore = true)
-  @Mapping(target = "minarticledate", expression = "java(ThreadParamsMapper.getMinarticledate(source))")
+  @Mapping(target = "minarticledate", expression = "java(getMinarticledate(source))")
   BggThreadQueryParams toBggModel(ThreadParams source);
 
 }

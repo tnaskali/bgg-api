@@ -30,14 +30,16 @@ public class ForumsService {
   @Autowired
   private ForumListsParamsMapper forumListsParamsMapper;
 
-  public Mono<Forum> getForum(ForumParams params) {
+  public Mono<Forum> getForum(Integer id, ForumParams params) {
     BggForumQueryParams bggParams = forumsParamsMapper.toBggModel(params);
+    bggParams.setId(id);
     return forumsRepository.getForum(bggParams)
         .map(xml -> new XmlProcessor(xml).toJavaObject(Forum.class));
   }
 
-  public Mono<Forums> getForums(ForumsParams params) {
+  public Mono<Forums> getForums(Integer id, ForumsParams params) {
     BggForumsQueryParams bggParams = forumListsParamsMapper.toBggModel(params);
+    bggParams.setId(id);
     return forumListsRepository.getForums(bggParams)
         .map(xml -> new XmlProcessor(xml).toJavaObject(Forums.class));
   }

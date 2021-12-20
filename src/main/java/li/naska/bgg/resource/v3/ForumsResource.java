@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
+
+import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("/api/v3/forums")
@@ -23,8 +26,10 @@ public class ForumsResource {
       value = "/{id}/threads",
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<Forum> getThreads(@ParameterObject @Validated ForumParams parameters) {
-    return forumsService.getForum(parameters);
+  public Mono<Forum> getThreads(
+      @NotNull @PathVariable Integer id,
+      @ParameterObject @Validated ForumParams parameters) {
+    return forumsService.getForum(id, parameters);
   }
 
 }

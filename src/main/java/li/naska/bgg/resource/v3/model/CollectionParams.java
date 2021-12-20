@@ -4,7 +4,6 @@ import com.boardgamegeek.enums.CollectionItemSubtype;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -12,14 +11,11 @@ import java.util.List;
 @Data
 public class CollectionParams {
 
-  @NotNull
-  private String username;
-
   private Boolean version;
 
   private CollectionItemSubtype subtype;
 
-  private List<Integer> id;
+  private List<Integer> ids;
 
   private Boolean brief;
 

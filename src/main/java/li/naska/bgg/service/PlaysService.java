@@ -8,8 +8,10 @@ import li.naska.bgg.repository.BggPlaysRepository;
 import li.naska.bgg.repository.model.BggGeekplayRequestBody;
 import li.naska.bgg.repository.model.BggGeekplayResponseBody;
 import li.naska.bgg.repository.model.BggPlaysQueryParams;
+import li.naska.bgg.resource.v3.model.ItemPlaysParams;
+import li.naska.bgg.resource.v3.model.ObjectType;
 import li.naska.bgg.resource.v3.model.Play;
-import li.naska.bgg.resource.v3.model.PlaysParams;
+import li.naska.bgg.resource.v3.model.UserPlaysParams;
 import li.naska.bgg.security.BggAuthenticationToken;
 import li.naska.bgg.util.XmlProcessor;
 import lombok.SneakyThrows;
@@ -43,8 +45,25 @@ public class PlaysService {
     );
   }
 
-  public Mono<Plays> getPlays(PlaysParams params) {
+  public Mono<Plays> getUserPlays(String username, UserPlaysParams params) {
     BggPlaysQueryParams bggParams = playsParamsMapper.toBggModel(params);
+    bggParams.setUsername(username);
+    return playsRepository.getPlays(bggParams)
+        .map(xml -> new XmlProcessor(xml).toJavaObject(Plays.class));
+  }
+
+  public Mono<Plays> getThingPlays(Integer id, ItemPlaysParams params) {
+    BggPlaysQueryParams bggParams = playsParamsMapper.toBggModel(params);
+    bggParams.setId(id);
+    bggParams.setType(ObjectType.thing.name());
+    return playsRepository.getPlays(bggParams)
+        .map(xml -> new XmlProcessor(xml).toJavaObject(Plays.class));
+  }
+
+  public Mono<Plays> getFamilyPlays(Integer id, ItemPlaysParams params) {
+    BggPlaysQueryParams bggParams = playsParamsMapper.toBggModel(params);
+    bggParams.setId(id);
+    bggParams.setType(ObjectType.family.name());
     return playsRepository.getPlays(bggParams)
         .map(xml -> new XmlProcessor(xml).toJavaObject(Plays.class));
   }

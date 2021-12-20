@@ -19,8 +19,9 @@ public class UsersService {
   @Autowired
   private UserParamsMapper userParamsMapper;
 
-  public Mono<User> getUser(UserParams params) {
+  public Mono<User> getUser(String username, UserParams params) {
     BggUserQueryParams bggParams = userParamsMapper.toBggModel(params);
+    bggParams.setName(username);
     return usersRepository.getUser(bggParams)
         .map(xml -> new XmlProcessor(xml).toJavaObject(User.class));
   }
