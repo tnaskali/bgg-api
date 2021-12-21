@@ -1,5 +1,6 @@
 package li.naska.bgg.resource.v3.model;
 
+import com.boardgamegeek.enums.ItemType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
@@ -14,7 +15,7 @@ public class Play {
   private String comments;
   private Integer durationInMinutes;
   private String location;
-  private ObjectType objectType;
+  private ItemType objectType;
   private Integer objectId;
   private Integer numberOfPlays;
   private List<Player> players;
@@ -32,5 +33,4 @@ public class Play {
     private Boolean won;
     private Boolean firstTimePlayer;
   }
-
 }

@@ -3,7 +3,6 @@ package li.naska.bgg.mapper;
 import com.boardgamegeek.common.*;
 import com.boardgamegeek.enums.NameType;
 import com.boardgamegeek.thing.*;
-import li.naska.bgg.resource.v3.model.LinkDirection;
 import li.naska.bgg.resource.v3.model.Thing;
 import org.mapstruct.*;
 
@@ -59,8 +58,6 @@ public interface ThingMapper {
   @Mapping(target = "marketplacelistings", expression = "java(getMarketplaceListings(source))")
   Thing fromBggModel(com.boardgamegeek.thing.Thing source);
 
-  @BeanMapping(ignoreUnmappedSourceProperties = "inbound")
-  @Mapping(target = "direction", expression = "java(getDirection(source))")
   Thing.ThingLink fromBggModel(Link source);
 
   @BeanMapping(ignoreUnmappedSourceProperties = {
@@ -79,8 +76,6 @@ public interface ThingMapper {
   @Mapping(target = "weight", expression = "java(getFirstBigDecimalValue(source.getWeights()))")
   Thing.ThingVersion fromBggModel(Version source);
 
-  @BeanMapping(ignoreUnmappedSourceProperties = "inbound")
-  @Mapping(target = "direction", expression = "java(getDirection(source))")
   Thing.ThingVersion.ThingVersionLink fromBggModel(VersionLink source);
 
   Thing.ThingVideo fromBggModel(Video source);
@@ -272,14 +267,6 @@ public interface ThingMapper {
           });
         });
     return target;
-  }
-
-  default LinkDirection getDirection(com.boardgamegeek.thing.Link source) {
-    return Boolean.TRUE.equals(source.isInbound()) ? LinkDirection.inbound : LinkDirection.outbound;
-  }
-
-  default LinkDirection getDirection(com.boardgamegeek.thing.VersionLink source) {
-    return Boolean.TRUE.equals(source.isInbound()) ? LinkDirection.inbound : LinkDirection.outbound;
   }
 
   default <T> T getFirstValue(Iterable<T> iterable) {

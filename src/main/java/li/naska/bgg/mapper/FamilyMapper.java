@@ -3,7 +3,6 @@ package li.naska.bgg.mapper;
 import com.boardgamegeek.enums.NameType;
 import com.boardgamegeek.family.Name;
 import li.naska.bgg.resource.v3.model.Family;
-import li.naska.bgg.resource.v3.model.LinkDirection;
 import org.mapstruct.*;
 
 import java.util.List;
@@ -22,8 +21,6 @@ public interface FamilyMapper {
   @Mapping(target = "links", source = "link")
   Family fromBggModel(com.boardgamegeek.family.Family source);
 
-  @BeanMapping(ignoreUnmappedSourceProperties = "inbound")
-  @Mapping(target = "direction", expression = "java(getDirection(source))")
   Family.FamilyLink fromBggModel(com.boardgamegeek.family.Link source);
 
   default String getName(com.boardgamegeek.family.Family source) {
@@ -39,10 +36,6 @@ public interface FamilyMapper {
         .filter(e -> e.getType() == NameType.alternate)
         .map(Name::getValue)
         .collect(Collectors.toList());
-  }
-
-  default LinkDirection getDirection(com.boardgamegeek.family.Link source) {
-    return Boolean.TRUE.equals(source.isInbound()) ? LinkDirection.inbound : LinkDirection.outbound;
   }
 
 }

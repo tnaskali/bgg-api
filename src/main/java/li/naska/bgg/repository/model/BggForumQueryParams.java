@@ -1,13 +1,11 @@
 package li.naska.bgg.repository.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class BggForumQueryParams {
 
   /**
