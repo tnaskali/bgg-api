@@ -54,10 +54,6 @@
     <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
 
-  <xs:complexType name="uriValue">
-    <xs:attribute name="value" type="xs:anyURI" use="required"/>
-  </xs:complexType>
-
   <xs:complexType name="nillableIntegerValue">
     <xs:attribute name="value" type="common:nillableInteger" use="required"/>
   </xs:complexType>

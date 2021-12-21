@@ -6,7 +6,7 @@
 
   <xs:complexType name="hotItem">
     <xs:sequence>
-      <xs:element name="thumbnail" type="common:uriValue"/>
+      <xs:element name="thumbnail" type="common:stringValue"/>
       <xs:element name="name" type="common:stringValue"/>
       <xs:element name="yearpublished" type="common:integerValue" minOccurs="0"/>
     </xs:sequence>

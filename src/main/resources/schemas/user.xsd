@@ -54,7 +54,7 @@
       <xs:element name="lastlogin" type="common:localDateValue"/>
       <xs:element name="stateorprovince" type="common:stringValue"/>
       <xs:element name="country" type="common:stringValue"/>
-      <xs:element name="webaddress" type="common:uriValue"/>
+      <xs:element name="webaddress" type="common:stringValue"/>
       <xs:element name="xboxaccount" type="common:stringValue"/>
       <xs:element name="wiiaccount" type="common:stringValue"/>
       <xs:element name="psnaccount" type="common:stringValue"/>

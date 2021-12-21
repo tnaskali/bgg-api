@@ -1,11 +1,7 @@
 package li.naska.bgg.resource.v3;
 
 import com.boardgamegeek.plays.Plays;
-import com.boardgamegeek.user.User;
-import li.naska.bgg.resource.v3.model.Collection;
-import li.naska.bgg.resource.v3.model.CollectionParams;
-import li.naska.bgg.resource.v3.model.UserParams;
-import li.naska.bgg.resource.v3.model.UserPlaysParams;
+import li.naska.bgg.resource.v3.model.*;
 import li.naska.bgg.service.PlaysService;
 import li.naska.bgg.service.ThingsService;
 import li.naska.bgg.service.UsersService;
