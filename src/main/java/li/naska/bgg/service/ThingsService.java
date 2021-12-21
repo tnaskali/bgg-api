@@ -1,20 +1,13 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.collection.Collection;
 import com.boardgamegeek.enums.CollectionItemSubtype;
 import com.boardgamegeek.thing.Things;
-import li.naska.bgg.mapper.CollectionParamsMapper;
-import li.naska.bgg.mapper.ThingMapper;
-import li.naska.bgg.mapper.ThingParamsMapper;
-import li.naska.bgg.mapper.ThingsParamsMapper;
+import li.naska.bgg.mapper.*;
 import li.naska.bgg.repository.BggCollectionRepository;
 import li.naska.bgg.repository.BggThingsRepository;
 import li.naska.bgg.repository.model.BggCollectionQueryParams;
 import li.naska.bgg.repository.model.BggThingsQueryParams;
-import li.naska.bgg.resource.v3.model.CollectionParams;
-import li.naska.bgg.resource.v3.model.Thing;
-import li.naska.bgg.resource.v3.model.ThingParams;
-import li.naska.bgg.resource.v3.model.ThingsParams;
+import li.naska.bgg.resource.v3.model.*;
 import li.naska.bgg.util.XmlProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,6 +26,9 @@ public class ThingsService {
 
   @Autowired
   private CollectionParamsMapper collectionParamsMapper;
+
+  @Autowired
+  private CollectionMapper collectionMapper;
 
   @Autowired
   private BggThingsRepository thingsRepository;
@@ -76,8 +72,22 @@ public class ThingsService {
     if (bggParams.getSubtype() == null || bggParams.getSubtype().equals(CollectionItemSubtype.boardgame.value())) {
       bggParams.setExcludesubtype(CollectionItemSubtype.boardgameexpansion.value());
     }
-    return collectionRepository.getCollection(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(Collection.class));
+    return collectionRepository.getCollection(null, bggParams)
+        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.collection.Collection.class))
+        .map(e -> collectionMapper.fromBggModel(e));
+  }
+
+  public Mono<Collection> getPrivateThings(String username, String cookie, CollectionParams params) {
+    BggCollectionQueryParams bggParams = collectionParamsMapper.toBggModel(params);
+    bggParams.setUsername(username);
+    // handle subtype bug in the BBG XML API
+    if (bggParams.getSubtype() == null || bggParams.getSubtype().equals(CollectionItemSubtype.boardgame.value())) {
+      bggParams.setExcludesubtype(CollectionItemSubtype.boardgameexpansion.value());
+    }
+    bggParams.setShowprivate(1);
+    return collectionRepository.getCollection(cookie, bggParams)
+        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.collection.Collection.class))
+        .map(e -> collectionMapper.fromBggModel(e));
   }
 
 }

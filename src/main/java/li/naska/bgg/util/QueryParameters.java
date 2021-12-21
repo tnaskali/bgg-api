@@ -13,7 +13,9 @@ public class QueryParameters {
     MultiValueMap<String, String> result = new LinkedMultiValueMap<>();
     Map<String, Object> fieldMap = new ObjectMapper().convertValue(source, new TypeReference<Map<String, Object>>() {
     });
-    fieldMap.forEach((k, v) -> result.set(k, v != null ? v.toString() : null));
+    fieldMap.forEach((k, v) -> {
+      if (v != null) result.set(k, v.toString());
+    });
     return result;
   }
 

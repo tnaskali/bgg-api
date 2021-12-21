@@ -11,11 +11,11 @@
     <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
 
-  <xs:complexType name="link">
+  <xs:complexType name="versionLink">
     <xs:attribute name="type" type="enums:versionLinkType" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="value" type="xs:string" use="required"/>
-    <xs:attribute name="inbound" type="xs:boolean" use="required"/>
+    <xs:attribute name="inbound" type="xs:boolean"/>
   </xs:complexType>
 
   <xs:complexType name="rank">
@@ -35,7 +35,7 @@
 
   <xs:complexType name="rating">
     <xs:sequence>
-      <xs:element name="usersrated" type="common:nonNegativeIntegerValue"/>
+      <xs:element name="usersrated" type="common:integerValue"/>
       <xs:element name="average" type="common:decimalValue"/>
       <xs:element name="bayesaverage" type="common:decimalValue"/>
       <xs:element name="stddev" type="common:decimalValue"/>
@@ -75,7 +75,7 @@
       <xs:element name="image" type="xs:anyURI"/>
       <xs:element name="name" type="collection:name"/>
       <xs:element name="yearpublished" type="common:integerValue"/>
-      <xs:element name="link" type="collection:link"/>
+      <xs:element name="link" type="collection:versionLink"/>
       <xs:element name="productcode" type="common:stringValue"/>
       <xs:element name="width" type="common:decimalValue"/>
       <xs:element name="length" type="common:decimalValue"/>
@@ -88,8 +88,35 @@
 
   <xs:complexType name="version">
     <xs:sequence>
-      <xs:element name="item" type="collection:versionItem"/>
+      <xs:element name="imageid" type="common:integerValue" minOccurs="0"/>
+      <xs:element name="year" type="xs:integer" minOccurs="0"/>
+      <xs:element name="publisher" type="collection:versionPublisher" minOccurs="0"/>
+      <xs:element name="other" type="xs:string" minOccurs="0"/>
+      <xs:element name="barcode" type="xs:string" minOccurs="0"/>
+      <xs:element name="item" type="collection:versionItem" minOccurs="0"/>
     </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="versionPublisher">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="publisherid" type="xs:integer" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="privateInfo">
+    <xs:sequence>
+      <xs:element name="privatecomment" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="pp_currency" type="xs:string"/>
+    <xs:attribute name="pricepaid" type="xs:decimal"/>
+    <xs:attribute name="cv_currency" type="xs:string"/>
+    <xs:attribute name="currvalue" type="xs:decimal"/>
+    <xs:attribute name="quantity" type="xs:integer"/>
+    <xs:attribute name="acquisitiondate" type="common:localDate"/>
+    <xs:attribute name="acquiredfrom" type="xs:string"/>
+    <xs:attribute name="inventorylocation" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="item">
@@ -102,8 +129,11 @@
       <xs:element name="stats" type="collection:stats" minOccurs="0"/>
       <xs:element name="status" type="collection:status"/>
       <xs:element name="numplays" type="xs:nonNegativeInteger"/>
-      <xs:element name="version" type="collection:version" minOccurs="0">
-      </xs:element>
+      <xs:element name="privateinfo" type="collection:privateInfo" minOccurs="0"/>
+      <xs:element name="version" type="collection:version" minOccurs="0"/>
+      <xs:element name="wantpartslist" type="xs:string" minOccurs="0"/>
+      <xs:element name="haspartslist" type="xs:string" minOccurs="0"/>
+      <xs:element name="wishlistcomment" type="xs:string" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="objecttype" type="enums:itemType" use="required"/>
     <xs:attribute name="objectid" type="xs:integer" use="required"/>

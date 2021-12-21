@@ -37,6 +37,7 @@ public interface CollectionParamsMapper {
   @BeanMapping(ignoreUnmappedSourceProperties = {"modifiedsincedate", "modifiedsincetime"})
   @Mapping(target = "username", ignore = true)
   @Mapping(target = "excludesubtype", ignore = true)
+  @Mapping(target = "showprivate", ignore = true)
   @Mapping(target = "id", source = "ids")
   @Mapping(target = "rating", source = "maxrating")
   @Mapping(target = "bggrating", source = "maxbggrating")

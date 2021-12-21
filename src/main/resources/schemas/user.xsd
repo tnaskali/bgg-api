@@ -50,7 +50,7 @@
       <xs:element name="firstname" type="common:stringValue"/>
       <xs:element name="lastname" type="common:stringValue"/>
       <xs:element name="avatarlink" type="common:stringValue"/>
-      <xs:element name="yearregistered" type="common:nillableIntegerValue"/>
+      <xs:element name="yearregistered" type="common:integerValue"/>
       <xs:element name="lastlogin" type="common:localDateValue"/>
       <xs:element name="stateorprovince" type="common:stringValue"/>
       <xs:element name="country" type="common:stringValue"/>

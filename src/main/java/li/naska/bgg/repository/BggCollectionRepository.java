@@ -15,6 +15,7 @@ import reactor.util.retry.Retry;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.util.Optional;
 
 /**
  * Collection
@@ -45,7 +46,7 @@ public class BggCollectionRepository {
     this.webClient = builder.baseUrl(collectionEndpoint).build();
   }
 
-  public Mono<String> getCollection(BggCollectionQueryParams params) {
+  public Mono<String> getCollection(String cookie, BggCollectionQueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -53,6 +54,8 @@ public class BggCollectionRepository {
             .build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
+        .headers(headers -> Optional.ofNullable(cookie)
+            .ifPresent(c -> headers.add("Cookie", c)))
         .retrieve()
         .onStatus(
             // BGG might queue the request

@@ -61,8 +61,6 @@ public class CollectionParams {
 
   private Integer maxplays;
 
-  private Boolean showprivate;
-
   private Integer collid;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
