@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
+import reactor.util.retry.Retry;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -43,6 +45,9 @@ public class BggUsersRepository {
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .bodyToMono(String.class)
+        .retryWhen(
+            Retry.max(3)
+                .filter(throwable -> throwable instanceof IOException))
         .doOnNext(body -> {
           if (body.startsWith("<?xml version=\"1.0\" encoding=\"utf-8\"?><user id=\"\"")) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
@@ -50,7 +55,6 @@ public class BggUsersRepository {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
           }
         });
-
   }
 
 }

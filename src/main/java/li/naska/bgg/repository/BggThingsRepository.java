@@ -4,13 +4,13 @@ import li.naska.bgg.repository.model.BggThingsQueryParams;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
+import reactor.util.retry.Retry;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -51,10 +51,10 @@ public class BggThingsRepository {
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
-        .onStatus(
-            httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
-            clientResponse -> Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .bodyToMono(String.class);
+        .bodyToMono(String.class)
+        .retryWhen(
+            Retry.max(3)
+                .filter(throwable -> throwable instanceof IOException));
   }
 
 }

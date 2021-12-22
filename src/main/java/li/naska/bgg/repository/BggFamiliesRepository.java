@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
+import reactor.util.retry.Retry;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -51,7 +53,11 @@ public class BggFamiliesRepository {
         .onStatus(
             httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
             clientResponse -> Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .bodyToMono(String.class);
+        .bodyToMono(String.class)
+        .retryWhen(
+            Retry.max(3)
+                .filter(throwable -> throwable instanceof IOException));
+
   }
 
 }

@@ -11,7 +11,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
+import reactor.util.retry.Retry;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,6 +48,9 @@ public class BggForumsRepository {
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .toEntity(String.class)
+        .retryWhen(
+            Retry.max(3)
+                .filter(throwable -> throwable instanceof IOException))
         .doOnNext(entity -> {
               if (MediaType.TEXT_HTML.equalsTypeAndSubtype(entity.getHeaders().getContentType())) {
                 Matcher matcher = Pattern.compile("<div class='messagebox error'>\\s*(.+)\\s*</div>").matcher(entity.getBody());

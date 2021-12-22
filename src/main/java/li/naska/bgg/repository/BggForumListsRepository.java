@@ -8,7 +8,9 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import reactor.util.retry.Retry;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -40,7 +42,10 @@ public class BggForumListsRepository {
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
-        .bodyToMono(String.class);
+        .bodyToMono(String.class)
+        .retryWhen(
+            Retry.max(3)
+                .filter(throwable -> throwable instanceof IOException));
   }
 
 }

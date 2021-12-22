@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.Optional;
@@ -63,8 +64,11 @@ public class BggCollectionRepository {
             response -> Mono.error(new BggResponseNotReadyException()))
         .bodyToMono(String.class)
         .retryWhen(
-            Retry.backoff(6, Duration.ofSeconds(5))
+            Retry.backoff(4, Duration.ofSeconds(4))
                 .filter(throwable -> throwable instanceof BggResponseNotReadyException))
+        .retryWhen(
+            Retry.max(3)
+                .filter(throwable -> throwable instanceof IOException))
         .doOnNext(body -> {
           if (body.equals("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\" ?>\n<errors>\n\t<error>\n\t\t<message>Invalid username specified</message>\n\t</error>\n</errors>")) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Collection not found");
