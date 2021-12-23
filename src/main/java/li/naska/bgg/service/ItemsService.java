@@ -38,7 +38,6 @@ public class ItemsService {
   @Autowired
   private SearchParamsMapper searchParamsMapper;
 
-
   public Mono<List<HotItem>> getHotItems(HotItemsParams params) {
     BggHotItemsQueryParams bggParams = hotItemsParamsMapper.toBggModel(params);
     return hotItemsRepository.getHotItems(bggParams)

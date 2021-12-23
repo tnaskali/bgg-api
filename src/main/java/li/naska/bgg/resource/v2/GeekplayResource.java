@@ -1,6 +1,5 @@
 package li.naska.bgg.resource.v2;
 
-
 import li.naska.bgg.repository.BggGeekplaysRepository;
 import li.naska.bgg.repository.model.BggGeekplayRequestBody;
 import li.naska.bgg.repository.model.BggGeekplayResponseBody;

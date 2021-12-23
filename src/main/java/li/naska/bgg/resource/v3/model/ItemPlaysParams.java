@@ -21,5 +21,4 @@ public class ItemPlaysParams {
 
   private Integer page;
 
-
 }
