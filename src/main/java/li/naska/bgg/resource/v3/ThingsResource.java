@@ -1,7 +1,6 @@
 package li.naska.bgg.resource.v3;
 
 import com.boardgamegeek.forumlist.Forums;
-import com.boardgamegeek.hot.HotItems;
 import com.boardgamegeek.search.Results;
 import li.naska.bgg.repository.BggHotItemsRepository;
 import li.naska.bgg.resource.v3.model.*;
@@ -49,7 +48,7 @@ public class ThingsResource {
   }
 
   @GetMapping(value = "/hot", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<HotItems> getHotThings(
+  public Mono<List<HotItem>> getHotThings(
       @ParameterObject @Validated HotItemsParams parameters) {
     return itemsService.getHotItems(parameters);
   }
