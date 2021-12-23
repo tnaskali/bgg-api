@@ -1,13 +1,9 @@
 package li.naska.bgg.resource.v3;
 
-import com.boardgamegeek.plays.Plays;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import li.naska.bgg.repository.model.BggGeekplayResponseBody;
-import li.naska.bgg.resource.v3.model.Collection;
-import li.naska.bgg.resource.v3.model.CollectionParams;
-import li.naska.bgg.resource.v3.model.Play;
-import li.naska.bgg.resource.v3.model.UserPlaysParams;
+import li.naska.bgg.resource.v3.model.*;
 import li.naska.bgg.security.BggAuthenticationToken;
 import li.naska.bgg.service.PlaysService;
 import li.naska.bgg.service.ThingsService;

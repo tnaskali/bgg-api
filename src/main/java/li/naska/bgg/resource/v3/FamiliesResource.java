@@ -1,7 +1,6 @@
 package li.naska.bgg.resource.v3;
 
 import com.boardgamegeek.forumlist.Forums;
-import com.boardgamegeek.plays.Plays;
 import li.naska.bgg.resource.v3.model.*;
 import li.naska.bgg.service.FamiliesService;
 import li.naska.bgg.service.ForumsService;

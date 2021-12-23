@@ -1,7 +1,6 @@
 package li.naska.bgg.repository.model;
 
 import com.boardgamegeek.enums.ItemType;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -15,9 +14,7 @@ import java.util.List;
 @Data
 public class BggGeekplayRequestBody {
 
-  /**
-   * technical properties
-   */
+  // technical properties
 
   @NotNull
   @Min(1)
@@ -33,12 +30,9 @@ public class BggGeekplayRequestBody {
   @Max(2)
   private Integer version;
 
-  /**
-   * business properties
-   */
+  // business properties
 
   private Integer playid;
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private LocalDate playdate;
   private String comments;
   private Integer length;

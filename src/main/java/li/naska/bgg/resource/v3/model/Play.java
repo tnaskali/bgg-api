@@ -1,7 +1,6 @@
 package li.naska.bgg.resource.v3.model;
 
 import com.boardgamegeek.enums.ItemType;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -10,7 +9,6 @@ import java.util.List;
 @Data
 public class Play {
   private Integer id;
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private LocalDate date;
   private String comments;
   private Integer durationInMinutes;

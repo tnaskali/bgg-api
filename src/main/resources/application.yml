@@ -36,6 +36,8 @@ spring:
     max-in-memory-size: 16MB
   jackson:
     default-property-inclusion: non_empty
+    serialization:
+      write-dates-as-timestamps: false
   webflux:
     base-path: /bgg-api
 

@@ -1,8 +1,8 @@
 package li.naska.bgg.service;
 
 import com.boardgamegeek.enums.ItemType;
-import com.boardgamegeek.plays.Plays;
 import li.naska.bgg.mapper.GeekplayParamsMapper;
+import li.naska.bgg.mapper.PlaysMapper;
 import li.naska.bgg.mapper.PlaysParamsMapper;
 import li.naska.bgg.repository.BggGeekplaysRepository;
 import li.naska.bgg.repository.BggPlaysRepository;
@@ -11,6 +11,7 @@ import li.naska.bgg.repository.model.BggGeekplayResponseBody;
 import li.naska.bgg.repository.model.BggPlaysQueryParams;
 import li.naska.bgg.resource.v3.model.ItemPlaysParams;
 import li.naska.bgg.resource.v3.model.Play;
+import li.naska.bgg.resource.v3.model.Plays;
 import li.naska.bgg.resource.v3.model.UserPlaysParams;
 import li.naska.bgg.util.XmlProcessor;
 import lombok.SneakyThrows;
@@ -32,6 +33,9 @@ public class PlaysService {
   private PlaysParamsMapper playsParamsMapper;
 
   @Autowired
+  private PlaysMapper playsMapper;
+
+  @Autowired
   private BggGeekplaysRepository geekplaysRepository;
 
   @Autowired
@@ -41,7 +45,8 @@ public class PlaysService {
     BggPlaysQueryParams bggParams = playsParamsMapper.toBggModel(params);
     bggParams.setUsername(username);
     return playsRepository.getPlays(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(Plays.class));
+        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.plays.Plays.class))
+        .map(e -> playsMapper.fromBggModel(e));
   }
 
   public Mono<Plays> getThingPlays(Integer id, ItemPlaysParams params) {
@@ -49,7 +54,8 @@ public class PlaysService {
     bggParams.setId(id);
     bggParams.setType(ItemType.thing.name());
     return playsRepository.getPlays(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(Plays.class));
+        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.plays.Plays.class))
+        .map(e -> playsMapper.fromBggModel(e));
   }
 
   public Mono<Plays> getFamilyPlays(Integer id, ItemPlaysParams params) {
@@ -57,7 +63,8 @@ public class PlaysService {
     bggParams.setId(id);
     bggParams.setType(ItemType.family.name());
     return playsRepository.getPlays(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(Plays.class));
+        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.plays.Plays.class))
+        .map(e -> playsMapper.fromBggModel(e));
   }
 
   @SneakyThrows
