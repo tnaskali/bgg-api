@@ -1,9 +1,10 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.thread.Thread;
+import li.naska.bgg.mapper.ThreadMapper;
 import li.naska.bgg.mapper.ThreadParamsMapper;
 import li.naska.bgg.repository.BggThreadsRepository;
 import li.naska.bgg.repository.model.BggThreadQueryParams;
+import li.naska.bgg.resource.v3.model.Thread;
 import li.naska.bgg.resource.v3.model.ThreadParams;
 import li.naska.bgg.util.XmlProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,15 @@ public class ThreadsService {
   @Autowired
   private ThreadParamsMapper threadParamsMapper;
 
+  @Autowired
+  private ThreadMapper threadMapper;
+
   public Mono<Thread> getThread(Integer id, ThreadParams params) {
     BggThreadQueryParams bggParams = threadParamsMapper.toBggModel(params);
     bggParams.setId(id);
     return threadsRepository.getThread(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(Thread.class));
+        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.thread.Thread.class))
+        .map(e -> threadMapper.fromBggModel(e));
   }
 
 }

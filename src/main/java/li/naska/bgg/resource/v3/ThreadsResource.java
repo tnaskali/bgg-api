@@ -1,6 +1,6 @@
 package li.naska.bgg.resource.v3;
 
-import com.boardgamegeek.thread.Thread;
+import li.naska.bgg.resource.v3.model.Thread;
 import li.naska.bgg.resource.v3.model.ThreadParams;
 import li.naska.bgg.service.ThreadsService;
 import org.springdoc.api.annotations.ParameterObject;
