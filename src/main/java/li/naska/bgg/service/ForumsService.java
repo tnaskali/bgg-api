@@ -1,13 +1,15 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.forum.Forum;
+import com.boardgamegeek.enums.ItemType;
 import com.boardgamegeek.forumlist.Forums;
 import li.naska.bgg.mapper.ForumListsParamsMapper;
-import li.naska.bgg.mapper.ForumsParamsMapper;
+import li.naska.bgg.mapper.ForumMapper;
+import li.naska.bgg.mapper.ForumParamsMapper;
 import li.naska.bgg.repository.BggForumListsRepository;
 import li.naska.bgg.repository.BggForumsRepository;
 import li.naska.bgg.repository.model.BggForumQueryParams;
 import li.naska.bgg.repository.model.BggForumsQueryParams;
+import li.naska.bgg.resource.v3.model.Forum;
 import li.naska.bgg.resource.v3.model.ForumParams;
 import li.naska.bgg.resource.v3.model.ForumsParams;
 import li.naska.bgg.util.XmlProcessor;
@@ -22,7 +24,10 @@ public class ForumsService {
   private BggForumsRepository forumsRepository;
 
   @Autowired
-  private ForumsParamsMapper forumsParamsMapper;
+  private ForumParamsMapper forumParamsMapper;
+
+  @Autowired
+  private ForumMapper forumMapper;
 
   @Autowired
   private BggForumListsRepository forumListsRepository;
@@ -31,17 +36,31 @@ public class ForumsService {
   private ForumListsParamsMapper forumListsParamsMapper;
 
   public Mono<Forum> getForum(Integer id, ForumParams params) {
-    BggForumQueryParams bggParams = forumsParamsMapper.toBggModel(params);
+    BggForumQueryParams bggParams = forumParamsMapper.toBggModel(params);
     bggParams.setId(id);
     return forumsRepository.getForum(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(Forum.class));
+        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.forum.Forum.class))
+        .map(e -> forumMapper.fromBggModel(e));
   }
 
-  public Mono<Forums> getForums(Integer id, ForumsParams params) {
+  public Mono<Forums> getForums(ForumsParams params) {
     BggForumsQueryParams bggParams = forumListsParamsMapper.toBggModel(params);
-    bggParams.setId(id);
     return forumListsRepository.getForums(bggParams)
         .map(xml -> new XmlProcessor(xml).toJavaObject(Forums.class));
+  }
+
+  public Mono<Forums> getThingForums(Integer id) {
+    ForumsParams parameters = new ForumsParams();
+    parameters.setId(id);
+    parameters.setType(ItemType.thing);
+    return getForums(parameters);
+  }
+
+  public Mono<Forums> getFamilyForums(Integer id) {
+    ForumsParams parameters = new ForumsParams();
+    parameters.setId(id);
+    parameters.setType(ItemType.family);
+    return getForums(parameters);
   }
 
 }

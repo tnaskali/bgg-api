@@ -3,7 +3,6 @@ package li.naska.bgg.mapper;
 import li.naska.bgg.repository.model.BggForumsQueryParams;
 import li.naska.bgg.resource.v3.model.ForumsParams;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 import static org.mapstruct.MappingConstants.ComponentModel;
@@ -15,7 +14,6 @@ import static org.mapstruct.MappingConstants.ComponentModel;
 )
 public interface ForumListsParamsMapper {
 
-  @Mapping(target = "id", ignore = true)
   BggForumsQueryParams toBggModel(ForumsParams source);
 
 }

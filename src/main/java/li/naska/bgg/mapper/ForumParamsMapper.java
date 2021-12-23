@@ -13,7 +13,7 @@ import static org.mapstruct.MappingConstants.ComponentModel;
     unmappedTargetPolicy = ReportingPolicy.ERROR,
     unmappedSourcePolicy = ReportingPolicy.ERROR
 )
-public interface ForumsParamsMapper {
+public interface ForumParamsMapper {
 
   @Mapping(target = "id", ignore = true)
   BggForumQueryParams toBggModel(ForumParams source);

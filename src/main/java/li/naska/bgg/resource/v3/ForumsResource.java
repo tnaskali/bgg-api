@@ -1,7 +1,9 @@
 package li.naska.bgg.resource.v3;
 
-import com.boardgamegeek.forum.Forum;
+import com.boardgamegeek.forumlist.Forums;
+import li.naska.bgg.resource.v3.model.Forum;
 import li.naska.bgg.resource.v3.model.ForumParams;
+import li.naska.bgg.resource.v3.model.ForumsParams;
 import li.naska.bgg.service.ForumsService;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +24,14 @@ public class ForumsResource {
   @Autowired
   private ForumsService forumsService;
 
-  @GetMapping(
-      value = "/{id}/threads",
-      consumes = MediaType.APPLICATION_JSON_VALUE,
-      produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<Forum> getThreads(
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<Forums> getForums(
+      @ParameterObject @Validated ForumsParams parameters) {
+    return forumsService.getForums(parameters);
+  }
+
+  @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<Forum> getForum(
       @NotNull @PathVariable Integer id,
       @ParameterObject @Validated ForumParams parameters) {
     return forumsService.getForum(id, parameters);

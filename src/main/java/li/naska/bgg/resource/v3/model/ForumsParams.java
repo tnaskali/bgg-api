@@ -6,6 +6,8 @@ import lombok.Data;
 @Data
 public class ForumsParams {
 
+  private Integer id;
+
   private ItemType type;
 
 }

@@ -46,9 +46,8 @@ public class FamiliesResource {
 
   @GetMapping(value = "/{id}/forums", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<Forums> getForums(
-      @NotNull @PathVariable Integer id,
-      @ParameterObject @Validated ForumsParams parameters) {
-    return forumsService.getForums(id, parameters);
+      @NotNull @PathVariable Integer id) {
+    return forumsService.getFamilyForums(id);
   }
 
   @GetMapping(value = "/{id}/plays", produces = MediaType.APPLICATION_JSON_VALUE)
