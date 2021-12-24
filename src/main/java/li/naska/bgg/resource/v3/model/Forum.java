@@ -8,13 +8,15 @@ import java.util.List;
 @Data
 public class Forum {
   private Integer id;
+  private Integer groupid;
   private String title;
-  private Integer numposts;
-  private ZonedDateTime lastpostdate;
-  private Integer noposting;
+  private Boolean noposting;
+  private String description;
   private Integer numthreads;
   // paged (50)
   private List<ForumThread> threads;
+  private Integer numposts;
+  private ZonedDateTime lastpostdate;
 
   @Data
   public static class ForumThread {

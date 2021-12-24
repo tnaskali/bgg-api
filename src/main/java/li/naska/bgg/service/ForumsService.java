@@ -17,6 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ForumsService {
 
@@ -43,20 +46,23 @@ public class ForumsService {
         .map(e -> forumMapper.fromBggModel(e));
   }
 
-  public Mono<Forums> getForums(ForumsParams params) {
+  public Mono<List<Forum>> getForums(ForumsParams params) {
     BggForumsQueryParams bggParams = forumListsParamsMapper.toBggModel(params);
     return forumListsRepository.getForums(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(Forums.class));
+        .map(xml -> new XmlProcessor(xml).toJavaObject(Forums.class))
+        .map(f -> f.getForum().stream()
+            .map(e -> forumMapper.fromBggModel(e))
+            .collect(Collectors.toList()));
   }
 
-  public Mono<Forums> getThingForums(Integer id) {
+  public Mono<List<Forum>> getThingForums(Integer id) {
     ForumsParams parameters = new ForumsParams();
     parameters.setId(id);
     parameters.setType(ItemType.thing);
     return getForums(parameters);
   }
 
-  public Mono<Forums> getFamilyForums(Integer id) {
+  public Mono<List<Forum>> getFamilyForums(Integer id) {
     ForumsParams parameters = new ForumsParams();
     parameters.setId(id);
     parameters.setType(ItemType.family);

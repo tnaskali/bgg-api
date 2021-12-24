@@ -1,6 +1,5 @@
 package li.naska.bgg.resource.v3;
 
-import com.boardgamegeek.forumlist.Forums;
 import li.naska.bgg.resource.v3.model.*;
 import li.naska.bgg.service.FamiliesService;
 import li.naska.bgg.service.ForumsService;
@@ -45,7 +44,7 @@ public class FamiliesResource {
   }
 
   @GetMapping(value = "/{id}/forums", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<Forums> getForums(
+  public Mono<List<Forum>> getForums(
       @NotNull @PathVariable Integer id) {
     return forumsService.getFamilyForums(id);
   }

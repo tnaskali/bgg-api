@@ -17,7 +17,12 @@ public interface ForumMapper {
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"termsofuse", "threads"})
   @Mapping(target = "threads", expression = "java(getThreads(source))")
+  @Mapping(target = "groupid", ignore = true)
+  @Mapping(target = "description", ignore = true)
   Forum fromBggModel(com.boardgamegeek.forum.Forum source);
+
+  @Mapping(target = "threads", ignore = true)
+  Forum fromBggModel(com.boardgamegeek.forumlist.Forum source);
 
   Forum.ForumThread fromBggModel(com.boardgamegeek.forum.Thread source);
 
