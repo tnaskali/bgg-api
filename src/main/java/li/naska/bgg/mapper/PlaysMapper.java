@@ -4,6 +4,7 @@ import com.boardgamegeek.enums.ItemSubtype;
 import com.boardgamegeek.enums.NameType;
 import com.boardgamegeek.family.Name;
 import com.boardgamegeek.plays.SubtypeValue;
+import li.naska.bgg.resource.v3.model.Play;
 import li.naska.bgg.resource.v3.model.Plays;
 import org.mapstruct.*;
 
@@ -25,14 +26,15 @@ public interface PlaysMapper {
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"players"})
   @Mapping(target = "players", expression = "java(getPlayers(source))")
-  Plays.Play fromBggModel(com.boardgamegeek.plays.Play source);
+  Play fromBggModel(com.boardgamegeek.plays.Play source);
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"subtypes"})
   @Mapping(target = "subtypes", expression = "java(getSubtypes(source))")
-  Plays.Play.PlayItem fromBggModel(com.boardgamegeek.plays.Item source);
+  Play.Item fromBggModel(com.boardgamegeek.plays.Item source);
 
+  @Mapping(target = "position", source = "startposition")
   @Mapping(target = "_new", source = "new")
-  Plays.Play.PlayPlayer fromBggModel(com.boardgamegeek.plays.Player source);
+  Play.Player fromBggModel(com.boardgamegeek.plays.Player source);
 
   default List<ItemSubtype> getSubtypes(com.boardgamegeek.plays.Item source) {
     return Optional.ofNullable(source.getSubtypes())
@@ -42,7 +44,7 @@ public interface PlaysMapper {
         ).orElse(null);
   }
 
-  default List<Plays.Play.PlayPlayer> getPlayers(com.boardgamegeek.plays.Play source) {
+  default List<Play.Player> getPlayers(com.boardgamegeek.plays.Play source) {
     return Optional.ofNullable(source.getPlayers())
         .map(o -> o.getPlayer().stream()
             .map(this::fromBggModel)
@@ -50,7 +52,7 @@ public interface PlaysMapper {
         ).orElse(null);
   }
 
-  default List<String> getAlternateNames(com.boardgamegeek.family.Family source) {
+  default List<String> getAlternatenames(com.boardgamegeek.family.Family source) {
     return source.getName().stream()
         .filter(e -> e.getType() == NameType.alternate)
         .map(Name::getValue)

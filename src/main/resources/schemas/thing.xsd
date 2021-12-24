@@ -112,7 +112,7 @@
       <xs:element name="numweights" type="common:integerValue"/>
       <xs:element name="averageweight" type="common:decimalValue"/>
     </xs:sequence>
-    <xs:attribute name="date" type="xs:string" use="required"/>
+    <xs:attribute name="date" type="common:localDate"/>
   </xs:complexType>
 
   <xs:complexType name="listingPrice">

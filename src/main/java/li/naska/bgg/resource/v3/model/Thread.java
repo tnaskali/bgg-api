@@ -11,10 +11,10 @@ public class Thread {
   private Integer id;
   private String link;
   private Integer numarticles;
-  private List<ThreadArticle> articles;
+  private List<Article> articles;
 
   @Data
-  public static class ThreadArticle {
+  public static class Article {
     private String subject;
     private String body;
     private Integer id;

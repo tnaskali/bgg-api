@@ -12,30 +12,32 @@ import java.util.List;
 public class Thing {
   private Integer id;
   private ThingType type;
-  private String name;
-  private List<String> alternateNames;
+  private Name name;
+  private List<Name> alternatenames;
   private String description;
   private String thumbnail;
   private String image;
   private Integer yearpublished;
   private LocalDate datepublished;
-  private LocalDate releasedate;
-  private String seriescode;
   private Integer issueindex;
   private Integer minplayers;
   private Integer maxplayers;
+  private LocalDate releasedate;
+  private List<Link> links;
+  private String seriescode;
+  private List<Poll> polls;
   private Integer playingtime;
   private Integer minplaytime;
   private Integer maxplaytime;
   private Integer minage;
-  private List<ThingLink> links;
-  private List<ThingVideo> videos;
-  private List<ThingVersion> versions;
-  private ThingStatistics stats;
-  private List<ThingMarketplaceListing> marketplacelistings;
+  private List<Video> videos;
+  private List<Version> versions;
+  private List<Comment> comments;
+  private Statistics statistics;
+  private List<MarketplaceListing> marketplacelistings;
 
   @Data
-  public static class ThingLink {
+  public static class Link {
     private Integer id;
     private ThingLinkType type;
     private String value;
@@ -43,7 +45,25 @@ public class Thing {
   }
 
   @Data
-  public static class ThingVideo {
+  public static class Poll {
+    private String name;
+    private String title;
+    private Integer numvotes;
+    private List<Result> results;
+
+    @Data
+    public static class Result {
+      private Integer level;
+      private String value;
+      private Integer votes;
+      private Integer votesforbest;
+      private Integer votesforrecommended;
+      private Integer votesfornotrecommended;
+    }
+  }
+
+  @Data
+  public static class Video {
     private Integer id;
     private String title;
     private String category;
@@ -55,10 +75,10 @@ public class Thing {
   }
 
   @Data
-  public static class ThingVersion {
+  public static class Version {
     private Integer id;
-    private String name;
-    private List<String> alternateNames;
+    private Name name;
+    private List<Name> alternatenames;
     private VersionType type;
     private String thumbnail;
     private String image;
@@ -68,10 +88,10 @@ public class Thing {
     private BigDecimal length;
     private BigDecimal depth;
     private BigDecimal weight;
-    private List<ThingVersionLink> links;
+    private List<VersionLink> links;
 
     @Data
-    public static class ThingVersionLink {
+    public static class VersionLink {
       private Integer id;
       private VersionLinkType type;
       private String value;
@@ -80,46 +100,30 @@ public class Thing {
   }
 
   @Data
-  public static class ThingStatistics {
+  public static class Comment {
+    private String username;
+    private BigDecimal rating;
+    private String value;
+  }
+
+  @Data
+  public static class Statistics {
+    private Integer usersrated;
+    private BigDecimal average;
+    private BigDecimal bayesaverage;
+    private List<Rank> ranks;
+    private BigDecimal stddev;
+    private BigDecimal median;
     private Integer owned;
     private Integer trading;
     private Integer wanting;
     private Integer wishing;
-    private ThingRating rating;
-    private ThingWeight weight;
-    private List<ThingRank> ranks;
-    private ThingPlayerCount playerCount;
-    private ThingPlayerAge playerAge;
-    private ThingLanguageDependency languageDependancy;
+    private Integer numcomments;
+    private Integer numweights;
+    private BigDecimal averageweight;
 
     @Data
-    public static class ThingRating {
-      private Integer usersrated;
-      private BigDecimal average;
-      private BigDecimal bayesaverage;
-      private BigDecimal stddev;
-      private BigDecimal median;
-      private Integer numcomments;
-      private Integer totalcomments;
-      // paged
-      private List<ThingRatingComment> comments;
-
-      @Data
-      public static class ThingRatingComment {
-        private String username;
-        private BigDecimal rating;
-        private String value;
-      }
-    }
-
-    @Data
-    public static class ThingWeight {
-      private Integer numweights;
-      private BigDecimal averageweight;
-    }
-
-    @Data
-    public static class ThingRank {
+    public static class Rank {
       private Integer id;
       private RankType type;
       private Integer value;
@@ -127,49 +131,10 @@ public class Thing {
       private String friendlyname;
       private BigDecimal bayesaverage;
     }
-
-    @Data
-    public static class ThingPlayerCount {
-      private Integer totalvotes;
-      private List<ThingSuggestedPlayerCountResult> results;
-
-      @Data
-      public static class ThingSuggestedPlayerCountResult {
-        private String value;
-        private Integer nbBestVotes;
-        private Integer nbRecommendedVotes;
-        private Integer nbNotRecommendedVotes;
-      }
-    }
-
-    @Data
-    public static class ThingPlayerAge {
-      private Integer totalvotes;
-      private List<ThingSuggestedPlayerAgeResult> results;
-
-      @Data
-      public static class ThingSuggestedPlayerAgeResult {
-        private String value;
-        private Integer numvotes;
-      }
-    }
-
-    @Data
-    public static class ThingLanguageDependency {
-      private Integer totalvotes;
-      private List<ThingLanguageDependencyResult> results;
-
-      @Data
-      public static class ThingLanguageDependencyResult {
-        private Integer level;
-        private String value;
-        private Integer numvotes;
-      }
-    }
   }
 
   @Data
-  public static class ThingMarketplaceListing {
+  public static class MarketplaceListing {
     private ZonedDateTime listdate;
     private String currency;
     private BigDecimal price;
@@ -178,4 +143,5 @@ public class Thing {
     private String link;
     private String title;
   }
+
 }

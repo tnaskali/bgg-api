@@ -19,9 +19,9 @@ public interface ThreadMapper {
   @Mapping(target = "articles", expression = "java(getArticles(source))")
   Thread fromBggModel(com.boardgamegeek.thread.Thread source);
 
-  Thread.ThreadArticle fromBggModel(com.boardgamegeek.thread.Article source);
+  Thread.Article fromBggModel(com.boardgamegeek.thread.Article source);
 
-  default List<Thread.ThreadArticle> getArticles(com.boardgamegeek.thread.Thread source) {
+  default List<Thread.Article> getArticles(com.boardgamegeek.thread.Thread source) {
     return Optional.ofNullable(source.getArticles())
         .map(Articles::getArticle)
         .map(l -> l.stream()

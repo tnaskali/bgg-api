@@ -29,14 +29,14 @@ public interface UserMapper extends BaseMapper {
   @Mapping(target = "guilds", expression = "java(getGuilds(source))")
   User fromBggModel(com.boardgamegeek.user.User source);
 
-  User.UserBuddy fromBggModel(com.boardgamegeek.user.Buddy source);
+  User.Buddy fromBggModel(com.boardgamegeek.user.Buddy source);
 
   User.UserGuild fromBggModel(com.boardgamegeek.user.Guild source);
 
   @Mapping(target = "items", source = "item")
-  User.UserRanking fromBggModel(com.boardgamegeek.user.Ranking source);
+  User.Ranking fromBggModel(com.boardgamegeek.user.Ranking source);
 
-  User.UserRanking.UserRankingItem fromBggModel(com.boardgamegeek.user.RankingItem source);
+  User.Ranking.RankingItem fromBggModel(com.boardgamegeek.user.RankingItem source);
 
   default Integer getNumbuddies(com.boardgamegeek.user.User source) {
     return Optional.ofNullable(source.getBuddies())
@@ -44,7 +44,7 @@ public interface UserMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default List<User.UserBuddy> getBuddies(com.boardgamegeek.user.User source) {
+  default List<User.Buddy> getBuddies(com.boardgamegeek.user.User source) {
     return Optional.ofNullable(source.getBuddies())
         .map(o -> o.getBuddy().stream()
             .map(this::fromBggModel)

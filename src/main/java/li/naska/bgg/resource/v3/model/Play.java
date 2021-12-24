@@ -1,5 +1,6 @@
 package li.naska.bgg.resource.v3.model;
 
+import com.boardgamegeek.enums.ItemSubtype;
 import com.boardgamegeek.enums.ItemType;
 import lombok.Data;
 
@@ -11,24 +12,33 @@ public class Play {
   private Integer id;
   private LocalDate date;
   private String comments;
-  private Integer durationInMinutes;
+  private Integer quantity;
+  private Integer length;
   private String location;
-  private ItemType objectType;
-  private Integer objectId;
-  private Integer numberOfPlays;
+  private Boolean incomplete;
+  private Boolean nowinstats;
+  private Item item;
   private List<Player> players;
-  private Boolean unfinished;
-  private Boolean noWinStats;
+
+  @Data
+  public static class Item {
+    private Integer objectid;
+    private ItemType objecttype;
+    private String name;
+    private List<ItemSubtype> subtypes;
+  }
 
   @Data
   public static class Player {
-    private String bggUsername;
+    private String username;
+    private Integer userid;
     private String name;
-    private String startingPosition;
+    private String position;
     private String color;
     private String score;
-    private String rating;
-    private Boolean won;
-    private Boolean firstTimePlayer;
+    private Integer rating;
+    private Boolean win;
+    private Boolean _new;
   }
 }
+

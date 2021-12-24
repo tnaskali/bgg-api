@@ -14,12 +14,12 @@ public class Forum {
   private String description;
   private Integer numthreads;
   // paged (50)
-  private List<ForumThread> threads;
+  private List<Thread> threads;
   private Integer numposts;
   private ZonedDateTime lastpostdate;
 
   @Data
-  public static class ForumThread {
+  public static class Thread {
     private Integer id;
     private String subject;
     private String author;

@@ -2,6 +2,7 @@ package li.naska.bgg.mapper;
 
 import li.naska.bgg.repository.model.BggGeekplayRequestBody;
 import li.naska.bgg.resource.v3.model.Play;
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
@@ -23,18 +24,11 @@ public interface GeekplayParamsMapper {
   @Mapping(target = "twitter_password", ignore = true)
   @Mapping(target = "playid", source = "id")
   @Mapping(target = "playdate", source = "date")
-  @Mapping(target = "length", source = "durationInMinutes")
-  @Mapping(target = "objecttype", source = "objectType")
-  @Mapping(target = "objectid", source = "objectId")
-  @Mapping(target = "quantity", source = "numberOfPlays")
-  @Mapping(target = "incomplete", source = "unfinished")
-  @Mapping(target = "nowinstats", source = "noWinStats")
+  @Mapping(target = "objecttype", source = "item.objecttype")
+  @Mapping(target = "objectid", source = "item.objectid")
   BggGeekplayRequestBody toBggModel(Play source);
 
-  @Mapping(target = "username", source = "bggUsername")
-  @Mapping(target = "position", source = "startingPosition")
-  @Mapping(target = "win", source = "won")
-  @Mapping(target = "_new", source = "firstTimePlayer")
+  @BeanMapping(ignoreUnmappedSourceProperties = {"userid"})
   BggGeekplayRequestBody.GeekplayPlayer toBggModel(Play.Player source);
 
 }

@@ -11,32 +11,32 @@ import java.util.List;
 
 @Data
 public class Collection {
-  private Integer totalitems;
   private ZonedDateTime pubdate;
-  private List<CollectionItem> items;
+  private Integer totalitems;
+  private List<Item> items;
 
   @Data
-  public static class CollectionItem {
+  public static class Item {
     private Integer objectid;
     private Integer collid;
     private ItemType objecttype;
     private CollectionItemSubtype subtype;
-    private String name;
+    private Name name;
     private String originalname;
     private String yearpublished;
     private String image;
     private String thumbnail;
-    private CollectionItemStats stats;
-    private CollectionItemStatus status;
+    private Stats stats;
+    private Status status;
     private Integer numplays;
-    private CollectionItemPrivateInfo privateinfo;
-    private CollectionItemVersion version;
+    private PrivateInfo privateinfo;
+    private Version version;
     private String wantpartslist;
     private String haspartslist;
     private String wishlistcomment;
 
     @Data
-    public static class CollectionItemPrivateInfo {
+    public static class PrivateInfo {
       private String privatecomment;
       private String ppCurrency;
       private BigDecimal pricepaid;
@@ -49,27 +49,27 @@ public class Collection {
     }
 
     @Data
-    public static class CollectionItemStats {
+    public static class Stats {
       private Integer minplayers;
       private Integer maxplayers;
       private Integer minplaytime;
       private Integer maxplaytime;
       private Integer playingtime;
       private Integer numowned;
-      private CollectionItemStatsRating rating;
+      private Rating rating;
 
       @Data
-      public static class CollectionItemStatsRating {
+      public static class Rating {
         protected String value;
         protected Integer usersrated;
         protected BigDecimal average;
         protected BigDecimal bayesaverage;
         protected BigDecimal stddev;
         protected BigDecimal median;
-        protected List<CollectionItemStatsRatingRank> ranks;
+        protected List<Rank> ranks;
 
         @Data
-        public static class CollectionItemStatsRatingRank {
+        public static class Rank {
           protected Integer id;
           protected RankType type;
           protected String name;
@@ -81,7 +81,7 @@ public class Collection {
     }
 
     @Data
-    public static class CollectionItemStatus {
+    public static class Status {
       private Boolean own;
       private Boolean prevowned;
       private Boolean fortrade;
@@ -94,11 +94,11 @@ public class Collection {
     }
 
     @Data
-    public static class CollectionItemVersion {
+    public static class Version {
       private Integer id;
       private VersionType type;
-      private String name;
-      private List<String> alternateNames;
+      private Name name;
+      private List<Name> alternatenames;
       private Integer yearpublished;
       private String productcode;
       private BigDecimal width;
@@ -109,19 +109,19 @@ public class Collection {
       private String image;
       private Integer imageid;
       private Integer year;
-      private CollectionItemVersionPublisher publisher;
+      private Publisher publisher;
       private String other;
       private String barcode;
-      private List<CollectionItemVersionLink> links;
+      private List<VersionLink> links;
 
       @Data
-      public static class CollectionItemVersionPublisher {
+      public static class Publisher {
         private Integer publisherid;
         private String value;
       }
 
       @Data
-      public static class CollectionItemVersionLink {
+      public static class VersionLink {
         private Integer id;
         private VersionLinkType type;
         private String value;

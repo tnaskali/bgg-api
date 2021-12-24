@@ -24,9 +24,9 @@ public interface ForumMapper {
   @Mapping(target = "threads", ignore = true)
   Forum fromBggModel(com.boardgamegeek.forumlist.Forum source);
 
-  Forum.ForumThread fromBggModel(com.boardgamegeek.forum.Thread source);
+  Forum.Thread fromBggModel(com.boardgamegeek.forum.Thread source);
 
-  default List<Forum.ForumThread> getThreads(com.boardgamegeek.forum.Forum source) {
+  default List<Forum.Thread> getThreads(com.boardgamegeek.forum.Forum source) {
     return Optional.ofNullable(source.getThreads())
         .map(Threads::getThread)
         .map(l -> l.stream()

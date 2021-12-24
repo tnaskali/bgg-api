@@ -10,15 +10,15 @@ import java.util.List;
 public class Family {
   private Integer id;
   private FamilyType type;
-  private String name;
-  private List<String> alternateNames;
+  private Name name;
+  private List<Name> alternatenames;
   private String description;
   private String thumbnail;
   private String image;
-  private List<FamilyLink> links;
+  private List<Link> links;
 
   @Data
-  public static class FamilyLink {
+  public static class Link {
     private Integer id;
     private FamilyLinkType type;
     private String value;

@@ -1,9 +1,9 @@
 package li.naska.bgg.mapper;
 
-import com.boardgamegeek.collection.Name;
 import com.boardgamegeek.common.IntegerValue;
 import com.boardgamegeek.enums.NameType;
 import li.naska.bgg.resource.v3.model.Collection;
+import li.naska.bgg.resource.v3.model.Name;
 import org.mapstruct.*;
 
 import java.util.List;
@@ -26,17 +26,17 @@ public interface CollectionMapper extends BaseMapper {
   Collection fromBggModel(com.boardgamegeek.collection.Collection source);
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"name", "version"})
-  @Mapping(target = "name", expression = "java(source.getName().getValue())")
+  @Mapping(target = "name", expression = "java(getName(source))")
   @Mapping(target = "version", expression = "java(getVersion(source))")
-  Collection.CollectionItem fromBggModel(com.boardgamegeek.collection.Item source);
+  Collection.Item fromBggModel(com.boardgamegeek.collection.Item source);
 
-  Collection.CollectionItem.CollectionItemStats fromBggModel(com.boardgamegeek.collection.Stats source);
+  Collection.Item.Stats fromBggModel(com.boardgamegeek.collection.Stats source);
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"ranks"})
   @Mapping(target = "ranks", expression = "java(getRanks(source))")
-  Collection.CollectionItem.CollectionItemStats.CollectionItemStatsRating fromBggModel(com.boardgamegeek.collection.Rating source);
+  Collection.Item.Stats.Rating fromBggModel(com.boardgamegeek.collection.Rating source);
 
-  default List<Collection.CollectionItem.CollectionItemStats.CollectionItemStatsRating.CollectionItemStatsRatingRank> getRanks(com.boardgamegeek.collection.Rating source) {
+  default List<Collection.Item.Stats.Rating.Rank> getRanks(com.boardgamegeek.collection.Rating source) {
     return Optional.ofNullable(source.getRanks())
         .map(o -> o.getRank().stream()
             .map(this::fromBggModel)
@@ -44,18 +44,18 @@ public interface CollectionMapper extends BaseMapper {
         .orElse(null);
   }
 
-  Collection.CollectionItem.CollectionItemStats.CollectionItemStatsRating.CollectionItemStatsRatingRank fromBggModel(com.boardgamegeek.collection.Rank source);
+  Collection.Item.Stats.Rating.Rank fromBggModel(com.boardgamegeek.collection.Rank source);
 
-  Collection.CollectionItem.CollectionItemStatus fromBggModel(com.boardgamegeek.collection.Status source);
+  Collection.Item.Status fromBggModel(com.boardgamegeek.collection.Status source);
 
-  Collection.CollectionItem.CollectionItemPrivateInfo fromBggModel(com.boardgamegeek.collection.PrivateInfo source);
+  Collection.Item.PrivateInfo fromBggModel(com.boardgamegeek.collection.PrivateInfo source);
 
-  default Collection.CollectionItem.CollectionItemVersion getVersion(com.boardgamegeek.collection.Item source) {
+  default Collection.Item.Version getVersion(com.boardgamegeek.collection.Item source) {
     com.boardgamegeek.collection.Version version = source.getVersion();
     if (version == null) {
       return null;
     }
-    Collection.CollectionItem.CollectionItemVersion target = new Collection.CollectionItem.CollectionItemVersion();
+    Collection.Item.Version target = new Collection.Item.Version();
     target.setYear(version.getYear());
     target.setBarcode(version.getBarcode());
     target.setOther(version.getOther());
@@ -69,7 +69,7 @@ public interface CollectionMapper extends BaseMapper {
       target.setId(o.getId());
       target.setType(o.getType());
       target.setName(getName(o));
-      target.setAlternateNames(getAlternateNames(o));
+      target.setAlternatenames(getAlternatenames(o));
       target.setYearpublished(getFirstIntegerValue(o.getYearpublisheds()));
       target.setProductcode(getFirstStringValue(o.getProductcodes()));
       target.setWidth(getFirstBigDecimalValue(o.getWidths()));
@@ -87,22 +87,28 @@ public interface CollectionMapper extends BaseMapper {
     return target;
   }
 
-  Collection.CollectionItem.CollectionItemVersion.CollectionItemVersionPublisher fromBggModel(com.boardgamegeek.collection.VersionPublisher source);
+  Collection.Item.Version.Publisher fromBggModel(com.boardgamegeek.collection.VersionPublisher source);
 
-  Collection.CollectionItem.CollectionItemVersion.CollectionItemVersionLink fromBggModel(com.boardgamegeek.collection.VersionLink source);
+  Collection.Item.Version.VersionLink fromBggModel(com.boardgamegeek.collection.VersionLink source);
 
-  default String getName(com.boardgamegeek.collection.VersionItem source) {
-    return source.getNames().stream()
-        .filter(e -> e.getType() == NameType.primary)
-        .map(Name::getValue)
-        .findFirst()
-        .get();
+  default Name getName(com.boardgamegeek.collection.Item source) {
+    return Optional.ofNullable(source.getName())
+        .map(e -> new Name(e.getValue(), e.getSortindex()))
+        .orElse(null);
   }
 
-  default List<String> getAlternateNames(com.boardgamegeek.collection.VersionItem source) {
+  default Name getName(com.boardgamegeek.collection.VersionItem source) {
+    return source.getNames().stream()
+        .filter(e -> e.getType() == NameType.primary)
+        .map(e -> new Name(e.getValue(), e.getSortindex()))
+        .findFirst()
+        .orElse(null);
+  }
+
+  default List<Name> getAlternatenames(com.boardgamegeek.collection.VersionItem source) {
     return source.getNames().stream()
         .filter(e -> e.getType() == NameType.alternate)
-        .map(Name::getValue)
+        .map(e -> new Name(e.getValue(), e.getSortindex()))
         .collect(Collectors.toList());
   }
 

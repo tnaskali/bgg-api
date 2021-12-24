@@ -27,15 +27,15 @@ public class User {
   private Integer traderating;
   private Integer numbuddies;
   // paged
-  private List<UserBuddy> buddies;
+  private List<Buddy> buddies;
   private Integer numguilds;
   // paged
   private List<UserGuild> guilds;
-  private UserRanking top;
-  private UserRanking hot;
+  private Ranking top;
+  private Ranking hot;
 
   @Data
-  public static class UserBuddy {
+  public static class Buddy {
     private Integer id;
     private String name;
   }
@@ -47,12 +47,12 @@ public class User {
   }
 
   @Data
-  public static class UserRanking {
-    private List<UserRankingItem> items;
+  public static class Ranking {
+    private List<RankingItem> items;
     private String domain;
 
     @Data
-    public static class UserRankingItem {
+    public static class RankingItem {
       private String rank;
       private RankType type;
       private String id;
