@@ -1,6 +1,6 @@
 package li.naska.bgg.resource.v3;
 
-import com.boardgamegeek.geeklist.Geeklist;
+import li.naska.bgg.resource.v3.model.Geeklist;
 import li.naska.bgg.resource.v3.model.GeeklistParams;
 import li.naska.bgg.service.GeeklistsService;
 import org.springdoc.api.annotations.ParameterObject;
