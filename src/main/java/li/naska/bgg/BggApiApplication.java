@@ -21,18 +21,26 @@ public class BggApiApplication {
   }
 
   @Bean
-  public GroupedOpenApi bggApiV0() {
-    return GroupedOpenApi.builder()
-        .group("v0")
-        .pathsToMatch("/api/v0/**")
-        .build();
-  }
-
-  @Bean
   public GroupedOpenApi bggApiV1() {
     return GroupedOpenApi.builder()
         .group("v1")
         .pathsToMatch("/api/v1/**")
+        .build();
+  }
+
+  @Bean
+  public GroupedOpenApi bggApiV2() {
+    return GroupedOpenApi.builder()
+        .group("v2")
+        .pathsToMatch("/api/v2/**")
+        .build();
+  }
+
+  @Bean
+  public GroupedOpenApi bggApiV3() {
+    return GroupedOpenApi.builder()
+        .group("v3")
+        .pathsToMatch("/api/v3/**")
         .build();
   }
 

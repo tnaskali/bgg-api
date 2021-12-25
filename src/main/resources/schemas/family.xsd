@@ -1,19 +1,20 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:family="http://www.boardgamegeek.com/family"
            targetNamespace="http://www.boardgamegeek.com/family">
 
   <xs:complexType name="name">
-    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="enums:nameType" use="required"/>
     <xs:attribute name="sortindex" type="xs:integer" use="required"/>
     <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="link">
-    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="enums:familyLinkType" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="value" type="xs:string" use="required"/>
-    <xs:attribute name="inbound" type="xs:string" use="required"/>
+    <xs:attribute name="inbound" type="xs:boolean"/>
   </xs:complexType>
 
   <xs:complexType name="family">
@@ -24,7 +25,7 @@
       <xs:element name="description" type="xs:string"/>
       <xs:element name="link" type="family:link" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="enums:familyType" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
   </xs:complexType>
 

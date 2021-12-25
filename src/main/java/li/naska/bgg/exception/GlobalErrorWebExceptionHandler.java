@@ -20,8 +20,12 @@ import java.util.Optional;
 @Order(-2)
 public class GlobalErrorWebExceptionHandler extends AbstractErrorWebExceptionHandler {
 
-  public GlobalErrorWebExceptionHandler(ErrorAttributes errorAttributes, WebProperties.Resources resources, ApplicationContext applicationContext, ServerCodecConfigurer codecConfigurer) {
-    super(errorAttributes, resources, applicationContext);
+  public GlobalErrorWebExceptionHandler(
+      ErrorAttributes errorAttributes,
+      WebProperties webProperties,
+      ApplicationContext applicationContext,
+      ServerCodecConfigurer codecConfigurer) {
+    super(errorAttributes, webProperties.getResources(), applicationContext);
     setMessageWriters(codecConfigurer.getWriters());
   }
 

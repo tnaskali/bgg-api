@@ -11,7 +11,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import reactor.util.retry.Retry;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -47,6 +49,9 @@ public class BggAuthenticationManager implements ReactiveAuthenticationManager {
             status -> status != HttpStatus.ACCEPTED,
             response -> Mono.error(new AuthenticationServiceException("Remote authentication failed")))
         .toEntity(String.class)
+        .retryWhen(
+            Retry.max(3)
+                .filter(throwable -> throwable instanceof IOException))
         .map(response -> new BggAuthenticationToken(
             Optional.ofNullable(response.getHeaders().get(HttpHeaders.SET_COOKIE))
                 .flatMap(l -> l.stream().filter(e -> e.startsWith("SessionID")).findFirst())

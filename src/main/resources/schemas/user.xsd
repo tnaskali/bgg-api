@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:common="http://www.boardgamegeek.com/common"
+           xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:user="http://www.boardgamegeek.com/user"
            targetNamespace="http://www.boardgamegeek.com/user">
 
   <xs:complexType name="rankingItem">
     <xs:attribute name="rank" type="xs:string" use="required"/>
-    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="enums:rankType" use="required"/>
     <xs:attribute name="id" type="xs:string" use="required"/>
     <xs:attribute name="name" type="xs:string" use="required"/>
   </xs:complexType>
@@ -49,22 +50,22 @@
       <xs:element name="firstname" type="common:stringValue"/>
       <xs:element name="lastname" type="common:stringValue"/>
       <xs:element name="avatarlink" type="common:stringValue"/>
-        <xs:element name="yearregistered" type="common:nillableIntegerValue"/>
-        <xs:element name="lastlogin" type="common:localDateValue"/>
-        <xs:element name="stateorprovince" type="common:stringValue"/>
-        <xs:element name="country" type="common:stringValue"/>
-        <xs:element name="webaddress" type="common:uriValue"/>
-        <xs:element name="xboxaccount" type="common:stringValue"/>
-        <xs:element name="wiiaccount" type="common:stringValue"/>
-        <xs:element name="psnaccount" type="common:stringValue"/>
-        <xs:element name="battlenetaccount" type="common:stringValue"/>
-        <xs:element name="steamaccount" type="common:stringValue"/>
-        <xs:element name="marketrating" type="common:integerValue"/>
-        <xs:element name="traderating" type="common:integerValue"/>
-        <xs:element name="buddies" type="user:buddies" minOccurs="0"/>
-        <xs:element name="guilds" type="user:guilds" minOccurs="0"/>
-        <xs:element name="top" type="user:ranking" minOccurs="0"/>
-        <xs:element name="hot" type="user:ranking" minOccurs="0"/>
+      <xs:element name="yearregistered" type="common:integerValue"/>
+      <xs:element name="lastlogin" type="common:localDateValue"/>
+      <xs:element name="stateorprovince" type="common:stringValue"/>
+      <xs:element name="country" type="common:stringValue"/>
+      <xs:element name="webaddress" type="common:stringValue"/>
+      <xs:element name="xboxaccount" type="common:stringValue"/>
+      <xs:element name="wiiaccount" type="common:stringValue"/>
+      <xs:element name="psnaccount" type="common:stringValue"/>
+      <xs:element name="battlenetaccount" type="common:stringValue"/>
+      <xs:element name="steamaccount" type="common:stringValue"/>
+      <xs:element name="marketrating" type="common:integerValue"/>
+      <xs:element name="traderating" type="common:integerValue"/>
+      <xs:element name="buddies" type="user:buddies" minOccurs="0"/>
+      <xs:element name="guilds" type="user:guilds" minOccurs="0"/>
+      <xs:element name="top" type="user:ranking" minOccurs="0"/>
+      <xs:element name="hot" type="user:ranking" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="id" type="common:nillableInteger" use="required"/> <!-- will be empty if user doesn't exist -->
     <xs:attribute name="name" type="xs:string" use="required"/>

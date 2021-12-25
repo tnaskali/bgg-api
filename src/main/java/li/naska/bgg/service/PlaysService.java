@@ -1,13 +1,18 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.geekplay.Play;
-import com.boardgamegeek.plays.Plays;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import li.naska.bgg.repository.BggGeekplayRepository;
+import com.boardgamegeek.enums.ItemType;
+import li.naska.bgg.mapper.GeekplayParamsMapper;
+import li.naska.bgg.mapper.PlaysMapper;
+import li.naska.bgg.mapper.PlaysParamsMapper;
+import li.naska.bgg.repository.BggGeekplaysRepository;
 import li.naska.bgg.repository.BggPlaysRepository;
-import li.naska.bgg.repository.model.BggPlaysParameters;
+import li.naska.bgg.repository.model.BggGeekplayRequestBody;
+import li.naska.bgg.repository.model.BggGeekplayResponseBody;
+import li.naska.bgg.repository.model.BggPlaysQueryParams;
+import li.naska.bgg.resource.v3.model.ItemPlaysParams;
+import li.naska.bgg.resource.v3.model.Play;
+import li.naska.bgg.resource.v3.model.Plays;
+import li.naska.bgg.resource.v3.model.UserPlaysParams;
 import li.naska.bgg.util.XmlProcessor;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
-import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class PlaysService {
@@ -25,28 +30,70 @@ public class PlaysService {
   private BggPlaysRepository playsRepository;
 
   @Autowired
-  private BggGeekplayRepository geekplayRepository;
+  private PlaysParamsMapper playsParamsMapper;
 
-  public Mono<Plays> getPlays(BggPlaysParameters parameters) {
-    return playsRepository.getPlays(parameters)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(Plays.class));
+  @Autowired
+  private PlaysMapper playsMapper;
+
+  @Autowired
+  private BggGeekplaysRepository geekplaysRepository;
+
+  @Autowired
+  private GeekplayParamsMapper geekplayParamsMapper;
+
+  public Mono<Plays> getUserPlays(String username, UserPlaysParams params) {
+    BggPlaysQueryParams bggParams = playsParamsMapper.toBggModel(params);
+    bggParams.setUsername(username);
+    return playsRepository.getPlays(bggParams)
+        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.plays.Plays.class))
+        .map(playsMapper::fromBggModel);
+  }
+
+  public Mono<Plays> getThingPlays(Integer id, ItemPlaysParams params) {
+    BggPlaysQueryParams bggParams = playsParamsMapper.toBggModel(params);
+    bggParams.setId(id);
+    bggParams.setType(ItemType.thing.name());
+    return playsRepository.getPlays(bggParams)
+        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.plays.Plays.class))
+        .map(playsMapper::fromBggModel);
+  }
+
+  public Mono<Plays> getFamilyPlays(Integer id, ItemPlaysParams params) {
+    BggPlaysQueryParams bggParams = playsParamsMapper.toBggModel(params);
+    bggParams.setId(id);
+    bggParams.setType(ItemType.family.name());
+    return playsRepository.getPlays(bggParams)
+        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.plays.Plays.class))
+        .map(playsMapper::fromBggModel);
   }
 
   @SneakyThrows
-  public Mono<Map<String, Object>> savePlay(String username, Integer id, Play play) {
-    return geekplayRepository.savePlay(username, id, play)
-        .map(body -> {
-          try {
-            return new ObjectMapper().readValue(body, new TypeReference<Map<String, Object>>() {
-            });
-          } catch (JsonProcessingException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
-          }
-        });
+  public Mono<BggGeekplayResponseBody> createPrivatePlay(String cookie, Play play) {
+    BggGeekplayRequestBody parameters = geekplayParamsMapper.toBggModel(play);
+    parameters.setAction("save");
+    parameters.setAjax(1);
+    return geekplaysRepository.updateGeekplay(cookie, parameters);
   }
 
-  public Mono<String> deletePlay(String username, Integer playId) {
-    return geekplayRepository.deletePlay(username, playId);
+  @SneakyThrows
+  public Mono<BggGeekplayResponseBody> updatePrivatePlay(Integer id, String cookie, Play play) {
+    if (!Objects.equals(id, play.getId())) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Play ID mismatch");
+    }
+    BggGeekplayRequestBody parameters = geekplayParamsMapper.toBggModel(play);
+    parameters.setAction("save");
+    parameters.setAjax(1);
+    parameters.setVersion(2);
+    return geekplaysRepository.updateGeekplay(cookie, parameters);
+  }
+
+  public Mono<BggGeekplayResponseBody> deletePrivatePlay(Integer id, String cookie) {
+    BggGeekplayRequestBody parameters = new BggGeekplayRequestBody();
+    parameters.setPlayid(id);
+    parameters.setAction("delete");
+    parameters.setAjax(1);
+    parameters.setFinalize(1);
+    return geekplaysRepository.updateGeekplay(cookie, parameters);
   }
 
 }

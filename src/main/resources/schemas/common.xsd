@@ -46,24 +46,12 @@
     <xs:attribute name="value" type="xs:integer" use="required"/>
   </xs:complexType>
 
-  <xs:complexType name="nonNegativeIntegerValue">
-    <xs:attribute name="value" type="xs:nonNegativeInteger" use="required"/>
-  </xs:complexType>
-
   <xs:complexType name="decimalValue">
     <xs:attribute name="value" type="xs:decimal" use="required"/>
   </xs:complexType>
 
-  <xs:complexType name="nonNegativeDecimalValue">
-    <xs:attribute name="value" type="common:nonNegativeDecimal" use="required"/>
-  </xs:complexType>
-
   <xs:complexType name="stringValue">
     <xs:attribute name="value" type="xs:string" use="required"/>
-  </xs:complexType>
-
-  <xs:complexType name="uriValue">
-    <xs:attribute name="value" type="xs:anyURI" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="nillableIntegerValue">
@@ -76,6 +64,10 @@
 
   <xs:complexType name="localDateTimeValue">
     <xs:attribute name="value" type="common:localDateTime" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="zonedDateTimeValue">
+    <xs:attribute name="value" type="common:zonedDateTime" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="sortIndexString">

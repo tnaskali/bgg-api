@@ -33,10 +33,8 @@ public class XmlProcessor {
 
   @SneakyThrows
   public String toJsonString() {
-    XmlMapper xmlMapper = new XmlMapper();
-    JsonNode node = xmlMapper.readTree(xmlString.getBytes());
-    ObjectMapper jsonMapper = new ObjectMapper();
-    return jsonMapper.writeValueAsString(node);
+    JsonNode node = new XmlMapper().readTree(xmlString.getBytes());
+    return new ObjectMapper().writeValueAsString(node);
   }
 
 }
