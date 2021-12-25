@@ -1,9 +1,9 @@
 package li.naska.bgg.service;
 
 import com.boardgamegeek.hot.HotItems;
-import com.boardgamegeek.search.Results;
 import li.naska.bgg.mapper.HotItemsMapper;
 import li.naska.bgg.mapper.HotItemsParamsMapper;
+import li.naska.bgg.mapper.ResultsMapper;
 import li.naska.bgg.mapper.SearchParamsMapper;
 import li.naska.bgg.repository.BggHotItemsRepository;
 import li.naska.bgg.repository.BggSearchRepository;
@@ -11,6 +11,7 @@ import li.naska.bgg.repository.model.BggHotItemsQueryParams;
 import li.naska.bgg.repository.model.BggSearchQueryParams;
 import li.naska.bgg.resource.v3.model.HotItem;
 import li.naska.bgg.resource.v3.model.HotItemsParams;
+import li.naska.bgg.resource.v3.model.Results;
 import li.naska.bgg.resource.v3.model.SearchParams;
 import li.naska.bgg.util.XmlProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ public class ItemsService {
   @Autowired
   private SearchParamsMapper searchParamsMapper;
 
+  @Autowired
+  private ResultsMapper resultsMapper;
+
   public Mono<List<HotItem>> getHotItems(HotItemsParams params) {
     BggHotItemsQueryParams bggParams = hotItemsParamsMapper.toBggModel(params);
     return hotItemsRepository.getHotItems(bggParams)
@@ -51,7 +55,8 @@ public class ItemsService {
   public Mono<Results> searchItems(SearchParams params) {
     BggSearchQueryParams bggParams = searchParamsMapper.toBggModel(params);
     return searchRepository.getResults(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(Results.class));
+        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.search.Results.class))
+        .map(resultsMapper::fromBggModel);
   }
 
 }

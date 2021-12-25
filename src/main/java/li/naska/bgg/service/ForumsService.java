@@ -43,7 +43,7 @@ public class ForumsService {
     bggParams.setId(id);
     return forumsRepository.getForum(bggParams)
         .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.forum.Forum.class))
-        .map(e -> forumMapper.fromBggModel(e));
+        .map(forumMapper::fromBggModel);
   }
 
   public Mono<List<Forum>> getForums(ForumsParams params) {
@@ -51,7 +51,7 @@ public class ForumsService {
     return forumListsRepository.getForums(bggParams)
         .map(xml -> new XmlProcessor(xml).toJavaObject(Forums.class))
         .map(f -> f.getForum().stream()
-            .map(e -> forumMapper.fromBggModel(e))
+            .map(forumMapper::fromBggModel)
             .collect(Collectors.toList()));
   }
 

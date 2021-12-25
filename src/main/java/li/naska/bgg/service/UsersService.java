@@ -28,7 +28,7 @@ public class UsersService {
     bggParams.setName(username);
     return usersRepository.getUser(bggParams)
         .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.user.User.class))
-        .map(e -> userMapper.fromBggModel(e));
+        .map(userMapper::fromBggModel);
   }
 
 }

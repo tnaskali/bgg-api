@@ -74,7 +74,7 @@ public class ThingsService {
     }
     return collectionRepository.getCollection(null, bggParams)
         .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.collection.Collection.class))
-        .map(e -> collectionMapper.fromBggModel(e));
+        .map(collectionMapper::fromBggModel);
   }
 
   public Mono<Collection> getPrivateThings(String username, String cookie, CollectionParams params) {
@@ -87,7 +87,7 @@ public class ThingsService {
     bggParams.setShowprivate(1);
     return collectionRepository.getCollection(cookie, bggParams)
         .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.collection.Collection.class))
-        .map(e -> collectionMapper.fromBggModel(e));
+        .map(collectionMapper::fromBggModel);
   }
 
 }

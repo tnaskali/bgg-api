@@ -28,7 +28,7 @@ public class ThreadsService {
     bggParams.setId(id);
     return threadsRepository.getThread(bggParams)
         .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.thread.Thread.class))
-        .map(e -> threadMapper.fromBggModel(e));
+        .map(threadMapper::fromBggModel);
   }
 
 }
