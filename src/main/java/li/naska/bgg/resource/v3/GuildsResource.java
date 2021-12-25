@@ -1,6 +1,6 @@
 package li.naska.bgg.resource.v3;
 
-import com.boardgamegeek.guild.Guild;
+import li.naska.bgg.resource.v3.model.Guild;
 import li.naska.bgg.resource.v3.model.GuildParams;
 import li.naska.bgg.service.GuildsService;
 import org.springdoc.api.annotations.ParameterObject;

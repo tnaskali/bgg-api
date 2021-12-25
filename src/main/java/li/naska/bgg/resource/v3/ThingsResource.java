@@ -1,6 +1,5 @@
 package li.naska.bgg.resource.v3;
 
-import com.boardgamegeek.search.Results;
 import li.naska.bgg.repository.BggHotItemsRepository;
 import li.naska.bgg.resource.v3.model.*;
 import li.naska.bgg.service.ForumsService;
