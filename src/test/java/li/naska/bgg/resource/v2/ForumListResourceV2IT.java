@@ -1,8 +1,6 @@
 package li.naska.bgg.resource.v2;
 
 import li.naska.bgg.resource.AbstractMockServerIT;
-import okhttp3.mockwebserver.Dispatcher;
-import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -67,15 +65,7 @@ public class ForumListResourceV2IT extends AbstractMockServerIT {
 
       @BeforeEach
       private void setup() {
-        mockWebServer.setDispatcher(new Dispatcher() {
-          @Override
-          public MockResponse dispatch(RecordedRequest request) {
-            return new MockResponse()
-                .setResponseCode(200)
-                .addHeader("Content-Type", "application/xml")
-                .setBody(mockResponseBody);
-          }
-        });
+        dispatch(200, mockResponseBody);
       }
 
       @Nested

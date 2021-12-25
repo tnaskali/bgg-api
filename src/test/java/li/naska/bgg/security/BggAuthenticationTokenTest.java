@@ -44,7 +44,6 @@ class BggAuthenticationTokenTest {
     String usernameCookie = "bggusername=foo; expires=Wed, 01-Dec-2021 13:42:33 GMT; Max-Age=2592000; path=/; domain=.boardgamegeek.com";
     String passwordCookie = "bggpassword=bar_encoded; expires=Wed, 01-Dec-2021 13:42:33 GMT; Max-Age=2592000; path=/; domain=.boardgamegeek.com";
 
-
     assertThatThrownBy(() -> new BggAuthenticationToken(sessionIdCookie, usernameCookie, passwordCookie)).hasMessage("sessionId cookie is null");
   }
 
