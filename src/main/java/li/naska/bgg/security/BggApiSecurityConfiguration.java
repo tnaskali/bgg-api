@@ -21,6 +21,8 @@ public class BggApiSecurityConfiguration {
         .csrf()
         .disable()
         .authorizeExchange()
+        .pathMatchers("/api/v2/*/private/**")
+        .authenticated()
         .pathMatchers("/api/v3/private/**")
         .authenticated()
         .anyExchange()

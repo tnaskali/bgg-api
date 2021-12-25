@@ -1,8 +1,6 @@
 package li.naska.bgg.resource.v1;
 
 import li.naska.bgg.resource.AbstractMockServerIT;
-import okhttp3.mockwebserver.Dispatcher;
-import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.assertj.core.util.TriFunction;
 import org.junit.jupiter.api.BeforeEach;
@@ -73,15 +71,7 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
 
       @BeforeEach
       private void setup() {
-        mockWebServer.setDispatcher(new Dispatcher() {
-          @Override
-          public MockResponse dispatch(RecordedRequest request) {
-            return new MockResponse()
-                .setResponseCode(200)
-                .addHeader("Content-Type", "application/xml")
-                .setBody(mockResponseBody);
-          }
-        });
+        dispatch(200, mockResponseBody);
       }
 
       @Nested

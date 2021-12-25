@@ -1,8 +1,6 @@
 package li.naska.bgg.resource.v2;
 
 import li.naska.bgg.resource.AbstractMockServerIT;
-import okhttp3.mockwebserver.Dispatcher;
-import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -23,30 +21,6 @@ import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * get thing
- * <p>
- * | given remote repository answers 200
- * | when invalid parameters
- * | then
- * | should answer 400
- * | should not forward request
- * <p>
- * | given remote repository answers 200
- * | when valid parameters
- * | when accept XML
- * | then
- * | should forward request
- * | should answer 200
- * | should render XML
- * <p>
- * | given remote repository answers 200
- * | when accept JSON
- * | then
- * | should forward request
- * | should answer 200
- * | should render JSON
- */
 @DisplayName("Thing resource V2")
 public class ThingResourceV2IT extends AbstractMockServerIT {
 
@@ -84,15 +58,7 @@ public class ThingResourceV2IT extends AbstractMockServerIT {
 
       @BeforeEach
       private void setup() {
-        mockWebServer.setDispatcher(new Dispatcher() {
-          @Override
-          public MockResponse dispatch(RecordedRequest request) {
-            return new MockResponse()
-                .setResponseCode(200)
-                .addHeader("Content-Type", "application/xml")
-                .setBody(mockResponseBody);
-          }
-        });
+        dispatch(200, mockResponseBody);
       }
 
       @Nested
@@ -151,7 +117,6 @@ public class ThingResourceV2IT extends AbstractMockServerIT {
                     add("historical", "1");
                     add("marketplace", "1");
                     add("comments", "1");
-                    add("ratingcomments", "1");
                     add("page", "1");
                     add("pagesize", "10");
                     add("from", "01-01-2001");
@@ -199,7 +164,6 @@ public class ThingResourceV2IT extends AbstractMockServerIT {
                   "&historical=1" +
                   "&marketplace=1" +
                   "&comments=1" +
-                  "&ratingcomments=1" +
                   "&page=1" +
                   "&pagesize=10" +
                   "&from=01-01-2001" +
@@ -259,7 +223,6 @@ public class ThingResourceV2IT extends AbstractMockServerIT {
                   "&historical=1" +
                   "&marketplace=1" +
                   "&comments=1" +
-                  "&ratingcomments=1" +
                   "&page=1" +
                   "&pagesize=10" +
                   "&from=01-01-2001" +
