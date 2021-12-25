@@ -1,5 +1,7 @@
 package li.naska.bgg.resource.v2;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import li.naska.bgg.repository.BggCollectionRepository;
 import li.naska.bgg.repository.model.BggCollectionQueryParams;
 import li.naska.bgg.security.BggAuthenticationToken;
@@ -31,14 +33,27 @@ public class CollectionResource {
 
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
   public Mono<String> getCollectionAsXml(@ParameterObject @Validated BggCollectionQueryParams parameters) {
+    return collectionRepository.getCollection(null, parameters);
+  }
+
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<String> getCollectionAsJson(@ParameterObject @Validated BggCollectionQueryParams parameters) {
+    return getCollectionAsXml(parameters)
+        .map(xml -> new XmlProcessor(xml).toJsonString());
+  }
+
+  @GetMapping(path = "/private", produces = MediaType.APPLICATION_XML_VALUE)
+  @Operation(security = @SecurityRequirement(name = "basicAuth"))
+  public Mono<String> getPrivateCollectionAsXml(@ParameterObject @Validated BggCollectionQueryParams parameters) {
     return authentication().flatMap(
         authn -> collectionRepository.getCollection(
             Optional.ofNullable(authn).map(BggAuthenticationToken::buildBggRequestHeader).orElse(null),
             parameters));
   }
 
-  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getCollectionAsJson(@ParameterObject @Validated BggCollectionQueryParams parameters) {
+  @GetMapping(path = "/private", produces = MediaType.APPLICATION_JSON_VALUE)
+  @Operation(security = @SecurityRequirement(name = "basicAuth"))
+  public Mono<String> getPrivateCollectionAsJson(@ParameterObject @Validated BggCollectionQueryParams parameters) {
     return getCollectionAsXml(parameters)
         .map(xml -> new XmlProcessor(xml).toJsonString());
   }

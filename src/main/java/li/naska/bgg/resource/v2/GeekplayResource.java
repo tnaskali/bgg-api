@@ -1,5 +1,7 @@
 package li.naska.bgg.resource.v2;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import li.naska.bgg.repository.BggGeekplaysRepository;
 import li.naska.bgg.repository.model.BggGeekplayRequestBody;
 import li.naska.bgg.repository.model.BggGeekplayResponseBody;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/api/v2/geekplay")
+@RequestMapping("/api/v2/geekplay/private")
 public class GeekplayResource {
 
   @Autowired
@@ -29,6 +31,7 @@ public class GeekplayResource {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @Operation(security = @SecurityRequirement(name = "basicAuth"))
   public Mono<BggGeekplayResponseBody> updateGeekplay(@ParameterObject @Validated @RequestBody BggGeekplayRequestBody params) {
     return authentication().flatMap(
         authn -> geekplayRepository.updateGeekplay(authn.buildBggRequestHeader(), params));
