@@ -1,5 +1,6 @@
 package li.naska.bgg.resource.v2;
 
+import com.boardgamegeek.forumlist.Forums;
 import li.naska.bgg.repository.BggForumListsRepository;
 import li.naska.bgg.repository.model.BggForumsQueryParams;
 import li.naska.bgg.util.XmlProcessor;
@@ -19,6 +20,9 @@ public class ForumListResource {
   @Autowired
   private BggForumListsRepository forumListsRepository;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
   public Mono<String> getForumsAsXml(@ParameterObject @Validated BggForumsQueryParams params) {
     return forumListsRepository.getForums(params);
@@ -27,7 +31,7 @@ public class ForumListResource {
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<String> getForumsAsJson(@ParameterObject @Validated BggForumsQueryParams params) {
     return getForumsAsXml(params)
-        .map(xml -> new XmlProcessor(xml).toJsonString());
+        .map(xml -> xmlProcessor.toJsonString(xml, Forums.class));
   }
 
 }

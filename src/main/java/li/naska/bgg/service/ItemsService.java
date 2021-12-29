@@ -42,10 +42,13 @@ public class ItemsService {
   @Autowired
   private ResultsMapper resultsMapper;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   public Mono<List<HotItem>> getHotItems(HotItemsParams params) {
     BggHotItemsQueryParams bggParams = hotItemsParamsMapper.toBggModel(params);
     return hotItemsRepository.getHotItems(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(HotItems.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, HotItems.class))
         .map(HotItems::getItem)
         .map(e -> e.stream()
             .map(hotItemsMapper::fromBggModel)
@@ -55,7 +58,7 @@ public class ItemsService {
   public Mono<Results> searchItems(SearchParams params) {
     BggSearchQueryParams bggParams = searchParamsMapper.toBggModel(params);
     return searchRepository.getResults(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.search.Results.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.search.Results.class))
         .map(resultsMapper::fromBggModel);
   }
 

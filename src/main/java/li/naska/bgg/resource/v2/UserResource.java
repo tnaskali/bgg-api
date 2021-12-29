@@ -1,5 +1,6 @@
 package li.naska.bgg.resource.v2;
 
+import com.boardgamegeek.user.User;
 import li.naska.bgg.repository.BggUsersRepository;
 import li.naska.bgg.repository.model.BggUserQueryParams;
 import li.naska.bgg.util.XmlProcessor;
@@ -19,6 +20,9 @@ public class UserResource {
   @Autowired
   private BggUsersRepository usersRepository;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
   public Mono<String> getUserAsXml(@ParameterObject @Validated BggUserQueryParams params) {
     return usersRepository.getUser(params);
@@ -27,7 +31,7 @@ public class UserResource {
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<String> getUserAsJson(@ParameterObject @Validated BggUserQueryParams params) {
     return getUserAsXml(params)
-        .map(xml -> new XmlProcessor(xml).toJsonString());
+        .map(xml -> xmlProcessor.toJsonString(xml, User.class));
   }
 
 }

@@ -38,18 +38,21 @@ public class ForumsService {
   @Autowired
   private ForumListsParamsMapper forumListsParamsMapper;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   public Mono<Forum> getForum(Integer id, ForumParams params) {
     BggForumQueryParams bggParams = forumParamsMapper.toBggModel(params);
     bggParams.setId(id);
     return forumsRepository.getForum(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.forum.Forum.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.forum.Forum.class))
         .map(forumMapper::fromBggModel);
   }
 
   public Mono<List<Forum>> getForums(ForumsParams params) {
     BggForumsQueryParams bggParams = forumListsParamsMapper.toBggModel(params);
     return forumListsRepository.getForums(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(Forums.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, Forums.class))
         .map(f -> f.getForum().stream()
             .map(forumMapper::fromBggModel)
             .collect(Collectors.toList()));

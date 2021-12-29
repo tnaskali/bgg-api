@@ -1,5 +1,6 @@
 package li.naska.bgg.resource.v2;
 
+import com.boardgamegeek.hot.HotItems;
 import li.naska.bgg.repository.BggHotItemsRepository;
 import li.naska.bgg.repository.model.BggHotItemsQueryParams;
 import li.naska.bgg.util.XmlProcessor;
@@ -19,6 +20,9 @@ public class HotResource {
   @Autowired
   private BggHotItemsRepository hotItemsRepository;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
   public Mono<String> getHotItemsAsXml(@ParameterObject @Validated BggHotItemsQueryParams params) {
     return hotItemsRepository.getHotItems(params);
@@ -27,7 +31,7 @@ public class HotResource {
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<String> getHotItemsAsJson(@ParameterObject @Validated BggHotItemsQueryParams params) {
     return getHotItemsAsXml(params)
-        .map(xml -> new XmlProcessor(xml).toJsonString());
+        .map(xml -> xmlProcessor.toJsonString(xml, HotItems.class));
   }
 
 }

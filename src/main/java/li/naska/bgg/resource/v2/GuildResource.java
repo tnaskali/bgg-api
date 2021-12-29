@@ -1,5 +1,6 @@
 package li.naska.bgg.resource.v2;
 
+import com.boardgamegeek.guild.Guild;
 import li.naska.bgg.repository.BggGuildsRepository;
 import li.naska.bgg.repository.model.BggGuildQueryParams;
 import li.naska.bgg.util.XmlProcessor;
@@ -19,6 +20,9 @@ public class GuildResource {
   @Autowired
   private BggGuildsRepository guildsRepository;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
   public Mono<String> getGuildAsXml(@ParameterObject @Validated BggGuildQueryParams params) {
     return guildsRepository.getGuild(params);
@@ -27,7 +31,7 @@ public class GuildResource {
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<String> getGuildAsJson(@ParameterObject @Validated BggGuildQueryParams params) {
     return getGuildAsXml(params)
-        .map(xml -> new XmlProcessor(xml).toJsonString());
+        .map(xml -> xmlProcessor.toJsonString(xml, Guild.class));
   }
 
 }

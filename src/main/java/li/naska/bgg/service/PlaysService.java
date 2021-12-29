@@ -41,11 +41,14 @@ public class PlaysService {
   @Autowired
   private GeekplayParamsMapper geekplayParamsMapper;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   public Mono<Plays> getUserPlays(String username, UserPlaysParams params) {
     BggPlaysQueryParams bggParams = playsParamsMapper.toBggModel(params);
     bggParams.setUsername(username);
     return playsRepository.getPlays(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.plays.Plays.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.plays.Plays.class))
         .map(playsMapper::fromBggModel);
   }
 
@@ -54,7 +57,7 @@ public class PlaysService {
     bggParams.setId(id);
     bggParams.setType(ItemType.thing.name());
     return playsRepository.getPlays(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.plays.Plays.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.plays.Plays.class))
         .map(playsMapper::fromBggModel);
   }
 
@@ -63,7 +66,7 @@ public class PlaysService {
     bggParams.setId(id);
     bggParams.setType(ItemType.family.name());
     return playsRepository.getPlays(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.plays.Plays.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.plays.Plays.class))
         .map(playsMapper::fromBggModel);
   }
 

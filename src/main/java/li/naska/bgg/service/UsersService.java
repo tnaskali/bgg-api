@@ -23,11 +23,14 @@ public class UsersService {
   @Autowired
   private UserMapper userMapper;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   public Mono<User> getUser(String username, UserParams params) {
     BggUserQueryParams bggParams = userParamsMapper.toBggModel(params);
     bggParams.setName(username);
     return usersRepository.getUser(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.user.User.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.user.User.class))
         .map(userMapper::fromBggModel);
   }
 

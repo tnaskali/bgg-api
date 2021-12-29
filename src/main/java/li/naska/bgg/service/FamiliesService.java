@@ -34,11 +34,14 @@ public class FamiliesService {
   @Autowired
   private FamilyMapper familyMapper;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   public Mono<Family> getFamily(Integer id, FamilyParams params) {
     BggFamiliesQueryParams bggParams = familyParamsMapper.toBggModel(params);
     bggParams.setId(id.toString());
     return familiesRepository.getFamilies(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(Families.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, Families.class))
         .map(Families::getItem)
         .flatMap(l -> l.size() == 1
             ? Mono.just(l.get(0))
@@ -49,7 +52,7 @@ public class FamiliesService {
   public Mono<List<Family>> getFamilies(FamiliesParams params) {
     BggFamiliesQueryParams bggParams = familiesParamsMapper.toBggModel(params);
     return familiesRepository.getFamilies(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(Families.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, Families.class))
         .map(Families::getItem)
         .map(l -> l.stream()
             .map(familyMapper::fromBggModel)
