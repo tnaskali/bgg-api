@@ -208,7 +208,7 @@ public class FamilyResourceV2IT extends AbstractMockServerIT {
             @Test
             @DisplayName("should render JSON")
             public void should_3() throws Exception {
-              result.expectBody().jsonPath("$.item.id").isEqualTo(666);
+              result.expectBody().jsonPath("$.item[0].id").isEqualTo(666);
             }
 
           }

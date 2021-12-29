@@ -1,5 +1,6 @@
 package li.naska.bgg.resource.v2;
 
+import com.boardgamegeek.thread.Thread;
 import li.naska.bgg.repository.BggThreadsRepository;
 import li.naska.bgg.repository.model.BggThreadQueryParams;
 import li.naska.bgg.util.XmlProcessor;
@@ -19,6 +20,9 @@ public class ThreadResource {
   @Autowired
   private BggThreadsRepository threadsRepository;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
   public Mono<String> getThreadAsXml(@ParameterObject @Validated BggThreadQueryParams params) {
     return threadsRepository.getThread(params);
@@ -27,7 +31,7 @@ public class ThreadResource {
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<String> getThreadAsJson(@ParameterObject @Validated BggThreadQueryParams params) {
     return getThreadAsXml(params)
-        .map(xml -> new XmlProcessor(xml).toJsonString());
+        .map(xml -> xmlProcessor.toJsonString(xml, Thread.class));
   }
 
 }

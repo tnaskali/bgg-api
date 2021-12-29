@@ -1,9 +1,9 @@
 package li.naska.bgg.util;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.xml.StaxUtils;
 
 import javax.xml.bind.JAXBContext;
@@ -13,16 +13,14 @@ import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import java.io.StringReader;
 
+@Component
 public class XmlProcessor {
 
-  private final String xmlString;
-
-  public XmlProcessor(String xmlString) {
-    this.xmlString = xmlString;
-  }
+  @Autowired
+  private ObjectMapper objectMapper;
 
   @SneakyThrows
-  public <T> T toJavaObject(Class<T> targetClass) {
+  public <T> T toJavaObject(String xmlString, Class<T> targetClass) {
     JAXBContext context = JAXBContext.newInstance(targetClass);
     Unmarshaller unmarshaller = context.createUnmarshaller();
     XMLInputFactory inputFactory = StaxUtils.createDefensiveInputFactory();
@@ -32,9 +30,9 @@ public class XmlProcessor {
   }
 
   @SneakyThrows
-  public String toJsonString() {
-    JsonNode node = new XmlMapper().readTree(xmlString.getBytes());
-    return new ObjectMapper().writeValueAsString(node);
+  public <T> String toJsonString(String xmlString, Class<T> targetClass) {
+    T object = toJavaObject(xmlString, targetClass);
+    return objectMapper.writeValueAsString(object);
   }
 
 }

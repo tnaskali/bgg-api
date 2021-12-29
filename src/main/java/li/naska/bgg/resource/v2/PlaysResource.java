@@ -1,5 +1,6 @@
 package li.naska.bgg.resource.v2;
 
+import com.boardgamegeek.plays.Plays;
 import li.naska.bgg.repository.BggPlaysRepository;
 import li.naska.bgg.repository.model.BggPlaysQueryParams;
 import li.naska.bgg.util.XmlProcessor;
@@ -19,6 +20,9 @@ public class PlaysResource {
   @Autowired
   private BggPlaysRepository playsRepository;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
   public Mono<String> getPlaysAsXml(@ParameterObject @Validated BggPlaysQueryParams params) {
     return playsRepository.getPlays(params);
@@ -27,7 +31,7 @@ public class PlaysResource {
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<String> getPlaysAsJson(@ParameterObject @Validated BggPlaysQueryParams params) {
     return getPlaysAsXml(params)
-        .map(xml -> new XmlProcessor(xml).toJsonString());
+        .map(xml -> xmlProcessor.toJsonString(xml, Plays.class));
   }
 
 }

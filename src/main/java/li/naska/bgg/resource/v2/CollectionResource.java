@@ -1,5 +1,6 @@
 package li.naska.bgg.resource.v2;
 
+import com.boardgamegeek.collection.Collection;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import li.naska.bgg.repository.BggCollectionRepository;
@@ -25,6 +26,9 @@ public class CollectionResource {
   @Autowired
   private BggCollectionRepository collectionRepository;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   private Mono<BggAuthenticationToken> authentication() {
     return ReactiveSecurityContextHolder.getContext().map(
         context -> (BggAuthenticationToken) context.getAuthentication()
@@ -39,7 +43,7 @@ public class CollectionResource {
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<String> getCollectionAsJson(@ParameterObject @Validated BggCollectionQueryParams parameters) {
     return getCollectionAsXml(parameters)
-        .map(xml -> new XmlProcessor(xml).toJsonString());
+        .map(xml -> xmlProcessor.toJsonString(xml, Collection.class));
   }
 
   @GetMapping(path = "/private", produces = MediaType.APPLICATION_XML_VALUE)
@@ -55,7 +59,7 @@ public class CollectionResource {
   @Operation(security = @SecurityRequirement(name = "basicAuth"))
   public Mono<String> getPrivateCollectionAsJson(@ParameterObject @Validated BggCollectionQueryParams parameters) {
     return getCollectionAsXml(parameters)
-        .map(xml -> new XmlProcessor(xml).toJsonString());
+        .map(xml -> xmlProcessor.toJsonString(xml, Collection.class));
   }
 
 }

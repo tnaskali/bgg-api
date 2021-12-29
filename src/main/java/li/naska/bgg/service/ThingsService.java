@@ -42,11 +42,14 @@ public class ThingsService {
   @Autowired
   private ThingMapper thingMapper;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   public Mono<Thing> getThing(Integer id, ThingParams params) {
     BggThingsQueryParams bggParams = thingParamsMapper.toBggModel(params);
     bggParams.setId(id.toString());
     return thingsRepository.getThings(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(Things.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, Things.class))
         .map(Things::getItem)
         .flatMap(l -> l.size() == 1
             ? Mono.just(l.get(0))
@@ -57,7 +60,7 @@ public class ThingsService {
   public Mono<List<Thing>> getThings(ThingsParams params) {
     BggThingsQueryParams bggParams = thingsParamsMapper.toBggModel(params);
     return thingsRepository.getThings(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(Things.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, Things.class))
         .map(Things::getItem)
         .map(l -> l.stream()
             .map(thingMapper::fromBggModel)
@@ -73,7 +76,7 @@ public class ThingsService {
       bggParams.setExcludesubtype(CollectionItemSubtype.boardgameexpansion.value());
     }
     return collectionRepository.getCollection(null, bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.collection.Collection.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.collection.Collection.class))
         .map(collectionMapper::fromBggModel);
   }
 
@@ -86,7 +89,7 @@ public class ThingsService {
     }
     bggParams.setShowprivate(1);
     return collectionRepository.getCollection(cookie, bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.collection.Collection.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.collection.Collection.class))
         .map(collectionMapper::fromBggModel);
   }
 

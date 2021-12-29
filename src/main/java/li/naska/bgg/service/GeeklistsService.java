@@ -23,10 +23,13 @@ public class GeeklistsService {
   @Autowired
   private GeeklistMapper geeklistMapper;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   public Mono<Geeklist> getGeeklist(Integer id, GeeklistParams params) {
     BggGeeklistQueryParams bggParams = geeklistParamsMapper.toBggModel(params);
     return geeklistsRepository.getGeeklist(id, bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.geeklist.Geeklist.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.geeklist.Geeklist.class))
         .map(geeklistMapper::fromBggModel);
   }
 

@@ -1,5 +1,6 @@
 package li.naska.bgg.resource.v2;
 
+import com.boardgamegeek.search.Results;
 import li.naska.bgg.repository.BggSearchRepository;
 import li.naska.bgg.repository.model.BggSearchQueryParams;
 import li.naska.bgg.util.XmlProcessor;
@@ -19,6 +20,9 @@ public class SearchResource {
   @Autowired
   private BggSearchRepository searchRepository;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
   public Mono<String> getResultsAsXml(@ParameterObject @Validated BggSearchQueryParams params) {
     return searchRepository.getResults(params);
@@ -27,7 +31,7 @@ public class SearchResource {
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<String> getResultsAsJson(@ParameterObject @Validated BggSearchQueryParams params) {
     return getResultsAsXml(params)
-        .map(xml -> new XmlProcessor(xml).toJsonString());
+        .map(xml -> xmlProcessor.toJsonString(xml, Results.class));
   }
 
 }

@@ -1,5 +1,6 @@
 package li.naska.bgg.resource.v1;
 
+import com.boardgamegeek.geeklist.Geeklist;
 import li.naska.bgg.repository.BggGeeklistsRepository;
 import li.naska.bgg.repository.model.BggGeeklistQueryParams;
 import li.naska.bgg.util.XmlProcessor;
@@ -22,6 +23,9 @@ public class GeeklistResource {
   @Autowired
   private BggGeeklistsRepository geeklistsRepository;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_XML_VALUE)
   public Mono<String> getGeeklistAsXml(
       @NotNull @PathVariable Integer id,
@@ -34,7 +38,7 @@ public class GeeklistResource {
       @NotNull @PathVariable Integer id,
       @ParameterObject @Validated BggGeeklistQueryParams params) {
     return getGeeklistAsXml(id, params)
-        .map(xml -> new XmlProcessor(xml).toJsonString());
+        .map(xml -> xmlProcessor.toJsonString(xml, Geeklist.class));
   }
 
 }

@@ -1,5 +1,6 @@
 package li.naska.bgg.resource.v2;
 
+import com.boardgamegeek.family.Families;
 import li.naska.bgg.repository.BggFamiliesRepository;
 import li.naska.bgg.repository.model.BggFamiliesQueryParams;
 import li.naska.bgg.util.XmlProcessor;
@@ -19,6 +20,9 @@ public class FamilyResource {
   @Autowired
   private BggFamiliesRepository familiesRepository;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
   public Mono<String> getFamiliesAsXml(@ParameterObject @Validated BggFamiliesQueryParams params) {
     return familiesRepository.getFamilies(params);
@@ -27,7 +31,7 @@ public class FamilyResource {
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<String> getFamiliesAsJson(@ParameterObject @Validated BggFamiliesQueryParams params) {
     return getFamiliesAsXml(params)
-        .map(xml -> new XmlProcessor(xml).toJsonString());
+        .map(xml -> xmlProcessor.toJsonString(xml, Families.class));
   }
 
 }

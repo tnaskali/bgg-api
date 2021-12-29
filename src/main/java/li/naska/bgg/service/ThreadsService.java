@@ -23,11 +23,14 @@ public class ThreadsService {
   @Autowired
   private ThreadMapper threadMapper;
 
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
   public Mono<Thread> getThread(Integer id, ThreadParams params) {
     BggThreadQueryParams bggParams = threadParamsMapper.toBggModel(params);
     bggParams.setId(id);
     return threadsRepository.getThread(bggParams)
-        .map(xml -> new XmlProcessor(xml).toJavaObject(com.boardgamegeek.thread.Thread.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.thread.Thread.class))
         .map(threadMapper::fromBggModel);
   }
 

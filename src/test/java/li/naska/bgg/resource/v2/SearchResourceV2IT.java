@@ -211,7 +211,7 @@ public class SearchResourceV2IT extends AbstractMockServerIT {
             @DisplayName("should render JSON")
             public void should_3() throws Exception {
               result.expectBody()
-                  .jsonPath("$.item.id").isEqualTo(666);
+                  .jsonPath("$.item[0].id").isEqualTo(666);
             }
 
           }
