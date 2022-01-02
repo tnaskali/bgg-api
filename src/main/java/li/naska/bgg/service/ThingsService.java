@@ -76,7 +76,7 @@ public class ThingsService {
         .flatMap(thing -> {
           int numPages = (int) Math.ceil((double) thing.getStatistics().getNumcomments() / BGG_THING_COMMENTS_PAGE_SIZE);
           return Flux.range(1, numPages)
-              .flatMap(page -> {
+              .flatMapSequential(page -> {
                 BggThingsQueryParams queryParams = new BggThingsQueryParams();
                 queryParams.setId(id.toString());
                 queryParams.setComments(1);
@@ -102,7 +102,7 @@ public class ThingsService {
     firstPageQueryParams.setPagesize(BGG_THING_COMMENTS_PAGE_SIZE);
     return getThing(firstPageQueryParams)
         .flatMap(thing -> Flux.range(helper.getBggStartPage(), helper.getBggPages())
-            .flatMap(page -> {
+            .flatMapSequential(page -> {
               BggThingsQueryParams queryParams = new BggThingsQueryParams();
               queryParams.setId(id.toString());
               queryParams.setComments(1);
@@ -138,7 +138,7 @@ public class ThingsService {
         .flatMap(thing -> {
           int numPages = (int) Math.ceil((double) thing.getStatistics().getNumcomments() / BGG_THING_COMMENTS_PAGE_SIZE);
           return Flux.range(1, numPages)
-              .flatMap(page -> {
+              .flatMapSequential(page -> {
                 BggThingsQueryParams queryParams = new BggThingsQueryParams();
                 queryParams.setId(id.toString());
                 queryParams.setRatingcomments(1);
@@ -164,7 +164,7 @@ public class ThingsService {
     firstPageQueryParams.setPagesize(BGG_THING_COMMENTS_PAGE_SIZE);
     return getThing(firstPageQueryParams)
         .flatMap(thing -> Flux.range(helper.getBggStartPage(), helper.getBggPages())
-            .flatMap(page -> {
+            .flatMapSequential(page -> {
               BggThingsQueryParams queryParams = new BggThingsQueryParams();
               queryParams.setId(id.toString());
               queryParams.setRatingcomments(1);

@@ -102,7 +102,7 @@ public class ForumsService {
         .flatMap(forum -> {
           int numPages = (int) Math.ceil((double) forum.getNumthreads() / BGG_FORUM_THREADS_PAGE_SIZE);
           return Flux.range(1, numPages)
-              .flatMap(page -> {
+              .flatMapSequential(page -> {
                 if (page == 1) {
                   return Mono.just(forum);
                 }
@@ -126,7 +126,7 @@ public class ForumsService {
     firstPageQueryParams.setPage(1);
     return getForum(firstPageQueryParams)
         .flatMap(guild -> Flux.range(helper.getBggStartPage(), helper.getBggPages())
-            .flatMap(page -> {
+            .flatMapSequential(page -> {
               if (page == helper.getBggStartPage()) {
                 return Mono.just(guild);
               }

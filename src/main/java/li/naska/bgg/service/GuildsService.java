@@ -57,7 +57,7 @@ public class GuildsService {
         .flatMap(guild -> {
           int numPages = (int) Math.ceil((double) guild.getNummembers() / BGG_GUILD_MEMBERS_PAGE_SIZE);
           return Flux.range(1, numPages)
-              .flatMap(page -> {
+              .flatMapSequential(page -> {
                 if (page == 1) {
                   return Mono.just(guild);
                 }
@@ -83,7 +83,7 @@ public class GuildsService {
     firstPageQueryParams.setPage(1);
     return getGuild(firstPageQueryParams)
         .flatMap(guild -> Flux.range(helper.getBggStartPage(), helper.getBggPages())
-            .flatMap(page -> {
+            .flatMapSequential(page -> {
               if (page == helper.getBggStartPage()) {
                 return Mono.just(guild);
               }
