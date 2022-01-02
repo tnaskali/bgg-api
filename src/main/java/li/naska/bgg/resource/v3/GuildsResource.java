@@ -1,8 +1,11 @@
 package li.naska.bgg.resource.v3;
 
 import li.naska.bgg.resource.v3.model.Guild;
+import li.naska.bgg.resource.v3.model.Guild.Member;
 import li.naska.bgg.resource.v3.model.GuildParams;
 import li.naska.bgg.service.GuildsService;
+import li.naska.bgg.util.Page;
+import li.naska.bgg.util.PagingParams;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -25,8 +28,15 @@ public class GuildsResource {
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<Guild> getGuild(
       @NotNull @PathVariable Integer id,
-      @ParameterObject @Validated GuildParams parameters) {
-    return guildsService.getGuild(id, parameters);
+      @ParameterObject @Validated GuildParams params) {
+    return guildsService.getGuild(id, params);
+  }
+
+  @GetMapping(value = "/{id}/members", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<Page<Member>> getMembers(
+      @NotNull @PathVariable Integer id,
+      @ParameterObject @Validated PagingParams pagingParams) {
+    return guildsService.getPagedMembers(id, pagingParams);
   }
 
 }

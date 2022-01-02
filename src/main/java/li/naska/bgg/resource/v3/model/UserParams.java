@@ -6,10 +6,6 @@ import lombok.Data;
 @Data
 public class UserParams {
 
-  private Boolean buddies;
-
-  private Boolean guilds;
-
   private Boolean hot;
 
   private Boolean top;

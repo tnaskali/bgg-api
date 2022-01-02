@@ -46,8 +46,8 @@ public class ItemsService {
   private XmlProcessor xmlProcessor;
 
   public Mono<List<HotItem>> getHotItems(HotItemsParams params) {
-    BggHotItemsQueryParams bggParams = hotItemsParamsMapper.toBggModel(params);
-    return hotItemsRepository.getHotItems(bggParams)
+    BggHotItemsQueryParams queryParams = hotItemsParamsMapper.toBggModel(params);
+    return hotItemsRepository.getHotItems(queryParams)
         .map(xml -> xmlProcessor.toJavaObject(xml, HotItems.class))
         .map(HotItems::getItem)
         .map(e -> e.stream()
@@ -56,8 +56,8 @@ public class ItemsService {
   }
 
   public Mono<Results> searchItems(SearchParams params) {
-    BggSearchQueryParams bggParams = searchParamsMapper.toBggModel(params);
-    return searchRepository.getResults(bggParams)
+    BggSearchQueryParams queryParams = searchParamsMapper.toBggModel(params);
+    return searchRepository.getResults(queryParams)
         .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.search.Results.class))
         .map(resultsMapper::fromBggModel);
   }

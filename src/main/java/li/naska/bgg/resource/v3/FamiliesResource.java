@@ -4,6 +4,8 @@ import li.naska.bgg.resource.v3.model.*;
 import li.naska.bgg.service.FamiliesService;
 import li.naska.bgg.service.ForumsService;
 import li.naska.bgg.service.PlaysService;
+import li.naska.bgg.util.Page;
+import li.naska.bgg.util.PagingParams;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -32,15 +34,14 @@ public class FamiliesResource {
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<List<Family>> getFamilies(
-      @ParameterObject @Validated FamiliesParams parameters) {
-    return familiesService.getFamilies(parameters);
+      @ParameterObject @Validated FamiliesParams params) {
+    return familiesService.getFamilies(params);
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<Family> getFamily(
-      @NotNull @PathVariable Integer id,
-      @ParameterObject @Validated FamilyParams parameters) {
-    return familiesService.getFamily(id, parameters);
+      @NotNull @PathVariable Integer id) {
+    return familiesService.getFamily(id);
   }
 
   @GetMapping(value = "/{id}/forums", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -50,10 +51,11 @@ public class FamiliesResource {
   }
 
   @GetMapping(value = "/{id}/plays", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<Plays> getPlays(
+  public Mono<Page<Play>> getPlays(
       @NotNull @PathVariable Integer id,
-      @ParameterObject @Validated ItemPlaysParams parameters) {
-    return playsService.getFamilyPlays(id, parameters);
+      @ParameterObject @Validated ItemPlaysParams params,
+      @ParameterObject @Validated PagingParams pagingParams) {
+    return playsService.getPagedFamilyPlays(id, params, pagingParams);
   }
 
 }

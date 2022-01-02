@@ -2,7 +2,7 @@ package li.naska.bgg.resource.v3;
 
 import li.naska.bgg.resource.v3.model.Thread;
 import li.naska.bgg.resource.v3.model.ThreadParams;
-import li.naska.bgg.service.ThreadsService;
+import li.naska.bgg.service.ForumsService;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,13 +20,13 @@ import javax.validation.constraints.NotNull;
 public class ThreadsResource {
 
   @Autowired
-  private ThreadsService threadsService;
+  private ForumsService forumsService;
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<Thread> getThread(
       @NotNull @PathVariable Integer id,
-      @ParameterObject @Validated ThreadParams parameters) {
-    return threadsService.getThread(id, parameters);
+      @ParameterObject @Validated ThreadParams params) {
+    return forumsService.getThread(id, params);
   }
 
 }

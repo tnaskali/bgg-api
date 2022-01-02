@@ -2,6 +2,7 @@ package li.naska.bgg.mapper;
 
 import com.boardgamegeek.forum.Threads;
 import li.naska.bgg.resource.v3.model.Forum;
+import li.naska.bgg.resource.v3.model.Thread;
 import org.mapstruct.*;
 
 import java.util.List;
@@ -24,9 +25,11 @@ public interface ForumMapper {
   @Mapping(target = "threads", ignore = true)
   Forum fromBggModel(com.boardgamegeek.forumlist.Forum source);
 
-  Forum.Thread fromBggModel(com.boardgamegeek.forum.Thread source);
+  @Mapping(target = "link", ignore = true)
+  @Mapping(target = "articles", ignore = true)
+  Thread fromBggModel(com.boardgamegeek.forum.Thread source);
 
-  default List<Forum.Thread> getThreads(com.boardgamegeek.forum.Forum source) {
+  default List<Thread> getThreads(com.boardgamegeek.forum.Forum source) {
     return Optional.ofNullable(source.getThreads())
         .map(Threads::getThread)
         .map(l -> l.stream()

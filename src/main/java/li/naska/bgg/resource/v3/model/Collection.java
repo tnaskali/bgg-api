@@ -38,9 +38,9 @@ public class Collection {
     @Data
     public static class PrivateInfo {
       private String privatecomment;
-      private String ppCurrency;
+      private String pp_currency;
       private BigDecimal pricepaid;
-      private String cvCurrency;
+      private String cv_currency;
       private BigDecimal currvalue;
       private Integer quantity;
       private LocalDate acquisitiondate;
