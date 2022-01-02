@@ -54,7 +54,7 @@ public class UsersService {
         .flatMap(user -> {
           int numPages = (int) Math.ceil((double) user.getNumbuddies() / BGG_USER_BUDDIES_PAGE_SIZE);
           return Flux.range(1, numPages)
-              .flatMap(page -> {
+              .flatMapSequential(page -> {
                 if (page == 1) {
                   return Mono.just(user);
                 }
@@ -80,7 +80,7 @@ public class UsersService {
     firstPageQueryParams.setPage(1);
     return getUser(firstPageQueryParams)
         .flatMap(user -> Flux.range(helper.getBggStartPage(), helper.getBggPages())
-            .flatMap(page -> {
+            .flatMapSequential(page -> {
               if (page == helper.getBggStartPage()) {
                 return Mono.just(user);
               }
@@ -116,7 +116,7 @@ public class UsersService {
         .flatMap(user -> {
           int numPages = (int) Math.ceil((double) user.getNumguilds() / BGG_USER_BUDDIES_PAGE_SIZE);
           return Flux.range(1, numPages)
-              .flatMap(page -> {
+              .flatMapSequential(page -> {
                 if (page == 1) {
                   return Mono.just(user);
                 }
@@ -142,7 +142,7 @@ public class UsersService {
     firstPageQueryParams.setPage(1);
     return getUser(firstPageQueryParams)
         .flatMap(user -> Flux.range(helper.getBggStartPage(), helper.getBggPages())
-            .flatMap(page -> {
+            .flatMapSequential(page -> {
               if (page == helper.getBggStartPage()) {
                 return Mono.just(user);
               }

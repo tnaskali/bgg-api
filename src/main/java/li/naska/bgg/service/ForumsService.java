@@ -2,7 +2,10 @@ package li.naska.bgg.service;
 
 import com.boardgamegeek.enums.ItemType;
 import com.boardgamegeek.forumlist.Forums;
-import li.naska.bgg.mapper.*;
+import li.naska.bgg.mapper.ForumListsParamsMapper;
+import li.naska.bgg.mapper.ForumMapper;
+import li.naska.bgg.mapper.ThreadMapper;
+import li.naska.bgg.mapper.ThreadParamsMapper;
 import li.naska.bgg.repository.BggForumListsRepository;
 import li.naska.bgg.repository.BggForumsRepository;
 import li.naska.bgg.repository.BggThreadsRepository;
@@ -32,9 +35,6 @@ public class ForumsService {
 
   @Autowired
   private BggForumsRepository forumsRepository;
-
-  @Autowired
-  private ForumParamsMapper forumParamsMapper;
 
   @Autowired
   private ForumMapper forumMapper;
@@ -102,7 +102,7 @@ public class ForumsService {
         .flatMap(forum -> {
           int numPages = (int) Math.ceil((double) forum.getNumthreads() / BGG_FORUM_THREADS_PAGE_SIZE);
           return Flux.range(1, numPages)
-              .flatMap(page -> {
+              .flatMapSequential(page -> {
                 if (page == 1) {
                   return Mono.just(forum);
                 }
@@ -126,7 +126,7 @@ public class ForumsService {
     firstPageQueryParams.setPage(1);
     return getForum(firstPageQueryParams)
         .flatMap(guild -> Flux.range(helper.getBggStartPage(), helper.getBggPages())
-            .flatMap(page -> {
+            .flatMapSequential(page -> {
               if (page == helper.getBggStartPage()) {
                 return Mono.just(guild);
               }

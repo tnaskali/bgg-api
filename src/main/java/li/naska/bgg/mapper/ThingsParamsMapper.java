@@ -21,6 +21,13 @@ public interface ThingsParamsMapper {
 
   @Mapping(target = "id", source = "ids")
   @Mapping(target = "type", source = "types")
+  @Mapping(target = "videos", ignore = true)
+  @Mapping(target = "versions", ignore = true)
+  @Mapping(target = "marketplace", ignore = true)
+  @Mapping(target = "comments", ignore = true)
+  @Mapping(target = "ratingcomments", ignore = true)
+  @Mapping(target = "page", ignore = true)
+  @Mapping(target = "pagesize", ignore = true)
   @Mapping(target = "historical", ignore = true)
   @Mapping(target = "from", ignore = true)
   @Mapping(target = "to", ignore = true)

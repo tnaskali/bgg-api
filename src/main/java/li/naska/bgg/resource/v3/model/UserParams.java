@@ -12,6 +12,4 @@ public class UserParams {
 
   private UserDomainType domain;
 
-  private Integer page;
-
 }

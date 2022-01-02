@@ -118,7 +118,7 @@ public class PlaysService {
         .flatMap(plays -> {
           int numPages = (int) Math.ceil((double) plays.getNumplays() / BGG_PLAYS_PAGE_SIZE);
           return Flux.range(1, numPages)
-              .flatMap(page -> {
+              .flatMapSequential(page -> {
                 if (page == 1) {
                   return Mono.just(plays);
                 }
@@ -140,7 +140,7 @@ public class PlaysService {
     firstPageQueryParams.setPage(helper.getBggStartPage());
     return getPlays(firstPageQueryParams)
         .flatMap(plays -> Flux.range(helper.getBggStartPage(), helper.getBggPages())
-            .flatMap(page -> {
+            .flatMapSequential(page -> {
               if (page == helper.getBggStartPage()) {
                 return Mono.just(plays);
               }
