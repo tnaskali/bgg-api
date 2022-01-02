@@ -2,7 +2,10 @@ package li.naska.bgg.service;
 
 import com.boardgamegeek.enums.ItemType;
 import com.boardgamegeek.forumlist.Forums;
-import li.naska.bgg.mapper.*;
+import li.naska.bgg.mapper.ForumListsParamsMapper;
+import li.naska.bgg.mapper.ForumMapper;
+import li.naska.bgg.mapper.ThreadMapper;
+import li.naska.bgg.mapper.ThreadParamsMapper;
 import li.naska.bgg.repository.BggForumListsRepository;
 import li.naska.bgg.repository.BggForumsRepository;
 import li.naska.bgg.repository.BggThreadsRepository;
@@ -32,9 +35,6 @@ public class ForumsService {
 
   @Autowired
   private BggForumsRepository forumsRepository;
-
-  @Autowired
-  private ForumParamsMapper forumParamsMapper;
 
   @Autowired
   private ForumMapper forumMapper;

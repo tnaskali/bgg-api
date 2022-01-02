@@ -21,6 +21,7 @@ public interface UserParamsMapper {
   @Mapping(target = "name", ignore = true)
   @Mapping(target = "buddies", ignore = true)
   @Mapping(target = "guilds", ignore = true)
+  @Mapping(target = "page", ignore = true)
   BggUserQueryParams toBggModel(UserParams source);
 
 }

@@ -14,20 +14,6 @@ public class ThingsParams {
 
   private List<ThingType> types;
 
-  private Boolean versions;
-
-  private Boolean videos;
-
   private Boolean stats;
-
-  private Boolean marketplace;
-
-  private Boolean comments;
-
-  private Boolean ratingcomments;
-
-  private Integer page;
-
-  private Integer pagesize;
 
 }
