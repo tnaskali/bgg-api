@@ -2,10 +2,16 @@ package li.naska.bgg.resource.v3;
 
 import li.naska.bgg.repository.BggHotItemsRepository;
 import li.naska.bgg.resource.v3.model.*;
+import li.naska.bgg.resource.v3.model.Thing.Comment;
+import li.naska.bgg.resource.v3.model.Thing.MarketplaceListing;
+import li.naska.bgg.resource.v3.model.Thing.Version;
+import li.naska.bgg.resource.v3.model.Thing.Video;
 import li.naska.bgg.service.ForumsService;
 import li.naska.bgg.service.ItemsService;
 import li.naska.bgg.service.PlaysService;
 import li.naska.bgg.service.ThingsService;
+import li.naska.bgg.util.Page;
+import li.naska.bgg.util.PagingParams;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -41,27 +47,58 @@ public class ThingsResource {
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<List<Thing>> getThings(
-      @ParameterObject @Validated ThingsParams parameters) {
-    return thingsService.getThings(parameters);
+      @ParameterObject @Validated ThingsParams params) {
+    return thingsService.getThings(params);
   }
 
   @GetMapping(value = "/hot", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<List<HotItem>> getHotThings(
-      @ParameterObject @Validated HotItemsParams parameters) {
-    return itemsService.getHotItems(parameters);
+      @ParameterObject @Validated HotItemsParams params) {
+    return itemsService.getHotItems(params);
   }
 
   @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<Results> searchThings(
-      @ParameterObject @Validated SearchParams parameters) {
-    return itemsService.searchItems(parameters);
+      @ParameterObject @Validated SearchParams params) {
+    return itemsService.searchItems(params);
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<Thing> getThing(
+      @NotNull @PathVariable Integer id) {
+    return thingsService.getThing(id);
+  }
+
+  @GetMapping(value = "/{id}/versions", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<List<Version>> getVersions(
+      @NotNull @PathVariable Integer id) {
+    return thingsService.getVersions(id);
+  }
+
+  @GetMapping(value = "/{id}/comments", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<Page<Comment>> getComments(
       @NotNull @PathVariable Integer id,
-      @ParameterObject @Validated ThingParams parameters) {
-    return thingsService.getThing(id, parameters);
+      @ParameterObject @Validated PagingParams pagingParams) {
+    return thingsService.getPagedComments(id, pagingParams);
+  }
+
+  @GetMapping(value = "/{id}/ratings", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<Page<Comment>> getRatings(
+      @NotNull @PathVariable Integer id,
+      @ParameterObject @Validated PagingParams pagingParams) {
+    return thingsService.getPagedRatings(id, pagingParams);
+  }
+
+  @GetMapping(value = "/{id}/videos", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<List<Video>> getVideos(
+      @NotNull @PathVariable Integer id) {
+    return thingsService.getVideos(id);
+  }
+
+  @GetMapping(value = "/{id}/marketplacelistings", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<List<MarketplaceListing>> getMarketplacelistings(
+      @NotNull @PathVariable Integer id) {
+    return thingsService.getMarketplacelistings(id);
   }
 
   @GetMapping(value = "/{id}/forums", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -71,10 +108,11 @@ public class ThingsResource {
   }
 
   @GetMapping(value = "/{id}/plays", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<Plays> getPlays(
+  public Mono<Page<Play>> getPlays(
       @NotNull @PathVariable Integer id,
-      @ParameterObject @Validated ItemPlaysParams parameters) {
-    return playsService.getThingPlays(id, parameters);
+      @ParameterObject @Validated ItemPlaysParams params,
+      @ParameterObject @Validated PagingParams pagingParams) {
+    return playsService.getPagedThingPlays(id, params, pagingParams);
   }
 
 }

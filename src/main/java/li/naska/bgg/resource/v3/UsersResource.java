@@ -1,9 +1,12 @@
 package li.naska.bgg.resource.v3;
 
 import li.naska.bgg.resource.v3.model.*;
+import li.naska.bgg.resource.v3.model.User.Buddy;
 import li.naska.bgg.service.PlaysService;
 import li.naska.bgg.service.ThingsService;
 import li.naska.bgg.service.UsersService;
+import li.naska.bgg.util.Page;
+import li.naska.bgg.util.PagingParams;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -37,18 +40,33 @@ public class UsersResource {
     return userService.getUser(username, parameters);
   }
 
-  @GetMapping(value = "/{username}/plays", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<Plays> getPlays(
+  @GetMapping(value = "/{username}/buddies", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<Page<Buddy>> getBuddies(
       @NotNull @PathVariable String username,
-      @ParameterObject @Validated UserPlaysParams parameters) {
-    return playsService.getUserPlays(username, parameters);
+      @ParameterObject @Validated PagingParams pagingParams) {
+    return userService.getPagedBuddies(username, pagingParams);
+  }
+
+  @GetMapping(value = "/{username}/guilds", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<Page<Guild>> getGuilds(
+      @NotNull @PathVariable String username,
+      @ParameterObject @Validated PagingParams pagingParams) {
+    return userService.getPagedGuilds(username, pagingParams);
+  }
+
+  @GetMapping(value = "/{username}/plays", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<Page<Play>> getPlays(
+      @NotNull @PathVariable String username,
+      @ParameterObject @Validated UserPlaysParams params,
+      @ParameterObject @Validated PagingParams pagingParams) {
+    return playsService.getPagedUserPlays(username, params, pagingParams);
   }
 
   @GetMapping(value = "/{username}/things", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<Collection> getThings(
       @NotNull @PathVariable String username,
-      @ParameterObject @Validated CollectionParams queryParameters) {
-    return thingsService.getThings(username, queryParameters);
+      @ParameterObject @Validated CollectionParams params) {
+    return thingsService.getThings(username, params);
   }
 
 }

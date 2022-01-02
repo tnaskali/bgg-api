@@ -19,6 +19,8 @@ import static org.mapstruct.MappingConstants.ComponentModel;
 public interface UserParamsMapper {
 
   @Mapping(target = "name", ignore = true)
+  @Mapping(target = "buddies", ignore = true)
+  @Mapping(target = "guilds", ignore = true)
   BggUserQueryParams toBggModel(UserParams source);
 
 }

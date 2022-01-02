@@ -7,10 +7,14 @@ import javax.validation.constraints.*;
 @Data
 public class BggThingsQueryParams {
 
-  @AssertTrue(message = "only one of comments and ratingcomments is allowed")
-  private boolean isCommentsValid() {
-    return !("1".equals(comments) && "1".equals(ratingcomments));
-  }
+  /**
+   * videos=1
+   * <p>
+   * Returns videos for the item.
+   */
+  @Min(1)
+  @Max(1)
+  private Integer videos;
 
   /**
    * id=NNN
@@ -39,16 +43,6 @@ public class BggThingsQueryParams {
   @Min(1)
   @Max(1)
   private Integer versions;
-
-  /**
-   * videos=1
-   * <p>
-   * Returns videos for the item.
-   */
-  @Min(1)
-  @Max(1)
-  private String videos;
-
   /**
    * stats=1
    * <p>
@@ -56,8 +50,7 @@ public class BggThingsQueryParams {
    */
   @Min(1)
   @Max(1)
-  private String stats;
-
+  private Integer stats;
   /**
    * historical=1
    * <p>
@@ -65,8 +58,7 @@ public class BggThingsQueryParams {
    */
   @Min(1)
   @Max(1)
-  private String historical;
-
+  private Integer historical;
   /**
    * marketplace=1
    * <p>
@@ -74,8 +66,7 @@ public class BggThingsQueryParams {
    */
   @Min(1)
   @Max(1)
-  private String marketplace;
-
+  private Integer marketplace;
   /**
    * comments=1
    * <p>
@@ -83,8 +74,7 @@ public class BggThingsQueryParams {
    */
   @Min(1)
   @Max(1)
-  private String comments;
-
+  private Integer comments;
   /**
    * ratingcomments=1
    * <p>
@@ -95,7 +85,12 @@ public class BggThingsQueryParams {
    */
   @Min(1)
   @Max(1)
-  private String ratingcomments;
+  private Integer ratingcomments;
+
+  @AssertTrue(message = "only one of comments and ratingcomments is allowed")
+  private boolean isCommentsValid() {
+    return !(Integer.valueOf(1).equals(comments) && Integer.valueOf(1).equals(ratingcomments));
+  }
 
   /**
    * page=NNN

@@ -19,6 +19,4 @@ public class ItemPlaysParams {
 
   private ItemSubtype subtype;
 
-  private Integer page;
-
 }

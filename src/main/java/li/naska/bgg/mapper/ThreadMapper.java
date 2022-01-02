@@ -17,6 +17,9 @@ public interface ThreadMapper {
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"termsofuse", "articles"})
   @Mapping(target = "articles", expression = "java(getArticles(source))")
+  @Mapping(target = "author", ignore = true)
+  @Mapping(target = "postdate", ignore = true)
+  @Mapping(target = "lastpostdate", ignore = true)
   Thread fromBggModel(com.boardgamegeek.thread.Thread source);
 
   Thread.Article fromBggModel(com.boardgamegeek.thread.Article source);

@@ -17,10 +17,12 @@ import static org.mapstruct.MappingConstants.ComponentModel;
 public interface PlaysParamsMapper {
 
   @Mapping(target = "username", ignore = true)
+  @Mapping(target = "page", ignore = true)
   BggPlaysQueryParams toBggModel(UserPlaysParams source);
 
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "type", ignore = true)
+  @Mapping(target = "page", ignore = true)
   BggPlaysQueryParams toBggModel(ItemPlaysParams source);
 
 }

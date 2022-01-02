@@ -2,6 +2,7 @@ package li.naska.bgg.mapper;
 
 import com.boardgamegeek.user.Buddies;
 import com.boardgamegeek.user.Guilds;
+import li.naska.bgg.resource.v3.model.Guild;
 import li.naska.bgg.resource.v3.model.User;
 import org.mapstruct.*;
 
@@ -31,7 +32,15 @@ public interface UserMapper extends BaseMapper {
 
   User.Buddy fromBggModel(com.boardgamegeek.user.Buddy source);
 
-  User.UserGuild fromBggModel(com.boardgamegeek.user.Guild source);
+  @Mapping(target = "created", ignore = true)
+  @Mapping(target = "category", ignore = true)
+  @Mapping(target = "website", ignore = true)
+  @Mapping(target = "manager", ignore = true)
+  @Mapping(target = "description", ignore = true)
+  @Mapping(target = "location", ignore = true)
+  @Mapping(target = "nummembers", ignore = true)
+  @Mapping(target = "members", ignore = true)
+  Guild fromBggModel(com.boardgamegeek.user.Guild source);
 
   @Mapping(target = "items", source = "item")
   User.Ranking fromBggModel(com.boardgamegeek.user.Ranking source);
@@ -58,7 +67,7 @@ public interface UserMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default List<User.UserGuild> getGuilds(com.boardgamegeek.user.User source) {
+  default List<Guild> getGuilds(com.boardgamegeek.user.User source) {
     return Optional.ofNullable(source.getGuilds())
         .map(o -> o.getGuild().stream()
             .map(this::fromBggModel)

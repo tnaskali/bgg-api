@@ -17,14 +17,4 @@ public class Forum {
   private List<Thread> threads;
   private Integer numposts;
   private ZonedDateTime lastpostdate;
-
-  @Data
-  public static class Thread {
-    private Integer id;
-    private String subject;
-    private String author;
-    private Integer numarticles;
-    private ZonedDateTime postdate;
-    private ZonedDateTime lastpostdate;
-  }
 }

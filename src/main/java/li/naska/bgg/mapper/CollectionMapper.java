@@ -48,6 +48,8 @@ public interface CollectionMapper extends BaseMapper {
 
   Collection.Item.Status fromBggModel(com.boardgamegeek.collection.Status source);
 
+  @Mapping(target = "pp_currency", source = "ppCurrency")
+  @Mapping(target = "cv_currency", source = "cvCurrency")
   Collection.Item.PrivateInfo fromBggModel(com.boardgamegeek.collection.PrivateInfo source);
 
   default Collection.Item.Version getVersion(com.boardgamegeek.collection.Item source) {

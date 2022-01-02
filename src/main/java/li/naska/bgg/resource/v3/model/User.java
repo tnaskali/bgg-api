@@ -30,18 +30,12 @@ public class User {
   private List<Buddy> buddies;
   private Integer numguilds;
   // paged
-  private List<UserGuild> guilds;
+  private List<Guild> guilds;
   private Ranking top;
   private Ranking hot;
 
   @Data
   public static class Buddy {
-    private Integer id;
-    private String name;
-  }
-
-  @Data
-  public static class UserGuild {
     private Integer id;
     private String name;
   }
