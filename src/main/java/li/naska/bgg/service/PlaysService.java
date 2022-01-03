@@ -139,7 +139,7 @@ public class PlaysService {
     BggPlaysQueryParams firstPageQueryParams = queryParamsSupplier.get();
     firstPageQueryParams.setPage(helper.getBggStartPage());
     return getPlays(firstPageQueryParams)
-        .flatMap(plays -> Flux.range(helper.getBggStartPage(), helper.getBggPages())
+        .flatMap(plays -> helper.getBggPagesRange(plays.getNumplays())
             .flatMapSequential(page -> {
               if (page == helper.getBggStartPage()) {
                 return Mono.just(plays);
@@ -150,19 +150,8 @@ public class PlaysService {
             })
             .flatMapIterable(Plays::getPlays)
             .collect(Collectors.toList())
-            .map(list -> Page.of(
-                pagingParams.getPage(),
-                (int) Math.ceil((double) plays.getNumplays() / pagingParams.getSize()),
-                pagingParams.getSize(),
-                plays.getNumplays(),
-                list.subList(
-                    Math.min(
-                        helper.getResultStartIndex(),
-                        list.size()),
-                    Math.min(
-                        helper.getResultEndIndex(),
-                        list.size())))
-            ));
+            .map(list -> helper.buildPage(list, plays.getNumplays()))
+        );
   }
 
   private Mono<Plays> getPlays(BggPlaysQueryParams queryParams) {

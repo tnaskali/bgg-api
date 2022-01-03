@@ -80,9 +80,9 @@ public class GuildsService {
     BggGuildQueryParams firstPageQueryParams = guildMembersParamsMapper.toBggModel(params);
     firstPageQueryParams.setId(id);
     firstPageQueryParams.setMembers(1);
-    firstPageQueryParams.setPage(1);
+    firstPageQueryParams.setPage(helper.getBggStartPage());
     return getGuild(firstPageQueryParams)
-        .flatMap(guild -> Flux.range(helper.getBggStartPage(), helper.getBggPages())
+        .flatMap(guild -> helper.getBggPagesRange(guild.getNummembers())
             .flatMapSequential(page -> {
               if (page == helper.getBggStartPage()) {
                 return Mono.just(guild);
@@ -95,19 +95,8 @@ public class GuildsService {
             })
             .flatMapIterable(Guild::getMembers)
             .collect(Collectors.toList())
-            .map(list -> Page.of(
-                pagingParams.getPage(),
-                (int) Math.ceil((double) guild.getNummembers() / pagingParams.getSize()),
-                pagingParams.getSize(),
-                guild.getNummembers(),
-                list.subList(
-                    Math.min(
-                        helper.getResultStartIndex(),
-                        list.size()),
-                    Math.min(
-                        helper.getResultEndIndex(),
-                        list.size())))
-            ));
+            .map(list -> helper.buildPage(list, guild.getNummembers()))
+        );
   }
 
 }

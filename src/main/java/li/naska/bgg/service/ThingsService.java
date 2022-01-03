@@ -68,13 +68,12 @@ public class ThingsService {
   public Mono<List<Comment>> getComments(Integer id) {
     BggThingsQueryParams firstPageQueryParams = new BggThingsQueryParams();
     firstPageQueryParams.setId(id.toString());
-    firstPageQueryParams.setStats(1);
     firstPageQueryParams.setComments(1);
     firstPageQueryParams.setPage(1);
     firstPageQueryParams.setPagesize(BGG_THING_COMMENTS_PAGE_SIZE);
     return getThing(firstPageQueryParams)
         .flatMap(thing -> {
-          int numPages = (int) Math.ceil((double) thing.getStatistics().getNumcomments() / BGG_THING_COMMENTS_PAGE_SIZE);
+          int numPages = (int) Math.ceil((double) thing.getNumcomments() / BGG_THING_COMMENTS_PAGE_SIZE);
           return Flux.range(1, numPages)
               .flatMapSequential(page -> {
                 BggThingsQueryParams queryParams = new BggThingsQueryParams();
@@ -96,12 +95,11 @@ public class ThingsService {
         BGG_THING_COMMENTS_PAGE_SIZE);
     BggThingsQueryParams firstPageQueryParams = new BggThingsQueryParams();
     firstPageQueryParams.setId(id.toString());
-    firstPageQueryParams.setStats(1);
     firstPageQueryParams.setComments(1);
-    firstPageQueryParams.setPage(1);
+    firstPageQueryParams.setPage(helper.getBggStartPage());
     firstPageQueryParams.setPagesize(BGG_THING_COMMENTS_PAGE_SIZE);
     return getThing(firstPageQueryParams)
-        .flatMap(thing -> Flux.range(helper.getBggStartPage(), helper.getBggPages())
+        .flatMap(thing -> helper.getBggPagesRange(thing.getNumcomments())
             .flatMapSequential(page -> {
               BggThingsQueryParams queryParams = new BggThingsQueryParams();
               queryParams.setId(id.toString());
@@ -112,31 +110,19 @@ public class ThingsService {
             })
             .flatMapIterable(Thing::getComments)
             .collect(Collectors.toList())
-            .map(list -> Page.of(
-                pagingParams.getPage(),
-                (int) Math.ceil((double) thing.getStatistics().getNumcomments() / pagingParams.getSize()),
-                pagingParams.getSize(),
-                thing.getStatistics().getNumcomments(),
-                list.subList(
-                    Math.min(
-                        helper.getResultStartIndex(),
-                        list.size()),
-                    Math.min(
-                        helper.getResultEndIndex(),
-                        list.size())))
-            ));
+            .map(list -> helper.buildPage(list, thing.getNumcomments()))
+        );
   }
 
   public Mono<List<Comment>> getRatings(Integer id) {
     BggThingsQueryParams firstPageQueryParams = new BggThingsQueryParams();
     firstPageQueryParams.setId(id.toString());
-    firstPageQueryParams.setStats(1);
     firstPageQueryParams.setRatingcomments(1);
     firstPageQueryParams.setPage(1);
     firstPageQueryParams.setPagesize(BGG_THING_COMMENTS_PAGE_SIZE);
     return getThing(firstPageQueryParams)
         .flatMap(thing -> {
-          int numPages = (int) Math.ceil((double) thing.getStatistics().getNumcomments() / BGG_THING_COMMENTS_PAGE_SIZE);
+          int numPages = (int) Math.ceil((double) thing.getNumcomments() / BGG_THING_COMMENTS_PAGE_SIZE);
           return Flux.range(1, numPages)
               .flatMapSequential(page -> {
                 BggThingsQueryParams queryParams = new BggThingsQueryParams();
@@ -158,12 +144,11 @@ public class ThingsService {
         BGG_THING_COMMENTS_PAGE_SIZE);
     BggThingsQueryParams firstPageQueryParams = new BggThingsQueryParams();
     firstPageQueryParams.setId(id.toString());
-    firstPageQueryParams.setStats(1);
     firstPageQueryParams.setRatingcomments(1);
-    firstPageQueryParams.setPage(1);
+    firstPageQueryParams.setPage(helper.getBggStartPage());
     firstPageQueryParams.setPagesize(BGG_THING_COMMENTS_PAGE_SIZE);
     return getThing(firstPageQueryParams)
-        .flatMap(thing -> Flux.range(helper.getBggStartPage(), helper.getBggPages())
+        .flatMap(thing -> helper.getBggPagesRange(thing.getNumcomments())
             .flatMapSequential(page -> {
               BggThingsQueryParams queryParams = new BggThingsQueryParams();
               queryParams.setId(id.toString());
@@ -174,19 +159,8 @@ public class ThingsService {
             })
             .flatMapIterable(Thing::getComments)
             .collect(Collectors.toList())
-            .map(list -> Page.of(
-                pagingParams.getPage(),
-                (int) Math.ceil((double) thing.getStatistics().getNumcomments() / pagingParams.getSize()),
-                pagingParams.getSize(),
-                thing.getStatistics().getNumcomments(),
-                list.subList(
-                    Math.min(
-                        helper.getResultStartIndex(),
-                        list.size()),
-                    Math.min(
-                        helper.getResultEndIndex(),
-                        list.size())))
-            ));
+            .map(list -> helper.buildPage(list, thing.getNumcomments()))
+        );
   }
 
   public Mono<List<Version>> getVersions(Integer id) {
