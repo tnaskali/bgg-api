@@ -123,12 +123,12 @@ public class ForumsService {
         BGG_FORUM_THREADS_PAGE_SIZE);
     BggForumQueryParams firstPageQueryParams = new BggForumQueryParams();
     firstPageQueryParams.setId(id);
-    firstPageQueryParams.setPage(1);
+    firstPageQueryParams.setPage(helper.getBggStartPage());
     return getForum(firstPageQueryParams)
-        .flatMap(guild -> Flux.range(helper.getBggStartPage(), helper.getBggPages())
+        .flatMap(forum -> helper.getBggPagesRange(forum.getNumthreads())
             .flatMapSequential(page -> {
               if (page == helper.getBggStartPage()) {
-                return Mono.just(guild);
+                return Mono.just(forum);
               }
               BggForumQueryParams queryParams = new BggForumQueryParams();
               queryParams.setId(id);
@@ -137,19 +137,8 @@ public class ForumsService {
             })
             .flatMapIterable(Forum::getThreads)
             .collect(Collectors.toList())
-            .map(list -> Page.of(
-                pagingParams.getPage(),
-                (int) Math.ceil((double) guild.getNumthreads() / pagingParams.getSize()),
-                pagingParams.getSize(),
-                guild.getNumthreads(),
-                list.subList(
-                    Math.min(
-                        helper.getResultStartIndex(),
-                        list.size()),
-                    Math.min(
-                        helper.getResultEndIndex(),
-                        list.size())))
-            ));
+            .map(list -> helper.buildPage(list, forum.getNumthreads()))
+        );
   }
 
   private Mono<Forum> getForum(BggForumQueryParams queryParams) {

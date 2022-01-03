@@ -1,6 +1,7 @@
 package li.naska.bgg.mapper;
 
 import com.boardgamegeek.enums.NameType;
+import com.boardgamegeek.thing.Comments;
 import com.boardgamegeek.thing.Result;
 import li.naska.bgg.resource.v3.model.Name;
 import li.naska.bgg.resource.v3.model.Thing;
@@ -53,6 +54,7 @@ public interface ThingMapper extends BaseMapper {
   @Mapping(target = "maxplaytime", expression = "java(getFirstIntegerValue(source.getMaxplaytimes()))")
   @Mapping(target = "minage", expression = "java(getFirstIntegerValue(source.getMinages()))")
   @Mapping(target = "videos", expression = "java(getVideos(source))")
+  @Mapping(target = "numcomments", expression = "java(getNumcomments(source))")
   @Mapping(target = "comments", expression = "java(getComments(source))")
   @Mapping(target = "versions", expression = "java(getVersions(source))")
   @Mapping(target = "statistics", expression = "java(getStatistics(source))")
@@ -224,6 +226,13 @@ public interface ThingMapper extends BaseMapper {
         .flatMap(e -> e.getItem().stream())
         .map(this::fromBggModel)
         .collect(Collectors.toList());
+  }
+
+  default Integer getNumcomments(com.boardgamegeek.thing.Thing source) {
+    return source.getComments().stream()
+        .findFirst()
+        .map(Comments::getTotalitems)
+        .orElse(null);
   }
 
   default List<Thing.Comment> getComments(com.boardgamegeek.thing.Thing source) {

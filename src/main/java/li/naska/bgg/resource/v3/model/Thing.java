@@ -32,6 +32,8 @@ public class Thing {
   private Integer minage;
   private List<Video> videos;
   private List<Version> versions;
+  private Integer numcomments;
+  // paged
   private List<Comment> comments;
   private Statistics statistics;
   private List<MarketplaceListing> marketplacelistings;

@@ -77,9 +77,9 @@ public class UsersService {
     BggUserQueryParams firstPageQueryParams = new BggUserQueryParams();
     firstPageQueryParams.setName(username);
     firstPageQueryParams.setBuddies(1);
-    firstPageQueryParams.setPage(1);
+    firstPageQueryParams.setPage(helper.getBggStartPage());
     return getUser(firstPageQueryParams)
-        .flatMap(user -> Flux.range(helper.getBggStartPage(), helper.getBggPages())
+        .flatMap(user -> helper.getBggPagesRange(user.getNumbuddies())
             .flatMapSequential(page -> {
               if (page == helper.getBggStartPage()) {
                 return Mono.just(user);
@@ -92,19 +92,8 @@ public class UsersService {
             })
             .flatMapIterable(User::getBuddies)
             .collect(Collectors.toList())
-            .map(list -> Page.of(
-                pagingParams.getPage(),
-                (int) Math.ceil((double) user.getNumbuddies() / pagingParams.getSize()),
-                pagingParams.getSize(),
-                user.getNumbuddies(),
-                list.subList(
-                    Math.min(
-                        helper.getResultStartIndex(),
-                        list.size()),
-                    Math.min(
-                        helper.getResultEndIndex(),
-                        list.size())))
-            ));
+            .map(list -> helper.buildPage(list, user.getNumbuddies()))
+        );
   }
 
   public Mono<List<Guild>> getGuilds(String username) {
@@ -139,9 +128,9 @@ public class UsersService {
     BggUserQueryParams firstPageQueryParams = new BggUserQueryParams();
     firstPageQueryParams.setName(username);
     firstPageQueryParams.setGuilds(1);
-    firstPageQueryParams.setPage(1);
+    firstPageQueryParams.setPage(helper.getBggStartPage());
     return getUser(firstPageQueryParams)
-        .flatMap(user -> Flux.range(helper.getBggStartPage(), helper.getBggPages())
+        .flatMap(user -> helper.getBggPagesRange(user.getNumguilds())
             .flatMapSequential(page -> {
               if (page == helper.getBggStartPage()) {
                 return Mono.just(user);
@@ -154,19 +143,8 @@ public class UsersService {
             })
             .flatMapIterable(User::getGuilds)
             .collect(Collectors.toList())
-            .map(list -> Page.of(
-                pagingParams.getPage(),
-                (int) Math.ceil((double) user.getNumguilds() / pagingParams.getSize()),
-                pagingParams.getSize(),
-                user.getNumguilds(),
-                list.subList(
-                    Math.min(
-                        helper.getResultStartIndex(),
-                        list.size()),
-                    Math.min(
-                        helper.getResultEndIndex(),
-                        list.size())))
-            ));
+            .map(list -> helper.buildPage(list, user.getNumguilds()))
+        );
   }
 
   private Mono<User> getUser(BggUserQueryParams queryParams) {
