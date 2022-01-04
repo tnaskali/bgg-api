@@ -8,15 +8,6 @@ import javax.validation.constraints.*;
 public class BggThingsQueryParams {
 
   /**
-   * videos=1
-   * <p>
-   * Returns videos for the item.
-   */
-  @Min(1)
-  @Max(1)
-  private Integer videos;
-
-  /**
    * id=NNN
    * <p>
    * Specifies the id of the thing(s) to retrieve. To request multiple things with a single query, NNN can specify a
@@ -43,6 +34,16 @@ public class BggThingsQueryParams {
   @Min(1)
   @Max(1)
   private Integer versions;
+
+  /**
+   * videos=1
+   * <p>
+   * Returns videos for the item.
+   */
+  @Min(1)
+  @Max(1)
+  private Integer videos;
+
   /**
    * stats=1
    * <p>
@@ -51,6 +52,7 @@ public class BggThingsQueryParams {
   @Min(1)
   @Max(1)
   private Integer stats;
+
   /**
    * historical=1
    * <p>
@@ -59,6 +61,7 @@ public class BggThingsQueryParams {
   @Min(1)
   @Max(1)
   private Integer historical;
+
   /**
    * marketplace=1
    * <p>
@@ -67,6 +70,7 @@ public class BggThingsQueryParams {
   @Min(1)
   @Max(1)
   private Integer marketplace;
+
   /**
    * comments=1
    * <p>
@@ -75,6 +79,7 @@ public class BggThingsQueryParams {
   @Min(1)
   @Max(1)
   private Integer comments;
+
   /**
    * ratingcomments=1
    * <p>
@@ -86,11 +91,6 @@ public class BggThingsQueryParams {
   @Min(1)
   @Max(1)
   private Integer ratingcomments;
-
-  @AssertTrue(message = "only one of comments and ratingcomments is allowed")
-  private boolean isCommentsValid() {
-    return !(Integer.valueOf(1).equals(comments) && Integer.valueOf(1).equals(ratingcomments));
-  }
 
   /**
    * page=NNN
@@ -126,5 +126,10 @@ public class BggThingsQueryParams {
   @Deprecated
   @Pattern(regexp = "^[0-3][0-9]-[0-1][0-9]-[1-2][0-9][0-9][0-9]$")
   private String to;
+
+  @AssertTrue(message = "only one of comments and ratingcomments is allowed")
+  private boolean isCommentsValid() {
+    return !(Integer.valueOf(1).equals(comments) && Integer.valueOf(1).equals(ratingcomments));
+  }
 
 }
