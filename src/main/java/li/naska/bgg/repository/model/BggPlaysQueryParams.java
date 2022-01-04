@@ -16,6 +16,7 @@ public class BggPlaysQueryParams {
    * must include either a username or an id and type to get results.
    */
   private String username;
+
   /**
    * id=NNN
    * <p>
@@ -23,6 +24,7 @@ public class BggPlaysQueryParams {
    */
   @Min(1)
   private Integer id;
+
   /**
    * type=TYPE
    * <p>
@@ -34,6 +36,7 @@ public class BggPlaysQueryParams {
    */
   @Pattern(regexp = "^(thing|family)$")
   private String type;
+
   /**
    * mindate=YYYY-MM-DD
    * <p>
@@ -41,6 +44,7 @@ public class BggPlaysQueryParams {
    */
   @Pattern(regexp = "^[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$")
   private String mindate;
+
   /**
    * maxdate=YYYY-MM-DD
    * <p>
@@ -48,6 +52,7 @@ public class BggPlaysQueryParams {
    */
   @Pattern(regexp = "^[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$")
   private String maxdate;
+
   /**
    * subtype=TYPE
    * <p>
@@ -66,6 +71,7 @@ public class BggPlaysQueryParams {
    */
   @Pattern(regexp = "^(boardgame|boardgameexpansion|boardgameaccessory|boardgameintegration|boardgamecompilation|boardgameimplementation|rpg|rpgitemrpgitem|videogame)$")
   private String subtype;
+
   /**
    * page=NNN
    * <p>

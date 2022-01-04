@@ -54,7 +54,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <com.squareup.okhttp3.version>4.9.3</com.squareup.okhttp3.version>
     <org.mapstruct.version>1.5.0.Beta2</org.mapstruct.version>
-    <org.springdoc.springdoc-openapi.version>1.6.2</org.springdoc.springdoc-openapi.version>
+    <org.springdoc.springdoc-openapi.version>1.6.3</org.springdoc.springdoc-openapi.version>
   </properties>
 
   <dependencies>
