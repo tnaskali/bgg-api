@@ -6,7 +6,7 @@ name: Build and deploy JAR app to Azure Web App - bgg-portal-api
 on:
   push:
     branches:
-      - master
+      - develop
   workflow_dispatch:
 
 jobs:
@@ -34,7 +34,7 @@ jobs:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'Test'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -48,6 +48,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'bgg-portal-api'
-          slot-name: 'Production'
+          slot-name: 'Test'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_58F0C4E07E3449868EB95E36122FDFE1 }}
           package: '*.jar'
