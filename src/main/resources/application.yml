@@ -24,10 +24,6 @@ bgg:
 
 debug: false
 
-management:
-  server:
-    port: 8089
-
 server:
   port: 8088
 
