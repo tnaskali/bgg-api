@@ -195,6 +195,13 @@
           <groupId>org.jvnet.jaxb2.maven2</groupId>
           <artifactId>maven-jaxb2-plugin</artifactId>
           <version>0.14.0</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.glassfish.jaxb</groupId>
+              <artifactId>jaxb-runtime</artifactId>
+              <version>${glassfish-jaxb.version}</version>
+            </dependency>
+          </dependencies>
           <executions>
             <execution>
               <id>generate-sources</id>
