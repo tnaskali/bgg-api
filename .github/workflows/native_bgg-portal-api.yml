@@ -1,0 +1,36 @@
+name: Build Native App - bgg-portal-api
+
+on:
+  push:
+    branches:
+      - feature/spring-native-integration
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Java version
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+
+      - name: Set up GraalVM version
+        uses: graalvm/setup-graalvm@v1
+        with:
+          version: '21.3.0'
+          java-version: '11'
+          components: 'native-image'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build native image with Maven
+        run: mvn clean package -Pnative -DskipTests
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: bgg-api-native
+          path: '${{ github.workspace }}/target/*.exe'
