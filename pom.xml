@@ -55,6 +55,19 @@
     <com.squareup.okhttp3.version>4.9.3</com.squareup.okhttp3.version>
     <org.mapstruct.version>1.5.0.Beta2</org.mapstruct.version>
     <org.springdoc.springdoc-openapi.version>1.6.3</org.springdoc.springdoc-openapi.version>
+    <java.version>11</java.version>
+    <repackage.classifier/>
+    <spring-native.version>0.11.1</spring-native.version>
+    <native-buildtools.version>0.9.9</native-buildtools.version>
+    <native-image.build-args>
+      --allow-incomplete-classpath
+      --report-unsupported-elements-at-runtime
+      --no-fallback
+      --install-exit-handlers
+      -H:+InlineBeforeAnalysis
+      --enable-https
+      -H:+ReportExceptionStackTraces
+    </native-image.build-args>
   </properties>
 
   <dependencies>
@@ -73,6 +86,11 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.experimental</groupId>
+      <artifactId>spring-native</artifactId>
+      <version>${spring-native.version}</version>
     </dependency>
     <dependency>
       <groupId>org.jvnet.jaxb2_commons</groupId>
@@ -139,8 +157,6 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.1</version>
           <configuration>
-            <source>1.8</source>
-            <target>1.8</target>
             <annotationProcessorPaths>
               <path>
                 <groupId>org.mapstruct</groupId>
@@ -241,6 +257,39 @@
             </plugins>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <configuration>
+            <classifier>${repackage.classifier}</classifier>
+            <image>
+              <builder>paketobuildpacks/builder:tiny</builder>
+              <env>
+                <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
+                <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>${native-image.build-args}</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
+              </env>
+            </image>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.springframework.experimental</groupId>
+          <artifactId>spring-aot-maven-plugin</artifactId>
+          <version>${spring-native.version}</version>
+          <executions>
+            <execution>
+              <id>test-generate</id>
+              <goals>
+                <goal>test-generate</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>generate</id>
+              <goals>
+                <goal>generate</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -248,6 +297,10 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.experimental</groupId>
+        <artifactId>spring-aot-maven-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -263,6 +316,27 @@
       </plugin>
     </plugins>
   </build>
+
+  <repositories>
+    <repository>
+      <id>spring-releases</id>
+      <name>Spring Releases</name>
+      <url>https://repo.spring.io/release</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>spring-releases</id>
+      <name>Spring Releases</name>
+      <url>https://repo.spring.io/release</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
 
   <profiles>
     <profile>
@@ -296,6 +370,53 @@
           <classifier>osx-aarch_64</classifier>
         </dependency>
       </dependencies>
+    </profile>
+    <profile>
+      <id>native</id>
+      <properties>
+        <repackage.classifier>exec</repackage.classifier>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>org.springdoc</groupId>
+          <artifactId>springdoc-openapi-native</artifactId>
+          <version>${org.springdoc.springdoc-openapi.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.junit.platform</groupId>
+          <artifactId>junit-platform-launcher</artifactId>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.graalvm.buildtools</groupId>
+            <artifactId>native-maven-plugin</artifactId>
+            <version>${native-buildtools.version}</version>
+            <extensions>true</extensions>
+            <configuration>
+              <buildArgs>${native-image.build-args}</buildArgs>
+            </configuration>
+            <executions>
+              <execution>
+                <id>test-native</id>
+                <phase>test</phase>
+                <goals>
+                  <goal>test</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>build-native</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 
