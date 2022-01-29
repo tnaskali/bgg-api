@@ -1,6 +1,6 @@
 bgg:
   web:
-    baseurl-bgs: https://www.boardgamegeek.com
+    baseurl-bgs: https://boardgamegeek.com
   api:
     v1:
       baseurl-bgs: ${bgg.web.baseurl-bgs}/xmlapi
