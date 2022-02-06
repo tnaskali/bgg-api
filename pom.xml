@@ -242,9 +242,6 @@
             <catalog>src/main/resources/catalogs/catalog.cat</catalog>
             <extension>true</extension>
             <args>
-              <arg>-XtoString</arg>
-              <arg>-Xequals</arg>
-              <arg>-XhashCode</arg>
               <arg>-Xsimplify</arg>
               <arg>-Xsimplify-usePluralForm=true</arg>
             </args>

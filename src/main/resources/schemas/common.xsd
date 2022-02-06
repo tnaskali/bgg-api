@@ -3,19 +3,6 @@
            xmlns:common="http://www.boardgamegeek.com/common"
            targetNamespace="http://www.boardgamegeek.com/common">
 
-  <xs:simpleType name="nonNegativeDecimal">
-    <xs:restriction base="xs:decimal">
-      <xs:minInclusive value="0"/>
-      <xs:fractionDigits value="5"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="nillableInteger">
-    <xs:restriction base="xs:string">
-      <xs:pattern value="0|-?[1-9][0-9]*"/>
-    </xs:restriction>
-  </xs:simpleType>
-
   <xs:simpleType name="localDate">
     <xs:restriction base="xs:string">
       <!-- 2020-01-11 -->
@@ -52,10 +39,6 @@
 
   <xs:complexType name="stringValue">
     <xs:attribute name="value" type="xs:string" use="required"/>
-  </xs:complexType>
-
-  <xs:complexType name="nillableIntegerValue">
-    <xs:attribute name="value" type="common:nillableInteger" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="localDateValue">
