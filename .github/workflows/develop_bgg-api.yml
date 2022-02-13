@@ -1,4 +1,4 @@
-name: Build and deploy native App - bgg-api
+name: build and deploy snapshot
 
 on:
   push:
@@ -44,4 +44,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/bgg-api:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/bgg-api-native:snapshot
