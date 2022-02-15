@@ -46,7 +46,7 @@ public class BggAuthenticationManager implements ReactiveAuthenticationManager {
         .bodyValue(formData)
         .retrieve()
         .onStatus(
-            status -> status != HttpStatus.ACCEPTED,
+            status -> status != HttpStatus.NO_CONTENT,
             response -> Mono.error(new AuthenticationServiceException("Remote authentication failed")))
         .toEntity(String.class)
         .retryWhen(
