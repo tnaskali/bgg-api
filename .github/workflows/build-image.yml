@@ -1,0 +1,73 @@
+name: build image
+
+on:
+  push:
+  workflow_dispatch:
+
+env:
+  DOCKERHUB_PROJECT: ${{ secrets.DOCKER_HUB_USERNAME }}/bgg-api
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v2
+
+      - name: Set up Java version
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+      - name: Extract project version
+        run: |
+          echo "MAVEN_PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+
+      - name: Build native executable
+        run: |
+          mvn clean package -DskipTests
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Set up buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: dockerfiles/Dockerfile
+          load: true
+          tags: ${{ env.DOCKERHUB_PROJECT }}:test
+
+      - name: Test image
+        run: |
+          DOCKER_PID=$(docker run -d -p 8088:8088 --rm ${{ env.DOCKERHUB_PROJECT }}:test 2>/dev/null)
+          sleep 10s
+          curl http://localhost:8088/bgg-api/v3/api-docs/v3
+          docker stop $DOCKER_PID
+
+      - name: Set tags for master branch
+        run: |
+          echo "DOCKER_HUB_TAGS=${{ env.DOCKERHUB_PROJECT }}:latest-snapshot,${{ env.DOCKERHUB_PROJECT }}:${{ env.MAVEN_PROJECT_VERSION }}" >> $GITHUB_ENV
+        if: github.ref == 'refs/heads/master'
+
+      - name: Set tags for develop branch
+        run: |
+          echo "DOCKER_HUB_TAGS=${{ env.DOCKERHUB_PROJECT }}:develop" >> $GITHUB_ENV
+        if: github.ref == 'refs/heads/develop'
+
+      - name: Push image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: dockerfiles/Dockerfile
+          push: true
+          tags: ${{ env.DOCKER_HUB_TAGS }}
+        if: ${{ env.DOCKER_HUB_TAGS }}
