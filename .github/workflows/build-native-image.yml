@@ -8,7 +8,6 @@ on:
 
 env:
   DOCKERHUB_PROJECT: ${{ secrets.DOCKER_HUB_USERNAME }}/bgg-api-native
-  TEST_TAG: ${{ env.DOCKERHUB_PROJECT }}:test
 
 jobs:
   build:
@@ -55,11 +54,11 @@ jobs:
           context: .
           file: dockerfiles/Dockerfile.native
           load: true
-          tags: ${{ env.TEST_TAG }}
+          tags: ${{ env.DOCKERHUB_PROJECT }}:test
 
       - name: Test image
         run: |
-          DOCKER_PID=$(docker run -d -p 8088:8088 --rm ${{ env.TEST_TAG }} 2>/dev/null)
+          DOCKER_PID=$(docker run -d -p 8088:8088 --rm ${{ env.DOCKERHUB_PROJECT }}:test 2>/dev/null)
           sleep 2s
           curl http://localhost:8088/bgg-api/v3/api-docs/v3
           docker stop $DOCKER_PID
