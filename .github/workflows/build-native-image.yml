@@ -8,7 +8,7 @@ on:
 
 env:
   DOCKERHUB_PROJECT: ${{ secrets.DOCKER_HUB_USERNAME }}/bgg-api-native
-  TEST_TAG: ${{ DOCKERHUB_PROJECT }}:test
+  TEST_TAG: ${{ env.DOCKERHUB_PROJECT }}:test
 
 jobs:
   build:
@@ -66,12 +66,12 @@ jobs:
 
       - name: Set tags for master branch
         run: |
-          echo "DOCKER_HUB_TAGS=${{ DOCKERHUB_PROJECT }}:latest-snapshot,${{ DOCKERHUB_PROJECT }}:${{ env.MAVEN_PROJECT_VERSION }}" >> $GITHUB_ENV
+          echo "DOCKER_HUB_TAGS=${{ env.DOCKERHUB_PROJECT }}:latest-snapshot,${{ env.DOCKERHUB_PROJECT }}:${{ env.MAVEN_PROJECT_VERSION }}" >> $GITHUB_ENV
         if: github.ref == 'refs/heads/master'
 
       - name: Set tags for develop branch
         run: |
-          echo "DOCKER_HUB_TAGS=${{ DOCKERHUB_PROJECT }}:develop" >> $GITHUB_ENV
+          echo "DOCKER_HUB_TAGS=${{ env.DOCKERHUB_PROJECT }}:develop" >> $GITHUB_ENV
         if: github.ref == 'refs/heads/develop'
 
       - name: Push image
