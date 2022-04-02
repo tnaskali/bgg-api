@@ -25,7 +25,7 @@ jobs:
         run: |
           echo "MAVEN_PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
 
-      - name: Build native executable
+      - name: Build jar
         run: |
           mvn clean package -DskipTests
 
