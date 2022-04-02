@@ -1,6 +1,9 @@
 name: build image
 
 on:
+  push:
+    branches:
+      - feature/build_images
   workflow_dispatch:
 
 env:
