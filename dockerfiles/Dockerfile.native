@@ -5,3 +5,5 @@ RUN mkdir /opt/bgg-api
 COPY target/bgg-api /opt/bgg-api/bgg-api
 
 ENTRYPOINT ["/opt/bgg-api/bgg-api"]
+
+EXPOSE 8088
