@@ -40,8 +40,9 @@ Prerequisites : have docker installed on your machine
 
 Steps :
 
-1. run `docker run -p 8088:8088 tnaskali/bgg-api:latest-snapshot` (or any other tag)
-2. navigate to http://localhost:8088/bgg-api/swagger-ui.html
+1. run `docker pull tnaskali/bgg-api:latest-snapshot` (or any other tag)
+2. run `docker run --rm -p 8088:8088 tnaskali/bgg-api:latest-snapshot`
+3. navigate to http://localhost:8088/bgg-api/swagger-ui.html
 
 ## pull and run a docker native image (Linux / MacOS only)
 
@@ -49,8 +50,9 @@ Prerequisites : have docker installed on your machine
 
 Steps :
 
-1. run `docker run -p 8088:8088 tnaskali/bgg-api-native:latest-snapshot` (or any other tag)
-2. navigate to http://localhost:8088/bgg-api/swagger-ui.html
+1. run `docker pull tnaskali/bgg-api-native:latest-snapshot` (or any other tag)
+2. run `docker run --rm -p 8088:8088 tnaskali/bgg-api-native:latest-snapshot`
+3. navigate to http://localhost:8088/bgg-api/swagger-ui.html
 
 # A word about security
 
