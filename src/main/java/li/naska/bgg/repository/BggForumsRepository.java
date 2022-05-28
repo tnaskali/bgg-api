@@ -1,5 +1,6 @@
 package li.naska.bgg.repository;
 
+import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.repository.model.BggForumQueryParams;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +49,10 @@ public class BggForumsRepository {
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .toEntity(String.class)
+        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
         .retryWhen(
             Retry.max(3)
-                .filter(throwable -> throwable instanceof IOException))
+                .filter(throwable -> throwable instanceof BggConnectionException))
         .doOnNext(entity -> {
               if (MediaType.TEXT_HTML.equalsTypeAndSubtype(entity.getHeaders().getContentType())) {
                 Matcher matcher = Pattern.compile("<div class='messagebox error'>\\s*(.+)\\s*</div>").matcher(entity.getBody());

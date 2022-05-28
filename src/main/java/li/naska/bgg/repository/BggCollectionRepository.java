@@ -1,5 +1,6 @@
 package li.naska.bgg.repository;
 
+import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.exception.BggResponseNotReadyException;
 import li.naska.bgg.repository.model.BggCollectionQueryParams;
 import li.naska.bgg.util.QueryParameters;
@@ -63,12 +64,13 @@ public class BggCollectionRepository {
             status -> status == HttpStatus.ACCEPTED,
             response -> Mono.error(new BggResponseNotReadyException()))
         .bodyToMono(String.class)
+        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
+        .retryWhen(
+            Retry.max(3)
+                .filter(throwable -> throwable instanceof BggConnectionException))
         .retryWhen(
             Retry.backoff(4, Duration.ofSeconds(4))
                 .filter(throwable -> throwable instanceof BggResponseNotReadyException))
-        .retryWhen(
-            Retry.max(3)
-                .filter(throwable -> throwable instanceof IOException))
         .doOnNext(body -> {
           if (body.equals("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\" ?>\n<errors>\n\t<error>\n\t\t<message>Invalid username specified</message>\n\t</error>\n</errors>")) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Collection not found");

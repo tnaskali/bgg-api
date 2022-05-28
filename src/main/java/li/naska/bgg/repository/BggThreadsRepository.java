@@ -1,5 +1,6 @@
 package li.naska.bgg.repository;
 
+import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.repository.model.BggThreadQueryParams;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,9 +47,10 @@ public class BggThreadsRepository {
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .bodyToMono(String.class)
+        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
         .retryWhen(
             Retry.max(3)
-                .filter(throwable -> throwable instanceof IOException))
+                .filter(throwable -> throwable instanceof BggConnectionException))
         .doOnNext(body -> {
           if (body.equals("<?xml version=\"1.0\" encoding=\"utf-8\"?><error message='Thread Not Found' />")) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Thread not found");

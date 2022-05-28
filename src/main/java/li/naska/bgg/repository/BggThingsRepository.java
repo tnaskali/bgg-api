@@ -1,5 +1,6 @@
 package li.naska.bgg.repository;
 
+import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.repository.model.BggThingsQueryParams;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,9 +53,10 @@ public class BggThingsRepository {
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .bodyToMono(String.class)
+        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
         .retryWhen(
             Retry.max(3)
-                .filter(throwable -> throwable instanceof IOException));
+                .filter(throwable -> throwable instanceof BggConnectionException));
   }
 
 }

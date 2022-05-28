@@ -1,5 +1,6 @@
 package li.naska.bgg.security;
 
+import li.naska.bgg.exception.BggConnectionException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -49,9 +50,10 @@ public class BggAuthenticationManager implements ReactiveAuthenticationManager {
             status -> status != HttpStatus.NO_CONTENT,
             response -> Mono.error(new AuthenticationServiceException("Remote authentication failed")))
         .toEntity(String.class)
+        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
         .retryWhen(
             Retry.max(3)
-                .filter(throwable -> throwable instanceof IOException))
+                .filter(throwable -> throwable instanceof BggConnectionException))
         .map(response -> new BggAuthenticationToken(
             Optional.ofNullable(response.getHeaders().get(HttpHeaders.SET_COOKIE))
                 .flatMap(l -> l.stream().filter(e -> e.startsWith("SessionID")).findFirst())
