@@ -7,20 +7,23 @@ bgg:
     v2:
       baseurl-bgs: ${bgg.web.baseurl-bgs}/xmlapi2
   endpoints:
+    geeklist: ${bgg.api.v1.baseurl-bgs}/geeklist
     collection: ${bgg.api.v2.baseurl-bgs}/collection
     family: ${bgg.api.v2.baseurl-bgs}/family
     forum: ${bgg.api.v2.baseurl-bgs}/forum
     forumlist: ${bgg.api.v2.baseurl-bgs}/forumlist
-    geeklist: ${bgg.api.v1.baseurl-bgs}/geeklist
     guild: ${bgg.api.v2.baseurl-bgs}/guild
     login: ${bgg.web.baseurl-bgs}/login/api/v1
     hot: ${bgg.api.v2.baseurl-bgs}/hot
     plays: ${bgg.api.v2.baseurl-bgs}/plays
-    geekplay: ${bgg.web.baseurl-bgs}/geekplay.php
     search: ${bgg.api.v2.baseurl-bgs}/search
     thing: ${bgg.api.v2.baseurl-bgs}/thing
     thread: ${bgg.api.v2.baseurl-bgs}/thread
     user: ${bgg.api.v2.baseurl-bgs}/user
+    geekaccount: ${bgg.web.baseurl-bgs}/geekaccount.php
+    geekcollection: ${bgg.web.baseurl-bgs}/geekcollection.php
+    geekplay: ${bgg.web.baseurl-bgs}/geekplay.php
+    unifiedsearch: ${bgg.web.baseurl-bgs}/search
 
 debug: false
 
