@@ -1,13 +1,14 @@
 package li.naska.bgg.service;
 
+import com.boardgamegeek.enums.UserDomainType;
 import li.naska.bgg.mapper.UserMapper;
-import li.naska.bgg.mapper.UserParamsMapper;
 import li.naska.bgg.repository.BggUsersRepository;
 import li.naska.bgg.repository.model.BggUserQueryParams;
 import li.naska.bgg.resource.v3.model.Guild;
 import li.naska.bgg.resource.v3.model.User;
 import li.naska.bgg.resource.v3.model.User.Buddy;
-import li.naska.bgg.resource.v3.model.UserParams;
+import li.naska.bgg.resource.v3.model.User.Ranking.RankedItem;
+import li.naska.bgg.resource.v3.model.UserRankedItemsParams;
 import li.naska.bgg.util.Page;
 import li.naska.bgg.util.PagingHelper;
 import li.naska.bgg.util.PagingParams;
@@ -17,7 +18,9 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,16 +34,13 @@ public class UsersService {
   private BggUsersRepository usersRepository;
 
   @Autowired
-  private UserParamsMapper userParamsMapper;
-
-  @Autowired
   private UserMapper userMapper;
 
   @Autowired
   private XmlProcessor xmlProcessor;
 
-  public Mono<User> getUser(String username, UserParams params) {
-    BggUserQueryParams queryParams = userParamsMapper.toBggModel(params);
+  public Mono<User> getUser(String username) {
+    BggUserQueryParams queryParams = new BggUserQueryParams();
     queryParams.setName(username);
     return getUser(queryParams);
   }
@@ -147,10 +147,27 @@ public class UsersService {
         );
   }
 
+  public Mono<List<RankedItem>> getHotItems(String username, UserRankedItemsParams params) {
+    BggUserQueryParams queryParams = new BggUserQueryParams();
+    queryParams.setName(username);
+    queryParams.setHot(1);
+    queryParams.setDomain(Optional.ofNullable(params.getDomain()).map(UserDomainType::value).orElse(null));
+    return getUser(queryParams)
+        .map(user -> Optional.ofNullable(user.getHot()).map(User.Ranking::getItems).orElse(Collections.emptyList()));
+  }
+
+  public Mono<List<RankedItem>> getTopItems(String username, UserRankedItemsParams params) {
+    BggUserQueryParams queryParams = new BggUserQueryParams();
+    queryParams.setName(username);
+    queryParams.setTop(1);
+    queryParams.setDomain(Optional.ofNullable(params.getDomain()).map(UserDomainType::value).orElse(null));
+    return getUser(queryParams)
+        .map(user -> Optional.ofNullable(user.getTop()).map(User.Ranking::getItems).orElse(Collections.emptyList()));
+  }
+
   private Mono<User> getUser(BggUserQueryParams queryParams) {
     return usersRepository.getUser(queryParams)
         .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.user.User.class))
         .map(userMapper::fromBggModel);
   }
-
 }

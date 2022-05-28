@@ -47,9 +47,9 @@ public class User {
 
     @Data
     public static class RankedItem {
-      private String rank;
+      private Integer rank;
       private RankedItemType type;
-      private String id;
+      private Integer id;
       private String name;
     }
   }

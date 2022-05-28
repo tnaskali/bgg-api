@@ -2,6 +2,7 @@ package li.naska.bgg.resource.v3;
 
 import li.naska.bgg.resource.v3.model.*;
 import li.naska.bgg.resource.v3.model.User.Buddy;
+import li.naska.bgg.resource.v3.model.User.Ranking.RankedItem;
 import li.naska.bgg.service.PlaysService;
 import li.naska.bgg.service.ThingsService;
 import li.naska.bgg.service.UsersService;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v3/users")
@@ -35,9 +37,8 @@ public class UsersResource {
 
   @GetMapping(value = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<User> getUser(
-      @NotNull @PathVariable String username,
-      @ParameterObject @Validated UserParams parameters) {
-    return userService.getUser(username, parameters);
+      @NotNull @PathVariable String username) {
+    return userService.getUser(username);
   }
 
   @GetMapping(value = "/{username}/buddies", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -67,6 +68,20 @@ public class UsersResource {
       @NotNull @PathVariable String username,
       @ParameterObject @Validated CollectionParams params) {
     return thingsService.getThings(username, params);
+  }
+
+  @GetMapping(value = "/{username}/hot", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<List<RankedItem>> getHotItems(
+      @NotNull @PathVariable String username,
+      @ParameterObject @Validated UserRankedItemsParams params) {
+    return userService.getHotItems(username, params);
+  }
+
+  @GetMapping(value = "/{username}/top", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<List<RankedItem>> getTopItems(
+      @NotNull @PathVariable String username,
+      @ParameterObject @Validated UserRankedItemsParams params) {
+    return userService.getTopItems(username, params);
   }
 
 }
