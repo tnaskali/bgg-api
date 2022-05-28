@@ -1,6 +1,6 @@
 package li.naska.bgg.resource.v3.model;
 
-import com.boardgamegeek.enums.RankType;
+import com.boardgamegeek.enums.RankedItemType;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -42,13 +42,13 @@ public class User {
 
   @Data
   public static class Ranking {
-    private List<RankingItem> items;
+    private List<RankedItem> items;
     private String domain;
 
     @Data
-    public static class RankingItem {
+    public static class RankedItem {
       private String rank;
-      private RankType type;
+      private RankedItemType type;
       private String id;
       private String name;
     }

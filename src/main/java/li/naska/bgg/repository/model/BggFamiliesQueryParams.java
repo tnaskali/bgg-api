@@ -24,7 +24,7 @@ public class BggFamiliesQueryParams {
    * Specifies that, regardless of the type of family asked for by id, the results are filtered by the FAMILYTPE(s)
    * specified. Multiple FAMILYTYPEs can be specified in a comma-delimited list.
    */
-  @Pattern(regexp = "^(boardgamefamily|rpg|rpgperiodical)(,(boardgamefamily|rpg|rpgperiodical))*$")
+  @Pattern(regexp = "^(awardset|bgaccessoryfamily|boardgamefamily|boardgamehonor|boardgamepodcast|rpg|rpgfamily|rpggenre|rpgperiodical|rpgpodcast|rpgseries|rpgsetting|rpgsystem|videogamecharacter|videogamefranchise|videogamehonor|videogameplatform|videogameseries)(,(awardset|bgaccessoryfamily|boardgamefamily|boardgamehonor|boardgamepodcast|rpg|rpgfamily|rpggenre|rpgperiodical|rpgpodcast|rpgseries|rpgsetting|rpgsystem|videogamecharacter|videogamefranchise|videogamehonor|videogameplatform|videogameseries))*$")
   private String type;
 
 }

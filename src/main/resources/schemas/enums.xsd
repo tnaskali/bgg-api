@@ -39,6 +39,13 @@
           </xs:appinfo>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="bgaccessoryfamily">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="bgaccessoryfamily"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="boardgamefamily">
         <xs:annotation>
           <xs:appinfo>
@@ -156,6 +163,13 @@
 
   <xs:simpleType name="familyLinkType">
     <xs:restriction base="xs:string">
+      <xs:enumeration value="bgaccessoryfamily">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="bgaccessoryfamily"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="boardgamefamily">
         <xs:annotation>
           <xs:appinfo>
@@ -685,6 +699,60 @@
         <xs:annotation>
           <xs:appinfo>
             <jaxb:typesafeEnumMember name="videogamecharacter"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="rankedItemType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="company">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="company"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="event">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="event"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="family">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="family"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="media">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="media"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="person">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="person"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="property">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="property"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="thing">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="thing"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:enumeration>

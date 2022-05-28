@@ -45,7 +45,7 @@ public interface UserMapper extends BaseMapper {
   @Mapping(target = "items", source = "item")
   User.Ranking fromBggModel(com.boardgamegeek.user.Ranking source);
 
-  User.Ranking.RankingItem fromBggModel(com.boardgamegeek.user.RankingItem source);
+  User.Ranking.RankedItem fromBggModel(com.boardgamegeek.user.RankedItem source);
 
   default Integer getNumbuddies(com.boardgamegeek.user.User source) {
     return Optional.ofNullable(source.getBuddies())
