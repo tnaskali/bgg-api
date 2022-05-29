@@ -67,6 +67,13 @@
           </xs:appinfo>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="boardgamesubdomain">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="boardgamesubdomain"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="rpg">
         <xs:annotation>
           <xs:appinfo>
