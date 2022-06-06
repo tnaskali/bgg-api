@@ -18,6 +18,7 @@ import reactor.util.retry.Retry;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,13 +33,15 @@ public class BggGeekcollectionsRepository {
     this.geekcollectionWebClient = builder.baseUrl(geekcollectionEndpoint).build();
   }
 
-  public Mono<String> getGeekcollection(BggGeekcollectionQueryParams params) {
+  public Mono<String> getGeekcollection(String cookie, BggGeekcollectionQueryParams params) {
     return geekcollectionWebClient
         .get()
         .uri(uriBuilder -> uriBuilder
             .queryParams(QueryParameters.fromPojo(params))
             .build())
         .header("Accept", "text/comma-separated-values")
+        .headers(headers -> Optional.ofNullable(cookie)
+            .ifPresent(c -> headers.add("Cookie", c)))
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .toEntity(String.class)

@@ -1,7 +1,7 @@
 package li.naska.bgg.mapper;
 
 import li.naska.bgg.repository.model.BggForumsQueryParams;
-import li.naska.bgg.resource.v3.model.ForumsParams;
+import li.naska.bgg.resource.vN.model.ForumsParams;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

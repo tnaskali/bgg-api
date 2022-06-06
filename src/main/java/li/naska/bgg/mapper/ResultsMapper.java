@@ -1,6 +1,6 @@
 package li.naska.bgg.mapper;
 
-import li.naska.bgg.resource.v3.model.Results;
+import li.naska.bgg.resource.vN.model.Results;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

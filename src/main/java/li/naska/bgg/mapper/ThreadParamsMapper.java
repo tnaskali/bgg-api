@@ -1,7 +1,7 @@
 package li.naska.bgg.mapper;
 
 import li.naska.bgg.repository.model.BggThreadQueryParams;
-import li.naska.bgg.resource.v3.model.ThreadParams;
+import li.naska.bgg.resource.vN.model.ThreadParams;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

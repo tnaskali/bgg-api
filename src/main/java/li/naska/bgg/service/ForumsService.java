@@ -12,10 +12,10 @@ import li.naska.bgg.repository.BggThreadsRepository;
 import li.naska.bgg.repository.model.BggForumQueryParams;
 import li.naska.bgg.repository.model.BggForumsQueryParams;
 import li.naska.bgg.repository.model.BggThreadQueryParams;
-import li.naska.bgg.resource.v3.model.Forum;
-import li.naska.bgg.resource.v3.model.ForumsParams;
-import li.naska.bgg.resource.v3.model.Thread;
-import li.naska.bgg.resource.v3.model.ThreadParams;
+import li.naska.bgg.resource.vN.model.Forum;
+import li.naska.bgg.resource.vN.model.ForumsParams;
+import li.naska.bgg.resource.vN.model.Thread;
+import li.naska.bgg.resource.vN.model.ThreadParams;
 import li.naska.bgg.util.Page;
 import li.naska.bgg.util.PagingHelper;
 import li.naska.bgg.util.PagingParams;
@@ -73,17 +73,17 @@ public class ForumsService {
   }
 
   public Mono<List<Forum>> getThingForums(Integer id) {
-    ForumsParams parameters = new ForumsParams();
-    parameters.setId(id);
-    parameters.setType(ItemType.thing);
-    return getForums(parameters);
+    ForumsParams params = new ForumsParams();
+    params.setId(id);
+    params.setType(ItemType.thing);
+    return getForums(params);
   }
 
   public Mono<List<Forum>> getFamilyForums(Integer id) {
-    ForumsParams parameters = new ForumsParams();
-    parameters.setId(id);
-    parameters.setType(ItemType.family);
-    return getForums(parameters);
+    ForumsParams params = new ForumsParams();
+    params.setId(id);
+    params.setType(ItemType.family);
+    return getForums(params);
   }
 
   public Mono<Thread> getThread(Integer id, ThreadParams params) {

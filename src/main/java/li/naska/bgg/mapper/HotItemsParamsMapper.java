@@ -1,7 +1,7 @@
 package li.naska.bgg.mapper;
 
 import li.naska.bgg.repository.model.BggHotItemsQueryParams;
-import li.naska.bgg.resource.v3.model.HotItemsParams;
+import li.naska.bgg.resource.vN.model.HotItemsParams;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

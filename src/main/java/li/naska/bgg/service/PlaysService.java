@@ -9,10 +9,10 @@ import li.naska.bgg.repository.BggPlaysRepository;
 import li.naska.bgg.repository.model.BggGeekplayRequestBody;
 import li.naska.bgg.repository.model.BggGeekplayResponseBody;
 import li.naska.bgg.repository.model.BggPlaysQueryParams;
-import li.naska.bgg.resource.v3.model.ItemPlaysParams;
-import li.naska.bgg.resource.v3.model.Play;
-import li.naska.bgg.resource.v3.model.Plays;
-import li.naska.bgg.resource.v3.model.UserPlaysParams;
+import li.naska.bgg.resource.vN.model.ItemPlaysParams;
+import li.naska.bgg.resource.vN.model.Play;
+import li.naska.bgg.resource.vN.model.Plays;
+import li.naska.bgg.resource.vN.model.UserPlaysParams;
 import li.naska.bgg.util.Page;
 import li.naska.bgg.util.PagingHelper;
 import li.naska.bgg.util.PagingParams;
@@ -176,7 +176,6 @@ public class PlaysService {
     BggGeekplayRequestBody requestBody = geekplayParamsMapper.toBggModel(play);
     requestBody.setAction("save");
     requestBody.setAjax(1);
-    requestBody.setVersion(2);
     return geekplaysRepository.updateGeekplay(cookie, requestBody);
   }
 

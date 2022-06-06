@@ -3,8 +3,8 @@ package li.naska.bgg.mapper;
 import com.boardgamegeek.enums.NameType;
 import com.boardgamegeek.thing.Comments;
 import com.boardgamegeek.thing.Result;
-import li.naska.bgg.resource.v3.model.Name;
-import li.naska.bgg.resource.v3.model.Thing;
+import li.naska.bgg.resource.vN.model.Name;
+import li.naska.bgg.resource.vN.model.Thing;
 import org.mapstruct.*;
 
 import java.math.BigDecimal;

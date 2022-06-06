@@ -1,8 +1,8 @@
 package li.naska.bgg.mapper;
 
 import li.naska.bgg.repository.model.BggPlaysQueryParams;
-import li.naska.bgg.resource.v3.model.ItemPlaysParams;
-import li.naska.bgg.resource.v3.model.UserPlaysParams;
+import li.naska.bgg.resource.vN.model.ItemPlaysParams;
+import li.naska.bgg.resource.vN.model.UserPlaysParams;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

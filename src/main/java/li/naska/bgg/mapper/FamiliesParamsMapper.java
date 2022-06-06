@@ -1,7 +1,7 @@
 package li.naska.bgg.mapper;
 
 import li.naska.bgg.repository.model.BggFamiliesQueryParams;
-import li.naska.bgg.resource.v3.model.FamiliesParams;
+import li.naska.bgg.resource.vN.model.FamiliesParams;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

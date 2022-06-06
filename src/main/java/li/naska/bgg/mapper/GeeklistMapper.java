@@ -1,6 +1,6 @@
 package li.naska.bgg.mapper;
 
-import li.naska.bgg.resource.v3.model.Geeklist;
+import li.naska.bgg.resource.vN.model.Geeklist;
 import org.mapstruct.*;
 
 @Mapper(

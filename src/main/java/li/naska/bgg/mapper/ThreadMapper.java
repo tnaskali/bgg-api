@@ -1,7 +1,7 @@
 package li.naska.bgg.mapper;
 
 import com.boardgamegeek.thread.Articles;
-import li.naska.bgg.resource.v3.model.Thread;
+import li.naska.bgg.resource.vN.model.Thread;
 import org.mapstruct.*;
 
 import java.util.List;

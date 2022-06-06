@@ -1,8 +1,8 @@
 package li.naska.bgg.mapper;
 
 import com.boardgamegeek.enums.NameType;
-import li.naska.bgg.resource.v3.model.Family;
-import li.naska.bgg.resource.v3.model.Name;
+import li.naska.bgg.resource.vN.model.Family;
+import li.naska.bgg.resource.vN.model.Name;
 import org.mapstruct.*;
 
 import java.util.List;

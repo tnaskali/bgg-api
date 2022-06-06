@@ -26,9 +26,6 @@ public class BggGeekplayRequestBody {
   @Min(1)
   @Max(1)
   private Integer finalize;
-  @Min(2)
-  @Max(2)
-  private Integer version;
 
   // business properties
 

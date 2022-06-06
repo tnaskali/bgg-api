@@ -4,8 +4,8 @@ import com.boardgamegeek.enums.ItemSubtype;
 import com.boardgamegeek.enums.NameType;
 import com.boardgamegeek.family.Name;
 import com.boardgamegeek.plays.SubtypeValue;
-import li.naska.bgg.resource.v3.model.Play;
-import li.naska.bgg.resource.v3.model.Plays;
+import li.naska.bgg.resource.vN.model.Play;
+import li.naska.bgg.resource.vN.model.Plays;
 import org.mapstruct.*;
 
 import java.util.List;

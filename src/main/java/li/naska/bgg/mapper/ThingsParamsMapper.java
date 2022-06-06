@@ -1,7 +1,7 @@
 package li.naska.bgg.mapper;
 
 import li.naska.bgg.repository.model.BggThingsQueryParams;
-import li.naska.bgg.resource.v3.model.ThingsParams;
+import li.naska.bgg.resource.vN.model.ThingsParams;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

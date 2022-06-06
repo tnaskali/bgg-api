@@ -1,7 +1,7 @@
 package li.naska.bgg.mapper;
 
 import li.naska.bgg.repository.model.BggGuildQueryParams;
-import li.naska.bgg.resource.v3.model.GuildMembersParams;
+import li.naska.bgg.resource.vN.model.GuildMembersParams;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

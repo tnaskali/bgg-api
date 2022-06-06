@@ -23,7 +23,7 @@ public class BggApiApplication {
   @Bean
   public GroupedOpenApi bggApiV1() {
     return GroupedOpenApi.builder()
-        .group("v1")
+        .group("v1 - XML API (v1)")
         .pathsToMatch("/api/v1/**")
         .build();
   }
@@ -31,7 +31,7 @@ public class BggApiApplication {
   @Bean
   public GroupedOpenApi bggApiV2() {
     return GroupedOpenApi.builder()
-        .group("v2")
+        .group("v2 - XML API (v2)")
         .pathsToMatch("/api/v2/**")
         .build();
   }
@@ -39,8 +39,32 @@ public class BggApiApplication {
   @Bean
   public GroupedOpenApi bggApiV3() {
     return GroupedOpenApi.builder()
-        .group("v3")
+        .group("v3 - JSON API (PHP)")
         .pathsToMatch("/api/v3/**")
+        .build();
+  }
+
+  @Bean
+  public GroupedOpenApi bggApiV4() {
+    return GroupedOpenApi.builder()
+        .group("v4 - JSON API (Geekdo)")
+        .pathsToMatch("/api/v4/**")
+        .build();
+  }
+
+  @Bean
+  public GroupedOpenApi bggApiV5() {
+    return GroupedOpenApi.builder()
+        .group("v5 - JSON API (Website)")
+        .pathsToMatch("/api/v5/**")
+        .build();
+  }
+
+  @Bean
+  public GroupedOpenApi bggApiVN() {
+    return GroupedOpenApi.builder()
+        .group("vN - JSON API (NEW)")
+        .pathsToMatch("/api/vN/**")
         .build();
   }
 
