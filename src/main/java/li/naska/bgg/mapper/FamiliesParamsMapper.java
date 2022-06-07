@@ -1,6 +1,6 @@
 package li.naska.bgg.mapper;
 
-import li.naska.bgg.repository.model.BggFamiliesQueryParams;
+import li.naska.bgg.repository.model.BggFamilyV2QueryParams;
 import li.naska.bgg.resource.vN.model.FamiliesParams;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -17,6 +17,6 @@ import static org.mapstruct.MappingConstants.ComponentModel;
 )
 public interface FamiliesParamsMapper {
 
-  BggFamiliesQueryParams toBggModel(FamiliesParams source);
+  BggFamilyV2QueryParams toBggModel(FamiliesParams source);
 
 }

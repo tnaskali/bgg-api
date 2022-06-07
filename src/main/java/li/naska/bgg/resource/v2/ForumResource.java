@@ -1,8 +1,8 @@
 package li.naska.bgg.resource.v2;
 
 import com.boardgamegeek.forum.Forum;
-import li.naska.bgg.repository.BggForumsRepository;
-import li.naska.bgg.repository.model.BggForumQueryParams;
+import li.naska.bgg.repository.BggForumV2Repository;
+import li.naska.bgg.repository.model.BggForumV2QueryParams;
 import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +18,18 @@ import reactor.core.publisher.Mono;
 public class ForumResource {
 
   @Autowired
-  private BggForumsRepository forumsRepository;
+  private BggForumV2Repository forumsRepository;
 
   @Autowired
   private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
-  public Mono<String> getForumAsXml(@ParameterObject @Validated BggForumQueryParams params) {
+  public Mono<String> getForumAsXml(@ParameterObject @Validated BggForumV2QueryParams params) {
     return forumsRepository.getForum(params);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getForumAsJson(@ParameterObject @Validated BggForumQueryParams params) {
+  public Mono<String> getForumAsJson(@ParameterObject @Validated BggForumV2QueryParams params) {
     return getForumAsXml(params)
         .map(xml -> xmlProcessor.toJsonString(xml, Forum.class));
   }

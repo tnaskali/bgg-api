@@ -1,6 +1,6 @@
 package li.naska.bgg.mapper;
 
-import li.naska.bgg.repository.model.BggGeeklistQueryParams;
+import li.naska.bgg.repository.model.BggGeeklistV1QueryParams;
 import li.naska.bgg.resource.vN.model.GeeklistParams;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -20,6 +20,6 @@ public interface GeeklistParamsMapper {
 
   @Mapping(target = "start", ignore = true)
   @Mapping(target = "count", ignore = true)
-  BggGeeklistQueryParams toBggModel(GeeklistParams source);
+  BggGeeklistV1QueryParams toBggModel(GeeklistParams source);
 
 }

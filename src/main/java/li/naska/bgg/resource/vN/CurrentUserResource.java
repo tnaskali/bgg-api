@@ -2,7 +2,7 @@ package li.naska.bgg.resource.vN;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import li.naska.bgg.repository.model.BggGeekplayResponseBody;
+import li.naska.bgg.repository.model.BggGeekplayV3ResponseBody;
 import li.naska.bgg.resource.vN.model.Collection;
 import li.naska.bgg.resource.vN.model.CollectionParams;
 import li.naska.bgg.resource.vN.model.Play;
@@ -52,7 +52,7 @@ public class CurrentUserResource {
   @PostMapping(value = "/plays", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.CREATED)
   @Operation(security = @SecurityRequirement(name = "basicAuth"))
-  public Mono<BggGeekplayResponseBody> createPlay(
+  public Mono<BggGeekplayV3ResponseBody> createPlay(
       @ParameterObject @Validated @RequestBody Play requestBody) {
     return authenticationService.authentication()
         .flatMap(authn -> playsService.createPrivatePlay(authn.buildBggRequestHeader(), requestBody));
@@ -60,7 +60,7 @@ public class CurrentUserResource {
 
   @PutMapping(value = "/plays/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(security = @SecurityRequirement(name = "basicAuth"))
-  public Mono<BggGeekplayResponseBody> updatePlay(
+  public Mono<BggGeekplayV3ResponseBody> updatePlay(
       @NotNull @PathVariable Integer id,
       @ParameterObject @Validated @RequestBody Play requestBody) {
     return authenticationService.authentication()
@@ -69,7 +69,7 @@ public class CurrentUserResource {
 
   @DeleteMapping(value = "/plays/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(security = @SecurityRequirement(name = "basicAuth"))
-  public Mono<BggGeekplayResponseBody> deletePlay(
+  public Mono<BggGeekplayV3ResponseBody> deletePlay(
       @NotNull @PathVariable Integer id) {
     return authenticationService.authentication()
         .flatMap(authn -> playsService.deletePrivatePlay(id, authn.buildBggRequestHeader()));

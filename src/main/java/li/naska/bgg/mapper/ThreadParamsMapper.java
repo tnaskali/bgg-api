@@ -1,6 +1,6 @@
 package li.naska.bgg.mapper;
 
-import li.naska.bgg.repository.model.BggThreadQueryParams;
+import li.naska.bgg.repository.model.BggThreadV2QueryParams;
 import li.naska.bgg.resource.vN.model.ThreadParams;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
@@ -34,6 +34,6 @@ public interface ThreadParamsMapper {
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "username", ignore = true)
   @Mapping(target = "minarticledate", expression = "java(getMinarticledate(source))")
-  BggThreadQueryParams toBggModel(ThreadParams source);
+  BggThreadV2QueryParams toBggModel(ThreadParams source);
 
 }

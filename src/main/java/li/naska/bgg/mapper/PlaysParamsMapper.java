@@ -1,6 +1,6 @@
 package li.naska.bgg.mapper;
 
-import li.naska.bgg.repository.model.BggPlaysQueryParams;
+import li.naska.bgg.repository.model.BggPlayV2QueryParams;
 import li.naska.bgg.resource.vN.model.ItemPlaysParams;
 import li.naska.bgg.resource.vN.model.UserPlaysParams;
 import org.mapstruct.Mapper;
@@ -18,11 +18,11 @@ public interface PlaysParamsMapper {
 
   @Mapping(target = "username", ignore = true)
   @Mapping(target = "page", ignore = true)
-  BggPlaysQueryParams toBggModel(UserPlaysParams source);
+  BggPlayV2QueryParams toBggModel(UserPlaysParams source);
 
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "type", ignore = true)
   @Mapping(target = "page", ignore = true)
-  BggPlaysQueryParams toBggModel(ItemPlaysParams source);
+  BggPlayV2QueryParams toBggModel(ItemPlaysParams source);
 
 }

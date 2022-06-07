@@ -1,6 +1,6 @@
 package li.naska.bgg.mapper;
 
-import li.naska.bgg.repository.model.BggHotItemsQueryParams;
+import li.naska.bgg.repository.model.BggHotV2QueryParams;
 import li.naska.bgg.resource.vN.model.HotItemsParams;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -14,6 +14,6 @@ import static org.mapstruct.MappingConstants.ComponentModel;
 )
 public interface HotItemsParamsMapper {
 
-  BggHotItemsQueryParams toBggModel(HotItemsParams source);
+  BggHotV2QueryParams toBggModel(HotItemsParams source);
 
 }

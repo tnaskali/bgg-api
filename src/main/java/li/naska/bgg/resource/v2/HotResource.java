@@ -1,8 +1,8 @@
 package li.naska.bgg.resource.v2;
 
 import com.boardgamegeek.hot.HotItems;
-import li.naska.bgg.repository.BggHotItemsRepository;
-import li.naska.bgg.repository.model.BggHotItemsQueryParams;
+import li.naska.bgg.repository.BggHotV2Repository;
+import li.naska.bgg.repository.model.BggHotV2QueryParams;
 import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +18,18 @@ import reactor.core.publisher.Mono;
 public class HotResource {
 
   @Autowired
-  private BggHotItemsRepository hotItemsRepository;
+  private BggHotV2Repository hotItemsRepository;
 
   @Autowired
   private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
-  public Mono<String> getHotItemsAsXml(@ParameterObject @Validated BggHotItemsQueryParams params) {
+  public Mono<String> getHotItemsAsXml(@ParameterObject @Validated BggHotV2QueryParams params) {
     return hotItemsRepository.getHotItems(params);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getHotItemsAsJson(@ParameterObject @Validated BggHotItemsQueryParams params) {
+  public Mono<String> getHotItemsAsJson(@ParameterObject @Validated BggHotV2QueryParams params) {
     return getHotItemsAsXml(params)
         .map(xml -> xmlProcessor.toJsonString(xml, HotItems.class));
   }

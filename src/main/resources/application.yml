@@ -1,29 +1,32 @@
 bgg:
   web:
     baseurl-bgs: https://boardgamegeek.com
-  api:
-    v1:
-      baseurl-bgs: ${bgg.web.baseurl-bgs}/xmlapi
-    v2:
-      baseurl-bgs: ${bgg.web.baseurl-bgs}/xmlapi2
   endpoints:
-    geeklist: ${bgg.api.v1.baseurl-bgs}/geeklist
-    collection: ${bgg.api.v2.baseurl-bgs}/collection
-    family: ${bgg.api.v2.baseurl-bgs}/family
-    forum: ${bgg.api.v2.baseurl-bgs}/forum
-    forumlist: ${bgg.api.v2.baseurl-bgs}/forumlist
-    guild: ${bgg.api.v2.baseurl-bgs}/guild
-    login: ${bgg.web.baseurl-bgs}/login/api/v1
-    hot: ${bgg.api.v2.baseurl-bgs}/hot
-    plays: ${bgg.api.v2.baseurl-bgs}/plays
-    search: ${bgg.api.v2.baseurl-bgs}/search
-    thing: ${bgg.api.v2.baseurl-bgs}/thing
-    thread: ${bgg.api.v2.baseurl-bgs}/thread
-    user: ${bgg.api.v2.baseurl-bgs}/user
-    geekaccount: ${bgg.web.baseurl-bgs}/geekaccount.php
-    geekcollection: ${bgg.web.baseurl-bgs}/geekcollection.php
-    geekplay: ${bgg.web.baseurl-bgs}/geekplay.php
-    unifiedsearch: ${bgg.web.baseurl-bgs}/search
+    v1:
+      boardgame: ${bgg.web.baseurl-bgs}/xmlapi/boardgame
+      collection: ${bgg.web.baseurl-bgs}/xmlapi/collection
+      geeklist: ${bgg.web.baseurl-bgs}/xmlapi/geeklist
+      search: ${bgg.web.baseurl-bgs}/xmlapi/search
+    v2:
+      collection: ${bgg.web.baseurl-bgs}/xmlapi2/collection
+      family: ${bgg.web.baseurl-bgs}/xmlapi2/family
+      forum: ${bgg.web.baseurl-bgs}/xmlapi2/forum
+      forumlist: ${bgg.web.baseurl-bgs}/xmlapi2/forumlist
+      guild: ${bgg.web.baseurl-bgs}/xmlapi2/guild
+      hot: ${bgg.web.baseurl-bgs}/xmlapi2/hot
+      plays: ${bgg.web.baseurl-bgs}/xmlapi2/plays
+      search: ${bgg.web.baseurl-bgs}/xmlapi2/search
+      thing: ${bgg.web.baseurl-bgs}/xmlapi2/thing
+      thread: ${bgg.web.baseurl-bgs}/xmlapi2/thread
+      user: ${bgg.web.baseurl-bgs}/xmlapi2/user
+    v3:
+      geekaccount: ${bgg.web.baseurl-bgs}/geekaccount.php
+      geekcollection: ${bgg.web.baseurl-bgs}/geekcollection.php
+      geekplay: ${bgg.web.baseurl-bgs}/geekplay.php
+    v4:
+    v5:
+      login: ${bgg.web.baseurl-bgs}/login/api/v1
+      search: ${bgg.web.baseurl-bgs}/search
 
 debug: false
 

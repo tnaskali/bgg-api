@@ -1,6 +1,6 @@
 package li.naska.bgg.resource.vN;
 
-import li.naska.bgg.repository.BggHotItemsRepository;
+import li.naska.bgg.repository.BggHotV2Repository;
 import li.naska.bgg.resource.vN.model.*;
 import li.naska.bgg.resource.vN.model.Thing.Comment;
 import li.naska.bgg.resource.vN.model.Thing.MarketplaceListing;
@@ -31,7 +31,7 @@ import java.util.List;
 public class ThingsResource {
 
   @Autowired
-  private BggHotItemsRepository bggHotItemsService;
+  private BggHotV2Repository bggHotItemsService;
 
   @Autowired
   private ItemsService itemsService;

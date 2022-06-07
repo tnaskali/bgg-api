@@ -1,6 +1,6 @@
 package li.naska.bgg.mapper;
 
-import li.naska.bgg.repository.model.BggGuildQueryParams;
+import li.naska.bgg.repository.model.BggGuildV2QueryParams;
 import li.naska.bgg.resource.vN.model.GuildMembersParams;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -21,6 +21,6 @@ public interface GuildMembersParamsMapper {
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "page", ignore = true)
   @Mapping(target = "members", ignore = true)
-  BggGuildQueryParams toBggModel(GuildMembersParams source);
+  BggGuildV2QueryParams toBggModel(GuildMembersParams source);
 
 }

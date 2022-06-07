@@ -1,6 +1,6 @@
 package li.naska.bgg.mapper;
 
-import li.naska.bgg.repository.model.BggForumsQueryParams;
+import li.naska.bgg.repository.model.BggForumlistV2QueryParams;
 import li.naska.bgg.resource.vN.model.ForumsParams;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -14,6 +14,6 @@ import static org.mapstruct.MappingConstants.ComponentModel;
 )
 public interface ForumListsParamsMapper {
 
-  BggForumsQueryParams toBggModel(ForumsParams source);
+  BggForumlistV2QueryParams toBggModel(ForumsParams source);
 
 }

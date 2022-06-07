@@ -6,10 +6,10 @@ import li.naska.bgg.mapper.CollectionMapper;
 import li.naska.bgg.mapper.CollectionParamsMapper;
 import li.naska.bgg.mapper.ThingMapper;
 import li.naska.bgg.mapper.ThingsParamsMapper;
-import li.naska.bgg.repository.BggCollectionRepository;
-import li.naska.bgg.repository.BggThingsRepository;
-import li.naska.bgg.repository.model.BggCollectionQueryParams;
-import li.naska.bgg.repository.model.BggThingsQueryParams;
+import li.naska.bgg.repository.BggCollectionV2Repository;
+import li.naska.bgg.repository.BggThingV2Repository;
+import li.naska.bgg.repository.model.BggCollectionV2QueryParams;
+import li.naska.bgg.repository.model.BggThingV2QueryParams;
 import li.naska.bgg.resource.vN.model.Collection;
 import li.naska.bgg.resource.vN.model.CollectionParams;
 import li.naska.bgg.resource.vN.model.Thing;
@@ -38,7 +38,7 @@ public class ThingsService {
   private static final int BGG_THING_COMMENTS_PAGE_SIZE = 100;
 
   @Autowired
-  private BggCollectionRepository collectionRepository;
+  private BggCollectionV2Repository collectionRepository;
 
   @Autowired
   private CollectionParamsMapper collectionParamsMapper;
@@ -47,7 +47,7 @@ public class ThingsService {
   private CollectionMapper collectionMapper;
 
   @Autowired
-  private BggThingsRepository thingsRepository;
+  private BggThingV2Repository thingsRepository;
 
   @Autowired
   private ThingsParamsMapper thingsParamsMapper;
@@ -59,14 +59,14 @@ public class ThingsService {
   private XmlProcessor xmlProcessor;
 
   public Mono<Thing> getThing(Integer id) {
-    BggThingsQueryParams queryParams = new BggThingsQueryParams();
+    BggThingV2QueryParams queryParams = new BggThingV2QueryParams();
     queryParams.setId(id.toString());
     queryParams.setStats(1);
     return getThing(queryParams);
   }
 
   public Mono<List<Comment>> getComments(Integer id) {
-    BggThingsQueryParams firstPageQueryParams = new BggThingsQueryParams();
+    BggThingV2QueryParams firstPageQueryParams = new BggThingV2QueryParams();
     firstPageQueryParams.setId(id.toString());
     firstPageQueryParams.setComments(1);
     firstPageQueryParams.setPage(1);
@@ -76,7 +76,7 @@ public class ThingsService {
           int numPages = (int) Math.ceil((double) thing.getNumcomments() / BGG_THING_COMMENTS_PAGE_SIZE);
           return Flux.range(1, numPages)
               .flatMapSequential(page -> {
-                BggThingsQueryParams queryParams = new BggThingsQueryParams();
+                BggThingV2QueryParams queryParams = new BggThingV2QueryParams();
                 queryParams.setId(id.toString());
                 queryParams.setComments(1);
                 queryParams.setPage(page);
@@ -93,7 +93,7 @@ public class ThingsService {
         pagingParams.getSize(),
         pagingParams.getPage(),
         BGG_THING_COMMENTS_PAGE_SIZE);
-    BggThingsQueryParams firstPageQueryParams = new BggThingsQueryParams();
+    BggThingV2QueryParams firstPageQueryParams = new BggThingV2QueryParams();
     firstPageQueryParams.setId(id.toString());
     firstPageQueryParams.setComments(1);
     firstPageQueryParams.setPage(helper.getBggStartPage());
@@ -101,7 +101,7 @@ public class ThingsService {
     return getThing(firstPageQueryParams)
         .flatMap(thing -> helper.getBggPagesRange(thing.getNumcomments())
             .flatMapSequential(page -> {
-              BggThingsQueryParams queryParams = new BggThingsQueryParams();
+              BggThingV2QueryParams queryParams = new BggThingV2QueryParams();
               queryParams.setId(id.toString());
               queryParams.setComments(1);
               queryParams.setPage(page);
@@ -115,7 +115,7 @@ public class ThingsService {
   }
 
   public Mono<List<Comment>> getRatings(Integer id) {
-    BggThingsQueryParams firstPageQueryParams = new BggThingsQueryParams();
+    BggThingV2QueryParams firstPageQueryParams = new BggThingV2QueryParams();
     firstPageQueryParams.setId(id.toString());
     firstPageQueryParams.setRatingcomments(1);
     firstPageQueryParams.setPage(1);
@@ -125,7 +125,7 @@ public class ThingsService {
           int numPages = (int) Math.ceil((double) thing.getNumcomments() / BGG_THING_COMMENTS_PAGE_SIZE);
           return Flux.range(1, numPages)
               .flatMapSequential(page -> {
-                BggThingsQueryParams queryParams = new BggThingsQueryParams();
+                BggThingV2QueryParams queryParams = new BggThingV2QueryParams();
                 queryParams.setId(id.toString());
                 queryParams.setRatingcomments(1);
                 queryParams.setPage(page);
@@ -142,7 +142,7 @@ public class ThingsService {
         pagingParams.getSize(),
         pagingParams.getPage(),
         BGG_THING_COMMENTS_PAGE_SIZE);
-    BggThingsQueryParams firstPageQueryParams = new BggThingsQueryParams();
+    BggThingV2QueryParams firstPageQueryParams = new BggThingV2QueryParams();
     firstPageQueryParams.setId(id.toString());
     firstPageQueryParams.setRatingcomments(1);
     firstPageQueryParams.setPage(helper.getBggStartPage());
@@ -150,7 +150,7 @@ public class ThingsService {
     return getThing(firstPageQueryParams)
         .flatMap(thing -> helper.getBggPagesRange(thing.getNumcomments())
             .flatMapSequential(page -> {
-              BggThingsQueryParams queryParams = new BggThingsQueryParams();
+              BggThingV2QueryParams queryParams = new BggThingV2QueryParams();
               queryParams.setId(id.toString());
               queryParams.setRatingcomments(1);
               queryParams.setPage(page);
@@ -164,7 +164,7 @@ public class ThingsService {
   }
 
   public Mono<List<Version>> getVersions(Integer id) {
-    BggThingsQueryParams queryParams = new BggThingsQueryParams();
+    BggThingV2QueryParams queryParams = new BggThingV2QueryParams();
     queryParams.setId(id.toString());
     queryParams.setVersions(1);
     return getThing(queryParams)
@@ -172,7 +172,7 @@ public class ThingsService {
   }
 
   public Mono<List<Video>> getVideos(Integer id) {
-    BggThingsQueryParams queryParams = new BggThingsQueryParams();
+    BggThingV2QueryParams queryParams = new BggThingV2QueryParams();
     queryParams.setId(id.toString());
     queryParams.setVideos(1);
     return getThing(queryParams)
@@ -180,14 +180,14 @@ public class ThingsService {
   }
 
   public Mono<List<MarketplaceListing>> getMarketplacelistings(Integer id) {
-    BggThingsQueryParams queryParams = new BggThingsQueryParams();
+    BggThingV2QueryParams queryParams = new BggThingV2QueryParams();
     queryParams.setId(id.toString());
     queryParams.setMarketplace(1);
     return getThing(queryParams)
         .map(Thing::getMarketplacelistings);
   }
 
-  private Mono<Thing> getThing(BggThingsQueryParams queryParams) {
+  private Mono<Thing> getThing(BggThingV2QueryParams queryParams) {
     return thingsRepository.getThings(queryParams)
         .map(xml -> xmlProcessor.toJavaObject(xml, Things.class))
         .map(Things::getItem)
@@ -198,7 +198,7 @@ public class ThingsService {
   }
 
   public Mono<List<Thing>> getThings(ThingsParams params) {
-    BggThingsQueryParams queryParams = thingsParamsMapper.toBggModel(params);
+    BggThingV2QueryParams queryParams = thingsParamsMapper.toBggModel(params);
     return thingsRepository.getThings(queryParams)
         .map(xml -> xmlProcessor.toJavaObject(xml, Things.class))
         .map(Things::getItem)
@@ -209,7 +209,7 @@ public class ThingsService {
   }
 
   public Mono<Collection> getThings(String username, CollectionParams params) {
-    BggCollectionQueryParams queryParams = collectionParamsMapper.toBggModel(params);
+    BggCollectionV2QueryParams queryParams = collectionParamsMapper.toBggModel(params);
     queryParams.setUsername(username);
     // handle subtype bug in the BBG XML API
     if (queryParams.getSubtype() == null || queryParams.getSubtype().equals(CollectionItemSubtype.boardgame.value())) {
@@ -221,7 +221,7 @@ public class ThingsService {
   }
 
   public Mono<Collection> getPrivateThings(String username, String cookie, CollectionParams params) {
-    BggCollectionQueryParams queryParams = collectionParamsMapper.toBggModel(params);
+    BggCollectionV2QueryParams queryParams = collectionParamsMapper.toBggModel(params);
     queryParams.setUsername(username);
     // handle subtype bug in the BBG XML API
     if (queryParams.getSubtype() == null || queryParams.getSubtype().equals(CollectionItemSubtype.boardgame.value())) {
