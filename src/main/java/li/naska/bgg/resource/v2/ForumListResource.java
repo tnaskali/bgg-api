@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController
+@RestController("ForumListV2Resource")
 @RequestMapping("/api/v2/forumlist")
 public class ForumListResource {
 

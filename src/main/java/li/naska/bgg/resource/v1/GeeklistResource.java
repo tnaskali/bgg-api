@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 
 import javax.validation.constraints.NotNull;
 
-@RestController
+@RestController("GeeklistV1Resource")
 @RequestMapping("/api/v1/geeklist")
 public class GeeklistResource {
 

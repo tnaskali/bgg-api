@@ -17,7 +17,7 @@ import reactor.core.publisher.Mono;
 
 import javax.validation.constraints.NotNull;
 
-@RestController("SearchResourceV5")
+@RestController("SearchV5Resource")
 @RequestMapping("/api/v5/search")
 public class SearchResource {
 

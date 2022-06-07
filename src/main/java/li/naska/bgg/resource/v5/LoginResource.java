@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-@RestController
+@RestController("LoginV5Resource")
 @RequestMapping("/api/v5/login")
 public class LoginResource {
 

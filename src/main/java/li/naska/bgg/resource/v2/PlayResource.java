@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController
+@RestController("PlayV2Resource")
 @RequestMapping("/api/v2/plays")
-public class PlaysResource {
+public class PlayResource {
 
   @Autowired
   private BggPlayV2Repository playsRepository;

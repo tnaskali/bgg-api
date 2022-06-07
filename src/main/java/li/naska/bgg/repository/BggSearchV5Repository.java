@@ -28,13 +28,14 @@ public class BggSearchV5Repository {
   public BggSearchV5Repository(
       @Autowired WebClient.Builder builder,
       @Value("${bgg.endpoints.v5.search}") String geekplayEndpoint) {
-    this.unifiedSearchWebClient = builder.baseUrl(geekplayEndpoint + "/{domain}").build();
+    this.unifiedSearchWebClient = builder.baseUrl(geekplayEndpoint).build();
   }
 
   public Mono<BggSearchV5ResponseBody> getSearchResults(SearchDomain domain, BggSearchV5QueryParams params) {
     return unifiedSearchWebClient
         .get()
         .uri(uriBuilder -> uriBuilder
+            .path("/{domain}")
             .queryParams(QueryParameters.fromPojo(params))
             .build(domain))
         .accept(MediaType.APPLICATION_JSON)
