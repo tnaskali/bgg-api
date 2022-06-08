@@ -50,7 +50,7 @@ jobs:
         run: |
           DOCKER_PID=$(docker run -d -p 8088:8088 --rm ${{ env.DOCKERHUB_PROJECT }}:test 2>/dev/null)
           sleep 10s
-          curl http://localhost:8088/bgg-api/v3/api-docs/v3
+          curl http://localhost:8088/bgg-api/v3/api-docs
           docker stop $DOCKER_PID
 
       - name: Set tags for master branch
