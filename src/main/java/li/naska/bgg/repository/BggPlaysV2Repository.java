@@ -1,7 +1,7 @@
 package li.naska.bgg.repository;
 
 import li.naska.bgg.exception.BggConnectionException;
-import li.naska.bgg.repository.model.BggPlayV2QueryParams;
+import li.naska.bgg.repository.model.BggPlaysV2QueryParams;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,18 +26,18 @@ import java.nio.charset.StandardCharsets;
  * @see <a href="https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc10">BGG_XML_API2</a>
  */
 @Repository
-public class BggPlayV2Repository {
+public class BggPlaysV2Repository {
 
-  private final WebClient playsWebClient;
+  private final WebClient webClient;
 
-  public BggPlayV2Repository(
+  public BggPlaysV2Repository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v2.plays}") String playsEndpoint) {
-    this.playsWebClient = builder.baseUrl(playsEndpoint).build();
+      @Value("${bgg.endpoints.v2.plays}") String endpoint) {
+    this.webClient = builder.baseUrl(endpoint).build();
   }
 
-  public Mono<String> getPlays(BggPlayV2QueryParams params) {
-    return playsWebClient
+  public Mono<String> getPlays(BggPlaysV2QueryParams params) {
+    return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
             .queryParams(QueryParameters.fromPojo(params))

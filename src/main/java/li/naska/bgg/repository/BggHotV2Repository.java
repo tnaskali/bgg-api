@@ -30,8 +30,8 @@ public class BggHotV2Repository {
 
   public BggHotV2Repository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v2.hot}") String hotEndpoint) {
-    this.webClient = builder.baseUrl(hotEndpoint).build();
+      @Value("${bgg.endpoints.v2.hot}") String endpoint) {
+    this.webClient = builder.baseUrl(endpoint).build();
   }
 
   public Mono<String> getHotItems(BggHotV2QueryParams params) {

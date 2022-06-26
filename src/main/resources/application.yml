@@ -24,6 +24,15 @@ bgg:
       geekcollection: ${bgg.web.baseurl-bgs}/geekcollection.php
       geekplay: ${bgg.web.baseurl-bgs}/geekplay.php
     v4:
+      articles: ${bgg.web.baseurl-bgs}/api/articles
+      families: ${bgg.web.baseurl-bgs}/api/families
+      forums: ${bgg.web.baseurl-bgs}/api/forums
+      geekitems: ${bgg.web.baseurl-bgs}/api/geekitems
+      geeklists: ${bgg.web.baseurl-bgs}/api/geeklists
+      hotness: ${bgg.web.baseurl-bgs}/api/hotness
+      things: ${bgg.web.baseurl-bgs}/api/things
+      threads: ${bgg.web.baseurl-bgs}/api/threads
+      users: ${bgg.web.baseurl-bgs}/api/users
     v5:
       login: ${bgg.web.baseurl-bgs}/login/api/v1
       search: ${bgg.web.baseurl-bgs}/search

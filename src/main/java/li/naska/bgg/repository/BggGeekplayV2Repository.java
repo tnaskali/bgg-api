@@ -23,16 +23,16 @@ import java.util.regex.Pattern;
 @Repository
 public class BggGeekplayV2Repository {
 
-  private final WebClient geekplayWebClient;
+  private final WebClient webClient;
 
   public BggGeekplayV2Repository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v3.geekplay}") String geekplayEndpoint) {
-    this.geekplayWebClient = builder.baseUrl(geekplayEndpoint).build();
+      @Value("${bgg.endpoints.v3.geekplay}") String endpoint) {
+    this.webClient = builder.baseUrl(endpoint).build();
   }
 
   public Mono<BggGeekplayV3ResponseBody> updateGeekplay(String cookie, BggGeekplayV3RequestBody requestBody) {
-    return geekplayWebClient
+    return webClient
         .post()
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)

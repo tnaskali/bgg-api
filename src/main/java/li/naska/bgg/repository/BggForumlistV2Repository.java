@@ -30,8 +30,8 @@ public class BggForumlistV2Repository {
 
   public BggForumlistV2Repository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v2.forumlist}") String forumListEndpoint) {
-    this.webClient = builder.baseUrl(forumListEndpoint).build();
+      @Value("${bgg.endpoints.v2.forumlist}") String endpoint) {
+    this.webClient = builder.baseUrl(endpoint).build();
   }
 
   public Mono<String> getForums(BggForumlistV2QueryParams params) {

@@ -23,16 +23,16 @@ import java.nio.charset.StandardCharsets;
 @Repository
 public class BggSearchV5Repository {
 
-  private final WebClient unifiedSearchWebClient;
+  private final WebClient webClient;
 
   public BggSearchV5Repository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v5.search}") String geekplayEndpoint) {
-    this.unifiedSearchWebClient = builder.baseUrl(geekplayEndpoint).build();
+      @Value("${bgg.endpoints.v5.search}") String endpoint) {
+    this.webClient = builder.baseUrl(endpoint).build();
   }
 
   public Mono<BggSearchV5ResponseBody> getSearchResults(SearchDomain domain, BggSearchV5QueryParams params) {
-    return unifiedSearchWebClient
+    return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
             .path("/{domain}")

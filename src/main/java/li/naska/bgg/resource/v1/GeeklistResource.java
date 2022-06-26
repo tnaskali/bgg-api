@@ -21,7 +21,7 @@ import javax.validation.constraints.NotNull;
 public class GeeklistResource {
 
   @Autowired
-  private BggGeeklistV1Repository geeklistsRepository;
+  private BggGeeklistV1Repository geeklistRepository;
 
   @Autowired
   private XmlProcessor xmlProcessor;
@@ -30,7 +30,7 @@ public class GeeklistResource {
   public Mono<String> getGeeklistAsXml(
       @NotNull @PathVariable Integer id,
       @ParameterObject @Validated BggGeeklistV1QueryParams params) {
-    return geeklistsRepository.getGeeklist(id, params);
+    return geeklistRepository.getGeeklist(id, params);
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

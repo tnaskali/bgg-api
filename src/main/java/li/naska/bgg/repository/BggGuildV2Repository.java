@@ -32,8 +32,8 @@ public class BggGuildV2Repository {
 
   public BggGuildV2Repository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v2.guild}") String guildEndpoint) {
-    this.webClient = builder.baseUrl(guildEndpoint).build();
+      @Value("${bgg.endpoints.v2.guild}") String endpoint) {
+    this.webClient = builder.baseUrl(endpoint).build();
   }
 
   public Mono<String> getGuild(BggGuildV2QueryParams params) {

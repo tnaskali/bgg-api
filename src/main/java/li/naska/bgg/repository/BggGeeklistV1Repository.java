@@ -30,8 +30,8 @@ public class BggGeeklistV1Repository {
 
   public BggGeeklistV1Repository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v1.geeklist}") String geeklistEndpoint) {
-    this.webClient = builder.baseUrl(geeklistEndpoint).build();
+      @Value("${bgg.endpoints.v1.geeklist}") String endpoint) {
+    this.webClient = builder.baseUrl(endpoint).build();
   }
 
   public Mono<String> getGeeklist(Integer id, BggGeeklistV1QueryParams params) {

@@ -33,8 +33,8 @@ public class BggBoardgameV1Repository {
 
   public BggBoardgameV1Repository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v1.boardgame}") String boardgameEndpoint) {
-    this.webClient = builder.baseUrl(boardgameEndpoint).build();
+      @Value("${bgg.endpoints.v1.boardgame}") String endpoint) {
+    this.webClient = builder.baseUrl(endpoint).build();
   }
 
   public Mono<String> getResults(List<Integer> ids, BggBoardgameV1QueryParams params) {

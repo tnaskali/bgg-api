@@ -47,8 +47,8 @@ public class BggCollectionV1Repository {
 
   public BggCollectionV1Repository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v1.collection}") String collectionEndpoint) {
-    this.webClient = builder.baseUrl(collectionEndpoint).build();
+      @Value("${bgg.endpoints.v1.collection}") String endpoint) {
+    this.webClient = builder.baseUrl(endpoint).build();
   }
 
   public Mono<String> getCollection(String cookie, String username, BggCollectionV1QueryParams params) {

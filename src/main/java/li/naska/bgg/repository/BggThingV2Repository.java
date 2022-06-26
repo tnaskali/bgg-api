@@ -39,8 +39,8 @@ public class BggThingV2Repository {
 
   public BggThingV2Repository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v2.thing}") String thingEndpoint) {
-    this.webClient = builder.baseUrl(thingEndpoint).build();
+      @Value("${bgg.endpoints.v2.thing}") String endpoint) {
+    this.webClient = builder.baseUrl(endpoint).build();
   }
 
   public Mono<String> getThings(BggThingV2QueryParams params) {

@@ -30,8 +30,8 @@ public class BggSearchV2Repository {
 
   public BggSearchV2Repository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v2.search}") String searchEndpoint) {
-    this.webClient = builder.baseUrl(searchEndpoint).build();
+      @Value("${bgg.endpoints.v2.search}") String endpoint) {
+    this.webClient = builder.baseUrl(endpoint).build();
   }
 
   public Mono<String> getResults(BggSearchV2QueryParams params) {

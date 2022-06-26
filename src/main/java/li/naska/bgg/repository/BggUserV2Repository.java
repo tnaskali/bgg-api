@@ -32,8 +32,8 @@ public class BggUserV2Repository {
 
   public BggUserV2Repository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v2.user}") String userEndpoint) {
-    this.webClient = builder.baseUrl(userEndpoint).build();
+      @Value("${bgg.endpoints.v2.user}") String endpoint) {
+    this.webClient = builder.baseUrl(endpoint).build();
   }
 
   public Mono<String> getUser(BggUserV2QueryParams params) {

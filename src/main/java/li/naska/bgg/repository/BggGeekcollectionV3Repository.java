@@ -25,16 +25,16 @@ import java.util.regex.Pattern;
 @Repository
 public class BggGeekcollectionV3Repository {
 
-  private final WebClient geekcollectionWebClient;
+  private final WebClient webClient;
 
   public BggGeekcollectionV3Repository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v3.geekcollection}") String geekcollectionEndpoint) {
-    this.geekcollectionWebClient = builder.baseUrl(geekcollectionEndpoint).build();
+      @Value("${bgg.endpoints.v3.geekcollection}") String endpoint) {
+    this.webClient = builder.baseUrl(endpoint).build();
   }
 
   public Mono<String> getGeekcollection(String cookie, BggGeekcollectionV3QueryParams params) {
-    return geekcollectionWebClient
+    return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
             .queryParams(QueryParameters.fromPojo(params))

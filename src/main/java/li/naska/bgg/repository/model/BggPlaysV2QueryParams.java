@@ -7,7 +7,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
 @Data
-public class BggPlayV2QueryParams {
+public class BggPlaysV2QueryParams {
 
   /**
    * username=NAME

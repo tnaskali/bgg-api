@@ -33,8 +33,8 @@ public class BggThreadV2Repository {
 
   public BggThreadV2Repository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v2.thread}") String threadEndpoint) {
-    this.webClient = builder.baseUrl(threadEndpoint).build();
+      @Value("${bgg.endpoints.v2.thread}") String endpoint) {
+    this.webClient = builder.baseUrl(endpoint).build();
   }
 
   public Mono<String> getThread(BggThreadV2QueryParams params) {
