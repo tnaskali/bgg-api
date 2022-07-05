@@ -2,11 +2,11 @@ package li.naska.bgg.service;
 
 import li.naska.bgg.mapper.GuildMapper;
 import li.naska.bgg.mapper.GuildMembersParamsMapper;
-import li.naska.bgg.repository.BggGuildsRepository;
-import li.naska.bgg.repository.model.BggGuildQueryParams;
-import li.naska.bgg.resource.v3.model.Guild;
-import li.naska.bgg.resource.v3.model.Guild.Member;
-import li.naska.bgg.resource.v3.model.GuildMembersParams;
+import li.naska.bgg.repository.BggGuildV2Repository;
+import li.naska.bgg.repository.model.BggGuildV2QueryParams;
+import li.naska.bgg.resource.vN.model.Guild;
+import li.naska.bgg.resource.vN.model.Guild.Member;
+import li.naska.bgg.resource.vN.model.GuildMembersParams;
 import li.naska.bgg.util.Page;
 import li.naska.bgg.util.PagingHelper;
 import li.naska.bgg.util.PagingParams;
@@ -25,7 +25,7 @@ public class GuildsService {
   private static final int BGG_GUILD_MEMBERS_PAGE_SIZE = 25;
 
   @Autowired
-  private BggGuildsRepository guildsRepository;
+  private BggGuildV2Repository guildsRepository;
 
   @Autowired
   private GuildMembersParamsMapper guildMembersParamsMapper;
@@ -37,19 +37,19 @@ public class GuildsService {
   private XmlProcessor xmlProcessor;
 
   public Mono<Guild> getGuild(Integer id) {
-    BggGuildQueryParams queryParams = new BggGuildQueryParams();
+    BggGuildV2QueryParams queryParams = new BggGuildV2QueryParams();
     queryParams.setId(id);
     return getGuild(queryParams);
   }
 
-  private Mono<Guild> getGuild(BggGuildQueryParams queryParams) {
+  private Mono<Guild> getGuild(BggGuildV2QueryParams queryParams) {
     return guildsRepository.getGuild(queryParams)
         .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.guild.Guild.class))
         .map(guildMapper::fromBggModel);
   }
 
   public Mono<List<Member>> getMembers(Integer id, GuildMembersParams params) {
-    BggGuildQueryParams firstPageQueryParams = guildMembersParamsMapper.toBggModel(params);
+    BggGuildV2QueryParams firstPageQueryParams = guildMembersParamsMapper.toBggModel(params);
     firstPageQueryParams.setId(id);
     firstPageQueryParams.setMembers(1);
     firstPageQueryParams.setPage(1);
@@ -61,7 +61,7 @@ public class GuildsService {
                 if (page == 1) {
                   return Mono.just(guild);
                 }
-                BggGuildQueryParams queryParams = guildMembersParamsMapper.toBggModel(params);
+                BggGuildV2QueryParams queryParams = guildMembersParamsMapper.toBggModel(params);
                 queryParams.setId(id);
                 queryParams.setMembers(1);
                 queryParams.setPage(page);
@@ -77,7 +77,7 @@ public class GuildsService {
         pagingParams.getSize(),
         pagingParams.getPage(),
         BGG_GUILD_MEMBERS_PAGE_SIZE);
-    BggGuildQueryParams firstPageQueryParams = guildMembersParamsMapper.toBggModel(params);
+    BggGuildV2QueryParams firstPageQueryParams = guildMembersParamsMapper.toBggModel(params);
     firstPageQueryParams.setId(id);
     firstPageQueryParams.setMembers(1);
     firstPageQueryParams.setPage(helper.getBggStartPage());
@@ -87,7 +87,7 @@ public class GuildsService {
               if (page == helper.getBggStartPage()) {
                 return Mono.just(guild);
               }
-              BggGuildQueryParams queryParams = guildMembersParamsMapper.toBggModel(params);
+              BggGuildV2QueryParams queryParams = guildMembersParamsMapper.toBggModel(params);
               queryParams.setId(id);
               queryParams.setMembers(1);
               queryParams.setPage(page);

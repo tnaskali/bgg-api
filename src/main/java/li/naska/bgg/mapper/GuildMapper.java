@@ -1,7 +1,7 @@
 package li.naska.bgg.mapper;
 
 import com.boardgamegeek.guild.Members;
-import li.naska.bgg.resource.v3.model.Guild;
+import li.naska.bgg.resource.vN.model.Guild;
 import org.mapstruct.*;
 
 import java.util.List;

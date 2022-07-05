@@ -3,62 +3,54 @@ package li.naska.bgg.resource.v2;
 import com.boardgamegeek.collection.Collection;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import li.naska.bgg.repository.BggCollectionRepository;
-import li.naska.bgg.repository.model.BggCollectionQueryParams;
-import li.naska.bgg.security.BggAuthenticationToken;
+import li.naska.bgg.repository.BggCollectionV2Repository;
+import li.naska.bgg.repository.model.BggCollectionV2QueryParams;
+import li.naska.bgg.service.AuthenticationService;
 import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-import java.util.Optional;
-
-@RestController
+@RestController("CollectionV2Resource")
 @RequestMapping("/api/v2/collection")
 public class CollectionResource {
 
   @Autowired
-  private BggCollectionRepository collectionRepository;
+  private BggCollectionV2Repository collectionRepository;
 
   @Autowired
   private XmlProcessor xmlProcessor;
 
-  private Mono<BggAuthenticationToken> authentication() {
-    return ReactiveSecurityContextHolder.getContext().map(
-        context -> (BggAuthenticationToken) context.getAuthentication()
-    );
-  }
+  @Autowired
+  private AuthenticationService authenticationService;
 
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
-  public Mono<String> getCollectionAsXml(@ParameterObject @Validated BggCollectionQueryParams parameters) {
-    return collectionRepository.getCollection(null, parameters);
+  public Mono<String> getCollectionAsXml(@ParameterObject @Validated BggCollectionV2QueryParams params) {
+    return collectionRepository.getCollection(null, params);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getCollectionAsJson(@ParameterObject @Validated BggCollectionQueryParams parameters) {
-    return getCollectionAsXml(parameters)
+  public Mono<String> getCollectionAsJson(@ParameterObject @Validated BggCollectionV2QueryParams params) {
+    return getCollectionAsXml(params)
         .map(xml -> xmlProcessor.toJsonString(xml, Collection.class));
   }
 
-  @GetMapping(path = "/private", produces = MediaType.APPLICATION_XML_VALUE)
+  @GetMapping(path = "/current", produces = MediaType.APPLICATION_XML_VALUE)
   @Operation(security = @SecurityRequirement(name = "basicAuth"))
-  public Mono<String> getPrivateCollectionAsXml(@ParameterObject @Validated BggCollectionQueryParams parameters) {
-    return authentication().flatMap(
-        authn -> collectionRepository.getCollection(
-            Optional.ofNullable(authn).map(BggAuthenticationToken::buildBggRequestHeader).orElse(null),
-            parameters));
+  public Mono<String> getCurrentCollectionAsXml(@ParameterObject @Validated BggCollectionV2QueryParams params) {
+    return authenticationService.authentication().flatMap(
+        authn -> collectionRepository.getCollection(authn.buildBggRequestHeader(), params));
   }
 
-  @GetMapping(path = "/private", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(path = "/current", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(security = @SecurityRequirement(name = "basicAuth"))
-  public Mono<String> getPrivateCollectionAsJson(@ParameterObject @Validated BggCollectionQueryParams parameters) {
-    return getCollectionAsXml(parameters)
+  public Mono<String> getCurrentCollectionAsJson(@ParameterObject @Validated BggCollectionV2QueryParams params) {
+    return getCurrentCollectionAsXml(params)
         .map(xml -> xmlProcessor.toJsonString(xml, Collection.class));
   }
 

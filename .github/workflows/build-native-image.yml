@@ -24,7 +24,7 @@ jobs:
       - name: Set up GraalVM version
         uses: graalvm/setup-graalvm@v1
         with:
-          version: '22.0.0.2'
+          version: '22.1.0'
           java-version: '11'
           components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -58,7 +58,7 @@ jobs:
         run: |
           DOCKER_PID=$(docker run -d -p 8088:8088 --rm ${{ env.DOCKERHUB_PROJECT }}:test 2>/dev/null)
           sleep 2s
-          curl http://localhost:8088/bgg-api/v3/api-docs/v3
+          curl http://localhost:8088/bgg-api/v3/api-docs
           docker stop $DOCKER_PID
 
       - name: Set tags for master branch

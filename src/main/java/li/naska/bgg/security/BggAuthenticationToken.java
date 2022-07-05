@@ -1,10 +1,10 @@
 package li.naska.bgg.security;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.util.Assert;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,27 +20,38 @@ public class BggAuthenticationToken extends AbstractAuthenticationToken {
 
   private final String bggPassword;
 
-  public BggAuthenticationToken(String sessionCookie, String usernameCookie, String passwordCookie) {
+  public BggAuthenticationToken(List<String> setCookieHeaders) {
     super(AuthorityUtils.NO_AUTHORITIES);
-    Assert.notNull(sessionCookie, "sessionId cookie is null");
-    Assert.notNull(usernameCookie, "username cookie is null");
-    Assert.notNull(passwordCookie, "password cookie is null");
-    Matcher matcher = SESSIONID_COOKIE_PATTERN.matcher(sessionCookie);
-    if (!matcher.find()) {
-      throw new AuthenticationServiceException("SessionId not found in cookie");
-    }
-    String bggSessionId = matcher.group(1);
+    String bggSessionId = setCookieHeaders
+        .stream()
+        .filter(e -> e.startsWith("SessionID"))
+        .findFirst()
+        .flatMap(sessionIdCookie -> {
+          Matcher sessionIdMatcher = SESSIONID_COOKIE_PATTERN.matcher(sessionIdCookie);
+          return sessionIdMatcher.find() ? Optional.of(sessionIdMatcher.group(1)) : Optional.empty();
+        })
+        .orElseThrow(() -> new IllegalStateException("no sessionId cookie found"));
     setDetails(bggSessionId);
-    Matcher usernameMatcher = BGGUSERNAME_COOKIE_PATTERN.matcher(usernameCookie);
-    if (!usernameMatcher.find()) {
-      throw new AuthenticationServiceException("bggusername not found in cookie");
-    }
-    this.bggUsername = usernameMatcher.group(1);
-    Matcher passwordMatcher = BGGPASSWORD_COOKIE_PATTERN.matcher(passwordCookie);
-    if (!passwordMatcher.find()) {
-      throw new AuthenticationServiceException("bggpassword not found in cookie");
-    }
-    this.bggPassword = passwordMatcher.group(1);
+    bggUsername = setCookieHeaders
+        .stream()
+        .filter(e -> !e.startsWith("bggusername=deleted;"))
+        .filter(e -> e.startsWith("bggusername"))
+        .findFirst()
+        .flatMap(usernameCookie -> {
+          Matcher usernameMatcher = BGGUSERNAME_COOKIE_PATTERN.matcher(usernameCookie);
+          return usernameMatcher.find() ? Optional.of(usernameMatcher.group(1)) : Optional.empty();
+        })
+        .orElseThrow(() -> new IllegalStateException("no username cookie found"));
+    bggPassword = setCookieHeaders
+        .stream()
+        .filter(e -> !e.startsWith("bggpassword=deleted;"))
+        .filter(e -> e.startsWith("bggpassword"))
+        .findFirst()
+        .flatMap(passwordCookie -> {
+          Matcher passwordMatcher = BGGPASSWORD_COOKIE_PATTERN.matcher(passwordCookie);
+          return passwordMatcher.find() ? Optional.of(passwordMatcher.group(1)) : Optional.empty();
+        })
+        .orElseThrow(() -> new IllegalStateException("no password cookie found"));
     setAuthenticated(true);
   }
 

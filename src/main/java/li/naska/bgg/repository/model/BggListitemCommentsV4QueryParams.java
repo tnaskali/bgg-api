@@ -1,0 +1,19 @@
+package li.naska.bgg.repository.model;
+
+import lombok.Data;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
+@Data
+public class BggListitemCommentsV4QueryParams {
+
+  @Min(1)
+  @Max(1)
+  private Integer totalonly;
+
+  @Min(1)
+  @Max(1)
+  private Integer metaonly;
+
+}

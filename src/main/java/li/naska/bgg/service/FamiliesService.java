@@ -3,10 +3,10 @@ package li.naska.bgg.service;
 import com.boardgamegeek.family.Families;
 import li.naska.bgg.mapper.FamiliesParamsMapper;
 import li.naska.bgg.mapper.FamilyMapper;
-import li.naska.bgg.repository.BggFamiliesRepository;
-import li.naska.bgg.repository.model.BggFamiliesQueryParams;
-import li.naska.bgg.resource.v3.model.FamiliesParams;
-import li.naska.bgg.resource.v3.model.Family;
+import li.naska.bgg.repository.BggFamilyV2Repository;
+import li.naska.bgg.repository.model.BggFamilyV2QueryParams;
+import li.naska.bgg.resource.vN.model.FamiliesParams;
+import li.naska.bgg.resource.vN.model.Family;
 import li.naska.bgg.util.XmlProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class FamiliesService {
   private FamiliesParamsMapper familiesParamsMapper;
 
   @Autowired
-  private BggFamiliesRepository familiesRepository;
+  private BggFamilyV2Repository familiesRepository;
 
   @Autowired
   private FamilyMapper familyMapper;
@@ -33,7 +33,7 @@ public class FamiliesService {
   private XmlProcessor xmlProcessor;
 
   public Mono<List<Family>> getFamilies(FamiliesParams params) {
-    BggFamiliesQueryParams queryParams = familiesParamsMapper.toBggModel(params);
+    BggFamilyV2QueryParams queryParams = familiesParamsMapper.toBggModel(params);
     return familiesRepository.getFamilies(queryParams)
         .map(xml -> xmlProcessor.toJavaObject(xml, Families.class))
         .map(Families::getItem)
@@ -43,7 +43,7 @@ public class FamiliesService {
   }
 
   public Mono<Family> getFamily(Integer id) {
-    BggFamiliesQueryParams queryParams = new BggFamiliesQueryParams();
+    BggFamilyV2QueryParams queryParams = new BggFamilyV2QueryParams();
     queryParams.setId(id.toString());
     return familiesRepository.getFamilies(queryParams)
         .map(xml -> xmlProcessor.toJavaObject(xml, Families.class))

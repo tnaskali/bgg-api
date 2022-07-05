@@ -1,7 +1,7 @@
 package li.naska.bgg.mapper;
 
-import li.naska.bgg.repository.model.BggCollectionQueryParams;
-import li.naska.bgg.resource.v3.model.CollectionParams;
+import li.naska.bgg.repository.model.BggCollectionV2QueryParams;
+import li.naska.bgg.resource.vN.model.CollectionParams;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -42,6 +42,6 @@ public interface CollectionParamsMapper {
   @Mapping(target = "rating", source = "maxrating")
   @Mapping(target = "bggrating", source = "maxbggrating")
   @Mapping(target = "modifiedsince", expression = "java(getModifiedsince(source))")
-  BggCollectionQueryParams toBggModel(CollectionParams source);
+  BggCollectionV2QueryParams toBggModel(CollectionParams source);
 
 }

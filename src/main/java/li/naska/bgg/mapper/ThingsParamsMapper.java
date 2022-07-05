@@ -1,7 +1,7 @@
 package li.naska.bgg.mapper;
 
-import li.naska.bgg.repository.model.BggThingsQueryParams;
-import li.naska.bgg.resource.v3.model.ThingsParams;
+import li.naska.bgg.repository.model.BggThingV2QueryParams;
+import li.naska.bgg.resource.vN.model.ThingsParams;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
@@ -31,6 +31,6 @@ public interface ThingsParamsMapper {
   @Mapping(target = "historical", ignore = true)
   @Mapping(target = "from", ignore = true)
   @Mapping(target = "to", ignore = true)
-  BggThingsQueryParams toBggModel(ThingsParams source);
+  BggThingV2QueryParams toBggModel(ThingsParams source);
 
 }

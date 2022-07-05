@@ -2,8 +2,8 @@ package li.naska.bgg.mapper;
 
 import com.boardgamegeek.user.Buddies;
 import com.boardgamegeek.user.Guilds;
-import li.naska.bgg.resource.v3.model.Guild;
-import li.naska.bgg.resource.v3.model.User;
+import li.naska.bgg.resource.vN.model.Guild;
+import li.naska.bgg.resource.vN.model.User;
 import org.mapstruct.*;
 
 import java.util.List;
@@ -45,7 +45,7 @@ public interface UserMapper extends BaseMapper {
   @Mapping(target = "items", source = "item")
   User.Ranking fromBggModel(com.boardgamegeek.user.Ranking source);
 
-  User.Ranking.RankingItem fromBggModel(com.boardgamegeek.user.RankingItem source);
+  User.Ranking.RankedItem fromBggModel(com.boardgamegeek.user.RankedItem source);
 
   default Integer getNumbuddies(com.boardgamegeek.user.User source) {
     return Optional.ofNullable(source.getBuddies())

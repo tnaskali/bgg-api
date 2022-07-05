@@ -32,10 +32,31 @@
 
   <xs:simpleType name="familyType">
     <xs:restriction base="xs:string">
+      <xs:enumeration value="award">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="award"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="awardcategory">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="awardcategory"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="awardset">
         <xs:annotation>
           <xs:appinfo>
             <jaxb:typesafeEnumMember name="awardset"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="bgaccessoryfamily">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="bgaccessoryfamily"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:enumeration>
@@ -60,6 +81,13 @@
           </xs:appinfo>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="boardgamesubdomain">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="boardgamesubdomain"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="rpg">
         <xs:annotation>
           <xs:appinfo>
@@ -78,6 +106,13 @@
         <xs:annotation>
           <xs:appinfo>
             <jaxb:typesafeEnumMember name="rpggenre"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rpghonor">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="rpghonor"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:enumeration>
@@ -156,6 +191,13 @@
 
   <xs:simpleType name="familyLinkType">
     <xs:restriction base="xs:string">
+      <xs:enumeration value="bgaccessoryfamily">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="bgaccessoryfamily"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="boardgamefamily">
         <xs:annotation>
           <xs:appinfo>
@@ -303,6 +345,160 @@
         <xs:annotation>
           <xs:appinfo>
             <jaxb:typesafeEnumMember name="language"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rpg">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="rpg"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rpgartist">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="rpgartist"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rpgcategory">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="rpgcategory"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rpgdesigner">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="rpgdesigner"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rpggenre">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="rpggenre"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rpgissue">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="rpgissue"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rpgmechanic">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="rpgmechanic"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rpgproducer">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="rpgproducer"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rpgpublisher">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="rpgpublisher"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rpgsetting">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="rpgsetting"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="videogamedeveloper">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="videogamedeveloper"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="videogameexpansion">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="videogameexpansion"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="videogamefranchise">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="videogamefranchise"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="videogamegenre">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="videogamegenre"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="videogamemedia">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="videogamemedia"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="videogamemode">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="videogamemode"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="videogameplatform">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="videogameplatform"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="videogamepublisher">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="videogamepublisher"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="videogamerating">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="videogamerating"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="videogameregion">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="videogameregion"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="videogametheme">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="videogametheme"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="videogameversion">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="videogameversion"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:enumeration>
@@ -691,6 +887,60 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="rankedItemType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="company">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="company"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="event">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="event"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="family">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="family"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="media">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="media"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="person">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="person"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="property">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="property"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="thing">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="thing"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="rankType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="subtype">
@@ -731,10 +981,45 @@
 
   <xs:simpleType name="versionType">
     <xs:restriction base="xs:string">
+      <xs:enumeration value="bgaccessoryversion">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="bgaccessoryversion"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="boardgameversion">
         <xs:annotation>
           <xs:appinfo>
             <jaxb:typesafeEnumMember name="boardgameversion"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rpgissueversion">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="rpgissueversion"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rpgitemversion">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="rpgitemversion"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="videogamehwversion">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="videogamehwversion"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="videogameversion">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="videogameversion"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:enumeration>
@@ -796,6 +1081,13 @@
         <xs:annotation>
           <xs:appinfo>
             <jaxb:typesafeEnumMember name="videogameexpansion"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="videogamehardware">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:typesafeEnumMember name="videogamehardware"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:enumeration>

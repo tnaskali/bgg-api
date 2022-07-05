@@ -5,14 +5,14 @@ import li.naska.bgg.mapper.HotItemsMapper;
 import li.naska.bgg.mapper.HotItemsParamsMapper;
 import li.naska.bgg.mapper.ResultsMapper;
 import li.naska.bgg.mapper.SearchParamsMapper;
-import li.naska.bgg.repository.BggHotItemsRepository;
-import li.naska.bgg.repository.BggSearchRepository;
-import li.naska.bgg.repository.model.BggHotItemsQueryParams;
-import li.naska.bgg.repository.model.BggSearchQueryParams;
-import li.naska.bgg.resource.v3.model.HotItem;
-import li.naska.bgg.resource.v3.model.HotItemsParams;
-import li.naska.bgg.resource.v3.model.Results;
-import li.naska.bgg.resource.v3.model.SearchParams;
+import li.naska.bgg.repository.BggHotV2Repository;
+import li.naska.bgg.repository.BggSearchV2Repository;
+import li.naska.bgg.repository.model.BggHotV2QueryParams;
+import li.naska.bgg.repository.model.BggSearchV2QueryParams;
+import li.naska.bgg.resource.vN.model.HotItem;
+import li.naska.bgg.resource.vN.model.HotItemsParams;
+import li.naska.bgg.resource.vN.model.Results;
+import li.naska.bgg.resource.vN.model.SearchParams;
 import li.naska.bgg.util.XmlProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class ItemsService {
 
   @Autowired
-  private BggHotItemsRepository hotItemsRepository;
+  private BggHotV2Repository hotItemsRepository;
 
   @Autowired
   private HotItemsParamsMapper hotItemsParamsMapper;
@@ -34,7 +34,7 @@ public class ItemsService {
   private HotItemsMapper hotItemsMapper;
 
   @Autowired
-  private BggSearchRepository searchRepository;
+  private BggSearchV2Repository searchRepository;
 
   @Autowired
   private SearchParamsMapper searchParamsMapper;
@@ -46,7 +46,7 @@ public class ItemsService {
   private XmlProcessor xmlProcessor;
 
   public Mono<List<HotItem>> getHotItems(HotItemsParams params) {
-    BggHotItemsQueryParams queryParams = hotItemsParamsMapper.toBggModel(params);
+    BggHotV2QueryParams queryParams = hotItemsParamsMapper.toBggModel(params);
     return hotItemsRepository.getHotItems(queryParams)
         .map(xml -> xmlProcessor.toJavaObject(xml, HotItems.class))
         .map(HotItems::getItem)
@@ -56,7 +56,7 @@ public class ItemsService {
   }
 
   public Mono<Results> searchItems(SearchParams params) {
-    BggSearchQueryParams queryParams = searchParamsMapper.toBggModel(params);
+    BggSearchV2QueryParams queryParams = searchParamsMapper.toBggModel(params);
     return searchRepository.getResults(queryParams)
         .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.search.Results.class))
         .map(resultsMapper::fromBggModel);

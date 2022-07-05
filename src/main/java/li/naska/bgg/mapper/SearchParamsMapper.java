@@ -1,7 +1,7 @@
 package li.naska.bgg.mapper;
 
-import li.naska.bgg.repository.model.BggSearchQueryParams;
-import li.naska.bgg.resource.v3.model.SearchParams;
+import li.naska.bgg.repository.model.BggSearchV2QueryParams;
+import li.naska.bgg.resource.vN.model.SearchParams;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -18,6 +18,6 @@ import static org.mapstruct.MappingConstants.ComponentModel;
 )
 public interface SearchParamsMapper {
 
-  BggSearchQueryParams toBggModel(SearchParams source);
+  BggSearchV2QueryParams toBggModel(SearchParams source);
 
 }
