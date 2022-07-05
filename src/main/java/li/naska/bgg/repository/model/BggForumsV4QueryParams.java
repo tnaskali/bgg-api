@@ -14,7 +14,7 @@ public class BggForumsV4QueryParams {
   private Integer objectid;
 
   @NotNull
-  @Pattern(regexp = "^(thing|family)$")
+  @Pattern(regexp = "^(company|event|family|media|person|property|thing)$")
   private String objecttype;
 
 }

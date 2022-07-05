@@ -1,6 +1,8 @@
 package li.naska.bgg.repository;
 
 import li.naska.bgg.exception.BggConnectionException;
+import li.naska.bgg.repository.model.BggHotnessV4QueryParams;
+import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -15,23 +17,22 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 @Repository
-public class BggFamiliesV4Repository {
+public class BggHotnessV4Repository {
 
   private final WebClient webClient;
 
-  public BggFamiliesV4Repository(
+  public BggHotnessV4Repository(
       @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v4.families}") String endpoint) {
+      @Value("${bgg.endpoints.v4.hotness}") String endpoint) {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 
-  public Mono<String> getFamily(Integer id) {
+  public Mono<String> getHotness(BggHotnessV4QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
-            .path("/{id}")
-            .queryParam("partial", "essential")
-            .build(id))
+            .queryParams(QueryParameters.fromPojo(params))
+            .build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()

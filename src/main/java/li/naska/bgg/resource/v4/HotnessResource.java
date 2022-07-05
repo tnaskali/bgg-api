@@ -1,7 +1,7 @@
 package li.naska.bgg.resource.v4;
 
-import li.naska.bgg.repository.BggForumsV4Repository;
-import li.naska.bgg.repository.model.BggForumsV4QueryParams;
+import li.naska.bgg.repository.BggHotnessV4Repository;
+import li.naska.bgg.repository.model.BggHotnessV4QueryParams;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("ForumsV4Resource")
-@RequestMapping("/api/v4/forums")
-public class ForumsResource {
+@RestController("HotnessV4Resource")
+@RequestMapping("/api/v4/hotness")
+public class HotnessResource {
 
   @Autowired
-  private BggForumsV4Repository forumsRepository;
+  private BggHotnessV4Repository hotnessRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getForums(@ParameterObject @Validated BggForumsV4QueryParams params) {
-    return forumsRepository.getForums(params);
+  public Mono<String> getHotness(@ParameterObject @Validated BggHotnessV4QueryParams params) {
+    return hotnessRepository.getHotness(params);
   }
 
 }

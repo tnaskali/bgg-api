@@ -21,14 +21,14 @@ public class ArticlesResource {
   @Autowired
   private BggArticlesV4Repository articlesRepository;
 
-  @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getArticle(@NotNull @PathVariable Integer id) {
-    return articlesRepository.getArticle(id);
-  }
-
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<String> getArticles(@ParameterObject @Validated BggArticlesV4QueryParams params) {
     return articlesRepository.getArticles(params);
+  }
+
+  @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Mono<String> getArticle(@NotNull @PathVariable Integer id) {
+    return articlesRepository.getArticle(id);
   }
 
 }
