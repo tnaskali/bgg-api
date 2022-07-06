@@ -1,4 +1,4 @@
-package li.naska.bgg.util;
+package li.naska.bgg;
 
 import io.swagger.v3.core.util.PrimitiveType;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@OpenAPIDefinition(info = @Info(title = "BGG API", version = "v1"))
+@OpenAPIDefinition(info = @Info(title = "BGG API", version = "vN"))
 @SecurityScheme(name = "basicAuth", type = SecuritySchemeType.HTTP, scheme = "basic")
 public class OpenApiConfiguration {
 
