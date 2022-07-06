@@ -27,7 +27,7 @@ class BggAuthenticationTokenTest {
     String sessionIdCookie = "SessionID=1234abcd; expires=Mon, 01-Nov-2021 11:40:40 GMT; Max-Age=3600; path=/; domain=.boardgamegeek.com";
     String passwordCookie = "bggpassword=bar_encoded; expires=Wed, 01-Dec-2021 13:42:33 GMT; Max-Age=2592000; path=/; domain=.boardgamegeek.com";
 
-    assertThatThrownBy(() -> new BggAuthenticationToken(List.of(sessionIdCookie, passwordCookie))).hasMessage("username cookie is null");
+    assertThatThrownBy(() -> new BggAuthenticationToken(List.of(sessionIdCookie, passwordCookie))).hasMessage("no username cookie found");
   }
 
   @Test
@@ -35,7 +35,7 @@ class BggAuthenticationTokenTest {
     String sessionIdCookie = "SessionID=1234abcd; expires=Mon, 01-Nov-2021 11:40:40 GMT; Max-Age=3600; path=/; domain=.boardgamegeek.com";
     String usernameCookie = "bggusername=foo; expires=Wed, 01-Dec-2021 13:42:33 GMT; Max-Age=2592000; path=/; domain=.boardgamegeek.com";
 
-    assertThatThrownBy(() -> new BggAuthenticationToken(List.of(sessionIdCookie, usernameCookie))).hasMessage("password cookie is null");
+    assertThatThrownBy(() -> new BggAuthenticationToken(List.of(sessionIdCookie, usernameCookie))).hasMessage("no password cookie found");
   }
 
   @Test
@@ -43,7 +43,7 @@ class BggAuthenticationTokenTest {
     String usernameCookie = "bggusername=foo; expires=Wed, 01-Dec-2021 13:42:33 GMT; Max-Age=2592000; path=/; domain=.boardgamegeek.com";
     String passwordCookie = "bggpassword=bar_encoded; expires=Wed, 01-Dec-2021 13:42:33 GMT; Max-Age=2592000; path=/; domain=.boardgamegeek.com";
 
-    assertThatThrownBy(() -> new BggAuthenticationToken(List.of(usernameCookie, passwordCookie))).hasMessage("sessionId cookie is null");
+    assertThatThrownBy(() -> new BggAuthenticationToken(List.of(usernameCookie, passwordCookie))).hasMessage("no sessionId cookie found");
   }
 
 }
