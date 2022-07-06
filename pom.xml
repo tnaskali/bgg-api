@@ -52,7 +52,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <org.mapstruct.version>1.5.1.Final</org.mapstruct.version>
+    <org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
     <org.springdoc.springdoc-openapi.version>1.6.9</org.springdoc.springdoc-openapi.version>
     <java.version>11</java.version>
     <repackage.classifier/>
