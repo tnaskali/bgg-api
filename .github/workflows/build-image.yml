@@ -68,7 +68,7 @@ jobs:
 
       - name: Deploy artefacts
         run: |
-          mvn deploy:deploy -DaltDeploymentRepository=github::https://maven.pkg.github.com/$GITHUB_REPOSITORY
+          mvn deploy:deploy -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/$GITHUB_REPOSITORY
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # if: github.ref == 'refs/heads/master'
