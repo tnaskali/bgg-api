@@ -10,13 +10,26 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     steps:
+      - name: Set environment variables for master branch
+        run: |
+          echo "DOCKER_HUB_TAGS=${{ env.DOCKERHUB_PROJECT }}:latest-snapshot,${{ env.DOCKERHUB_PROJECT }}:${{ env.MAVEN_PROJECT_VERSION }}" >> $GITHUB_ENV
+        if: github.ref == 'refs/heads/master'
+
+      - name: Set environment variables for develop branch
+        run: |
+          echo "DOCKER_HUB_TAGS=${{ env.DOCKERHUB_PROJECT }}:develop" >> $GITHUB_ENV
+        if: github.ref == 'refs/heads/develop'
+
       - name: Checkout project
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Java version
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '11'
@@ -25,21 +38,21 @@ jobs:
         run: |
           echo "MAVEN_PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
 
-      - name: Build jar
+      - name: Build artefacts
         run: |
-          mvn clean package -DskipTests
+          mvn package
 
       - name: Login to Docker Hub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Set up buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
 
       - name: Build image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: dockerfiles/Dockerfile
@@ -53,18 +66,15 @@ jobs:
           curl http://localhost:8088/bgg-api/v3/api-docs
           docker stop $DOCKER_PID
 
-      - name: Set tags for master branch
+      - name: Deploy artefacts
         run: |
-          echo "DOCKER_HUB_TAGS=${{ env.DOCKERHUB_PROJECT }}:latest-snapshot,${{ env.DOCKERHUB_PROJECT }}:${{ env.MAVEN_PROJECT_VERSION }}" >> $GITHUB_ENV
-        if: github.ref == 'refs/heads/master'
+          mvn deploy:deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # if: github.ref == 'refs/heads/master'
 
-      - name: Set tags for develop branch
-        run: |
-          echo "DOCKER_HUB_TAGS=${{ env.DOCKERHUB_PROJECT }}:develop" >> $GITHUB_ENV
-        if: github.ref == 'refs/heads/develop'
-
-      - name: Push image
-        uses: docker/build-push-action@v2
+      - name: Deploy image
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: dockerfiles/Dockerfile
