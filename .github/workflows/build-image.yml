@@ -15,16 +15,6 @@ jobs:
       packages: write
 
     steps:
-      - name: Set environment variables for master branch
-        run: |
-          echo "DOCKER_HUB_TAGS=${{ env.DOCKERHUB_PROJECT }}:latest-snapshot,${{ env.DOCKERHUB_PROJECT }}:${{ env.MAVEN_PROJECT_VERSION }}" >> $GITHUB_ENV
-        if: github.ref == 'refs/heads/master'
-
-      - name: Set environment variables for develop branch
-        run: |
-          echo "DOCKER_HUB_TAGS=${{ env.DOCKERHUB_PROJECT }}:develop" >> $GITHUB_ENV
-        if: github.ref == 'refs/heads/develop'
-
       - name: Checkout project
         uses: actions/checkout@v3
 
@@ -37,6 +27,16 @@ jobs:
       - name: Extract project version
         run: |
           echo "MAVEN_PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+
+      - name: Set environment variables for master branch
+        run: |
+          echo "DOCKER_HUB_TAGS=${{ env.DOCKERHUB_PROJECT }}:latest-snapshot,${{ env.DOCKERHUB_PROJECT }}:${{ env.MAVEN_PROJECT_VERSION }}" >> $GITHUB_ENV
+        if: github.ref == 'refs/heads/master'
+
+      - name: Set environment variables for develop branch
+        run: |
+          echo "DOCKER_HUB_TAGS=${{ env.DOCKERHUB_PROJECT }}:develop" >> $GITHUB_ENV
+        if: github.ref == 'refs/heads/develop'
 
       - name: Build artefacts
         run: |
@@ -68,7 +68,7 @@ jobs:
 
       - name: Deploy artefacts
         run: |
-          mvn deploy:deploy
+          mvn deploy:deploy -DaltDeploymentRepository=github::https://maven.pkg.github.com/${{ GITHUB_REPOSITORY }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # if: github.ref == 'refs/heads/master'
