@@ -6,7 +6,7 @@ on:
     tags: [ 'v*.*.*' ]
 
 env:
-  DOCKER_IMAGE: ${GITHUB_REPOSITORY}-native
+  DOCKER_IMAGE: ${{ github.repository }}-native
 
 jobs:
   build:
