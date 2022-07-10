@@ -52,7 +52,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <org.mapstruct.version>1.5.1.Final</org.mapstruct.version>
+    <org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
     <org.springdoc.springdoc-openapi.version>1.6.9</org.springdoc.springdoc-openapi.version>
     <java.version>11</java.version>
     <repackage.classifier/>
@@ -243,28 +243,6 @@
             <classifier>${repackage.classifier}</classifier>
           </configuration>
         </plugin>
-        <plugin>
-          <groupId>org.springframework.experimental</groupId>
-          <artifactId>spring-aot-maven-plugin</artifactId>
-          <version>${spring-native.version}</version>
-          <executions>
-            <execution>
-              <id>test-generate</id>
-              <goals>
-                <goal>test-generate</goal>
-              </goals>
-            </execution>
-            <execution>
-              <id>generate</id>
-              <goals>
-                <goal>generate</goal>
-              </goals>
-            </execution>
-          </executions>
-          <configuration>
-            <removeXmlSupport>false</removeXmlSupport>
-          </configuration>
-        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -272,10 +250,6 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.springframework.experimental</groupId>
-        <artifactId>spring-aot-maven-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -353,6 +327,11 @@
       </properties>
       <dependencies>
         <dependency>
+          <groupId>org.springframework.experimental</groupId>
+          <artifactId>spring-native</artifactId>
+          <version>${spring-native.version}</version>
+        </dependency>
+        <dependency>
           <groupId>org.springdoc</groupId>
           <artifactId>springdoc-openapi-native</artifactId>
           <version>${org.springdoc.springdoc-openapi.version}</version>
@@ -364,6 +343,32 @@
         </dependency>
       </dependencies>
       <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.springframework.experimental</groupId>
+              <artifactId>spring-aot-maven-plugin</artifactId>
+              <version>${spring-native.version}</version>
+              <executions>
+                <execution>
+                  <id>test-generate</id>
+                  <goals>
+                    <goal>test-generate</goal>
+                  </goals>
+                </execution>
+                <execution>
+                  <id>generate</id>
+                  <goals>
+                    <goal>generate</goal>
+                  </goals>
+                </execution>
+              </executions>
+              <configuration>
+                <removeXmlSupport>false</removeXmlSupport>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
         <plugins>
           <plugin>
             <groupId>org.springframework.experimental</groupId>
