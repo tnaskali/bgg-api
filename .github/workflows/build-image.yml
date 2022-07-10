@@ -6,8 +6,8 @@ on:
     branches: [ 'master' ]
 
 env:
-  DOCKER_IMAGE: "$GITHUB_REPOSITORY"
-  GITHUB_PACKAGE_URL: "https://maven.pkg.github.com/$GITHUB_REPOSITORY"
+  DOCKER_IMAGE: ${GITHUB_REPOSITORY}
+  GITHUB_PACKAGE_URL: https://maven.pkg.github.com/${GITHUB_REPOSITORY}
 
 jobs:
   build:
