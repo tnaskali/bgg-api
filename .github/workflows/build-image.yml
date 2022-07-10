@@ -49,7 +49,7 @@ jobs:
         run: |
           DOCKER_PID=$(docker run -d -p 8088:8088 --rm ${{ env.DOCKER_IMAGE }}:test 2>/dev/null)
           sleep 10s
-          curl http://localhost:8088/bgg-api/v3/api-docs
+          curl --fail http://localhost:8088/bgg-api/v3/api-docs
           docker stop $DOCKER_PID
 
       # deploy
@@ -57,7 +57,7 @@ jobs:
       - name: Deploy artefacts
         if: github.ref == 'refs/heads/master'
         run: |
-          mvn --batch-mode validate jar:jar deploy:deploy -DaltDeploymentRepository=github::default::{{ env.GITHUB_PACKAGE_URL }}
+          mvn --batch-mode validate jar:jar deploy:deploy -DaltDeploymentRepository=github::default::${{ env.GITHUB_PACKAGE_URL }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
