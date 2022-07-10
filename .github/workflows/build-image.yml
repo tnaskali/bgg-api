@@ -90,7 +90,7 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/master'
     environment:
-      name: 'native-staging'
+      name: 'staging'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}/bgg-api/swagger-ui.html
 
     steps:
@@ -98,6 +98,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'bgg-api-native-staging'
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_NATIVE_STAGING }}
+          app-name: 'bgg-api-staging'
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_STAGING }}
           images: 'index.docker.io/${{ env.DOCKER_IMAGE }}:master'
