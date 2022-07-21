@@ -6,11 +6,15 @@ on:
     tags: [ 'v*.*.*' ]
 
 env:
+  DOCKER_REGISTRY: ghcr.io
   DOCKER_IMAGE: ${{ github.repository }}-native
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     steps:
       # build
@@ -38,8 +42,11 @@ jobs:
 
       # build image
 
-      - name: Set up buildx
-        uses: docker/setup-buildx-action@v2
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.DOCKER_IMAGE }}
 
       - name: Build image
         uses: docker/build-push-action@v3
@@ -47,28 +54,24 @@ jobs:
           context: .
           file: dockerfiles/Dockerfile.native
           load: true
-          tags: ${{ env.DOCKER_IMAGE }}:test
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
       - name: Test image
         run: |
-          DOCKER_PID=$(docker run -d -p 8088:8088 --rm ${{ env.DOCKER_IMAGE }}:test 2>/dev/null)
+          DOCKER_PID=$(docker run -d -p 8088:8088 --rm ${{ env.DOCKER_IMAGE }}:master 2>/dev/null)
           sleep 2s
           curl --fail http://localhost:8088/bgg-api/v3/api-docs
           docker stop $DOCKER_PID
 
       # deploy
 
-      - name: Extract Docker metadata
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ env.DOCKER_IMAGE }}
-
       - name: Login to Docker registry
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          registry: ${{ env.DOCKER_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy image
         uses: docker/build-push-action@v3
@@ -84,7 +87,7 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/master'
     environment:
-      name: 'native-staging'
+      name: native-staging
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}/bgg-api/swagger-ui.html
 
     steps:
@@ -92,6 +95,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'bgg-api-native-staging'
+          app-name: bgg-api-native-staging
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_NATIVE_STAGING }}
-          images: 'index.docker.io/${{ env.DOCKER_IMAGE }}:master'
+          images: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}:master
