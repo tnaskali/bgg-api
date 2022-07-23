@@ -1,4 +1,4 @@
-FROM eclipse-temurin:11
+FROM eclipse-temurin:18
 
 ENV SERVER_PORT=80
 EXPOSE ${SERVER_PORT}
