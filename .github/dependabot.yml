@@ -6,13 +6,19 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    open-pull-requests-limit: 1
 
   - package-ecosystem: "maven"
     directory: "/"
     schedule:
       interval: "daily"
+    ignore:
+      - dependency-name: "jaxb2-basics"
+        versions: [ "1.11.1-PUBLISHED-BY-MISTAKE" ]
+    open-pull-requests-limit: 1
 
   - package-ecosystem: "docker"
     directory: "/dockerfiles/"
     schedule:
       interval: "daily"
+    open-pull-requests-limit: 1
