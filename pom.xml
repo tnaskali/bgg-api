@@ -56,7 +56,7 @@
     <org.springdoc.springdoc-openapi.version>1.6.9</org.springdoc.springdoc-openapi.version>
     <java.version>11</java.version>
     <repackage.classifier/>
-    <spring-native.version>0.12.0</spring-native.version>
+    <spring-native.version>0.12.1</spring-native.version>
     <native-buildtools.version>0.9.11</native-buildtools.version>
   </properties>
 
