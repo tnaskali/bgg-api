@@ -35,24 +35,17 @@ jobs:
 
       # build image
 
-      - name: Extract Docker metadata
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}
-
       - name: Build image
         uses: docker/build-push-action@v3
         with:
           context: .
           file: dockerfiles/Dockerfile
           load: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
 
       - name: Test image
         run: |
-          DOCKER_PID=$(docker run -d -p 8088:80 --rm ${{ env.DOCKER_IMAGE }}:master 2>/dev/null)
+          DOCKER_PID=$(docker run -d -p 8088:80 --rm ${{ env.DOCKER_IMAGE }}:${{ github.sha }} 2>/dev/null)
           sleep 10s
           curl --fail http://localhost:8088/bgg-api/v3/api-docs
           docker stop $DOCKER_PID
@@ -73,6 +66,12 @@ jobs:
           registry: ${{ env.DOCKER_REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract Docker metadata
+        id: metameta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}
 
       - name: Deploy image
         if: github.ref == 'refs/heads/master'
