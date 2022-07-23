@@ -1,4 +1,4 @@
-name: sonarcloud analysis
+name: code analysis
 
 on:
   push:
@@ -11,14 +11,19 @@ permissions:
   pull-requests: read # allows SonarCloud to decorate PRs with analysis results
 
 jobs:
-  Analysis:
+  analysis:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Analyze with SonarCloud         
+      - name: Checkout project
+        uses: actions/checkout@v3
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
+
+      - name: Analyze with SonarCloud
         uses: sonarsource/sonarcloud-github-action@v1.6
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args:
