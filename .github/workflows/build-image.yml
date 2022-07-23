@@ -31,7 +31,7 @@ jobs:
 
       - name: Build artefacts
         run: |
-          mvn --batch-mode verify
+          mvn --batch-mode verify -DskipTests
 
       # build image
 
@@ -52,7 +52,7 @@ jobs:
 
       - name: Test image
         run: |
-          DOCKER_PID=$(docker run -d -p 8088:8088 --rm ${{ env.DOCKER_IMAGE }}:master 2>/dev/null)
+          DOCKER_PID=$(docker run -d -p 8088:80 --rm ${{ env.DOCKER_IMAGE }}:master 2>/dev/null)
           sleep 10s
           curl --fail http://localhost:8088/bgg-api/v3/api-docs
           docker stop $DOCKER_PID

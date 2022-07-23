@@ -41,7 +41,7 @@ bgg:
 debug: false
 
 server:
-  port: 8088
+  port: 8080
 
 spring:
   codec:

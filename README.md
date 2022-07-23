@@ -21,7 +21,7 @@ Steps :
 
 1. clone this repository on your local machine
 2. run `mvn spring-boot:run`
-3. navigate to http://localhost:8088/bgg-api/swagger-ui.html
+3. navigate to http://localhost:8080/bgg-api/swagger-ui.html
 
 ## build and run a native application locally
 
@@ -32,7 +32,7 @@ Steps :
 1. clone this repository on your local machine
 2. run `mvn package -Pnative -DskipTests` to build the native image (takes about 10 minutes)
 3. run `./target/bgg-api`
-4. navigate to http://localhost:8088/bgg-api/swagger-ui.html
+4. navigate to http://localhost:8080/bgg-api/swagger-ui.html
 
 ## pull and run a docker java image (Linux / MacOS only)
 
@@ -40,9 +40,9 @@ Prerequisites : have docker installed on your machine
 
 Steps :
 
-1. run `docker pull tnaskali/bgg-api:latest-snapshot` (or any other tag)
-2. run `docker run --rm -p 8088:8088 tnaskali/bgg-api:latest-snapshot`
-3. navigate to http://localhost:8088/bgg-api/swagger-ui.html
+1. run `docker pull ghcr.io/tnaskali/bgg-api:master` (or any other tag)
+2. run `docker run --rm -p 8080:80 tnaskali/bgg-api:master`
+3. navigate to http://localhost:8080/bgg-api/swagger-ui.html
 
 ## pull and run a docker native image (Linux / MacOS only)
 
@@ -50,9 +50,9 @@ Prerequisites : have docker installed on your machine
 
 Steps :
 
-1. run `docker pull tnaskali/bgg-api-native:latest-snapshot` (or any other tag)
-2. run `docker run --rm -p 8088:8088 tnaskali/bgg-api-native:latest-snapshot`
-3. navigate to http://localhost:8088/bgg-api/swagger-ui.html
+1. run `docker pull ghcr.io/tnaskali/bgg-api-native:master` (or any other tag)
+2. run `docker run --rm -p 8088:80 tnaskali/bgg-api-native:master`
+3. navigate to http://localhost:80/bgg-api/swagger-ui.html
 
 # A word about security
 

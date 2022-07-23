@@ -1,9 +1,9 @@
 FROM ubuntu:latest
 
+ENV SERVER_PORT=80
+EXPOSE ${SERVER_PORT}
+WORKDIR /opt/bgg-api
+ENTRYPOINT ["./bgg-api"]
+
 RUN mkdir /opt/bgg-api
-
 COPY target/bgg-api /opt/bgg-api/bgg-api
-
-ENTRYPOINT ["/opt/bgg-api/bgg-api"]
-
-EXPOSE 8088
