@@ -5,5 +5,4 @@ EXPOSE ${SERVER_PORT}
 WORKDIR /opt/bgg-api
 ENTRYPOINT ["./bgg-api"]
 
-RUN mkdir /opt/bgg-api
 COPY target/bgg-api /opt/bgg-api/bgg-api
