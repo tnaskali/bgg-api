@@ -58,6 +58,9 @@
     <repackage.classifier/>
     <spring-native.version>0.12.1</spring-native.version>
     <native-buildtools.version>0.9.13</native-buildtools.version>
+    <sonar.coverage.jacoco.xmlReportPaths>
+      ${project.basedir}/target/site/jacoco/jacoco.xml,${project.basedir}/target/site/jacoco-it/jacoco.xml
+    </sonar.coverage.jacoco.xmlReportPaths>
   </properties>
 
   <dependencies>
@@ -192,7 +195,7 @@
         <plugin>
           <groupId>org.jvnet.jaxb2.maven2</groupId>
           <artifactId>maven-jaxb2-plugin</artifactId>
-          <version>0.14.0</version>
+          <version>0.15.1</version>
           <dependencies>
             <dependency>
               <groupId>org.glassfish.jaxb</groupId>
