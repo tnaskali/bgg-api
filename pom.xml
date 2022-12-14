@@ -58,7 +58,7 @@
     <java.version>17</java.version>
     <repackage.classifier/>
     <spring-native.version>0.12.1</spring-native.version>
-    <native-buildtools.version>0.9.14</native-buildtools.version>
+    <native-buildtools.version>0.9.19</native-buildtools.version>
     <sonar.coverage.jacoco.xmlReportPaths>
       ${project.basedir}/target/site/jacoco/jacoco.xml,${project.basedir}/target/site/jacoco-it/jacoco.xml
     </sonar.coverage.jacoco.xmlReportPaths>
