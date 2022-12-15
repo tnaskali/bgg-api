@@ -54,9 +54,9 @@ jobs:
 
       - name: Test image
         run: |
-          DOCKER_PID=$(docker run -d -p 8088:80 --rm ${{ env.DOCKER_IMAGE }}:${{ github.sha }} 2>/dev/null)
+          DOCKER_PID=$(docker run -d -p 8080:80 --rm ${{ env.DOCKER_IMAGE }}:${{ github.sha }} 2>/dev/null)
           sleep 2s
-          curl --fail http://localhost:8088/bgg-api/actuator/health
+          curl --fail http://localhost:8080/bgg-api/actuator/health
           docker stop $DOCKER_PID
 
       # deploy

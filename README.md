@@ -50,8 +50,8 @@ Prerequisites : have docker installed on your machine
 Steps :
 
 1. run `docker pull ghcr.io/tnaskali/bgg-api-native:master` (or any other tag)
-2. run `docker run --rm -p 8088:80 tnaskali/bgg-api-native:master`
-3. navigate to http://localhost:80/bgg-api/actuator/health
+2. run `docker run --rm -p 8080:8080 tnaskali/bgg-api-native:master`
+3. navigate to http://localhost:8080/bgg-api/actuator/health
 
 # A word about security
 
