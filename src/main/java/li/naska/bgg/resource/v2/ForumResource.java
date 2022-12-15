@@ -4,7 +4,6 @@ import com.boardgamegeek.forum.Forum;
 import li.naska.bgg.repository.BggForumV2Repository;
 import li.naska.bgg.repository.model.BggForumV2QueryParams;
 import li.naska.bgg.util.XmlProcessor;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -24,12 +23,12 @@ public class ForumResource {
   private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
-  public Mono<String> getForumAsXml(@ParameterObject @Validated BggForumV2QueryParams params) {
+  public Mono<String> getForumAsXml(@Validated BggForumV2QueryParams params) {
     return forumsRepository.getForum(params);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getForumAsJson(@ParameterObject @Validated BggForumV2QueryParams params) {
+  public Mono<String> getForumAsJson(@Validated BggForumV2QueryParams params) {
     return getForumAsXml(params)
         .map(xml -> xmlProcessor.toJsonString(xml, Forum.class));
   }

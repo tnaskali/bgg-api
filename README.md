@@ -1,38 +1,37 @@
 # BGG-API
 
 Spring Boot application acting as a bridge to
-BoardGameGeek's [XML API 2](https://boardgamegeek.com/wiki/page/BGG_XML_API2) and Games Logging API. Its purpose is to
-expose the same functionalities in a more user-friendly way using Json and OpenAPI.
+BoardGameGeek's [XML API 2](https://boardgamegeek.com/wiki/page/BGG_XML_API2), as well as their undocumented Games
+Logging API and Json API. Its purpose is to expose the same data in a more developer-friendly way.
 
 # Features
 
-- Static BGG XML API schemas in XSD format (located under [src/main/resources/schemas](src/main/resources/schemas))
+- Static BGG XML API schemas in XSD format (located under [src/main/xsd](src/main/xsd))
 - Json API for querying objects based on their XML API (no authentication required)
 - Json API for logging games based on their Json API (basic authentication required)
-- Swagger / OpenAPI3 specifications
 
 # Usage
 
 ## build and run a java application locally
 
-Prerequisites : have Java 11+ and maven installed on your machine
+Prerequisites : have Java 17+ and maven installed on your machine
 
 Steps :
 
 1. clone this repository on your local machine
 2. run `mvn spring-boot:run`
-3. navigate to http://localhost:8080/bgg-api/swagger-ui.html
+3. navigate to http://localhost:8080/bgg-api/actuator/health
 
 ## build and run a native application locally
 
-Prerequisites : have GraalVM (java11) 22+ and maven installed on your machine
+Prerequisites : have GraalVM (java17) 22+ and maven installed on your machine
 
 Steps :
 
 1. clone this repository on your local machine
-2. run `mvn package -Pnative -DskipTests` to build the native image (takes about 10 minutes)
+2. run `mvn native:compile -Pnative` to build the native image (takes about 5 minutes)
 3. run `./target/bgg-api`
-4. navigate to http://localhost:8080/bgg-api/swagger-ui.html
+4. navigate to http://localhost:8080/bgg-api/actuator/health
 
 ## pull and run a docker java image (Linux / MacOS only)
 
@@ -42,7 +41,7 @@ Steps :
 
 1. run `docker pull ghcr.io/tnaskali/bgg-api:master` (or any other tag)
 2. run `docker run --rm -p 8080:80 tnaskali/bgg-api:master`
-3. navigate to http://localhost:8080/bgg-api/swagger-ui.html
+3. navigate to http://localhost:8080/bgg-api/actuator/health
 
 ## pull and run a docker native image (Linux / MacOS only)
 
@@ -52,7 +51,7 @@ Steps :
 
 1. run `docker pull ghcr.io/tnaskali/bgg-api-native:master` (or any other tag)
 2. run `docker run --rm -p 8088:80 tnaskali/bgg-api-native:master`
-3. navigate to http://localhost:80/bgg-api/swagger-ui.html
+3. navigate to http://localhost:80/bgg-api/actuator/health
 
 # A word about security
 

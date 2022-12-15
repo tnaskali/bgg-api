@@ -1,5 +1,6 @@
 package li.naska.bgg.resource.v1;
 
+import jakarta.annotation.PostConstruct;
 import li.naska.bgg.resource.AbstractMockServerIT;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.assertj.core.util.TriFunction;
@@ -14,7 +15,6 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import javax.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -70,7 +70,7 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
           "</geeklist>";
 
       @BeforeEach
-      private void setup() {
+      public void setup() {
         dispatch(200, mockResponseBody);
       }
 

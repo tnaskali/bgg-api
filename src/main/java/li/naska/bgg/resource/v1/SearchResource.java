@@ -1,10 +1,9 @@
 package li.naska.bgg.resource.v1;
 
-import com.boardgamegeek.search.Results;
+import com.boardgamegeek.search.Items;
 import li.naska.bgg.repository.BggSearchV1Repository;
 import li.naska.bgg.repository.model.BggSearchV1QueryParams;
 import li.naska.bgg.util.XmlProcessor;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -24,14 +23,14 @@ public class SearchResource {
   private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
-  public Mono<String> getResultsAsXml(@ParameterObject @Validated BggSearchV1QueryParams params) {
+  public Mono<String> getResultsAsXml(@Validated BggSearchV1QueryParams params) {
     return searchRepository.getResults(params);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getResultsAsJson(@ParameterObject @Validated BggSearchV1QueryParams params) {
+  public Mono<String> getResultsAsJson(@Validated BggSearchV1QueryParams params) {
     return getResultsAsXml(params)
-        .map(xml -> xmlProcessor.toJsonString(xml, Results.class));
+        .map(xml -> xmlProcessor.toJsonString(xml, Items.class));
   }
 
 }

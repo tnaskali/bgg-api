@@ -1,0 +1,2020 @@
+[
+  {
+    "name": "com.boardgamegeek.collection.Item",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.collection.Items",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.collection.Name",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.collection.ObjectFactory",
+    "queryAllDeclaredMethods": true
+  },
+  {
+    "name": "com.boardgamegeek.collection.PrivateInfo",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.collection.Rank",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.collection.Ranks",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.collection.Rating",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.collection.Stats",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.collection.Status",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.collection.Version",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.collection.VersionItem",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.collection.VersionLink",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.collection.VersionPublisher",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.common.DecimalValue",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.common.IntegerValue",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.common.LocalDateValue",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.common.SortIndexString",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.common.StringValue",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.common.ZonedDateTimeValue",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.enums.CollectionItemSubtype",
+    "allDeclaredFields": true,
+    "fields": [
+      {
+        "name": "BOARDGAME"
+      },
+      {
+        "name": "BOARDGAMEACCESSORY"
+      },
+      {
+        "name": "BOARDGAMEEXPANSION"
+      },
+      {
+        "name": "BOARDGAMEIMPLEMENTATION"
+      },
+      {
+        "name": "BOARDGAMEINTEGRATION"
+      },
+      {
+        "name": "RPGISSUE"
+      },
+      {
+        "name": "RPGITEM"
+      },
+      {
+        "name": "VIDEOGAME"
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.enums.ItemSubtype",
+    "allDeclaredFields": true,
+    "fields": [
+      {
+        "name": "BOARDGAME"
+      },
+      {
+        "name": "BOARDGAMEACCESSORY"
+      },
+      {
+        "name": "BOARDGAMECOMPILATION"
+      },
+      {
+        "name": "BOARDGAMEEXPANSION"
+      },
+      {
+        "name": "BOARDGAMEIMPLEMENTATION"
+      },
+      {
+        "name": "BOARDGAMEINTEGRATION"
+      },
+      {
+        "name": "RPG"
+      },
+      {
+        "name": "RPGITEM"
+      },
+      {
+        "name": "VIDEOGAME"
+      },
+      {
+        "name": "VIDEOGAMEBG"
+      },
+      {
+        "name": "VIDEOGAMECOMPILATION"
+      },
+      {
+        "name": "VIDEOGAMEEXPANSION"
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.enums.ItemType",
+    "allDeclaredFields": true,
+    "fields": [
+      {
+        "name": "FAMILY"
+      },
+      {
+        "name": "THING"
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.enums.NameType",
+    "allDeclaredFields": true,
+    "fields": [
+      {
+        "name": "ALTERNATE"
+      },
+      {
+        "name": "PRIMARY"
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.enums.RankType",
+    "allDeclaredFields": true,
+    "fields": [
+      {
+        "name": "FAMILY"
+      },
+      {
+        "name": "SUBTYPE"
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.enums.RankedItemType",
+    "allDeclaredFields": true,
+    "fields": [
+      {
+        "name": "COMPANY"
+      },
+      {
+        "name": "EVENT"
+      },
+      {
+        "name": "FAMILY"
+      },
+      {
+        "name": "MEDIA"
+      },
+      {
+        "name": "PERSON"
+      },
+      {
+        "name": "PROPERTY"
+      },
+      {
+        "name": "THING"
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.enums.SearchType",
+    "allDeclaredFields": true,
+    "fields": [
+      {
+        "name": "BOARDGAME"
+      },
+      {
+        "name": "BOARDGAMEACCESSORY"
+      },
+      {
+        "name": "BOARDGAMEARTIST"
+      },
+      {
+        "name": "BOARDGAMECATEGORY"
+      },
+      {
+        "name": "BOARDGAMEDESIGNER"
+      },
+      {
+        "name": "BOARDGAMEEXPANSION"
+      },
+      {
+        "name": "BOARDGAMEFAMILY"
+      },
+      {
+        "name": "BOARDGAMEHONOR"
+      },
+      {
+        "name": "BOARDGAMEMECHANIC"
+      },
+      {
+        "name": "BOARDGAMEPERSON"
+      },
+      {
+        "name": "BOARDGAMEPUBLISHER"
+      },
+      {
+        "name": "FAMILY"
+      },
+      {
+        "name": "RPG"
+      },
+      {
+        "name": "RPGARTIST"
+      },
+      {
+        "name": "RPGCATEGORY"
+      },
+      {
+        "name": "RPGDESIGNER"
+      },
+      {
+        "name": "RPGGENRE"
+      },
+      {
+        "name": "RPGISSUE"
+      },
+      {
+        "name": "RPGITEM"
+      },
+      {
+        "name": "RPGMECHANIC"
+      },
+      {
+        "name": "RPGPERIODICAL"
+      },
+      {
+        "name": "RPGPRODUCER"
+      },
+      {
+        "name": "RPGPUBLISHER"
+      },
+      {
+        "name": "RPGSERIES"
+      },
+      {
+        "name": "THING"
+      },
+      {
+        "name": "VIDEOGAME"
+      },
+      {
+        "name": "VIDEOGAMECHARACTER"
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.enums.ThingLinkType",
+    "allDeclaredFields": true,
+    "fields": [
+      {
+        "name": "BOARDGAMEARTIST"
+      },
+      {
+        "name": "BOARDGAMECATEGORY"
+      },
+      {
+        "name": "BOARDGAMEDESIGNER"
+      },
+      {
+        "name": "BOARDGAMEEXPANSION"
+      },
+      {
+        "name": "BOARDGAMEFAMILY"
+      },
+      {
+        "name": "BOARDGAMEIMPLEMENTATION"
+      },
+      {
+        "name": "BOARDGAMEMECHANIC"
+      },
+      {
+        "name": "BOARDGAMEPUBLISHER"
+      },
+      {
+        "name": "RPG"
+      },
+      {
+        "name": "RPGARTIST"
+      },
+      {
+        "name": "RPGCATEGORY"
+      },
+      {
+        "name": "RPGDESIGNER"
+      },
+      {
+        "name": "RPGGENRE"
+      },
+      {
+        "name": "RPGISSUE"
+      },
+      {
+        "name": "RPGMECHANIC"
+      },
+      {
+        "name": "RPGPRODUCER"
+      },
+      {
+        "name": "RPGPUBLISHER"
+      },
+      {
+        "name": "RPGSERIES"
+      },
+      {
+        "name": "RPGSETTING"
+      },
+      {
+        "name": "VIDEOGAMECOMPILATION"
+      },
+      {
+        "name": "VIDEOGAMEDEVELOPER"
+      },
+      {
+        "name": "VIDEOGAMEEXPANSION"
+      },
+      {
+        "name": "VIDEOGAMEFRANCHISE"
+      },
+      {
+        "name": "VIDEOGAMEGENRE"
+      },
+      {
+        "name": "VIDEOGAMEMODE"
+      },
+      {
+        "name": "VIDEOGAMEPLATFORM"
+      },
+      {
+        "name": "VIDEOGAMEPUBLISHER"
+      },
+      {
+        "name": "VIDEOGAMETHEME"
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.enums.ThingType",
+    "allDeclaredFields": true,
+    "fields": [
+      {
+        "name": "BOARDGAME"
+      },
+      {
+        "name": "BOARDGAMEACCESSORY"
+      },
+      {
+        "name": "BOARDGAMEEXPANSION"
+      },
+      {
+        "name": "RPGISSUE"
+      },
+      {
+        "name": "RPGITEM"
+      },
+      {
+        "name": "VIDEOGAME"
+      },
+      {
+        "name": "VIDEOGAMECOMPILATION"
+      },
+      {
+        "name": "VIDEOGAMEEXPANSION"
+      },
+      {
+        "name": "VIDEOGAMEHARDWARE"
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.enums.VersionLinkType",
+    "allDeclaredFields": true,
+    "fields": [
+      {
+        "name": "BOARDGAMEARTIST"
+      },
+      {
+        "name": "BOARDGAMEPUBLISHER"
+      },
+      {
+        "name": "BOARDGAMEVERSION"
+      },
+      {
+        "name": "LANGUAGE"
+      },
+      {
+        "name": "RPG"
+      },
+      {
+        "name": "RPGARTIST"
+      },
+      {
+        "name": "RPGCATEGORY"
+      },
+      {
+        "name": "RPGDESIGNER"
+      },
+      {
+        "name": "RPGGENRE"
+      },
+      {
+        "name": "RPGISSUE"
+      },
+      {
+        "name": "RPGMECHANIC"
+      },
+      {
+        "name": "RPGPRODUCER"
+      },
+      {
+        "name": "RPGPUBLISHER"
+      },
+      {
+        "name": "RPGSETTING"
+      },
+      {
+        "name": "VIDEOGAMEDEVELOPER"
+      },
+      {
+        "name": "VIDEOGAMEEXPANSION"
+      },
+      {
+        "name": "VIDEOGAMEFRANCHISE"
+      },
+      {
+        "name": "VIDEOGAMEGENRE"
+      },
+      {
+        "name": "VIDEOGAMEMEDIA"
+      },
+      {
+        "name": "VIDEOGAMEMODE"
+      },
+      {
+        "name": "VIDEOGAMEPLATFORM"
+      },
+      {
+        "name": "VIDEOGAMEPUBLISHER"
+      },
+      {
+        "name": "VIDEOGAMERATING"
+      },
+      {
+        "name": "VIDEOGAMEREGION"
+      },
+      {
+        "name": "VIDEOGAMETHEME"
+      },
+      {
+        "name": "VIDEOGAMEVERSION"
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.enums.VersionType",
+    "allDeclaredFields": true,
+    "fields": [
+      {
+        "name": "BGACCESSORYVERSION"
+      },
+      {
+        "name": "BOARDGAMEVERSION"
+      },
+      {
+        "name": "RPGISSUEVERSION"
+      },
+      {
+        "name": "RPGITEMVERSION"
+      },
+      {
+        "name": "VIDEOGAMEHWVERSION"
+      },
+      {
+        "name": "VIDEOGAMEVERSION"
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.geeklist.Comment",
+    "allDeclaredFields": true,
+    "queryAllDeclaredConstructors": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getDate",
+        "parameterTypes": []
+      },
+      {
+        "name": "getEditdate",
+        "parameterTypes": []
+      },
+      {
+        "name": "getPostdate",
+        "parameterTypes": []
+      },
+      {
+        "name": "getThumbs",
+        "parameterTypes": []
+      },
+      {
+        "name": "getUsername",
+        "parameterTypes": []
+      },
+      {
+        "name": "getValue",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.geeklist.Geeklist",
+    "allDeclaredFields": true,
+    "queryAllDeclaredConstructors": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getComments",
+        "parameterTypes": []
+      },
+      {
+        "name": "getDescription",
+        "parameterTypes": []
+      },
+      {
+        "name": "getEditdate",
+        "parameterTypes": []
+      },
+      {
+        "name": "getEditdateTimestamp",
+        "parameterTypes": []
+      },
+      {
+        "name": "getId",
+        "parameterTypes": []
+      },
+      {
+        "name": "getItems",
+        "parameterTypes": []
+      },
+      {
+        "name": "getNumitems",
+        "parameterTypes": []
+      },
+      {
+        "name": "getPostdate",
+        "parameterTypes": []
+      },
+      {
+        "name": "getPostdateTimestamp",
+        "parameterTypes": []
+      },
+      {
+        "name": "getTermsofuse",
+        "parameterTypes": []
+      },
+      {
+        "name": "getThumbs",
+        "parameterTypes": []
+      },
+      {
+        "name": "getTitle",
+        "parameterTypes": []
+      },
+      {
+        "name": "getUsername",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.geeklist.Item",
+    "allDeclaredFields": true,
+    "queryAllDeclaredConstructors": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getBody",
+        "parameterTypes": []
+      },
+      {
+        "name": "getComments",
+        "parameterTypes": []
+      },
+      {
+        "name": "getEditdate",
+        "parameterTypes": []
+      },
+      {
+        "name": "getId",
+        "parameterTypes": []
+      },
+      {
+        "name": "getImageid",
+        "parameterTypes": []
+      },
+      {
+        "name": "getObjectid",
+        "parameterTypes": []
+      },
+      {
+        "name": "getObjectname",
+        "parameterTypes": []
+      },
+      {
+        "name": "getObjecttype",
+        "parameterTypes": []
+      },
+      {
+        "name": "getPostdate",
+        "parameterTypes": []
+      },
+      {
+        "name": "getSubtype",
+        "parameterTypes": []
+      },
+      {
+        "name": "getThumbs",
+        "parameterTypes": []
+      },
+      {
+        "name": "getUsername",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.plays.Item",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.plays.Play",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.plays.Player",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.plays.Players",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.plays.Plays",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.plays.Subtype",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.plays.SubtypeValue",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.search.Items",
+    "allDeclaredFields": true,
+    "queryAllDeclaredConstructors": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getItems",
+        "parameterTypes": []
+      },
+      {
+        "name": "getTermsofuse",
+        "parameterTypes": []
+      },
+      {
+        "name": "getTotal",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.search.Name",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.search.Result",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Comment",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Comments",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Items",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Link",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Listing",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.ListingLink",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.ListingPrice",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Marketplacelistings",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Name",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.ObjectFactory",
+    "queryAllDeclaredMethods": true
+  },
+  {
+    "name": "com.boardgamegeek.thing.Poll",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Rank",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Ranks",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Ratings",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Result",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Results",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Statistics",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Thing",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Version",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.VersionLink",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Versions",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Video",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thing.Videos",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thread.Article",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thread.Articles",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.thread.Thread",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.user.Buddies",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.user.Buddy",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.user.Guild",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.user.Guilds",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.user.RankedItem",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.user.Ranking",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "com.boardgamegeek.user.User",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "java.util.ArrayList",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.util.DateTimeToZonedDateTimeAdapter",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.util.IntegerToIntegerAdapter",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.util.StringToLocalDateAdapter",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.util.StringToLocalDateTimeAdapter",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.util.StringToZonedDateTimeAdapter",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggArticlesV4QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggBoardgameV1QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggCollectionV1QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggCollectionV2QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggFamilyV2QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggFansV4QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggForumlistV2QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggForumsV4QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggForumV2QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggGeekaccountV3RequestBody",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggGeekaccountV3ResponseBody",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggGeekcollectionV3QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggGeekitemLinkeditemsV4QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggGeekitemsV4QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggGeeklistCommentsV4QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggGeeklistReactionsV4QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggGeeklistsV4QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggGeeklistTipsV4QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggGeeklistV1QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggGeekplayV3RequestBody",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggGeekplayV3ResponseBody",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggGuildV2QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggHotnessV4QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggHotV2QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggListitemCommentsV4QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggListitemReactionsV4QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggListitemsV4QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggListitemTipsV4QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggPlaysV2QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggSearchV1QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggSearchV2QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggSearchV5QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggSearchV5ResponseBody",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggThingV2QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggThreadsV4QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggThreadV2QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggUsersV4QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.repository.model.BggUserV2QueryParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.resource.vN.model.CollectionParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.resource.vN.model.FamiliesParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.resource.vN.model.ForumsParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.resource.vN.model.GeeklistParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.resource.vN.model.GuildMembersParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.resource.vN.model.HotItemsParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.resource.vN.model.ItemPlaysParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.resource.vN.model.PlaysParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.resource.vN.model.SearchParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.resource.vN.model.ThingsParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.resource.vN.model.ThreadParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.resource.vN.model.UserPlaysParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.resource.vN.model.UserRankedItemsParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.service.model.LoginParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "li.naska.bgg.util.PagingParams",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.glassfish.jaxb.runtime.v2.ContextFactory",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "createContext",
+        "parameterTypes": [
+          "[Ljava.lang.Class",
+          "java.util.Map"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.glassfish.jaxb.core.v2.model.nav.ReflectionNavigator",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "getInstance",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.glassfish.jaxb.runtime.v2.runtime.property.ArrayElementLeafProperty",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allPublicConstructors": true
+  },
+  {
+    "name": "org.glassfish.jaxb.runtime.v2.runtime.property.ArrayElementNodeProperty",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allPublicConstructors": true
+  },
+  {
+    "name": "org.glassfish.jaxb.runtime.v2.runtime.property.ArrayReferenceNodeProperty",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allPublicConstructors": true
+  },
+  {
+    "name": "org.glassfish.jaxb.runtime.v2.runtime.property.SingleElementLeafProperty",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allPublicConstructors": true
+  },
+  {
+    "name": "org.glassfish.jaxb.runtime.v2.runtime.property.SingleElementNodeProperty",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allPublicConstructors": true
+  },
+  {
+    "name": "org.glassfish.jaxb.runtime.v2.runtime.property.SingleMapNodeProperty",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allPublicConstructors": true
+  },
+  {
+    "name": "org.glassfish.jaxb.runtime.v2.runtime.property.SingleReferenceNodeProperty",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allPublicConstructors": true
+  },
+  {
+    "name": "jakarta.xml.bind.annotation.XmlAccessorType",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "jakarta.xml.bind.annotation.XmlAttribute",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "jakarta.xml.bind.annotation.XmlElement",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "jakarta.xml.bind.annotation.XmlEnum",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "jakarta.xml.bind.annotation.XmlSchemaType",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "jakarta.xml.bind.annotation.XmlType",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter",
+    "allDeclaredFields": true,
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  }
+]

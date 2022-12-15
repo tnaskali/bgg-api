@@ -2,6 +2,8 @@ name: build image
 
 on:
   push:
+    branches: [ 'master' ]
+    tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ 'master' ]
 
@@ -55,7 +57,7 @@ jobs:
         run: |
           DOCKER_PID=$(docker run -d -p 8088:80 --rm ${{ env.DOCKER_IMAGE }}:${{ github.sha }} 2>/dev/null)
           sleep 10s
-          curl --fail http://localhost:8088/bgg-api/v3/api-docs
+          curl --fail http://localhost:8088/bgg-api/actuator/health
           docker stop $DOCKER_PID
 
       # deploy
@@ -98,7 +100,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     environment:
       name: staging
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}/bgg-api/swagger-ui.html
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}/bgg-api/actuator/health
 
     steps:
       - name: Deploy to Azure Web App

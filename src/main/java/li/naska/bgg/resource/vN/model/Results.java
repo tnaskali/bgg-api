@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class Results {
   private Integer total;
-  private List<Result> item;
+  private List<Result> items;
 
   @Data
   public static class Result {

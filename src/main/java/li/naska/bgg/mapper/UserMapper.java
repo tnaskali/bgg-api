@@ -42,7 +42,6 @@ public interface UserMapper extends BaseMapper {
   @Mapping(target = "members", ignore = true)
   Guild fromBggModel(com.boardgamegeek.user.Guild source);
 
-  @Mapping(target = "items", source = "item")
   User.Ranking fromBggModel(com.boardgamegeek.user.Ranking source);
 
   User.Ranking.RankedItem fromBggModel(com.boardgamegeek.user.RankedItem source);
@@ -55,7 +54,7 @@ public interface UserMapper extends BaseMapper {
 
   default List<User.Buddy> getBuddies(com.boardgamegeek.user.User source) {
     return Optional.ofNullable(source.getBuddies())
-        .map(o -> o.getBuddy().stream()
+        .map(o -> o.getBuddies().stream()
             .map(this::fromBggModel)
             .collect(Collectors.toList()))
         .orElse(null);
@@ -69,7 +68,7 @@ public interface UserMapper extends BaseMapper {
 
   default List<Guild> getGuilds(com.boardgamegeek.user.User source) {
     return Optional.ofNullable(source.getGuilds())
-        .map(o -> o.getGuild().stream()
+        .map(o -> o.getGuilds().stream()
             .map(this::fromBggModel)
             .collect(Collectors.toList()))
         .orElse(null);

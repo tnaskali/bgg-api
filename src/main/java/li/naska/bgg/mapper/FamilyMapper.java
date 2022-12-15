@@ -15,25 +15,24 @@ import java.util.stream.Collectors;
 )
 public interface FamilyMapper {
 
-  @BeanMapping(ignoreUnmappedSourceProperties = {"name", "link"})
+  @BeanMapping(ignoreUnmappedSourceProperties = {"names"})
   @Mapping(target = "name", expression = "java(getName(source))")
   @Mapping(target = "alternatenames", expression = "java(getAlternatenames(source))")
-  @Mapping(target = "links", source = "link")
   Family fromBggModel(com.boardgamegeek.family.Family source);
 
   Family.Link fromBggModel(com.boardgamegeek.family.Link source);
 
   default Name getName(com.boardgamegeek.family.Family source) {
-    return source.getName().stream()
-        .filter(e -> e.getType() == NameType.primary)
+    return source.getNames().stream()
+        .filter(e -> e.getType() == NameType.PRIMARY)
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .findFirst()
         .orElse(null);
   }
 
   default List<Name> getAlternatenames(com.boardgamegeek.family.Family source) {
-    return source.getName().stream()
-        .filter(e -> e.getType() == NameType.alternate)
+    return source.getNames().stream()
+        .filter(e -> e.getType() == NameType.ALTERNATE)
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .collect(Collectors.toList());
   }

@@ -4,6 +4,8 @@
            xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:geeklist="http://www.boardgamegeek.com/geeklist"
            targetNamespace="http://www.boardgamegeek.com/geeklist">
+  <xs:import schemaLocation="common.xsd" namespace="http://www.boardgamegeek.com/common"/>
+  <xs:import schemaLocation="enums.xsd" namespace="http://www.boardgamegeek.com/enums"/>
 
   <xs:complexType name="comment">
     <xs:simpleContent>

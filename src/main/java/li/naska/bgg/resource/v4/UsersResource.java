@@ -2,7 +2,6 @@ package li.naska.bgg.resource.v4;
 
 import li.naska.bgg.repository.BggUsersV4Repository;
 import li.naska.bgg.repository.model.BggUsersV4QueryParams;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -25,7 +24,7 @@ public class UsersResource {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getUsers(@ParameterObject @Validated BggUsersV4QueryParams params) {
+  public Mono<String> getUsers(@Validated BggUsersV4QueryParams params) {
     return usersRepository.getUsers(params);
   }
 

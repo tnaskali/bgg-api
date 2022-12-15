@@ -21,7 +21,7 @@ public interface PlaysMapper {
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"username", "userid", "page", "termsofuse"})
   @Mapping(target = "numplays", source = "total")
-  @Mapping(target = "plays", source = "play")
+  @Mapping(target = "plays", source = "plaies")
   Plays fromBggModel(com.boardgamegeek.plays.Plays source);
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"players"})
@@ -38,7 +38,7 @@ public interface PlaysMapper {
 
   default List<ItemSubtype> getSubtypes(com.boardgamegeek.plays.Item source) {
     return Optional.ofNullable(source.getSubtypes())
-        .map(o -> o.getSubtype().stream()
+        .map(o -> o.getSubtypes().stream()
             .map(SubtypeValue::getValue)
             .collect(Collectors.toList())
         ).orElse(null);
@@ -46,15 +46,15 @@ public interface PlaysMapper {
 
   default List<Play.Player> getPlayers(com.boardgamegeek.plays.Play source) {
     return Optional.ofNullable(source.getPlayers())
-        .map(o -> o.getPlayer().stream()
+        .map(o -> o.getPlayers().stream()
             .map(this::fromBggModel)
             .collect(Collectors.toList())
         ).orElse(null);
   }
 
   default List<String> getAlternatenames(com.boardgamegeek.family.Family source) {
-    return source.getName().stream()
-        .filter(e -> e.getType() == NameType.alternate)
+    return source.getNames().stream()
+        .filter(e -> e.getType() == NameType.ALTERNATE)
         .map(Name::getValue)
         .collect(Collectors.toList());
   }

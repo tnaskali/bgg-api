@@ -1,6 +1,7 @@
 package li.naska.bgg.util;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
+
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 

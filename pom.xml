@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.5</version>
+    <version>3.0.0</version>
     <relativePath/>
   </parent>
 
@@ -54,11 +54,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
-    <org.springdoc.springdoc-openapi.version>1.6.13</org.springdoc.springdoc-openapi.version>
     <java.version>17</java.version>
-    <repackage.classifier/>
-    <spring-native.version>0.12.1</spring-native.version>
-    <native-buildtools.version>0.9.14</native-buildtools.version>
     <sonar.coverage.jacoco.xmlReportPaths>
       ${project.basedir}/target/site/jacoco/jacoco.xml,${project.basedir}/target/site/jacoco-it/jacoco.xml
     </sonar.coverage.jacoco.xmlReportPaths>
@@ -85,28 +81,27 @@
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework.experimental</groupId>
-      <artifactId>spring-native</artifactId>
-      <version>${spring-native.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jvnet.jaxb2_commons</groupId>
-      <artifactId>jaxb2-basics-runtime</artifactId>
-      <version>0.12.0</version>
-    </dependency>
-    <dependency>
       <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.el</groupId>
+      <artifactId>jakarta.el-api</artifactId>
+      <version>5.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.expressly</groupId>
+      <artifactId>expressly</artifactId>
+      <version>5.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.xml.bind</groupId>
+      <artifactId>jakarta.xml.bind-api</artifactId>
     </dependency>
     <dependency>
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct</artifactId>
       <version>${org.mapstruct.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-webflux-ui</artifactId>
-      <version>${org.springdoc.springdoc-openapi.version}</version>
     </dependency>
 
     <dependency>
@@ -165,6 +160,19 @@
           </configuration>
         </plugin>
         <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>jaxb2-maven-plugin</artifactId>
+          <version>3.1.0</version>
+          <executions>
+            <execution>
+              <id>xjc</id>
+              <goals>
+                <goal>xjc</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
           <version>0.8.8</version>
@@ -196,60 +204,6 @@
           </executions>
         </plugin>
         <plugin>
-          <groupId>org.jvnet.jaxb2.maven2</groupId>
-          <artifactId>maven-jaxb2-plugin</artifactId>
-          <version>0.15.1</version>
-          <dependencies>
-            <dependency>
-              <groupId>org.glassfish.jaxb</groupId>
-              <artifactId>jaxb-runtime</artifactId>
-              <version>${glassfish-jaxb.version}</version>
-            </dependency>
-          </dependencies>
-          <executions>
-            <execution>
-              <id>generate-sources</id>
-              <goals>
-                <goal>generate</goal>
-              </goals>
-              <configuration>
-                <schemaDirectory>src/main/resources/schemas</schemaDirectory>
-                <schemaIncludes>
-                  <include>*.xsd</include>
-                </schemaIncludes>
-                <bindingDirectory>src/main/resources/bindings</bindingDirectory>
-                <bindingIncludes>
-                  <include>*.xjb</include>
-                </bindingIncludes>
-                <generateDirectory>target/generated-sources/xjc</generateDirectory>
-              </configuration>
-            </execution>
-          </executions>
-          <configuration>
-            <strict>false</strict>
-            <catalog>src/main/resources/catalogs/catalog.cat</catalog>
-            <extension>true</extension>
-            <args>
-              <arg>-Xsimplify</arg>
-              <arg>-Xsimplify-usePluralForm=true</arg>
-            </args>
-            <plugins>
-              <plugin>
-                <groupId>org.jvnet.jaxb2_commons</groupId>
-                <artifactId>jaxb2-basics</artifactId>
-                <version>0.12.0</version>
-              </plugin>
-            </plugins>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-maven-plugin</artifactId>
-          <configuration>
-            <classifier>${repackage.classifier}</classifier>
-          </configuration>
-        </plugin>
-        <plugin>
           <groupId>org.sonarsource.scanner.maven</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
           <version>3.9.1.2184</version>
@@ -271,32 +225,15 @@
         <artifactId>jacoco-maven-plugin</artifactId>
       </plugin>
       <plugin>
-        <groupId>org.jvnet.jaxb2.maven2</groupId>
-        <artifactId>maven-jaxb2-plugin</artifactId>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jaxb2-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.graalvm.buildtools</groupId>
+        <artifactId>native-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
-
-  <repositories>
-    <repository>
-      <id>spring-releases</id>
-      <name>Spring Releases</name>
-      <url>https://repo.spring.io/release</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>spring-releases</id>
-      <name>Spring Releases</name>
-      <url>https://repo.spring.io/release</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
 
   <profiles>
     <profile>
@@ -330,114 +267,6 @@
           <classifier>osx-aarch_64</classifier>
         </dependency>
       </dependencies>
-    </profile>
-    <profile>
-      <id>native</id>
-      <properties>
-        <repackage.classifier>exec</repackage.classifier>
-      </properties>
-      <dependencies>
-        <dependency>
-          <groupId>org.springframework.experimental</groupId>
-          <artifactId>spring-native</artifactId>
-          <version>${spring-native.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>org.springdoc</groupId>
-          <artifactId>springdoc-openapi-native</artifactId>
-          <version>${org.springdoc.springdoc-openapi.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>org.junit.platform</groupId>
-          <artifactId>junit-platform-launcher</artifactId>
-          <scope>test</scope>
-        </dependency>
-      </dependencies>
-      <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <groupId>org.springframework.experimental</groupId>
-              <artifactId>spring-aot-maven-plugin</artifactId>
-              <version>${spring-native.version}</version>
-              <executions>
-                <execution>
-                  <id>test-generate</id>
-                  <goals>
-                    <goal>test-generate</goal>
-                  </goals>
-                </execution>
-                <execution>
-                  <id>generate</id>
-                  <goals>
-                    <goal>generate</goal>
-                  </goals>
-                </execution>
-              </executions>
-              <configuration>
-                <removeXmlSupport>false</removeXmlSupport>
-              </configuration>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-        <plugins>
-          <plugin>
-            <groupId>org.springframework.experimental</groupId>
-            <artifactId>spring-aot-maven-plugin</artifactId>
-            <version>${spring-native.version}</version>
-            <executions>
-              <execution>
-                <id>test-generate</id>
-                <goals>
-                  <goal>test-generate</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>generate</id>
-                <goals>
-                  <goal>generate</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <removeXmlSupport>false</removeXmlSupport>
-            </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.graalvm.buildtools</groupId>
-            <artifactId>native-maven-plugin</artifactId>
-            <version>${native-buildtools.version}</version>
-            <extensions>true</extensions>
-            <configuration>
-              <buildArgs>
-                --allow-incomplete-classpath
-                --report-unsupported-elements-at-runtime
-                --no-fallback
-                --install-exit-handlers
-                -H:+InlineBeforeAnalysis
-                --enable-https
-                -H:+ReportExceptionStackTraces
-              </buildArgs>
-            </configuration>
-            <executions>
-              <execution>
-                <id>test-native</id>
-                <phase>test</phase>
-                <goals>
-                  <goal>test</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>build-native</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>build</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
   </profiles>
 

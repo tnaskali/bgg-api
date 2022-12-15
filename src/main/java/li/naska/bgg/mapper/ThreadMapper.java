@@ -26,7 +26,7 @@ public interface ThreadMapper {
 
   default List<Thread.Article> getArticles(com.boardgamegeek.thread.Thread source) {
     return Optional.ofNullable(source.getArticles())
-        .map(Articles::getArticle)
+        .map(Articles::getArticles)
         .map(l -> l.stream()
             .map(this::fromBggModel)
             .collect(Collectors.toList()))

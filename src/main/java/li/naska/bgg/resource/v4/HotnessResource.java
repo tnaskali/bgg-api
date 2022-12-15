@@ -2,7 +2,6 @@ package li.naska.bgg.resource.v4;
 
 import li.naska.bgg.repository.BggHotnessV4Repository;
 import li.naska.bgg.repository.model.BggHotnessV4QueryParams;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -19,7 +18,7 @@ public class HotnessResource {
   private BggHotnessV4Repository hotnessRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getHotness(@ParameterObject @Validated BggHotnessV4QueryParams params) {
+  public Mono<String> getHotness(@Validated BggHotnessV4QueryParams params) {
     return hotnessRepository.getHotness(params);
   }
 

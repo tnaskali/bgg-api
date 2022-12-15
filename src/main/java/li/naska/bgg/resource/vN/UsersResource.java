@@ -1,5 +1,6 @@
 package li.naska.bgg.resource.vN;
 
+import jakarta.validation.constraints.NotNull;
 import li.naska.bgg.resource.vN.model.*;
 import li.naska.bgg.resource.vN.model.User.Buddy;
 import li.naska.bgg.resource.vN.model.User.Ranking.RankedItem;
@@ -8,7 +9,6 @@ import li.naska.bgg.service.ThingsService;
 import li.naska.bgg.service.UsersService;
 import li.naska.bgg.util.Page;
 import li.naska.bgg.util.PagingParams;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -44,43 +43,43 @@ public class UsersResource {
   @GetMapping(value = "/{username}/buddies", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<Page<Buddy>> getBuddies(
       @NotNull @PathVariable String username,
-      @ParameterObject @Validated PagingParams pagingParams) {
+      @Validated PagingParams pagingParams) {
     return userService.getPagedBuddies(username, pagingParams);
   }
 
   @GetMapping(value = "/{username}/guilds", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<Page<Guild>> getGuilds(
       @NotNull @PathVariable String username,
-      @ParameterObject @Validated PagingParams pagingParams) {
+      @Validated PagingParams pagingParams) {
     return userService.getPagedGuilds(username, pagingParams);
   }
 
   @GetMapping(value = "/{username}/plays", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<Page<Play>> getPlays(
       @NotNull @PathVariable String username,
-      @ParameterObject @Validated UserPlaysParams params,
-      @ParameterObject @Validated PagingParams pagingParams) {
+      @Validated UserPlaysParams params,
+      @Validated PagingParams pagingParams) {
     return playsService.getPagedUserPlays(username, params, pagingParams);
   }
 
   @GetMapping(value = "/{username}/things", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<Collection> getThings(
       @NotNull @PathVariable String username,
-      @ParameterObject @Validated CollectionParams params) {
+      @Validated CollectionParams params) {
     return thingsService.getThings(username, params);
   }
 
   @GetMapping(value = "/{username}/hot", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<List<RankedItem>> getHotItems(
       @NotNull @PathVariable String username,
-      @ParameterObject @Validated UserRankedItemsParams params) {
+      @Validated UserRankedItemsParams params) {
     return userService.getHotItems(username, params);
   }
 
   @GetMapping(value = "/{username}/top", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<List<RankedItem>> getTopItems(
       @NotNull @PathVariable String username,
-      @ParameterObject @Validated UserRankedItemsParams params) {
+      @Validated UserRankedItemsParams params) {
     return userService.getTopItems(username, params);
   }
 

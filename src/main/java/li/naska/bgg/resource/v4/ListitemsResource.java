@@ -1,10 +1,10 @@
 package li.naska.bgg.resource.v4;
 
+import jakarta.validation.constraints.NotNull;
 import li.naska.bgg.repository.BggListitemsV4Repository;
 import li.naska.bgg.repository.model.BggListitemReactionsV4QueryParams;
 import li.naska.bgg.repository.model.BggListitemTipsV4QueryParams;
 import li.naska.bgg.repository.model.BggListitemsV4QueryParams;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-import javax.validation.constraints.NotNull;
-
 @RestController("ListitemsV4Resource")
 @RequestMapping("/api/v4/listitems")
 public class ListitemsResource {
@@ -24,7 +22,7 @@ public class ListitemsResource {
   private BggListitemsV4Repository listitemsRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getListitems(@ParameterObject @Validated BggListitemsV4QueryParams params) {
+  public Mono<String> getListitems(@Validated BggListitemsV4QueryParams params) {
     return listitemsRepository.getListitems(params);
   }
 
@@ -35,13 +33,13 @@ public class ListitemsResource {
 
   @GetMapping(path = "/{id}/reactions", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<String> getListitemsReactions(@NotNull @PathVariable Integer id,
-                                            @ParameterObject @Validated BggListitemReactionsV4QueryParams params) {
+                                            @Validated BggListitemReactionsV4QueryParams params) {
     return listitemsRepository.getListitemReactions(id, params);
   }
 
   @GetMapping(path = "/{id}/tips", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<String> getListitemsTips(@NotNull @PathVariable Integer id,
-                                       @ParameterObject @Validated BggListitemTipsV4QueryParams params) {
+                                       @Validated BggListitemTipsV4QueryParams params) {
     return listitemsRepository.getListitemTips(id, params);
   }
 

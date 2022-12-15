@@ -4,7 +4,6 @@ import com.boardgamegeek.guild.Guild;
 import li.naska.bgg.repository.BggGuildV2Repository;
 import li.naska.bgg.repository.model.BggGuildV2QueryParams;
 import li.naska.bgg.util.XmlProcessor;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -24,12 +23,12 @@ public class GuildResource {
   private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
-  public Mono<String> getGuildAsXml(@ParameterObject @Validated BggGuildV2QueryParams params) {
+  public Mono<String> getGuildAsXml(@Validated BggGuildV2QueryParams params) {
     return guildsRepository.getGuild(params);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getGuildAsJson(@ParameterObject @Validated BggGuildV2QueryParams params) {
+  public Mono<String> getGuildAsJson(@Validated BggGuildV2QueryParams params) {
     return getGuildAsXml(params)
         .map(xml -> xmlProcessor.toJsonString(xml, Guild.class));
   }

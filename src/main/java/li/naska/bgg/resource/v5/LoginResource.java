@@ -2,7 +2,6 @@ package li.naska.bgg.resource.v5;
 
 import li.naska.bgg.service.LoginService;
 import li.naska.bgg.service.model.LoginParams;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -22,7 +21,7 @@ public class LoginResource {
 
   @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<List<String>> getSearchResults(
-      @ParameterObject @Validated LoginParams params) {
+      @Validated LoginParams params) {
     return loginService.login(params.getUsername(), params.getPassword());
   }
 

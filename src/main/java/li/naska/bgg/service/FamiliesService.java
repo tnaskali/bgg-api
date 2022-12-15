@@ -1,6 +1,6 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.family.Families;
+import com.boardgamegeek.family.Items;
 import li.naska.bgg.mapper.FamiliesParamsMapper;
 import li.naska.bgg.mapper.FamilyMapper;
 import li.naska.bgg.repository.BggFamilyV2Repository;
@@ -35,8 +35,8 @@ public class FamiliesService {
   public Mono<List<Family>> getFamilies(FamiliesParams params) {
     BggFamilyV2QueryParams queryParams = familiesParamsMapper.toBggModel(params);
     return familiesRepository.getFamilies(queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, Families.class))
-        .map(Families::getItem)
+        .map(xml -> xmlProcessor.toJavaObject(xml, Items.class))
+        .map(Items::getItems)
         .map(l -> l.stream()
             .map(familyMapper::fromBggModel)
             .collect(Collectors.toList()));
@@ -46,8 +46,8 @@ public class FamiliesService {
     BggFamilyV2QueryParams queryParams = new BggFamilyV2QueryParams();
     queryParams.setId(id.toString());
     return familiesRepository.getFamilies(queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, Families.class))
-        .map(Families::getItem)
+        .map(xml -> xmlProcessor.toJavaObject(xml, Items.class))
+        .map(Items::getItems)
         .flatMap(l -> l.size() == 1
             ? Mono.just(l.get(0))
             : Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "no match found")))

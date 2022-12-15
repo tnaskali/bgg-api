@@ -1,10 +1,9 @@
 package li.naska.bgg.resource.v1;
 
-import com.boardgamegeek.search.Results;
+import com.boardgamegeek.search.Items;
 import li.naska.bgg.repository.BggBoardgameV1Repository;
 import li.naska.bgg.repository.model.BggBoardgameV1QueryParams;
 import li.naska.bgg.util.XmlProcessor;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -28,15 +27,15 @@ public class BoardgameResource {
 
   @GetMapping(path = "/{gameids}", produces = MediaType.APPLICATION_XML_VALUE)
   public Mono<String> getResultsAsXml(@PathVariable List<Integer> gameids,
-                                      @ParameterObject @Validated BggBoardgameV1QueryParams params) {
+                                      @Validated BggBoardgameV1QueryParams params) {
     return boardgameRepository.getResults(gameids, params);
   }
 
   @GetMapping(path = "/{gameids}", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<String> getResultsAsJson(@PathVariable List<Integer> gameids,
-                                       @ParameterObject @Validated BggBoardgameV1QueryParams params) {
+                                       @Validated BggBoardgameV1QueryParams params) {
     return getResultsAsXml(gameids, params)
-        .map(xml -> xmlProcessor.toJsonString(xml, Results.class));
+        .map(xml -> xmlProcessor.toJsonString(xml, Items.class));
   }
 
 }

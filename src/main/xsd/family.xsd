@@ -3,6 +3,7 @@
            xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:family="http://www.boardgamegeek.com/family"
            targetNamespace="http://www.boardgamegeek.com/family">
+  <xs:import schemaLocation="enums.xsd" namespace="http://www.boardgamegeek.com/enums"/>
 
   <xs:complexType name="name">
     <xs:attribute name="type" type="enums:nameType" use="required"/>

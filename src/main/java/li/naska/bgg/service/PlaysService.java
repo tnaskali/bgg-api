@@ -75,7 +75,7 @@ public class PlaysService {
     Supplier<BggPlaysV2QueryParams> queryParamsSupplier = () -> {
       BggPlaysV2QueryParams queryParams = playsParamsMapper.toBggModel(params);
       queryParams.setId(id);
-      queryParams.setType(ItemType.thing.name());
+      queryParams.setType(ItemType.THING.name());
       return queryParams;
     };
     return getPlays(queryParamsSupplier);
@@ -85,7 +85,7 @@ public class PlaysService {
     Supplier<BggPlaysV2QueryParams> queryParamsSupplier = () -> {
       BggPlaysV2QueryParams queryParams = playsParamsMapper.toBggModel(params);
       queryParams.setId(id);
-      queryParams.setType(ItemType.thing.name());
+      queryParams.setType(ItemType.THING.name());
       return queryParams;
     };
     return getPagedPlays(queryParamsSupplier, pagingParams);
@@ -95,7 +95,7 @@ public class PlaysService {
     Supplier<BggPlaysV2QueryParams> queryParamsSupplier = () -> {
       BggPlaysV2QueryParams queryParams = playsParamsMapper.toBggModel(params);
       queryParams.setId(id);
-      queryParams.setType(ItemType.family.name());
+      queryParams.setType(ItemType.FAMILY.name());
       return queryParams;
     };
     return getPlays(queryParamsSupplier);
@@ -105,7 +105,7 @@ public class PlaysService {
     Supplier<BggPlaysV2QueryParams> queryParamsSupplier = () -> {
       BggPlaysV2QueryParams queryParams = playsParamsMapper.toBggModel(params);
       queryParams.setId(id);
-      queryParams.setType(ItemType.family.name());
+      queryParams.setType(ItemType.FAMILY.name());
       return queryParams;
     };
     return getPagedPlays(queryParamsSupplier, pagingParams);

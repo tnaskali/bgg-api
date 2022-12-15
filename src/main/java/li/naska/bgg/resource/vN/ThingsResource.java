@@ -1,5 +1,6 @@
 package li.naska.bgg.resource.vN;
 
+import jakarta.validation.constraints.NotNull;
 import li.naska.bgg.repository.BggHotV2Repository;
 import li.naska.bgg.resource.vN.model.*;
 import li.naska.bgg.resource.vN.model.Thing.Comment;
@@ -12,7 +13,6 @@ import li.naska.bgg.service.PlaysService;
 import li.naska.bgg.service.ThingsService;
 import li.naska.bgg.util.Page;
 import li.naska.bgg.util.PagingParams;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -47,19 +46,19 @@ public class ThingsResource {
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<List<Thing>> getThings(
-      @ParameterObject @Validated ThingsParams params) {
+      @Validated ThingsParams params) {
     return thingsService.getThings(params);
   }
 
   @GetMapping(value = "/hot", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<List<HotItem>> getHotThings(
-      @ParameterObject @Validated HotItemsParams params) {
+      @Validated HotItemsParams params) {
     return itemsService.getHotItems(params);
   }
 
   @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<Results> searchThings(
-      @ParameterObject @Validated SearchParams params) {
+      @Validated SearchParams params) {
     return itemsService.searchItems(params);
   }
 
@@ -78,14 +77,14 @@ public class ThingsResource {
   @GetMapping(value = "/{id}/comments", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<Page<Comment>> getComments(
       @NotNull @PathVariable Integer id,
-      @ParameterObject @Validated PagingParams pagingParams) {
+      @Validated PagingParams pagingParams) {
     return thingsService.getPagedComments(id, pagingParams);
   }
 
   @GetMapping(value = "/{id}/ratings", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<Page<Comment>> getRatings(
       @NotNull @PathVariable Integer id,
-      @ParameterObject @Validated PagingParams pagingParams) {
+      @Validated PagingParams pagingParams) {
     return thingsService.getPagedRatings(id, pagingParams);
   }
 
@@ -110,8 +109,8 @@ public class ThingsResource {
   @GetMapping(value = "/{id}/plays", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<Page<Play>> getPlays(
       @NotNull @PathVariable Integer id,
-      @ParameterObject @Validated ItemPlaysParams params,
-      @ParameterObject @Validated PagingParams pagingParams) {
+      @Validated ItemPlaysParams params,
+      @Validated PagingParams pagingParams) {
     return playsService.getPagedThingPlays(id, params, pagingParams);
   }
 

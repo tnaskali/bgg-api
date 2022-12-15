@@ -4,6 +4,8 @@
            xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:plays="http://www.boardgamegeek.com/plays"
            targetNamespace="http://www.boardgamegeek.com/plays">
+  <xs:import schemaLocation="common.xsd" namespace="http://www.boardgamegeek.com/common"/>
+  <xs:import schemaLocation="enums.xsd" namespace="http://www.boardgamegeek.com/enums"/>
 
   <xs:complexType name="subtypeValue">
     <xs:attribute name="value" type="enums:itemSubtype" use="required"/>

@@ -1,9 +1,8 @@
 package li.naska.bgg.resource.vN.model;
 
 import com.boardgamegeek.enums.HotItemType;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-
-import javax.validation.constraints.NotNull;
 
 @Data
 public class HotItemsParams {
