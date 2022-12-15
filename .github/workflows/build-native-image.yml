@@ -40,7 +40,7 @@ jobs:
 
       - name: Build artefacts
         run: |
-          mvn --batch-mode verify -Pnative -DskipTests
+          mvn --batch-mode native:compile -Pnative
 
       # build image
 
