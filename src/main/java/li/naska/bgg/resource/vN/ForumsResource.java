@@ -1,12 +1,12 @@
 package li.naska.bgg.resource.vN;
 
+import jakarta.validation.constraints.NotNull;
 import li.naska.bgg.resource.vN.model.Forum;
 import li.naska.bgg.resource.vN.model.ForumsParams;
 import li.naska.bgg.resource.vN.model.Thread;
 import li.naska.bgg.service.ForumsService;
 import li.naska.bgg.util.Page;
 import li.naska.bgg.util.PagingParams;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -28,7 +27,7 @@ public class ForumsResource {
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<List<Forum>> getForums(
-      @ParameterObject @Validated ForumsParams params) {
+      @Validated ForumsParams params) {
     return forumsService.getForums(params);
   }
 
@@ -41,7 +40,7 @@ public class ForumsResource {
   @GetMapping(value = "/{id}/threads", produces = MediaType.APPLICATION_JSON_VALUE)
   public Mono<Page<Thread>> getThreads(
       @NotNull @PathVariable Integer id,
-      @ParameterObject @Validated PagingParams pagingParams) {
+      @Validated PagingParams pagingParams) {
     return forumsService.getPagedThreads(id, pagingParams);
   }
 

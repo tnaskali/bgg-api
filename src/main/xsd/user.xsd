@@ -4,6 +4,8 @@
            xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:user="http://www.boardgamegeek.com/user"
            targetNamespace="http://www.boardgamegeek.com/user">
+  <xs:import schemaLocation="common.xsd" namespace="http://www.boardgamegeek.com/common"/>
+  <xs:import schemaLocation="enums.xsd" namespace="http://www.boardgamegeek.com/enums"/>
 
   <xs:complexType name="rankedItem">
     <xs:attribute name="rank" type="xs:nonNegativeInteger" use="required"/>

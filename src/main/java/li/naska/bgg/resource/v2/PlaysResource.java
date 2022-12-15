@@ -4,7 +4,6 @@ import com.boardgamegeek.plays.Plays;
 import li.naska.bgg.repository.BggPlaysV2Repository;
 import li.naska.bgg.repository.model.BggPlaysV2QueryParams;
 import li.naska.bgg.util.XmlProcessor;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -24,12 +23,12 @@ public class PlaysResource {
   private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
-  public Mono<String> getPlaysAsXml(@ParameterObject @Validated BggPlaysV2QueryParams params) {
+  public Mono<String> getPlaysAsXml(@Validated BggPlaysV2QueryParams params) {
     return playsRepository.getPlays(params);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getPlaysAsJson(@ParameterObject @Validated BggPlaysV2QueryParams params) {
+  public Mono<String> getPlaysAsJson(@Validated BggPlaysV2QueryParams params) {
     return getPlaysAsXml(params)
         .map(xml -> xmlProcessor.toJsonString(xml, Plays.class));
   }

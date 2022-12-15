@@ -52,7 +52,3 @@ spring:
       write-dates-as-timestamps: false
   webflux:
     base-path: /bgg-api
-
-springdoc:
-  swagger-ui:
-    disable-swagger-default-url: true

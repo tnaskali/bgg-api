@@ -4,7 +4,6 @@ import com.boardgamegeek.thread.Thread;
 import li.naska.bgg.repository.BggThreadV2Repository;
 import li.naska.bgg.repository.model.BggThreadV2QueryParams;
 import li.naska.bgg.util.XmlProcessor;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -24,12 +23,12 @@ public class ThreadResource {
   private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
-  public Mono<String> getThreadAsXml(@ParameterObject @Validated BggThreadV2QueryParams params) {
+  public Mono<String> getThreadAsXml(@Validated BggThreadV2QueryParams params) {
     return threadsRepository.getThread(params);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getThreadAsJson(@ParameterObject @Validated BggThreadV2QueryParams params) {
+  public Mono<String> getThreadAsJson(@Validated BggThreadV2QueryParams params) {
     return getThreadAsXml(params)
         .map(xml -> xmlProcessor.toJsonString(xml, Thread.class));
   }

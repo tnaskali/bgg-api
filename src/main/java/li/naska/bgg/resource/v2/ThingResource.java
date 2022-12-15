@@ -1,10 +1,9 @@
 package li.naska.bgg.resource.v2;
 
-import com.boardgamegeek.thing.Things;
+import com.boardgamegeek.thing.Items;
 import li.naska.bgg.repository.BggThingV2Repository;
 import li.naska.bgg.repository.model.BggThingV2QueryParams;
 import li.naska.bgg.util.XmlProcessor;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -24,14 +23,14 @@ public class ThingResource {
   private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
-  public Mono<String> getThingsAsXml(@ParameterObject @Validated BggThingV2QueryParams params) {
+  public Mono<String> getThingsAsXml(@Validated BggThingV2QueryParams params) {
     return thingsRepository.getThings(params);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getThingsAsJson(@ParameterObject @Validated BggThingV2QueryParams params) {
+  public Mono<String> getThingsAsJson(@Validated BggThingV2QueryParams params) {
     return getThingsAsXml(params)
-        .map(xml -> xmlProcessor.toJsonString(xml, Things.class));
+        .map(xml -> xmlProcessor.toJsonString(xml, Items.class));
   }
 
 }

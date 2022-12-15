@@ -67,7 +67,7 @@ public class ForumsService {
     BggForumlistV2QueryParams queryParams = forumListsParamsMapper.toBggModel(params);
     return forumListsRepository.getForums(queryParams)
         .map(xml -> xmlProcessor.toJavaObject(xml, Forums.class))
-        .map(f -> f.getForum().stream()
+        .map(f -> f.getFora().stream()
             .map(forumMapper::fromBggModel)
             .collect(Collectors.toList()));
   }
@@ -75,14 +75,14 @@ public class ForumsService {
   public Mono<List<Forum>> getThingForums(Integer id) {
     ForumsParams params = new ForumsParams();
     params.setId(id);
-    params.setType(ItemType.thing);
+    params.setType(ItemType.THING);
     return getForums(params);
   }
 
   public Mono<List<Forum>> getFamilyForums(Integer id) {
     ForumsParams params = new ForumsParams();
     params.setId(id);
-    params.setType(ItemType.family);
+    params.setType(ItemType.FAMILY);
     return getForums(params);
   }
 

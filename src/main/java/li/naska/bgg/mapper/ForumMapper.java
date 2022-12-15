@@ -31,7 +31,7 @@ public interface ForumMapper {
 
   default List<Thread> getThreads(com.boardgamegeek.forum.Forum source) {
     return Optional.ofNullable(source.getThreads())
-        .map(Threads::getThread)
+        .map(Threads::getThreads)
         .map(l -> l.stream()
             .map(this::fromBggModel)
             .collect(Collectors.toList()))

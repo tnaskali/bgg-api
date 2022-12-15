@@ -4,7 +4,6 @@ import li.naska.bgg.repository.BggGeekitemV4Repository;
 import li.naska.bgg.repository.BggGeekitemsV4Repository;
 import li.naska.bgg.repository.model.BggGeekitemLinkeditemsV4QueryParams;
 import li.naska.bgg.repository.model.BggGeekitemsV4QueryParams;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -24,12 +23,12 @@ public class GeekitemsResource {
   private BggGeekitemV4Repository geekitemRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getGeekitem(@ParameterObject @Validated BggGeekitemsV4QueryParams params) {
+  public Mono<String> getGeekitem(@Validated BggGeekitemsV4QueryParams params) {
     return geekitemsRepository.getGeekitem(params);
   }
 
   @GetMapping(path = "/linkeditems", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getGeekitemLinkeditems(@ParameterObject @Validated BggGeekitemLinkeditemsV4QueryParams params) {
+  public Mono<String> getGeekitemLinkeditems(@Validated BggGeekitemLinkeditemsV4QueryParams params) {
     return geekitemRepository.getGeekitemLinkeditems(params);
   }
 

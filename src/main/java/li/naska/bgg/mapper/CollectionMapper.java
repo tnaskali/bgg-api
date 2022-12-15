@@ -1,11 +1,16 @@
 package li.naska.bgg.mapper;
 
+import com.boardgamegeek.collection.VersionLink;
+import com.boardgamegeek.common.DecimalValue;
 import com.boardgamegeek.common.IntegerValue;
+import com.boardgamegeek.common.StringValue;
 import com.boardgamegeek.enums.NameType;
+import jakarta.xml.bind.JAXBElement;
 import li.naska.bgg.resource.vN.model.Collection;
 import li.naska.bgg.resource.vN.model.Name;
 import org.mapstruct.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,9 +26,8 @@ import java.util.stream.Collectors;
 )
 public interface CollectionMapper extends BaseMapper {
 
-  @BeanMapping(ignoreUnmappedSourceProperties = {"item", "termsofuse"})
-  @Mapping(target = "items", source = "item")
-  Collection fromBggModel(com.boardgamegeek.collection.Collection source);
+  @BeanMapping(ignoreUnmappedSourceProperties = {"termsofuse"})
+  Collection fromBggModel(com.boardgamegeek.collection.Items source);
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"name", "version"})
   @Mapping(target = "name", expression = "java(getName(source))")
@@ -38,7 +42,7 @@ public interface CollectionMapper extends BaseMapper {
 
   default List<Collection.Item.Stats.Rating.Rank> getRanks(com.boardgamegeek.collection.Rating source) {
     return Optional.ofNullable(source.getRanks())
-        .map(o -> o.getRank().stream()
+        .map(o -> o.getRanks().stream()
             .map(this::fromBggModel)
             .collect(Collectors.toList()))
         .orElse(null);
@@ -72,19 +76,15 @@ public interface CollectionMapper extends BaseMapper {
       target.setType(o.getType());
       target.setName(getName(o));
       target.setAlternatenames(getAlternatenames(o));
-      target.setYearpublished(getFirstIntegerValue(o.getYearpublisheds()));
-      target.setProductcode(getFirstStringValue(o.getProductcodes()));
-      target.setWidth(getFirstBigDecimalValue(o.getWidths()));
-      target.setLength(getFirstBigDecimalValue(o.getLengths()));
-      target.setDepth(getFirstBigDecimalValue(o.getDepths()));
-      target.setWeight(getFirstBigDecimalValue(o.getWeights()));
-      target.setThumbnail(getFirstValue(o.getThumbnails()));
-      target.setImage(getFirstValue(o.getImages()));
-      Optional.ofNullable(o.getLinks())
-          .map(l -> l.stream()
-              .map(this::fromBggModel)
-              .collect(Collectors.toList()))
-          .ifPresent(target::setLinks);
+      target.setYearpublished(getYearpublished(o));
+      target.setProductcode(getProductcode(o));
+      target.setWidth(getWidth(o));
+      target.setLength(getLength(o));
+      target.setDepth(getDepth(o));
+      target.setWeight(getWeight(o));
+      target.setThumbnail(getThumbnail(o));
+      target.setImage(getImage(o));
+      target.setLinks(getLinks(o));
     });
     return target;
   }
@@ -100,17 +100,111 @@ public interface CollectionMapper extends BaseMapper {
   }
 
   default Name getName(com.boardgamegeek.collection.VersionItem source) {
-    return source.getNames().stream()
-        .filter(e -> e.getType() == NameType.primary)
+    return source.getThumbnailsAndImagesAndNames().stream()
+        .filter(e -> "name".equals(e.getName().getLocalPart()))
+        .map(JAXBElement::getValue)
+        .map(e -> (com.boardgamegeek.collection.Name) e)
+        .filter(e -> e.getType() == NameType.PRIMARY)
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .findFirst()
         .orElse(null);
   }
 
   default List<Name> getAlternatenames(com.boardgamegeek.collection.VersionItem source) {
-    return source.getNames().stream()
-        .filter(e -> e.getType() == NameType.alternate)
+    return source.getThumbnailsAndImagesAndNames().stream()
+        .filter(e -> "name".equals(e.getName().getLocalPart()))
+        .map(JAXBElement::getValue)
+        .map(e -> (com.boardgamegeek.collection.Name) e)
+        .filter(e -> e.getType() == NameType.ALTERNATE)
         .map(e -> new Name(e.getValue(), e.getSortindex()))
+        .collect(Collectors.toList());
+  }
+
+  default Integer getYearpublished(com.boardgamegeek.collection.VersionItem source) {
+    return source.getThumbnailsAndImagesAndNames().stream()
+        .filter(e -> "yearpublished".equals(e.getName().getLocalPart()))
+        .map(JAXBElement::getValue)
+        .map(e -> (IntegerValue) e)
+        .map(IntegerValue::getValue)
+        .findFirst()
+        .orElse(null);
+  }
+
+  default String getProductcode(com.boardgamegeek.collection.VersionItem source) {
+    return source.getThumbnailsAndImagesAndNames().stream()
+        .filter(e -> "productcode".equals(e.getName().getLocalPart()))
+        .map(JAXBElement::getValue)
+        .map(e -> (StringValue) e)
+        .map(StringValue::getValue)
+        .findFirst()
+        .orElse(null);
+  }
+
+  default BigDecimal getWidth(com.boardgamegeek.collection.VersionItem source) {
+    return source.getThumbnailsAndImagesAndNames().stream()
+        .filter(e -> "width".equals(e.getName().getLocalPart()))
+        .map(JAXBElement::getValue)
+        .map(e -> (DecimalValue) e)
+        .map(DecimalValue::getValue)
+        .findFirst()
+        .orElse(null);
+  }
+
+  default BigDecimal getLength(com.boardgamegeek.collection.VersionItem source) {
+    return source.getThumbnailsAndImagesAndNames().stream()
+        .filter(e -> "length".equals(e.getName().getLocalPart()))
+        .map(JAXBElement::getValue)
+        .map(e -> (DecimalValue) e)
+        .map(DecimalValue::getValue)
+        .findFirst()
+        .orElse(null);
+  }
+
+  default BigDecimal getWeight(com.boardgamegeek.collection.VersionItem source) {
+    return source.getThumbnailsAndImagesAndNames().stream()
+        .filter(e -> "weight".equals(e.getName().getLocalPart()))
+        .map(JAXBElement::getValue)
+        .map(e -> (DecimalValue) e)
+        .map(DecimalValue::getValue)
+        .findFirst()
+        .orElse(null);
+  }
+
+  default BigDecimal getDepth(com.boardgamegeek.collection.VersionItem source) {
+    return source.getThumbnailsAndImagesAndNames().stream()
+        .filter(e -> "depth".equals(e.getName().getLocalPart()))
+        .map(JAXBElement::getValue)
+        .map(e -> (DecimalValue) e)
+        .map(DecimalValue::getValue)
+        .findFirst()
+        .orElse(null);
+  }
+
+  default String getImage(com.boardgamegeek.collection.VersionItem source) {
+    return source.getThumbnailsAndImagesAndNames().stream()
+        .filter(e -> "image".equals(e.getName().getLocalPart()))
+        .map(JAXBElement::getValue)
+        .map(e -> (String) e)
+        .findFirst()
+        .orElse(null);
+  }
+
+  default String getThumbnail(com.boardgamegeek.collection.VersionItem source) {
+    return source.getThumbnailsAndImagesAndNames().stream()
+        .filter(e -> "thumbnail".equals(e.getName().getLocalPart()))
+        .map(JAXBElement::getValue)
+        .map(e -> (StringValue) e)
+        .map(StringValue::getValue)
+        .findFirst()
+        .orElse(null);
+  }
+
+  default List<Collection.Item.Version.VersionLink> getLinks(com.boardgamegeek.collection.VersionItem source) {
+    return source.getThumbnailsAndImagesAndNames().stream()
+        .filter(e -> "link".equals(e.getName().getLocalPart()))
+        .map(JAXBElement::getValue)
+        .map(e -> (VersionLink) e)
+        .map(this::fromBggModel)
         .collect(Collectors.toList());
   }
 

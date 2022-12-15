@@ -1,6 +1,6 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.hot.HotItems;
+import com.boardgamegeek.hot.Items;
 import li.naska.bgg.mapper.HotItemsMapper;
 import li.naska.bgg.mapper.HotItemsParamsMapper;
 import li.naska.bgg.mapper.ResultsMapper;
@@ -48,8 +48,8 @@ public class ItemsService {
   public Mono<List<HotItem>> getHotItems(HotItemsParams params) {
     BggHotV2QueryParams queryParams = hotItemsParamsMapper.toBggModel(params);
     return hotItemsRepository.getHotItems(queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, HotItems.class))
-        .map(HotItems::getItem)
+        .map(xml -> xmlProcessor.toJavaObject(xml, Items.class))
+        .map(Items::getItems)
         .map(e -> e.stream()
             .map(hotItemsMapper::fromBggModel)
             .collect(Collectors.toList()));
@@ -58,7 +58,7 @@ public class ItemsService {
   public Mono<Results> searchItems(SearchParams params) {
     BggSearchV2QueryParams queryParams = searchParamsMapper.toBggModel(params);
     return searchRepository.getResults(queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.search.Results.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.search.Items.class))
         .map(resultsMapper::fromBggModel);
   }
 

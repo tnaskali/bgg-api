@@ -1,9 +1,9 @@
 package li.naska.bgg.util;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.Data;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import java.util.Optional;
 
 @Data

@@ -1,10 +1,9 @@
 package li.naska.bgg.repository.model;
 
+import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
-
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Pattern;
 
 @Data
 public class BggPlaysV2QueryParams {

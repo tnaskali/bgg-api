@@ -1,5 +1,6 @@
 package li.naska.bgg.resource.v2;
 
+import jakarta.annotation.PostConstruct;
 import li.naska.bgg.resource.AbstractMockServerIT;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +14,6 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import javax.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -69,7 +69,7 @@ public class UserResourceV2IT extends AbstractMockServerIT {
           "</user>";
 
       @BeforeEach
-      private void setup() {
+      public void setup() {
         dispatch(200, mockResponseBody);
       }
 

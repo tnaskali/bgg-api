@@ -1,10 +1,9 @@
 package li.naska.bgg.resource.v2;
 
-import com.boardgamegeek.family.Families;
+import com.boardgamegeek.family.Items;
 import li.naska.bgg.repository.BggFamilyV2Repository;
 import li.naska.bgg.repository.model.BggFamilyV2QueryParams;
 import li.naska.bgg.util.XmlProcessor;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -24,14 +23,14 @@ public class FamilyResource {
   private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
-  public Mono<String> getFamiliesAsXml(@ParameterObject @Validated BggFamilyV2QueryParams params) {
+  public Mono<String> getFamiliesAsXml(@Validated BggFamilyV2QueryParams params) {
     return familiesRepository.getFamilies(params);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getFamiliesAsJson(@ParameterObject @Validated BggFamilyV2QueryParams params) {
+  public Mono<String> getFamiliesAsJson(@Validated BggFamilyV2QueryParams params) {
     return getFamiliesAsXml(params)
-        .map(xml -> xmlProcessor.toJsonString(xml, Families.class));
+        .map(xml -> xmlProcessor.toJsonString(xml, Items.class));
   }
 
 }

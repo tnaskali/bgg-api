@@ -32,7 +32,7 @@ public interface GuildMapper {
 
   default List<Guild.Member> getMembers(com.boardgamegeek.guild.Guild source) {
     return Optional.ofNullable(source.getMembers())
-        .map(e -> e.getMember().stream()
+        .map(e -> e.getMembers().stream()
             .map(this::fromBggModel)
             .collect(Collectors.toList()))
         .orElse(null);

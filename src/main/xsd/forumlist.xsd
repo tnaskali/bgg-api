@@ -4,6 +4,8 @@
            xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:forumlist="http://www.boardgamegeek.com/forumlist"
            targetNamespace="http://www.boardgamegeek.com/forumlist">
+  <xs:import schemaLocation="common.xsd" namespace="http://www.boardgamegeek.com/common"/>
+  <xs:import schemaLocation="enums.xsd" namespace="http://www.boardgamegeek.com/enums"/>
 
   <xs:complexType name="forum">
     <xs:attribute name="id" type="xs:integer" use="required"/>

@@ -1,8 +1,7 @@
 package li.naska.bgg.repository.model;
 
+import jakarta.validation.constraints.*;
 import lombok.Data;
-
-import javax.validation.constraints.*;
 
 @Data
 public class BggThingV2QueryParams {

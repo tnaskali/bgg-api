@@ -2,7 +2,6 @@ package li.naska.bgg.resource.v4;
 
 import li.naska.bgg.repository.BggFansV4Repository;
 import li.naska.bgg.repository.model.BggFansV4QueryParams;
-import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -19,7 +18,7 @@ public class FansResource {
   private BggFansV4Repository fansRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getFans(@ParameterObject @Validated BggFansV4QueryParams params) {
+  public Mono<String> getFans(@Validated BggFansV4QueryParams params) {
     return fansRepository.getFans(params);
   }
 
