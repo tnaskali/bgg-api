@@ -37,11 +37,11 @@ public class PagingHelper {
   }
 
   public int getLastPage(int bggTotalSize) {
-    return (int) Math.ceil((double) bggTotalSize / requestedPageSize);
+    return Math.max(1, (int) Math.ceil((double) bggTotalSize / requestedPageSize));
   }
 
   private int getBggEndPage(int bggTotalSize) {
-    return (int) Math.ceil((double) Math.min(getEndIndex(), bggTotalSize) / bggPageSize);
+    return Math.max(1, (int) Math.ceil((double) Math.min(getEndIndex(), bggTotalSize) / bggPageSize));
   }
 
   public int getBggPages(int bggTotalSize) {
@@ -68,7 +68,7 @@ public class PagingHelper {
   }
 
   public <T> Page<T> buildPage(List<T> intermediateList, int bggTotalSize) {
-    int totalPages = (int) Math.ceil((double) bggTotalSize / requestedPageSize);
+    int totalPages = getLastPage(bggTotalSize);
     List<T> finalList = intermediateList.subList(
         Math.min(
             getTrimStartIndex(),
