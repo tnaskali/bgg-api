@@ -45,7 +45,7 @@ bgg:
       login: ${bgg.web.baseurl-bgs}/login/api/v1
       search: ${bgg.web.baseurl-bgs}/search
 
-debug: false
+debug: true
 
 server:
   port: 8080
@@ -53,5 +53,12 @@ server:
 spring:
   codec:
     max-in-memory-size: 16MB
+  graphql:
+    graphiql:
+      enabled: true
+  jackson:
+    # default-property-inclusion: non_empty
+    serialization:
+      write-dates-as-timestamps: false
   webflux:
     base-path: /bgg-api

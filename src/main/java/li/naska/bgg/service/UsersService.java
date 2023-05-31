@@ -102,7 +102,7 @@ public class UsersService {
     firstPageQueryParams.setPage(1);
     return getUser(firstPageQueryParams)
         .flatMap(user -> {
-          int numPages = Math.max(1, (int) Math.ceil((double) user.getNumguilds() / BGG_USER_BUDDIES_PAGE_SIZE));
+          int numPages = Math.max(1, (int) Math.ceil((double) user.getNumguilds() / BGG_USER_GUILDS_PAGE_SIZE));
           return Flux.range(1, numPages)
               .flatMapSequential(page -> {
                 if (page == 1) {
@@ -169,4 +169,5 @@ public class UsersService {
         .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.user.v2.User.class))
         .map(userMapper::fromBggModel);
   }
+
 }
