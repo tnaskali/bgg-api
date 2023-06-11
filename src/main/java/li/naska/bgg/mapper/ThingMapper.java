@@ -4,7 +4,6 @@ import com.boardgamegeek.common.DecimalValue;
 import com.boardgamegeek.common.IntegerValue;
 import com.boardgamegeek.common.LocalDateValue;
 import com.boardgamegeek.common.StringValue;
-import com.boardgamegeek.enums.NameType;
 import com.boardgamegeek.thing.*;
 import jakarta.xml.bind.JAXBElement;
 import li.naska.bgg.resource.vN.model.Name;
@@ -339,7 +338,7 @@ public interface ThingMapper extends BaseMapper {
         .filter(e -> "name".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
         .map(e -> (com.boardgamegeek.thing.Name) e)
-        .filter(e -> e.getType() == NameType.PRIMARY)
+        .filter(e -> "primary".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .findFirst()
         .orElse(null);
@@ -350,7 +349,7 @@ public interface ThingMapper extends BaseMapper {
         .filter(e -> "name".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
         .map(e -> (com.boardgamegeek.thing.Name) e)
-        .filter(e -> e.getType() == NameType.PRIMARY)
+        .filter(e -> "primary".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .findFirst()
         .orElse(null);
@@ -361,7 +360,7 @@ public interface ThingMapper extends BaseMapper {
         .filter(e -> "name".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
         .map(e -> (com.boardgamegeek.thing.Name) e)
-        .filter(e -> e.getType() == NameType.ALTERNATE)
+        .filter(e -> "alternate".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .collect(Collectors.toList());
   }
@@ -371,7 +370,7 @@ public interface ThingMapper extends BaseMapper {
         .filter(e -> "name".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
         .map(e -> (com.boardgamegeek.thing.Name) e)
-        .filter(e -> e.getType() == NameType.ALTERNATE)
+        .filter(e -> "alternate".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .collect(Collectors.toList());
   }

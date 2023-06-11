@@ -1,6 +1,5 @@
 package li.naska.bgg.resource.vN.model;
 
-import com.boardgamegeek.enums.ItemSubtype;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,6 +16,6 @@ public class ItemPlaysParams {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate maxdate;
 
-  private ItemSubtype subtype;
+  private String subtype;
 
 }

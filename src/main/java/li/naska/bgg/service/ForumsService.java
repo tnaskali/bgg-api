@@ -1,6 +1,5 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.enums.ItemType;
 import com.boardgamegeek.forumlist.Forums;
 import li.naska.bgg.mapper.ForumListsParamsMapper;
 import li.naska.bgg.mapper.ForumMapper;
@@ -75,14 +74,14 @@ public class ForumsService {
   public Mono<List<Forum>> getThingForums(Integer id) {
     ForumsParams params = new ForumsParams();
     params.setId(id);
-    params.setType(ItemType.THING);
+    params.setType("thing");
     return getForums(params);
   }
 
   public Mono<List<Forum>> getFamilyForums(Integer id) {
     ForumsParams params = new ForumsParams();
     params.setId(id);
-    params.setType(ItemType.FAMILY);
+    params.setType("family");
     return getForums(params);
   }
 

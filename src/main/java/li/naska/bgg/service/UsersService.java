@@ -1,6 +1,5 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.enums.UserDomainType;
 import li.naska.bgg.mapper.UserMapper;
 import li.naska.bgg.repository.BggUserV2Repository;
 import li.naska.bgg.repository.model.BggUserV2QueryParams;
@@ -151,7 +150,7 @@ public class UsersService {
     BggUserV2QueryParams queryParams = new BggUserV2QueryParams();
     queryParams.setName(username);
     queryParams.setHot(1);
-    queryParams.setDomain(Optional.ofNullable(params.getDomain()).map(UserDomainType::value).orElse(null));
+    queryParams.setDomain(params.getDomain());
     return getUser(queryParams)
         .map(user -> Optional.ofNullable(user.getHot()).map(User.Ranking::getItems).orElse(Collections.emptyList()));
   }
@@ -160,7 +159,7 @@ public class UsersService {
     BggUserV2QueryParams queryParams = new BggUserV2QueryParams();
     queryParams.setName(username);
     queryParams.setTop(1);
-    queryParams.setDomain(Optional.ofNullable(params.getDomain()).map(UserDomainType::value).orElse(null));
+    queryParams.setDomain(params.getDomain());
     return getUser(queryParams)
         .map(user -> Optional.ofNullable(user.getTop()).map(User.Ranking::getItems).orElse(Collections.emptyList()));
   }

@@ -19,12 +19,6 @@
     </jaxb:schemaBindings>
   </jaxb:bindings>
 
-  <jaxb:bindings schemaLocation="../xsd/enums.xsd" node="//xs:schema">
-    <jaxb:schemaBindings>
-      <jaxb:package name="com.boardgamegeek.enums"/>
-    </jaxb:schemaBindings>
-  </jaxb:bindings>
-
   <jaxb:bindings schemaLocation="../xsd/family.xsd" node="//xs:schema">
     <jaxb:schemaBindings>
       <jaxb:package name="com.boardgamegeek.family"/>

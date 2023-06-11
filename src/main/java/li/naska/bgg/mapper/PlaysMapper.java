@@ -1,7 +1,5 @@
 package li.naska.bgg.mapper;
 
-import com.boardgamegeek.enums.ItemSubtype;
-import com.boardgamegeek.enums.NameType;
 import com.boardgamegeek.family.Name;
 import com.boardgamegeek.plays.SubtypeValue;
 import li.naska.bgg.resource.vN.model.Play;
@@ -36,7 +34,7 @@ public interface PlaysMapper {
   @Mapping(target = "_new", source = "new")
   Play.Player fromBggModel(com.boardgamegeek.plays.Player source);
 
-  default List<ItemSubtype> getSubtypes(com.boardgamegeek.plays.Item source) {
+  default List<String> getSubtypes(com.boardgamegeek.plays.Item source) {
     return Optional.ofNullable(source.getSubtypes())
         .map(o -> o.getSubtypes().stream()
             .map(SubtypeValue::getValue)
@@ -54,7 +52,7 @@ public interface PlaysMapper {
 
   default List<String> getAlternatenames(com.boardgamegeek.family.Family source) {
     return source.getNames().stream()
-        .filter(e -> e.getType() == NameType.ALTERNATE)
+        .filter(e -> "alternate".equals(e.getType()))
         .map(Name::getValue)
         .collect(Collectors.toList());
   }

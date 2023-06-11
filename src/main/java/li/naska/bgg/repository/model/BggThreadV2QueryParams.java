@@ -38,7 +38,7 @@ public class BggThreadV2QueryParams {
 
   @Pattern(regexp = "^([1-2][0-9])?[0-9][0-9]-[0-1][0-9]-[0-3][0-9]( [0-9][0-9]:[0-9][0-9]:[0-9][0-9])?$")
   @Parameter(
-      example = "700",
+      example = "2002-01-01 12:00:00",
       description = """
           Filters the results so that only articles on the specified date or later will be returned.
           <p>

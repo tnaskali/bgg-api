@@ -1,6 +1,5 @@
 package li.naska.bgg.repository.model;
 
-import com.boardgamegeek.enums.ItemType;
 import li.naska.bgg.resource.v5.model.SearchDomain;
 import lombok.Data;
 
@@ -28,7 +27,7 @@ public class BggSearchV5ResponseBody {
 
     private Integer rep_imageid;
 
-    private ItemType objecttype;
+    private String objecttype;
 
     private String name;
 

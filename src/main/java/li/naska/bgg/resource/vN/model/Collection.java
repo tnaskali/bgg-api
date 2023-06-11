@@ -1,6 +1,5 @@
 package li.naska.bgg.resource.vN.model;
 
-import com.boardgamegeek.enums.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -19,8 +18,8 @@ public class Collection {
   public static class Item {
     private Integer objectid;
     private Integer collid;
-    private ItemType objecttype;
-    private CollectionItemSubtype subtype;
+    private String objecttype;
+    private String subtype;
     private Name name;
     private String originalname;
     private String yearpublished;
@@ -71,7 +70,7 @@ public class Collection {
         @Data
         public static class Rank {
           protected Integer id;
-          protected RankType type;
+          protected String type;
           protected String name;
           protected String friendlyname;
           protected String value;
@@ -96,7 +95,7 @@ public class Collection {
     @Data
     public static class Version {
       private Integer id;
-      private VersionType type;
+      private String type;
       private Name name;
       private List<Name> alternatenames;
       private Integer yearpublished;
@@ -123,7 +122,7 @@ public class Collection {
       @Data
       public static class VersionLink {
         private Integer id;
-        private VersionLinkType type;
+        private String type;
         private String value;
         private Boolean inbound;
       }

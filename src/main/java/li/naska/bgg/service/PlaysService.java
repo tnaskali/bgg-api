@@ -1,6 +1,5 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.enums.ItemType;
 import li.naska.bgg.mapper.GeekplayParamsMapper;
 import li.naska.bgg.mapper.PlaysMapper;
 import li.naska.bgg.mapper.PlaysParamsMapper;
@@ -75,7 +74,7 @@ public class PlaysService {
     Supplier<BggPlaysV2QueryParams> queryParamsSupplier = () -> {
       BggPlaysV2QueryParams queryParams = playsParamsMapper.toBggModel(params);
       queryParams.setId(id);
-      queryParams.setType(ItemType.THING.name());
+      queryParams.setType("thing");
       return queryParams;
     };
     return getPlays(queryParamsSupplier);
@@ -85,7 +84,7 @@ public class PlaysService {
     Supplier<BggPlaysV2QueryParams> queryParamsSupplier = () -> {
       BggPlaysV2QueryParams queryParams = playsParamsMapper.toBggModel(params);
       queryParams.setId(id);
-      queryParams.setType(ItemType.THING.name());
+      queryParams.setType("thing");
       return queryParams;
     };
     return getPagedPlays(queryParamsSupplier, pagingParams);
@@ -95,7 +94,7 @@ public class PlaysService {
     Supplier<BggPlaysV2QueryParams> queryParamsSupplier = () -> {
       BggPlaysV2QueryParams queryParams = playsParamsMapper.toBggModel(params);
       queryParams.setId(id);
-      queryParams.setType(ItemType.FAMILY.name());
+      queryParams.setType("family");
       return queryParams;
     };
     return getPlays(queryParamsSupplier);
@@ -105,7 +104,7 @@ public class PlaysService {
     Supplier<BggPlaysV2QueryParams> queryParamsSupplier = () -> {
       BggPlaysV2QueryParams queryParams = playsParamsMapper.toBggModel(params);
       queryParams.setId(id);
-      queryParams.setType(ItemType.FAMILY.name());
+      queryParams.setType("family");
       return queryParams;
     };
     return getPagedPlays(queryParamsSupplier, pagingParams);

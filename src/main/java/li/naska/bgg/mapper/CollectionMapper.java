@@ -4,7 +4,6 @@ import com.boardgamegeek.collection.VersionLink;
 import com.boardgamegeek.common.DecimalValue;
 import com.boardgamegeek.common.IntegerValue;
 import com.boardgamegeek.common.StringValue;
-import com.boardgamegeek.enums.NameType;
 import jakarta.xml.bind.JAXBElement;
 import li.naska.bgg.resource.vN.model.Collection;
 import li.naska.bgg.resource.vN.model.Name;
@@ -104,7 +103,7 @@ public interface CollectionMapper extends BaseMapper {
         .filter(e -> "name".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
         .map(e -> (com.boardgamegeek.collection.Name) e)
-        .filter(e -> e.getType() == NameType.PRIMARY)
+        .filter(e -> "primary".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .findFirst()
         .orElse(null);
@@ -115,7 +114,7 @@ public interface CollectionMapper extends BaseMapper {
         .filter(e -> "name".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
         .map(e -> (com.boardgamegeek.collection.Name) e)
-        .filter(e -> e.getType() == NameType.ALTERNATE)
+        .filter(e -> "alternate".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .collect(Collectors.toList());
   }

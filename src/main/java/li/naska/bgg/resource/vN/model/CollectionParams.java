@@ -1,6 +1,5 @@
 package li.naska.bgg.resource.vN.model;
 
-import com.boardgamegeek.enums.CollectionItemSubtype;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,7 +12,7 @@ public class CollectionParams {
 
   private Boolean version;
 
-  private CollectionItemSubtype subtype;
+  private String subtype;
 
   private List<Integer> ids;
 

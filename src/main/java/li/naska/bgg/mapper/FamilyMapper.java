@@ -1,6 +1,5 @@
 package li.naska.bgg.mapper;
 
-import com.boardgamegeek.enums.NameType;
 import li.naska.bgg.resource.vN.model.Family;
 import li.naska.bgg.resource.vN.model.Name;
 import org.mapstruct.*;
@@ -24,7 +23,7 @@ public interface FamilyMapper {
 
   default Name getName(com.boardgamegeek.family.Family source) {
     return source.getNames().stream()
-        .filter(e -> e.getType() == NameType.PRIMARY)
+        .filter(e -> "primary".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .findFirst()
         .orElse(null);
@@ -32,7 +31,7 @@ public interface FamilyMapper {
 
   default List<Name> getAlternatenames(com.boardgamegeek.family.Family source) {
     return source.getNames().stream()
-        .filter(e -> e.getType() == NameType.ALTERNATE)
+        .filter(e -> "alternate".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .collect(Collectors.toList());
   }

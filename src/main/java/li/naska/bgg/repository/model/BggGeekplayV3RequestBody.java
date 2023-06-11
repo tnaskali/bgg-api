@@ -1,6 +1,5 @@
 package li.naska.bgg.repository.model;
 
-import com.boardgamegeek.enums.ItemType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -34,7 +33,7 @@ public class BggGeekplayV3RequestBody {
   private String comments;
   private Integer length;
   private String location;
-  private ItemType objecttype;
+  private String objecttype;
   private Integer objectid;
   private Integer quantity;
   private Boolean twitter;

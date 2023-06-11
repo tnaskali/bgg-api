@@ -1,12 +1,10 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:search="http://www.boardgamegeek.com/search"
            targetNamespace="http://www.boardgamegeek.com/search">
-  <xs:import schemaLocation="enums.xsd" namespace="http://www.boardgamegeek.com/enums"/>
 
   <xs:complexType name="name">
-    <xs:attribute name="type" type="enums:nameType" use="required"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
 
@@ -15,7 +13,7 @@
       <xs:element name="name" type="search:name"/>
       <xs:element name="yearpublished" type="xs:integer" minOccurs="0"/>
     </xs:sequence>
-    <xs:attribute name="type" type="enums:searchType" use="required"/>
+      <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
   </xs:complexType>
 

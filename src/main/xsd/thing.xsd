@@ -1,27 +1,25 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:common="http://www.boardgamegeek.com/common"
-           xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:thing="http://www.boardgamegeek.com/thing"
            targetNamespace="http://www.boardgamegeek.com/thing">
   <xs:import schemaLocation="common.xsd" namespace="http://www.boardgamegeek.com/common"/>
-  <xs:import schemaLocation="enums.xsd" namespace="http://www.boardgamegeek.com/enums"/>
 
   <xs:complexType name="name">
-    <xs:attribute name="type" type="enums:nameType" use="required"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="sortindex" type="xs:integer" use="required"/>
     <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="link">
-    <xs:attribute name="type" type="enums:thingLinkType" use="required"/>
+      <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="value" type="xs:string" use="required"/>
     <xs:attribute name="inbound" type="xs:boolean"/>
   </xs:complexType>
 
   <xs:complexType name="versionLink">
-    <xs:attribute name="type" type="enums:versionLinkType" use="required"/>
+      <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="value" type="xs:string" use="required"/>
     <xs:attribute name="inbound" type="xs:boolean"/>
@@ -73,7 +71,7 @@
       <xs:element name="depth" type="common:decimalValue"/>
       <xs:element name="weight" type="common:decimalValue"/>
     </xs:choice>
-    <xs:attribute name="type" type="enums:versionType" use="required"/>
+      <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
   </xs:complexType>
 
@@ -84,7 +82,7 @@
   </xs:complexType>
 
   <xs:complexType name="rank">
-    <xs:attribute name="type" type="enums:rankType" use="required"/>
+      <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="friendlyname" type="xs:string" use="required"/>
@@ -196,7 +194,7 @@
       <xs:element name="statistics" type="thing:statistics"/>
       <xs:element name="marketplacelistings" type="thing:marketplacelistings"/>
     </xs:choice>
-    <xs:attribute name="type" type="enums:thingType" use="required"/>
+      <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
   </xs:complexType>
 

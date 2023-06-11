@@ -1,6 +1,5 @@
 package li.naska.bgg.repository;
 
-import com.boardgamegeek.enums.CollectionItemSubtype;
 import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.exception.BggResponseNotReadyException;
 import li.naska.bgg.repository.model.BggCollectionV2QueryParams;
@@ -33,8 +32,8 @@ public class BggCollectionV2Repository {
 
   public Mono<String> getCollection(Optional<String> cookie, BggCollectionV2QueryParams params) {
     // BBG incorrectly returns boardgameexpansion items with the wrong subtype if not explicitly excluded
-    if (params.getSubtype() == null || params.getSubtype().equals(CollectionItemSubtype.BOARDGAME.value())) {
-      params.setExcludesubtype(CollectionItemSubtype.BOARDGAMEEXPANSION.value());
+    if (params.getSubtype() == null || params.getSubtype().equals("boardgame")) {
+      params.setExcludesubtype("boardgameexpansion");
     }
     return webClient
         .get()

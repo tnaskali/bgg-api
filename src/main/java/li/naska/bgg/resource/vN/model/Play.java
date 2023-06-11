@@ -1,7 +1,5 @@
 package li.naska.bgg.resource.vN.model;
 
-import com.boardgamegeek.enums.ItemSubtype;
-import com.boardgamegeek.enums.ItemType;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -23,9 +21,9 @@ public class Play {
   @Data
   public static class Item {
     private Integer objectid;
-    private ItemType objecttype;
+    private String objecttype;
     private String name;
-    private List<ItemSubtype> subtypes;
+    private List<String> subtypes;
   }
 
   @Data

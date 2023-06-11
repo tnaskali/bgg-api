@@ -1,14 +1,12 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:common="http://www.boardgamegeek.com/common"
-           xmlns:enums="http://www.boardgamegeek.com/enums"
            xmlns:plays="http://www.boardgamegeek.com/plays"
            targetNamespace="http://www.boardgamegeek.com/plays">
   <xs:import schemaLocation="common.xsd" namespace="http://www.boardgamegeek.com/common"/>
-  <xs:import schemaLocation="enums.xsd" namespace="http://www.boardgamegeek.com/enums"/>
 
   <xs:complexType name="subtypeValue">
-    <xs:attribute name="value" type="enums:itemSubtype" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="subtype">
@@ -22,7 +20,7 @@
       <xs:element name="subtypes" type="plays:subtype" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="objecttype" type="enums:itemType" use="required"/>
+      <xs:attribute name="objecttype" type="xs:string" use="required"/>
     <xs:attribute name="objectid" type="xs:integer" use="required"/>
   </xs:complexType>
 
