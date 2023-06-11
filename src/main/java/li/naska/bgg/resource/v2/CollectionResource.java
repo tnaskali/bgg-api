@@ -1,12 +1,18 @@
 package li.naska.bgg.resource.v2;
 
 import com.boardgamegeek.collection.Items;
+import io.swagger.v3.oas.annotations.ExternalDocumentation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import li.naska.bgg.repository.BggCollectionV2Repository;
 import li.naska.bgg.repository.model.BggCollectionV2QueryParams;
+import li.naska.bgg.security.BggAuthenticationToken;
 import li.naska.bgg.service.AuthenticationService;
 import li.naska.bgg.util.XmlProcessor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,27 +32,29 @@ public class CollectionResource {
   @Autowired
   private AuthenticationService authenticationService;
 
-  @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
-  public Mono<String> getCollectionAsXml(@Validated BggCollectionV2QueryParams params) {
-    return collectionRepository.getCollection(null, params);
-  }
-
-  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getCollectionAsJson(@Validated BggCollectionV2QueryParams params) {
-    return getCollectionAsXml(params)
-        .map(xml -> xmlProcessor.toJsonString(xml, Items.class));
-  }
-
-  @GetMapping(path = "/current", produces = MediaType.APPLICATION_XML_VALUE)
-  public Mono<String> getCurrentCollectionAsXml(@Validated BggCollectionV2QueryParams params) {
-    return authenticationService.authentication().flatMap(
-        authn -> collectionRepository.getCollection(authn.buildBggRequestHeader(), params));
-  }
-
-  @GetMapping(path = "/current", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getCurrentCollectionAsJson(@Validated BggCollectionV2QueryParams params) {
-    return getCurrentCollectionAsXml(params)
-        .map(xml -> xmlProcessor.toJsonString(xml, Items.class));
+  @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+  @Operation(
+      summary = "Collection",
+      description = """
+          Request details about a user's collection.
+          <p>
+          <i>Syntax</i> : /collection?username={username}[&{parameters}]
+          <p>
+          <i>Example</i> : /collection?username=eekspider
+          """,
+      security = @SecurityRequirement(name = "basicAuth"),
+      externalDocs = @ExternalDocumentation(
+          description = "original documentation",
+          url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc11"
+      )
+  )
+  public Mono<String> getCollection(
+      @Validated @ParameterObject BggCollectionV2QueryParams params,
+      ServerHttpRequest request) {
+    boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
+    return authenticationService.optionalAuthentication()
+        .flatMap(authn -> collectionRepository.getCollection(authn.map(BggAuthenticationToken::buildBggRequestHeader), params))
+        .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Items.class));
   }
 
 }

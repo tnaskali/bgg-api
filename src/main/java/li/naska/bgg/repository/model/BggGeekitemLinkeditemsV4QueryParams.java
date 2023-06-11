@@ -13,7 +13,7 @@ public class BggGeekitemLinkeditemsV4QueryParams {
   private Integer objectid;
 
   @NotNull
-  @Pattern(regexp = "^(company|event|family|media|person|property|thing)")
+  @Pattern(regexp = "^(company|event|family|media|person|property|thing|version)$")
   private String objecttype;
 
   @NotNull

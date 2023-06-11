@@ -14,24 +14,6 @@ import reactor.util.retry.Retry;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Thing Items
- * <p>
- * In the BGG database, any physical, tangible product is called a thing. The XMLAPI2 supports things of the following
- * THINGTYPEs:
- * <ul>
- *   <li>boardgame
- *   <li>boardgameexpansion
- *   <li>boardgameaccessory
- *   <li>videogame
- *   <li>rpgitem
- *   <li>rpgissue (for periodicals)
- * </ul>
- * <p>
- * Base URI: /xmlapi2/thing?parameters
- *
- * @see <a href="https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc3">BGG_XML_API2</a>
- */
 @Repository
 public class BggThingV2Repository {
 

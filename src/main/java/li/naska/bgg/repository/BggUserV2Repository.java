@@ -16,15 +16,6 @@ import reactor.util.retry.Retry;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Users
- * <p>
- * With the XMLAPI2 you can request basic public profile information about a user by username.
- * <p>
- * Base URI: /xmlapi2/user?parameters
- *
- * @see <a href="https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc8">BGG_XML_API2</a>
- */
 @Repository
 public class BggUserV2Repository {
 

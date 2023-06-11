@@ -1,6 +1,5 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.enums.CollectionItemSubtype;
 import com.boardgamegeek.thing.Items;
 import li.naska.bgg.mapper.CollectionMapper;
 import li.naska.bgg.mapper.CollectionParamsMapper;
@@ -30,6 +29,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -211,11 +211,7 @@ public class ThingsService {
   public Mono<Collection> getThings(String username, CollectionParams params) {
     BggCollectionV2QueryParams queryParams = collectionParamsMapper.toBggModel(params);
     queryParams.setUsername(username);
-    // handle subtype bug in the BBG XML API
-    if (queryParams.getSubtype() == null || queryParams.getSubtype().equals(CollectionItemSubtype.BOARDGAME.value())) {
-      queryParams.setExcludesubtype(CollectionItemSubtype.BOARDGAMEEXPANSION.value());
-    }
-    return collectionRepository.getCollection(null, queryParams)
+    return collectionRepository.getCollection(Optional.empty(), queryParams)
         .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.collection.Items.class))
         .map(collectionMapper::fromBggModel);
   }
@@ -223,12 +219,8 @@ public class ThingsService {
   public Mono<Collection> getPrivateThings(String username, String cookie, CollectionParams params) {
     BggCollectionV2QueryParams queryParams = collectionParamsMapper.toBggModel(params);
     queryParams.setUsername(username);
-    // handle subtype bug in the BBG XML API
-    if (queryParams.getSubtype() == null || queryParams.getSubtype().equals(CollectionItemSubtype.BOARDGAME.value())) {
-      queryParams.setExcludesubtype(CollectionItemSubtype.BOARDGAMEEXPANSION.value());
-    }
     queryParams.setShowprivate(1);
-    return collectionRepository.getCollection(cookie, queryParams)
+    return collectionRepository.getCollection(Optional.of(cookie), queryParams)
         .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.collection.Items.class))
         .map(collectionMapper::fromBggModel);
   }

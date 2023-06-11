@@ -16,21 +16,6 @@ import reactor.util.retry.Retry;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Family Items
- * <p>
- * In the BGG database, more abstract or esoteric concepts are represented by something called a family. The XMLAPI2
- * supports families of the following FAMILYTYPEs:
- * <ul>
- *   <li>rpg
- *   <li>rpgperiodical
- *   <li>boardgamefamily
- * </ul>
- * <p>
- * Base URI: /xmlapi2/family?parameters
- *
- * @see <a href="https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc4">BGG_XML_API2</a>
- */
 @Repository
 public class BggFamilyV2Repository {
 

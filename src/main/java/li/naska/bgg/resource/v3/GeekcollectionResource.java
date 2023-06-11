@@ -1,7 +1,10 @@
 package li.naska.bgg.resource.v3;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import li.naska.bgg.repository.BggGeekcollectionV3Repository;
 import li.naska.bgg.repository.model.BggGeekcollectionV3QueryParams;
+import li.naska.bgg.security.BggAuthenticationToken;
 import li.naska.bgg.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -21,14 +24,10 @@ public class GeekcollectionResource {
   private AuthenticationService authenticationService;
 
   @GetMapping(produces = "text/csv")
+  @Operation(security = @SecurityRequirement(name = "basicAuth"))
   public Mono<String> getGeekcollection(@Validated BggGeekcollectionV3QueryParams params) {
-    return geekcollectionRepository.getGeekcollection(null, params);
-  }
-
-  @GetMapping(path = "/current", produces = "text/csv")
-  public Mono<String> getCurrentGeekcollection(@Validated BggGeekcollectionV3QueryParams params) {
-    return authenticationService.authentication().flatMap(
-        authn -> geekcollectionRepository.getGeekcollection(authn.buildBggRequestHeader(), params));
+    return authenticationService.optionalAuthentication().flatMap(
+        authn -> geekcollectionRepository.getGeekcollection(authn.map(BggAuthenticationToken::buildBggRequestHeader), params));
   }
 
 }

@@ -13,7 +13,7 @@ public class BggFansV4QueryParams {
   private Integer objectid;
 
   @NotNull
-  @Pattern(regexp = "^(company|event|family|media|person|property|thing)")
+  @Pattern(regexp = "^(company|event|family|media|person|property|thing)$")
   private String objecttype;
 
 }

@@ -1,5 +1,7 @@
 package li.naska.bgg.repository.model;
 
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -9,289 +11,441 @@ import lombok.Data;
 @Data
 public class BggCollectionV2QueryParams {
 
-  /**
-   * username=NAME
-   * <p>
-   * Name of the user to request the collection for.
-   */
   @NotNull
+  @Parameter(
+      example = "eekspider",
+      description = """
+          Name of the user to request the collection for.
+          <p>
+          <i>Syntax</i> : /collection?username={username}
+          <p>
+          <i>Example</i> : /collection?username=eekspider
+          """
+  )
   private String username;
 
-  /**
-   * version=1
-   * <p>
-   * Returns version info for each item in your collection.
-   */
   @Min(1)
   @Max(1)
+  @Parameter(
+      example = "1",
+      description = """
+          Returns version info for each item in your collection.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&version=1
+          <p>
+          <i>Example</i> : /collection?username=eekspider&version=1
+          """
+  )
   private Integer version;
 
-  /**
-   * subtype=TYPE
-   * <p>
-   * Specifies which collection you want to retrieve. TYPE may be boardgame, boardgameexpansion, boardgameaccessory,
-   * rpgitem, rpgissue, or videogame; the default is boardgame
-   */
-  @Pattern(regexp = "^(boardgame|boardgameexpansion|boardgameaccessory|rpgitem|rpgissue|videogame|videogamecompilation|videogameexpansion)$")
+  @Pattern(regexp = "^(boardgame|boardgameaccessory|boardgameexpansion|boardgameissue|rpgissue|rpgitem|videogame|videogamecompilation|videogameexpansion|videogamehardware)$")
+  @Parameter(
+      example = "boardgame",
+      description = """
+          Specifies which collection you want to retrieve.
+          <p>
+          Type may be any thing subtype :
+          <li/>boardgame
+          <li/>boardgameaccessory
+          <li/>boardgameexpansion
+          <li/>boardgameissue
+          <li/>rpgissue
+          <li/>rpgitem
+          <li/>videogame
+          <li/>videogamecompilation
+          <li/>videogameexpansion
+          <li/>videogamehardware
+          <p>
+          The default is "boardgame".
+          <p>
+          <i>Syntax</i> : /collection?username={username}&subtype={subtype}
+          <p>
+          <i>Example</i> : /collection?username=eekspider&subtype=boardgame
+          """,
+      schema = @Schema(defaultValue = "boardgame")
+  )
   private String subtype;
 
-  /**
-   * excludesubtype=TYPE
-   * <p>
-   * Specifies which subtype you want to exclude from the results.
-   */
-  @Pattern(regexp = "^(boardgame|boardgameexpansion|boardgameaccessory|rpgitem|rpgissue|videogame|videogamecompilation|videogameexpansion)$")
+  @Pattern(regexp = "^(boardgame|boardgameaccessory|boardgameexpansion|boardgameissue|rpgissue|rpgitem|videogame|videogamecompilation|videogameexpansion|videogamehardware)$")
+  @Parameter(
+      example = "boardgameexpansion",
+      description = """
+          Specifies which subtype you want to exclude from the results.
+          <p>
+          Subtype may be :
+          <li/>boardgame
+          <li/>boardgameaccessory
+          <li/>boardgameexpansion
+          <li/>boardgameissue
+          <li/>rpgissue
+          <li/>rpgitem
+          <li/>videogame
+          <li/>videogamecompilation
+          <li/>videogameexpansion
+          <li/>videogamehardware
+          <p>
+          <i>Syntax</i> : /collection?username={username}&excludesubtype={subtype}
+          <p>
+          <i>Example</i> : /collection?username=eekspider&excludesubtype=boardgameexpansion
+          """
+  )
   private String excludesubtype;
 
-  /**
-   * id=NNN
-   * <p>
-   * Filter collection to specifically listed item(s). NNN may be a comma-delimited list of item ids.
-   */
   @Pattern(regexp = "^[1-9][0-9]*(,[1-9][0-9]*)*$")
+  @Parameter(
+      example = "16499",
+      description = """
+          Filter collection to specifically listed item(s). Value may be a comma-delimited list of item ids.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&id={ids}
+          <p>
+          <i>Example</i> : /collection?username=eekspider&id=935,16499
+          """
+  )
   private String id;
 
-  /**
-   * brief=1
-   * <p>
-   * Returns more abbreviated results.
-   */
   @Min(1)
   @Max(1)
+  @Parameter(
+      description = """
+          Returns more abbreviated results.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&brief=1
+          <p>
+          <i>Example</i> : /collection?username=eekspider&brief=1
+          """
+  )
   private Integer brief;
 
-  /**
-   * stats=1
-   * <p>
-   * Returns expanded rating/ranking info for the collection.
-   */
   @Min(1)
   @Max(1)
+  @Parameter(
+      example = "1",
+      description = """
+          Returns expanded rating/ranking info for the collection.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&stats=1
+          <p>
+          <i>Example</i> : /collection?username=eekspider&stats=1
+          """
+  )
   private Integer stats;
 
-  /**
-   * own=[0,1]
-   * <p>
-   * Filter for owned games. Set to 0 to exclude these items so marked. Set to 1 for returning owned games and 0 for
-   * non-owned games.
-   */
   @Min(0)
   @Max(1)
+  @Parameter(
+      description = """
+          Filter for owned games. Set to 0 to exclude these items so marked. Set to 1 for returning owned games and 0 for non-owned games.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&own=1
+          <p>
+          <i>Example</i> : /collection?username=eekspider&own=1
+          """
+  )
   private Integer own;
 
-  /**
-   * rated=[0,1]
-   * <p>
-   * Filter for whether an item has been rated. Set to 0 to exclude these items so marked. Set to 1 to include only
-   * these items so marked.
-   */
   @Min(0)
   @Max(1)
+  @Parameter(
+      description = """
+          Filter for whether an item has been rated. Set to 0 to exclude these items so marked. Set to 1 to include only these items so marked.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&rated=1
+          <p>
+          <i>Example</i> : /collection?username=eekspider&rated=1
+          """
+  )
   private Integer rated;
 
-  /**
-   * played=[0,1]
-   * <p>
-   * Filter for whether an item has been played. Set to 0 to exclude these items so marked. Set to 1 to include only
-   * these items so marked.
-   */
   @Min(0)
   @Max(1)
+  @Parameter(
+      description = """
+          Filter for whether an item has been played. Set to 0 to exclude these items so marked. Set to 1 to include only these items so marked.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&played=1
+          <p>
+          <i>Example</i> : /collection?username=eekspider&played=1
+          """
+  )
   private Integer played;
 
-  /**
-   * comment=[0,1]
-   * <p>
-   * Filter for items that have been commented. Set to 0 to exclude these items so marked. Set to 1 to include only
-   * these items so marked.
-   */
   @Min(0)
   @Max(1)
+  @Parameter(
+      description = """
+          Filter for items that have been commented. Set to 0 to exclude these items so marked. Set to 1 to include only these items so marked.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&comment=1
+          <p>
+          <i>Example</i> : /collection?username=eekspider&comment=1
+          """
+  )
   private Integer comment;
 
-  /**
-   * trade=[0,1]
-   * <p>
-   * Filter for items marked for trade. Set to 0 to exclude these items so marked. Set to 1 to include only these items
-   * so marked.
-   */
   @Min(0)
   @Max(1)
+  @Parameter(
+      description = """
+          Filter for items marked for trade. Set to 0 to exclude these items so marked. Set to 1 to include only these items so marked.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&trade=1
+          <p>
+          <i>Example</i> : /collection?username=eekspider&trade=1
+          """
+  )
   private Integer trade;
 
-  /**
-   * want=[0,1]
-   * <p>
-   * Filter for items wanted in trade. Set to 0 to exclude these items so marked. Set to 1 to include only these items
-   * so marked.
-   */
   @Min(0)
   @Max(1)
+  @Parameter(
+      description = """
+          Filter for items wanted in trade. Set to 0 to exclude these items so marked. Set to 1 to include only these items so marked.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&want=1
+          <p>
+          <i>Example</i> : /collection?username=eekspider&want=1
+          """
+  )
   private Integer want;
 
-  /**
-   * wishlist=[0,1]
-   * <p>
-   * Filter for items on the wishlist. Set to 0 to exclude these items so marked. Set to 1 to include only these items
-   * so marked.
-   */
   @Min(0)
   @Max(1)
+  @Parameter(
+      description = """
+          Filter for items on the wishlist. Set to 0 to exclude these items so marked. Set to 1 to include only these items so marked.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&wishlist=1
+          <p>
+          <i>Example</i> : /collection?username=eekspider&wishlist=1
+          """
+  )
   private Integer wishlist;
 
-  /**
-   * wishlistpriority=[1-5]
-   * <p>
-   * Filter for wishlist priority. Returns only items of the specified priority.
-   */
   @Min(1)
   @Max(5)
+  @Parameter(
+      description = """
+          Filter for wishlist priority. Returns only items of the specified priority.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&wishlistpriority={priority}
+          <p>
+          <i>Example</i> : /collection?username=eekspider&wishlistpriority=5
+          """
+  )
   private Integer wishlistpriority;
 
-  /**
-   * preordered=[0,1]
-   * <p>
-   * Filter for pre-ordered games Returns only items of the specified priority. Set to 0 to exclude these items so
-   * marked. Set to 1 to include only these items so marked.
-   */
   @Min(0)
   @Max(1)
+  @Parameter(
+      description = """
+          Filter for pre-ordered games Returns only items of the specified priority. Set to 0 to exclude these items so marked. Set to 1 to include only these items so marked.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&preordered=1
+          <p>
+          <i>Example</i> : /collection?username=eekspider&preordered=1
+          """
+  )
   private Integer preordered;
 
-  /**
-   * wanttoplay=[0,1]
-   * <p>
-   * Filter for items marked as wanting to play. Set to 0 to exclude these items so marked. Set to 1 to include only
-   * these items so marked.
-   */
   @Min(0)
   @Max(1)
+  @Parameter(
+      description = """
+          Filter for items marked as wanting to play. Set to 0 to exclude these items so marked. Set to 1 to include only these items so marked.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&wanttoplay=1
+          <p>
+          <i>Example</i> : /collection?username=eekspider&wanttoplay=1
+          """
+  )
   private Integer wanttoplay;
 
-  /**
-   * wanttobuy=[0,1]
-   * <p>
-   * Filter for ownership flag. Set to 0 to exclude these items so marked. Set to 1 to include only these items so
-   * marked.
-   */
   @Min(0)
   @Max(1)
+  @Parameter(
+      description = """
+          Filter for ownership flag. Set to 0 to exclude these items so marked. Set to 1 to include only these items so marked.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&wanttobuy=1
+          <p>
+          <i>Example</i> : /collection?username=eekspider&wanttobuy=1
+          """
+  )
   private Integer wanttobuy;
 
-  /**
-   * prevowned=[0,1]
-   * <p>
-   * Filter for games marked previously owned. Set to 0 to exclude these items so marked. Set to 1 to include only these
-   * items so marked.
-   */
   @Min(0)
   @Max(1)
+  @Parameter(
+      description = """
+          Filter for games marked previously owned. Set to 0 to exclude these items so marked. Set to 1 to include only these items so marked.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&prevowned=1
+          <p>
+          <i>Example</i> : /collection?username=eekspider&prevowned=1
+          """
+  )
   private Integer prevowned;
 
-  /**
-   * hasparts=[0,1]
-   * <p>
-   * Filter on whether there is a comment in the Has Parts field of the item. Set to 0 to exclude these items so marked.
-   * Set to 1 to include only these items so marked.
-   */
   @Min(0)
   @Max(1)
+  @Parameter(
+      description = """
+          Filter on whether there is a comment in the Has Parts field of the item. Set to 0 to exclude these items so marked. Set to 1 to include only these items so marked.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&hasparts=1
+          <p>
+          <i>Example</i> : /collection?username=eekspider&hasparts=1
+          """
+  )
   private Integer hasparts;
 
-  /**
-   * wantparts=[0,1]
-   * <p>
-   * Filter on whether there is a comment in the Wants Parts field of the item. Set to 0 to exclude these items so
-   * marked. Set to 1 to include only these items so marked.
-   */
   @Min(0)
   @Max(1)
+  @Parameter(
+      description = """
+          Filter on whether there is a comment in the Wants Parts field of the item. Set to 0 to exclude these items so marked. Set to 1 to include only these items so marked.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&wantparts=1
+          <p>
+          <i>Example</i> : /collection?username=eekspider&wantparts=1
+          """
+  )
   private String wantparts;
 
-  /**
-   * minrating=[1-10]
-   * <p>
-   * Filter on minimum personal rating assigned for that item in the collection.
-   */
   @Min(-1)
   @Max(10)
+  @Parameter(
+      description = """
+          Filter on minimum personal rating assigned for that item in the collection.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&minrating={rating}
+          <p>
+          <i>Example</i> : /collection?username=eekspider&minrating=5
+          """
+  )
   private Integer minrating;
 
-  /**
-   * rating=[1-10]
-   * <p>
-   * Filter on maximum personal rating assigned for that item in the collection. [Note: Although you'd expect it to be
-   * maxrating, it's rating.]
-   */
   @Min(1)
   @Max(10)
+  @Parameter(
+      description = """
+          Filter on maximum personal rating assigned for that item in the collection.
+          <p>
+          <i>Note</i> : Although you'd expect it to be maxrating, it's rating.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&rating={rating}
+          <p>
+          <i>Example</i> : /collection?username=eekspider&rating=5
+          """
+  )
   private Integer rating;
 
-  /**
-   * minbggrating=[1-10]
-   * <p>
-   * Filter on minimum BGG rating for that item in the collection. Note: 0 is ignored... you can use -1 though, for
-   * example min -1 and max 1 to get items w/no bgg rating.
-   */
   @Min(-1)
   @Max(10)
+  @Parameter(
+      example = "-1",
+      description = """
+          Filter on minimum BGG rating for that item in the collection.
+          <p>
+          <i>Note</i> : 0 is ignored... you can use -1 though, for example min -1 and max 1 to get items w/no bgg rating.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&minbggrating={rating}
+          <p>
+          <i>Example</i> : /collection?username=eekspider&minbggrating=5
+          <i>Example</i> : /collection?username=eekspider&minbggrating=-1&bggrating=1
+          """
+  )
   private Integer minbggrating;
 
-  /**
-   * bggrating=[1-10]
-   * <p>
-   * Filter on maximum BGG rating for that item in the collection. [Note: Although you'd expect it to be maxbggrating,
-   * it's bggrating.]
-   */
   @Min(1)
   @Max(10)
+  @Parameter(
+      example = "7",
+      description = """
+          Filter on maximum BGG rating for that item in the collection.
+          <p>
+          <i>Note</i> : Although you'd expect it to be maxbggrating, it's bggrating.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&bggrating={rating}
+          <p>
+          <i>Example</i> : /collection?username=eekspider&bggrating=5
+          <i>Example</i> : /collection?username=eekspider&minbggrating=-1&bggrating=1
+          """
+  )
   private Integer bggrating;
 
-  /**
-   * minplays=NNN
-   * <p>
-   * Filter by minimum number of recorded plays.
-   */
   @Min(1)
+  @Parameter(
+      description = """
+          Filter by minimum number of recorded plays.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&minplays={plays}
+          <p>
+          <i>Example</i> : /collection?username=eekspider&minplays=10
+          """
+  )
   private Integer minplays;
 
-  /**
-   * maxplays=NNN
-   * <p>
-   * Filter by maximum number of recorded plays. [Note: Although the two maxima parameters above lack the max part, this
-   * one really is maxplays.]
-   */
   @Min(1)
+  @Parameter(
+      description = """
+          Filter by maximum number of recorded plays.
+          <p>
+          <i>Note</i> : Although the two maxima parameters above lack the max part, this one really is maxplays.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&maxplays={plays}
+          <p>
+          <i>Example</i> : /collection?username=eekspider&maxplays=99
+          """
+  )
   private Integer maxplays;
 
-  /**
-   * showprivate=1
-   * <p>
-   * Filter to show private collection info. Only works when viewing your own collection and you are logged in.
-   */
   @Min(1)
   @Max(1)
+  @Parameter(
+      example = "1",
+      description = """
+          Filter to show private collection info. Only works when viewing your own collection and you are logged in.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&showprivate=1
+          <p>
+          <i>Example</i> : /collection?username=eekspider&showprivate=1
+          """
+  )
   private Integer showprivate;
 
-  /**
-   * collid=NNN
-   * <p>
-   * Restrict the collection results to the single specified collection id. Collid is returned in the results of normal
-   * queries as well.
-   */
   @Min(1)
+  @Parameter(
+      example = "7044466",
+      description = """
+          Restrict the collection results to the single specified collection id. Collid is returned in the results of normal queries as well.
+          <p>
+          <i>Syntax</i> : /collection?username={username}&collid={collid}
+          <p>
+          <i>Example</i> : /collection?username=eekspider&collid=7044466
+          """
+  )
   private Integer collid;
 
-  /**
-   * modifiedsince=YY-MM-DD
-   * <br/>
-   * modifiedsince=YY-MM-DD%20HH%3AMM%3ASS
-   * <p>
-   * Restricts the collection results to only those whose status (own, want, fortrade, etc.) has changed or been added
-   * since the date specified (does not return results for deletions). Time may be added as well:
-   * modifiedsince=YY-MM-DD%20HH:MM:SS
-   */
   @Pattern(regexp = "^([1-2][0-9])?[0-9][0-9]-[0-1][0-9]-[0-3][0-9]( [0-9][0-9]:[0-9][0-9]:[0-9][0-9])?$")
+  @Parameter(
+      example = "2008-08-09 12:00:00",
+      description = """
+          Restricts the collection results to only those whose status (own, want, fortrade, etc.) has changed or been
+          added since the date specified (does not return results for deletions).
+          <p>
+          Supported formats:
+          <li/>YY-MM-DD
+          <li/>YYYY-MM-DD
+          <li/>YY-MM-DD%20HH:MM:SS
+          <li/>YYYY-MM-DD%20HH:MM:SS
+          <p>
+          <i>Syntax</i> : /collection?username={username}&modifiedsince={date}
+          <p>
+          <i>Example</i> : /collection?username=eekspider&modifiedsince=2008-08-09%2012:00:00
+          """
+  )
   private String modifiedsince;
 
 }

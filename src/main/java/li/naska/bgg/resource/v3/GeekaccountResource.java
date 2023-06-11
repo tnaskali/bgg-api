@@ -1,5 +1,7 @@
 package li.naska.bgg.resource.v3;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import li.naska.bgg.repository.BggGeekaccountV3Repository;
 import li.naska.bgg.repository.model.BggGeekaccountV3RequestBody;
 import li.naska.bgg.repository.model.BggGeekaccountV3ResponseBody;
@@ -24,8 +26,9 @@ public class GeekaccountResource {
   private AuthenticationService authenticationService;
 
   @PostMapping(path = "/current", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @Operation(security = @SecurityRequirement(name = "basicAuth"))
   public Mono<BggGeekaccountV3ResponseBody> updateCurrentGeekaccount(@Validated @RequestBody BggGeekaccountV3RequestBody params) {
-    return authenticationService.authentication().flatMap(
+    return authenticationService.requiredAuthentication().flatMap(
         authn -> geekaccountRepository.updateGeekaccount(authn.buildBggRequestHeader(), params));
   }
 

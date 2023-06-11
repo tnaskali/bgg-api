@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
+
 @Service
 public class AuthenticationService {
 
@@ -15,11 +17,16 @@ public class AuthenticationService {
     return ReactiveSecurityContextHolder.getContext();
   }
 
-  public Mono<BggAuthenticationToken> authentication() {
-    return getSecurityContext().map(
-        context -> (BggAuthenticationToken) context.getAuthentication()
+  private Mono<BggAuthenticationToken> authentication() {
+    return getSecurityContext().map(context -> (BggAuthenticationToken) context.getAuthentication());
+  }
 
-    ).switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED, "authentication required")));
+  public Mono<BggAuthenticationToken> requiredAuthentication() {
+    return authentication().switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED, "authentication required")));
+  }
+
+  public Mono<Optional<BggAuthenticationToken>> optionalAuthentication() {
+    return authentication().singleOptional();
   }
 
 }

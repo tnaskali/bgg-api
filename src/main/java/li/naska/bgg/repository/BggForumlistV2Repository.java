@@ -14,15 +14,6 @@ import reactor.util.retry.Retry;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Forum Lists
- * <p>
- * You can request a list of forums for a particular type/id through the XMLAPI2.
- * <p>
- * Base URI: /xmlapi2/forumlist?parameters
- *
- * @see <a href="https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc5">BGG_XML_API2</a>
- */
 @Repository
 public class BggForumlistV2Repository {
 

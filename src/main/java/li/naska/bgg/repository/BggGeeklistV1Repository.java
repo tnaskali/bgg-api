@@ -14,15 +14,6 @@ import reactor.util.retry.Retry;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Retrieve entries from a geeklist
- * <p>
- * /xmlapi/geeklist/<listid>
- * <p>
- * Example: https://www.boardgamegeek.com/xmlapi/geeklist/11205
- *
- * @see <a href="https://boardgamegeek.com/wiki/page/BGG_XML_API&redirectedfrom=XML_API#toc7">BGG XML API</a>
- */
 @Repository
 public class BggGeeklistV1Repository {
 

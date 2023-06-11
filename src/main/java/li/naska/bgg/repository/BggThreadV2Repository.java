@@ -16,16 +16,6 @@ import reactor.util.retry.Retry;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Threads
- * <p>
- * With the XMLAPI2 you can request forum threads by thread id. A thread consists of some basic information about the
- * thread and a series of articles or individual postings.
- * <p>
- * Base URI: /xmlapi2/thread?parameters
- *
- * @see <a href="https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc7">BGG_XML_API2</a>
- */
 @Repository
 public class BggThreadV2Repository {
 

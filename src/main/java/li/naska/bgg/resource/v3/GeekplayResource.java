@@ -1,5 +1,7 @@
 package li.naska.bgg.resource.v3;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import li.naska.bgg.repository.BggGeekplayV2Repository;
 import li.naska.bgg.repository.model.BggGeekplayV3RequestBody;
 import li.naska.bgg.repository.model.BggGeekplayV3ResponseBody;
@@ -23,9 +25,10 @@ public class GeekplayResource {
   @Autowired
   private AuthenticationService authenticationService;
 
-  @PostMapping(path = "/current", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @Operation(security = @SecurityRequirement(name = "basicAuth"))
   public Mono<BggGeekplayV3ResponseBody> updateCurrentGeekplay(@Validated @RequestBody BggGeekplayV3RequestBody params) {
-    return authenticationService.authentication().flatMap(
+    return authenticationService.requiredAuthentication().flatMap(
         authn -> geekplayRepository.updateGeekplay(authn.buildBggRequestHeader(), params));
   }
 

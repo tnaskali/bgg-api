@@ -33,15 +33,14 @@ public class BggGeekcollectionV3Repository {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 
-  public Mono<String> getGeekcollection(String cookie, BggGeekcollectionV3QueryParams params) {
+  public Mono<String> getGeekcollection(Optional<String> cookie, BggGeekcollectionV3QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
             .queryParams(QueryParameters.fromPojo(params))
             .build())
         .header("Accept", "text/comma-separated-values")
-        .headers(headers -> Optional.ofNullable(cookie)
-            .ifPresent(c -> headers.add("Cookie", c)))
+        .headers(headers -> cookie.ifPresent(c -> headers.add("Cookie", c)))
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .toEntity(String.class)

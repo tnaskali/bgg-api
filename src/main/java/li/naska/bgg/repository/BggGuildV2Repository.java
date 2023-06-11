@@ -16,15 +16,6 @@ import reactor.util.retry.Retry;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Guilds
- * <p>
- * Request information about particular guilds.
- * <p>
- * URI: /xmlapi2/guild?parameters
- *
- * @see <a href="https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc9">BGG_XML_API2</a>
- */
 @Repository
 public class BggGuildV2Repository {
 

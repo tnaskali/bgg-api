@@ -16,15 +16,6 @@ import reactor.util.retry.Retry;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Plays
- * <p>
- * Request plays logged by a particular user or for a particular item.
- * <p>
- * Base URI: /xmlapi2/plays?parameters
- *
- * @see <a href="https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc10">BGG_XML_API2</a>
- */
 @Repository
 public class BggPlaysV2Repository {
 

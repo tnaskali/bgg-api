@@ -14,7 +14,7 @@ public class BggHotnessV4QueryParams {
   private String geeksite;
 
   @NotNull
-  @Pattern(regexp = "^(company|event|family|media|person|property|thing)")
+  @Pattern(regexp = "^(company|event|family|media|person|property|thing)$")
   private String objecttype;
 
   @Min(1)

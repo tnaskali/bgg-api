@@ -19,15 +19,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Forums
- * <p>
- * You can request a list of threads in a particular forum through the XMLAPI2.
- * <p>
- * Base URI: /xmlapi2/forum?parameters
- *
- * @see <a href="https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc6">BGG_XML_API2</a>
- */
 @Repository
 public class BggForumV2Repository {
 

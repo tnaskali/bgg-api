@@ -26,6 +26,7 @@ public class BggGeekaccountV3RequestBody {
 
   private Integer id;
   private Integer objectid;
+  @Pattern(regexp = "^(company|event|family|media|person|property|thing|version)$")
   private String objecttype;
   private String geekitemname;
   @NotNull

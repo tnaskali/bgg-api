@@ -13,19 +13,10 @@ import reactor.util.retry.Retry;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * Boardgame
- * <p>
- * Retrieve information about a particular game or games
- * <p>
- * Base URI: /xmlapi/boardgame/{gameids}?parameters
- *
- * @see <a href="https://boardgamegeek.com/wiki/page/BGG_XML_API#toc4">BGG_XML_API</a>
- */
 @Repository
 public class BggBoardgameV1Repository {
 
@@ -37,11 +28,11 @@ public class BggBoardgameV1Repository {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 
-  public Mono<String> getResults(List<Integer> ids, BggBoardgameV1QueryParams params) {
+  public Mono<String> getBoardgames(Set<Integer> ids, BggBoardgameV1QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
-            .path("/{gameids}")
+            .path("/{ids}")
             .queryParams(QueryParameters.fromPojo(params))
             .build(ids.stream().map(Objects::toString).collect(Collectors.joining(","))))
         .accept(MediaType.APPLICATION_XML)
