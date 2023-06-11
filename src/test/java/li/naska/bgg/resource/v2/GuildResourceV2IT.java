@@ -49,21 +49,23 @@ public class GuildResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-          "<guild id=\"666\" name=\"Shire, Middle Earth\" created=\"Mon, 16 Mar 2009 17:25:14 +0000\" termsofuse=\"https://boardgamegeek.com/xmlapi/termsofuse\">\n" +
-          "    <category>region</category>\n" +
-          "    <website></website>\n" +
-          "    <manager>frodo</manager>\n" +
-          "    <description>This guild is designed to facilitate board gaming in the Shire.</description>\n" +
-          "    <location>\n" +
-          "        <addr1></addr1>\n" +
-          "        <addr2></addr2>\n" +
-          "        <city></city>\n" +
-          "        <stateorprovince>Shire</stateorprovince>\n" +
-          "        <postalcode></postalcode>\n" +
-          "        <country>Middle Earth</country>\n" +
-          "    </location>\n" +
-          "</guild>";
+      final String mockResponseBody = """
+          <?xml version="1.0" encoding="utf-8"?>
+          <guild id="666" name="Shire, Middle Earth" created="Mon, 16 Mar 2009 17:25:14 +0000" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+              <category>region</category>
+              <website></website>
+              <manager>frodo</manager>
+              <description>This guild is designed to facilitate board gaming in the Shire.</description>
+              <location>
+                  <addr1></addr1>
+                  <addr2></addr2>
+                  <city></city>
+                  <stateorprovince>Shire</stateorprovince>
+                  <postalcode></postalcode>
+                  <country>Middle Earth</country>
+              </location>
+          </guild>
+          """;
 
       @BeforeEach
       public void setup() {

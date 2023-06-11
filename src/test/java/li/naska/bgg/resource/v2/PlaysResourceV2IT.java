@@ -49,16 +49,18 @@ public class PlaysResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-          "<plays username=\"gandalf\" userid=\"666\" total=\"23\" page=\"1\" termsofuse=\"https://boardgamegeek.com/xmlapi/termsofuse\">\n" +
-          "    <play id=\"666\" date=\"2021-12-05\" quantity=\"1\" length=\"0\" incomplete=\"0\" nowinstats=\"0\" location=\"Bag End\">\n" +
-          "        <item name=\"War of the Ring: Second Edition\" objecttype=\"thing\" objectid=\"666\">\n" +
-          "            <subtypes>\n" +
-          "                <subtype value=\"boardgame\" />\n" +
-          "            </subtypes>\n" +
-          "        </item>\n" +
-          "    </play>\n" +
-          "</plays>";
+      final String mockResponseBody = """
+          <?xml version="1.0" encoding="utf-8"?>
+          <plays username="gandalf" userid="666" total="23" page="1" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+              <play id="666" date="2021-12-05" quantity="1" length="0" incomplete="0" nowinstats="0" location="Bag End">
+                  <item name="War of the Ring: Second Edition" objecttype="thing" objectid="666">
+                      <subtypes>
+                          <subtype value="boardgame" />
+                      </subtypes>
+                  </item>
+              </play>
+          </plays>
+          """;
 
       @BeforeEach
       public void setup() {

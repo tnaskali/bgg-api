@@ -49,12 +49,14 @@ public class ThingResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-          "<items termsofuse=\"https://boardgamegeek.com/xmlapi/termsofuse\">\n" +
-          "  <item type=\"boardgame\" id=\"666\">\n" +
-          "    <name type=\"primary\" sortindex=\"1\" value=\"A test Boardgame\"/>\n" +
-          "  </item>\n" +
-          "</items>";
+      final String mockResponseBody = """
+          <?xml version="1.0" encoding="utf-8"?>
+          <items termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+            <item type="boardgame" id="666">
+              <name type="primary" sortindex="1" value="A test Boardgame"/>
+            </item>
+          </items>
+          """;
 
       @BeforeEach
       public void setup() {
