@@ -105,7 +105,7 @@ public class ThingResourceV2IT extends AbstractMockServerIT {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest = (MediaType mediaType) -> Do.this.partialTest
             .apply(
-                new LinkedMultiValueMap<String, String>() {
+                new LinkedMultiValueMap<>() {
                   {
                     add("id", "666");
                     add("id", "667,668");
@@ -119,8 +119,8 @@ public class ThingResourceV2IT extends AbstractMockServerIT {
                     add("comments", "1");
                     add("page", "1");
                     add("pagesize", "10");
-                    add("from", "01-01-2001");
-                    add("to", "31-12-2001");
+                    add("from", "2001-01-01");
+                    add("to", "2001-12-31");
                     // undeclared
                     add("undeclared_param", "abc123");
                   }
@@ -166,8 +166,8 @@ public class ThingResourceV2IT extends AbstractMockServerIT {
                   "&comments=1" +
                   "&page=1" +
                   "&pagesize=10" +
-                  "&from=01-01-2001" +
-                  "&to=31-12-2001");
+                  "&from=2001-01-01" +
+                  "&to=2001-12-31");
             }
 
             @Test
@@ -225,8 +225,8 @@ public class ThingResourceV2IT extends AbstractMockServerIT {
                   "&comments=1" +
                   "&page=1" +
                   "&pagesize=10" +
-                  "&from=01-01-2001" +
-                  "&to=31-12-2001");
+                  "&from=2001-01-01" +
+                  "&to=2001-12-31");
             }
 
             @Test

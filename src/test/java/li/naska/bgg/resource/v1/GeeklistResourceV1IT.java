@@ -80,7 +80,7 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
 
         private final Supplier<WebTestClient.ResponseSpec> test = () -> Do.this.partialTest.apply(
             666,
-            new LinkedMultiValueMap<String, String>() {{
+            new LinkedMultiValueMap<>() {{
               set("comments", "2");
             }},
             MediaType.APPLICATION_XML);
@@ -122,7 +122,7 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest = (MediaType mediaType) -> Do.this.partialTest
             .apply(
                 666,
-                new LinkedMultiValueMap<String, String>() {
+                new LinkedMultiValueMap<>() {
                   {
                     add("comments", "1");
                     add("start", "100");

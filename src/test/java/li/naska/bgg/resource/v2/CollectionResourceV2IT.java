@@ -106,7 +106,7 @@ public class CollectionResourceV2IT extends AbstractMockServerIT {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest = (MediaType mediaType) -> Do.this.partialTest
             .apply(
-                new LinkedMultiValueMap<String, String>() {
+                new LinkedMultiValueMap<>() {
                   {
                     add("username", "gandalf");
                     add("version", "1");
