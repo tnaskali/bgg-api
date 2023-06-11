@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:common="http://www.boardgamegeek.com/common"
-           xmlns:geeklist="http://www.boardgamegeek.com/geeklist"
-           targetNamespace="http://www.boardgamegeek.com/geeklist">
-  <xs:import schemaLocation="common.xsd" namespace="http://www.boardgamegeek.com/common"/>
+           xmlns:geeklist="http://www.boardgamegeek.com/geeklist/v1"
+           targetNamespace="http://www.boardgamegeek.com/geeklist/v1">
+    <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
-  <xs:complexType name="comment">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute name="username" type="xs:string" use="required"/>
-        <xs:attribute name="date" type="common:zonedDateTime" use="required"/>
-        <xs:attribute name="postdate" type="common:zonedDateTime" use="required"/>
-        <xs:attribute name="editdate" type="common:zonedDateTime" use="required"/>
-        <xs:attribute name="thumbs" type="xs:nonNegativeInteger" use="required"/>
-      </xs:extension>
+    <xs:complexType name="comment">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="username" type="xs:string" use="required"/>
+                <xs:attribute name="date" type="common:zonedDateTime" use="required"/>
+                <xs:attribute name="postdate" type="common:zonedDateTime" use="required"/>
+                <xs:attribute name="editdate" type="common:zonedDateTime" use="required"/>
+                <xs:attribute name="thumbs" type="xs:nonNegativeInteger" use="required"/>
+            </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
 

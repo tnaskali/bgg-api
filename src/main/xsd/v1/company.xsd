@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:company="http://www.boardgamegeek.com/company/v1"
+           targetNamespace="http://www.boardgamegeek.com/company/v1">
+
+    <xs:complexType name="company">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="companies">
+        <xs:sequence>
+            <xs:element name="company" type="company:company" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
+    </xs:complexType>
+
+    <xs:element name="companies" type="company:companies"/>
+
+</xs:schema>

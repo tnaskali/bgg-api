@@ -13,10 +13,10 @@ public interface GeeklistMapper {
   @BeanMapping(ignoreUnmappedSourceProperties = {"termsofuse", "postdateTimestamp", "editdateTimestamp"})
   @Mapping(target = "postdate_timestamp", source = "postdateTimestamp")
   @Mapping(target = "editdate_timestamp", source = "editdateTimestamp")
-  Geeklist fromBggModel(com.boardgamegeek.geeklist.Geeklist source);
+  Geeklist fromBggModel(com.boardgamegeek.geeklist.v1.Geeklist source);
 
-  Geeklist.Comment fromBggModel(com.boardgamegeek.geeklist.Comment source);
+  Geeklist.Comment fromBggModel(com.boardgamegeek.geeklist.v1.Comment source);
 
-  Geeklist.Item fromBggModel(com.boardgamegeek.geeklist.Item source);
+  Geeklist.Item fromBggModel(com.boardgamegeek.geeklist.v1.Item source);
 
 }

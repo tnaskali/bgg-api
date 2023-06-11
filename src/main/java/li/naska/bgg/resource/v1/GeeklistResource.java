@@ -1,6 +1,6 @@
 package li.naska.bgg.resource.v1;
 
-import com.boardgamegeek.geeklist.Geeklist;
+import com.boardgamegeek.geeklist.v1.Geeklist;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

@@ -5,7 +5,9 @@ bgg:
     v1:
       boardgame: ${bgg.web.baseurl-bgs}/xmlapi/boardgame
       collection: ${bgg.web.baseurl-bgs}/xmlapi/collection
+      company: ${bgg.web.baseurl-bgs}/xmlapi/company
       geeklist: ${bgg.web.baseurl-bgs}/xmlapi/geeklist
+      person: ${bgg.web.baseurl-bgs}/xmlapi/person
       search: ${bgg.web.baseurl-bgs}/xmlapi/search
     v2:
       collection: ${bgg.web.baseurl-bgs}/xmlapi2/collection
