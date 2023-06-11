@@ -9,11 +9,13 @@ bgg:
       search: ${bgg.web.baseurl-bgs}/xmlapi/search
     v2:
       collection: ${bgg.web.baseurl-bgs}/xmlapi2/collection
+      company: ${bgg.web.baseurl-bgs}/xmlapi2/company
       family: ${bgg.web.baseurl-bgs}/xmlapi2/family
       forum: ${bgg.web.baseurl-bgs}/xmlapi2/forum
       forumlist: ${bgg.web.baseurl-bgs}/xmlapi2/forumlist
       guild: ${bgg.web.baseurl-bgs}/xmlapi2/guild
       hot: ${bgg.web.baseurl-bgs}/xmlapi2/hot
+      person: ${bgg.web.baseurl-bgs}/xmlapi2/person
       plays: ${bgg.web.baseurl-bgs}/xmlapi2/plays
       search: ${bgg.web.baseurl-bgs}/xmlapi2/search
       thing: ${bgg.web.baseurl-bgs}/xmlapi2/thing

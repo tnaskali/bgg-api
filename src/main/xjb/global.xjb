@@ -19,6 +19,12 @@
     </jaxb:schemaBindings>
   </jaxb:bindings>
 
+  <jaxb:bindings schemaLocation="../xsd/company.xsd" node="//xs:schema">
+    <jaxb:schemaBindings>
+      <jaxb:package name="com.boardgamegeek.company"/>
+    </jaxb:schemaBindings>
+  </jaxb:bindings>
+
   <jaxb:bindings schemaLocation="../xsd/family.xsd" node="//xs:schema">
     <jaxb:schemaBindings>
       <jaxb:package name="com.boardgamegeek.family"/>
@@ -52,6 +58,12 @@
   <jaxb:bindings schemaLocation="../xsd/hot.xsd" node="//xs:schema">
     <jaxb:schemaBindings>
       <jaxb:package name="com.boardgamegeek.hot"/>
+    </jaxb:schemaBindings>
+  </jaxb:bindings>
+
+  <jaxb:bindings schemaLocation="../xsd/person.xsd" node="//xs:schema">
+    <jaxb:schemaBindings>
+      <jaxb:package name="com.boardgamegeek.person"/>
     </jaxb:schemaBindings>
   </jaxb:bindings>
 

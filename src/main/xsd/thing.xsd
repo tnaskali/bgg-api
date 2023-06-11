@@ -194,7 +194,7 @@
       <xs:element name="statistics" type="thing:statistics"/>
       <xs:element name="marketplacelistings" type="thing:marketplacelistings"/>
     </xs:choice>
-      <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
   </xs:complexType>
 

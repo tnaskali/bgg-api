@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:common="http://www.boardgamegeek.com/common"
+           xmlns:company="http://www.boardgamegeek.com/company"
+           targetNamespace="http://www.boardgamegeek.com/company">
+    <xs:import schemaLocation="common.xsd" namespace="http://www.boardgamegeek.com/common"/>
+
+    <xs:complexType name="video">
+        <xs:attribute name="id" type="xs:integer" use="required"/>
+        <xs:attribute name="title" type="xs:string" use="required"/>
+        <xs:attribute name="category" type="xs:string" use="required"/>
+        <xs:attribute name="language" type="xs:string" use="required"/>
+        <xs:attribute name="link" type="xs:anyURI" use="required"/>
+        <xs:attribute name="username" type="xs:string" use="required"/>
+        <xs:attribute name="userid" type="xs:integer" use="required"/>
+        <xs:attribute name="postdate" type="common:zonedDateTime" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="videos">
+        <xs:sequence>
+            <xs:element name="video" type="company:video" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="total" type="xs:integer" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="company">
+        <xs:sequence>
+            <xs:element name="thumbnail" type="xs:anyURI"/>
+            <xs:element name="image" type="xs:anyURI"/>
+            <xs:element name="videos" type="company:videos" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="xs:string" use="required"/>
+        <xs:attribute name="id" type="xs:integer" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="companies">
+        <xs:sequence>
+            <xs:element name="item" type="company:company" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
+    </xs:complexType>
+
+    <xs:element name="items" type="company:companies"/>
+
+</xs:schema>
