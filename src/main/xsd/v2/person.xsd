@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:common="http://www.boardgamegeek.com/common"
-           xmlns:person="http://www.boardgamegeek.com/person"
-           targetNamespace="http://www.boardgamegeek.com/person">
+           xmlns:person="http://www.boardgamegeek.com/person/v2"
+           targetNamespace="http://www.boardgamegeek.com/person/v2">
   <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
   <xs:complexType name="video">

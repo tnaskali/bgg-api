@@ -1,6 +1,5 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.thing.Items;
 import li.naska.bgg.mapper.CollectionMapper;
 import li.naska.bgg.mapper.CollectionParamsMapper;
 import li.naska.bgg.mapper.ThingMapper;
@@ -189,8 +188,8 @@ public class ThingsService {
 
   private Mono<Thing> getThing(BggThingV2QueryParams queryParams) {
     return thingsRepository.getThings(queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, Items.class))
-        .map(Items::getItems)
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.thing.v2.Items.class))
+        .map(com.boardgamegeek.thing.v2.Items::getItems)
         .flatMap(l -> l.size() == 1
             ? Mono.just(l.get(0))
             : Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "no match found")))
@@ -200,8 +199,8 @@ public class ThingsService {
   public Mono<List<Thing>> getThings(ThingsParams params) {
     BggThingV2QueryParams queryParams = thingsParamsMapper.toBggModel(params);
     return thingsRepository.getThings(queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, Items.class))
-        .map(Items::getItems)
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.thing.v2.Items.class))
+        .map(com.boardgamegeek.thing.v2.Items::getItems)
         .map(l -> l.stream()
             .map(thingMapper::fromBggModel)
             .collect(Collectors.toList()));
@@ -212,7 +211,7 @@ public class ThingsService {
     BggCollectionV2QueryParams queryParams = collectionParamsMapper.toBggModel(params);
     queryParams.setUsername(username);
     return collectionRepository.getCollection(Optional.empty(), queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.collection.Items.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.collection.v2.Items.class))
         .map(collectionMapper::fromBggModel);
   }
 
@@ -221,7 +220,7 @@ public class ThingsService {
     queryParams.setUsername(username);
     queryParams.setShowprivate(1);
     return collectionRepository.getCollection(Optional.of(cookie), queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.collection.Items.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.collection.v2.Items.class))
         .map(collectionMapper::fromBggModel);
   }
 

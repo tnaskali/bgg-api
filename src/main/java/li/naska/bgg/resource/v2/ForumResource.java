@@ -1,6 +1,6 @@
 package li.naska.bgg.resource.v2;
 
-import com.boardgamegeek.forum.Forum;
+import com.boardgamegeek.forum.v2.Forum;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggForumV2Repository;

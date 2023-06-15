@@ -1,7 +1,5 @@
 package li.naska.bgg.mapper;
 
-import com.boardgamegeek.family.Name;
-import com.boardgamegeek.plays.SubtypeValue;
 import li.naska.bgg.resource.vN.model.Play;
 import li.naska.bgg.resource.vN.model.Plays;
 import org.mapstruct.*;
@@ -20,41 +18,34 @@ public interface PlaysMapper {
   @BeanMapping(ignoreUnmappedSourceProperties = {"username", "userid", "page", "termsofuse"})
   @Mapping(target = "numplays", source = "total")
   @Mapping(target = "plays", source = "plaies")
-  Plays fromBggModel(com.boardgamegeek.plays.Plays source);
+  Plays fromBggModel(com.boardgamegeek.plays.v2.Plays source);
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"players"})
   @Mapping(target = "players", expression = "java(getPlayers(source))")
-  Play fromBggModel(com.boardgamegeek.plays.Play source);
+  Play fromBggModel(com.boardgamegeek.plays.v2.Play source);
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"subtypes"})
   @Mapping(target = "subtypes", expression = "java(getSubtypes(source))")
-  Play.Item fromBggModel(com.boardgamegeek.plays.Item source);
+  Play.Item fromBggModel(com.boardgamegeek.plays.v2.Item source);
 
   @Mapping(target = "position", source = "startposition")
   @Mapping(target = "_new", source = "new")
-  Play.Player fromBggModel(com.boardgamegeek.plays.Player source);
+  Play.Player fromBggModel(com.boardgamegeek.plays.v2.Player source);
 
-  default List<String> getSubtypes(com.boardgamegeek.plays.Item source) {
+  default List<String> getSubtypes(com.boardgamegeek.plays.v2.Item source) {
     return Optional.ofNullable(source.getSubtypes())
         .map(o -> o.getSubtypes().stream()
-            .map(SubtypeValue::getValue)
+            .map(com.boardgamegeek.plays.v2.SubtypeValue::getValue)
             .collect(Collectors.toList())
         ).orElse(null);
   }
 
-  default List<Play.Player> getPlayers(com.boardgamegeek.plays.Play source) {
+  default List<Play.Player> getPlayers(com.boardgamegeek.plays.v2.Play source) {
     return Optional.ofNullable(source.getPlayers())
         .map(o -> o.getPlayers().stream()
             .map(this::fromBggModel)
             .collect(Collectors.toList())
         ).orElse(null);
-  }
-
-  default List<String> getAlternatenames(com.boardgamegeek.family.Family source) {
-    return source.getNames().stream()
-        .filter(e -> "alternate".equals(e.getType()))
-        .map(Name::getValue)
-        .collect(Collectors.toList());
   }
 
 }

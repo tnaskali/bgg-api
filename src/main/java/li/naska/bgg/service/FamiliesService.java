@@ -1,6 +1,6 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.family.Items;
+import com.boardgamegeek.family.v2.Items;
 import li.naska.bgg.mapper.FamiliesParamsMapper;
 import li.naska.bgg.mapper.FamilyMapper;
 import li.naska.bgg.repository.BggFamilyV2Repository;

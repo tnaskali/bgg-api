@@ -1,6 +1,6 @@
 package li.naska.bgg.resource.v2;
 
-import com.boardgamegeek.guild.Guild;
+import com.boardgamegeek.guild.v2.Guild;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggGuildV2Repository;

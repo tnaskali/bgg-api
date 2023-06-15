@@ -14,8 +14,8 @@ import org.mapstruct.ReportingPolicy;
 public interface ResultsMapper {
 
   @BeanMapping(ignoreUnmappedSourceProperties = "termsofuse")
-  Results fromBggModel(com.boardgamegeek.search.Items source);
+  Results fromBggModel(com.boardgamegeek.search.v2.Items source);
 
-  Results.Result fromBggModel(com.boardgamegeek.search.Result source);
+  Results.Result fromBggModel(com.boardgamegeek.search.v2.Result source);
 
 }

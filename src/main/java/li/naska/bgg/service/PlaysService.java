@@ -155,7 +155,7 @@ public class PlaysService {
 
   private Mono<Plays> getPlays(BggPlaysV2QueryParams queryParams) {
     return playsRepository.getPlays(queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.plays.Plays.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.plays.v2.Plays.class))
         .map(playsMapper::fromBggModel);
   }
 

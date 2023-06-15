@@ -17,11 +17,11 @@ public interface FamilyMapper {
   @BeanMapping(ignoreUnmappedSourceProperties = {"names"})
   @Mapping(target = "name", expression = "java(getName(source))")
   @Mapping(target = "alternatenames", expression = "java(getAlternatenames(source))")
-  Family fromBggModel(com.boardgamegeek.family.Family source);
+  Family fromBggModel(com.boardgamegeek.family.v2.Family source);
 
-  Family.Link fromBggModel(com.boardgamegeek.family.Link source);
+  Family.Link fromBggModel(com.boardgamegeek.family.v2.Link source);
 
-  default Name getName(com.boardgamegeek.family.Family source) {
+  default Name getName(com.boardgamegeek.family.v2.Family source) {
     return source.getNames().stream()
         .filter(e -> "primary".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
@@ -29,7 +29,7 @@ public interface FamilyMapper {
         .orElse(null);
   }
 
-  default List<Name> getAlternatenames(com.boardgamegeek.family.Family source) {
+  default List<Name> getAlternatenames(com.boardgamegeek.family.v2.Family source) {
     return source.getNames().stream()
         .filter(e -> "alternate".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))

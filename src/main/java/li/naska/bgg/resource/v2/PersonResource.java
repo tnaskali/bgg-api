@@ -1,6 +1,6 @@
 package li.naska.bgg.resource.v2;
 
-import com.boardgamegeek.person.Items;
+import com.boardgamegeek.person.v2.Items;
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggPersonV2Repository;
 import li.naska.bgg.repository.model.BggPersonV2QueryParams;

@@ -1,6 +1,6 @@
 package li.naska.bgg.resource.v2;
 
-import com.boardgamegeek.plays.Plays;
+import com.boardgamegeek.plays.v2.Plays;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggPlaysV2Repository;

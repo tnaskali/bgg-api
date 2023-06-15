@@ -16,6 +16,6 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface HotItemsMapper {
 
-  HotItem fromBggModel(com.boardgamegeek.hot.HotItem source);
+  HotItem fromBggModel(com.boardgamegeek.hot.v2.HotItem source);
 
 }

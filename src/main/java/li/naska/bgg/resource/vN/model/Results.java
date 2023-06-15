@@ -1,6 +1,5 @@
 package li.naska.bgg.resource.vN.model;
 
-import com.boardgamegeek.search.Name;
 import lombok.Data;
 
 import java.util.List;
@@ -16,5 +15,11 @@ public class Results {
     private Integer yearpublished;
     private String type;
     private Integer id;
+
+    @Data
+    public static class Name {
+      private String type;
+      private String value;
+    }
   }
 }

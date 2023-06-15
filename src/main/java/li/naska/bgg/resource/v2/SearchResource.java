@@ -1,6 +1,6 @@
 package li.naska.bgg.resource.v2;
 
-import com.boardgamegeek.search.Items;
+import com.boardgamegeek.search.v2.Items;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggSearchV2Repository;

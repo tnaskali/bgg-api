@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:thread="http://www.boardgamegeek.com/thread"
-           targetNamespace="http://www.boardgamegeek.com/thread">
+           xmlns:thread="http://www.boardgamegeek.com/thread/v2"
+           targetNamespace="http://www.boardgamegeek.com/thread/v2">
 
   <xs:complexType name="article">
     <xs:sequence>

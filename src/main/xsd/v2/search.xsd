@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:search="http://www.boardgamegeek.com/search"
-           targetNamespace="http://www.boardgamegeek.com/search">
+           xmlns:search="http://www.boardgamegeek.com/search/v2"
+           targetNamespace="http://www.boardgamegeek.com/search/v2">
 
   <xs:complexType name="name">
     <xs:attribute name="type" type="xs:string" use="required"/>

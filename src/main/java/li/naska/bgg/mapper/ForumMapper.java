@@ -1,6 +1,5 @@
 package li.naska.bgg.mapper;
 
-import com.boardgamegeek.forum.Threads;
 import li.naska.bgg.resource.vN.model.Forum;
 import li.naska.bgg.resource.vN.model.Thread;
 import org.mapstruct.*;
@@ -20,18 +19,18 @@ public interface ForumMapper {
   @Mapping(target = "threads", expression = "java(getThreads(source))")
   @Mapping(target = "groupid", ignore = true)
   @Mapping(target = "description", ignore = true)
-  Forum fromBggModel(com.boardgamegeek.forum.Forum source);
+  Forum fromBggModel(com.boardgamegeek.forum.v2.Forum source);
 
   @Mapping(target = "threads", ignore = true)
-  Forum fromBggModel(com.boardgamegeek.forumlist.Forum source);
+  Forum fromBggModel(com.boardgamegeek.forumlist.v2.Forum source);
 
   @Mapping(target = "link", ignore = true)
   @Mapping(target = "articles", ignore = true)
-  Thread fromBggModel(com.boardgamegeek.forum.Thread source);
+  Thread fromBggModel(com.boardgamegeek.forum.v2.Thread source);
 
-  default List<Thread> getThreads(com.boardgamegeek.forum.Forum source) {
+  default List<Thread> getThreads(com.boardgamegeek.forum.v2.Forum source) {
     return Optional.ofNullable(source.getThreads())
-        .map(Threads::getThreads)
+        .map(com.boardgamegeek.forum.v2.Threads::getThreads)
         .map(l -> l.stream()
             .map(this::fromBggModel)
             .collect(Collectors.toList()))

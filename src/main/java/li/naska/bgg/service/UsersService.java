@@ -166,7 +166,7 @@ public class UsersService {
 
   private Mono<User> getUser(BggUserV2QueryParams queryParams) {
     return usersRepository.getUser(queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.user.User.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.user.v2.User.class))
         .map(userMapper::fromBggModel);
   }
 }

@@ -1,6 +1,6 @@
 package li.naska.bgg.resource.v2;
 
-import com.boardgamegeek.company.Items;
+import com.boardgamegeek.company.v2.Items;
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggCompanyV2Repository;
 import li.naska.bgg.repository.model.BggCompanyV2QueryParams;

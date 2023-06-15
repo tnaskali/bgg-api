@@ -1,7 +1,5 @@
 package li.naska.bgg.mapper;
 
-import com.boardgamegeek.user.Buddies;
-import com.boardgamegeek.user.Guilds;
 import li.naska.bgg.resource.vN.model.Guild;
 import li.naska.bgg.resource.vN.model.User;
 import org.mapstruct.*;
@@ -28,9 +26,9 @@ public interface UserMapper extends BaseMapper {
   @Mapping(target = "buddies", expression = "java(getBuddies(source))")
   @Mapping(target = "numguilds", expression = "java(getNumguilds(source))")
   @Mapping(target = "guilds", expression = "java(getGuilds(source))")
-  User fromBggModel(com.boardgamegeek.user.User source);
+  User fromBggModel(com.boardgamegeek.user.v2.User source);
 
-  User.Buddy fromBggModel(com.boardgamegeek.user.Buddy source);
+  User.Buddy fromBggModel(com.boardgamegeek.user.v2.Buddy source);
 
   @Mapping(target = "created", ignore = true)
   @Mapping(target = "category", ignore = true)
@@ -40,19 +38,19 @@ public interface UserMapper extends BaseMapper {
   @Mapping(target = "location", ignore = true)
   @Mapping(target = "nummembers", ignore = true)
   @Mapping(target = "members", ignore = true)
-  Guild fromBggModel(com.boardgamegeek.user.Guild source);
+  Guild fromBggModel(com.boardgamegeek.user.v2.Guild source);
 
-  User.Ranking fromBggModel(com.boardgamegeek.user.Ranking source);
+  User.Ranking fromBggModel(com.boardgamegeek.user.v2.Ranking source);
 
-  User.Ranking.RankedItem fromBggModel(com.boardgamegeek.user.RankedItem source);
+  User.Ranking.RankedItem fromBggModel(com.boardgamegeek.user.v2.RankedItem source);
 
-  default Integer getNumbuddies(com.boardgamegeek.user.User source) {
+  default Integer getNumbuddies(com.boardgamegeek.user.v2.User source) {
     return Optional.ofNullable(source.getBuddies())
-        .map(Buddies::getTotal)
+        .map(com.boardgamegeek.user.v2.Buddies::getTotal)
         .orElse(null);
   }
 
-  default List<User.Buddy> getBuddies(com.boardgamegeek.user.User source) {
+  default List<User.Buddy> getBuddies(com.boardgamegeek.user.v2.User source) {
     return Optional.ofNullable(source.getBuddies())
         .map(o -> o.getBuddies().stream()
             .map(this::fromBggModel)
@@ -60,13 +58,13 @@ public interface UserMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default Integer getNumguilds(com.boardgamegeek.user.User source) {
+  default Integer getNumguilds(com.boardgamegeek.user.v2.User source) {
     return Optional.ofNullable(source.getGuilds())
-        .map(Guilds::getTotal)
+        .map(com.boardgamegeek.user.v2.Guilds::getTotal)
         .orElse(null);
   }
 
-  default List<Guild> getGuilds(com.boardgamegeek.user.User source) {
+  default List<Guild> getGuilds(com.boardgamegeek.user.v2.User source) {
     return Optional.ofNullable(source.getGuilds())
         .map(o -> o.getGuilds().stream()
             .map(this::fromBggModel)
