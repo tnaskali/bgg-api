@@ -41,7 +41,6 @@ public class BggGuildV2QueryParams {
 
   @Pattern(regexp = "^(username|date)$")
   @Parameter(
-      example = "1",
       description = """
           Specifies how to sort the members list; default is username.
           <p>
@@ -59,7 +58,6 @@ public class BggGuildV2QueryParams {
 
   @Min(1)
   @Parameter(
-      example = "1",
       description = """
           The page of the members list to return. Page size is 25.
           <p>
