@@ -3,7 +3,7 @@
            xmlns:common="http://www.boardgamegeek.com/common"
            xmlns:hot="http://www.boardgamegeek.com/hot"
            targetNamespace="http://www.boardgamegeek.com/hot">
-  <xs:import schemaLocation="common.xsd" namespace="http://www.boardgamegeek.com/common"/>
+  <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
   <xs:complexType name="hotItem">
     <xs:sequence>

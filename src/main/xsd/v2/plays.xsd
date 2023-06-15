@@ -3,7 +3,7 @@
            xmlns:common="http://www.boardgamegeek.com/common"
            xmlns:plays="http://www.boardgamegeek.com/plays"
            targetNamespace="http://www.boardgamegeek.com/plays">
-  <xs:import schemaLocation="common.xsd" namespace="http://www.boardgamegeek.com/common"/>
+  <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
   <xs:complexType name="subtypeValue">
     <xs:attribute name="value" type="xs:string" use="required"/>
@@ -20,7 +20,7 @@
       <xs:element name="subtypes" type="plays:subtype" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>
-      <xs:attribute name="objecttype" type="xs:string" use="required"/>
+    <xs:attribute name="objecttype" type="xs:string" use="required"/>
     <xs:attribute name="objectid" type="xs:integer" use="required"/>
   </xs:complexType>
 

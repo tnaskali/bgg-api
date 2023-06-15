@@ -3,7 +3,7 @@
            xmlns:common="http://www.boardgamegeek.com/common"
            xmlns:thing="http://www.boardgamegeek.com/thing"
            targetNamespace="http://www.boardgamegeek.com/thing">
-  <xs:import schemaLocation="common.xsd" namespace="http://www.boardgamegeek.com/common"/>
+  <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
   <xs:complexType name="name">
     <xs:attribute name="type" type="xs:string" use="required"/>
@@ -12,14 +12,14 @@
   </xs:complexType>
 
   <xs:complexType name="link">
-      <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="value" type="xs:string" use="required"/>
     <xs:attribute name="inbound" type="xs:boolean"/>
   </xs:complexType>
 
   <xs:complexType name="versionLink">
-      <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="value" type="xs:string" use="required"/>
     <xs:attribute name="inbound" type="xs:boolean"/>
@@ -71,7 +71,7 @@
       <xs:element name="depth" type="common:decimalValue"/>
       <xs:element name="weight" type="common:decimalValue"/>
     </xs:choice>
-      <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
   </xs:complexType>
 
@@ -82,7 +82,7 @@
   </xs:complexType>
 
   <xs:complexType name="rank">
-      <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="friendlyname" type="xs:string" use="required"/>

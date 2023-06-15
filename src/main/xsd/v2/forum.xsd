@@ -3,7 +3,7 @@
            xmlns:common="http://www.boardgamegeek.com/common"
            xmlns:forum="http://www.boardgamegeek.com/forum"
            targetNamespace="http://www.boardgamegeek.com/forum">
-  <xs:import schemaLocation="common.xsd" namespace="http://www.boardgamegeek.com/common"/>
+  <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
   <xs:complexType name="thread">
     <xs:attribute name="id" type="xs:integer" use="required"/>

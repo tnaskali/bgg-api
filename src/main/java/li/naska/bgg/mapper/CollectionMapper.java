@@ -102,7 +102,7 @@ public interface CollectionMapper extends BaseMapper {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "name".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (com.boardgamegeek.collection.Name) e)
+        .map(e -> (com.boardgamegeek.collection.VersionName) e)
         .filter(e -> "primary".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .findFirst()
@@ -113,7 +113,7 @@ public interface CollectionMapper extends BaseMapper {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "name".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (com.boardgamegeek.collection.Name) e)
+        .map(e -> (com.boardgamegeek.collection.VersionName) e)
         .filter(e -> "alternate".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .collect(Collectors.toList());
