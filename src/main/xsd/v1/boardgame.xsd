@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:boardgame="http://www.boardgamegeek.com/boardgame/v1"
+           targetNamespace="http://www.boardgamegeek.com/boardgame/v1">
+
+  <xs:complexType name="name">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="primary" type="xs:boolean"/>
+        <xs:attribute name="sortindex" type="xs:nonNegativeInteger" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="link">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="objectid" type="xs:nonNegativeInteger"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element name="result" type="boardgame:result"/>
+    </xs:sequence>
+    <xs:attribute name="level" type="xs:positiveInteger"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="numvotes" type="xs:nonNegativeInteger" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="results">
+    <xs:sequence>
+      <xs:element name="result" type="boardgame:result"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="poll">
+    <xs:sequence>
+      <xs:element name="results" type="boardgame:results"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="title" type="xs:string" use="required"/>
+    <xs:attribute name="totalvotes" type="xs:nonNegativeInteger" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="comment">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="username" type="xs:string"/>
+        <xs:attribute name="rating" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="rank">
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="friendlyname" type="xs:string" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="bayesaverage" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="ranks">
+    <xs:sequence>
+      <xs:element name="rank" type="boardgame:rank" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ratings">
+    <xs:sequence>
+      <xs:element name="usersrated" type="xs:nonNegativeInteger"/>
+      <xs:element name="average" type="xs:decimal"/>
+      <xs:element name="bayesaverage" type="xs:decimal"/>
+      <xs:element name="ranks" type="boardgame:ranks" minOccurs="0"/>
+      <xs:element name="stddev" type="xs:decimal"/>
+      <xs:element name="median" type="xs:decimal"/>
+      <xs:element name="owned" type="xs:nonNegativeInteger"/>
+      <xs:element name="trading" type="xs:nonNegativeInteger"/>
+      <xs:element name="wanting" type="xs:nonNegativeInteger"/>
+      <xs:element name="wishing" type="xs:nonNegativeInteger"/>
+      <xs:element name="numcomments" type="xs:nonNegativeInteger"/>
+      <xs:element name="numweights" type="xs:nonNegativeInteger"/>
+      <xs:element name="averageweight" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="statistics">
+    <xs:sequence>
+      <xs:element name="ratings" type="boardgame:ratings" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="page" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="boardgame">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="yearpublished" type="xs:nonNegativeInteger"/>
+      <xs:element name="minplayers" type="xs:positiveInteger"/>
+      <xs:element name="maxplayers" type="xs:positiveInteger"/>
+      <xs:element name="playingtime" type="xs:positiveInteger"/>
+      <xs:element name="minplaytime" type="xs:positiveInteger"/>
+      <xs:element name="maxplaytime" type="xs:positiveInteger"/>
+      <xs:element name="age" type="xs:positiveInteger"/>
+      <xs:element name="name" type="boardgame:name" maxOccurs="unbounded"/>
+      <xs:element name="description" type="xs:string"/>
+      <xs:element name="thumbnail" type="xs:anyURI"/>
+      <xs:element name="image" type="xs:anyURI"/>
+      <xs:element name="boardgame" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgameaccessory" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgameartist" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgamecategory" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgamecompilation" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgamedesigner" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgamedeveloper" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgameeditor" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgameexpansion" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgamefamily" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgamegraphicdesigner" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgamehonor" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgameimplementation" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgameinsertdesigner" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgameintegration" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgameissue" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgameissueversion" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgamemechanic" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgamepodcastepisode" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgamepublisher" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgamesculptor" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgamesolodesigner" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgamesubdomain" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgameversion" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgamewriter" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="commerceweblink" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="videogamebg" type="boardgame:link" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="poll" type="boardgame:poll" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="comment" type="boardgame:comment" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="statistics" type="boardgame:statistics" minOccurs="0"/>
+    </xs:choice>
+    <xs:attribute name="objectid" type="xs:positiveInteger" use="required"/>
+    <xs:attribute name="subtypemismatch" type="xs:boolean"/>
+  </xs:complexType>
+
+  <xs:complexType name="boardgames">
+    <xs:sequence>
+      <xs:element name="boardgame" type="boardgame:boardgame" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
+  </xs:complexType>
+
+  <xs:element name="boardgames" type="boardgame:boardgames"/>
+
+</xs:schema>

@@ -1,12 +1,15 @@
 package li.naska.bgg.resource.v1;
 
+import com.boardgamegeek.search.v1.Boardgames;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggSearchV1Repository;
 import li.naska.bgg.repository.model.BggSearchV1QueryParams;
+import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +23,10 @@ public class SearchResource {
   @Autowired
   private BggSearchV1Repository searchRepository;
 
-  @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
+  @Autowired
+  private XmlProcessor xmlProcessor;
+
+  @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Search for games by name and by AKAs",
       description = """
@@ -35,8 +41,11 @@ public class SearchResource {
           url = "https://boardgamegeek.com/wiki/page/BGG_XML_API#toc3"
       )
   )
-  public Mono<String> getResults(@Validated @ParameterObject BggSearchV1QueryParams params) {
-    return searchRepository.getResults(params);
+  public Mono<String> getResults(@Validated @ParameterObject BggSearchV1QueryParams params,
+                                 ServerHttpRequest request) {
+    boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
+    return searchRepository.getResults(params)
+        .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Boardgames.class));
   }
 
 }
