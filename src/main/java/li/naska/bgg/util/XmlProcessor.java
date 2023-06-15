@@ -1,5 +1,6 @@
 package li.naska.bgg.util;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
@@ -32,7 +33,26 @@ public class XmlProcessor {
   @SneakyThrows
   public <T> String toJsonString(String xmlString, Class<T> targetClass) {
     T object = toJavaObject(xmlString, targetClass);
-    return objectMapper.writeValueAsString(object);
+    return objectMapper
+        .addMixIn(JAXBElement.class, JAXBElementMixin.class)
+        .writeValueAsString(object);
+  }
+
+  static abstract class JAXBElementMixin<T> {
+    @JsonIgnore
+    protected abstract Class<T> getDeclaredType();
+
+    @JsonIgnore
+    protected abstract Class<?> getScope();
+
+    @JsonIgnore
+    protected abstract boolean isNil();
+
+    @JsonIgnore
+    protected abstract boolean isGlobalScope();
+
+    @JsonIgnore
+    protected abstract boolean isTypeSubstituted();
   }
 
 }
