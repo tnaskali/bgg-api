@@ -46,7 +46,7 @@ public class GeeklistResource {
           url = "https://boardgamegeek.com/wiki/page/BGG_XML_API#toc7"
       )
   )
-  public Mono<String> getGeeklist(@NotNull @PathVariable @Parameter(description = "geeklist id", example = "11205") Integer id,
+  public Mono<String> getGeeklist(@NotNull @PathVariable @Parameter(description = "The geeklist id.", example = "11205") Integer id,
                                   @Validated @ParameterObject BggGeeklistV1QueryParams params,
                                   ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);

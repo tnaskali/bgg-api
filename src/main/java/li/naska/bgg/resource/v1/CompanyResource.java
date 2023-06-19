@@ -40,7 +40,7 @@ public class CompanyResource {
           <i>Example</i> : /company/2,10162
           """
   )
-  public Mono<String> getCompanies(@NotNull @PathVariable @Parameter(description = "company id(s)", example = "[ 17, 10162 ]") Set<Integer> ids,
+  public Mono<String> getCompanies(@NotNull @PathVariable @Parameter(description = "The company id(s).", example = "[ 17, 10162 ]") Set<Integer> ids,
                                    ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
     return companyRepository.getCompanies(ids)

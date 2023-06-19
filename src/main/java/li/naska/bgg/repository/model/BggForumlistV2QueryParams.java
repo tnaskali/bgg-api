@@ -17,6 +17,9 @@ public class BggForumlistV2QueryParams {
           Specifies the id of the type of database entry you want the forum list for. This is the id that appears in
           the address of the page when visiting a particular game in the database.
           <p>
+          <i>Syntax</i> : /forumlist?id={id}
+          <p>
+          <i>Example</i> : /forumlist?id=62408
           """
   )
   private Integer id;
@@ -40,6 +43,9 @@ public class BggForumlistV2QueryParams {
           <li/>version
           <li/>weblink
           <p>
+          <i>Syntax</i> : /forumlist?id={id}&type={type}
+          <p>
+          <i>Example</i> : /forumlist?id=62408&type=family
           """
   )
   private String type;

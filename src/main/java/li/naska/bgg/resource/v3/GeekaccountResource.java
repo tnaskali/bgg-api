@@ -25,8 +25,11 @@ public class GeekaccountResource {
   @Autowired
   private AuthenticationService authenticationService;
 
-  @PostMapping(path = "/current", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(security = @SecurityRequirement(name = "basicAuth"))
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @Operation(
+      summary = "Manages hot and top lists of the current user",
+      description = "Manages hot and top lists of the current user",
+      security = @SecurityRequirement(name = "basicAuth"))
   public Mono<BggGeekaccountV3ResponseBody> updateCurrentGeekaccount(@Validated @RequestBody BggGeekaccountV3RequestBody params) {
     return authenticationService.requiredAuthentication().flatMap(
         authn -> geekaccountRepository.updateGeekaccount(authn.buildBggRequestHeader(), params));

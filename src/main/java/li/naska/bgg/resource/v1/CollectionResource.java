@@ -52,7 +52,7 @@ public class CollectionResource {
           url = "https://boardgamegeek.com/wiki/page/BGG_XML_API#toc5"
       )
   )
-  public Mono<String> getCollection(@PathVariable @Parameter(description = "username", example = "eekspider") String username,
+  public Mono<String> getCollection(@PathVariable @Parameter(description = "The collection owner's username.", example = "eekspider") String username,
                                     @Validated @ParameterObject BggCollectionV1QueryParams params,
                                     ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);

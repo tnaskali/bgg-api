@@ -353,6 +353,7 @@ public class BggCollectionV2QueryParams {
           <i>Syntax</i> : /collection?username={username}&minbggrating={rating}
           <p>
           <i>Example</i> : /collection?username=eekspider&minbggrating=5
+          <p>
           <i>Example</i> : /collection?username=eekspider&minbggrating=-1&bggrating=1
           """
   )

@@ -13,7 +13,7 @@ public class BggSearchV1QueryParams {
   @Parameter(
       example = "Crossbows and Catapults",
       description = """
-          String to search for (required)
+          String to search for (required).
           <p>
           <i>Syntax</i> : /search?search={searchString}
           <p>
@@ -22,12 +22,12 @@ public class BggSearchV1QueryParams {
   )
   private String search;
 
+  @Deprecated
   @Min(1)
   @Max(1)
-  @Deprecated
   @Parameter(
       description = """
-          Exact name/aka search only (set it to 1, absent by default)
+          Exact name/aka search only (set it to 1, absent by default).
           <p>
           <i>Note</i> : exact doesn't seem to work yet in BGG 2.0
           <p>

@@ -86,6 +86,9 @@ public class BggThingV2QueryParams {
       description = """
           Returns ranking and rating stats for the item.
           <p>
+          <i>Syntax</i> : /thing?id={ids}&stats=1
+          <p>
+          <i>Example</i> : /thing?id=205637&stats=1
           """
   )
   private Integer stats;

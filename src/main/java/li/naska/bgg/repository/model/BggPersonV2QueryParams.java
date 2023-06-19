@@ -61,9 +61,9 @@ public class BggPersonV2QueryParams {
       description = """
           Returns videos for the person.
           <p>
-          <i>Syntax</i> : /person?id={ids}&version=1
+          <i>Syntax</i> : /person?id={ids}&videos=1
           <p>
-          <i>Example</i> : /person?id=153580&version=1
+          <i>Example</i> : /person?id=153580&videos=1
           """
   )
   private Integer videos;

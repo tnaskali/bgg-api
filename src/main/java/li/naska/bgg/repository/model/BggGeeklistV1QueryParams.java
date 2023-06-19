@@ -22,12 +22,24 @@ public class BggGeeklistV1QueryParams {
   )
   private Integer comments;
 
-  @Min(1)
+  // unnecessary properties
+
   @Deprecated
+  @Min(1)
+  @Parameter(
+      description = """
+          <b>This parameter is obsolete and no longer supported.</b> It was required in the original api if you wanted to retrieve all items on a geeklist longer than 150 items as that's the most that could be returned on a single api call. Currently however the geeklist xml api returns the entire geeklist (all items) in a single call.
+          """
+  )
   private Integer start;
 
-  @Min(1)
   @Deprecated
+  @Min(1)
+  @Parameter(
+      description = """
+          <b>This parameter is obsolete and no longer supported.</b> It was required in the original api if you wanted to retrieve all items on a geeklist longer than 150 items as that's the most that could be returned on a single api call. Currently however the geeklist xml api returns the entire geeklist (all items) in a single call.
+          """
+  )
   private Integer count;
 
 }

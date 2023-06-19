@@ -26,10 +26,13 @@ public class GeekplayResource {
   private AuthenticationService authenticationService;
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(security = @SecurityRequirement(name = "basicAuth"))
-  public Mono<BggGeekplayV3ResponseBody> updateCurrentGeekplay(@Validated @RequestBody BggGeekplayV3RequestBody params) {
+  @Operation(
+      summary = "Manages plays of the current user",
+      description = "Manages plays of the current user",
+      security = @SecurityRequirement(name = "basicAuth"))
+  public Mono<BggGeekplayV3ResponseBody> updateCurrentGeekplay(@Validated @RequestBody BggGeekplayV3RequestBody body) {
     return authenticationService.requiredAuthentication().flatMap(
-        authn -> geekplayRepository.updateGeekplay(authn.buildBggRequestHeader(), params));
+        authn -> geekplayRepository.updateGeekplay(authn.buildBggRequestHeader(), body));
   }
 
 }

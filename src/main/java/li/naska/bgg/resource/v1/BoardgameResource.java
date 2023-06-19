@@ -47,7 +47,7 @@ public class BoardgameResource {
           url = "https://boardgamegeek.com/wiki/page/BGG_XML_API#toc4"
       )
   )
-  public Mono<String> getBoardgames(@PathVariable @Parameter(description = "game id(s)", example = "[ 35424, 2860 ]") Set<Integer> ids,
+  public Mono<String> getBoardgames(@PathVariable @Parameter(description = "The game id(s).", example = "[ 35424, 2860 ]") Set<Integer> ids,
                                     @Validated @ParameterObject BggBoardgameV1QueryParams params,
                                     ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);

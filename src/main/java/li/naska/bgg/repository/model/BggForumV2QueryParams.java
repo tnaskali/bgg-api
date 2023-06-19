@@ -16,6 +16,9 @@ public class BggForumV2QueryParams {
           Specifies the id of the forum. This is the id that appears in the address of the page when visiting a forum
           in the browser.
           <p>
+          <i>Syntax</i> : /forum?id={id}
+          <p>
+          <i>Example</i> : /forum?id=2003721
           """
   )
   private Integer id;
@@ -27,6 +30,9 @@ public class BggForumV2QueryParams {
           The page of the thread list to return; page size is 50. Threads in the thread list are sorted in order of
           most recent post.
           <p>
+          <i>Syntax</i> : /forum?id={id}&page={page}
+          <p>
+          <i>Example</i> : /forum?id=2003721&page=1
           """
   )
   private Integer page;

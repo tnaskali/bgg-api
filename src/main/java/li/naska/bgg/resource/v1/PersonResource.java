@@ -40,7 +40,7 @@ public class PersonResource {
           <i>Example</i> : /person/2,675
           """
   )
-  public Mono<String> getPersons(@NotNull @PathVariable @Parameter(description = "person id(s)", example = "[ 2, 675 ]") Set<Integer> ids,
+  public Mono<String> getPersons(@NotNull @PathVariable @Parameter(description = "The person id(s).", example = "[ 2, 675 ]") Set<Integer> ids,
                                  ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
     return personRepository.getPersons(ids)
