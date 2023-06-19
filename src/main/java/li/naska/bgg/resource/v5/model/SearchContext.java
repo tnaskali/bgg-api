@@ -1,6 +1,6 @@
 package li.naska.bgg.resource.v5.model;
 
-public enum SearchDomain {
+public enum SearchContext {
   boardgame,
   boardgameaccessory,
   boardgameartist,

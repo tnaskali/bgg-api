@@ -1,6 +1,6 @@
 package li.naska.bgg.repository.model;
 
-import li.naska.bgg.resource.v5.model.SearchDomain;
+import li.naska.bgg.resource.v5.model.SearchContext;
 import lombok.Data;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class BggSearchV5ResponseBody {
 
     private Integer objectid;
 
-    private SearchDomain subtype;
+    private SearchContext subtype;
 
     private String primaryname;
 

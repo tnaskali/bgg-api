@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.repository.model.BggSearchV5QueryParams;
 import li.naska.bgg.repository.model.BggSearchV5ResponseBody;
-import li.naska.bgg.resource.v5.model.SearchDomain;
+import li.naska.bgg.resource.v5.model.SearchContext;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,13 +34,13 @@ public class BggSearchV5Repository {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 
-  public Mono<BggSearchV5ResponseBody> getSearchResults(SearchDomain domain, BggSearchV5QueryParams params) {
+  public Mono<BggSearchV5ResponseBody> getSearchResults(SearchContext context, BggSearchV5QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
-            .path("/{domain}")
+            .path("/{context}")
             .queryParams(QueryParameters.fromPojo(params))
-            .build(domain))
+            .build(context))
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
