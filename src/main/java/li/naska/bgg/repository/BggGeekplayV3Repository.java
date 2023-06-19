@@ -53,11 +53,11 @@ public class BggGeekplayV3Repository {
         .retryWhen(
             Retry.max(3)
                 .filter(throwable -> throwable instanceof BggConnectionException))
-        .map(entity -> {
+        .handle((entity, sink) -> {
           try {
-            return objectMapper.readValue(entity.getBody(), BggGeekplayV3ResponseBody.class);
+            sink.next(objectMapper.readValue(entity.getBody(), BggGeekplayV3ResponseBody.class));
           } catch (JsonProcessingException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+            sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
           }
         });
   }
@@ -98,11 +98,11 @@ public class BggGeekplayV3Repository {
               }
             }
         )
-        .map(entity -> {
+        .<BggGeekplayV3ResponseBody>handle((entity, sink) -> {
           try {
-            return objectMapper.readValue(entity.getBody(), BggGeekplayV3ResponseBody.class);
+            sink.next(objectMapper.readValue(entity.getBody(), BggGeekplayV3ResponseBody.class));
           } catch (JsonProcessingException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+            sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
           }
         })
         .doOnNext(responseBody -> {

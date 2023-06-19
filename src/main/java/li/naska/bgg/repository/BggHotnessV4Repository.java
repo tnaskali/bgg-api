@@ -1,7 +1,10 @@
 package li.naska.bgg.repository;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.repository.model.BggHotnessV4QueryParams;
+import li.naska.bgg.repository.model.BggHotnessV4ResponseBody;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +22,9 @@ import java.nio.charset.StandardCharsets;
 @Repository
 public class BggHotnessV4Repository {
 
+  @Autowired
+  private ObjectMapper objectMapper;
+
   private final WebClient webClient;
 
   public BggHotnessV4Repository(
@@ -27,7 +33,7 @@ public class BggHotnessV4Repository {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 
-  public Mono<String> getHotness(BggHotnessV4QueryParams params) {
+  public Mono<BggHotnessV4ResponseBody> getHotness(BggHotnessV4QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -39,7 +45,14 @@ public class BggHotnessV4Repository {
         .onStatus(
             httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
             clientResponse -> Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .bodyToMono(String.class)
+        .toEntity(String.class)
+        .<BggHotnessV4ResponseBody>handle((entity, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(entity.getBody(), BggHotnessV4ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        })
         .onErrorMap(IOException.class, ioe -> new BggConnectionException())
         .retryWhen(
             Retry.max(3)

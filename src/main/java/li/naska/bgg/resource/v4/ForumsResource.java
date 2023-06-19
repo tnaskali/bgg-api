@@ -1,7 +1,10 @@
 package li.naska.bgg.resource.v4;
 
+import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggForumsV4Repository;
 import li.naska.bgg.repository.model.BggForumsV4QueryParams;
+import li.naska.bgg.repository.model.BggForumsV4ResponseBody;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -18,7 +21,17 @@ public class ForumsResource {
   private BggForumsV4Repository forumsRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getForums(@Validated BggForumsV4QueryParams params) {
+  @Operation(
+      summary = "Get forums",
+      description = """
+          Get forums information for a given object.
+          <p>
+          <i>Syntax</i> : /forums?objectid={id}&objecttype={type}
+          <p>
+          <i>Example</i> : /forums?objectid=1000&objecttype=thing
+          """
+  )
+  public Mono<BggForumsV4ResponseBody> getForums(@Validated @ParameterObject BggForumsV4QueryParams params) {
     return forumsRepository.getForums(params);
   }
 

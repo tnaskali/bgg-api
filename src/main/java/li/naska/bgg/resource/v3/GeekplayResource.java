@@ -26,8 +26,14 @@ public class GeekplayResource {
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
-      summary = "Get play details",
-      description = "Get play details.",
+      summary = "Get plays details",
+      description = """
+          Get plays details for the current user and a given item.
+          <p>
+          <i>Syntax</i> : /geekplay?action={action}&objectid={id}&objecttype={type}
+          <p>
+          <i>Example</i> : /geekplay?action=getuserplaycount&objectid=205637&objecttype=thing
+          """,
       security = @SecurityRequirement(name = "basicAuth")
   )
   public Mono<BggGeekplayV3ResponseBody> getGeekplay(@Validated @ParameterObject BggGeekplayV3RequestParams params) {

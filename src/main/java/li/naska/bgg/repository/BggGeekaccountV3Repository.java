@@ -70,11 +70,11 @@ public class BggGeekaccountV3Repository {
               }
             }
         )
-        .map(entity -> {
+        .<BggGeekaccountV3ResponseBody>handle((entity, sink) -> {
           try {
-            return objectMapper.readValue(entity.getBody(), BggGeekaccountV3ResponseBody.class);
+            sink.next(objectMapper.readValue(entity.getBody(), BggGeekaccountV3ResponseBody.class));
           } catch (JsonProcessingException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+            sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
           }
         })
         .doOnNext(responseBody -> {

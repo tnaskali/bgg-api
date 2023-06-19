@@ -49,11 +49,11 @@ public class BggSearchV5Repository {
         .retryWhen(
             Retry.max(3)
                 .filter(throwable -> throwable instanceof BggConnectionException))
-        .map(entity -> {
+        .handle((entity, sink) -> {
           try {
-            return objectMapper.readValue(entity.getBody(), BggSearchV5ResponseBody.class);
+            sink.next(objectMapper.readValue(entity.getBody(), BggSearchV5ResponseBody.class));
           } catch (JsonProcessingException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+            sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
           }
         });
   }
