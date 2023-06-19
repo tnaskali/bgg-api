@@ -4,8 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.repository.model.BggGeekplayV3RequestBody;
+import li.naska.bgg.repository.model.BggGeekplayV3RequestParams;
 import li.naska.bgg.repository.model.BggGeekplayV3ResponseBody;
+import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,14 +24,42 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Repository
-public class BggGeekplayV2Repository {
+public class BggGeekplayV3Repository {
+
+  @Autowired
+  @Qualifier("v3")
+  private ObjectMapper objectMapper;
 
   private final WebClient webClient;
 
-  public BggGeekplayV2Repository(
+  public BggGeekplayV3Repository(
       @Autowired WebClient.Builder builder,
       @Value("${bgg.endpoints.v3.geekplay}") String endpoint) {
     this.webClient = builder.baseUrl(endpoint).build();
+  }
+
+  public Mono<BggGeekplayV3ResponseBody> getGeekplay(String cookie, BggGeekplayV3RequestParams params) {
+    return webClient
+        .get()
+        .uri(uriBuilder -> uriBuilder
+            .queryParams(QueryParameters.fromPojo(params))
+            .build())
+        .accept(MediaType.APPLICATION_JSON)
+        .acceptCharset(StandardCharsets.UTF_8)
+        .header("Cookie", cookie)
+        .retrieve()
+        .toEntity(String.class)
+        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
+        .retryWhen(
+            Retry.max(3)
+                .filter(throwable -> throwable instanceof BggConnectionException))
+        .map(entity -> {
+          try {
+            return objectMapper.readValue(entity.getBody(), BggGeekplayV3ResponseBody.class);
+          } catch (JsonProcessingException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+          }
+        });
   }
 
   public Mono<BggGeekplayV3ResponseBody> updateGeekplay(String cookie, BggGeekplayV3RequestBody requestBody) {
@@ -69,7 +100,7 @@ public class BggGeekplayV2Repository {
         )
         .map(entity -> {
           try {
-            return new ObjectMapper().readValue(entity.getBody(), BggGeekplayV3ResponseBody.class);
+            return objectMapper.readValue(entity.getBody(), BggGeekplayV3ResponseBody.class);
           } catch (JsonProcessingException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
           }
@@ -84,8 +115,6 @@ public class BggGeekplayV2Repository {
               throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Authentication required");
             } else if ("Invalid item. Play not saved.".equals(responseBody.getError())) {
               throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid item");
-            } else if ("Invalid action".equals(responseBody.getError())) {
-              throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid action");
             } else {
               throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, responseBody.getError());
             }

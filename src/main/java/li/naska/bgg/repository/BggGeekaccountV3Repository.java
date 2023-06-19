@@ -6,6 +6,7 @@ import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.repository.model.BggGeekaccountV3RequestBody;
 import li.naska.bgg.repository.model.BggGeekaccountV3ResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,6 +23,10 @@ import java.util.regex.Pattern;
 
 @Repository
 public class BggGeekaccountV3Repository {
+
+  @Autowired
+  @Qualifier("v3")
+  private ObjectMapper objectMapper;
 
   private final WebClient webClient;
 
@@ -67,7 +72,7 @@ public class BggGeekaccountV3Repository {
         )
         .map(entity -> {
           try {
-            return new ObjectMapper().readValue(entity.getBody(), BggGeekaccountV3ResponseBody.class);
+            return objectMapper.readValue(entity.getBody(), BggGeekaccountV3ResponseBody.class);
           } catch (JsonProcessingException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
           }

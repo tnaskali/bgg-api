@@ -28,6 +28,8 @@ bgg:
       geekaccount: ${bgg.web.baseurl-bgs}/geekaccount.php
       geekcollection: ${bgg.web.baseurl-bgs}/geekcollection.php
       geekplay: ${bgg.web.baseurl-bgs}/geekplay.php
+      geekpoll: ${bgg.web.baseurl-bgs}/geekpoll.php
+      geekpollitem: ${bgg.web.baseurl-bgs}/geekitempoll.php
     v4:
       articles: ${bgg.web.baseurl-bgs}/api/articles
       fans: ${bgg.web.baseurl-bgs}/api/fans
@@ -53,7 +55,5 @@ spring:
     max-in-memory-size: 16MB
   jackson:
     default-property-inclusion: non_empty
-    serialization:
-      write-dates-as-timestamps: false
   webflux:
     base-path: /bgg-api

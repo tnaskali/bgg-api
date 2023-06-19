@@ -3,7 +3,7 @@ package li.naska.bgg.service;
 import li.naska.bgg.mapper.GeekplayParamsMapper;
 import li.naska.bgg.mapper.PlaysMapper;
 import li.naska.bgg.mapper.PlaysParamsMapper;
-import li.naska.bgg.repository.BggGeekplayV2Repository;
+import li.naska.bgg.repository.BggGeekplayV3Repository;
 import li.naska.bgg.repository.BggPlaysV2Repository;
 import li.naska.bgg.repository.model.BggGeekplayV3RequestBody;
 import li.naska.bgg.repository.model.BggGeekplayV3ResponseBody;
@@ -44,7 +44,7 @@ public class PlaysService {
   private PlaysMapper playsMapper;
 
   @Autowired
-  private BggGeekplayV2Repository geekplaysRepository;
+  private BggGeekplayV3Repository geekplaysRepository;
 
   @Autowired
   private GeekplayParamsMapper geekplayParamsMapper;

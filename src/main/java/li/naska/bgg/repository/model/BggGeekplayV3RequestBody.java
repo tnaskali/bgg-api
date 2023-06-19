@@ -47,6 +47,15 @@ public class BggGeekplayV3RequestBody {
   )
   private Integer playid;
 
+  @Min(1)
+  @Max(1)
+  @Parameter(
+      description = """
+          Set to 1 during a deletion to bypass validation.
+          """
+  )
+  private Integer finalize;
+
   private LocalDate playdate;
 
   private String comments;
@@ -75,18 +84,6 @@ public class BggGeekplayV3RequestBody {
   private Boolean nowinstats;
 
   private List<GeekplayPlayer> players;
-
-  // unnecessary properties
-
-  @Deprecated
-  @Min(1)
-  @Max(1)
-  @Parameter(
-      description = """
-          Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
-          """
-  )
-  private Integer finalize;
 
   @Data
   public static class GeekplayPlayer {
