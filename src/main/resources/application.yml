@@ -9,6 +9,7 @@ bgg:
       geeklist: ${bgg.web.baseurl-bgs}/xmlapi/geeklist
       person: ${bgg.web.baseurl-bgs}/xmlapi/person
       search: ${bgg.web.baseurl-bgs}/xmlapi/search
+      thread: ${bgg.web.baseurl-bgs}/xmlapi/thread
     v2:
       collection: ${bgg.web.baseurl-bgs}/xmlapi2/collection
       company: ${bgg.web.baseurl-bgs}/xmlapi2/company
