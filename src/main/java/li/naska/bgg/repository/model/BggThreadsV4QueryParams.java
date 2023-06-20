@@ -14,7 +14,7 @@ public class BggThreadsV4QueryParams {
   private Integer objectid;
 
   @NotNull
-  @Pattern(regexp = "^(company|event|family|media|person|property|thing)$")
+  @Pattern(regexp = "^(company|component|event|family|media|person|property|thing|version|weblink)$")
   private String objecttype;
 
   @Min(1)

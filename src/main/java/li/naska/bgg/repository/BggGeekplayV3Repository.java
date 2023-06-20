@@ -8,7 +8,6 @@ import li.naska.bgg.repository.model.BggGeekplayV3RequestParams;
 import li.naska.bgg.repository.model.BggGeekplayV3ResponseBody;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,7 +26,6 @@ import java.util.regex.Pattern;
 public class BggGeekplayV3Repository {
 
   @Autowired
-  @Qualifier("v3")
   private ObjectMapper objectMapper;
 
   private final WebClient webClient;

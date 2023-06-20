@@ -80,6 +80,8 @@ public class BggUserV4ResponseBody {
 
     private Integer badgeid;
 
+    private String userRedirect;
+
   }
 
   @Data

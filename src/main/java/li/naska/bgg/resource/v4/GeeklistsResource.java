@@ -1,10 +1,11 @@
 package li.naska.bgg.resource.v4;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.constraints.NotNull;
 import li.naska.bgg.repository.BggGeeklistsV4Repository;
-import li.naska.bgg.repository.model.BggGeeklistReactionsV4QueryParams;
-import li.naska.bgg.repository.model.BggGeeklistTipsV4QueryParams;
-import li.naska.bgg.repository.model.BggGeeklistsV4QueryParams;
+import li.naska.bgg.repository.model.*;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -22,24 +23,64 @@ public class GeeklistsResource {
   private BggGeeklistsV4Repository geeklistsRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getGeeklists(@Validated BggGeeklistsV4QueryParams params) {
+  @Operation(
+      summary = "Get geeklists",
+      description = """
+          Get geeklists by object id and type.
+          <p>
+          <i>Syntax</i> : /geeklists?objectid={id}&objecttype={type}
+          <p>
+          <i>Example</i> : /geeklists?objectid=1000&objecttype=thing
+          """
+  )
+  public Mono<BggGeeklistsV4ResponseBody> getGeeklists(@Validated @ParameterObject BggGeeklistsV4QueryParams params) {
     return geeklistsRepository.getGeeklists(params);
   }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getGeeklist(@NotNull @PathVariable Integer id) {
+  @Operation(
+      summary = "Get geeklist",
+      description = """
+          Get geeklist by id.
+          <p>
+          <i>Syntax</i> : /geeklists/{id}
+          <p>
+          <i>Example</i> : /geeklists/250030
+          """
+  )
+  public Mono<BggGeeklistV4ResponseBody> getGeeklist(@NotNull @PathVariable @Parameter(example = "250030", description = "Geeklist id.") Integer id) {
     return geeklistsRepository.getGeeklist(id);
   }
 
   @GetMapping(path = "/{id}/reactions", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getGeeklistReactions(@NotNull @PathVariable Integer id,
-                                           @Validated BggGeeklistReactionsV4QueryParams params) {
+  @Operation(
+      summary = "Get geeklist reactions",
+      description = """
+          Get reactions for a given geeklist.
+          <p>
+          <i>Syntax</i> : /geeklists/{id}/reactions[?{parameters}]
+          <p>
+          <i>Example</i> : /geeklists/250030/reactions
+          """
+  )
+  public Mono<BggGeeklistReactionsV4ResponseBody> getGeeklistReactions(@NotNull @PathVariable @Parameter(example = "250030", description = "Geeklist id.") Integer id,
+                                                                       @Validated @ParameterObject BggGeeklistReactionsV4QueryParams params) {
     return geeklistsRepository.getGeeklistReactions(id, params);
   }
 
   @GetMapping(path = "/{id}/tips", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Mono<String> getGeeklistTips(@NotNull @PathVariable Integer id,
-                                      @Validated BggGeeklistTipsV4QueryParams params) {
+  @Operation(
+      summary = "Get geeklist tips",
+      description = """
+          Get tips for a given geeklist.
+          <p>
+          <i>Syntax</i> : /geeklists/{id}/tips[?{parameters}]
+          <p>
+          <i>Example</i> : /geeklists/250030/tips
+          """
+  )
+  public Mono<BggGeeklistTipsV4ResponseBody> getGeeklistTips(@NotNull @PathVariable @Parameter(example = "250030", description = "Geeklist id.") Integer id,
+                                                             @Validated @ParameterObject BggGeeklistTipsV4QueryParams params) {
     return geeklistsRepository.getGeeklistTips(id, params);
   }
 

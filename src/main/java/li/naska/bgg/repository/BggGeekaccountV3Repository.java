@@ -6,7 +6,6 @@ import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.repository.model.BggGeekaccountV3RequestBody;
 import li.naska.bgg.repository.model.BggGeekaccountV3ResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,7 +24,6 @@ import java.util.regex.Pattern;
 public class BggGeekaccountV3Repository {
 
   @Autowired
-  @Qualifier("v3")
   private ObjectMapper objectMapper;
 
   private final WebClient webClient;

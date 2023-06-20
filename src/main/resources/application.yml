@@ -53,7 +53,5 @@ server:
 spring:
   codec:
     max-in-memory-size: 16MB
-  jackson:
-    default-property-inclusion: non_empty
   webflux:
     base-path: /bgg-api
