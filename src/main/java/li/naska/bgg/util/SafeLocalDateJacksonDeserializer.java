@@ -16,8 +16,9 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 public class SafeLocalDateJacksonDeserializer extends JSR310DateTimeDeserializerBase<LocalDate> {
 
-  public static final SafeLocalDateJacksonDeserializer INSTANCE = new SafeLocalDateJacksonDeserializer();
   private static final DateTimeFormatter CUSTOM_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
+
+  public static final SafeLocalDateJacksonDeserializer INSTANCE = new SafeLocalDateJacksonDeserializer();
 
   protected SafeLocalDateJacksonDeserializer() {
     this(CUSTOM_FORMATTER);
