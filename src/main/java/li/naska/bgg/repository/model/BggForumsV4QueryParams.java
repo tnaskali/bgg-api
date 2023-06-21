@@ -12,13 +12,13 @@ public class BggForumsV4QueryParams {
   @NotNull
   @Min(1)
   @Parameter(
-      example = "1000",
+      example = "205637",
       description = """
           The object id.
           <p>
           <i>Syntax</i> : /forums?objectid={id}&objecttype={type}
           <p>
-          <i>Example</i> : /forums?objectid=1000&objecttype=thing
+          <i>Example</i> : /forums?objectid=205637&objecttype=thing
           """
   )
   private Integer objectid;
@@ -32,7 +32,7 @@ public class BggForumsV4QueryParams {
           <p>
           <i>Syntax</i> : /forums?objectid={id}&objecttype={type}
           <p>
-          <i>Example</i> : /forums?objectid=1000&objecttype=thing
+          <i>Example</i> : /forums?objectid=205637&objecttype=thing
           """
   )
   private String objecttype;

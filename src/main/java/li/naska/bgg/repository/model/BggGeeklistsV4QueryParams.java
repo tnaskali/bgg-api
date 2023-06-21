@@ -49,7 +49,7 @@ public class BggGeeklistsV4QueryParams {
           <p>
           <i>Syntax</i> : /geeklists?objectid={id}&objecttype={type}&sort={sort}
           <p>
-          <i>Example</i> : /geeklists?objectid=205637&objecttype=thing&sort=name
+          <i>Example</i> : /geeklists?objectid=205637&objecttype=thing&sort=recent
           """,
       schema = @Schema(defaultValue = "recent")
   )
