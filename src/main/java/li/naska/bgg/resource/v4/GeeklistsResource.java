@@ -84,4 +84,20 @@ public class GeeklistsResource {
     return geeklistsRepository.getGeeklistTips(id, params);
   }
 
+  @GetMapping(path = "/{id}/comments", produces = MediaType.APPLICATION_JSON_VALUE)
+  @Operation(
+      summary = "Get geeklist comments",
+      description = """
+          Get comments for a given geeklist.
+          <p>
+          <i>Syntax</i> : /geeklists/{id}/comments[?{parameters}]
+          <p>
+          <i>Example</i> : /geeklists/250030/comments
+          """
+  )
+  public Mono<BggGeeklistCommentsV4ResponseBody> getGeeklistComments(@NotNull @PathVariable @Parameter(example = "250030", description = "Geeklist id.") Integer id,
+                                                                     @Validated @ParameterObject BggGeeklistCommentsV4QueryParams params) {
+    return geeklistsRepository.getGeeklistComments(id, params);
+  }
+
 }
