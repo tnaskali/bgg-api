@@ -40,7 +40,7 @@ public class PlaysResource {
           <p>
           <i>Example</i> : /plays?username=eekspider
           <p>
-          <i>Example</i> : /plays?id=3085&&type=thing
+          <i>Example</i> : /plays?id=3085&type=thing
           """,
       externalDocs = @ExternalDocumentation(
           description = "original documentation",

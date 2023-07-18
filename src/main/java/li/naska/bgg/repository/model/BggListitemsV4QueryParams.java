@@ -30,7 +30,7 @@ public class BggListitemsV4QueryParams {
           <p>
           <i>Syntax</i> : /listitems?listid={listid}&page={count}
           <p>
-          <i>Example</i> : /listitems?listid=250030&page={count}
+          <i>Example</i> : /listitems?listid=250030&page=2
           """,
       schema = @Schema(defaultValue = "1")
   )

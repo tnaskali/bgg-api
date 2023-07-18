@@ -46,7 +46,7 @@ public class BggThreadV2QueryParams {
           <p>
           <i>Example</i> : /thread?id=666&minarticledate=2002-01-01
           <p>
-          <i>Example</i> : /thread?id=666&minarticledate=2002-01-01%2012:00:00
+          <i>Example</i> : /thread?id=666&minarticledate=2002-01-01%2012%3A00%3A00
           """
   )
   private String minarticledate;
