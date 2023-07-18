@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.constraints.NotNull;
 import li.naska.bgg.repository.BggThreadV1Repository;
 import li.naska.bgg.repository.model.BggThreadV1QueryParams;
-import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -22,9 +21,6 @@ public class ThreadResource {
 
   @Autowired
   private BggThreadV1Repository threadRepository;
-
-  @Autowired
-  private XmlProcessor xmlProcessor;
 
   @Deprecated
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_XML_VALUE)
