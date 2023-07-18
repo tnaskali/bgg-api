@@ -144,6 +144,8 @@ public class BggGeekitemV4ResponseBody {
 
     private String name;
 
+    private Integer sortindex;
+
     private String objecttype;
 
     private Integer objectid;
@@ -232,6 +234,8 @@ public class BggGeekitemV4ResponseBody {
     private String previewthumb;
 
     private String square200;
+
+    private String original;
 
   }
 

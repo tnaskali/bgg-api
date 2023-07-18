@@ -83,6 +83,8 @@ public class BggGeekitemLinkeditemsV4ResponseBody {
 
     private String square200;
 
+    private String original;
+
   }
 
   @Data
