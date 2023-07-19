@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import li.naska.bgg.repository.BggGeekplayV3Repository;
 import li.naska.bgg.repository.model.BggGeekplayV3RequestBody;
-import li.naska.bgg.repository.model.BggGeekplayV3RequestParams;
+import li.naska.bgg.repository.model.BggGeekplayV3QueryParams;
 import li.naska.bgg.repository.model.BggGeekplayV3ResponseBody;
 import li.naska.bgg.service.AuthenticationService;
 import org.springdoc.core.annotations.ParameterObject;
@@ -36,7 +36,7 @@ public class GeekplayResource {
           """,
       security = @SecurityRequirement(name = "basicAuth")
   )
-  public Mono<BggGeekplayV3ResponseBody> getGeekplay(@Validated @ParameterObject BggGeekplayV3RequestParams params) {
+  public Mono<BggGeekplayV3ResponseBody> getGeekplay(@Validated @ParameterObject BggGeekplayV3QueryParams params) {
     return authenticationService.requiredAuthentication().flatMap(
         authn -> geekplayRepository.getGeekplay(authn.buildBggRequestHeader(), params));
   }

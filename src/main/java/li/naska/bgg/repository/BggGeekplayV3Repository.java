@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.repository.model.BggGeekplayV3RequestBody;
-import li.naska.bgg.repository.model.BggGeekplayV3RequestParams;
+import li.naska.bgg.repository.model.BggGeekplayV3QueryParams;
 import li.naska.bgg.repository.model.BggGeekplayV3ResponseBody;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class BggGeekplayV3Repository {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 
-  public Mono<BggGeekplayV3ResponseBody> getGeekplay(String cookie, BggGeekplayV3RequestParams params) {
+  public Mono<BggGeekplayV3ResponseBody> getGeekplay(String cookie, BggGeekplayV3QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder

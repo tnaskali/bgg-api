@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
 import li.naska.bgg.exception.BggConnectionException;
-import li.naska.bgg.repository.model.BggGeekpollV3RequestParams;
+import li.naska.bgg.repository.model.BggGeekpollV3QueryParams;
 import li.naska.bgg.repository.model.BggGeekpollV3ResponseBody;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class BggGeekpollV3Repository {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 
-  public Mono<BggGeekpollV3ResponseBody> getGeekpoll(Optional<String> cookie, BggGeekpollV3RequestParams params) {
+  public Mono<BggGeekpollV3ResponseBody> getGeekpoll(Optional<String> cookie, BggGeekpollV3QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder

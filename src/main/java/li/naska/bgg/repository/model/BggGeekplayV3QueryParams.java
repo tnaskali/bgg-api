@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
-public class BggGeekplayV3RequestParams {
+public class BggGeekplayV3QueryParams {
 
   @NotNull
   @Pattern(regexp = "^(getuserplaycount)$")

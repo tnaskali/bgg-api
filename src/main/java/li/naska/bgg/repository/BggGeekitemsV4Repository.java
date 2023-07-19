@@ -3,7 +3,7 @@ package li.naska.bgg.repository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import li.naska.bgg.exception.BggConnectionException;
-import li.naska.bgg.repository.model.BggGeekitemV4ResponseBody;
+import li.naska.bgg.repository.model.BggGeekitemsV4ResponseBody;
 import li.naska.bgg.repository.model.BggGeekitemsV4QueryParams;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class BggGeekitemsV4Repository {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 
-  public Mono<BggGeekitemV4ResponseBody> getGeekitem(BggGeekitemsV4QueryParams params) {
+  public Mono<BggGeekitemsV4ResponseBody> getGeekitems(BggGeekitemsV4QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -46,9 +46,9 @@ public class BggGeekitemsV4Repository {
             httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
             clientResponse -> Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
         .toEntity(String.class)
-        .<BggGeekitemV4ResponseBody>handle((entity, sink) -> {
+        .<BggGeekitemsV4ResponseBody>handle((entity, sink) -> {
           try {
-            sink.next(objectMapper.readValue(entity.getBody(), BggGeekitemV4ResponseBody.class));
+            sink.next(objectMapper.readValue(entity.getBody(), BggGeekitemsV4ResponseBody.class));
           } catch (JsonProcessingException e) {
             sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
           }

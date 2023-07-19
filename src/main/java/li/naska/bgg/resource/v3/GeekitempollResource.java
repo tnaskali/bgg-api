@@ -3,7 +3,7 @@ package li.naska.bgg.resource.v3;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import li.naska.bgg.repository.BggGeekitempollV3Repository;
-import li.naska.bgg.repository.model.BggGeekitempollV3RequestParams;
+import li.naska.bgg.repository.model.BggGeekitempollV3QueryParams;
 import li.naska.bgg.repository.model.BggGeekitempollV3ResponseBody;
 import li.naska.bgg.security.BggAuthenticationToken;
 import li.naska.bgg.service.AuthenticationService;
@@ -32,7 +32,7 @@ public class GeekitempollResource {
       description = "Get poll information for a given item.",
       security = @SecurityRequirement(name = "basicAuth")
   )
-  public Mono<BggGeekitempollV3ResponseBody> getGeekitempoll(@Validated @ParameterObject BggGeekitempollV3RequestParams params) {
+  public Mono<BggGeekitempollV3ResponseBody> getGeekitempoll(@Validated @ParameterObject BggGeekitempollV3QueryParams params) {
     return authenticationService.optionalAuthentication().flatMap(
         authn -> geekitempollRepository.getGeekitempoll(authn.map(BggAuthenticationToken::buildBggRequestHeader), params));
   }

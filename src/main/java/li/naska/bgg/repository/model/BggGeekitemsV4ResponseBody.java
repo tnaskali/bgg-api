@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-public class BggGeekitemV4ResponseBody {
+public class BggGeekitemsV4ResponseBody {
 
   private Item item;
 

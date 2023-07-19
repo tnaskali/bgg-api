@@ -3,7 +3,7 @@ package li.naska.bgg.repository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import li.naska.bgg.exception.BggConnectionException;
-import li.naska.bgg.repository.model.BggGeekitempollV3RequestParams;
+import li.naska.bgg.repository.model.BggGeekitempollV3QueryParams;
 import li.naska.bgg.repository.model.BggGeekitempollV3ResponseBody;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class BggGeekitempollV3Repository {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 
-  public Mono<BggGeekitempollV3ResponseBody> getGeekitempoll(Optional<String> cookie, BggGeekitempollV3RequestParams params) {
+  public Mono<BggGeekitempollV3ResponseBody> getGeekitempoll(Optional<String> cookie, BggGeekitempollV3QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class BggUserV4ResponseBody {
+public class BggUsersV4ResponseBody {
 
   private String type;
 

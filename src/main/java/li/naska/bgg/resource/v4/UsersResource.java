@@ -3,7 +3,7 @@ package li.naska.bgg.resource.v4;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import li.naska.bgg.repository.BggUsersV4Repository;
-import li.naska.bgg.repository.model.BggUserV4ResponseBody;
+import li.naska.bgg.repository.model.BggUsersV4ResponseBody;
 import li.naska.bgg.repository.model.BggUsersV4QueryParams;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class UsersResource {
           <i>Example</i> : /users/10937
           """
   )
-  public Mono<BggUserV4ResponseBody> getUser(@PathVariable @Parameter(example = "10937", description = "User id.") Integer id) {
+  public Mono<BggUsersV4ResponseBody> getUser(@PathVariable @Parameter(example = "10937", description = "User id.") Integer id) {
     return usersRepository.getUser(id);
   }
 
@@ -50,7 +50,7 @@ public class UsersResource {
           <i>Example</i> : /users?username=Jester
           """
   )
-  public Mono<List<BggUserV4ResponseBody>> getUsers(@Validated @ParameterObject BggUsersV4QueryParams params) {
+  public Mono<List<BggUsersV4ResponseBody>> getUsers(@Validated @ParameterObject BggUsersV4QueryParams params) {
     return usersRepository.getUsers(params);
   }
 

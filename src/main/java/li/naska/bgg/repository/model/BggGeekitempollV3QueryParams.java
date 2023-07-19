@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
-public class BggGeekitempollV3RequestParams {
+public class BggGeekitempollV3QueryParams {
 
   @NotNull
   @Pattern(regexp = "^(view)$")

@@ -2,7 +2,7 @@ package li.naska.bgg.resource.v4;
 
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggGeekitemsV4Repository;
-import li.naska.bgg.repository.model.BggGeekitemV4ResponseBody;
+import li.naska.bgg.repository.model.BggGeekitemsV4ResponseBody;
 import li.naska.bgg.repository.model.BggGeekitemsV4QueryParams;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +31,8 @@ public class GeekitemsResource {
           <i>Example</i> : /geekitems?objectid=1000&objecttype=thing
           """
   )
-  public Mono<BggGeekitemV4ResponseBody> getGeekitem(@Validated @ParameterObject BggGeekitemsV4QueryParams params) {
-    return geekitemsRepository.getGeekitem(params);
+  public Mono<BggGeekitemsV4ResponseBody> getGeekitems(@Validated @ParameterObject BggGeekitemsV4QueryParams params) {
+    return geekitemsRepository.getGeekitems(params);
   }
 
 }

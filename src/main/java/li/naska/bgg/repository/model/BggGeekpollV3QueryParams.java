@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
-public class BggGeekpollV3RequestParams {
+public class BggGeekpollV3QueryParams {
 
   @NotNull
   @Pattern(regexp = "^(results)$")
