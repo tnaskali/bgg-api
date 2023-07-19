@@ -1,41 +1,57 @@
 package li.naska.bgg.util;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
-import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.xml.StaxUtils;
 
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
 import java.io.StringReader;
 
 @Component
+@Slf4j
 public class XmlProcessor {
 
   @Autowired
   private ObjectMapper objectMapper;
 
-  @SneakyThrows
   public <T> T toJavaObject(String xmlString, Class<T> targetClass) {
-    JAXBContext context = JAXBContext.newInstance(targetClass);
-    Unmarshaller unmarshaller = context.createUnmarshaller();
-    XMLInputFactory inputFactory = StaxUtils.createDefensiveInputFactory();
-    XMLEventReader eventReader = inputFactory.createXMLEventReader(new StringReader(xmlString));
-    JAXBElement<T> jaxbElement = unmarshaller.unmarshal(eventReader, targetClass);
-    return jaxbElement.getValue();
+    try {
+      JAXBContext context = JAXBContext.newInstance(targetClass);
+      Unmarshaller unmarshaller = context.createUnmarshaller();
+      XMLInputFactory inputFactory = StaxUtils.createDefensiveInputFactory();
+      XMLEventReader eventReader = inputFactory.createXMLEventReader(new StringReader(xmlString));
+      JAXBElement<T> jaxbElement = unmarshaller.unmarshal(eventReader, targetClass);
+      return jaxbElement.getValue();
+    } catch (JAXBException | XMLStreamException e) {
+      log.error("XML processing error", e);
+      throw new IllegalStateException(e);
+    }
   }
 
-  @SneakyThrows
   public <T> String toJsonString(String xmlString, Class<T> targetClass) {
     T object = toJavaObject(xmlString, targetClass);
-    return objectMapper
-        .addMixIn(JAXBElement.class, JAXBElementMixin.class)
-        .writeValueAsString(object);
+    return toJsonString(object);
+  }
+
+  public <T> String toJsonString(T object) {
+    try {
+      return objectMapper
+              .addMixIn(JAXBElement.class, JAXBElementMixin.class)
+              .writeValueAsString(object);
+    } catch (JsonProcessingException e) {
+      log.error("JSON processing error", e);
+      throw new IllegalStateException(e);
+    }
   }
 
   static abstract class JAXBElementMixin<T> {
