@@ -1,6 +1,6 @@
 package li.naska.bgg.graphql.data;
 
-import com.boardgamegeek.user.Guild;
+import com.boardgamegeek.user.v2.Guild;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 package li.naska.bgg.graphql.service;
 
-import com.boardgamegeek.guild.Guild;
-import com.boardgamegeek.guild.Member;
-import com.boardgamegeek.guild.Members;
+import com.boardgamegeek.guild.v2.Guild;
+import com.boardgamegeek.guild.v2.Member;
+import com.boardgamegeek.guild.v2.Members;
 import li.naska.bgg.repository.BggGuildV2Repository;
 import li.naska.bgg.repository.model.BggGuildV2QueryParams;
 import li.naska.bgg.util.XmlProcessor;

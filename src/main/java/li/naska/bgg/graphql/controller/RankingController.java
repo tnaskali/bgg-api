@@ -19,7 +19,7 @@ public class RankingController {
     return Mono.fromFuture(loader.load(new UserRankingData.UserRankingKey(ranking.user().username(), ranking.type(), "boardgame")))
         .map(data -> data.ranking().getItems().stream().map(item -> new RankedItem(
                 item.getRank(),
-                item.getType().value(),
+                item.getType(),
                 item.getId(),
                 item.getName()))
             .collect(Collectors.toList())
@@ -31,7 +31,7 @@ public class RankingController {
     return Mono.fromFuture(loader.load(new UserRankingData.UserRankingKey(ranking.user().username(), ranking.type(), "rpg")))
         .map(data -> data.ranking().getItems().stream().map(item -> new RankedItem(
                 item.getRank(),
-                item.getType().value(),
+                item.getType(),
                 item.getId(),
                 item.getName()))
             .collect(Collectors.toList())
@@ -43,7 +43,7 @@ public class RankingController {
     return Mono.fromFuture(loader.load(new UserRankingData.UserRankingKey(ranking.user().username(), ranking.type(), "videogame")))
         .map(data -> data.ranking().getItems().stream().map(item -> new RankedItem(
                 item.getRank(),
-                item.getType().value(),
+                item.getType(),
                 item.getId(),
                 item.getName()))
             .collect(Collectors.toList())

@@ -1,7 +1,7 @@
 package li.naska.bgg.graphql;
 
-import com.boardgamegeek.enums.UserDomainType;
 import li.naska.bgg.graphql.data.*;
+import li.naska.bgg.graphql.model.enums.Domain;
 import li.naska.bgg.graphql.service.GraphQLGuildsService;
 import li.naska.bgg.graphql.service.GraphQLUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class GraphQLDataLoadingConfiguration {
     );
     registry.forTypePair(UserRankingData.UserRankingKey.class, UserRankingData.class).registerMappedBatchLoader((keys, env) ->
         Flux.fromIterable(keys)
-            .flatMap(key -> Mono.just(key).zipWith(usersService.getUserRanking(key.username(), key.type(), UserDomainType.fromValue(key.domain()))))
+            .flatMap(key -> Mono.just(key).zipWith(usersService.getUserRanking(key.username(), key.type(), Domain.valueOf(key.domain()))))
             .collectMap(Tuple2::getT1, tuple -> new UserRankingData(tuple.getT2()))
     );
     registry.forTypePair(Integer.class, GuildData.class).registerMappedBatchLoader((ids, env) ->

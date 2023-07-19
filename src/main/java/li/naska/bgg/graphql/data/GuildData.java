@@ -1,6 +1,6 @@
 package li.naska.bgg.graphql.data;
 
-import com.boardgamegeek.guild.Guild;
+import com.boardgamegeek.guild.v2.Guild;
 
 public record GuildData(Guild guild) {
 }

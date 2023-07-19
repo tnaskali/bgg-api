@@ -132,14 +132,14 @@ public class UserController {
   public Mono<List<Guild>> guilds(User user, DataLoader<String, UserGuildsData> loader) {
     return Mono.fromFuture(loader.load(user.username()))
         .map(UserGuildsData::guilds)
-        .map(data -> data.stream().map(com.boardgamegeek.user.Guild::getId).map(Guild::new).collect(Collectors.toList()));
+        .map(data -> data.stream().map(com.boardgamegeek.user.v2.Guild::getId).map(Guild::new).collect(Collectors.toList()));
   }
 
   @SchemaMapping
   public Mono<List<User>> buddies(User user, DataLoader<String, UserBuddiesData> loader) {
     return Mono.fromFuture(loader.load(user.username()))
         .map(UserBuddiesData::buddies)
-        .map(data -> data.stream().map(com.boardgamegeek.user.Buddy::getName).map(User::new).collect(Collectors.toList()));
+        .map(data -> data.stream().map(com.boardgamegeek.user.v2.Buddy::getName).map(User::new).collect(Collectors.toList()));
   }
 
   @SchemaMapping
