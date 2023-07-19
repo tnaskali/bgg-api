@@ -49,14 +49,16 @@ public class HotItemsResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-          "<items termsofuse=\"https://boardgamegeek.com/xmlapi/termsofuse\">\n" +
-          "    <item id=\"666\" rank=\"1\">\n" +
-          "        <thumbnail value=\"https://cf.geekdo-images.com/ImPgGag98W6gpV1KV812aA__thumb/img/X-lBBdG4uO6LT0y1vXxCN4jdR4M=/fit-in/200x150/filters:strip_icc()/pic1215633.jpg\"/>\n" +
-          "        <name value=\"War of the Ring: Second Edition\"/>\n" +
-          "        <yearpublished value=\"2012\" />\n" +
-          "    </item>\n" +
-          "</items>";
+      final String mockResponseBody = """
+          <?xml version="1.0" encoding="utf-8"?>
+          <items termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+              <item id="666" rank="1">
+                  <thumbnail value="https://cf.geekdo-images.com/ImPgGag98W6gpV1KV812aA__thumb/img/X-lBBdG4uO6LT0y1vXxCN4jdR4M=/fit-in/200x150/filters:strip_icc()/pic1215633.jpg"/>
+                  <name value="War of the Ring: Second Edition"/>
+                  <yearpublished value="2012" />
+              </item>
+          </items>
+          """;
 
       @BeforeEach
       public void setup() {
@@ -107,7 +109,7 @@ public class HotItemsResourceV2IT extends AbstractMockServerIT {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest = (MediaType mediaType) -> Do.this.partialTest
             .apply(
-                new LinkedMultiValueMap<String, String>() {
+                new LinkedMultiValueMap<>() {
                   {
                     add("type", "boardgame");
                     // undeclared

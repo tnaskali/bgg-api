@@ -1,7 +1,5 @@
 package li.naska.bgg.resource.vN.model;
 
-import com.boardgamegeek.enums.ItemSubtype;
-import com.boardgamegeek.enums.ItemType;
 import lombok.Data;
 
 import java.time.ZonedDateTime;
@@ -37,8 +35,8 @@ public class Geeklist {
     private Integer id;
     private Integer objectid;
     private String objectname;
-    private ItemType objecttype;
-    private ItemSubtype subtype;
+    private String objecttype;
+    private String subtype;
     private String body;
     private List<Comment> comments;
     private String username;

@@ -49,13 +49,15 @@ public class SearchResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-          "<items total=\"1\" termsofuse=\"https://boardgamegeek.com/xmlapi/termsofuse\">\n" +
-          "    <item type=\"rpgitem\" id=\"666\">\n" +
-          "        <name type=\"primary\" value=\"Bag End Floor Plans\"/>\n" +
-          "        <yearpublished value=\"2015\" />\n" +
-          "    </item>\n" +
-          "</items>";
+      final String mockResponseBody = """
+          <?xml version="1.0" encoding="utf-8"?>
+          <items total="1" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+              <item type="rpgitem" id="666">
+                  <name type="primary" value="Bag End Floor Plans"/>
+                  <yearpublished value="2015" />
+              </item>
+          </items>
+          """;
 
       @BeforeEach
       public void setup() {
@@ -106,7 +108,7 @@ public class SearchResourceV2IT extends AbstractMockServerIT {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest = (MediaType mediaType) -> Do.this.partialTest
             .apply(
-                new LinkedMultiValueMap<String, String>() {
+                new LinkedMultiValueMap<>() {
                   {
                     add("query", "bag end");
                     add("type", "rpgitem");

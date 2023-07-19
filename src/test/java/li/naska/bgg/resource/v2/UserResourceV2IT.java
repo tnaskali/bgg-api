@@ -49,24 +49,26 @@ public class UserResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-          "<user id=\"666\" name=\"gandalf\" termsofuse=\"https://boardgamegeek.com/xmlapi/termsofuse\">\n" +
-          "    <firstname value=\"N/A\" />\n" +
-          "    <lastname value=\"Mithrandir\" />\n" +
-          "    <avatarlink value=\"N/A\" />\n" +
-          "    <yearregistered value=\"2003\" />\n" +
-          "    <lastlogin value=\"\" />\n" +
-          "    <stateorprovince value=\"Unspecified\" />\n" +
-          "    <country value=\"New Zealand\" />\n" +
-          "    <webaddress value=\"\" />\n" +
-          "    <xboxaccount value=\"\" />\n" +
-          "    <wiiaccount value=\"\" />\n" +
-          "    <psnaccount value=\"\" />\n" +
-          "    <battlenetaccount value=\"\" />\n" +
-          "    <steamaccount value=\"\" />\n" +
-          "    <traderating value=\"0\" />\n" +
-          "    <marketrating value=\"0\" />\n" +
-          "</user>";
+      final String mockResponseBody = """
+          <?xml version="1.0" encoding="utf-8"?>
+          <user id="666" name="gandalf" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+              <firstname value="N/A" />
+              <lastname value="Mithrandir" />
+              <avatarlink value="N/A" />
+              <yearregistered value="2003" />
+              <lastlogin value="" />
+              <stateorprovince value="Unspecified" />
+              <country value="New Zealand" />
+              <webaddress value="" />
+              <xboxaccount value="" />
+              <wiiaccount value="" />
+              <psnaccount value="" />
+              <battlenetaccount value="" />
+              <steamaccount value="" />
+              <traderating value="0" />
+              <marketrating value="0" />
+          </user>
+          """;
 
       @BeforeEach
       public void setup() {
@@ -117,7 +119,7 @@ public class UserResourceV2IT extends AbstractMockServerIT {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest = (MediaType mediaType) -> Do.this.partialTest
             .apply(
-                new LinkedMultiValueMap<String, String>() {
+                new LinkedMultiValueMap<>() {
                   {
                     add("name", "gandalf");
                     add("buddies", "1");

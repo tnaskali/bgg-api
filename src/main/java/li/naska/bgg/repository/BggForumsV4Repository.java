@@ -1,8 +1,12 @@
 package li.naska.bgg.repository;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import li.naska.bgg.exception.BggConnectionException;
+import li.naska.bgg.repository.model.BggForumsThreadsV4QueryParams;
+import li.naska.bgg.repository.model.BggForumsThreadsV4ResponseBody;
 import li.naska.bgg.repository.model.BggForumsV4QueryParams;
-import li.naska.bgg.repository.model.BggThreadsV4QueryParams;
+import li.naska.bgg.repository.model.BggForumsV4ResponseBody;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +24,9 @@ import java.nio.charset.StandardCharsets;
 @Repository
 public class BggForumsV4Repository {
 
+  @Autowired
+  private ObjectMapper objectMapper;
+
   private final WebClient webClient;
 
   public BggForumsV4Repository(
@@ -28,7 +35,7 @@ public class BggForumsV4Repository {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 
-  public Mono<String> getForums(BggForumsV4QueryParams params) {
+  public Mono<BggForumsV4ResponseBody> getForums(BggForumsV4QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -40,7 +47,14 @@ public class BggForumsV4Repository {
         .onStatus(
             httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
             clientResponse -> Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .bodyToMono(String.class)
+        .toEntity(String.class)
+        .<BggForumsV4ResponseBody>handle((entity, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(entity.getBody(), BggForumsV4ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        })
         .onErrorMap(IOException.class, ioe -> new BggConnectionException())
         .retryWhen(
             Retry.max(3)
@@ -48,7 +62,7 @@ public class BggForumsV4Repository {
   }
 
 
-  public Mono<String> getThreads(BggThreadsV4QueryParams params) {
+  public Mono<BggForumsThreadsV4ResponseBody> getThreads(BggForumsThreadsV4QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -61,7 +75,14 @@ public class BggForumsV4Repository {
         .onStatus(
             httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
             clientResponse -> Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .bodyToMono(String.class)
+        .toEntity(String.class)
+        .<BggForumsThreadsV4ResponseBody>handle((entity, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(entity.getBody(), BggForumsThreadsV4ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        })
         .onErrorMap(IOException.class, ioe -> new BggConnectionException())
         .retryWhen(
             Retry.max(3)

@@ -1,7 +1,5 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.enums.CollectionItemSubtype;
-import com.boardgamegeek.thing.Items;
 import li.naska.bgg.mapper.CollectionMapper;
 import li.naska.bgg.mapper.CollectionParamsMapper;
 import li.naska.bgg.mapper.ThingMapper;
@@ -30,6 +28,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -189,8 +188,8 @@ public class ThingsService {
 
   private Mono<Thing> getThing(BggThingV2QueryParams queryParams) {
     return thingsRepository.getThings(queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, Items.class))
-        .map(Items::getItems)
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.thing.v2.Items.class))
+        .map(com.boardgamegeek.thing.v2.Items::getItems)
         .flatMap(l -> l.size() == 1
             ? Mono.just(l.get(0))
             : Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "no match found")))
@@ -200,8 +199,8 @@ public class ThingsService {
   public Mono<List<Thing>> getThings(ThingsParams params) {
     BggThingV2QueryParams queryParams = thingsParamsMapper.toBggModel(params);
     return thingsRepository.getThings(queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, Items.class))
-        .map(Items::getItems)
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.thing.v2.Items.class))
+        .map(com.boardgamegeek.thing.v2.Items::getItems)
         .map(l -> l.stream()
             .map(thingMapper::fromBggModel)
             .collect(Collectors.toList()));
@@ -211,25 +210,17 @@ public class ThingsService {
   public Mono<Collection> getThings(String username, CollectionParams params) {
     BggCollectionV2QueryParams queryParams = collectionParamsMapper.toBggModel(params);
     queryParams.setUsername(username);
-    // handle subtype bug in the BBG XML API
-    if (queryParams.getSubtype() == null || queryParams.getSubtype().equals(CollectionItemSubtype.BOARDGAME.value())) {
-      queryParams.setExcludesubtype(CollectionItemSubtype.BOARDGAMEEXPANSION.value());
-    }
-    return collectionRepository.getCollection(null, queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.collection.Items.class))
+    return collectionRepository.getCollection(Optional.empty(), queryParams)
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.collection.v2.Items.class))
         .map(collectionMapper::fromBggModel);
   }
 
   public Mono<Collection> getPrivateThings(String username, String cookie, CollectionParams params) {
     BggCollectionV2QueryParams queryParams = collectionParamsMapper.toBggModel(params);
     queryParams.setUsername(username);
-    // handle subtype bug in the BBG XML API
-    if (queryParams.getSubtype() == null || queryParams.getSubtype().equals(CollectionItemSubtype.BOARDGAME.value())) {
-      queryParams.setExcludesubtype(CollectionItemSubtype.BOARDGAMEEXPANSION.value());
-    }
     queryParams.setShowprivate(1);
-    return collectionRepository.getCollection(cookie, queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.collection.Items.class))
+    return collectionRepository.getCollection(Optional.of(cookie), queryParams)
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.collection.v2.Items.class))
         .map(collectionMapper::fromBggModel);
   }
 

@@ -1,6 +1,5 @@
 package li.naska.bgg.mapper;
 
-import com.boardgamegeek.enums.NameType;
 import li.naska.bgg.resource.vN.model.Family;
 import li.naska.bgg.resource.vN.model.Name;
 import org.mapstruct.*;
@@ -18,21 +17,21 @@ public interface FamilyMapper {
   @BeanMapping(ignoreUnmappedSourceProperties = {"names"})
   @Mapping(target = "name", expression = "java(getName(source))")
   @Mapping(target = "alternatenames", expression = "java(getAlternatenames(source))")
-  Family fromBggModel(com.boardgamegeek.family.Family source);
+  Family fromBggModel(com.boardgamegeek.family.v2.Family source);
 
-  Family.Link fromBggModel(com.boardgamegeek.family.Link source);
+  Family.Link fromBggModel(com.boardgamegeek.family.v2.Link source);
 
-  default Name getName(com.boardgamegeek.family.Family source) {
+  default Name getName(com.boardgamegeek.family.v2.Family source) {
     return source.getNames().stream()
-        .filter(e -> e.getType() == NameType.PRIMARY)
+        .filter(e -> "primary".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .findFirst()
         .orElse(null);
   }
 
-  default List<Name> getAlternatenames(com.boardgamegeek.family.Family source) {
+  default List<Name> getAlternatenames(com.boardgamegeek.family.v2.Family source) {
     return source.getNames().stream()
-        .filter(e -> e.getType() == NameType.ALTERNATE)
+        .filter(e -> "alternate".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .collect(Collectors.toList());
   }

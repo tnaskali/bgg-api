@@ -1,5 +1,6 @@
 package li.naska.bgg.repository.model;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -8,47 +9,71 @@ import lombok.Data;
 @Data
 public class BggThreadV2QueryParams {
 
-  /**
-   * id=NNN
-   * <p>
-   * Specifies the id of the thread to retrieve.
-   */
   @NotNull
   @Min(1)
+  @Parameter(
+      example = "666",
+      description = """
+          Specifies the id of the thread to retrieve.
+          <p>
+          <i>Syntax</i> : /thread?id={id}
+          <p>
+          <i>Example</i> : /thread?id=666
+          """
+  )
   private Integer id;
 
-  /**
-   * minarticleid=NNN
-   * <p>
-   * Filters the results so that only articles with an equal or higher id than NNN will be returned.
-   */
   @Min(1)
+  @Parameter(
+      example = "700",
+      description = """
+          Filters the results so that only articles with an equal or higher id than NNN will be returned.
+          <p>
+          <i>Syntax</i> : /thread?id={id}&minarticleid={id}
+          <p>
+          <i>Example</i> : /thread?id=666&minarticleid=700
+          """
+  )
   private Integer minarticleid;
 
-  /**
-   * minarticledate=YYYY-MM-DD
-   * <br/>
-   * minarticledate=YYYY-MM-DD%20HH%3AMM%3ASS
-   * <p>
-   * Filters the results so that only articles on the specified date or later will be returned.
-   */
   @Pattern(regexp = "^([1-2][0-9])?[0-9][0-9]-[0-1][0-9]-[0-3][0-9]( [0-9][0-9]:[0-9][0-9]:[0-9][0-9])?$")
+  @Parameter(
+      example = "2002-01-01 12:00:00",
+      description = """
+          Filters the results so that only articles on the specified date or later will be returned.
+          <p>
+          <i>Syntax</i> : /thread?id={id}&minarticledate={date}
+          <p>
+          <i>Example</i> : /thread?id=666&minarticledate=2002-01-01
+          <p>
+          <i>Example</i> : /thread?id=666&minarticledate=2002-01-01%2012%3A00%3A00
+          """
+  )
   private String minarticledate;
 
-  /**
-   * count=NNN
-   * <p>
-   * Limits the number of articles returned to no more than NNN.
-   */
   @Min(1)
+  @Parameter(
+      example = "100",
+      description = """
+          Limits the number of articles returned to no more than NNN.
+          <p>
+          <i>Syntax</i> : /thread?id={id}&count={count}
+          <p>
+          <i>Example</i> : /thread?id=666&count=100
+          """
+  )
   private Integer count;
 
-  /**
-   * username=NAME
-   * <p>
-   * <i>Not currently supported.</i>
-   */
   @Deprecated
+  @Parameter(
+      description = """
+          <i>Not currently supported.</i>
+          <p>
+          <i>Syntax</i> : /thread?id={id}&username={username}
+          <p>
+          <i>Example</i> : /thread?id=666&username=gschloesser
+          """
+  )
   private String username;
 
 }

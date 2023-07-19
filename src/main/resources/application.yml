@@ -5,15 +5,20 @@ bgg:
     v1:
       boardgame: ${bgg.web.baseurl-bgs}/xmlapi/boardgame
       collection: ${bgg.web.baseurl-bgs}/xmlapi/collection
+      company: ${bgg.web.baseurl-bgs}/xmlapi/company
       geeklist: ${bgg.web.baseurl-bgs}/xmlapi/geeklist
+      person: ${bgg.web.baseurl-bgs}/xmlapi/person
       search: ${bgg.web.baseurl-bgs}/xmlapi/search
+      thread: ${bgg.web.baseurl-bgs}/xmlapi/thread
     v2:
       collection: ${bgg.web.baseurl-bgs}/xmlapi2/collection
+      company: ${bgg.web.baseurl-bgs}/xmlapi2/company
       family: ${bgg.web.baseurl-bgs}/xmlapi2/family
       forum: ${bgg.web.baseurl-bgs}/xmlapi2/forum
       forumlist: ${bgg.web.baseurl-bgs}/xmlapi2/forumlist
       guild: ${bgg.web.baseurl-bgs}/xmlapi2/guild
       hot: ${bgg.web.baseurl-bgs}/xmlapi2/hot
+      person: ${bgg.web.baseurl-bgs}/xmlapi2/person
       plays: ${bgg.web.baseurl-bgs}/xmlapi2/plays
       search: ${bgg.web.baseurl-bgs}/xmlapi2/search
       thing: ${bgg.web.baseurl-bgs}/xmlapi2/thing
@@ -23,6 +28,8 @@ bgg:
       geekaccount: ${bgg.web.baseurl-bgs}/geekaccount.php
       geekcollection: ${bgg.web.baseurl-bgs}/geekcollection.php
       geekplay: ${bgg.web.baseurl-bgs}/geekplay.php
+      geekpoll: ${bgg.web.baseurl-bgs}/geekpoll.php
+      geekpollitem: ${bgg.web.baseurl-bgs}/geekitempoll.php
     v4:
       articles: ${bgg.web.baseurl-bgs}/api/articles
       fans: ${bgg.web.baseurl-bgs}/api/fans
@@ -46,9 +53,5 @@ server:
 spring:
   codec:
     max-in-memory-size: 16MB
-  jackson:
-    default-property-inclusion: non_empty
-    serialization:
-      write-dates-as-timestamps: false
   webflux:
     base-path: /bgg-api

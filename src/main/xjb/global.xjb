@@ -1,95 +1,10 @@
 <?xml version="1.0"?>
-<jaxb:bindings
-    xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
-    xmlns:common="http://www.boardgamegeek.com/common"
-    jaxb:version="3.0"
-    jaxb:extensionBindingPrefixes="xjc">
-
-  <jaxb:bindings schemaLocation="../xsd/collection.xsd" node="//xs:schema">
-    <jaxb:schemaBindings>
-      <jaxb:package name="com.boardgamegeek.collection"/>
-    </jaxb:schemaBindings>
-  </jaxb:bindings>
-
-  <jaxb:bindings schemaLocation="../xsd/common.xsd" node="//xs:schema">
-    <jaxb:schemaBindings>
-      <jaxb:package name="com.boardgamegeek.common"/>
-    </jaxb:schemaBindings>
-  </jaxb:bindings>
-
-  <jaxb:bindings schemaLocation="../xsd/enums.xsd" node="//xs:schema">
-    <jaxb:schemaBindings>
-      <jaxb:package name="com.boardgamegeek.enums"/>
-    </jaxb:schemaBindings>
-  </jaxb:bindings>
-
-  <jaxb:bindings schemaLocation="../xsd/family.xsd" node="//xs:schema">
-    <jaxb:schemaBindings>
-      <jaxb:package name="com.boardgamegeek.family"/>
-    </jaxb:schemaBindings>
-  </jaxb:bindings>
-
-  <jaxb:bindings schemaLocation="../xsd/forum.xsd" node="//xs:schema">
-    <jaxb:schemaBindings>
-      <jaxb:package name="com.boardgamegeek.forum"/>
-    </jaxb:schemaBindings>
-  </jaxb:bindings>
-
-  <jaxb:bindings schemaLocation="../xsd/forumlist.xsd" node="//xs:schema">
-    <jaxb:schemaBindings>
-      <jaxb:package name="com.boardgamegeek.forumlist"/>
-    </jaxb:schemaBindings>
-  </jaxb:bindings>
-
-  <jaxb:bindings schemaLocation="../xsd/geeklist.xsd" node="//xs:schema">
-    <jaxb:schemaBindings>
-      <jaxb:package name="com.boardgamegeek.geeklist"/>
-    </jaxb:schemaBindings>
-  </jaxb:bindings>
-
-  <jaxb:bindings schemaLocation="../xsd/guild.xsd" node="//xs:schema">
-    <jaxb:schemaBindings>
-      <jaxb:package name="com.boardgamegeek.guild"/>
-    </jaxb:schemaBindings>
-  </jaxb:bindings>
-
-  <jaxb:bindings schemaLocation="../xsd/hot.xsd" node="//xs:schema">
-    <jaxb:schemaBindings>
-      <jaxb:package name="com.boardgamegeek.hot"/>
-    </jaxb:schemaBindings>
-  </jaxb:bindings>
-
-  <jaxb:bindings schemaLocation="../xsd/plays.xsd" node="//xs:schema">
-    <jaxb:schemaBindings>
-      <jaxb:package name="com.boardgamegeek.plays"/>
-    </jaxb:schemaBindings>
-  </jaxb:bindings>
-
-  <jaxb:bindings schemaLocation="../xsd/search.xsd" node="//xs:schema">
-    <jaxb:schemaBindings>
-      <jaxb:package name="com.boardgamegeek.search"/>
-    </jaxb:schemaBindings>
-  </jaxb:bindings>
-
-  <jaxb:bindings schemaLocation="../xsd/thing.xsd" node="//xs:schema">
-    <jaxb:schemaBindings>
-      <jaxb:package name="com.boardgamegeek.thing"/>
-    </jaxb:schemaBindings>
-  </jaxb:bindings>
-
-  <jaxb:bindings schemaLocation="../xsd/thread.xsd" node="//xs:schema">
-    <jaxb:schemaBindings>
-      <jaxb:package name="com.boardgamegeek.thread"/>
-    </jaxb:schemaBindings>
-  </jaxb:bindings>
-
-  <jaxb:bindings schemaLocation="../xsd/user.xsd" node="//xs:schema">
-    <jaxb:schemaBindings>
-      <jaxb:package name="com.boardgamegeek.user"/>
-    </jaxb:schemaBindings>
-  </jaxb:bindings>
+<jaxb:bindings xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
+               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+               xmlns:common="http://www.boardgamegeek.com/common"
+               jaxb:version="3.0"
+               jaxb:extensionBindingPrefixes="xjc">
 
   <jaxb:globalBindings>
     <jaxb:serializable/>

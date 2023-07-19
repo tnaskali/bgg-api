@@ -49,20 +49,22 @@ public class ThreadResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-          "<thread id=\"666\" numarticles=\"1\" link=\"https://boardgamegeek.com/thread/666\" termsofuse=\"https://boardgamegeek.com/xmlapi/termsofuse\">\n" +
-          "    <subject>Preview</subject>\n" +
-          "    <articles>\n" +
-          "        <article id=\"796\" username=\"gschloesser\"\n" +
-          "            link=\"https://boardgamegeek.com/thread/666/article/796#796\"\n" +
-          "            postdate=\"2002-01-30T13:11:55-06:00\"\n" +
-          "            editdate=\"2002-01-30T13:11:55-06:00\"\n" +
-          "            numedits=\"0\">\n" +
-          "            <subject>Preview</subject>\n" +
-          "            <body>I had read some positive things about this Knizia card game which capitalizes on the Lord of the Rings movie.</body>\n" +
-          "        </article>\n" +
-          "    </articles>\n" +
-          "</thread>";
+      final String mockResponseBody = """
+          <?xml version="1.0" encoding="utf-8"?>
+          <thread id="666" numarticles="1" link="https://boardgamegeek.com/thread/666" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+              <subject>Preview</subject>
+              <articles>
+                  <article id="796" username="gschloesser"
+                      link="https://boardgamegeek.com/thread/666/article/796#796"
+                      postdate="2002-01-30T13:11:55-06:00"
+                      editdate="2002-01-30T13:11:55-06:00"
+                      numedits="0">
+                      <subject>Preview</subject>
+                      <body>I had read some positive things about this Knizia card game which capitalizes on the Lord of the Rings movie.</body>
+                  </article>
+              </articles>
+          </thread>
+          """;
 
       @BeforeEach
       public void setup() {
@@ -113,7 +115,7 @@ public class ThreadResourceV2IT extends AbstractMockServerIT {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest = (MediaType mediaType) -> Do.this.partialTest
             .apply(
-                new LinkedMultiValueMap<String, String>() {
+                new LinkedMultiValueMap<>() {
                   {
                     add("id", "666");
                     add("minarticleid", "100");

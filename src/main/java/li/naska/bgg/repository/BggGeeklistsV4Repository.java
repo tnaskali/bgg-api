@@ -1,13 +1,14 @@
 package li.naska.bgg.repository;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import li.naska.bgg.exception.BggConnectionException;
-import li.naska.bgg.repository.model.BggGeeklistCommentsV4QueryParams;
-import li.naska.bgg.repository.model.BggGeeklistReactionsV4QueryParams;
-import li.naska.bgg.repository.model.BggGeeklistTipsV4QueryParams;
-import li.naska.bgg.repository.model.BggGeeklistsV4QueryParams;
+import li.naska.bgg.repository.model.*;
 import li.naska.bgg.util.QueryParameters;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
@@ -22,6 +23,9 @@ import java.nio.charset.StandardCharsets;
 @Repository
 public class BggGeeklistsV4Repository {
 
+  @Autowired
+  private ObjectMapper objectMapper;
+
   private final WebClient webClient;
 
   public BggGeeklistsV4Repository(
@@ -30,7 +34,7 @@ public class BggGeeklistsV4Repository {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 
-  public Mono<String> getGeeklists(BggGeeklistsV4QueryParams params) {
+  public Mono<BggGeeklistsV4ResponseBody> getGeeklists(BggGeeklistsV4QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -42,14 +46,21 @@ public class BggGeeklistsV4Repository {
         .onStatus(
             httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
             clientResponse -> Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .bodyToMono(String.class)
+        .toEntity(String.class)
+        .<BggGeeklistsV4ResponseBody>handle((entity, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(entity.getBody(), BggGeeklistsV4ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        })
         .onErrorMap(IOException.class, ioe -> new BggConnectionException())
         .retryWhen(
             Retry.max(3)
                 .filter(throwable -> throwable instanceof BggConnectionException));
   }
 
-  public Mono<String> getGeeklist(Integer id) {
+  public Mono<BggGeeklistV4ResponseBody> getGeeklist(Integer id) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -61,14 +72,21 @@ public class BggGeeklistsV4Repository {
         .onStatus(
             httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
             clientResponse -> Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .bodyToMono(String.class)
+        .toEntity(String.class)
+        .<BggGeeklistV4ResponseBody>handle((entity, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(entity.getBody(), BggGeeklistV4ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        })
         .onErrorMap(IOException.class, ioe -> new BggConnectionException())
         .retryWhen(
             Retry.max(3)
                 .filter(throwable -> throwable instanceof BggConnectionException));
   }
 
-  public Mono<String> getGeeklistComments(Integer id, BggGeeklistCommentsV4QueryParams params) {
+  public Mono<BggGeeklistCommentsV4ResponseBody> getGeeklistComments(Integer id, BggGeeklistCommentsV4QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -81,14 +99,23 @@ public class BggGeeklistsV4Repository {
         .onStatus(
             httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
             clientResponse -> Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .bodyToMono(String.class)
+        .toEntity(String.class)
+        .map(HttpEntity::getBody)
+        .map(body -> StringUtils.isNumeric(body) ? String.format("{ \"totalCount\": %s }", body) : body)
+        .<BggGeeklistCommentsV4ResponseBody>handle((body, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(body, BggGeeklistCommentsV4ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        })
         .onErrorMap(IOException.class, ioe -> new BggConnectionException())
         .retryWhen(
             Retry.max(3)
                 .filter(throwable -> throwable instanceof BggConnectionException));
   }
 
-  public Mono<String> getGeeklistReactions(Integer id, BggGeeklistReactionsV4QueryParams params) {
+  public Mono<BggGeeklistReactionsV4ResponseBody> getGeeklistReactions(Integer id, BggGeeklistReactionsV4QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -101,14 +128,21 @@ public class BggGeeklistsV4Repository {
         .onStatus(
             httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
             clientResponse -> Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .bodyToMono(String.class)
+        .toEntity(String.class)
+        .<BggGeeklistReactionsV4ResponseBody>handle((entity, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(entity.getBody(), BggGeeklistReactionsV4ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        })
         .onErrorMap(IOException.class, ioe -> new BggConnectionException())
         .retryWhen(
             Retry.max(3)
                 .filter(throwable -> throwable instanceof BggConnectionException));
   }
 
-  public Mono<String> getGeeklistTips(Integer id, BggGeeklistTipsV4QueryParams params) {
+  public Mono<BggGeeklistTipsV4ResponseBody> getGeeklistTips(Integer id, BggGeeklistTipsV4QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -121,7 +155,14 @@ public class BggGeeklistsV4Repository {
         .onStatus(
             httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
             clientResponse -> Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .bodyToMono(String.class)
+        .toEntity(String.class)
+        .<BggGeeklistTipsV4ResponseBody>handle((entity, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(entity.getBody(), BggGeeklistTipsV4ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        })
         .onErrorMap(IOException.class, ioe -> new BggConnectionException())
         .retryWhen(
             Retry.max(3)

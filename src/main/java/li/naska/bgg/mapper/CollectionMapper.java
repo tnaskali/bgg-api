@@ -1,10 +1,8 @@
 package li.naska.bgg.mapper;
 
-import com.boardgamegeek.collection.VersionLink;
 import com.boardgamegeek.common.DecimalValue;
 import com.boardgamegeek.common.IntegerValue;
 import com.boardgamegeek.common.StringValue;
-import com.boardgamegeek.enums.NameType;
 import jakarta.xml.bind.JAXBElement;
 import li.naska.bgg.resource.vN.model.Collection;
 import li.naska.bgg.resource.vN.model.Name;
@@ -27,20 +25,20 @@ import java.util.stream.Collectors;
 public interface CollectionMapper extends BaseMapper {
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"termsofuse"})
-  Collection fromBggModel(com.boardgamegeek.collection.Items source);
+  Collection fromBggModel(com.boardgamegeek.collection.v2.Items source);
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"name", "version"})
   @Mapping(target = "name", expression = "java(getName(source))")
   @Mapping(target = "version", expression = "java(getVersion(source))")
-  Collection.Item fromBggModel(com.boardgamegeek.collection.Item source);
+  Collection.Item fromBggModel(com.boardgamegeek.collection.v2.Item source);
 
-  Collection.Item.Stats fromBggModel(com.boardgamegeek.collection.Stats source);
+  Collection.Item.Stats fromBggModel(com.boardgamegeek.collection.v2.Stats source);
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"ranks"})
   @Mapping(target = "ranks", expression = "java(getRanks(source))")
-  Collection.Item.Stats.Rating fromBggModel(com.boardgamegeek.collection.Rating source);
+  Collection.Item.Stats.Rating fromBggModel(com.boardgamegeek.collection.v2.Rating source);
 
-  default List<Collection.Item.Stats.Rating.Rank> getRanks(com.boardgamegeek.collection.Rating source) {
+  default List<Collection.Item.Stats.Rating.Rank> getRanks(com.boardgamegeek.collection.v2.Rating source) {
     return Optional.ofNullable(source.getRanks())
         .map(o -> o.getRanks().stream()
             .map(this::fromBggModel)
@@ -48,16 +46,16 @@ public interface CollectionMapper extends BaseMapper {
         .orElse(null);
   }
 
-  Collection.Item.Stats.Rating.Rank fromBggModel(com.boardgamegeek.collection.Rank source);
+  Collection.Item.Stats.Rating.Rank fromBggModel(com.boardgamegeek.collection.v2.Rank source);
 
-  Collection.Item.Status fromBggModel(com.boardgamegeek.collection.Status source);
+  Collection.Item.Status fromBggModel(com.boardgamegeek.collection.v2.Status source);
 
   @Mapping(target = "pp_currency", source = "ppCurrency")
   @Mapping(target = "cv_currency", source = "cvCurrency")
-  Collection.Item.PrivateInfo fromBggModel(com.boardgamegeek.collection.PrivateInfo source);
+  Collection.Item.PrivateInfo fromBggModel(com.boardgamegeek.collection.v2.PrivateInfo source);
 
-  default Collection.Item.Version getVersion(com.boardgamegeek.collection.Item source) {
-    com.boardgamegeek.collection.Version version = source.getVersion();
+  default Collection.Item.Version getVersion(com.boardgamegeek.collection.v2.Item source) {
+    com.boardgamegeek.collection.v2.Version version = source.getVersion();
     if (version == null) {
       return null;
     }
@@ -89,38 +87,38 @@ public interface CollectionMapper extends BaseMapper {
     return target;
   }
 
-  Collection.Item.Version.Publisher fromBggModel(com.boardgamegeek.collection.VersionPublisher source);
+  Collection.Item.Version.Publisher fromBggModel(com.boardgamegeek.collection.v2.VersionPublisher source);
 
-  Collection.Item.Version.VersionLink fromBggModel(com.boardgamegeek.collection.VersionLink source);
+  Collection.Item.Version.VersionLink fromBggModel(com.boardgamegeek.collection.v2.VersionLink source);
 
-  default Name getName(com.boardgamegeek.collection.Item source) {
+  default Name getName(com.boardgamegeek.collection.v2.Item source) {
     return Optional.ofNullable(source.getName())
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .orElse(null);
   }
 
-  default Name getName(com.boardgamegeek.collection.VersionItem source) {
+  default Name getName(com.boardgamegeek.collection.v2.VersionItem source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "name".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (com.boardgamegeek.collection.Name) e)
-        .filter(e -> e.getType() == NameType.PRIMARY)
+        .map(e -> (com.boardgamegeek.collection.v2.VersionName) e)
+        .filter(e -> "primary".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .findFirst()
         .orElse(null);
   }
 
-  default List<Name> getAlternatenames(com.boardgamegeek.collection.VersionItem source) {
+  default List<Name> getAlternatenames(com.boardgamegeek.collection.v2.VersionItem source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "name".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (com.boardgamegeek.collection.Name) e)
-        .filter(e -> e.getType() == NameType.ALTERNATE)
+        .map(e -> (com.boardgamegeek.collection.v2.VersionName) e)
+        .filter(e -> "alternate".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .collect(Collectors.toList());
   }
 
-  default Integer getYearpublished(com.boardgamegeek.collection.VersionItem source) {
+  default Integer getYearpublished(com.boardgamegeek.collection.v2.VersionItem source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "yearpublished".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -130,7 +128,7 @@ public interface CollectionMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default String getProductcode(com.boardgamegeek.collection.VersionItem source) {
+  default String getProductcode(com.boardgamegeek.collection.v2.VersionItem source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "productcode".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -140,7 +138,7 @@ public interface CollectionMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default BigDecimal getWidth(com.boardgamegeek.collection.VersionItem source) {
+  default BigDecimal getWidth(com.boardgamegeek.collection.v2.VersionItem source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "width".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -150,7 +148,7 @@ public interface CollectionMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default BigDecimal getLength(com.boardgamegeek.collection.VersionItem source) {
+  default BigDecimal getLength(com.boardgamegeek.collection.v2.VersionItem source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "length".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -160,7 +158,7 @@ public interface CollectionMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default BigDecimal getWeight(com.boardgamegeek.collection.VersionItem source) {
+  default BigDecimal getWeight(com.boardgamegeek.collection.v2.VersionItem source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "weight".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -170,7 +168,7 @@ public interface CollectionMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default BigDecimal getDepth(com.boardgamegeek.collection.VersionItem source) {
+  default BigDecimal getDepth(com.boardgamegeek.collection.v2.VersionItem source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "depth".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -180,7 +178,7 @@ public interface CollectionMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default String getImage(com.boardgamegeek.collection.VersionItem source) {
+  default String getImage(com.boardgamegeek.collection.v2.VersionItem source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "image".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -189,7 +187,7 @@ public interface CollectionMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default String getThumbnail(com.boardgamegeek.collection.VersionItem source) {
+  default String getThumbnail(com.boardgamegeek.collection.v2.VersionItem source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "thumbnail".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -199,11 +197,11 @@ public interface CollectionMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default List<Collection.Item.Version.VersionLink> getLinks(com.boardgamegeek.collection.VersionItem source) {
+  default List<Collection.Item.Version.VersionLink> getLinks(com.boardgamegeek.collection.v2.VersionItem source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "link".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (VersionLink) e)
+        .map(e -> (com.boardgamegeek.collection.v2.VersionLink) e)
         .map(this::fromBggModel)
         .collect(Collectors.toList());
   }

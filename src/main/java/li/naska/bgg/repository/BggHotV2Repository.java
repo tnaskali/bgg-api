@@ -14,15 +14,6 @@ import reactor.util.retry.Retry;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Hot Items
- * <p>
- * You can retrieve the list of most active items on the site.
- * <p>
- * Base URI: /xmlapi2/hot?parameter
- *
- * @see <a href="https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc12">BGG_XML_API2</a>
- */
 @Repository
 public class BggHotV2Repository {
 

@@ -4,8 +4,6 @@ import com.boardgamegeek.common.DecimalValue;
 import com.boardgamegeek.common.IntegerValue;
 import com.boardgamegeek.common.LocalDateValue;
 import com.boardgamegeek.common.StringValue;
-import com.boardgamegeek.enums.NameType;
-import com.boardgamegeek.thing.*;
 import jakarta.xml.bind.JAXBElement;
 import li.naska.bgg.resource.vN.model.Name;
 import li.naska.bgg.resource.vN.model.Thing;
@@ -61,39 +59,39 @@ public interface ThingMapper extends BaseMapper {
   @Mapping(target = "marketplacelistings", expression = "java(getMarketplaceListings(source))")
   @Mapping(target = "links", expression = "java(getLinks(source))")
   @Mapping(target = "polls", expression = "java(getPolls(source))")
-  Thing fromBggModel(com.boardgamegeek.thing.Thing source);
+  Thing fromBggModel(com.boardgamegeek.thing.v2.Thing source);
 
-  default Thing.Statistics getStatistics(com.boardgamegeek.thing.Thing source) {
+  default Thing.Statistics getStatistics(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "statistics".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (Statistics) e)
+        .map(e -> (com.boardgamegeek.thing.v2.Statistics) e)
         .flatMap(e -> e.getRatings().stream())
         .map(this::fromBggModel)
         .findFirst()
         .orElse(null);
   }
 
-  Thing.Link fromBggModel(com.boardgamegeek.thing.Link source);
+  Thing.Link fromBggModel(com.boardgamegeek.thing.v2.Link source);
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"results"})
   @Mapping(target = "numvotes", source = "totalvotes")
   @Mapping(target = "results", expression = "java(getResults(source))")
-  Thing.Poll fromBggModel(com.boardgamegeek.thing.Poll source);
+  Thing.Poll fromBggModel(com.boardgamegeek.thing.v2.Poll source);
 
   @Mapping(target = "votes", source = "numvotes")
   @Mapping(target = "votesforbest", ignore = true)
   @Mapping(target = "votesforrecommended", ignore = true)
   @Mapping(target = "votesfornotrecommended", ignore = true)
-  Thing.Poll.Result fromBggModel(com.boardgamegeek.thing.Result source);
+  Thing.Poll.Result fromBggModel(com.boardgamegeek.thing.v2.Result source);
 
-  default List<Thing.Poll.Result> getResults(com.boardgamegeek.thing.Poll source) {
+  default List<Thing.Poll.Result> getResults(com.boardgamegeek.thing.v2.Poll source) {
     if ("suggested_numplayers".equals(source.getName())) {
       return source.getResults().stream()
           .map(r -> {
             Function<String, Integer> votesFunction = (name) -> r.getResults().stream()
                 .filter(e -> name.equals(e.getValue()))
-                .map(Result::getNumvotes)
+                .map(com.boardgamegeek.thing.v2.Result::getNumvotes)
                 .findFirst()
                 .orElse(null);
             Thing.Poll.Result result = new Thing.Poll.Result();
@@ -126,17 +124,17 @@ public interface ThingMapper extends BaseMapper {
   @Mapping(target = "depth", expression = "java(getDepth(source))")
   @Mapping(target = "weight", expression = "java(getWeight(source))")
   @Mapping(target = "links", expression = "java(getLinks(source))")
-  Thing.Version fromBggModel(com.boardgamegeek.thing.Version source);
+  Thing.Version fromBggModel(com.boardgamegeek.thing.v2.Version source);
 
-  Thing.Version.VersionLink fromBggModel(com.boardgamegeek.thing.VersionLink source);
+  Thing.Version.VersionLink fromBggModel(com.boardgamegeek.thing.v2.VersionLink source);
 
-  Thing.Video fromBggModel(com.boardgamegeek.thing.Video source);
+  Thing.Video fromBggModel(com.boardgamegeek.thing.v2.Video source);
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"rating"})
   @Mapping(target = "rating", expression = "java(getRating(source))")
-  Thing.Comment fromBggModel(com.boardgamegeek.thing.Comment source);
+  Thing.Comment fromBggModel(com.boardgamegeek.thing.v2.Comment source);
 
-  default BigDecimal getRating(com.boardgamegeek.thing.Comment source) {
+  default BigDecimal getRating(com.boardgamegeek.thing.v2.Comment source) {
     return Optional.ofNullable(source.getRating())
         .map(o -> "N/A".equals(o) ? null : new BigDecimal(o))
         .orElse(null);
@@ -144,9 +142,9 @@ public interface ThingMapper extends BaseMapper {
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"ranks", "date"})
   @Mapping(target = "ranks", expression = "java(getRanks(source))")
-  Thing.Statistics fromBggModel(com.boardgamegeek.thing.Ratings source);
+  Thing.Statistics fromBggModel(com.boardgamegeek.thing.v2.Ratings source);
 
-  default List<Thing.Statistics.Rank> getRanks(com.boardgamegeek.thing.Ratings source) {
+  default List<Thing.Statistics.Rank> getRanks(com.boardgamegeek.thing.v2.Ratings source) {
     return Optional.ofNullable(source.getRanks())
         .map(o -> o.getRanks().stream()
             .map(this::fromBggModel)
@@ -154,16 +152,16 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  Thing.Statistics.Rank fromBggModel(com.boardgamegeek.thing.Rank source);
+  Thing.Statistics.Rank fromBggModel(com.boardgamegeek.thing.v2.Rank source);
 
   @BeanMapping(ignoreUnmappedSourceProperties = {"price", "link"})
   @Mapping(target = "currency", expression = "java(source.getPrice().getCurrency())")
   @Mapping(target = "price", expression = "java(source.getPrice().getValue())")
   @Mapping(target = "link", expression = "java(source.getLink().getHref())")
   @Mapping(target = "title", expression = "java(source.getLink().getTitle())")
-  Thing.MarketplaceListing fromBggModel(com.boardgamegeek.thing.Listing source);
+  Thing.MarketplaceListing fromBggModel(com.boardgamegeek.thing.v2.Listing source);
 
-  default String getImage(com.boardgamegeek.thing.Thing source) {
+  default String getImage(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "image".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -172,7 +170,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default String getImage(com.boardgamegeek.thing.Version source) {
+  default String getImage(com.boardgamegeek.thing.v2.Version source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "image".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -181,7 +179,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default String getThumbnail(com.boardgamegeek.thing.Thing source) {
+  default String getThumbnail(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "thumbnail".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -190,7 +188,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default String getThumbnail(com.boardgamegeek.thing.Version source) {
+  default String getThumbnail(com.boardgamegeek.thing.v2.Version source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "thumbnail".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -199,7 +197,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default String getDescription(com.boardgamegeek.thing.Thing source) {
+  default String getDescription(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "description".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -208,7 +206,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default Integer getYearpublished(com.boardgamegeek.thing.Thing source) {
+  default Integer getYearpublished(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "yearpublished".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -218,7 +216,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default Integer getYearpublished(com.boardgamegeek.thing.Version source) {
+  default Integer getYearpublished(com.boardgamegeek.thing.v2.Version source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "yearpublished".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -228,7 +226,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default LocalDate getDatepublished(com.boardgamegeek.thing.Thing source) {
+  default LocalDate getDatepublished(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "datepublished".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -244,7 +242,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default LocalDate getReleasedate(com.boardgamegeek.thing.Thing source) {
+  default LocalDate getReleasedate(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "releasedate".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -254,7 +252,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default String getSeriescode(com.boardgamegeek.thing.Thing source) {
+  default String getSeriescode(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "seriescode".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -264,7 +262,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default Integer getIssueIndex(com.boardgamegeek.thing.Thing source) {
+  default Integer getIssueIndex(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "issueIndex".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -274,7 +272,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default Integer getMinplayers(com.boardgamegeek.thing.Thing source) {
+  default Integer getMinplayers(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "minplayers".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -284,7 +282,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default Integer getMaxplayers(com.boardgamegeek.thing.Thing source) {
+  default Integer getMaxplayers(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "maxplayers".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -294,7 +292,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default Integer getPlayingtime(com.boardgamegeek.thing.Thing source) {
+  default Integer getPlayingtime(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "playingtime".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -304,7 +302,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default Integer getMinplaytime(com.boardgamegeek.thing.Thing source) {
+  default Integer getMinplaytime(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "minplaytime".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -314,7 +312,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default Integer getMaxplaytime(com.boardgamegeek.thing.Thing source) {
+  default Integer getMaxplaytime(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "maxplaytime".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -324,7 +322,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default Integer getMinage(com.boardgamegeek.thing.Thing source) {
+  default Integer getMinage(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "minage".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -334,49 +332,49 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default Name getName(com.boardgamegeek.thing.Thing source) {
+  default Name getName(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "name".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (com.boardgamegeek.thing.Name) e)
-        .filter(e -> e.getType() == NameType.PRIMARY)
+        .map(e -> (com.boardgamegeek.thing.v2.Name) e)
+        .filter(e -> "primary".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .findFirst()
         .orElse(null);
   }
 
-  default Name getName(com.boardgamegeek.thing.Version source) {
+  default Name getName(com.boardgamegeek.thing.v2.Version source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "name".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (com.boardgamegeek.thing.Name) e)
-        .filter(e -> e.getType() == NameType.PRIMARY)
+        .map(e -> (com.boardgamegeek.thing.v2.Name) e)
+        .filter(e -> "primary".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .findFirst()
         .orElse(null);
   }
 
-  default List<Name> getAlternatenames(com.boardgamegeek.thing.Thing source) {
+  default List<Name> getAlternatenames(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "name".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (com.boardgamegeek.thing.Name) e)
-        .filter(e -> e.getType() == NameType.ALTERNATE)
+        .map(e -> (com.boardgamegeek.thing.v2.Name) e)
+        .filter(e -> "alternate".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .collect(Collectors.toList());
   }
 
-  default List<Name> getAlternatenames(com.boardgamegeek.thing.Version source) {
+  default List<Name> getAlternatenames(com.boardgamegeek.thing.v2.Version source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "name".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (com.boardgamegeek.thing.Name) e)
-        .filter(e -> e.getType() == NameType.ALTERNATE)
+        .map(e -> (com.boardgamegeek.thing.v2.Name) e)
+        .filter(e -> "alternate".equals(e.getType()))
         .map(e -> new Name(e.getValue(), e.getSortindex()))
         .collect(Collectors.toList());
   }
 
-  default String getProductcode(com.boardgamegeek.thing.Version source) {
+  default String getProductcode(com.boardgamegeek.thing.v2.Version source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "productcode".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -386,7 +384,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default BigDecimal getWidth(com.boardgamegeek.thing.Version source) {
+  default BigDecimal getWidth(com.boardgamegeek.thing.v2.Version source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "width".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -396,7 +394,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default BigDecimal getLength(com.boardgamegeek.thing.Version source) {
+  default BigDecimal getLength(com.boardgamegeek.thing.v2.Version source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "length".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -406,7 +404,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default BigDecimal getWeight(com.boardgamegeek.thing.Version source) {
+  default BigDecimal getWeight(com.boardgamegeek.thing.v2.Version source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "weight".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -416,7 +414,7 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default BigDecimal getDepth(com.boardgamegeek.thing.Version source) {
+  default BigDecimal getDepth(com.boardgamegeek.thing.v2.Version source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "depth".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
@@ -426,79 +424,79 @@ public interface ThingMapper extends BaseMapper {
         .orElse(null);
   }
 
-  default List<Thing.Link> getLinks(com.boardgamegeek.thing.Thing source) {
+  default List<Thing.Link> getLinks(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "link".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (Link) e)
+        .map(e -> (com.boardgamegeek.thing.v2.Link) e)
         .map(this::fromBggModel)
         .collect(Collectors.toList());
   }
 
-  default List<Thing.Version.VersionLink> getLinks(com.boardgamegeek.thing.Version source) {
+  default List<Thing.Version.VersionLink> getLinks(com.boardgamegeek.thing.v2.Version source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "link".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (VersionLink) e)
+        .map(e -> (com.boardgamegeek.thing.v2.VersionLink) e)
         .map(this::fromBggModel)
         .collect(Collectors.toList());
   }
 
-  default List<Thing.Video> getVideos(com.boardgamegeek.thing.Thing source) {
+  default List<Thing.Video> getVideos(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "videos".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (com.boardgamegeek.thing.Videos) e)
+        .map(e -> (com.boardgamegeek.thing.v2.Videos) e)
         .flatMap(e -> e.getVideos().stream())
         .map(this::fromBggModel)
         .collect(Collectors.toList());
   }
 
-  default List<Thing.Version> getVersions(com.boardgamegeek.thing.Thing source) {
+  default List<Thing.Version> getVersions(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "versions".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (com.boardgamegeek.thing.Versions) e)
+        .map(e -> (com.boardgamegeek.thing.v2.Versions) e)
         .flatMap(e -> e.getItems().stream())
         .map(this::fromBggModel)
         .collect(Collectors.toList());
   }
 
-  default Integer getNumcomments(com.boardgamegeek.thing.Thing source) {
+  default Integer getNumcomments(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "comments".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (com.boardgamegeek.thing.Comments) e)
+        .map(e -> (com.boardgamegeek.thing.v2.Comments) e)
         .findFirst()
-        .map(Comments::getTotalitems)
+        .map(com.boardgamegeek.thing.v2.Comments::getTotalitems)
         .orElse(null);
   }
 
-  default List<Thing.Comment> getComments(com.boardgamegeek.thing.Thing source) {
+  default List<Thing.Comment> getComments(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "comments".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (com.boardgamegeek.thing.Comments) e)
+        .map(e -> (com.boardgamegeek.thing.v2.Comments) e)
         .flatMap(e -> e.getComments().stream())
         .map(this::fromBggModel)
         .collect(Collectors.toList());
   }
 
-  default List<Thing.MarketplaceListing> getMarketplaceListings(com.boardgamegeek.thing.Thing source) {
+  default List<Thing.MarketplaceListing> getMarketplaceListings(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "marketplacelistings".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (com.boardgamegeek.thing.Marketplacelistings) e)
+        .map(e -> (com.boardgamegeek.thing.v2.Marketplacelistings) e)
         .flatMap(e -> e.getListings().stream())
         .map(this::fromBggModel)
         .collect(Collectors.toList());
   }
 
-  default List<Thing.Poll> getPolls(com.boardgamegeek.thing.Thing source) {
+  default List<Thing.Poll> getPolls(com.boardgamegeek.thing.v2.Thing source) {
     return source.getThumbnailsAndImagesAndNames().stream()
         .filter(e -> "poll".equals(e.getName().getLocalPart()))
         .map(JAXBElement::getValue)
-        .map(e -> (com.boardgamegeek.thing.Poll) e)
+        .map(e -> (com.boardgamegeek.thing.v2.Poll) e)
         .map(this::fromBggModel)
         .collect(Collectors.toList());
   }

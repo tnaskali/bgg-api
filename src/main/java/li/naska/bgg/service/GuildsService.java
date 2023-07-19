@@ -44,7 +44,7 @@ public class GuildsService {
 
   private Mono<Guild> getGuild(BggGuildV2QueryParams queryParams) {
     return guildsRepository.getGuild(queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.guild.Guild.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.guild.v2.Guild.class))
         .map(guildMapper::fromBggModel);
   }
 

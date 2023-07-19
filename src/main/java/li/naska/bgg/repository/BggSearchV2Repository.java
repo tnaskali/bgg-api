@@ -14,15 +14,6 @@ import reactor.util.retry.Retry;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Search
- * <p>
- * You can search for items from the database by name.
- * <p>
- * Base URI: /xmlapi2/search?parameters
- *
- * @see <a href="https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc14">BGG_XML_API2</a>
- */
 @Repository
 public class BggSearchV2Repository {
 

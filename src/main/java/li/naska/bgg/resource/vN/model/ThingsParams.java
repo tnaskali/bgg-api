@@ -1,6 +1,5 @@
 package li.naska.bgg.resource.vN.model;
 
-import com.boardgamegeek.enums.ThingType;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -12,7 +11,7 @@ public class ThingsParams {
   @NotNull
   private List<Integer> ids;
 
-  private List<ThingType> types;
+  private List<String> types;
 
   private Boolean stats;
 

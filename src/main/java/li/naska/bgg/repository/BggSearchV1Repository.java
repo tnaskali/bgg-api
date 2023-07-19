@@ -14,15 +14,6 @@ import reactor.util.retry.Retry;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Search
- * <p>
- * Search for games by name and by AKAs
- * <p>
- * Base URI: /xmlapi/search?parameters
- *
- * @see <a href="https://boardgamegeek.com/wiki/page/BGG_XML_API#toc3">BGG_XML_API</a>
- */
 @Repository
 public class BggSearchV1Repository {
 

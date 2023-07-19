@@ -49,19 +49,13 @@ public class ForumListResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-          "<forums type=\"thing\" id=\"666\" termsofuse=\"https://boardgamegeek.com/xmlapi/termsofuse\">\n" +
-          "    <forum id=\"123541\" groupid=\"0\" title=\"Reviews\" noposting=\"0\" description=\"Post your game reviews in this forum.  &lt;A href=&quot;/thread/59278&quot;&gt;Click here for help on writing game reviews.&lt;/A&gt;\" numthreads=\"0\" numposts=\"0\" lastpostdate=\"\" />\n" +
-          "    <forum id=\"50454\" groupid=\"0\" title=\"Sessions\" noposting=\"0\" description=\"Post your session reports here.\" numthreads=\"1\" numposts=\"1\" lastpostdate=\"Mon, 01 Jan 2001 06:00:00 +0000\" />\n" +
-          "    <forum id=\"72914\" groupid=\"0\" title=\"General\" noposting=\"0\" description=\"Post any related article to this game here.\" numthreads=\"1\" numposts=\"2\" lastpostdate=\"Sun, 06 Jan 2008 18:24:14 +0000\" />\n" +
-          "    <forum id=\"123542\" groupid=\"0\" title=\"Rules\" noposting=\"0\" description=\"Post any rules questions you have here.\" numthreads=\"0\" numposts=\"0\" lastpostdate=\"\" />\n" +
-          "    <forum id=\"123543\" groupid=\"0\" title=\"Strategy\" noposting=\"0\" description=\"Post strategy and tactics articles here.\" numthreads=\"0\" numposts=\"0\" lastpostdate=\"\" />\n" +
-          "    <forum id=\"123544\" groupid=\"0\" title=\"Variants\" noposting=\"0\" description=\"Post variants to the game rules here.\" numthreads=\"0\" numposts=\"0\" lastpostdate=\"\" />\n" +
-          "    <forum id=\"123545\" groupid=\"0\" title=\"News\" noposting=\"0\" description=\"Post time sensitive announcements here.\" numthreads=\"0\" numposts=\"0\" lastpostdate=\"\" />\n" +
-          "    <forum id=\"2480784\" groupid=\"0\" title=\"Crowdfunding\" noposting=\"0\" description=\"Post crowdfunding / preorder content here.\" numthreads=\"0\" numposts=\"0\" lastpostdate=\"\" />\n" +
-          "    <forum id=\"454182\" groupid=\"0\" title=\"Play By Forum\" noposting=\"0\" description=\"Run Play By Forum (PBF) games here.\" numthreads=\"0\" numposts=\"0\" lastpostdate=\"\" />\n" +
-          "    <forum id=\"1477598\" groupid=\"0\" title=\"Organized Play\" noposting=\"0\" description=\"Post here to find local gamers and to promote local events.\" numthreads=\"0\" numposts=\"0\" lastpostdate=\"\" />\n" +
-          "</forums>";
+      final String mockResponseBody = """
+          <?xml version="1.0" encoding="utf-8"?>
+          <forums type="thing" id="666" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+              <forum id="123541" groupid="0" title="Reviews" noposting="0" description="Post your game reviews in this forum.  &lt;A href=&quot;/thread/59278&quot;&gt;Click here for help on writing game reviews.&lt;/A&gt;" numthreads="0" numposts="0" lastpostdate="" />
+              <forum id="50454" groupid="0" title="Sessions" noposting="0" description="Post your session reports here." numthreads="1" numposts="1" lastpostdate="Mon, 01 Jan 2001 06:00:00 +0000" />
+          </forums>
+          """;
 
       @BeforeEach
       public void setup() {
@@ -112,7 +106,7 @@ public class ForumListResourceV2IT extends AbstractMockServerIT {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest = (MediaType mediaType) -> Do.this.partialTest
             .apply(
-                new LinkedMultiValueMap<String, String>() {
+                new LinkedMultiValueMap<>() {
                   {
                     add("id", "666");
                     add("type", "thing");

@@ -1,7 +1,11 @@
 package li.naska.bgg.repository;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import li.naska.bgg.exception.BggConnectionException;
+import li.naska.bgg.repository.model.BggArticleV4ResponseBody;
 import li.naska.bgg.repository.model.BggArticlesV4QueryParams;
+import li.naska.bgg.repository.model.BggArticlesV4ResponseBody;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +23,9 @@ import java.nio.charset.StandardCharsets;
 @Repository
 public class BggArticlesV4Repository {
 
+  @Autowired
+  private ObjectMapper objectMapper;
+
   private final WebClient webClient;
 
   public BggArticlesV4Repository(
@@ -27,7 +34,7 @@ public class BggArticlesV4Repository {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 
-  public Mono<String> getArticles(BggArticlesV4QueryParams params) {
+  public Mono<BggArticlesV4ResponseBody> getArticles(BggArticlesV4QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -39,14 +46,21 @@ public class BggArticlesV4Repository {
         .onStatus(
             httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
             clientResponse -> Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .bodyToMono(String.class)
+        .toEntity(String.class)
+        .<BggArticlesV4ResponseBody>handle((entity, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(entity.getBody(), BggArticlesV4ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        })
         .onErrorMap(IOException.class, ioe -> new BggConnectionException())
         .retryWhen(
             Retry.max(3)
                 .filter(throwable -> throwable instanceof BggConnectionException));
   }
 
-  public Mono<String> getArticle(Integer id) {
+  public Mono<BggArticleV4ResponseBody> getArticle(Integer id) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -55,7 +69,14 @@ public class BggArticlesV4Repository {
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
-        .bodyToMono(String.class)
+        .toEntity(String.class)
+        .<BggArticleV4ResponseBody>handle((entity, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(entity.getBody(), BggArticleV4ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        })
         .onErrorMap(IOException.class, ioe -> new BggConnectionException())
         .retryWhen(
             Retry.max(3)

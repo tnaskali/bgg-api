@@ -1,7 +1,5 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.enums.ItemType;
-import com.boardgamegeek.forumlist.Forums;
 import li.naska.bgg.mapper.ForumListsParamsMapper;
 import li.naska.bgg.mapper.ForumMapper;
 import li.naska.bgg.mapper.ThreadMapper;
@@ -66,7 +64,7 @@ public class ForumsService {
   public Mono<List<Forum>> getForums(ForumsParams params) {
     BggForumlistV2QueryParams queryParams = forumListsParamsMapper.toBggModel(params);
     return forumListsRepository.getForums(queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, Forums.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.forumlist.v2.Forums.class))
         .map(f -> f.getFora().stream()
             .map(forumMapper::fromBggModel)
             .collect(Collectors.toList()));
@@ -75,14 +73,14 @@ public class ForumsService {
   public Mono<List<Forum>> getThingForums(Integer id) {
     ForumsParams params = new ForumsParams();
     params.setId(id);
-    params.setType(ItemType.THING);
+    params.setType("thing");
     return getForums(params);
   }
 
   public Mono<List<Forum>> getFamilyForums(Integer id) {
     ForumsParams params = new ForumsParams();
     params.setId(id);
-    params.setType(ItemType.FAMILY);
+    params.setType("family");
     return getForums(params);
   }
 
@@ -90,7 +88,7 @@ public class ForumsService {
     BggThreadV2QueryParams queryParams = threadParamsMapper.toBggModel(params);
     queryParams.setId(id);
     return threadsRepository.getThread(queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.thread.Thread.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.thread.v2.Thread.class))
         .map(threadMapper::fromBggModel);
   }
 
@@ -143,7 +141,7 @@ public class ForumsService {
 
   private Mono<Forum> getForum(BggForumV2QueryParams queryParams) {
     return forumsRepository.getForum(queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.forum.Forum.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.forum.v2.Forum.class))
         .map(forumMapper::fromBggModel);
   }
 

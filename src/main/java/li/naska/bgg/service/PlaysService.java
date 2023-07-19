@@ -1,10 +1,9 @@
 package li.naska.bgg.service;
 
-import com.boardgamegeek.enums.ItemType;
 import li.naska.bgg.mapper.GeekplayParamsMapper;
 import li.naska.bgg.mapper.PlaysMapper;
 import li.naska.bgg.mapper.PlaysParamsMapper;
-import li.naska.bgg.repository.BggGeekplayV2Repository;
+import li.naska.bgg.repository.BggGeekplayV3Repository;
 import li.naska.bgg.repository.BggPlaysV2Repository;
 import li.naska.bgg.repository.model.BggGeekplayV3RequestBody;
 import li.naska.bgg.repository.model.BggGeekplayV3ResponseBody;
@@ -45,7 +44,7 @@ public class PlaysService {
   private PlaysMapper playsMapper;
 
   @Autowired
-  private BggGeekplayV2Repository geekplaysRepository;
+  private BggGeekplayV3Repository geekplaysRepository;
 
   @Autowired
   private GeekplayParamsMapper geekplayParamsMapper;
@@ -75,7 +74,7 @@ public class PlaysService {
     Supplier<BggPlaysV2QueryParams> queryParamsSupplier = () -> {
       BggPlaysV2QueryParams queryParams = playsParamsMapper.toBggModel(params);
       queryParams.setId(id);
-      queryParams.setType(ItemType.THING.name());
+      queryParams.setType("thing");
       return queryParams;
     };
     return getPlays(queryParamsSupplier);
@@ -85,7 +84,7 @@ public class PlaysService {
     Supplier<BggPlaysV2QueryParams> queryParamsSupplier = () -> {
       BggPlaysV2QueryParams queryParams = playsParamsMapper.toBggModel(params);
       queryParams.setId(id);
-      queryParams.setType(ItemType.THING.name());
+      queryParams.setType("thing");
       return queryParams;
     };
     return getPagedPlays(queryParamsSupplier, pagingParams);
@@ -95,7 +94,7 @@ public class PlaysService {
     Supplier<BggPlaysV2QueryParams> queryParamsSupplier = () -> {
       BggPlaysV2QueryParams queryParams = playsParamsMapper.toBggModel(params);
       queryParams.setId(id);
-      queryParams.setType(ItemType.FAMILY.name());
+      queryParams.setType("family");
       return queryParams;
     };
     return getPlays(queryParamsSupplier);
@@ -105,7 +104,7 @@ public class PlaysService {
     Supplier<BggPlaysV2QueryParams> queryParamsSupplier = () -> {
       BggPlaysV2QueryParams queryParams = playsParamsMapper.toBggModel(params);
       queryParams.setId(id);
-      queryParams.setType(ItemType.FAMILY.name());
+      queryParams.setType("family");
       return queryParams;
     };
     return getPagedPlays(queryParamsSupplier, pagingParams);
@@ -156,7 +155,7 @@ public class PlaysService {
 
   private Mono<Plays> getPlays(BggPlaysV2QueryParams queryParams) {
     return playsRepository.getPlays(queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.plays.Plays.class))
+        .map(xml -> xmlProcessor.toJavaObject(xml, com.boardgamegeek.plays.v2.Plays.class))
         .map(playsMapper::fromBggModel);
   }
 

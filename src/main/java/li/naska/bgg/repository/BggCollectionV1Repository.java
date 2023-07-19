@@ -19,27 +19,6 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.Optional;
 
-/**
- * Collection
- * <p>
- * Retrieve games in a user's collection
- * <br/>
- * <b>Important definition:</b> A user's collection includes any games the user has added to her collection on BGG. This
- * includes games she owns, games she used to own, games she's rated, games upon which she's commented, games she's
- * played, and games on her wishlist, just to name a few. In this section, references to the collection mean this
- * broader sense of BGG collection, not the user's personal stash of games.
- * <br/>
- * The XMLAPI will place requests for geeklists and user collections into a queue to be processed by backend servers.
- * When this happens, the request will result in an HTTP response of 202 to indicate the request has been queued and is
- * pending processing. These collection requests will result in an HTTP response of 200 along with the XML data once the
- * server has the data available (See
- * <a href="https://boardgamegeek.com/thread/1188687/export-collections-has-been-updated-xmlapi-develop">Export
- * collections has been updated (XMLAPI developers read this)</a> for details).
- * <p>
- * Base URI: /xmlapi/collection/{username}?parameters
- *
- * @see <a href="https://boardgamegeek.com/wiki/page/BGG_XML_API#toc5">BGG_XML_API</a>
- */
 @Repository
 public class BggCollectionV1Repository {
 
@@ -51,7 +30,7 @@ public class BggCollectionV1Repository {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 
-  public Mono<String> getCollection(String cookie, String username, BggCollectionV1QueryParams params) {
+  public Mono<String> getCollection(Optional<String> cookie, String username, BggCollectionV1QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -60,8 +39,7 @@ public class BggCollectionV1Repository {
             .build(username))
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
-        .headers(headers -> Optional.ofNullable(cookie)
-            .ifPresent(c -> headers.add("Cookie", c)))
+        .headers(headers -> cookie.ifPresent(c -> headers.add("Cookie", c)))
         .retrieve()
         .onStatus(
             // BGG might queue the request

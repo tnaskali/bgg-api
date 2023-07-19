@@ -23,6 +23,9 @@ import java.util.regex.Pattern;
 @Repository
 public class BggGeekaccountV3Repository {
 
+  @Autowired
+  private ObjectMapper objectMapper;
+
   private final WebClient webClient;
 
   public BggGeekaccountV3Repository(
@@ -65,11 +68,11 @@ public class BggGeekaccountV3Repository {
               }
             }
         )
-        .map(entity -> {
+        .<BggGeekaccountV3ResponseBody>handle((entity, sink) -> {
           try {
-            return new ObjectMapper().readValue(entity.getBody(), BggGeekaccountV3ResponseBody.class);
+            sink.next(objectMapper.readValue(entity.getBody(), BggGeekaccountV3ResponseBody.class));
           } catch (JsonProcessingException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+            sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
           }
         })
         .doOnNext(responseBody -> {

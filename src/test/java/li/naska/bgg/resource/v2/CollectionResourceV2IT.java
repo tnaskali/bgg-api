@@ -49,13 +49,15 @@ public class CollectionResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-          "<items totalitems=\"389\" termsofuse=\"https://boardgamegeek.com/xmlapi/termsofuse\" pubdate=\"Sat, 18 Dec 2021 12:16:30 +0000\">\n" +
-          "    <item objecttype=\"thing\" objectid=\"94246\" subtype=\"boardgame\" collid=\"67682351\">\n" +
-          "        <name sortindex=\"1\">1812: The Invasion of Canada</name>\n" +
-          "        <status own=\"1\" prevowned=\"0\" fortrade=\"0\" want=\"0\" wanttoplay=\"0\" wanttobuy=\"0\" wishlist=\"0\"  preordered=\"0\" lastmodified=\"2020-01-11 11:15:53\" />\n" +
-          "    </item>\n" +
-          "</items>";
+      final String mockResponseBody = """
+          <?xml version="1.0" encoding="utf-8"?>
+          <items totalitems="389" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse" pubdate="Sat, 18 Dec 2021 12:16:30 +0000">
+              <item objecttype="thing" objectid="94246" subtype="boardgame" collid="67682351">
+                  <name sortindex="1">1812: The Invasion of Canada</name>
+                  <status own="1" prevowned="0" fortrade="0" want="0" wanttoplay="0" wanttobuy="0" wishlist="0"  preordered="0" lastmodified="2020-01-11 11:15:53" />
+              </item>
+          </items>
+          """;
 
       @BeforeEach
       public void setup() {
@@ -106,7 +108,7 @@ public class CollectionResourceV2IT extends AbstractMockServerIT {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest = (MediaType mediaType) -> Do.this.partialTest
             .apply(
-                new LinkedMultiValueMap<String, String>() {
+                new LinkedMultiValueMap<>() {
                   {
                     add("username", "gandalf");
                     add("version", "1");

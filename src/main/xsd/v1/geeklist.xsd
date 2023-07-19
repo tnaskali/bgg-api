@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:common="http://www.boardgamegeek.com/common"
+           xmlns:geeklist="http://www.boardgamegeek.com/geeklist/v1"
+           targetNamespace="http://www.boardgamegeek.com/geeklist/v1">
+  <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
+
+  <xs:complexType name="comment">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="username" type="xs:string" use="required"/>
+        <xs:attribute name="date" type="common:zonedDateTime" use="required"/>
+        <xs:attribute name="postdate" type="common:zonedDateTime" use="required"/>
+        <xs:attribute name="editdate" type="common:zonedDateTime" use="required"/>
+        <xs:attribute name="thumbs" type="xs:nonNegativeInteger" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="item">
+    <xs:sequence>
+      <xs:element name="body" type="xs:string"/>
+      <xs:element name="comment" type="geeklist:comment" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="objecttype" type="xs:string" use="required"/>
+    <xs:attribute name="subtype" type="xs:string" use="required"/>
+    <xs:attribute name="objectid" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="objectname" type="xs:string" use="required"/>
+    <xs:attribute name="username" type="xs:string" use="required"/>
+    <xs:attribute name="postdate" type="common:zonedDateTime" use="required"/>
+    <xs:attribute name="editdate" type="common:zonedDateTime" use="required"/>
+    <xs:attribute name="thumbs" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="imageid" type="xs:nonNegativeInteger" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="geeklist">
+    <xs:sequence>
+      <xs:element name="postdate" type="common:zonedDateTime"/>
+      <xs:element name="postdate_timestamp" type="xs:nonNegativeInteger"/>
+      <xs:element name="editdate" type="common:zonedDateTime"/>
+      <xs:element name="editdate_timestamp" type="xs:nonNegativeInteger"/>
+      <xs:element name="thumbs" type="xs:nonNegativeInteger"/>
+      <xs:element name="numitems" type="xs:nonNegativeInteger"/>
+      <xs:element name="username" type="xs:string"/>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="description" type="xs:string"/>
+      <xs:element name="comment" type="geeklist:comment" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="item" type="geeklist:item" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
+  </xs:complexType>
+
+  <xs:element name="geeklist" type="geeklist:geeklist"/>
+
+</xs:schema>

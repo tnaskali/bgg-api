@@ -49,12 +49,14 @@ public class FamilyResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-          "<items termsofuse=\"https://boardgamegeek.com/xmlapi/termsofuse\">\n" +
-          "  <item type=\"boardgamefamily\" id=\"666\">\n" +
-          "    <name type=\"primary\" sortindex=\"1\" value=\"A test BoardgameFamily\"/>\n" +
-          "  </item>\n" +
-          "</items>";
+      final String mockResponseBody = """
+          <?xml version="1.0" encoding="utf-8"?>
+          <items termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+            <item type="boardgamefamily" id="666">
+              <name type="primary" sortindex="1" value="A test BoardgameFamily"/>
+            </item>
+          </items>
+          """;
 
       @BeforeEach
       public void setup() {
@@ -105,7 +107,7 @@ public class FamilyResourceV2IT extends AbstractMockServerIT {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest = (MediaType mediaType) -> Do.this.partialTest
             .apply(
-                new LinkedMultiValueMap<String, String>() {
+                new LinkedMultiValueMap<>() {
                   {
                     add("id", "666");
                     add("id", "667,668");

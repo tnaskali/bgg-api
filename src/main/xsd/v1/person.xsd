@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:person="http://www.boardgamegeek.com/person/v1"
+           targetNamespace="http://www.boardgamegeek.com/person/v1">
+
+  <xs:complexType name="person">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="description" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="people">
+    <xs:sequence>
+      <xs:element name="person" type="person:person" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
+  </xs:complexType>
+
+  <xs:element name="people" type="person:people"/>
+
+</xs:schema>

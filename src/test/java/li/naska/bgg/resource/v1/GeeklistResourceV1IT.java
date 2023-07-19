@@ -37,8 +37,8 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
   @DisplayName("get geeklist")
   class Do {
 
-    private final TriFunction<Integer, MultiValueMap<String, String>, MediaType, WebTestClient.ResponseSpec> partialTest =
-        (Integer id, MultiValueMap<String, String> params, MediaType mediaType) ->
+    private final TriFunction<Object, MultiValueMap<String, String>, MediaType, WebTestClient.ResponseSpec> partialTest =
+        (Object id, MultiValueMap<String, String> params, MediaType mediaType) ->
             webTestClient
                 .get()
                 .uri(builder -> builder.queryParams(params).build(id))
@@ -50,24 +50,25 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody = "" +
-          "<geeklist id=\"666\" termsofuse=\"https://boardgamegeek.com/xmlapi/termsofuse\">\n" +
-          "    <postdate>Wed, 12 Mar 2003 18:08:25 +0000</postdate>\n" +
-          "    <postdate_timestamp>1047492505</postdate_timestamp>\n" +
-          "    <editdate>Wed, 12 Mar 2003 18:08:25 +0000</editdate>\n" +
-          "    <editdate_timestamp>1047492505</editdate_timestamp>\n" +
-          "    <thumbs>3</thumbs>\n" +
-          "    <numitems>8</numitems>\n" +
-          "    <username>dlminsac</username>\n" +
-          "    <title>Bodily Functions</title>\n" +
-          "    <description>Games in which bodily functions play a prominant role.  Dedicated to Greg Schloesser.</description>\n" +
-          "    <item " +
-          "        id=\"8414\" objecttype=\"thing\" subtype=\"boardgame\" objectid=\"2940\"" +
-          "        objectname=\"A Dog&#039;s Life\" username=\"dlminsac\" postdate=\"Wed, 12 Mar 2003 18:08:25 +0000\"" +
-          "        editdate=\"Wed, 12 Mar 2003 18:08:25 +0000\" thumbs=\"0\" imageid=\"8508\">\n" +
-          "        <body>Stock up on that water so you can force the other dogs to sniff your pee.</body>\n" +
-          "    </item>\n" +
-          "</geeklist>";
+      final String mockResponseBody = """
+          <geeklist id="666" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+              <postdate>Wed, 12 Mar 2003 18:08:25 +0000</postdate>
+              <postdate_timestamp>1047492505</postdate_timestamp>
+              <editdate>Wed, 12 Mar 2003 18:08:25 +0000</editdate>
+              <editdate_timestamp>1047492505</editdate_timestamp>
+              <thumbs>3</thumbs>
+              <numitems>8</numitems>
+              <username>dlminsac</username>
+              <title>Bodily Functions</title>
+              <description>Games in which bodily functions play a prominant role.  Dedicated to Greg Schloesser.</description>
+              <item\s
+                  id="8414" objecttype="thing" subtype="boardgame" objectid="2940"
+                  objectname="A Dog&#039;s Life" username="dlminsac" postdate="Wed, 12 Mar 2003 18:08:25 +0000"
+                  editdate="Wed, 12 Mar 2003 18:08:25 +0000" thumbs="0" imageid="8508">
+                  <body>Stock up on that water so you can force the other dogs to sniff your pee.</body>
+              </item>
+          </geeklist>
+          """;
 
       @BeforeEach
       public void setup() {
@@ -75,12 +76,51 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
       }
 
       @Nested
-      @DisplayName("when invalid parameters")
+      @DisplayName("when invalid path parameter")
       class When_1 {
 
         private final Supplier<WebTestClient.ResponseSpec> test = () -> Do.this.partialTest.apply(
+            "toto",
+            new LinkedMultiValueMap<>(),
+            MediaType.APPLICATION_XML);
+
+        @Nested
+        @DisplayName("then")
+        class Then {
+
+          private WebTestClient.ResponseSpec result;
+
+          private RecordedRequest recordedRequest;
+
+          @BeforeEach
+          public void setup() throws Exception {
+            result = test.get();
+            recordedRequest = record();
+          }
+
+          @Test
+          @DisplayName("should answer 400")
+          public void should_1() {
+            result.expectStatus().isBadRequest();
+          }
+
+          @Test
+          @DisplayName("should not forward request")
+          public void should_2() {
+            assertThat(recordedRequest).isNull();
+          }
+
+        }
+
+      }
+
+      @Nested
+      @DisplayName("when invalid query parameter")
+      class When_2 {
+
+        private final Supplier<WebTestClient.ResponseSpec> test = () -> Do.this.partialTest.apply(
             666,
-            new LinkedMultiValueMap<String, String>() {{
+            new LinkedMultiValueMap<>() {{
               set("comments", "2");
             }},
             MediaType.APPLICATION_XML);
@@ -117,12 +157,12 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
 
       @Nested
       @DisplayName("when valid parameters")
-      class When_2 {
+      class When_3 {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest = (MediaType mediaType) -> Do.this.partialTest
             .apply(
                 666,
-                new LinkedMultiValueMap<String, String>() {
+                new LinkedMultiValueMap<>() {
                   {
                     add("comments", "1");
                     add("start", "100");
@@ -135,9 +175,9 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
 
         @Nested
         @DisplayName("when accept XML")
-        class When_2_1 {
+        class When_3_1 {
 
-          private final Supplier<WebTestClient.ResponseSpec> test = () -> When_2.this.partialTest
+          private final Supplier<WebTestClient.ResponseSpec> test = () -> When_3.this.partialTest
               .apply(MediaType.APPLICATION_XML);
 
           @Nested
@@ -187,7 +227,7 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
         @DisplayName("when accept JSON")
         class When_2_2 {
 
-          private final Supplier<WebTestClient.ResponseSpec> test = () -> When_2.this.partialTest
+          private final Supplier<WebTestClient.ResponseSpec> test = () -> When_3.this.partialTest
               .apply(MediaType.APPLICATION_JSON);
 
           @Nested
