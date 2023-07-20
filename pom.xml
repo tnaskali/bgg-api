@@ -54,7 +54,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <com.graphql-java.version>20.2</com.graphql-java.version>
-    <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
     <org.springdoc.version>2.2.0</org.springdoc.version>
     <java.version>17</java.version>
     <sonar.coverage.jacoco.xmlReportPaths>
@@ -121,11 +120,6 @@
       <groupId>jakarta.xml.bind</groupId>
       <artifactId>jakarta.xml.bind-api</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.mapstruct</groupId>
-      <artifactId>mapstruct</artifactId>
-      <version>${org.mapstruct.version}</version>
-    </dependency>
 
     <dependency>
       <groupId>org.springdoc</groupId>
@@ -179,19 +173,9 @@
           <configuration>
             <annotationProcessorPaths>
               <path>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct-processor</artifactId>
-                <version>${org.mapstruct.version}</version>
-              </path>
-              <path>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
-              </path>
-              <path>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok-mapstruct-binding</artifactId>
-                <version>0.2.0</version>
               </path>
             </annotationProcessorPaths>
           </configuration>
