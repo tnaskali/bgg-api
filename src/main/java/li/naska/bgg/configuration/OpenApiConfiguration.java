@@ -61,12 +61,4 @@ public class OpenApiConfiguration {
         .build();
   }
 
-  @Bean
-  public GroupedOpenApi bggApiVN() {
-    return GroupedOpenApi.builder()
-        .group("vN - JSON API (NEW)")
-        .pathsToMatch("/api/vN/**")
-        .build();
-  }
-
 }
