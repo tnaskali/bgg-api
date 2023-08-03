@@ -4,5 +4,5 @@ import com.boardgamegeek.user.v2.Buddy;
 
 import java.util.List;
 
-public record UserBuddiesData(List<Buddy> buddies) {
+public record UserV2Buddies(List<Buddy> buddies) {
 }

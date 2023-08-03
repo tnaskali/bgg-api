@@ -4,5 +4,5 @@ import com.boardgamegeek.user.v2.Guild;
 
 import java.util.List;
 
-public record UserGuildsData(List<Guild> guilds) {
+public record UserV2Guilds(List<Guild> guilds) {
 }

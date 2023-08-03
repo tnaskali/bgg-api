@@ -19,14 +19,14 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 public class JacksonConfiguration {
 
   @Bean
-  public ObjectMapper standardObjectMapper() {
+  public ObjectMapper customObjectMapper() {
     ObjectMapper mapper = new ObjectMapper();
     SimpleModule javaTimeModule = new JavaTimeModule();
     // deserialize bad formatted dates to null
     javaTimeModule.addDeserializer(LocalDateTime.class, SafeLocalDateTimeJacksonDeserializer.INSTANCE);
     javaTimeModule.addDeserializer(LocalDate.class, SafeLocalDateJacksonDeserializer.INSTANCE); // see BggGeekitemV4ResponseBody#commercelinks
     mapper.registerModule(javaTimeModule);
-    mapper.setDefaultPropertyInclusion(NON_EMPTY);
+    // mapper.setDefaultPropertyInclusion(NON_EMPTY); // FIXME https://stackoverflow.com/a/56008395/4074057
     mapper.enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT); // see BggUserV4ResponseBody#adminBadges
     mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     return mapper;

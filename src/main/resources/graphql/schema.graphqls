@@ -7,6 +7,7 @@ enum UserDomain {
 
 type Query {
     userByUsername(username: ID): User
+    userById(id: ID): User
     guildById(id: ID): Guild
 }
 
@@ -16,9 +17,9 @@ type User {
     firstname: String
     lastname: String
     avatarlink: String
-    yearregistered: Int
+    dateregistered: Date
     lastlogin: Date
-    address: SimpleAddress
+    address: Address
     webaddress: String
     xboxaccount: String
     wiiaccount: String
@@ -27,10 +28,14 @@ type User {
     steamaccount: String
     marketrating: Int
     traderating: Int
-    guilds: [Guild]
-    buddies: [User]
+    guilds: [Guild!]
+    buddies: [User!]
     top: Ranking
     hot: Ranking
+    supportyears: [Int!]
+    designerid: Int
+    publisherid: Int
+    microbadges: [Microbadge!]
 }
 
 type Guild {
@@ -42,7 +47,7 @@ type Guild {
     manager: User
     description: String
     address: Address
-    members: [GuildMember]
+    members: [GuildMember!]
 }
 
 type Address {
@@ -51,11 +56,7 @@ type Address {
     city: String
     postalcode: String
     stateorprovince: String
-    country: String
-}
-
-type SimpleAddress {
-    stateorprovince: String
+    isocountry: String
     country: String
 }
 
@@ -65,9 +66,9 @@ type GuildMember {
 }
 
 type Ranking {
-    boardgame: [RankedItem]
-    rpg: [RankedItem]
-    videogame: [RankedItem]
+    boardgame: [RankedItem!]
+    rpg: [RankedItem!]
+    videogame: [RankedItem!]
 }
 
 type RankedItem {
@@ -75,4 +76,10 @@ type RankedItem {
     type: String
     id: Int
     name: String
+}
+
+type Microbadge {
+    id: ID
+    name: String,
+    imagesrc: String
 }

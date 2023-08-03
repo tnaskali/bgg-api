@@ -1,6 +1,6 @@
 package li.naska.bgg.graphql.controller;
 
-import li.naska.bgg.graphql.data.UserRankingData;
+import li.naska.bgg.graphql.data.UserV2Ranking;
 import li.naska.bgg.graphql.model.RankedItem;
 import li.naska.bgg.graphql.model.Ranking;
 import org.dataloader.DataLoader;
@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 public class RankingController {
 
   @SchemaMapping
-  public Mono<List<RankedItem>> boardgame(Ranking ranking, DataLoader<UserRankingData.UserRankingKey, UserRankingData> loader) {
-    return Mono.fromFuture(loader.load(new UserRankingData.UserRankingKey(ranking.user().username(), ranking.type(), "boardgame")))
+  public Mono<List<RankedItem>> boardgame(Ranking ranking, DataLoader<UserV2Ranking.UserRankingKey, UserV2Ranking> loader) {
+    return Mono.fromFuture(loader.load(new UserV2Ranking.UserRankingKey(ranking.user().username(), ranking.type(), "boardgame")))
         .map(data -> data.ranking().getItems().stream().map(item -> new RankedItem(
                 item.getRank(),
                 item.getType(),
@@ -27,8 +27,8 @@ public class RankingController {
   }
 
   @SchemaMapping
-  public Mono<List<RankedItem>> rpg(Ranking ranking, DataLoader<UserRankingData.UserRankingKey, UserRankingData> loader) {
-    return Mono.fromFuture(loader.load(new UserRankingData.UserRankingKey(ranking.user().username(), ranking.type(), "rpg")))
+  public Mono<List<RankedItem>> rpg(Ranking ranking, DataLoader<UserV2Ranking.UserRankingKey, UserV2Ranking> loader) {
+    return Mono.fromFuture(loader.load(new UserV2Ranking.UserRankingKey(ranking.user().username(), ranking.type(), "rpg")))
         .map(data -> data.ranking().getItems().stream().map(item -> new RankedItem(
                 item.getRank(),
                 item.getType(),
@@ -39,8 +39,8 @@ public class RankingController {
   }
 
   @SchemaMapping
-  public Mono<List<RankedItem>> videogame(Ranking ranking, DataLoader<UserRankingData.UserRankingKey, UserRankingData> loader) {
-    return Mono.fromFuture(loader.load(new UserRankingData.UserRankingKey(ranking.user().username(), ranking.type(), "videogame")))
+  public Mono<List<RankedItem>> videogame(Ranking ranking, DataLoader<UserV2Ranking.UserRankingKey, UserV2Ranking> loader) {
+    return Mono.fromFuture(loader.load(new UserV2Ranking.UserRankingKey(ranking.user().username(), ranking.type(), "videogame")))
         .map(data -> data.ranking().getItems().stream().map(item -> new RankedItem(
                 item.getRank(),
                 item.getType(),

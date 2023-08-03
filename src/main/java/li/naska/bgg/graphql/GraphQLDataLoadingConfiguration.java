@@ -4,6 +4,7 @@ import li.naska.bgg.graphql.data.*;
 import li.naska.bgg.graphql.model.enums.Domain;
 import li.naska.bgg.graphql.service.GraphQLGuildsService;
 import li.naska.bgg.graphql.service.GraphQLUsersService;
+import li.naska.bgg.repository.BggMicrobadgesV4Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.graphql.execution.BatchLoaderRegistry;
@@ -20,36 +21,52 @@ public class GraphQLDataLoadingConfiguration {
   @Autowired
   private GraphQLGuildsService guildsService;
 
+  @Autowired
+  private BggMicrobadgesV4Repository microbadgesService;
+
   public GraphQLDataLoadingConfiguration(BatchLoaderRegistry registry) {
-    registry.forTypePair(String.class, UserData.class).registerMappedBatchLoader((usernames, env) ->
+    // User
+    registry.forTypePair(Integer.class, UserV4.class).registerMappedBatchLoader((ids, env) ->
+        Flux.fromIterable(ids)
+            .flatMap(id -> Mono.just(id).zipWith(usersService.getUser(id)))
+            .collectMap(Tuple2::getT1, tuple -> new UserV4(tuple.getT2()))
+    );
+    registry.forTypePair(String.class, UserV2.class).registerMappedBatchLoader((usernames, env) ->
         Flux.fromIterable(usernames)
             .flatMap(username -> Mono.just(username).zipWith(usersService.getUser(username)))
-            .collectMap(Tuple2::getT1, tuple -> new UserData(tuple.getT2()))
+            .collectMap(Tuple2::getT1, tuple -> new UserV2(tuple.getT2()))
     );
-    registry.forTypePair(String.class, UserGuildsData.class).registerMappedBatchLoader((usernames, env) ->
+    registry.forTypePair(String.class, UserV2Guilds.class).registerMappedBatchLoader((usernames, env) ->
         Flux.fromIterable(usernames)
             .flatMap(username -> Mono.just(username).zipWith(usersService.getUserGuilds(username)))
-            .collectMap(Tuple2::getT1, tuple -> new UserGuildsData(tuple.getT2()))
+            .collectMap(Tuple2::getT1, tuple -> new UserV2Guilds(tuple.getT2()))
     );
-    registry.forTypePair(String.class, UserBuddiesData.class).registerMappedBatchLoader((usernames, env) ->
+    registry.forTypePair(String.class, UserV2Buddies.class).registerMappedBatchLoader((usernames, env) ->
         Flux.fromIterable(usernames)
             .flatMap(username -> Mono.just(username).zipWith(usersService.getUserBuddies(username)))
-            .collectMap(Tuple2::getT1, tuple -> new UserBuddiesData(tuple.getT2()))
+            .collectMap(Tuple2::getT1, tuple -> new UserV2Buddies(tuple.getT2()))
     );
-    registry.forTypePair(UserRankingData.UserRankingKey.class, UserRankingData.class).registerMappedBatchLoader((keys, env) ->
+    registry.forTypePair(UserV2Ranking.UserRankingKey.class, UserV2Ranking.class).registerMappedBatchLoader((keys, env) ->
         Flux.fromIterable(keys)
             .flatMap(key -> Mono.just(key).zipWith(usersService.getUserRanking(key.username(), key.type(), Domain.valueOf(key.domain()))))
-            .collectMap(Tuple2::getT1, tuple -> new UserRankingData(tuple.getT2()))
+            .collectMap(Tuple2::getT1, tuple -> new UserV2Ranking(tuple.getT2()))
     );
-    registry.forTypePair(Integer.class, GuildData.class).registerMappedBatchLoader((ids, env) ->
+    // Guild
+    registry.forTypePair(Integer.class, GuildV2.class).registerMappedBatchLoader((ids, env) ->
         Flux.fromIterable(ids)
             .flatMap(id -> Mono.just(id).zipWith(guildsService.getGuild(id)))
-            .collectMap(Tuple2::getT1, tuple -> new GuildData(tuple.getT2()))
+            .collectMap(Tuple2::getT1, tuple -> new GuildV2(tuple.getT2()))
     );
-    registry.forTypePair(Integer.class, GuildMembersData.class).registerMappedBatchLoader((ids, env) ->
+    registry.forTypePair(Integer.class, GuildV2Members.class).registerMappedBatchLoader((ids, env) ->
         Flux.fromIterable(ids)
             .flatMap(id -> Mono.just(id).zipWith(guildsService.getMembers(id)))
-            .collectMap(Tuple2::getT1, tuple -> new GuildMembersData(tuple.getT2()))
+            .collectMap(Tuple2::getT1, tuple -> new GuildV2Members(tuple.getT2()))
+    );
+    // Microbadge
+    registry.forTypePair(Integer.class, MicrobadgeV4.class).registerMappedBatchLoader((ids, env) ->
+        Flux.fromIterable(ids)
+            .flatMap(id -> Mono.just(id).zipWith(microbadgesService.getMicrobadge(id)))
+            .collectMap(Tuple2::getT1, tuple -> new MicrobadgeV4(tuple.getT2()))
     );
   }
 

@@ -3,7 +3,9 @@ package li.naska.bgg.graphql.service;
 import com.boardgamegeek.user.v2.*;
 import li.naska.bgg.graphql.model.enums.Domain;
 import li.naska.bgg.repository.BggUserV2Repository;
+import li.naska.bgg.repository.BggUsersV4Repository;
 import li.naska.bgg.repository.model.BggUserV2QueryParams;
+import li.naska.bgg.repository.model.BggUsersV4ResponseBody;
 import li.naska.bgg.util.XmlProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.execution.BatchLoaderRegistry;
@@ -22,7 +24,10 @@ public class GraphQLUsersService {
   private static final int BGG_USER_GUILDS_PAGE_SIZE = 1000;
 
   @Autowired
-  private BggUserV2Repository usersRepository;
+  private BggUserV2Repository usersV2Repository;
+
+  @Autowired
+  private BggUsersV4Repository usersV4Repository;
 
   @Autowired
   private XmlProcessor xmlProcessor;
@@ -30,6 +35,10 @@ public class GraphQLUsersService {
   @Autowired
   private BatchLoaderRegistry registry;
 
+
+  public Mono<BggUsersV4ResponseBody> getUser(Integer id) {
+    return usersV4Repository.getUser(id);
+  }
 
   public Mono<User> getUser(String username) {
     return getUser(username, Domain.boardgame, 1);
@@ -86,7 +95,7 @@ public class GraphQLUsersService {
   }
 
   private Mono<User> getUser(BggUserV2QueryParams queryParams) {
-    return usersRepository.getUser(queryParams)
+    return usersV2Repository.getUser(queryParams)
         .map(xml -> xmlProcessor.toJavaObject(xml, User.class));
   }
 

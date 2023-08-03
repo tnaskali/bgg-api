@@ -39,6 +39,7 @@ bgg:
       geeklists: ${bgg.web.baseurl-bgs}/api/geeklists
       hotness: ${bgg.web.baseurl-bgs}/api/hotness
       listitems: ${bgg.web.baseurl-bgs}/api/listitems
+      microbadges: ${bgg.web.baseurl-bgs}/api/microbadges
       threads: ${bgg.web.baseurl-bgs}/api/threads
       users: ${bgg.web.baseurl-bgs}/api/users
     v5:
@@ -56,9 +57,5 @@ spring:
   graphql:
     graphiql:
       enabled: true
-  jackson:
-    # default-property-inclusion: non_empty
-    serialization:
-      write-dates-as-timestamps: false
   webflux:
     base-path: /bgg-api
