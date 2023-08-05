@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import li.naska.bgg.repository.model.BggGeekaccountV3RequestBody;
 import li.naska.bgg.repository.model.BggGeekaccountV3ResponseBody;
+import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -36,9 +37,9 @@ public class BggGeekaccountV3Repository {
         .post()
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
-        .contentType(MediaType.APPLICATION_JSON)
+        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
         .header("Cookie", cookie)
-        .bodyValue(requestBody)
+        .bodyValue(QueryParameters.fromPojo(requestBody))
         .retrieve()
         .toEntity(String.class)
         .doOnNext(entity -> {
