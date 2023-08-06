@@ -43,6 +43,7 @@ bgg:
       threads: ${bgg.web.baseurl-bgs}/api/threads
       users: ${bgg.web.baseurl-bgs}/api/users
     v5:
+      geekaccount: ${bgg.web.baseurl-bgs}/geekaccount
       login: ${bgg.web.baseurl-bgs}/login/api/v1
       search: ${bgg.web.baseurl-bgs}/search
 

@@ -3,7 +3,7 @@ package li.naska.bgg.repository.model;
 import lombok.Data;
 
 @Data
-public class BggGeekaccountV3ResponseBody {
+public class BggGeekaccountToplistV3ResponseBody {
 
   private String id;
 

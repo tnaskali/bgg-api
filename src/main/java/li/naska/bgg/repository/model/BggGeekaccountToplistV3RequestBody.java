@@ -10,7 +10,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class BggGeekaccountV3RequestBody {
+public class BggGeekaccountToplistV3RequestBody {
 
   @NotNull
   @Pattern(regexp = "^(savetoplistitem|deletetoplistitem|savetoplistorder)$")
@@ -20,9 +20,9 @@ public class BggGeekaccountV3RequestBody {
           Action to perform.
           <p>
           Possible values are:
-          <li/>savetoplistitem (append)
-          <li/>deletetoplistitem (delete)
-          <li/>savetoplistorder (reorder)
+          <li/>savetoplistitem (append to toplist)
+          <li/>deletetoplistitem (delete from toplist)
+          <li/>savetoplistorder (reorder toplist)
           """
   )
   private String action;
@@ -64,6 +64,7 @@ public class BggGeekaccountV3RequestBody {
           """
   )
   private Integer id;
+
   @Parameter(
       example = "205637",
       description = """
@@ -143,5 +144,15 @@ public class BggGeekaccountV3RequestBody {
           """
   )
   private String geekitemname;
+
+  @Deprecated
+  @Parameter(
+      description = """
+          Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
+          <p>
+          Corresponds to the "Submit" form button and always has a value of "Submit".
+          """
+  )
+  private String B1;
 
 }
