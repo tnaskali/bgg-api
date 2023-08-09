@@ -8,22 +8,29 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
-public class BggGeekplayV3QueryParams {
+public class BggGeekplayPlaysV3QueryParams {
 
   @NotNull
-  @Pattern(regexp = "^(getuserplaycount)$")
+  @Pattern(regexp = "^(getplays)$")
   @Parameter(
-      example = "getuserplaycount",
+      example = "getplays",
       description = """
           Action to perform.
           <p>
           Possible values are:
-          <li/>getuserplaycount
+          <li/>getplays
           """
   )
   private String action;
 
-  @NotNull
+  @Parameter(
+      example = "825923",
+      description = """
+          User id.
+          """
+  )
+  private Integer userid;
+
   @Parameter(
       example = "205637",
       description = """
@@ -32,7 +39,6 @@ public class BggGeekplayV3QueryParams {
   )
   private Integer objectid;
 
-  @NotNull
   @Pattern(regexp = "^(thing|family)$")
   @Parameter(
       example = "thing",

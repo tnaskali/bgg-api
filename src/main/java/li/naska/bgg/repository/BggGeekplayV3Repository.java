@@ -2,9 +2,7 @@ package li.naska.bgg.repository;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import li.naska.bgg.repository.model.BggGeekplayV3QueryParams;
-import li.naska.bgg.repository.model.BggGeekplayV3RequestBody;
-import li.naska.bgg.repository.model.BggGeekplayV3ResponseBody;
+import li.naska.bgg.repository.model.*;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,7 +31,30 @@ public class BggGeekplayV3Repository {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 
-  public Mono<BggGeekplayV3ResponseBody> getGeekplay(String cookie, BggGeekplayV3QueryParams params) {
+  public Mono<BggGeekplayPlaysV3ResponseBody> getGeekplayPlays(BggGeekplayPlaysV3QueryParams params) {
+    return webClient
+        .get()
+        .uri(uriBuilder -> uriBuilder
+            .queryParams(QueryParameters.fromPojo(params))
+            .build())
+        .accept(MediaType.APPLICATION_JSON)
+        .acceptCharset(StandardCharsets.UTF_8)
+        .retrieve()
+        .toEntity(String.class)
+        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
+        .retryWhen(
+            Retry.max(3)
+                .filter(throwable -> throwable instanceof BggConnectionException))
+        .handle((entity, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(entity.getBody(), BggGeekplayPlaysV3ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        });
+  }
+
+  public Mono<BggGeekplayCountV3ResponseBody> getGeekplayCount(String cookie, BggGeekplayCountV3QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -46,7 +67,7 @@ public class BggGeekplayV3Repository {
         .toEntity(String.class)
         .handle((entity, sink) -> {
           try {
-            sink.next(objectMapper.readValue(entity.getBody(), BggGeekplayV3ResponseBody.class));
+            sink.next(objectMapper.readValue(entity.getBody(), BggGeekplayCountV3ResponseBody.class));
           } catch (JsonProcessingException e) {
             sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
           }

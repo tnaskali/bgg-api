@@ -22,16 +22,6 @@ public class BggGeekplayV3ResponseBody {
 
   private String html;
 
-  /**
-   * Only action=getuserplaycount
-   */
-  private Integer userid;
-
-  /**
-   * Only action=getuserplaycount
-   */
-  private Integer count;
-
   private String error;
 
 }
