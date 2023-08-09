@@ -23,14 +23,7 @@ public class BggGeekplayCountV3QueryParams {
   )
   private String action;
 
-  @Parameter(
-      example = "825923",
-      description = """
-          User id.
-          """
-  )
-  private Integer userid;
-
+  @NotNull
   @Parameter(
       example = "205637",
       description = """
@@ -39,6 +32,7 @@ public class BggGeekplayCountV3QueryParams {
   )
   private Integer objectid;
 
+  @NotNull
   @Pattern(regexp = "^(thing|family)$")
   @Parameter(
       example = "thing",
@@ -47,6 +41,14 @@ public class BggGeekplayCountV3QueryParams {
           """
   )
   private String objecttype;
+
+  @Parameter(
+      example = "825923",
+      description = """
+          User id.
+          """
+  )
+  private Integer userid;
 
   @Deprecated
   @Min(1)
