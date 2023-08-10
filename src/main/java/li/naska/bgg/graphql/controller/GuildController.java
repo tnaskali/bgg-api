@@ -22,17 +22,20 @@ public class GuildController {
 
   @QueryMapping
   public Mono<Guild> guildById(@Argument Integer id, DataLoader<Integer, GuildV2> loader) {
-    return Mono.fromFuture(loader.load(id)).map(guild -> new Guild(guild.guild().getId()));
+    return Mono.fromFuture(loader.load(id))
+        .map(guild -> new Guild(guild.guild().getId()));
   }
 
   @SchemaMapping
   public Mono<String> name(Guild guild, DataLoader<Integer, GuildV2> loader) {
-    return Mono.fromFuture(loader.load(guild.id())).map(data -> data.guild().getName());
+    return Mono.fromFuture(loader.load(guild.id()))
+        .map(data -> data.guild().getName());
   }
 
   @SchemaMapping
   public Mono<ZonedDateTime> created(Guild guild, DataLoader<Integer, GuildV2> loader) {
-    return Mono.fromFuture(loader.load(guild.id())).map(data -> data.guild().getCreated());
+    return Mono.fromFuture(loader.load(guild.id()))
+        .map(data -> data.guild().getCreated());
   }
 
   @SchemaMapping
@@ -42,18 +45,21 @@ public class GuildController {
 
   @SchemaMapping
   public Mono<String> website(Guild guild, DataLoader<Integer, GuildV2> loader) {
-    return Mono.fromFuture(loader.load(guild.id())).map(data -> data.guild().getWebsite());
+    return Mono.fromFuture(loader.load(guild.id()))
+        .map(data -> data.guild().getWebsite());
   }
 
   @SchemaMapping
   public Mono<String> description(Guild guild, DataLoader<Integer, GuildV2> loader) {
-    return Mono.fromFuture(loader.load(guild.id())).map(data -> data.guild().getDescription());
+    return Mono.fromFuture(loader.load(guild.id()))
+        .map(data -> data.guild().getDescription());
   }
 
   @SchemaMapping
   public Mono<User> manager(Guild guild, DataLoader<Integer, GuildV2> loader, DataLoader<String, UserV2> userLoader) {
-    return Mono.fromFuture(loader.load(guild.id())).flatMap(data -> Mono.fromFuture(userLoader.load(data.guild().getManager()))
-        .map(user -> new User(user.user().getId(), user.user().getName())));
+    return Mono.fromFuture(loader.load(guild.id()))
+        .flatMap(data -> Mono.fromFuture(userLoader.load(data.guild().getManager()))
+            .map(user -> new User(user.user().getId(), user.user().getName())));
   }
 
   @SchemaMapping

@@ -14,17 +14,20 @@ public class MicrobadgeController {
 
   @QueryMapping
   public Mono<Microbadge> microbadgeById(@Argument Integer id, DataLoader<Integer, MicrobadgeV4> loader) {
-    return Mono.fromFuture(loader.load(id)).map(microbadge -> new Microbadge(microbadge.microbadge().getBadgeid()));
+    return Mono.fromFuture(loader.load(id))
+        .map(data -> new Microbadge(data.microbadge().getBadgeid()));
   }
 
   @SchemaMapping
   public Mono<String> name(Microbadge microbadge, DataLoader<Integer, MicrobadgeV4> loader) {
-    return Mono.fromFuture(loader.load(microbadge.id())).map(data -> data.microbadge().getName());
+    return Mono.fromFuture(loader.load(microbadge.id()))
+        .map(data -> data.microbadge().getName());
   }
 
   @SchemaMapping
   public Mono<String> imagesrc(Microbadge microbadge, DataLoader<Integer, MicrobadgeV4> loader) {
-    return Mono.fromFuture(loader.load(microbadge.id())).map(data -> data.microbadge().getSrc());
+    return Mono.fromFuture(loader.load(microbadge.id()))
+        .map(data -> data.microbadge().getSrc());
   }
 
 }

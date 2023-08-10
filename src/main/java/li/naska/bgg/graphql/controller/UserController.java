@@ -1,5 +1,7 @@
 package li.naska.bgg.graphql.controller;
 
+import com.boardgamegeek.common.IntegerValue;
+import com.boardgamegeek.common.StringValue;
 import li.naska.bgg.graphql.data.UserV2Buddies;
 import li.naska.bgg.graphql.data.UserV2;
 import li.naska.bgg.graphql.data.UserV2Guilds;
@@ -21,12 +23,14 @@ public class UserController {
 
   @QueryMapping
   public Mono<User> userById(@Argument Integer id, DataLoader<Integer, UserV4> loader) {
-    return Mono.fromFuture(loader.load(id)).map(user -> new User(user.user().getId(), user.user().getUsername()));
+    return Mono.fromFuture(loader.load(id))
+        .map(data -> new User(data.user().getId(), data.user().getUsername()));
   }
 
   @QueryMapping
   public Mono<User> userByUsername(@Argument String username, DataLoader<String, UserV2> loader) {
-    return Mono.fromFuture(loader.load(username)).map(user -> new User(user.user().getId(), user.user().getName()));
+    return Mono.fromFuture(loader.load(username))
+        .map(data -> new User(data.user().getId(), data.user().getName()));
   }
 
   @SchemaMapping
@@ -57,56 +61,64 @@ public class UserController {
   @SchemaMapping
   public Mono<String> webaddress(User user, DataLoader<String, UserV2> loader) {
     return Mono.fromFuture(loader.load(user.username()))
-        .map(data -> data.user().getWebaddress().getValue())
+        .mapNotNull(data -> data.user().getWebaddress())
+        .map(StringValue::getValue)
         .filter(value -> !value.isEmpty());
   }
 
   @SchemaMapping
   public Mono<String> wiiaccount(User user, DataLoader<String, UserV2> loader) {
     return Mono.fromFuture(loader.load(user.username()))
-        .map(data -> data.user().getWiiaccount().getValue())
+        .mapNotNull(data -> data.user().getWiiaccount())
+        .map(StringValue::getValue)
         .filter(value -> !value.isEmpty());
   }
 
   @SchemaMapping
   public Mono<String> psnaccount(User user, DataLoader<String, UserV2> loader) {
     return Mono.fromFuture(loader.load(user.username()))
-        .map(data -> data.user().getPsnaccount().getValue())
+        .mapNotNull(data -> data.user().getPsnaccount())
+        .map(StringValue::getValue)
         .filter(value -> !value.isEmpty());
   }
 
   @SchemaMapping
   public Mono<String> battlenetaccount(User user, DataLoader<String, UserV2> loader) {
     return Mono.fromFuture(loader.load(user.username()))
-        .map(data -> data.user().getBattlenetaccount().getValue())
+        .mapNotNull(data -> data.user().getBattlenetaccount())
+        .map(StringValue::getValue)
         .filter(value -> !value.isEmpty());
   }
 
   @SchemaMapping
   public Mono<String> steamaccount(User user, DataLoader<String, UserV2> loader) {
     return Mono.fromFuture(loader.load(user.username()))
-        .map(data -> data.user().getSteamaccount().getValue())
+        .mapNotNull(data -> data.user().getSteamaccount())
+        .map(StringValue::getValue)
         .filter(value -> !value.isEmpty());
   }
 
   @SchemaMapping
   public Mono<String> xboxaccount(User user, DataLoader<String, UserV2> loader) {
     return Mono.fromFuture(loader.load(user.username()))
-        .map(data -> data.user().getXboxaccount().getValue())
+        .mapNotNull(data -> data.user().getXboxaccount())
+        .map(StringValue::getValue)
         .filter(value -> !value.isEmpty());
   }
 
   @SchemaMapping
   public Mono<Integer> marketrating(User user, DataLoader<String, UserV2> loader) {
     return Mono.fromFuture(loader.load(user.username()))
-        .map(data -> data.user().getMarketrating().getValue())
+        .mapNotNull(data -> data.user().getMarketrating())
+        .map(IntegerValue::getValue)
         .filter(value -> value != 0);
   }
 
   @SchemaMapping
   public Mono<Integer> traderating(User user, DataLoader<String, UserV2> loader) {
     return Mono.fromFuture(loader.load(user.username()))
-        .map(data -> data.user().getTraderating().getValue())
+        .mapNotNull(data -> data.user().getTraderating())
+        .map(IntegerValue::getValue)
         .filter(value -> value != 0);
   }
 
@@ -114,14 +126,19 @@ public class UserController {
   public Mono<List<Guild>> guilds(User user, DataLoader<String, UserV2Guilds> loader) {
     return Mono.fromFuture(loader.load(user.username()))
         .map(UserV2Guilds::guilds)
-        .map(data -> data.stream().map(com.boardgamegeek.user.v2.Guild::getId).map(Guild::new).collect(Collectors.toList()));
+        .map(data -> data.stream()
+            .map(com.boardgamegeek.user.v2.Guild::getId)
+            .map(Guild::new)
+            .collect(Collectors.toList()));
   }
 
   @SchemaMapping
   public Mono<List<User>> buddies(User user, DataLoader<String, UserV2Buddies> loader) {
     return Mono.fromFuture(loader.load(user.username()))
         .map(UserV2Buddies::buddies)
-        .map(data -> data.stream().map(buddy -> new User(buddy.getId(), buddy.getName())).collect(Collectors.toList()));
+        .map(data -> data.stream()
+            .map(buddy -> new User(buddy.getId(), buddy.getName()))
+            .collect(Collectors.toList()));
   }
 
   @SchemaMapping
