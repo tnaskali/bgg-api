@@ -816,6 +816,12 @@
     "allDeclaredConstructors": true
   },
   {
+    "name": "com.github.benmanes.caffeine.cache.PSWMW",
+    "allDeclaredFields": true,
+    "allDeclaredMethods": true,
+    "allDeclaredConstructors": true
+  },
+  {
     "name": "com.fasterxml.jackson.databind.ext.CoreXMLSerializers",
     "allDeclaredFields": true,
     "allDeclaredMethods": true,
