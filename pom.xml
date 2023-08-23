@@ -54,7 +54,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
-    <org.springdoc.version>2.1.0</org.springdoc.version>
+    <org.springdoc.version>2.2.0</org.springdoc.version>
     <java.version>17</java.version>
     <sonar.coverage.jacoco.xmlReportPaths>
       ${project.basedir}/target/site/jacoco/jacoco.xml,${project.basedir}/target/site/jacoco-it/jacoco.xml
