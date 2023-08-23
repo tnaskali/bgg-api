@@ -2,9 +2,8 @@ package li.naska.bgg.repository;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import li.naska.bgg.exception.BggConnectionException;
-import li.naska.bgg.repository.model.BggGeekitemsV4ResponseBody;
 import li.naska.bgg.repository.model.BggGeekitemsV4QueryParams;
+import li.naska.bgg.repository.model.BggGeekitemsV4ResponseBody;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,9 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
-import reactor.util.retry.Retry;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 @Repository
@@ -52,11 +49,7 @@ public class BggGeekitemsV4Repository {
           } catch (JsonProcessingException e) {
             sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
           }
-        })
-        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
-        .retryWhen(
-            Retry.max(3)
-                .filter(throwable -> throwable instanceof BggConnectionException));
+        });
   }
 
 }

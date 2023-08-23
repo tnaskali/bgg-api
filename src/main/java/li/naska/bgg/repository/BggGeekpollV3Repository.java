@@ -3,7 +3,6 @@ package li.naska.bgg.repository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
-import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.repository.model.BggGeekpollV3QueryParams;
 import li.naska.bgg.repository.model.BggGeekpollV3ResponseBody;
 import li.naska.bgg.util.QueryParameters;
@@ -15,9 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
-import reactor.util.retry.Retry;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
@@ -45,10 +42,6 @@ public class BggGeekpollV3Repository {
         .headers(headers -> cookie.ifPresent(c -> headers.add("Cookie", c)))
         .retrieve()
         .toEntity(String.class)
-        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
-        .retryWhen(
-            Retry.max(3)
-                .filter(throwable -> throwable instanceof BggConnectionException))
         .doOnNext(entity -> {
               if (JsonPath.read(entity.getBody(), "$['poll']").equals(false)) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Poll does not exist");

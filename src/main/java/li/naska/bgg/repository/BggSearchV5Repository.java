@@ -2,7 +2,6 @@ package li.naska.bgg.repository;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.repository.model.BggSearchV5QueryParams;
 import li.naska.bgg.repository.model.BggSearchV5ResponseBody;
 import li.naska.bgg.resource.v5.model.SearchContext;
@@ -15,9 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
-import reactor.util.retry.Retry;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 @Repository
@@ -45,10 +42,6 @@ public class BggSearchV5Repository {
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .toEntity(String.class)
-        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
-        .retryWhen(
-            Retry.max(3)
-                .filter(throwable -> throwable instanceof BggConnectionException))
         .handle((entity, sink) -> {
           try {
             sink.next(objectMapper.readValue(entity.getBody(), BggSearchV5ResponseBody.class));

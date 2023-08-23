@@ -1,6 +1,5 @@
 package li.naska.bgg.repository;
 
-import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.exception.BggResponseNotReadyException;
 import li.naska.bgg.repository.model.BggCollectionV1QueryParams;
 import li.naska.bgg.util.QueryParameters;
@@ -14,7 +13,6 @@ import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.Optional;
@@ -46,10 +44,6 @@ public class BggCollectionV1Repository {
             status -> status == HttpStatus.ACCEPTED,
             response -> Mono.error(new BggResponseNotReadyException()))
         .bodyToMono(String.class)
-        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
-        .retryWhen(
-            Retry.max(3)
-                .filter(throwable -> throwable instanceof BggConnectionException))
         .retryWhen(
             Retry.backoff(4, Duration.ofSeconds(4))
                 .filter(throwable -> throwable instanceof BggResponseNotReadyException))

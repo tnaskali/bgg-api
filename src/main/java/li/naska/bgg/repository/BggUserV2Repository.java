@@ -1,6 +1,5 @@
 package li.naska.bgg.repository;
 
-import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.repository.model.BggUserV2QueryParams;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
-import reactor.util.retry.Retry;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 @Repository
@@ -37,10 +34,6 @@ public class BggUserV2Repository {
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .bodyToMono(String.class)
-        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
-        .retryWhen(
-            Retry.max(3)
-                .filter(throwable -> throwable instanceof BggConnectionException))
         .doOnNext(body -> {
           if (body.startsWith("<?xml version=\"1.0\" encoding=\"utf-8\"?><user id=\"\"")) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");

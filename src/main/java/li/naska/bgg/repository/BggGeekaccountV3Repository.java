@@ -2,7 +2,6 @@ package li.naska.bgg.repository;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.repository.model.BggGeekaccountV3RequestBody;
 import li.naska.bgg.repository.model.BggGeekaccountV3ResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
-import reactor.util.retry.Retry;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,10 +41,6 @@ public class BggGeekaccountV3Repository {
         .bodyValue(requestBody)
         .retrieve()
         .toEntity(String.class)
-        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
-        .retryWhen(
-            Retry.max(3)
-                .filter(throwable -> throwable instanceof BggConnectionException))
         .doOnNext(entity -> {
               if (MediaType.TEXT_HTML.equalsTypeAndSubtype(entity.getHeaders().getContentType())) {
                 Matcher matcher = Pattern.compile("<div class='messagebox'>\\s*(.+)\\s*</div>").matcher(entity.getBody());

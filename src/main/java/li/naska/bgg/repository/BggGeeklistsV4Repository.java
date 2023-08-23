@@ -2,7 +2,6 @@ package li.naska.bgg.repository;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.repository.model.*;
 import li.naska.bgg.util.QueryParameters;
 import org.apache.commons.lang3.StringUtils;
@@ -15,9 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
-import reactor.util.retry.Retry;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 @Repository
@@ -53,11 +50,7 @@ public class BggGeeklistsV4Repository {
           } catch (JsonProcessingException e) {
             sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
           }
-        })
-        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
-        .retryWhen(
-            Retry.max(3)
-                .filter(throwable -> throwable instanceof BggConnectionException));
+        });
   }
 
   public Mono<BggGeeklistV4ResponseBody> getGeeklist(Integer id) {
@@ -79,11 +72,7 @@ public class BggGeeklistsV4Repository {
           } catch (JsonProcessingException e) {
             sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
           }
-        })
-        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
-        .retryWhen(
-            Retry.max(3)
-                .filter(throwable -> throwable instanceof BggConnectionException));
+        });
   }
 
   public Mono<BggGeeklistCommentsV4ResponseBody> getGeeklistComments(Integer id, BggGeeklistCommentsV4QueryParams params) {
@@ -108,11 +97,7 @@ public class BggGeeklistsV4Repository {
           } catch (JsonProcessingException e) {
             sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
           }
-        })
-        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
-        .retryWhen(
-            Retry.max(3)
-                .filter(throwable -> throwable instanceof BggConnectionException));
+        });
   }
 
   public Mono<BggGeeklistReactionsV4ResponseBody> getGeeklistReactions(Integer id, BggGeeklistReactionsV4QueryParams params) {
@@ -135,11 +120,7 @@ public class BggGeeklistsV4Repository {
           } catch (JsonProcessingException e) {
             sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
           }
-        })
-        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
-        .retryWhen(
-            Retry.max(3)
-                .filter(throwable -> throwable instanceof BggConnectionException));
+        });
   }
 
   public Mono<BggGeeklistTipsV4ResponseBody> getGeeklistTips(Integer id, BggGeeklistTipsV4QueryParams params) {
@@ -162,11 +143,7 @@ public class BggGeeklistsV4Repository {
           } catch (JsonProcessingException e) {
             sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
           }
-        })
-        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
-        .retryWhen(
-            Retry.max(3)
-                .filter(throwable -> throwable instanceof BggConnectionException));
+        });
   }
 
 }
