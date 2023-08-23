@@ -1,5 +1,6 @@
 package li.naska.bgg.service;
 
+import li.naska.bgg.cache.AsyncCacheable;
 import li.naska.bgg.exception.BggConnectionException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +27,7 @@ public class LoginService {
         .build();
   }
 
+  @AsyncCacheable(name = "login")
   public Mono<List<String>> login(String username, String password) {
     Map<String, Object> credentials = new HashMap<>();
     credentials.put("username", username);
@@ -40,7 +42,7 @@ public class LoginService {
         .retrieve()
         .onStatus(
             status -> status != HttpStatus.NO_CONTENT,
-            response -> Mono.error(new AuthenticationServiceException("Remote authentication failed")))
+            response -> response.bodyToMono(String.class).map(AuthenticationServiceException::new))
         .toEntity(Void.class)
         .onErrorMap(IOException.class, ioe -> new BggConnectionException())
         .retryWhen(

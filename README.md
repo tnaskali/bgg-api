@@ -74,3 +74,4 @@ before deciding to use this API.
 - Fisico's thread on BGG forum : https://boardgamegeek.com/thread/1010057/xml-schema-for-bgg-xml-api2
 - Reddit Thread on how to log plays programmatically : https://www.reddit.com/r/boardgames/comments/ez86me/uploading_games_plays_to_bgg_programmatically/
 - Baeldung's tutorial on Spring Security Custom Authentication Provider : https://www.baeldung.com/spring-security-authentication-provider
+- shaikezr's solution to caching Mono<?> : https://github.com/shaikezr/async-cacheable (until https://github.com/spring-projects/spring-framework/issues/17920 gets released)
