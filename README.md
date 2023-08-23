@@ -1,14 +1,17 @@
 # BGG-API
 
-Spring Boot application acting as a bridge to
-BoardGameGeek's [XML API 2](https://boardgamegeek.com/wiki/page/BGG_XML_API2), as well as their undocumented Games
-Logging API and Json API. Its purpose is to expose the same data in a more developer-friendly way.
+Spring Boot application acting as a proxy to
+BoardGameGeek's [XML API](https://boardgamegeek.com/wiki/page/BGG_XML_API), [XML API 2](https://boardgamegeek.com/wiki/page/BGG_XML_API2),
+as well as their undocumented Json API. Its purpose is to expose the same functionalities, mainly retrieving but also
+persisting data, in a more user-friendly and developer-friendly way.
 
 # Features
 
 - Static BGG XML API schemas in XSD format (located under [src/main/xsd](src/main/xsd))
-- Json API for querying objects based on their XML API (no authentication required)
-- Json API for logging games based on their Json API (basic authentication required)
+- Proxied XML and Json API for querying data based on their public API (no authentication required)
+- Proxied Json API for mutating data (e.g. logging games) based on their public API (basic authentication required)
+- OpenAPI definition and Swagger UI (/bgg-api/swagger-ui.html) web interface
+- Support for building both Java and native artifacts and images
 
 # Usage
 
@@ -24,7 +27,7 @@ Steps :
 
 ## build and run a native application locally
 
-Prerequisites : have GraalVM (java17) 22+ and maven installed on your machine
+Prerequisites : have GraalVM 22+ (java17) and maven installed on your machine
 
 Steps :
 
@@ -61,8 +64,8 @@ duration of the session. Then the API will use a secure HTTPS connection to perf
 
 # Terms of use
 
-This is just a bridge to BoardGameGeek's API,
-so [their terms of use](https://boardgamegeek.com/wiki/page/XML_API_Terms_of_Use#) still apply. Be sure to read them
+This is just a proxy to BoardGameGeek's API, so
+[their terms of use](https://boardgamegeek.com/wiki/page/XML_API_Terms_of_Use#) still apply. Be sure to read them
 before deciding to use this API.
 
 # Credits and inspirations
