@@ -49,10 +49,6 @@ public class BggGeekaccountV3Repository {
         .header("Cookie", cookie)
         .retrieve()
         .toEntity(String.class)
-        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
-        .retryWhen(
-            Retry.max(3)
-                .filter(throwable -> throwable instanceof BggConnectionException))
         .map(entity -> {
           Document doc = Jsoup.parse(entity.getBody());
           BggGeekaccountContactV3ResponseBody result = new BggGeekaccountContactV3ResponseBody();
@@ -89,10 +85,6 @@ public class BggGeekaccountV3Repository {
         .body(BodyInserters.fromMultipartData(QueryParameters.fromPojo(body)))
         .retrieve()
         .toEntity(String.class)
-        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
-        .retryWhen(
-            Retry.max(3)
-                .filter(throwable -> throwable instanceof BggConnectionException))
         .map(entity -> {
           BggGeekaccountContactV3ResponseBody result = new BggGeekaccountContactV3ResponseBody();
           BeanUtils.copyProperties(body, result);

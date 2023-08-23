@@ -1,6 +1,5 @@
 package li.naska.bgg.repository;
 
-import li.naska.bgg.exception.BggConnectionException;
 import li.naska.bgg.repository.model.BggGeekaccountToplistV5QueryParams;
 import li.naska.bgg.repository.model.BggGeekaccountToplistV5ResponseBody;
 import org.jsoup.Jsoup;
@@ -11,9 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import reactor.util.retry.Retry;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -39,10 +36,6 @@ public class BggGeekaccountV5Repository {
         .header("Cookie", cookie)
         .retrieve()
         .toEntity(String.class)
-        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
-        .retryWhen(
-            Retry.max(3)
-                .filter(throwable -> throwable instanceof BggConnectionException))
         .map(entity -> {
           Document doc = Jsoup.parse(entity.getBody());
           List<Integer> ids = doc.getElementById("toplistitems").children().stream()

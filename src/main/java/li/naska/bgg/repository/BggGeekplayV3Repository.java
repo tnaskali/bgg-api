@@ -41,10 +41,6 @@ public class BggGeekplayV3Repository {
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .toEntity(String.class)
-        .onErrorMap(IOException.class, ioe -> new BggConnectionException())
-        .retryWhen(
-            Retry.max(3)
-                .filter(throwable -> throwable instanceof BggConnectionException))
         .handle((entity, sink) -> {
           try {
             sink.next(objectMapper.readValue(entity.getBody(), BggGeekplayPlaysV3ResponseBody.class));
