@@ -53,7 +53,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <com.graphql-java.version>20.2</com.graphql-java.version>
+    <com.graphql-java.version>21.0</com.graphql-java.version>
     <org.springdoc.version>2.2.0</org.springdoc.version>
     <org.jsoup.version>1.16.1</org.jsoup.version>
     <java.version>17</java.version>
