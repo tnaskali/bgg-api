@@ -22,9 +22,10 @@ import java.util.regex.Pattern;
 @Repository
 public class BggGeekitempollV3Repository {
 
-  private final WebClient webClient;
   @Autowired
   private ObjectMapper objectMapper;
+
+  private final WebClient webClient;
 
   public BggGeekitempollV3Repository(
       @Autowired WebClient.Builder builder,

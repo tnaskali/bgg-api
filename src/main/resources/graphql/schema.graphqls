@@ -1,0 +1,85 @@
+scalar Date
+scalar DateTime
+
+enum UserDomain {
+    boardgame, rpg, videogame
+}
+
+type Query {
+    userByUsername(username: ID): User
+    userById(id: ID): User
+    guildById(id: ID): Guild
+}
+
+type User {
+    username: ID
+    id: ID
+    firstname: String
+    lastname: String
+    avatarlink: String
+    dateregistered: Date
+    lastlogin: Date
+    address: Address
+    webaddress: String
+    xboxaccount: String
+    wiiaccount: String
+    psnaccount: String
+    battlenetaccount: String
+    steamaccount: String
+    marketrating: Int
+    traderating: Int
+    guilds: [Guild!]
+    buddies: [User!]
+    top: Ranking
+    hot: Ranking
+    supportyears: [Int!]
+    designerid: Int
+    publisherid: Int
+    microbadges: [Microbadge!]
+}
+
+type Guild {
+    id: ID
+    name: String
+    created: DateTime
+    category: String
+    website: String
+    manager: User
+    description: String
+    address: Address
+    members: [GuildMember!]
+}
+
+type Address {
+    address1: String
+    address2: String
+    city: String
+    postalcode: String
+    stateorprovince: String
+    isocountry: String
+    country: String
+}
+
+type GuildMember {
+    user: User!
+    joined: DateTime!
+}
+
+type Ranking {
+    boardgame: [RankedItem!]
+    rpg: [RankedItem!]
+    videogame: [RankedItem!]
+}
+
+type RankedItem {
+    rank: Int
+    type: String
+    id: Int
+    name: String
+}
+
+type Microbadge {
+    id: ID
+    name: String,
+    imagesrc: String
+}

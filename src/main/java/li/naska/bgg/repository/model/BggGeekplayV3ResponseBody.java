@@ -11,29 +11,16 @@ public class BggGeekplayV3ResponseBody {
   private Boolean success;
 
   /**
-   * Only action=delete
+   * Only action=save
    */
   private String playid;
 
   /**
-   * Only action=delete
+   * Only action=save
    */
   private Integer numplays;
 
-  /**
-   * Only action=delete
-   */
   private String html;
-
-  /**
-   * Only action=getuserplaycount
-   */
-  private Integer userid;
-
-  /**
-   * Only action=getuserplaycount
-   */
-  private Integer count;
 
   private String error;
 
