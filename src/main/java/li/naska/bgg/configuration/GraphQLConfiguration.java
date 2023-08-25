@@ -1,4 +1,4 @@
-package li.naska.bgg.graphql;
+package li.naska.bgg.configuration;
 
 import graphql.scalars.ExtendedScalars;
 import org.springframework.context.annotation.Bean;

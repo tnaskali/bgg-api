@@ -2,17 +2,21 @@ package li.naska.bgg.graphql.controller;
 
 import com.boardgamegeek.common.IntegerValue;
 import com.boardgamegeek.common.StringValue;
-import li.naska.bgg.graphql.data.UserV2Buddies;
 import li.naska.bgg.graphql.data.UserV2;
+import li.naska.bgg.graphql.data.UserV2Buddies;
 import li.naska.bgg.graphql.data.UserV2Guilds;
 import li.naska.bgg.graphql.data.UserV4;
 import li.naska.bgg.graphql.model.*;
+import li.naska.bgg.graphql.service.GraphQLUsersService;
 import org.dataloader.DataLoader;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
+import org.springframework.graphql.execution.BatchLoaderRegistry;
 import org.springframework.stereotype.Controller;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.util.function.Tuple2;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,6 +24,29 @@ import java.util.stream.Collectors;
 
 @Controller("GraphQLUserController")
 public class UserController {
+
+  public UserController(BatchLoaderRegistry registry, GraphQLUsersService usersService) {
+    registry.forTypePair(Integer.class, UserV4.class).registerMappedBatchLoader((ids, env) ->
+        Flux.fromIterable(ids)
+            .flatMap(id -> Mono.just(id).zipWith(usersService.getUser(id)))
+            .collectMap(Tuple2::getT1, tuple -> new UserV4(tuple.getT2()))
+    );
+    registry.forTypePair(String.class, UserV2.class).registerMappedBatchLoader((usernames, env) ->
+        Flux.fromIterable(usernames)
+            .flatMap(username -> Mono.just(username).zipWith(usersService.getUser(username)))
+            .collectMap(Tuple2::getT1, tuple -> new UserV2(tuple.getT2()))
+    );
+    registry.forTypePair(String.class, UserV2Guilds.class).registerMappedBatchLoader((usernames, env) ->
+        Flux.fromIterable(usernames)
+            .flatMap(username -> Mono.just(username).zipWith(usersService.getUserGuilds(username)))
+            .collectMap(Tuple2::getT1, tuple -> new UserV2Guilds(tuple.getT2()))
+    );
+    registry.forTypePair(String.class, UserV2Buddies.class).registerMappedBatchLoader((usernames, env) ->
+        Flux.fromIterable(usernames)
+            .flatMap(username -> Mono.just(username).zipWith(usersService.getUserBuddies(username)))
+            .collectMap(Tuple2::getT1, tuple -> new UserV2Buddies(tuple.getT2()))
+    );
+  }
 
   @QueryMapping
   public Mono<User> userById(@Argument Integer id, DataLoader<Integer, UserV4> loader) {
