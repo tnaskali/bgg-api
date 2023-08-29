@@ -10,6 +10,7 @@ persisting data, in a more user-friendly and developer-friendly way.
 - Static BGG XML API schemas in XSD format (located under [src/main/xsd](src/main/xsd))
 - Proxied XML and Json API for querying data based on their public API (no authentication required)
 - Proxied Json API for mutating data (e.g. logging games) based on their public API (basic authentication required)
+- (in progress) custom GraphQL API unifying these different API endpoints (schema under [src/main/resources/graphql](src/main/resources/graphql)) and GraphiQL UI (/bgg-api/graphiql) web interface
 - OpenAPI definition and Swagger UI (/bgg-api/swagger-ui.html) web interface
 - Support for building both Java and native artifacts and images
 
@@ -23,7 +24,7 @@ Steps :
 
 1. clone this repository on your local machine
 2. run `mvn spring-boot:run`
-3. navigate to http://localhost:8080/bgg-api/actuator/health
+3. navigate to http://localhost:8080/bgg-api/swagger-ui.html or http://localhost:8080/bgg-api/graphiql
 
 ## build and run a native application locally
 
@@ -34,7 +35,7 @@ Steps :
 1. clone this repository on your local machine
 2. run `mvn native:compile -Pnative` to build the native image (takes about 5 minutes)
 3. run `./target/bgg-api`
-4. navigate to http://localhost:8080/bgg-api/actuator/health
+4. navigate to http://localhost:8080/bgg-api/swagger-ui.html or http://localhost:8080/bgg-api/graphiql
 
 ## pull and run a docker java image (Linux / MacOS only)
 
@@ -44,7 +45,7 @@ Steps :
 
 1. run `docker pull ghcr.io/tnaskali/bgg-api:master` (or any other tag)
 2. run `docker run --rm -p 8080:80 tnaskali/bgg-api:master`
-3. navigate to http://localhost:8080/bgg-api/actuator/health
+3. navigate to http://localhost:8080/bgg-api/swagger-ui.html or http://localhost:8080/bgg-api/graphiql
 
 ## pull and run a docker native image (Linux / MacOS only)
 
@@ -54,7 +55,93 @@ Steps :
 
 1. run `docker pull ghcr.io/tnaskali/bgg-api-native:master` (or any other tag)
 2. run `docker run --rm -p 8080:8080 tnaskali/bgg-api-native:master`
-3. navigate to http://localhost:8080/bgg-api/actuator/health
+3. navigate to http://localhost:8080/bgg-api/swagger-ui.html or http://localhost:8080/bgg-api/graphiql
+
+# Examples
+
+## Sample request body for logging a play
+
+endpoint: /bgg-api/api/v3/geekplay (POST, basic auth)
+
+```json
+{
+  "ajax": 1,
+  "action": "save",
+  "objectid": 1000,
+  "objecttype": "thing",
+  "playdate": "2023-08-03",
+  "comments": "comments go here",
+  "length": 60,
+  "location": "Home",
+  "quantity": 3,
+  "players": [
+    {
+      "name": "Non-BGG Friend",
+      "position": "1",
+      "color": "blue",
+      "score": "18",
+      "rating": 7,
+      "win": true,
+      "new": false
+    },
+    {
+      "username": "tnaskali",
+      "new": true
+    }
+  ]
+}
+```
+
+
+## Sample graphQL user query
+
+endpoint: /bgg-api/graphql (POST, no auth)
+
+```graphql
+{
+    userByUsername(username: "tnaskali") {
+        id,
+        firstname,
+        lastname,
+        username,
+        dateregistered,
+        supportyears,
+        designerid,
+        publisherid,
+        address {
+            city,
+            isocountry
+        },
+        guilds{
+            id,
+            name,
+            manager{
+                id,
+                username
+            },
+            members {
+                user {
+                    id,
+                    username
+                },
+                joined
+            }},
+        microbadges {
+            id,
+            name,
+            imagesrc
+        },
+        top{
+            boardgame{
+                rank,
+                id,
+                type,
+                name
+            }
+        }
+    }
+}
+```
 
 # A word about security
 
