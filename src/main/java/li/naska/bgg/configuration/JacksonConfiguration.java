@@ -5,17 +5,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import jakarta.validation.constraints.NotNull;
+import li.naska.bgg.util.ClasspathUtils;
+import li.naska.bgg.util.ReflectionUtils;
 import li.naska.bgg.util.SafeLocalDateJacksonDeserializer;
 import li.naska.bgg.util.SafeLocalDateTimeJacksonDeserializer;
+import org.springframework.aot.hint.MemberCategory;
+import org.springframework.aot.hint.RuntimeHints;
+import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportRuntimeHints;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 @Configuration
+@ImportRuntimeHints(JacksonConfiguration.JacksonRuntimeHints.class)
 public class JacksonConfiguration {
 
   @Bean
@@ -30,6 +38,30 @@ public class JacksonConfiguration {
     mapper.enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT); // see BggUserV4ResponseBody#adminBadges
     mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     return mapper;
+  }
+
+  static class JacksonRuntimeHints implements RuntimeHintsRegistrar {
+
+    private static final String JACKSON_MODEL_PACKAGE = "li.naska.bgg.repository.model";
+
+    private static final String[] JACKSON_CLASSES = {
+        "com.fasterxml.jackson.databind.ext.CoreXMLSerializers"
+    };
+
+    @Override
+    public void registerHints(@NotNull RuntimeHints hints, ClassLoader classLoader) {
+      Stream.concat(
+              ClasspathUtils.getClassesInPackage(JACKSON_MODEL_PACKAGE, classLoader),
+              Arrays.stream(JACKSON_CLASSES).map(ReflectionUtils::getClass)
+          )
+          .forEach(clazz -> hints.reflection().registerType(
+              clazz,
+              MemberCategory.DECLARED_FIELDS,
+              MemberCategory.INVOKE_DECLARED_METHODS,
+              MemberCategory.INVOKE_DECLARED_CONSTRUCTORS)
+          );
+    }
+
   }
 
 }
