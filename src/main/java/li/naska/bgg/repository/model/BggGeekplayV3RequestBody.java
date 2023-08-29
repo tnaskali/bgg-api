@@ -98,7 +98,7 @@ public class BggGeekplayV3RequestBody {
 
     private String score;
 
-    private String rating;
+    private Integer rating;
 
     private Boolean win;
 
