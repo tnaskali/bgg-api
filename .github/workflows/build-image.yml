@@ -80,7 +80,7 @@ jobs:
       - name: Extract Docker metadata
         if: github.ref == 'refs/heads/master'
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}
 
