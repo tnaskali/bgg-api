@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.1.6</version>
+    <version>3.2.0</version>
     <relativePath/>
   </parent>
 
@@ -96,7 +96,7 @@
     <dependency>
       <groupId>com.graphql-java</groupId>
       <artifactId>graphql-java-extended-scalars</artifactId>
-      <version>${graphql-java.version}</version>
+      <version>21.0</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate.validator</groupId>
