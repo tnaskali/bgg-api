@@ -53,7 +53,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <org.springdoc.version>2.4.0</org.springdoc.version>
+    <org.springdoc.version>2.5.0</org.springdoc.version>
     <org.jsoup.version>1.17.2</org.jsoup.version>
     <java.version>17</java.version>
     <sonar.coverage.jacoco.xmlReportPaths>
