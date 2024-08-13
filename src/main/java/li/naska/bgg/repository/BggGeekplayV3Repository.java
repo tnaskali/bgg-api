@@ -83,9 +83,9 @@ public class BggGeekplayV3Repository {
         .toEntity(String.class)
         .doOnNext(entity -> {
               if (MediaType.TEXT_HTML.equalsTypeAndSubtype(entity.getHeaders().getContentType())) {
-                Matcher matcher = Pattern.compile("<div class='messagebox error'>\\s*(.+)\\s*</div>").matcher(entity.getBody());
+                Matcher matcher = Pattern.compile("<div class='messagebox error'>([\\s\\S]*?)</div>").matcher(entity.getBody());
                 if (matcher.find()) {
-                  String error = matcher.group(1);
+                  String error = matcher.group(1).trim();
                   if ("Play does not exist.".equals(error)) {
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Play does not exist");
                   } else if ("You can't delete this play".equals(error)) {

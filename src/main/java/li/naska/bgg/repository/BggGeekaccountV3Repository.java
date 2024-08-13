@@ -105,16 +105,16 @@ public class BggGeekaccountV3Repository {
         .toEntity(String.class)
         .doOnNext(entity -> {
               if (MediaType.TEXT_HTML.equalsTypeAndSubtype(entity.getHeaders().getContentType())) {
-                Matcher matcher = Pattern.compile("<div class='messagebox'>\\s*(.+)\\s*</div>").matcher(entity.getBody());
+                Matcher matcher = Pattern.compile("<div class='messagebox'>([\\s\\S]*?)</div>").matcher(entity.getBody());
                 if (matcher.find()) {
-                  String error = matcher.group(1);
+                  String error = matcher.group(1).trim();
                   if ("This action requires you to <a href=\"/login?redirect=1\">login</a>.".equals(error)) {
                     throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Login required");
                   }
                 }
-                matcher = Pattern.compile("<div class='messagebox error'>\\s*(.+)\\s*</div>").matcher(entity.getBody());
+                matcher = Pattern.compile("<div class='messagebox error'>([\\s\\S]*?)</div>").matcher(entity.getBody());
                 if (matcher.find()) {
-                  String error = matcher.group(1);
+                  String error = matcher.group(1).trim();
                   if ("Invalid action".equals(error)) {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid action");
                   }
