@@ -6,6 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -33,7 +34,7 @@ public class BggGeekaccountV5Repository {
             .build(params.getListtype(), params.getDomain()))
         .accept(MediaType.TEXT_HTML)
         .acceptCharset(StandardCharsets.UTF_8)
-        .header("Cookie", cookie)
+        .header(HttpHeaders.COOKIE, cookie)
         .retrieve()
         .toEntity(String.class)
         .map(entity -> {

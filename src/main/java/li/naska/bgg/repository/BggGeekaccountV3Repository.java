@@ -9,6 +9,7 @@ import org.jsoup.nodes.Document;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
@@ -46,7 +47,7 @@ public class BggGeekaccountV3Repository {
             .build())
         .accept(MediaType.TEXT_HTML)
         .acceptCharset(StandardCharsets.UTF_8)
-        .header("Cookie", cookie)
+        .header(HttpHeaders.COOKIE, cookie)
         .retrieve()
         .toEntity(String.class)
         .map(entity -> {
@@ -80,8 +81,8 @@ public class BggGeekaccountV3Repository {
         .accept(MediaType.TEXT_HTML)
         .acceptCharset(StandardCharsets.UTF_8)
         .contentType(MediaType.MULTIPART_FORM_DATA)
-        .header("Cookie", cookie)
-        .header("Referer", "%s?action=editcontact".formatted(endpoint))
+        .header(HttpHeaders.REFERER, "%s?action=editcontact".formatted(endpoint))
+        .header(HttpHeaders.COOKIE, cookie)
         .body(BodyInserters.fromMultipartData(QueryParameters.fromPojo(body)))
         .retrieve()
         .toEntity(String.class)
@@ -98,7 +99,7 @@ public class BggGeekaccountV3Repository {
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-        .header("Cookie", cookie)
+        .header(HttpHeaders.COOKIE, cookie)
         .bodyValue(QueryParameters.fromPojo(requestBody))
         .retrieve()
         .toEntity(String.class)

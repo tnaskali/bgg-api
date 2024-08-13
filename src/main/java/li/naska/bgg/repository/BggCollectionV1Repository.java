@@ -5,6 +5,7 @@ import li.naska.bgg.repository.model.BggCollectionV1QueryParams;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
@@ -37,7 +38,7 @@ public class BggCollectionV1Repository {
             .build(username))
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
-        .headers(headers -> cookie.ifPresent(c -> headers.add("Cookie", c)))
+        .headers(headers -> cookie.ifPresent(c -> headers.add(HttpHeaders.COOKIE, c)))
         .retrieve()
         .onStatus(
             // BGG might queue the request

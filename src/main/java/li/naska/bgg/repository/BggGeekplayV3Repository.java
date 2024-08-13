@@ -6,6 +6,7 @@ import li.naska.bgg.repository.model.*;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
@@ -58,7 +59,7 @@ public class BggGeekplayV3Repository {
             .build())
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
-        .header("Cookie", cookie)
+        .header(HttpHeaders.COOKIE, cookie)
         .retrieve()
         .toEntity(String.class)
         .handle((entity, sink) -> {
@@ -76,7 +77,7 @@ public class BggGeekplayV3Repository {
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .contentType(MediaType.APPLICATION_JSON)
-        .header("Cookie", cookie)
+        .header(HttpHeaders.COOKIE, cookie)
         .bodyValue(requestBody)
         .retrieve()
         .toEntity(String.class)
