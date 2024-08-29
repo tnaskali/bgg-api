@@ -13,7 +13,7 @@ public final class ReflectionUtils {
     return Class.forName(className);
   }
 
-  public static Stream<? extends Class<?>> getDeclaredClasses(Class<?> clazz) {
+  public static Stream<Class<?>> getDeclaredClasses(Class<?> clazz) {
     List<Class<?>> result = new ArrayList<>();
     result.add(clazz);
     result.addAll(List.of(clazz.getDeclaredClasses()));

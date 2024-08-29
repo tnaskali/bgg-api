@@ -1,5 +1,6 @@
 package li.naska.bgg.resource;
 
+import jakarta.validation.constraints.NotNull;
 import java.util.concurrent.TimeUnit;
 import okhttp3.mockwebserver.Dispatcher;
 import okhttp3.mockwebserver.MockResponse;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -41,10 +44,10 @@ public abstract class AbstractMockServerIT {
   protected void dispatch(int responseCode, String mockResponseBody) {
     mockWebServer.setDispatcher(new Dispatcher() {
       @Override
-      public MockResponse dispatch(RecordedRequest request) {
+      public @NotNull MockResponse dispatch(@NotNull RecordedRequest request) {
         return new MockResponse()
             .setResponseCode(responseCode)
-            .addHeader("Content-Type", "application/xml")
+            .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_XML_VALUE)
             .setBody(mockResponseBody);
       }
     });
