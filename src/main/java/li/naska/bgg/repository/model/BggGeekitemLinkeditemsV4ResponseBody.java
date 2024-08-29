@@ -1,14 +1,14 @@
 package li.naska.bgg.repository.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.Data;
 
 @Data
-@JsonIgnoreProperties(value = {"itemdata", "linkdata"}) // This is only display data, no need to map to schema
+@JsonIgnoreProperties(
+    value = {"itemdata", "linkdata"}) // This is only display data, no need to map to schema
 public class BggGeekitemLinkeditemsV4ResponseBody {
 
   private List<Item> items;
@@ -63,7 +63,6 @@ public class BggGeekitemLinkeditemsV4ResponseBody {
     private String href;
 
     private Images images;
-
   }
 
   @Data
@@ -84,15 +83,13 @@ public class BggGeekitemLinkeditemsV4ResponseBody {
     private String square200;
 
     private String original;
-
   }
 
   @Data
-  @JsonIgnoreProperties(value = {"sortdata", "filters"}) // This is only display data, no need to map to schema
+  @JsonIgnoreProperties(
+      value = {"sortdata", "filters"}) // This is only display data, no need to map to schema
   public static class Config {
 
     private Integer numitems;
-
   }
-
 }

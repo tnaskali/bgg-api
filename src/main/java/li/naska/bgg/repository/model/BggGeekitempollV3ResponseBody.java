@@ -1,9 +1,8 @@
 package li.naska.bgg.repository.model;
 
-import lombok.Data;
-
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class BggGeekitempollV3ResponseBody {
@@ -42,7 +41,6 @@ public class BggGeekitempollV3ResponseBody {
     private Integer voters;
 
     private Integer unixenddatetime;
-
   }
 
   @Data
@@ -81,7 +79,6 @@ public class BggGeekitempollV3ResponseBody {
     private List<ChoiceColumn> choicesc;
 
     private List<ChoiceRow> choicesr;
-
   }
 
   @Data
@@ -94,7 +91,6 @@ public class BggGeekitempollV3ResponseBody {
     private String body;
 
     private String choicetype;
-
   }
 
   @Data
@@ -109,7 +105,6 @@ public class BggGeekitempollV3ResponseBody {
     private String choicetype;
 
     private Integer voters;
-
   }
 
   @Data
@@ -128,7 +123,5 @@ public class BggGeekitempollV3ResponseBody {
     private Integer questionid;
 
     private Integer userid;
-
   }
-
 }

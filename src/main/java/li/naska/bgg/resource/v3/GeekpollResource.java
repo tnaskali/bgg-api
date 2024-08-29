@@ -20,21 +20,22 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v3/geekpoll")
 public class GeekpollResource {
 
-  @Autowired
-  private BggGeekpollV3Repository geekpollRepository;
+  @Autowired private BggGeekpollV3Repository geekpollRepository;
 
-  @Autowired
-  private AuthenticationService authenticationService;
+  @Autowired private AuthenticationService authenticationService;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get poll",
       description = "Get poll information by id.",
-      security = @SecurityRequirement(name = "basicAuth")
-  )
-  public Mono<BggGeekpollV3ResponseBody> getGeekpoll(@Validated @ParameterObject BggGeekpollV3QueryParams params) {
-    return authenticationService.optionalAuthentication().flatMap(
-        authn -> geekpollRepository.getGeekpoll(authn.map(BggAuthenticationToken::buildBggRequestHeader), params));
+      security = @SecurityRequirement(name = "basicAuth"))
+  public Mono<BggGeekpollV3ResponseBody> getGeekpoll(
+      @Validated @ParameterObject BggGeekpollV3QueryParams params) {
+    return authenticationService
+        .optionalAuthentication()
+        .flatMap(
+            authn ->
+                geekpollRepository.getGeekpoll(
+                    authn.map(BggAuthenticationToken::buildBggRequestHeader), params));
   }
-
 }

@@ -13,22 +13,24 @@ public class BggForumlistV2QueryParams {
   @Min(1)
   @Parameter(
       example = "62408",
-      description = """
+      description =
+          """
           Specifies the id of the type of database entry you want the forum list for. This is the id that appears in
           the address of the page when visiting a particular game in the database.
           <p>
           <i>Syntax</i> : /forumlist?id={id}
           <p>
           <i>Example</i> : /forumlist?id=62408
-          """
-  )
+          """)
   private Integer id;
 
   @NotNull
-  @Pattern(regexp = "^(company|component|event|family|media|person|property|thing|version|weblink)$")
+  @Pattern(
+      regexp = "^(company|component|event|family|media|person|property|thing|version|weblink)$")
   @Parameter(
       example = "family",
-      description = """
+      description =
+          """
           The type of entry in the database.
           <p>
           The XMLAPI2 supports the following object types:
@@ -46,8 +48,6 @@ public class BggForumlistV2QueryParams {
           <i>Syntax</i> : /forumlist?id={id}&type={type}
           <p>
           <i>Example</i> : /forumlist?id=62408&type=family
-          """
-  )
+          """)
   private String type;
-
 }

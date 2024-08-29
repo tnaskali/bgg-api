@@ -20,32 +20,30 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/forum")
 public class ForumResource {
 
-  @Autowired
-  private BggForumV2Repository forumsRepository;
+  @Autowired private BggForumV2Repository forumsRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  @Autowired private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Forums",
-      description = """
+      description =
+          """
           You can request a list of threads in a particular forum through the XMLAPI2.
           <p>
           <i>Syntax</i> : /forum?id={id}[&page={page}]
           <p>
           <i>Example</i> : /forum?id=2003721&page=1
           """,
-      externalDocs = @ExternalDocumentation(
-          description = "original documentation",
-          url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc6"
-      )
-  )
-  public Mono<String> getForum(@Validated @ParameterObject BggForumV2QueryParams params,
-                               ServerHttpRequest request) {
+      externalDocs =
+          @ExternalDocumentation(
+              description = "original documentation",
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc6"))
+  public Mono<String> getForum(
+      @Validated @ParameterObject BggForumV2QueryParams params, ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return forumsRepository.getForum(params)
+    return forumsRepository
+        .getForum(params)
         .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Forum.class));
   }
-
 }

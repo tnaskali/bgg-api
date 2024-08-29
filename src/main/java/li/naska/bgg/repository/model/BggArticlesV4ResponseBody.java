@@ -1,8 +1,7 @@
 package li.naska.bgg.repository.model;
 
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class BggArticlesV4ResponseBody {
@@ -14,5 +13,4 @@ public class BggArticlesV4ResponseBody {
   private Integer perPage;
 
   private Integer total;
-
 }

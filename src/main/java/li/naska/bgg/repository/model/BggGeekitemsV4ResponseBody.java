@@ -1,12 +1,11 @@
 package li.naska.bgg.repository.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import lombok.Data;
 
 @Data
 public class BggGeekitemsV4ResponseBody {
@@ -126,7 +125,6 @@ public class BggGeekitemsV4ResponseBody {
     private Object promoted_ad;
 
     private User special_user;
-
   }
 
   @Data
@@ -136,7 +134,6 @@ public class BggGeekitemsV4ResponseBody {
 
     /* TODO unknown format */
     private Object shopifyitem;
-
   }
 
   @Data
@@ -155,7 +152,6 @@ public class BggGeekitemsV4ResponseBody {
     private String itemstate;
 
     private String href;
-
   }
 
   @Data
@@ -177,7 +173,6 @@ public class BggGeekitemsV4ResponseBody {
 
     /* TODO unknown format */
     private Object shopifyitem;
-
   }
 
   @Data
@@ -192,7 +187,6 @@ public class BggGeekitemsV4ResponseBody {
     private Integer primaryname;
 
     private String translit;
-
   }
 
   @Data
@@ -203,7 +197,6 @@ public class BggGeekitemsV4ResponseBody {
     private String name;
 
     private Boolean secondaryname;
-
   }
 
   @Data
@@ -215,7 +208,6 @@ public class BggGeekitemsV4ResponseBody {
     private Object url;
 
     private String title;
-
   }
 
   @Data
@@ -236,7 +228,6 @@ public class BggGeekitemsV4ResponseBody {
     private String square200;
 
     private String original;
-
   }
 
   @Data
@@ -245,7 +236,6 @@ public class BggGeekitemsV4ResponseBody {
     private Image square100;
 
     private Image mediacard;
-
   }
 
   @Data
@@ -255,7 +245,6 @@ public class BggGeekitemsV4ResponseBody {
 
     @JsonProperty(value = "src@2x")
     private String src_at_2x;
-
   }
 
   @Data
@@ -264,7 +253,5 @@ public class BggGeekitemsV4ResponseBody {
     private String username;
 
     private Integer userid;
-
   }
-
 }

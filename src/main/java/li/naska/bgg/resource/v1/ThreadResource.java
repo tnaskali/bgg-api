@@ -19,14 +19,14 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v1/thread")
 public class ThreadResource {
 
-  @Autowired
-  private BggThreadV1Repository threadRepository;
+  @Autowired private BggThreadV1Repository threadRepository;
 
   @Deprecated
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_XML_VALUE)
   @Operation(
       summary = "Retrieve the messages from a forum/game thread",
-      description = """
+      description =
+          """
           <b>This endpoint doesn't seem to be working anymore as it gets redirected to an invalid URI.</b>
           <p>
           Retrieve the messages from a forum/game thread.
@@ -37,14 +37,14 @@ public class ThreadResource {
           <p>
           <i>Example</i> : /thread/381021
           """,
-      externalDocs = @ExternalDocumentation(
-          description = "original documentation",
-          url = "https://boardgamegeek.com/wiki/page/BGG_XML_API#toc6"
-      )
-  )
-  public Mono<String> getThread(@NotNull @PathVariable @Parameter(description = "The thread id(s).", example = "381021") Integer id,
-                                @ParameterObject BggThreadV1QueryParams params) {
+      externalDocs =
+          @ExternalDocumentation(
+              description = "original documentation",
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API#toc6"))
+  public Mono<String> getThread(
+      @NotNull @PathVariable @Parameter(description = "The thread id(s).", example = "381021")
+          Integer id,
+      @ParameterObject BggThreadV1QueryParams params) {
     return threadRepository.getThread(id, params);
   }
-
 }

@@ -1,9 +1,8 @@
 package li.naska.bgg.repository.model;
 
+import java.util.List;
 import li.naska.bgg.resource.v5.model.SearchContext;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class BggSearchV5ResponseBody {
@@ -38,7 +37,5 @@ public class BggSearchV5ResponseBody {
     private Integer id;
 
     private String href;
-
   }
-
 }

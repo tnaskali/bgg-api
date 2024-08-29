@@ -1,10 +1,9 @@
 package li.naska.bgg.repository.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-
 import java.time.ZonedDateTime;
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class BggGeeklistV4ResponseBody {
@@ -52,7 +51,5 @@ public class BggGeeklistV4ResponseBody {
     private String rel;
 
     private String uri;
-
   }
-
 }

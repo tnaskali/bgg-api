@@ -19,28 +19,26 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/person")
 public class PersonResource {
 
-  @Autowired
-  private BggPersonV2Repository personsRepository;
+  @Autowired private BggPersonV2Repository personsRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  @Autowired private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Person items",
-      description = """
+      description =
+          """
           In the BGG database, any real person is called a person.
           <p>
           <i>Syntax</i> : /person?id={ids}[&{parameters}]
           <p>
           <i>Example</i> : /person?id=153580,150831
-          """
-  )
-  public Mono<String> getPerson(@Validated @ParameterObject BggPersonV2QueryParams params,
-                                ServerHttpRequest request) {
+          """)
+  public Mono<String> getPerson(
+      @Validated @ParameterObject BggPersonV2QueryParams params, ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return personsRepository.getPersons(params)
+    return personsRepository
+        .getPersons(params)
         .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Items.class));
   }
-
 }

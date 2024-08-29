@@ -25,19 +25,19 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v1/collection")
 public class CollectionResource {
 
-  @Autowired
-  private BggCollectionV1Repository collectionRepository;
+  @Autowired private BggCollectionV1Repository collectionRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  @Autowired private XmlProcessor xmlProcessor;
 
-  @Autowired
-  private AuthenticationService authenticationService;
+  @Autowired private AuthenticationService authenticationService;
 
-  @GetMapping(path = "/{username}", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+  @GetMapping(
+      path = "/{username}",
+      produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Retrieve games in a user's collection",
-      description = """
+      description =
+          """
           Retrieve games in a user's collection.
           <p>
           Important definition: A user's collection includes any games the user has added to her collection on BGG. This includes games she owns, games she used to own, games she's rated, games upon which she's commented, games she's played, and games on her wishlist, just to name a few. In this section, references to the collection mean this broader sense of BGG collection, not the user's personal stash of games.
@@ -47,18 +47,23 @@ public class CollectionResource {
           <i>Example</i> : /collection/eekspider
           """,
       security = @SecurityRequirement(name = "basicAuth"),
-      externalDocs = @ExternalDocumentation(
-          description = "original documentation",
-          url = "https://boardgamegeek.com/wiki/page/BGG_XML_API#toc5"
-      )
-  )
-  public Mono<String> getCollection(@PathVariable @Parameter(description = "The collection owner's username.", example = "eekspider") String username,
-                                    @Validated @ParameterObject BggCollectionV1QueryParams params,
-                                    ServerHttpRequest request) {
+      externalDocs =
+          @ExternalDocumentation(
+              description = "original documentation",
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API#toc5"))
+  public Mono<String> getCollection(
+      @PathVariable
+          @Parameter(description = "The collection owner's username.", example = "eekspider")
+          String username,
+      @Validated @ParameterObject BggCollectionV1QueryParams params,
+      ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return authenticationService.optionalAuthentication()
-        .flatMap(authn -> collectionRepository.getCollection(authn.map(BggAuthenticationToken::buildBggRequestHeader), username, params))
+    return authenticationService
+        .optionalAuthentication()
+        .flatMap(
+            authn ->
+                collectionRepository.getCollection(
+                    authn.map(BggAuthenticationToken::buildBggRequestHeader), username, params))
         .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Items.class));
   }
-
 }

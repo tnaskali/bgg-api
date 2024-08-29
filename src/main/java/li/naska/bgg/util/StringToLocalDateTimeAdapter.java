@@ -1,16 +1,14 @@
 package li.naska.bgg.util;
 
 import jakarta.xml.bind.annotation.adapters.XmlAdapter;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class StringToLocalDateTimeAdapter extends XmlAdapter<String, LocalDateTime> {
 
-  /**
-   * Example : 2020-01-11 11:15:53
-   */
-  private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+  /** Example : 2020-01-11 11:15:53 */
+  private static final DateTimeFormatter FORMATTER =
+      DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
   @Override
   public String marshal(LocalDateTime localDateTime) {
@@ -21,5 +19,4 @@ public class StringToLocalDateTimeAdapter extends XmlAdapter<String, LocalDateTi
   public LocalDateTime unmarshal(String string) {
     return LocalDateTime.from(FORMATTER.parse(string));
   }
-
 }

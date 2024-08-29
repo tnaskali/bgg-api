@@ -1,9 +1,8 @@
 package li.naska.bgg.repository.model;
 
-import lombok.Data;
-
 import java.time.ZonedDateTime;
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class BggListitemCommentsV4ResponseBody {
@@ -30,7 +29,6 @@ public class BggListitemCommentsV4ResponseBody {
     private String type;
 
     private Integer id;
-
   }
 
   @Data
@@ -61,7 +59,6 @@ public class BggListitemCommentsV4ResponseBody {
     private List<Link> links;
 
     private Integer rollsCount;
-
   }
 
   @Data
@@ -70,7 +67,6 @@ public class BggListitemCommentsV4ResponseBody {
     private String rel;
 
     private String uri;
-
   }
 
   @Data
@@ -81,14 +77,11 @@ public class BggListitemCommentsV4ResponseBody {
     private String uri;
 
     private Meta meta;
-
   }
 
   @Data
   public static class Meta {
 
     private Integer totalCount;
-
   }
-
 }

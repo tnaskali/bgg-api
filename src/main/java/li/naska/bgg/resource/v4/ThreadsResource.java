@@ -21,38 +21,38 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/threads")
 public class ThreadsResource {
 
-  @Autowired
-  private BggThreadsV4Repository threadsRepository;
+  @Autowired private BggThreadsV4Repository threadsRepository;
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get thread",
-      description = """
+      description =
+          """
           Get thread by id.
           <p>
           <i>Syntax</i> : /threads/{id}
           <p>
           <i>Example</i> : /threads/99401
-          """
-  )
-  public Mono<BggThreadV4ResponseBody> getThread(@NotNull @PathVariable @Parameter(example = "99401", description = "Thread id.") Integer id) {
+          """)
+  public Mono<BggThreadV4ResponseBody> getThread(
+      @NotNull @PathVariable @Parameter(example = "99401", description = "Thread id.") Integer id) {
     return threadsRepository.getThread(id);
   }
 
   @GetMapping(path = "/{id}/reactions", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get thread reactions",
-      description = """
+      description =
+          """
           Get reactions for a given thread.
           <p>
           <i>Syntax</i> : /threads/{id}/reactions[?{parameters}]
           <p>
           <i>Example</i> : /threads/99401/reactions
-          """
-  )
-  public Mono<BggThreadReactionsV4ResponseBody> getThreadReactions(@NotNull @PathVariable @Parameter(example = "99401", description = "Thread id.") Integer id,
-                                                                   @Validated @ParameterObject BggThreadReactionsV4QueryParams params) {
+          """)
+  public Mono<BggThreadReactionsV4ResponseBody> getThreadReactions(
+      @NotNull @PathVariable @Parameter(example = "99401", description = "Thread id.") Integer id,
+      @Validated @ParameterObject BggThreadReactionsV4QueryParams params) {
     return threadsRepository.getThreadReactions(id, params);
   }
-
 }

@@ -20,32 +20,30 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/forumlist")
 public class ForumListResource {
 
-  @Autowired
-  private BggForumlistV2Repository forumListsRepository;
+  @Autowired private BggForumlistV2Repository forumListsRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  @Autowired private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Forum Lists",
-      description = """
+      description =
+          """
           You can request a list of forums for a particular type/id through the XMLAPI2.
           <p>
           <i>Syntax</i> : /forumlist?id={id}&type={type}
           <p>
           <i>Example</i> : /forumlist?id=62408&type=family
           """,
-      externalDocs = @ExternalDocumentation(
-          description = "original documentation",
-          url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc5"
-      )
-  )
-  public Mono<String> getForums(@Validated @ParameterObject BggForumlistV2QueryParams params,
-                                ServerHttpRequest request) {
+      externalDocs =
+          @ExternalDocumentation(
+              description = "original documentation",
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc5"))
+  public Mono<String> getForums(
+      @Validated @ParameterObject BggForumlistV2QueryParams params, ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return forumListsRepository.getForums(params)
+    return forumListsRepository
+        .getForums(params)
         .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Forums.class));
   }
-
 }

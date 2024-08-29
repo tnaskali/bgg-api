@@ -1,6 +1,7 @@
 package li.naska.bgg.service;
 
 import com.jayway.jsonpath.JsonPath;
+import java.util.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpHeaders;
@@ -11,18 +12,14 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
-import java.util.*;
-
 @Service
 public class LoginService {
 
   private final WebClient webClient;
 
-  public LoginService(WebClient.Builder builder,
-                      @Value("${bgg.endpoints.v5.login}") String loginEndpoint) {
-    webClient = builder
-        .baseUrl(loginEndpoint)
-        .build();
+  public LoginService(
+      WebClient.Builder builder, @Value("${bgg.endpoints.v5.login}") String loginEndpoint) {
+    webClient = builder.baseUrl(loginEndpoint).build();
   }
 
   @Cacheable(cacheNames = "login", key = "#username")
@@ -40,13 +37,15 @@ public class LoginService {
         .retrieve()
         .onStatus(
             status -> status != HttpStatus.NO_CONTENT,
-            response -> response.bodyToMono(String.class)
-                .map(body -> JsonPath.<String>read(body, "$.errors.message"))
-                .map(body -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, body)))
+            response ->
+                response
+                    .bodyToMono(String.class)
+                    .map(body -> JsonPath.<String>read(body, "$.errors.message"))
+                    .map(body -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, body)))
         .toEntity(Void.class)
-        .map(response -> Optional
-            .ofNullable(response.getHeaders().get(HttpHeaders.SET_COOKIE))
-            .orElse(Collections.emptyList()));
+        .map(
+            response ->
+                Optional.ofNullable(response.getHeaders().get(HttpHeaders.SET_COOKIE))
+                    .orElse(Collections.emptyList()));
   }
-
 }

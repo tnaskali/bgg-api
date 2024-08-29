@@ -16,53 +16,57 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v3/geekplay")
 public class GeekplayResource {
 
-  @Autowired
-  private BggGeekplayV3Repository geekplayRepository;
+  @Autowired private BggGeekplayV3Repository geekplayRepository;
 
-  @Autowired
-  private AuthenticationService authenticationService;
+  @Autowired private AuthenticationService authenticationService;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get plays details",
-      description = """
+      description =
+          """
           Get plays details.
           <p>
           <i>Syntax</i> : /geekplay?action={action}&objectid={id}&objecttype={type}
           <p>
           <i>Example</i> : /geekplay?action=getplays&objectid=205637&objecttype=thing
-          """
-  )
-  public Mono<BggGeekplayPlaysV3ResponseBody> getGeekplayPlays(@Validated @ParameterObject BggGeekplayPlaysV3QueryParams params) {
+          """)
+  public Mono<BggGeekplayPlaysV3ResponseBody> getGeekplayPlays(
+      @Validated @ParameterObject BggGeekplayPlaysV3QueryParams params) {
     return geekplayRepository.getGeekplayPlays(params);
   }
 
   @GetMapping(path = "/count", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get play count information for the current user",
-      description = """
+      description =
+          """
           Get play count information for the current user.
           <p>
           <i>Syntax</i> : /geekplay/count?action=getuserplaycount[?{parameters}]
           <p>
           <i>Example</i> : /geekplay/count?action=getuserplaycount&userid=825923&objectid=205637&objecttype=thing
           """,
-      security = @SecurityRequirement(name = "basicAuth")
-  )
-  public Mono<BggGeekplayCountV3ResponseBody> getGeekplayCount(@Validated @ParameterObject BggGeekplayCountV3QueryParams params) {
-    return authenticationService.requiredAuthentication().flatMap(
-        authn -> geekplayRepository.getGeekplayCount(authn.buildBggRequestHeader(), params));
+      security = @SecurityRequirement(name = "basicAuth"))
+  public Mono<BggGeekplayCountV3ResponseBody> getGeekplayCount(
+      @Validated @ParameterObject BggGeekplayCountV3QueryParams params) {
+    return authenticationService
+        .requiredAuthentication()
+        .flatMap(
+            authn -> geekplayRepository.getGeekplayCount(authn.buildBggRequestHeader(), params));
   }
 
-  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Updates play information for the current user",
       description = "Updates play information for the current user.",
-      security = @SecurityRequirement(name = "basicAuth")
-  )
-  public Mono<BggGeekplayV3ResponseBody> updateGeekplay(@Validated @RequestBody BggGeekplayV3RequestBody body) {
-    return authenticationService.requiredAuthentication().flatMap(
-        authn -> geekplayRepository.updateGeekplay(authn.buildBggRequestHeader(), body));
+      security = @SecurityRequirement(name = "basicAuth"))
+  public Mono<BggGeekplayV3ResponseBody> updateGeekplay(
+      @Validated @RequestBody BggGeekplayV3RequestBody body) {
+    return authenticationService
+        .requiredAuthentication()
+        .flatMap(authn -> geekplayRepository.updateGeekplay(authn.buildBggRequestHeader(), body));
   }
-
 }

@@ -20,32 +20,30 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/guild")
 public class GuildResource {
 
-  @Autowired
-  private BggGuildV2Repository guildsRepository;
+  @Autowired private BggGuildV2Repository guildsRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  @Autowired private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Guilds",
-      description = """
+      description =
+          """
           Request information about particular guilds.
           <p>
           <i>Syntax</i> : /guild?id={id}[&{parameters}]
           <p>
           <i>Example</i> : /guild?id=666
           """,
-      externalDocs = @ExternalDocumentation(
-          description = "original documentation",
-          url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc9"
-      )
-  )
-  public Mono<String> getGuild(@Validated @ParameterObject BggGuildV2QueryParams params,
-                               ServerHttpRequest request) {
+      externalDocs =
+          @ExternalDocumentation(
+              description = "original documentation",
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc9"))
+  public Mono<String> getGuild(
+      @Validated @ParameterObject BggGuildV2QueryParams params, ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return guildsRepository.getGuild(params)
+    return guildsRepository
+        .getGuild(params)
         .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Guild.class));
   }
-
 }

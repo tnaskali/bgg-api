@@ -15,21 +15,15 @@ import org.springframework.security.web.server.savedrequest.NoOpServerRequestCac
 @Configuration
 public class SecurityConfiguration {
 
-  @Autowired
-  private BggAuthenticationManager authenticationManager;
+  @Autowired private BggAuthenticationManager authenticationManager;
 
   @Bean
   public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
-    return http
-        .authenticationManager(authenticationManager)
-        .requestCache(spec -> spec
-            .requestCache(NoOpServerRequestCache.getInstance()))
+    return http.authenticationManager(authenticationManager)
+        .requestCache(spec -> spec.requestCache(NoOpServerRequestCache.getInstance()))
         .csrf(CsrfSpec::disable)
-        .authorizeExchange(spec -> spec
-            .anyExchange()
-            .permitAll())
+        .authorizeExchange(spec -> spec.anyExchange().permitAll())
         .httpBasic(Customizer.withDefaults())
         .build();
   }
-
 }

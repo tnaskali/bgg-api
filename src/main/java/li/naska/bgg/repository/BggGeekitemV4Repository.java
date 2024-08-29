@@ -2,6 +2,7 @@ package li.naska.bgg.repository;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.nio.charset.StandardCharsets;
 import li.naska.bgg.repository.model.BggGeekitemLinkeditemsV4QueryParams;
 import li.naska.bgg.repository.model.BggGeekitemLinkeditemsV4ResponseBody;
 import li.naska.bgg.util.QueryParameters;
@@ -14,13 +15,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
-import java.nio.charset.StandardCharsets;
-
 @Repository
 public class BggGeekitemV4Repository {
 
-  @Autowired
-  private ObjectMapper objectMapper;
+  @Autowired private ObjectMapper objectMapper;
 
   private final WebClient webClient;
 
@@ -30,27 +28,35 @@ public class BggGeekitemV4Repository {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 
-  public Mono<BggGeekitemLinkeditemsV4ResponseBody> getLinkeditems(BggGeekitemLinkeditemsV4QueryParams params) {
+  public Mono<BggGeekitemLinkeditemsV4ResponseBody> getLinkeditems(
+      BggGeekitemLinkeditemsV4QueryParams params) {
     return webClient
         .get()
-        .uri(uriBuilder -> uriBuilder
-            .path("/linkeditems")
-            .queryParams(QueryParameters.fromPojo(params))
-            .build())
+        .uri(
+            uriBuilder ->
+                uriBuilder
+                    .path("/linkeditems")
+                    .queryParams(QueryParameters.fromPojo(params))
+                    .build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .onStatus(
             httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
-            clientResponse -> Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
+            clientResponse ->
+                Mono.error(
+                    new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
         .toEntity(String.class)
-        .<BggGeekitemLinkeditemsV4ResponseBody>handle((entity, sink) -> {
-          try {
-            sink.next(objectMapper.readValue(entity.getBody(), BggGeekitemLinkeditemsV4ResponseBody.class));
-          } catch (JsonProcessingException e) {
-            sink.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
-          }
-        });
+        .<BggGeekitemLinkeditemsV4ResponseBody>handle(
+            (entity, sink) -> {
+              try {
+                sink.next(
+                    objectMapper.readValue(
+                        entity.getBody(), BggGeekitemLinkeditemsV4ResponseBody.class));
+              } catch (JsonProcessingException e) {
+                sink.error(
+                    new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+              }
+            });
   }
-
 }

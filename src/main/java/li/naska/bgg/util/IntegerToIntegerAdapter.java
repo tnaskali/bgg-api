@@ -13,5 +13,4 @@ public class IntegerToIntegerAdapter extends XmlAdapter<String, Integer> {
   public Integer unmarshal(String string) {
     return Integer.parseInt(string);
   }
-
 }

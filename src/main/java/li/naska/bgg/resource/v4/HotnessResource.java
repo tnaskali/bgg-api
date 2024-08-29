@@ -17,22 +17,21 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/hotness")
 public class HotnessResource {
 
-  @Autowired
-  private BggHotnessV4Repository hotnessRepository;
+  @Autowired private BggHotnessV4Repository hotnessRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get hotness",
-      description = """
+      description =
+          """
           Get hotness information.
           <p>
           <i>Syntax</i> : /hotness?objectid={id}&objecttype={type}
           <p>
           <i>Example</i> : /hotness?objectid=1000&objecttype=thing
-          """
-  )
-  public Mono<BggHotnessV4ResponseBody> getHotness(@Validated @ParameterObject BggHotnessV4QueryParams params) {
+          """)
+  public Mono<BggHotnessV4ResponseBody> getHotness(
+      @Validated @ParameterObject BggHotnessV4QueryParams params) {
     return hotnessRepository.getHotness(params);
   }
-
 }

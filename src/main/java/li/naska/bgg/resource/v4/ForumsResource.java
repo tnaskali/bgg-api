@@ -19,37 +19,37 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/forums")
 public class ForumsResource {
 
-  @Autowired
-  private BggForumsV4Repository forumsRepository;
+  @Autowired private BggForumsV4Repository forumsRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get forums",
-      description = """
+      description =
+          """
           Get forums information for a given object.
           <p>
           <i>Syntax</i> : /forums?objectid={id}&objecttype={type}
           <p>
           <i>Example</i> : /forums?objectid=205637&objecttype=thing
-          """
-  )
-  public Mono<BggForumsV4ResponseBody> getForums(@Validated @ParameterObject BggForumsV4QueryParams params) {
+          """)
+  public Mono<BggForumsV4ResponseBody> getForums(
+      @Validated @ParameterObject BggForumsV4QueryParams params) {
     return forumsRepository.getForums(params);
   }
 
   @GetMapping(path = "/threads", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get threads",
-      description = """
+      description =
+          """
           Get thread for a given object id and type.
           <p>
           <i>Syntax</i> : /forums/threads?objectid={id}&objecttype={type}
           <p>
           <i>Example</i> : /forums/threads?objectid=205637&objecttype=thing
-          """
-  )
-  public Mono<BggForumsThreadsV4ResponseBody> getThreads(@Validated @ParameterObject BggForumsThreadsV4QueryParams params) {
+          """)
+  public Mono<BggForumsThreadsV4ResponseBody> getThreads(
+      @Validated @ParameterObject BggForumsThreadsV4QueryParams params) {
     return forumsRepository.getThreads(params);
   }
-
 }

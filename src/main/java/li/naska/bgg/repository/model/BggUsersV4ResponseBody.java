@@ -1,10 +1,9 @@
 package li.naska.bgg.repository.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-
 import java.time.LocalDate;
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class BggUsersV4ResponseBody {
@@ -70,7 +69,6 @@ public class BggUsersV4ResponseBody {
     private Boolean videogame;
 
     private Boolean puzzle;
-
   }
 
   @Data
@@ -81,7 +79,6 @@ public class BggUsersV4ResponseBody {
     private Integer badgeid;
 
     private String userRedirect;
-
   }
 
   @Data
@@ -90,7 +87,6 @@ public class BggUsersV4ResponseBody {
     private String rel;
 
     private String uri;
-
   }
 
   @Data
@@ -103,7 +99,6 @@ public class BggUsersV4ResponseBody {
     private List<CreditBadge> videogame;
 
     private List<CreditBadge> puzzle;
-
   }
 
   @Data
@@ -114,7 +109,6 @@ public class BggUsersV4ResponseBody {
     private String label;
 
     private String href;
-
   }
 
   @Data
@@ -123,7 +117,6 @@ public class BggUsersV4ResponseBody {
     private String src;
 
     private String url;
-
   }
 
   @Data
@@ -134,7 +127,6 @@ public class BggUsersV4ResponseBody {
     private Integer height;
 
     private Integer width;
-
   }
 
   @Data
@@ -151,7 +143,6 @@ public class BggUsersV4ResponseBody {
 
     @JsonProperty(value = "default")
     private String _default;
-
   }
 
   @Data
@@ -165,7 +156,5 @@ public class BggUsersV4ResponseBody {
 
     @JsonProperty(value = "default@3x")
     private String default_at_3x;
-
   }
-
 }

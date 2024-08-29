@@ -12,13 +12,12 @@ public class BggGeekaccountContactV3QueryParams {
   @Pattern(regexp = "^(editcontact)$")
   @Parameter(
       example = "editcontact",
-      description = """
+      description =
+          """
           Action to perform.
           <p>
           Possible values are:
           <li/>editcontact (select)
-          """
-  )
+          """)
   private String action;
-
 }

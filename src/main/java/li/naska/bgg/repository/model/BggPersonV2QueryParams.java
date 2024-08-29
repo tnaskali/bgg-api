@@ -14,21 +14,24 @@ public class BggPersonV2QueryParams {
   @Pattern(regexp = "^[1-9][0-9]*(,[1-9][0-9]*)*$")
   @Parameter(
       example = "153580,150831",
-      description = """
+      description =
+          """
           Specifies the id of the person(s) to retrieve. To request multiple persons with a single query, one can specify a
           comma-delimited list of ids.
           <p>
           <i>Syntax</i> : /person?id={ids}
           <p>
           <i>Example</i> : /person?id=153580,150831
-          """
-  )
+          """)
   private String id;
 
-  @Pattern(regexp = "^(boardgameartist|boardgameauthor|boardgamedesigner|boardgamedeveloper|boardgameeditor|boardgamegraphicdesigner|boardgameinsertdesigner|boardgamesculptor|boardgamesolodesigner|boardgamewriter|rpgartist|rpgdesigner|rpgproducer)(,(boardgameartist|boardgameauthor|boardgamedesigner|boardgamedeveloper|boardgameeditor|boardgamegraphicdesigner|boardgameinsertdesigner|boardgamesculptor|boardgamesolodesigner|boardgamewriter|rpgartist|rpgdesigner|rpgproducer))*$")
+  @Pattern(
+      regexp =
+          "^(boardgameartist|boardgameauthor|boardgamedesigner|boardgamedeveloper|boardgameeditor|boardgamegraphicdesigner|boardgameinsertdesigner|boardgamesculptor|boardgamesolodesigner|boardgamewriter|rpgartist|rpgdesigner|rpgproducer)(,(boardgameartist|boardgameauthor|boardgamedesigner|boardgamedeveloper|boardgameeditor|boardgamegraphicdesigner|boardgameinsertdesigner|boardgamesculptor|boardgamesolodesigner|boardgamewriter|rpgartist|rpgdesigner|rpgproducer))*$")
   @Parameter(
       example = "boardgamedeveloper,boardgameeditor",
-      description = """
+      description =
+          """
           Specifies that, regardless of the type of person asked for by id, the results are filtered by the person
           type(s) specified. Multiple person type can be specified in a comma-delimited list.
           <p>
@@ -50,22 +53,20 @@ public class BggPersonV2QueryParams {
           <i>Syntax</i> : /person?id={ids}&type={personTypes}
           <p>
           <i>Example</i> : /person?id=153580,150831&type=boardgamedeveloper,boardgameeditor
-          """
-  )
+          """)
   private String type;
 
   @Min(1)
   @Max(1)
   @Parameter(
       example = "1",
-      description = """
+      description =
+          """
           Returns videos for the person.
           <p>
           <i>Syntax</i> : /person?id={ids}&videos=1
           <p>
           <i>Example</i> : /person?id=153580&videos=1
-          """
-  )
+          """)
   private Integer videos;
-
 }

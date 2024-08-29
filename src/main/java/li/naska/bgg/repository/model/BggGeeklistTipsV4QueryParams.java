@@ -11,28 +11,27 @@ public class BggGeeklistTipsV4QueryParams {
 
   @Min(1)
   @Parameter(
-      description = """
+      description =
+          """
           Page id. Page size is 20.
           <p>
           <i>Syntax</i> : /geeklists/{id}/tips?pageid={page}
           <p>
           <i>Example</i> : /geeklists/250030/tips?pageid=2
           """,
-      schema = @Schema(defaultValue = "1")
-  )
+      schema = @Schema(defaultValue = "1"))
   private Integer pageid;
 
   @Min(1)
   @Max(1)
   @Parameter(
-      description = """
+      description =
+          """
           Shows only tips total count.
           <p>
           <i>Syntax</i> : /geeklists/{id}/tips?totalonly=1
           <p>
           <i>Example</i> : /geeklists/250030/tips?totalonly=1
-          """
-  )
+          """)
   private Integer totalonly;
-
 }

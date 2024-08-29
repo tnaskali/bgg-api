@@ -6,10 +6,9 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import lombok.Data;
-
 import java.time.LocalDate;
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class BggGeekplayV3RequestBody {
@@ -19,41 +18,41 @@ public class BggGeekplayV3RequestBody {
   @Max(1)
   @Parameter(
       example = "1",
-      description = """
-          Required to have data returned as JSON instead of HTML.
+      description =
           """
-  )
+          Required to have data returned as JSON instead of HTML.
+          """)
   private Integer ajax;
 
   @NotNull
   @Pattern(regexp = "^(save|delete)$")
   @Parameter(
       example = "save",
-      description = """
+      description =
+          """
           Action to perform.
           <p>
           Possible values are:
           <li/>save (create or update)
           <li/>delete (delete)
-          """
-  )
+          """)
   private String action;
 
   @Min(1)
   @Parameter(
-      description = """
-          Id of the play to update or delete.
+      description =
           """
-  )
+          Id of the play to update or delete.
+          """)
   private Integer playid;
 
   @Min(1)
   @Max(1)
   @Parameter(
-      description = """
-          Set to 1 during a deletion to bypass validation.
+      description =
           """
-  )
+          Set to 1 during a deletion to bypass validation.
+          """)
   private Integer finalize;
 
   private LocalDate playdate;
@@ -104,7 +103,5 @@ public class BggGeekplayV3RequestBody {
 
     @JsonProperty(value = "new")
     private Boolean _new;
-
   }
-
 }

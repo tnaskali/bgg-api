@@ -7,22 +7,20 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
+import java.io.StringReader;
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.xml.StaxUtils;
 
-import javax.xml.stream.XMLEventReader;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-import java.io.StringReader;
-
 @Component
 @Slf4j
 public class XmlProcessor {
 
-  @Autowired
-  private ObjectMapper objectMapper;
+  @Autowired private ObjectMapper objectMapper;
 
   public <T> T toJavaObject(String xmlString, Class<T> targetClass) {
     try {
@@ -46,15 +44,15 @@ public class XmlProcessor {
   public <T> String toJsonString(T object) {
     try {
       return objectMapper
-              .addMixIn(JAXBElement.class, JAXBElementMixin.class)
-              .writeValueAsString(object);
+          .addMixIn(JAXBElement.class, JAXBElementMixin.class)
+          .writeValueAsString(object);
     } catch (JsonProcessingException e) {
       log.error("JSON processing error", e);
       throw new IllegalStateException(e);
     }
   }
 
-  static abstract class JAXBElementMixin<T> {
+  abstract static class JAXBElementMixin<T> {
     @JsonIgnore
     protected abstract Class<T> getDeclaredType();
 
@@ -70,5 +68,4 @@ public class XmlProcessor {
     @JsonIgnore
     protected abstract boolean isTypeSubstituted();
   }
-
 }

@@ -17,22 +17,21 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/fans")
 public class FansResource {
 
-  @Autowired
-  private BggFansV4Repository fansRepository;
+  @Autowired private BggFansV4Repository fansRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get fans",
-      description = """
+      description =
+          """
           Get fans information for a given object.
           <p>
           <i>Syntax</i> : /fans?objectid={id}&objecttype={type}
           <p>
           <i>Example</i> : /fans?objectid=1000&objecttype=thing
-          """
-  )
-  public Mono<BggFansV4ResponseBody> getFans(@Validated @ParameterObject BggFansV4QueryParams params) {
+          """)
+  public Mono<BggFansV4ResponseBody> getFans(
+      @Validated @ParameterObject BggFansV4QueryParams params) {
     return fansRepository.getFans(params);
   }
-
 }

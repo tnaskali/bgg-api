@@ -20,16 +20,15 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/plays")
 public class PlaysResource {
 
-  @Autowired
-  private BggPlaysV2Repository playsRepository;
+  @Autowired private BggPlaysV2Repository playsRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  @Autowired private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Plays",
-      description = """
+      description =
+          """
           Request plays logged by a particular user or for a particular item. Data is returned in backwards-chronological form.
           <p>
           You must include either a username or an id and type to get results.
@@ -42,16 +41,15 @@ public class PlaysResource {
           <p>
           <i>Example</i> : /plays?id=3085&type=thing
           """,
-      externalDocs = @ExternalDocumentation(
-          description = "original documentation",
-          url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc10"
-      )
-  )
-  public Mono<String> getPlays(@Validated @ParameterObject BggPlaysV2QueryParams params,
-                               ServerHttpRequest request) {
+      externalDocs =
+          @ExternalDocumentation(
+              description = "original documentation",
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc10"))
+  public Mono<String> getPlays(
+      @Validated @ParameterObject BggPlaysV2QueryParams params, ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return playsRepository.getPlays(params)
+    return playsRepository
+        .getPlays(params)
         .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Plays.class));
   }
-
 }

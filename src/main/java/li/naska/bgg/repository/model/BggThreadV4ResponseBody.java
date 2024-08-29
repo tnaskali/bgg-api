@@ -1,10 +1,9 @@
 package li.naska.bgg.repository.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-
 import java.time.ZonedDateTime;
 import java.util.List;
+import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(value = "crumbs")
@@ -62,7 +61,6 @@ public class BggThreadV4ResponseBody {
     private String type;
 
     private Integer id;
-
   }
 
   @Data
@@ -71,7 +69,5 @@ public class BggThreadV4ResponseBody {
     private String rel;
 
     private String uri;
-
   }
-
 }

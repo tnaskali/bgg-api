@@ -9,10 +9,13 @@ import lombok.Data;
 public class BggHotV2QueryParams {
 
   @NotNull
-  @Pattern(regexp = "^(boardgame|boardgamecompany|boardgameperson|rpg|rpgcompany|rpgperson|videogame|videogamecompany)$")
+  @Pattern(
+      regexp =
+          "^(boardgame|boardgamecompany|boardgameperson|rpg|rpgcompany|rpgperson|videogame|videogamecompany)$")
   @Parameter(
       example = "boardgame",
-      description = """
+      description =
+          """
           There are a number of different hot lists available on the site.
           <p>
           Valid types include:
@@ -30,8 +33,6 @@ public class BggHotV2QueryParams {
           <i>Syntax</i> : /hot?type={type}
           <p>
           <i>Example</i> : /hot?type=boardgame
-          """
-  )
+          """)
   private String type;
-
 }

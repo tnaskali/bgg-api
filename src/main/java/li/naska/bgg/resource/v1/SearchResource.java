@@ -20,32 +20,30 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v1/search")
 public class SearchResource {
 
-  @Autowired
-  private BggSearchV1Repository searchRepository;
+  @Autowired private BggSearchV1Repository searchRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  @Autowired private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Search for games by name and by AKAs",
-      description = """
+      description =
+          """
           Search for games by name and by AKAs.
           <p>
           <i>Syntax</i> : /search?search={searchString}[&{parameters}]
           <p>
           <i>Example</i> : /search?search=Crossbows%20and%20Catapults
           """,
-      externalDocs = @ExternalDocumentation(
-          description = "original documentation",
-          url = "https://boardgamegeek.com/wiki/page/BGG_XML_API#toc3"
-      )
-  )
-  public Mono<String> getResults(@Validated @ParameterObject BggSearchV1QueryParams params,
-                                 ServerHttpRequest request) {
+      externalDocs =
+          @ExternalDocumentation(
+              description = "original documentation",
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API#toc3"))
+  public Mono<String> getResults(
+      @Validated @ParameterObject BggSearchV1QueryParams params, ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return searchRepository.getResults(params)
+    return searchRepository
+        .getResults(params)
         .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Boardgames.class));
   }
-
 }

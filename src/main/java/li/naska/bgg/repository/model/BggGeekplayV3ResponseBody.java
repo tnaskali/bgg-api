@@ -23,5 +23,4 @@ public class BggGeekplayV3ResponseBody {
   private String html;
 
   private String error;
-
 }

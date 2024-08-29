@@ -13,23 +13,22 @@ public class BggGeekpollV3QueryParams {
   @Pattern(regexp = "^(results)$")
   @Parameter(
       example = "results",
-      description = """
+      description =
+          """
           Action to perform.
           <p>
           Possible values are:
           <li/>results
-          """
-  )
+          """)
   private String action;
 
   @NotNull
   @Min(1)
   @Parameter(
       example = "1589097",
-      description = """
-          Poll Id.
+      description =
           """
-  )
+          Poll Id.
+          """)
   private Integer pollid;
-
 }

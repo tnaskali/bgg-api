@@ -5,9 +5,8 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class BggGeekaccountToplistV3RequestBody {
@@ -16,69 +15,71 @@ public class BggGeekaccountToplistV3RequestBody {
   @Pattern(regexp = "^(savetoplistitem|deletetoplistitem|savetoplistorder)$")
   @Parameter(
       example = "savetoplistitem",
-      description = """
+      description =
+          """
           Action to perform.
           <p>
           Possible values are:
           <li/>savetoplistitem (append to toplist)
           <li/>deletetoplistitem (delete from toplist)
           <li/>savetoplistorder (reorder toplist)
-          """
-  )
+          """)
   private String action;
 
   @NotNull
   @Pattern(regexp = "^(hot|top)$")
   @Parameter(
       example = "top",
-      description = """
+      description =
+          """
           List type.
           <p>
           Possible values are:
           <li/>hot
           <li/>top
-          """
-  )
+          """)
   private String listtype;
 
   @NotNull
   @Pattern(regexp = "^(boardgame|rpg|videogame)$")
   @Parameter(
       example = "boardgame",
-      description = """
+      description =
+          """
           Domain.
           <p>
           Possible values are any domain:
           <li/>boardgame
           <li/>rpg
           <li/>videogame
-          """
-  )
+          """)
   private String domain;
 
   @Parameter(
-      description = """
+      description =
+          """
           Internal Id of the toplistitem to delete.
           <p>
           Only relevant for "action=deletetoplistitem"
-          """
-  )
+          """)
   private Integer id;
 
   @Parameter(
       example = "205637",
-      description = """
+      description =
+          """
           Id of the object to add to the toplist.
           <p>
           Only relevant for "action=savetoplistitem"
-          """
-  )
+          """)
   private Integer objectid;
 
-  @Pattern(regexp = "^(company|component|event|family|media|person|property|thing|version|weblink)$")
+  @Pattern(
+      regexp = "^(company|component|event|family|media|person|property|thing|version|weblink)$")
   @Parameter(
       example = "thing",
-      description = """
+      description =
+          """
           Type or subtype of the object to add to the toplist.
           <p>
           Only relevant for "action=savetoplistitem"
@@ -95,17 +96,16 @@ public class BggGeekaccountToplistV3RequestBody {
           <li/>version
           <li/>weblink
           Or any of their subtypes.
-          """
-  )
+          """)
   private String objecttype;
 
   @Parameter(
-      description = """
+      description =
+          """
           New ordering of the elements of the toplist.
           <p>
           Only relevant for "action=savetoplistorder"
-          """
-  )
+          """)
   private List<String> listitems;
 
   // unnecessary properties
@@ -114,12 +114,12 @@ public class BggGeekaccountToplistV3RequestBody {
   @Min(1)
   @Max(1)
   @Parameter(
-      description = """
+      description =
+          """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Seems to be present with a value of "1" in all requests.
-          """
-  )
+          """)
   private Integer ajax;
 
   // unnecessary properties
@@ -127,32 +127,31 @@ public class BggGeekaccountToplistV3RequestBody {
   @Deprecated
   @Pattern(regexp = "^Save$")
   @Parameter(
-      description = """
+      description =
+          """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Seems to be present with a value of "Save" in the case of action=savetoplistitem.
-          """
-  )
+          """)
   private String save;
 
   @Deprecated
   @Parameter(
-      description = """
+      description =
+          """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Seems to correspond to the object name or AKA selected in the search box in the case of action=savetoplistitem.
-          """
-  )
+          """)
   private String geekitemname;
 
   @Deprecated
   @Parameter(
-      description = """
+      description =
+          """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Corresponds to the "Submit" form button and always has a value of "Submit".
-          """
-  )
+          """)
   private String B1;
-
 }

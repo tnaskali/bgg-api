@@ -19,85 +19,92 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/listitems")
 public class ListitemsResource {
 
-  @Autowired
-  private BggListitemsV4Repository listitemsRepository;
+  @Autowired private BggListitemsV4Repository listitemsRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get listitems",
-      description = """
+      description =
+          """
           Get listitems by geeklist id.
           <p>
           <i>Syntax</i> : /listitems?listid={listid}[&{parameters}]
           <p>
           <i>Example</i> : /listitems?listid=250030
-          """
-  )
-  public Mono<BggListitemsV4ResponseBody> getListitems(@Validated @ParameterObject BggListitemsV4QueryParams params) {
+          """)
+  public Mono<BggListitemsV4ResponseBody> getListitems(
+      @Validated @ParameterObject BggListitemsV4QueryParams params) {
     return listitemsRepository.getListitems(params);
   }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get listitem",
-      description = """
+      description =
+          """
           Get listitem by id.
           <p>
           <i>Syntax</i> : /listitems/{id}
           <p>
           <i>Example</i> : /listitems/6632367
-          """
-  )
-  public Mono<BggListitemV4ResponseBody> getListitem(@NotNull @PathVariable @Parameter(example = "6632367", description = "The listitem id.") Integer id) {
+          """)
+  public Mono<BggListitemV4ResponseBody> getListitem(
+      @NotNull @PathVariable @Parameter(example = "6632367", description = "The listitem id.")
+          Integer id) {
     return listitemsRepository.getListitem(id);
   }
 
   @GetMapping(path = "/{id}/reactions", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get listitem reactions",
-      description = """
+      description =
+          """
           Get reactions for a given listitem.
           <p>
           <i>Syntax</i> : /listitems/{id}/reactions[?{parameters}]
           <p>
           <i>Example</i> : /listitems/6632367/reactions
-          """
-  )
-  public Mono<BggListitemReactionsV4ResponseBody> getListitemReactions(@NotNull @PathVariable @Parameter(example = "6632367", description = "The listitem id.") Integer id,
-                                                                       @Validated @ParameterObject BggListitemReactionsV4QueryParams params) {
+          """)
+  public Mono<BggListitemReactionsV4ResponseBody> getListitemReactions(
+      @NotNull @PathVariable @Parameter(example = "6632367", description = "The listitem id.")
+          Integer id,
+      @Validated @ParameterObject BggListitemReactionsV4QueryParams params) {
     return listitemsRepository.getListitemReactions(id, params);
   }
 
   @GetMapping(path = "/{id}/tips", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get listitem tips",
-      description = """
+      description =
+          """
           Get tips for a given listitem.
           <p>
           <i>Syntax</i> : /listitems/{id}/tips[?{parameters}]
           <p>
           <i>Example</i> : /listitems/6632367/tips
-          """
-  )
-  public Mono<BggListitemTipsV4ResponseBody> getListitemTips(@NotNull @PathVariable @Parameter(example = "6632367", description = "The listitem id.") Integer id,
-                                                             @Validated @ParameterObject BggListitemTipsV4QueryParams params) {
+          """)
+  public Mono<BggListitemTipsV4ResponseBody> getListitemTips(
+      @NotNull @PathVariable @Parameter(example = "6632367", description = "The listitem id.")
+          Integer id,
+      @Validated @ParameterObject BggListitemTipsV4QueryParams params) {
     return listitemsRepository.getListitemTips(id, params);
   }
 
   @GetMapping(path = "/{id}/comments", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get listitem comments",
-      description = """
+      description =
+          """
           Get comments for a given listitem.
           <p>
           <i>Syntax</i> : /listitems/{id}/comments[?{parameters}]
           <p>
           <i>Example</i> : /listitems/6632367/comments
-          """
-  )
-  public Mono<BggListitemCommentsV4ResponseBody> getListitemComments(@NotNull @PathVariable @Parameter(example = "6632367", description = "The listitem id.") Integer id,
-                                                                     @Validated @ParameterObject BggListitemCommentsV4QueryParams params) {
+          """)
+  public Mono<BggListitemCommentsV4ResponseBody> getListitemComments(
+      @NotNull @PathVariable @Parameter(example = "6632367", description = "The listitem id.")
+          Integer id,
+      @Validated @ParameterObject BggListitemCommentsV4QueryParams params) {
     return listitemsRepository.getListitemComments(id, params);
   }
-
 }

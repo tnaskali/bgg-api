@@ -21,23 +21,22 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v5/search")
 public class SearchResource {
 
-  @Autowired
-  private BggSearchV5Repository searchRepository;
+  @Autowired private BggSearchV5Repository searchRepository;
 
   @GetMapping(path = "/{context}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Quick search",
-      description = """
+      description =
+          """
           Quick item search.
           <p>
           <i>Syntax</i> : /search/{context}?q={query}[&{parameters}]
           <p>
           <i>Example</i> : /search/boardgame?q=corona
-          """
-  )
-  public Mono<BggSearchV5ResponseBody> getSearchResults(@NotNull @PathVariable @Parameter(description = "Search context.") SearchContext context,
-                                                        @Validated @ParameterObject BggSearchV5QueryParams params) {
+          """)
+  public Mono<BggSearchV5ResponseBody> getSearchResults(
+      @NotNull @PathVariable @Parameter(description = "Search context.") SearchContext context,
+      @Validated @ParameterObject BggSearchV5QueryParams params) {
     return searchRepository.getSearchResults(context, params);
   }
-
 }

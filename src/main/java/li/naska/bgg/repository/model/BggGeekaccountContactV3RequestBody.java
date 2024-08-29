@@ -2,13 +2,9 @@ package li.naska.bgg.repository.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.Parameter;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class BggGeekaccountContactV3RequestBody {
@@ -17,20 +13,18 @@ public class BggGeekaccountContactV3RequestBody {
   @Pattern(regexp = "^(savecontact)$")
   @Parameter(
       example = "savecontact",
-      description = """
+      description =
+          """
           Action to perform.
           <p>
           Possible values are:
           <li/>savecontact (update contact information)
-          """
-  )
+          """)
   private String action;
 
-  @NotNull
-  private String username;
+  @NotNull private String username;
 
-  @NotNull
-  private String password;
+  @NotNull private String password;
 
   private String firstname;
 
@@ -69,13 +63,12 @@ public class BggGeekaccountContactV3RequestBody {
   @Deprecated
   @Pattern(regexp = "^(Submit)$")
   @Parameter(
-      description = """
+      description =
+          """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Corresponds to the "Submit" form button and always has a value of "Submit".
-          """
-  )
+          """)
   @JsonProperty(value = "B1")
   private String B1;
-
 }

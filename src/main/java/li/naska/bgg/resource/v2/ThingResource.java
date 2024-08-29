@@ -20,32 +20,30 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/thing")
 public class ThingResource {
 
-  @Autowired
-  private BggThingV2Repository thingsRepository;
+  @Autowired private BggThingV2Repository thingsRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  @Autowired private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Thing Items",
-      description = """
+      description =
+          """
           In the BGG database, any physical, tangible product is called a thing.
           <p>
           <i>Syntax</i> : /thing?id={ids}[&{parameters}]
           <p>
           <i>Example</i> : /thing?id=383974
           """,
-      externalDocs = @ExternalDocumentation(
-          description = "original documentation",
-          url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc3"
-      )
-  )
-  public Mono<String> getThings(@Validated @ParameterObject BggThingV2QueryParams params,
-                                ServerHttpRequest request) {
+      externalDocs =
+          @ExternalDocumentation(
+              description = "original documentation",
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc3"))
+  public Mono<String> getThings(
+      @Validated @ParameterObject BggThingV2QueryParams params, ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return thingsRepository.getThings(params)
+    return thingsRepository
+        .getThings(params)
         .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Items.class));
   }
-
 }

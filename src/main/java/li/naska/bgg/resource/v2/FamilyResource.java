@@ -20,16 +20,15 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/family")
 public class FamilyResource {
 
-  @Autowired
-  private BggFamilyV2Repository familiesRepository;
+  @Autowired private BggFamilyV2Repository familiesRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  @Autowired private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Family items",
-      description = """
+      description =
+          """
           In the BGG database, more abstract or esoteric concepts are represented by something called a family.
           <p>
           The XMLAPI2 supports families of the following family types:
@@ -60,16 +59,15 @@ public class FamilyResource {
           <p>
           <i>Example</i> : /family?id=8590,62408
           """,
-      externalDocs = @ExternalDocumentation(
-          description = "original documentation",
-          url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc4"
-      )
-  )
-  public Mono<String> getFamilies(@Validated @ParameterObject BggFamilyV2QueryParams params,
-                                  ServerHttpRequest request) {
+      externalDocs =
+          @ExternalDocumentation(
+              description = "original documentation",
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc4"))
+  public Mono<String> getFamilies(
+      @Validated @ParameterObject BggFamilyV2QueryParams params, ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return familiesRepository.getFamilies(params)
+    return familiesRepository
+        .getFamilies(params)
         .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Items.class));
   }
-
 }

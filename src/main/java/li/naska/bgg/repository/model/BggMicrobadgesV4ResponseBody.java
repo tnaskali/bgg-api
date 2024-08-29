@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 @Data
-@JsonIgnoreProperties(value = { "customurl", "url", "links" })
+@JsonIgnoreProperties(value = {"customurl", "url", "links"})
 public class BggMicrobadgesV4ResponseBody {
 
   private Integer badgeid;
@@ -14,5 +14,4 @@ public class BggMicrobadgesV4ResponseBody {
   private String title;
 
   private String src;
-
 }

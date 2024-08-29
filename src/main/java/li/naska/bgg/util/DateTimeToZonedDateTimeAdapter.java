@@ -1,7 +1,6 @@
 package li.naska.bgg.util;
 
 import jakarta.xml.bind.annotation.adapters.XmlAdapter;
-
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -21,5 +20,4 @@ public class DateTimeToZonedDateTimeAdapter extends XmlAdapter<String, ZonedDate
   public ZonedDateTime unmarshal(String string) {
     return ZonedDateTime.from(FORMATTER.parse(string));
   }
-
 }

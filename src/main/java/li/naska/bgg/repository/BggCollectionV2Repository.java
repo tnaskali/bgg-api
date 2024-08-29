@@ -1,5 +1,8 @@
 package li.naska.bgg.repository;
 
+import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.util.Optional;
 import li.naska.bgg.exception.BggResponseNotReadyException;
 import li.naska.bgg.repository.model.BggCollectionV2QueryParams;
 import li.naska.bgg.util.QueryParameters;
@@ -14,10 +17,6 @@ import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
 
-import java.nio.charset.StandardCharsets;
-import java.time.Duration;
-import java.util.Optional;
-
 @Repository
 public class BggCollectionV2Repository {
 
@@ -30,15 +29,14 @@ public class BggCollectionV2Repository {
   }
 
   public Mono<String> getCollection(Optional<String> cookie, BggCollectionV2QueryParams params) {
-    // BBG incorrectly returns boardgameexpansion items with the wrong subtype if not explicitly excluded
+    // BBG incorrectly returns boardgameexpansion items with the wrong subtype if not explicitly
+    // excluded
     if (params.getSubtype() == null || params.getSubtype().equals("boardgame")) {
       params.setExcludesubtype("boardgameexpansion");
     }
     return webClient
         .get()
-        .uri(uriBuilder -> uriBuilder
-            .queryParams(QueryParameters.fromPojo(params))
-            .build())
+        .uri(uriBuilder -> uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .headers(headers -> cookie.ifPresent(c -> headers.add(HttpHeaders.COOKIE, c)))
@@ -51,11 +49,12 @@ public class BggCollectionV2Repository {
         .retryWhen(
             Retry.backoff(4, Duration.ofSeconds(4))
                 .filter(throwable -> throwable instanceof BggResponseNotReadyException))
-        .doOnNext(body -> {
-          if (body.equals("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\" ?>\n<errors>\n\t<error>\n\t\t<message>Invalid username specified</message>\n\t</error>\n</errors>")) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Collection not found");
-          }
-        });
+        .doOnNext(
+            body -> {
+              if (body.equals(
+                  "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\" ?>\n<errors>\n\t<error>\n\t\t<message>Invalid username specified</message>\n\t</error>\n</errors>")) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Collection not found");
+              }
+            });
   }
-
 }

@@ -16,22 +16,21 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/microbadges")
 public class MicrobadgesResource {
 
-  @Autowired
-  private BggMicrobadgesV4Repository microbadgesRepository;
+  @Autowired private BggMicrobadgesV4Repository microbadgesRepository;
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get microbadge by id",
-      description = """
+      description =
+          """
           Get microbadge by id.
           <p>
           <i>Syntax</i> : /microbadges/{id}
           <p>
           <i>Example</i> : /microbadges/10937
-          """
-  )
-  public Mono<BggMicrobadgesV4ResponseBody> getMicrobadge(@PathVariable @Parameter(example = "766", description = "Microbadge id.") Integer id) {
+          """)
+  public Mono<BggMicrobadgesV4ResponseBody> getMicrobadge(
+      @PathVariable @Parameter(example = "766", description = "Microbadge id.") Integer id) {
     return microbadgesRepository.getMicrobadge(id);
   }
-
 }

@@ -1,5 +1,7 @@
 package li.naska.bgg.exception;
 
+import java.util.Map;
+import java.util.Optional;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.boot.autoconfigure.web.reactive.error.AbstractErrorWebExceptionHandler;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
@@ -12,9 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.*;
 import reactor.core.publisher.Mono;
-
-import java.util.Map;
-import java.util.Optional;
 
 @Component
 @Order(-2)
@@ -35,12 +34,13 @@ public class GlobalErrorWebExceptionHandler extends AbstractErrorWebExceptionHan
   }
 
   private Mono<ServerResponse> renderErrorResponse(ServerRequest request) {
-    Map<String, Object> errorPropertiesMap = getErrorAttributes(request,
-        ErrorAttributeOptions.defaults().including(ErrorAttributeOptions.Include.MESSAGE));
+    Map<String, Object> errorPropertiesMap =
+        getErrorAttributes(
+            request,
+            ErrorAttributeOptions.defaults().including(ErrorAttributeOptions.Include.MESSAGE));
     int errorStatus = Optional.ofNullable((Integer) errorPropertiesMap.get("status")).orElse(500);
     return ServerResponse.status(errorStatus)
         .contentType(MediaType.APPLICATION_JSON)
         .body(BodyInserters.fromValue(errorPropertiesMap));
   }
-
 }

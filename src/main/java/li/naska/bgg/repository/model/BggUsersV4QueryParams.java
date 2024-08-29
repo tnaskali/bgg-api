@@ -10,14 +10,13 @@ public class BggUsersV4QueryParams {
   @NotNull
   @Parameter(
       example = "Jester",
-      description = """
+      description =
+          """
           Username.
           <p>
           <i>Syntax</i> : /users?username={username}
           <p>
           <i>Example</i> : /users?username=Jester
-          """
-  )
+          """)
   private String username;
-
 }

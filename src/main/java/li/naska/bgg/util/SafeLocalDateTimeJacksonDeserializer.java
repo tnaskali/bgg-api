@@ -7,22 +7,23 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.datatype.jsr310.deser.JSR310DateTimeDeserializerBase;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import lombok.extern.slf4j.Slf4j;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class SafeLocalDateTimeJacksonDeserializer extends JSR310DateTimeDeserializerBase<LocalDateTime> {
+public class SafeLocalDateTimeJacksonDeserializer
+    extends JSR310DateTimeDeserializerBase<LocalDateTime> {
 
-  private static final DateTimeFormatter CUSTOM_FORMATTER = new DateTimeFormatterBuilder()
-      .appendOptional(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-      .appendOptional(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
-      .toFormatter();
-
-  public static final SafeLocalDateTimeJacksonDeserializer INSTANCE = new SafeLocalDateTimeJacksonDeserializer();
+  public static final SafeLocalDateTimeJacksonDeserializer INSTANCE =
+      new SafeLocalDateTimeJacksonDeserializer();
+  private static final DateTimeFormatter CUSTOM_FORMATTER =
+      new DateTimeFormatterBuilder()
+          .appendOptional(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+          .appendOptional(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+          .toFormatter();
 
   protected SafeLocalDateTimeJacksonDeserializer() {
     this(CUSTOM_FORMATTER);
@@ -32,7 +33,8 @@ public class SafeLocalDateTimeJacksonDeserializer extends JSR310DateTimeDeserial
     super(LocalDateTime.class, dtf);
   }
 
-  protected SafeLocalDateTimeJacksonDeserializer(SafeLocalDateTimeJacksonDeserializer base, Boolean leniency) {
+  protected SafeLocalDateTimeJacksonDeserializer(
+      SafeLocalDateTimeJacksonDeserializer base, Boolean leniency) {
     super(base, leniency);
   }
 
@@ -66,5 +68,4 @@ public class SafeLocalDateTimeJacksonDeserializer extends JSR310DateTimeDeserial
   protected JSR310DateTimeDeserializerBase<LocalDateTime> withShape(JsonFormat.Shape shape) {
     return this;
   }
-
 }

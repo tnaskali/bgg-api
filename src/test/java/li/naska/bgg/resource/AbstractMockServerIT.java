@@ -1,5 +1,6 @@
 package li.naska.bgg.resource;
 
+import java.util.concurrent.TimeUnit;
 import okhttp3.mockwebserver.Dispatcher;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -12,16 +13,13 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 
-import java.util.concurrent.TimeUnit;
-
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext
 public abstract class AbstractMockServerIT {
 
   protected static MockWebServer mockWebServer;
 
-  @LocalServerPort
-  protected int port;
+  @LocalServerPort protected int port;
 
   @BeforeAll
   static void setupMockWebServer() throws Exception {
@@ -40,15 +38,16 @@ public abstract class AbstractMockServerIT {
   }
 
   protected void dispatch(int responseCode, String mockResponseBody) {
-    mockWebServer.setDispatcher(new Dispatcher() {
-      @Override
-      public MockResponse dispatch(RecordedRequest request) {
-        return new MockResponse()
-            .setResponseCode(responseCode)
-            .addHeader("Content-Type", "application/xml")
-            .setBody(mockResponseBody);
-      }
-    });
+    mockWebServer.setDispatcher(
+        new Dispatcher() {
+          @Override
+          public MockResponse dispatch(RecordedRequest request) {
+            return new MockResponse()
+                .setResponseCode(responseCode)
+                .addHeader("Content-Type", "application/xml")
+                .setBody(mockResponseBody);
+          }
+        });
   }
 
   protected RecordedRequest record() {
@@ -58,5 +57,4 @@ public abstract class AbstractMockServerIT {
       return null;
     }
   }
-
 }

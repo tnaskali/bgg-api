@@ -18,21 +18,21 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v5/geekaccount")
 public class GeekaccountResource {
 
-  @Autowired
-  private BggGeekaccountV5Repository geekaccountRepository;
+  @Autowired private BggGeekaccountV5Repository geekaccountRepository;
 
-  @Autowired
-  private AuthenticationService authenticationService;
+  @Autowired private AuthenticationService authenticationService;
 
   @GetMapping(path = "/toplist")
   @Operation(
       summary = "Get account toplist information for the current user",
       description = "Get account toplist information for the current user.",
-      security = @SecurityRequirement(name = "basicAuth")
-  )
-  public Mono<BggGeekaccountToplistV5ResponseBody> getGeekaccountToplist(@Validated @ParameterObject BggGeekaccountToplistV5QueryParams params) {
-    return authenticationService.requiredAuthentication().flatMap(
-        authn -> geekaccountRepository.getGeekaccountToplist(authn.buildBggRequestHeader(), params));
+      security = @SecurityRequirement(name = "basicAuth"))
+  public Mono<BggGeekaccountToplistV5ResponseBody> getGeekaccountToplist(
+      @Validated @ParameterObject BggGeekaccountToplistV5QueryParams params) {
+    return authenticationService
+        .requiredAuthentication()
+        .flatMap(
+            authn ->
+                geekaccountRepository.getGeekaccountToplist(authn.buildBggRequestHeader(), params));
   }
-
 }

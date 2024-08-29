@@ -16,30 +16,31 @@ import reactor.util.function.Tuple2;
 @Controller("GraphQLMicrobadgeController")
 public class MicrobadgeController {
 
-  public MicrobadgeController(BatchLoaderRegistry registry, BggMicrobadgesV4Repository microbadgesService) {
-    registry.forTypePair(Integer.class, MicrobadgeV4.class).registerMappedBatchLoader((ids, env) ->
-        Flux.fromIterable(ids)
-            .flatMap(id -> Mono.just(id).zipWith(microbadgesService.getMicrobadge(id)))
-            .collectMap(Tuple2::getT1, tuple -> new MicrobadgeV4(tuple.getT2()))
-    );
+  public MicrobadgeController(
+      BatchLoaderRegistry registry, BggMicrobadgesV4Repository microbadgesService) {
+    registry
+        .forTypePair(Integer.class, MicrobadgeV4.class)
+        .registerMappedBatchLoader(
+            (ids, env) ->
+                Flux.fromIterable(ids)
+                    .flatMap(id -> Mono.just(id).zipWith(microbadgesService.getMicrobadge(id)))
+                    .collectMap(Tuple2::getT1, tuple -> new MicrobadgeV4(tuple.getT2())));
   }
 
   @QueryMapping
-  public Mono<Microbadge> microbadgeById(@Argument Integer id, DataLoader<Integer, MicrobadgeV4> loader) {
+  public Mono<Microbadge> microbadgeById(
+      @Argument Integer id, DataLoader<Integer, MicrobadgeV4> loader) {
     return Mono.fromFuture(loader.load(id))
         .map(data -> new Microbadge(data.microbadge().getBadgeid()));
   }
 
   @SchemaMapping
   public Mono<String> name(Microbadge microbadge, DataLoader<Integer, MicrobadgeV4> loader) {
-    return Mono.fromFuture(loader.load(microbadge.id()))
-        .map(data -> data.microbadge().getName());
+    return Mono.fromFuture(loader.load(microbadge.id())).map(data -> data.microbadge().getName());
   }
 
   @SchemaMapping
   public Mono<String> imagesrc(Microbadge microbadge, DataLoader<Integer, MicrobadgeV4> loader) {
-    return Mono.fromFuture(loader.load(microbadge.id()))
-        .map(data -> data.microbadge().getSrc());
+    return Mono.fromFuture(loader.load(microbadge.id())).map(data -> data.microbadge().getSrc());
   }
-
 }

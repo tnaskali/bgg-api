@@ -1,8 +1,7 @@
 package li.naska.bgg.repository.model;
 
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class BggForumsV4ResponseBody {
@@ -21,7 +20,5 @@ public class BggForumsV4ResponseBody {
     private Integer numposts;
 
     private Integer numthreads;
-
   }
-
 }

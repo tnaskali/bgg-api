@@ -19,85 +19,92 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/geeklists")
 public class GeeklistsResource {
 
-  @Autowired
-  private BggGeeklistsV4Repository geeklistsRepository;
+  @Autowired private BggGeeklistsV4Repository geeklistsRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get geeklists",
-      description = """
+      description =
+          """
           Get geeklists by object id and type.
           <p>
           <i>Syntax</i> : /geeklists?objectid={id}&objecttype={type}
           <p>
           <i>Example</i> : /geeklists?objectid=1000&objecttype=thing
-          """
-  )
-  public Mono<BggGeeklistsV4ResponseBody> getGeeklists(@Validated @ParameterObject BggGeeklistsV4QueryParams params) {
+          """)
+  public Mono<BggGeeklistsV4ResponseBody> getGeeklists(
+      @Validated @ParameterObject BggGeeklistsV4QueryParams params) {
     return geeklistsRepository.getGeeklists(params);
   }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get geeklist",
-      description = """
+      description =
+          """
           Get geeklist by id.
           <p>
           <i>Syntax</i> : /geeklists/{id}
           <p>
           <i>Example</i> : /geeklists/250030
-          """
-  )
-  public Mono<BggGeeklistV4ResponseBody> getGeeklist(@NotNull @PathVariable @Parameter(example = "250030", description = "Geeklist id.") Integer id) {
+          """)
+  public Mono<BggGeeklistV4ResponseBody> getGeeklist(
+      @NotNull @PathVariable @Parameter(example = "250030", description = "Geeklist id.")
+          Integer id) {
     return geeklistsRepository.getGeeklist(id);
   }
 
   @GetMapping(path = "/{id}/reactions", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get geeklist reactions",
-      description = """
+      description =
+          """
           Get reactions for a given geeklist.
           <p>
           <i>Syntax</i> : /geeklists/{id}/reactions[?{parameters}]
           <p>
           <i>Example</i> : /geeklists/250030/reactions
-          """
-  )
-  public Mono<BggGeeklistReactionsV4ResponseBody> getGeeklistReactions(@NotNull @PathVariable @Parameter(example = "250030", description = "Geeklist id.") Integer id,
-                                                                       @Validated @ParameterObject BggGeeklistReactionsV4QueryParams params) {
+          """)
+  public Mono<BggGeeklistReactionsV4ResponseBody> getGeeklistReactions(
+      @NotNull @PathVariable @Parameter(example = "250030", description = "Geeklist id.")
+          Integer id,
+      @Validated @ParameterObject BggGeeklistReactionsV4QueryParams params) {
     return geeklistsRepository.getGeeklistReactions(id, params);
   }
 
   @GetMapping(path = "/{id}/tips", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get geeklist tips",
-      description = """
+      description =
+          """
           Get tips for a given geeklist.
           <p>
           <i>Syntax</i> : /geeklists/{id}/tips[?{parameters}]
           <p>
           <i>Example</i> : /geeklists/250030/tips
-          """
-  )
-  public Mono<BggGeeklistTipsV4ResponseBody> getGeeklistTips(@NotNull @PathVariable @Parameter(example = "250030", description = "Geeklist id.") Integer id,
-                                                             @Validated @ParameterObject BggGeeklistTipsV4QueryParams params) {
+          """)
+  public Mono<BggGeeklistTipsV4ResponseBody> getGeeklistTips(
+      @NotNull @PathVariable @Parameter(example = "250030", description = "Geeklist id.")
+          Integer id,
+      @Validated @ParameterObject BggGeeklistTipsV4QueryParams params) {
     return geeklistsRepository.getGeeklistTips(id, params);
   }
 
   @GetMapping(path = "/{id}/comments", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get geeklist comments",
-      description = """
+      description =
+          """
           Get comments for a given geeklist.
           <p>
           <i>Syntax</i> : /geeklists/{id}/comments[?{parameters}]
           <p>
           <i>Example</i> : /geeklists/250030/comments
-          """
-  )
-  public Mono<BggGeeklistCommentsV4ResponseBody> getGeeklistComments(@NotNull @PathVariable @Parameter(example = "250030", description = "Geeklist id.") Integer id,
-                                                                     @Validated @ParameterObject BggGeeklistCommentsV4QueryParams params) {
+          """)
+  public Mono<BggGeeklistCommentsV4ResponseBody> getGeeklistComments(
+      @NotNull @PathVariable @Parameter(example = "250030", description = "Geeklist id.")
+          Integer id,
+      @Validated @ParameterObject BggGeeklistCommentsV4QueryParams params) {
     return geeklistsRepository.getGeeklistComments(id, params);
   }
-
 }

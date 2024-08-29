@@ -11,17 +11,14 @@ import reactor.core.publisher.Mono;
 @Component
 public class BggAuthenticationManager implements ReactiveAuthenticationManager {
 
-  @Autowired
-  private LoginService loginService;
+  @Autowired private LoginService loginService;
 
   @Override
-  public Mono<Authentication> authenticate(final Authentication authentication) throws AuthenticationException {
+  public Mono<Authentication> authenticate(final Authentication authentication)
+      throws AuthenticationException {
     final String username = authentication.getName();
     final String password = authentication.getCredentials().toString();
 
-    return loginService
-        .login(username, password)
-        .map(BggAuthenticationToken::new);
+    return loginService.login(username, password).map(BggAuthenticationToken::new);
   }
-
 }

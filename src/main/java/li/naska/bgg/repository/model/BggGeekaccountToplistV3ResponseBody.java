@@ -22,5 +22,4 @@ public class BggGeekaccountToplistV3ResponseBody {
   private Boolean maxitems;
 
   private String html;
-
 }

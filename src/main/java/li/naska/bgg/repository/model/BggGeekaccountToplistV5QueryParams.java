@@ -12,29 +12,28 @@ public class BggGeekaccountToplistV5QueryParams {
   @Pattern(regexp = "^(hot|top)$")
   @Parameter(
       example = "top",
-      description = """
+      description =
+          """
           List type.
           <p>
           Possible values are:
           <li/>hot
           <li/>top
-          """
-  )
+          """)
   private String listtype;
 
   @NotNull
   @Pattern(regexp = "^(boardgame|rpg|videogame)$")
   @Parameter(
       example = "boardgame",
-      description = """
+      description =
+          """
           Domain.
           <p>
           Possible values are any domain:
           <li/>boardgame
           <li/>rpg
           <li/>videogame
-          """
-  )
+          """)
   private String domain;
-
 }

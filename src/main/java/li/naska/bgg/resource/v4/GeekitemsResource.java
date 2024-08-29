@@ -2,8 +2,8 @@ package li.naska.bgg.resource.v4;
 
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggGeekitemsV4Repository;
-import li.naska.bgg.repository.model.BggGeekitemsV4ResponseBody;
 import li.naska.bgg.repository.model.BggGeekitemsV4QueryParams;
+import li.naska.bgg.repository.model.BggGeekitemsV4ResponseBody;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,22 +17,21 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/geekitems")
 public class GeekitemsResource {
 
-  @Autowired
-  private BggGeekitemsV4Repository geekitemsRepository;
+  @Autowired private BggGeekitemsV4Repository geekitemsRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get item",
-      description = """
+      description =
+          """
           Get item for a given id and type.
           <p>
           <i>Syntax</i> : /geekitems?objectid={id}&objecttype={type}
           <p>
           <i>Example</i> : /geekitems?objectid=1000&objecttype=thing
-          """
-  )
-  public Mono<BggGeekitemsV4ResponseBody> getGeekitems(@Validated @ParameterObject BggGeekitemsV4QueryParams params) {
+          """)
+  public Mono<BggGeekitemsV4ResponseBody> getGeekitems(
+      @Validated @ParameterObject BggGeekitemsV4QueryParams params) {
     return geekitemsRepository.getGeekitems(params);
   }
-
 }

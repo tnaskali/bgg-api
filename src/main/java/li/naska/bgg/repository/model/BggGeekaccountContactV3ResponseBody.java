@@ -40,5 +40,4 @@ public class BggGeekaccountContactV3ResponseBody {
   private String wii_friendcode;
 
   private String psn_id;
-
 }

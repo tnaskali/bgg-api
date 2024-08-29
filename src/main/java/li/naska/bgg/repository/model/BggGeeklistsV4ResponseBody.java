@@ -1,10 +1,9 @@
 package li.naska.bgg.repository.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class BggGeeklistsV4ResponseBody {
@@ -45,17 +44,15 @@ public class BggGeeklistsV4ResponseBody {
     private String name;
 
     private String imageurl;
-
   }
 
   @Data
-  @JsonIgnoreProperties(value = {"categoryfilters"}) // This is only display data, no need to map to schema
+  @JsonIgnoreProperties(
+      value = {"categoryfilters"}) // This is only display data, no need to map to schema
   public static class Config {
 
     private Integer numitems;
 
     private Integer endpage;
-
   }
-
 }

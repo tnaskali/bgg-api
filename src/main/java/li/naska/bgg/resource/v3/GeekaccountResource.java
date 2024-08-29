@@ -16,40 +16,57 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v3/geekaccount")
 public class GeekaccountResource {
 
-  @Autowired
-  private BggGeekaccountV3Repository geekaccountRepository;
+  @Autowired private BggGeekaccountV3Repository geekaccountRepository;
 
-  @Autowired
-  private AuthenticationService authenticationService;
+  @Autowired private AuthenticationService authenticationService;
 
   @GetMapping(path = "/contact", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get account information for the current user",
       description = "Get account information for the current user",
       security = @SecurityRequirement(name = "basicAuth"))
-  public Mono<BggGeekaccountContactV3ResponseBody> getGeekaccountContact(@Validated @ParameterObject BggGeekaccountContactV3QueryParams params) {
-    return authenticationService.requiredAuthentication().flatMap(
-        authn -> geekaccountRepository.getGeekaccountContact(authn.buildBggRequestHeader(), params));
+  public Mono<BggGeekaccountContactV3ResponseBody> getGeekaccountContact(
+      @Validated @ParameterObject BggGeekaccountContactV3QueryParams params) {
+    return authenticationService
+        .requiredAuthentication()
+        .flatMap(
+            authn ->
+                geekaccountRepository.getGeekaccountContact(authn.buildBggRequestHeader(), params));
   }
 
-  @PostMapping(path = "/contact", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(
+      path = "/contact",
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Update account contact information for the current user",
       description = "Update account contact information for of the current user",
       security = @SecurityRequirement(name = "basicAuth"))
-  public Mono<BggGeekaccountContactV3ResponseBody> updateGeekaccountContact(@Validated @RequestBody BggGeekaccountContactV3RequestBody body) {
-    return authenticationService.requiredAuthentication().flatMap(
-        authn -> geekaccountRepository.updateGeekaccountContact(authn.buildBggRequestHeader(), body));
+  public Mono<BggGeekaccountContactV3ResponseBody> updateGeekaccountContact(
+      @Validated @RequestBody BggGeekaccountContactV3RequestBody body) {
+    return authenticationService
+        .requiredAuthentication()
+        .flatMap(
+            authn ->
+                geekaccountRepository.updateGeekaccountContact(
+                    authn.buildBggRequestHeader(), body));
   }
 
-  @PostMapping(path = "/toplist", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(
+      path = "/toplist",
+      consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Update account toplist information for the current user",
       description = "Update account toplist information for of the current user",
       security = @SecurityRequirement(name = "basicAuth"))
-  public Mono<BggGeekaccountToplistV3ResponseBody> updateGeekaccountToplist(@Validated @RequestBody BggGeekaccountToplistV3RequestBody body) {
-    return authenticationService.requiredAuthentication().flatMap(
-        authn -> geekaccountRepository.updateGeekaccountToplist(authn.buildBggRequestHeader(), body));
+  public Mono<BggGeekaccountToplistV3ResponseBody> updateGeekaccountToplist(
+      @Validated @RequestBody BggGeekaccountToplistV3RequestBody body) {
+    return authenticationService
+        .requiredAuthentication()
+        .flatMap(
+            authn ->
+                geekaccountRepository.updateGeekaccountToplist(
+                    authn.buildBggRequestHeader(), body));
   }
-
 }

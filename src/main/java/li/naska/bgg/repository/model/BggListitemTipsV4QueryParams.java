@@ -11,14 +11,13 @@ public class BggListitemTipsV4QueryParams {
   @Min(1)
   @Max(1)
   @Parameter(
-      description = """
+      description =
+          """
           Shows only tips total count.
           <p>
           <i>Syntax</i> : /listitems/{id}/tips?totalonly=1
           <p>
           <i>Example</i> : /listitems/6632367/tips?totalonly=1
-          """
-  )
+          """)
   private Integer totalonly;
-
 }

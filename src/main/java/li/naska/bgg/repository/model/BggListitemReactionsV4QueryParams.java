@@ -11,14 +11,13 @@ public class BggListitemReactionsV4QueryParams {
   @Min(1)
   @Max(1)
   @Parameter(
-      description = """
+      description =
+          """
           Shows only reactions total count.
           <p>
           <i>Syntax</i> : /listitems/{id}/reactions?totalonly=1
           <p>
           <i>Example</i> : /listitems/6632367/reactions?totalonly=1
-          """
-  )
+          """)
   private Integer totalonly;
-
 }

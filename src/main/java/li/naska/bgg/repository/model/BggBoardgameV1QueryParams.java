@@ -13,48 +13,49 @@ public class BggBoardgameV1QueryParams {
   @Max(1)
   @Parameter(
       example = "1",
-      description = """
+      description =
+          """
           Show users' comments on games (set it to 1, absent by default).
           <p>
           <i>Syntax</i> : /boardgame/{gameId}?comments=1
           <p>
           <i>Example</i> : /boardgame/35424,2860?comments=1
-          """
-  )
+          """)
   private Integer comments;
 
   @Min(1)
   @Parameter(
       example = "1",
-      description = """
+      description =
+          """
           You can use page to increment the results (set it to the page of results you want, 1 by default).
           <p>
           <i>Syntax</i> : /boardgame/{gameId}?comments=1&page={1,}
           <p>
           <i>Example</i> : /boardgame/35424,2860?comments=1&page=1
-          """
-  )
+          """)
   private Integer page;
 
   @Min(1)
   @Max(1)
   @Parameter(
       example = "1",
-      description = """
+      description =
+          """
           Include game statistics (set it to 1, absent by default).
           <p>
           <i>Syntax</i> : /boardgame/{gameId}?stats=1
           <p>
           <i>Example</i> : /boardgame/2860?stats=1
-          """
-  )
+          """)
   private Integer stats;
 
   @Min(1)
   @Max(1)
   @Parameter(
       example = "1",
-      description = """
+      description =
+          """
           Include historical game statistics (set it to 1, absent by default).
           <p>
           Use from/end parameters to set starting and ending dates. Returns all data starting from 2006-03-18.
@@ -64,34 +65,32 @@ public class BggBoardgameV1QueryParams {
           <i>Example</i> : /boardgame/35424,2860?historical=1
           <p>
           <i>Example</i> : /boardgame/35424,2860?historical=1&from=2009-01-01&to=2009-03-17
-          """
-  )
+          """)
   private Integer historical;
 
   @Pattern(regexp = "^[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$")
   @Parameter(
       example = "2006-03-18",
-      description = """
+      description =
+          """
           Set the start date to include historical data (format: YYYY-MM-DD, absent by default).
           <p>
           <i>Syntax</i> : /boardgame/{gameId}?historical=1&from={date}&to={date}
           <p>
           <i>Example</i> : /boardgame/35424,2860?historical=1&from=2009-01-01&to=2009-03-17
-          """
-  )
+          """)
   private String from;
 
   @Parameter(
       example = "2999-12-31",
-      description = """
+      description =
+          """
           Set the end date to include historical data (format: YYYY-MM-DD, absent by default).
           <p>
           <i>Syntax</i> : /boardgame/{gameId}?historical=1&from={date}&to={date}
           <p>
           <i>Example</i> : /boardgame/35424,2860?historical=1&from=2009-01-01&to=2009-03-17
-          """
-  )
+          """)
   @Pattern(regexp = "^[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$")
   private String to;
-
 }

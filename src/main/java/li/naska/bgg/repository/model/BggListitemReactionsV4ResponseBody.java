@@ -1,8 +1,7 @@
 package li.naska.bgg.repository.model;
 
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class BggListitemReactionsV4ResponseBody {
@@ -19,7 +18,5 @@ public class BggListitemReactionsV4ResponseBody {
     private String rel;
 
     private String uri;
-
   }
-
 }

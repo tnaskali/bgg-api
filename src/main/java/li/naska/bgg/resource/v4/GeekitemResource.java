@@ -17,22 +17,21 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/geekitem")
 public class GeekitemResource {
 
-  @Autowired
-  private BggGeekitemV4Repository geekitemRepository;
+  @Autowired private BggGeekitemV4Repository geekitemRepository;
 
   @GetMapping(path = "/linkeditems", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get linked items",
-      description = """
+      description =
+          """
           Get items linked to a given item.
           <p>
           <i>Syntax</i> : /linkeditems?objectid={id}&objecttype={type}&linkdata_index={linktype}
           <p>
           <i>Example</i> : /linkeditems?objectid=205637&objecttype=thing&linkdata_index=reimplementation
-          """
-  )
-  public Mono<BggGeekitemLinkeditemsV4ResponseBody> getLinkeditems(@Validated @ParameterObject BggGeekitemLinkeditemsV4QueryParams params) {
+          """)
+  public Mono<BggGeekitemLinkeditemsV4ResponseBody> getLinkeditems(
+      @Validated @ParameterObject BggGeekitemLinkeditemsV4QueryParams params) {
     return geekitemRepository.getLinkeditems(params);
   }
-
 }

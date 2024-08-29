@@ -1,9 +1,8 @@
 package li.naska.bgg.repository.model;
 
-import lombok.Data;
-
 import java.time.ZonedDateTime;
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class BggArticleV4ResponseBody {
@@ -44,7 +43,6 @@ public class BggArticleV4ResponseBody {
     private String type;
 
     private Integer id;
-
   }
 
   @Data
@@ -53,7 +51,6 @@ public class BggArticleV4ResponseBody {
     private String visibility;
 
     private String stub;
-
   }
 
   @Data
@@ -62,7 +59,5 @@ public class BggArticleV4ResponseBody {
     private String rel;
 
     private String uri;
-
   }
-
 }

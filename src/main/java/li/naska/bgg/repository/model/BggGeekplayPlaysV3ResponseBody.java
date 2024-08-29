@@ -1,11 +1,10 @@
 package li.naska.bgg.repository.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class BggGeekplayPlaysV3ResponseBody {
@@ -53,8 +52,10 @@ public class BggGeekplayPlaysV3ResponseBody {
     private String color;
     private String score;
     private Integer win;
+
     @JsonProperty(value = "new")
     private Integer _new;
+
     private Integer rating;
     private Integer uplayerid;
     private String name;
@@ -66,5 +67,4 @@ public class BggGeekplayPlaysV3ResponseBody {
   public static class Subtype {
     private String subtype;
   }
-
 }

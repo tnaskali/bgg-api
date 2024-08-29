@@ -12,20 +12,21 @@ public class BggPlaysV2QueryParams {
 
   @Parameter(
       example = "eekspider",
-      description = """
+      description =
+          """
           Name of the player you want to request play information for.
           <p>
           <i>Syntax</i> : /plays?username={username}
           <p>
           <i>Example</i> : /plays?username=eekspider
-          """
-  )
+          """)
   private String username;
 
   @Min(1)
   @Parameter(
       example = "3085",
-      description = """
+      description =
+          """
           Id number of the item you want to request play information for.
           <p>
           <i>Note</i> : Must be used together with "type" unless "username" is also set.
@@ -33,13 +34,13 @@ public class BggPlaysV2QueryParams {
           <i>Syntax</i> : /plays?id={itemId}&type={itemType}
           <p>
           <i>Example</i> : /plays?id=3085&type=thing
-          """
-  )
+          """)
   private Integer id;
 
   @Parameter(
       example = "thing",
-      description = """
+      description =
+          """
           Type of the item you want to request play information for.
           <p>
           Valid types include:
@@ -51,41 +52,43 @@ public class BggPlaysV2QueryParams {
           <i>Syntax</i> : /plays?id={itemId}&type={itemType}
           <p>
           <i>Example</i> : /plays?id=3085&type=thing
-          """
-  )
+          """)
   @Pattern(regexp = "^(thing|family)$")
   private String type;
 
   @Pattern(regexp = "^[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$")
   @Parameter(
       example = "2009-01-01",
-      description = """
+      description =
+          """
           Returns only plays of the specified date or later.
           <p>
           <i>Syntax</i> : /plays?mindate={date}
           <p>
           <i>Example</i> : /plays?mindate=2009-01-01
-          """
-  )
+          """)
   private String mindate;
 
   @Pattern(regexp = "^[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$")
   @Parameter(
       example = "2009-12-31",
-      description = """
+      description =
+          """
           Returns only plays of the specified date or earlier.
           <p>
           <i>Syntax</i> : /plays?maxdate={date}
           <p>
           <i>Example</i> : /plays?maxdate=2009-12-31
-          """
-  )
+          """)
   private String maxdate;
 
-  @Pattern(regexp = "^(boardgame|boardgameexpansion|boardgameaccessory|boardgameintegration|boardgamecompilation|boardgameimplementation|rpg|rpgitem|videogame)$")
+  @Pattern(
+      regexp =
+          "^(boardgame|boardgameexpansion|boardgameaccessory|boardgameintegration|boardgamecompilation|boardgameimplementation|rpg|rpgitem|videogame)$")
   @Parameter(
       example = "boardgame",
-      description = """
+      description =
+          """
           Limits play results to the specified subtype; boardgame is the default.
           <p>
           Valid subtypes include:
@@ -105,26 +108,24 @@ public class BggPlaysV2QueryParams {
           <p>
           <i>Example</i> : /plays?subtype=boardgame
           """,
-      schema = @Schema(defaultValue = "boardgame")
-  )
+      schema = @Schema(defaultValue = "boardgame"))
   private String subtype;
 
   @Min(1)
   @Parameter(
       example = "1",
-      description = """
+      description =
+          """
           The page of information to request. Page size is 100 records.
           <p>
           <i>Syntax</i> : /plays?page={page}
           <p>
           <i>Example</i> : /plays?page=1
-          """
-  )
+          """)
   private Integer page;
 
   @AssertTrue(message = "You must include either a username or an id and type")
   private boolean isMandatoryFieldsCheck() {
     return username != null || (id != null && type != null);
   }
-
 }

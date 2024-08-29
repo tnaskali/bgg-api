@@ -2,11 +2,10 @@ package li.naska.bgg.repository.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class BggListitemV4ResponseBody {
@@ -68,7 +67,6 @@ public class BggListitemV4ResponseBody {
     private Integer imageid;
 
     private Integer nameSortIndex;
-
   }
 
   @Data
@@ -77,7 +75,6 @@ public class BggListitemV4ResponseBody {
     private String name;
 
     private String displayValue;
-
   }
 
   @Data
@@ -86,7 +83,6 @@ public class BggListitemV4ResponseBody {
     private Image square100;
 
     private Image mediacard;
-
   }
 
   @Data
@@ -96,7 +92,6 @@ public class BggListitemV4ResponseBody {
 
     @JsonProperty(value = "src@2x")
     private String src_at_2x;
-
   }
 
   @Data
@@ -105,7 +100,6 @@ public class BggListitemV4ResponseBody {
     private String rel;
 
     private String uri;
-
   }
 
   @Data
@@ -118,7 +112,6 @@ public class BggListitemV4ResponseBody {
     private Image image;
 
     private Boolean blocks_ads;
-
   }
 
   @Data
@@ -127,7 +120,5 @@ public class BggListitemV4ResponseBody {
     private BigDecimal average;
 
     private Integer rank;
-
   }
-
 }

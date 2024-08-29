@@ -1,11 +1,10 @@
 package li.naska.bgg.repository.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(value = {"subdomains", "forums", "linkedforums"})
@@ -85,7 +84,6 @@ public class BggForumsThreadsV4ResponseBody {
     private String objecthref;
 
     private String objectname;
-
   }
 
   @Data
@@ -98,11 +96,22 @@ public class BggForumsThreadsV4ResponseBody {
     private String avatarfile;
 
     private String avatarurl_md;
-
   }
 
   @Data
-  @JsonIgnoreProperties(value = {"sorttypes", "showforumlink", "showsubdomains", "showobjectlink", "showcontrols", "showpost", "showbrowse", "showsearch", "browselink", "browselink_newui"})
+  @JsonIgnoreProperties(
+      value = {
+        "sorttypes",
+        "showforumlink",
+        "showsubdomains",
+        "showobjectlink",
+        "showcontrols",
+        "showpost",
+        "showbrowse",
+        "showsearch",
+        "browselink",
+        "browselink_newui"
+      })
   public static class Config {
 
     private String moduletitle;
@@ -120,7 +129,5 @@ public class BggForumsThreadsV4ResponseBody {
     private Integer numthreads;
 
     private String forumtitle;
-
   }
-
 }

@@ -10,10 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LoginParams {
 
-  @NotNull
-  private String username;
+  @NotNull private String username;
 
-  @NotNull
-  private String password;
-
+  @NotNull private String password;
 }

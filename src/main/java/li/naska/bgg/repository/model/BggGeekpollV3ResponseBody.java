@@ -1,11 +1,10 @@
 package li.naska.bgg.repository.model;
 
-import lombok.Data;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import lombok.Data;
 
 @Data
 public class BggGeekpollV3ResponseBody {
@@ -44,7 +43,6 @@ public class BggGeekpollV3ResponseBody {
     private Integer voters;
 
     private Integer unixenddatetime;
-
   }
 
   @Data
@@ -85,7 +83,6 @@ public class BggGeekpollV3ResponseBody {
     private Integer voters;
 
     private List<Result> results;
-
   }
 
   @Data
@@ -106,7 +103,6 @@ public class BggGeekpollV3ResponseBody {
     private List<ChoiceRow> choicesr;
 
     private Integer colcount;
-
   }
 
   @Data
@@ -119,7 +115,6 @@ public class BggGeekpollV3ResponseBody {
     private String body;
 
     private String choicetype;
-
   }
 
   @Data
@@ -134,7 +129,6 @@ public class BggGeekpollV3ResponseBody {
     private String choicetype;
 
     private Integer voters;
-
   }
 
   @Data
@@ -157,7 +151,5 @@ public class BggGeekpollV3ResponseBody {
     private Boolean max;
 
     private Boolean maxrows;
-
   }
-
 }

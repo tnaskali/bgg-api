@@ -1,5 +1,6 @@
 package li.naska.bgg.repository;
 
+import java.nio.charset.StandardCharsets;
 import li.naska.bgg.repository.model.BggForumlistV2QueryParams;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-
-import java.nio.charset.StandardCharsets;
 
 @Repository
 public class BggForumlistV2Repository {
@@ -25,13 +24,10 @@ public class BggForumlistV2Repository {
   public Mono<String> getForums(BggForumlistV2QueryParams params) {
     return webClient
         .get()
-        .uri(uriBuilder -> uriBuilder
-            .queryParams(QueryParameters.fromPojo(params))
-            .build())
+        .uri(uriBuilder -> uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .bodyToMono(String.class);
   }
-
 }

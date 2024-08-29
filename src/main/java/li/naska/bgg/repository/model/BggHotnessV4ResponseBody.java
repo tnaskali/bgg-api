@@ -1,9 +1,8 @@
 package li.naska.bgg.repository.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class BggHotnessV4ResponseBody {
@@ -38,7 +37,6 @@ public class BggHotnessV4ResponseBody {
     private Integer rank;
 
     private String description;
-
   }
 
   @Data
@@ -49,7 +47,6 @@ public class BggHotnessV4ResponseBody {
     private Image square100;
 
     private Image mediacard;
-
   }
 
   @Data
@@ -59,7 +56,5 @@ public class BggHotnessV4ResponseBody {
 
     @JsonProperty(value = "src@2x")
     private String src_at_2x;
-
   }
-
 }

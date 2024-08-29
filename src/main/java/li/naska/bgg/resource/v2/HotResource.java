@@ -20,32 +20,30 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/hot")
 public class HotResource {
 
-  @Autowired
-  private BggHotV2Repository hotItemsRepository;
+  @Autowired private BggHotV2Repository hotItemsRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  @Autowired private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Hot Items",
-      description = """
+      description =
+          """
           You can retrieve the list of most active items on the site.
           <p>
           <i>Syntax</i> : /hot?type={type}
           <p>
           <i>Example</i> : /hot?type=boardgame
           """,
-      externalDocs = @ExternalDocumentation(
-          description = "original documentation",
-          url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc12"
-      )
-  )
-  public Mono<String> getHotItems(@Validated @ParameterObject BggHotV2QueryParams params,
-                                  ServerHttpRequest request) {
+      externalDocs =
+          @ExternalDocumentation(
+              description = "original documentation",
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc12"))
+  public Mono<String> getHotItems(
+      @Validated @ParameterObject BggHotV2QueryParams params, ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return hotItemsRepository.getHotItems(params)
+    return hotItemsRepository
+        .getHotItems(params)
         .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Items.class));
   }
-
 }

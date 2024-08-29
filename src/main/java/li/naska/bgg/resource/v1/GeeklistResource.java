@@ -23,16 +23,17 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v1/geeklist")
 public class GeeklistResource {
 
-  @Autowired
-  private BggGeeklistV1Repository geeklistRepository;
+  @Autowired private BggGeeklistV1Repository geeklistRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  @Autowired private XmlProcessor xmlProcessor;
 
-  @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+  @GetMapping(
+      value = "/{id}",
+      produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Retrieve entries from a geeklist",
-      description = """
+      description =
+          """
           Retrieve entries from a geeklist.
           <p>
           <i>Note</i> : the old "start" and "count" parameters are obsolete and no longer supported. They were required in the original api if you wanted to retreive all items on a geeklist longer than 150 items as that's the most that could be returned on a single api call. Currently however the geeklist xml api returns the entire geeklist (all items) in a single call.
@@ -41,17 +42,18 @@ public class GeeklistResource {
           <p>
           <i>Example</i> : /geeklist/11205
           """,
-      externalDocs = @ExternalDocumentation(
-          description = "original documentation",
-          url = "https://boardgamegeek.com/wiki/page/BGG_XML_API#toc7"
-      )
-  )
-  public Mono<String> getGeeklist(@NotNull @PathVariable @Parameter(description = "The geeklist id.", example = "11205") Integer id,
-                                  @Validated @ParameterObject BggGeeklistV1QueryParams params,
-                                  ServerHttpRequest request) {
+      externalDocs =
+          @ExternalDocumentation(
+              description = "original documentation",
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API#toc7"))
+  public Mono<String> getGeeklist(
+      @NotNull @PathVariable @Parameter(description = "The geeklist id.", example = "11205")
+          Integer id,
+      @Validated @ParameterObject BggGeeklistV1QueryParams params,
+      ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return geeklistRepository.getGeeklist(id, params)
+    return geeklistRepository
+        .getGeeklist(id, params)
         .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Geeklist.class));
   }
-
 }

@@ -1,11 +1,10 @@
 package li.naska.bgg.util;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.SneakyThrows;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
+import lombok.SneakyThrows;
 
 public final class ReflectionUtils {
 
@@ -20,5 +19,4 @@ public final class ReflectionUtils {
     result.addAll(List.of(clazz.getDeclaredClasses()));
     return result.stream();
   }
-
 }

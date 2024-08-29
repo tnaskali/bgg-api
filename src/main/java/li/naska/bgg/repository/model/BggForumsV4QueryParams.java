@@ -13,28 +13,28 @@ public class BggForumsV4QueryParams {
   @Min(1)
   @Parameter(
       example = "205637",
-      description = """
+      description =
+          """
           The object id.
           <p>
           <i>Syntax</i> : /forums?objectid={id}&objecttype={type}
           <p>
           <i>Example</i> : /forums?objectid=205637&objecttype=thing
-          """
-  )
+          """)
   private Integer objectid;
 
   @NotNull
-  @Pattern(regexp = "^(company|component|event|family|media|person|property|thing|version|weblink)$")
+  @Pattern(
+      regexp = "^(company|component|event|family|media|person|property|thing|version|weblink)$")
   @Parameter(
       example = "thing",
-      description = """
+      description =
+          """
           The object type.
           <p>
           <i>Syntax</i> : /forums?objectid={id}&objecttype={type}
           <p>
           <i>Example</i> : /forums?objectid=205637&objecttype=thing
-          """
-  )
+          """)
   private String objecttype;
-
 }

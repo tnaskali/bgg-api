@@ -7,18 +7,18 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.datatype.jsr310.deser.JSR310DateTimeDeserializerBase;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import lombok.extern.slf4j.Slf4j;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class SafeLocalDateJacksonDeserializer extends JSR310DateTimeDeserializerBase<LocalDate> {
 
   private static final DateTimeFormatter CUSTOM_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
 
-  public static final SafeLocalDateJacksonDeserializer INSTANCE = new SafeLocalDateJacksonDeserializer();
+  public static final SafeLocalDateJacksonDeserializer INSTANCE =
+      new SafeLocalDateJacksonDeserializer();
 
   protected SafeLocalDateJacksonDeserializer() {
     this(CUSTOM_FORMATTER);
@@ -28,7 +28,8 @@ public class SafeLocalDateJacksonDeserializer extends JSR310DateTimeDeserializer
     super(LocalDate.class, dtf);
   }
 
-  protected SafeLocalDateJacksonDeserializer(SafeLocalDateJacksonDeserializer base, Boolean leniency) {
+  protected SafeLocalDateJacksonDeserializer(
+      SafeLocalDateJacksonDeserializer base, Boolean leniency) {
     super(base, leniency);
   }
 
@@ -62,5 +63,4 @@ public class SafeLocalDateJacksonDeserializer extends JSR310DateTimeDeserializer
   protected JSR310DateTimeDeserializerBase<LocalDate> withShape(JsonFormat.Shape shape) {
     return this;
   }
-
 }

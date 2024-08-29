@@ -20,32 +20,30 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/thread")
 public class ThreadResource {
 
-  @Autowired
-  private BggThreadV2Repository threadsRepository;
+  @Autowired private BggThreadV2Repository threadsRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  @Autowired private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Threads",
-      description = """
+      description =
+          """
           With the XMLAPI2 you can request forum threads by thread id. A thread consists of some basic information about the thread and a series of articles or individual postings.
           <p>
           <i>Syntax</i> : /thread?id={id}[&{parameters}]
           <p>
           <i>Example</i> : /thread?id=666
           """,
-      externalDocs = @ExternalDocumentation(
-          description = "original documentation",
-          url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc7"
-      )
-  )
-  public Mono<String> getThread(@Validated @ParameterObject BggThreadV2QueryParams params,
-                                ServerHttpRequest request) {
+      externalDocs =
+          @ExternalDocumentation(
+              description = "original documentation",
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc7"))
+  public Mono<String> getThread(
+      @Validated @ParameterObject BggThreadV2QueryParams params, ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return threadsRepository.getThread(params)
+    return threadsRepository
+        .getThread(params)
         .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Thread.class));
   }
-
 }

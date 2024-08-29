@@ -23,19 +23,17 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/collection")
 public class CollectionResource {
 
-  @Autowired
-  private BggCollectionV2Repository collectionRepository;
+  @Autowired private BggCollectionV2Repository collectionRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  @Autowired private XmlProcessor xmlProcessor;
 
-  @Autowired
-  private AuthenticationService authenticationService;
+  @Autowired private AuthenticationService authenticationService;
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Collection",
-      description = """
+      description =
+          """
           Request details about a user's collection.
           <p>
           <i>Syntax</i> : /collection?username={username}[&{parameters}]
@@ -43,18 +41,19 @@ public class CollectionResource {
           <i>Example</i> : /collection?username=eekspider
           """,
       security = @SecurityRequirement(name = "basicAuth"),
-      externalDocs = @ExternalDocumentation(
-          description = "original documentation",
-          url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc11"
-      )
-  )
+      externalDocs =
+          @ExternalDocumentation(
+              description = "original documentation",
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc11"))
   public Mono<String> getCollection(
-      @Validated @ParameterObject BggCollectionV2QueryParams params,
-      ServerHttpRequest request) {
+      @Validated @ParameterObject BggCollectionV2QueryParams params, ServerHttpRequest request) {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return authenticationService.optionalAuthentication()
-        .flatMap(authn -> collectionRepository.getCollection(authn.map(BggAuthenticationToken::buildBggRequestHeader), params))
+    return authenticationService
+        .optionalAuthentication()
+        .flatMap(
+            authn ->
+                collectionRepository.getCollection(
+                    authn.map(BggAuthenticationToken::buildBggRequestHeader), params))
         .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Items.class));
   }
-
 }

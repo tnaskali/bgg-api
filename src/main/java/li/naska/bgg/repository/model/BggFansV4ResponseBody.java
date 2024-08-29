@@ -6,5 +6,4 @@ import lombok.Data;
 public class BggFansV4ResponseBody {
 
   private Integer numfans;
-
 }
