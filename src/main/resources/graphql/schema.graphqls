@@ -9,6 +9,7 @@ type Query {
     userByUsername(username: ID): User
     userById(id: ID): User
     guildById(id: ID): Guild
+    microbadgeById(id: ID): Microbadge
 }
 
 type User {
