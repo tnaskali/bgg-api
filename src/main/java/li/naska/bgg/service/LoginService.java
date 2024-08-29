@@ -35,17 +35,12 @@ public class LoginService {
         .contentType(MediaType.APPLICATION_JSON)
         .bodyValue(formData)
         .retrieve()
-        .onStatus(
-            status -> status != HttpStatus.NO_CONTENT,
-            response ->
-                response
-                    .bodyToMono(String.class)
-                    .map(body -> JsonPath.<String>read(body, "$.errors.message"))
-                    .map(body -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, body)))
+        .onStatus(status -> status != HttpStatus.NO_CONTENT, response -> response
+            .bodyToMono(String.class)
+            .map(body -> JsonPath.<String>read(body, "$.errors.message"))
+            .map(body -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, body)))
         .toEntity(Void.class)
-        .map(
-            response ->
-                Optional.ofNullable(response.getHeaders().get(HttpHeaders.SET_COOKIE))
-                    .orElse(Collections.emptyList()));
+        .map(response -> Optional.ofNullable(response.getHeaders().get(HttpHeaders.SET_COOKIE))
+            .orElse(Collections.emptyList()));
   }
 }

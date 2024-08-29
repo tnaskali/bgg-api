@@ -18,9 +18,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v3/geekcollection")
 public class GeekcollectionResource {
 
-  @Autowired private BggGeekcollectionV3Repository geekcollectionRepository;
+  @Autowired
+  private BggGeekcollectionV3Repository geekcollectionRepository;
 
-  @Autowired private AuthenticationService authenticationService;
+  @Autowired
+  private AuthenticationService authenticationService;
 
   @GetMapping(produces = "text/csv")
   @Operation(
@@ -31,9 +33,7 @@ public class GeekcollectionResource {
       @Validated @ParameterObject BggGeekcollectionV3QueryParams params) {
     return authenticationService
         .optionalAuthentication()
-        .flatMap(
-            authn ->
-                geekcollectionRepository.getGeekcollection(
-                    authn.map(BggAuthenticationToken::buildBggRequestHeader), params));
+        .flatMap(authn -> geekcollectionRepository.getGeekcollection(
+            authn.map(BggAuthenticationToken::buildBggRequestHeader), params));
   }
 }

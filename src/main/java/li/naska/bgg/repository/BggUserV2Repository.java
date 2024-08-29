@@ -25,19 +25,19 @@ public class BggUserV2Repository {
   public Mono<String> getUser(BggUserV2QueryParams params) {
     return webClient
         .get()
-        .uri(uriBuilder -> uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
+        .uri(uriBuilder ->
+            uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .bodyToMono(String.class)
-        .doOnNext(
-            body -> {
-              if (body.startsWith("<?xml version=\"1.0\" encoding=\"utf-8\"?><user id=\"\"")) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
-              } else if (body.equals(
-                  "<?xml version=\"1.0\" encoding=\"utf-8\"?>\t<div class='messagebox error'>\n\t\tinvalid Get list data\n\t</div>")) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
-              }
-            });
+        .doOnNext(body -> {
+          if (body.startsWith("<?xml version=\"1.0\" encoding=\"utf-8\"?><user id=\"\"")) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+          } else if (body.equals(
+              "<?xml version=\"1.0\" encoding=\"utf-8\"?>\t<div class='messagebox error'>\n\t\tinvalid Get list data\n\t</div>")) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+          }
+        });
   }
 }

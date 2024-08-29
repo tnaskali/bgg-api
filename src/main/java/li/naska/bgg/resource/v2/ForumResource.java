@@ -20,9 +20,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/forum")
 public class ForumResource {
 
-  @Autowired private BggForumV2Repository forumsRepository;
+  @Autowired
+  private BggForumV2Repository forumsRepository;
 
-  @Autowired private XmlProcessor xmlProcessor;
+  @Autowired
+  private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(

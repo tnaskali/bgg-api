@@ -58,15 +58,13 @@ public class JacksonConfiguration {
       Stream.concat(
               ClasspathUtils.getClassesInPackage(JACKSON_MODEL_PACKAGE, classLoader),
               Arrays.stream(JACKSON_CLASSES).map(ReflectionUtils::getClass))
-          .forEach(
-              clazz ->
-                  hints
-                      .reflection()
-                      .registerType(
-                          clazz,
-                          MemberCategory.DECLARED_FIELDS,
-                          MemberCategory.INVOKE_DECLARED_METHODS,
-                          MemberCategory.INVOKE_DECLARED_CONSTRUCTORS));
+          .forEach(clazz -> hints
+              .reflection()
+              .registerType(
+                  clazz,
+                  MemberCategory.DECLARED_FIELDS,
+                  MemberCategory.INVOKE_DECLARED_METHODS,
+                  MemberCategory.INVOKE_DECLARED_CONSTRUCTORS));
     }
   }
 }

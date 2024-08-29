@@ -16,7 +16,8 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/microbadges")
 public class MicrobadgesResource {
 
-  @Autowired private BggMicrobadgesV4Repository microbadgesRepository;
+  @Autowired
+  private BggMicrobadgesV4Repository microbadgesRepository;
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

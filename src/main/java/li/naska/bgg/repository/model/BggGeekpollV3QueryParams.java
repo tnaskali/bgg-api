@@ -24,10 +24,7 @@ public class BggGeekpollV3QueryParams {
 
   @NotNull
   @Min(1)
-  @Parameter(
-      example = "1589097",
-      description =
-          """
+  @Parameter(example = "1589097", description = """
           Poll Id.
           """)
   private Integer pollid;

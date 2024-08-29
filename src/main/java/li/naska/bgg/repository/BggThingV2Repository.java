@@ -23,7 +23,8 @@ public class BggThingV2Repository {
   public Mono<String> getThings(BggThingV2QueryParams params) {
     return webClient
         .get()
-        .uri(uriBuilder -> uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
+        .uri(uriBuilder ->
+            uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()

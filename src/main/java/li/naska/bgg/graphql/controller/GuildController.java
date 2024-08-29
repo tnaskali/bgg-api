@@ -26,18 +26,14 @@ public class GuildController {
   public GuildController(BatchLoaderRegistry registry, GraphQLGuildsService guildsService) {
     registry
         .forTypePair(Integer.class, GuildV2.class)
-        .registerMappedBatchLoader(
-            (ids, env) ->
-                Flux.fromIterable(ids)
-                    .flatMap(id -> Mono.just(id).zipWith(guildsService.getGuild(id)))
-                    .collectMap(Tuple2::getT1, tuple -> new GuildV2(tuple.getT2())));
+        .registerMappedBatchLoader((ids, env) -> Flux.fromIterable(ids)
+            .flatMap(id -> Mono.just(id).zipWith(guildsService.getGuild(id)))
+            .collectMap(Tuple2::getT1, tuple -> new GuildV2(tuple.getT2())));
     registry
         .forTypePair(Integer.class, GuildV2Members.class)
-        .registerMappedBatchLoader(
-            (ids, env) ->
-                Flux.fromIterable(ids)
-                    .flatMap(id -> Mono.just(id).zipWith(guildsService.getMembers(id)))
-                    .collectMap(Tuple2::getT1, tuple -> new GuildV2Members(tuple.getT2())));
+        .registerMappedBatchLoader((ids, env) -> Flux.fromIterable(ids)
+            .flatMap(id -> Mono.just(id).zipWith(guildsService.getMembers(id)))
+            .collectMap(Tuple2::getT1, tuple -> new GuildV2Members(tuple.getT2())));
   }
 
   @QueryMapping
@@ -74,25 +70,21 @@ public class GuildController {
   public Mono<User> manager(
       Guild guild, DataLoader<Integer, GuildV2> loader, DataLoader<String, UserV2> userLoader) {
     return Mono.fromFuture(loader.load(guild.id()))
-        .flatMap(
-            data ->
-                Mono.fromFuture(userLoader.load(data.guild().getManager()))
-                    .map(user -> new User(user.user().getId(), user.user().getName())));
+        .flatMap(data -> Mono.fromFuture(userLoader.load(data.guild().getManager()))
+            .map(user -> new User(user.user().getId(), user.user().getName())));
   }
 
   @SchemaMapping
   public Mono<Address> address(Guild guild, DataLoader<Integer, GuildV2> loader) {
     return Mono.fromFuture(loader.load(guild.id()))
-        .map(
-            data ->
-                new Address(
-                    data.guild().getLocation().getAddr1(),
-                    data.guild().getLocation().getAddr2(),
-                    data.guild().getLocation().getPostalcode(),
-                    data.guild().getLocation().getCity(),
-                    data.guild().getLocation().getStateorprovince(),
-                    null,
-                    data.guild().getLocation().getCountry()));
+        .map(data -> new Address(
+            data.guild().getLocation().getAddr1(),
+            data.guild().getLocation().getAddr2(),
+            data.guild().getLocation().getPostalcode(),
+            data.guild().getLocation().getCity(),
+            data.guild().getLocation().getStateorprovince(),
+            null,
+            data.guild().getLocation().getCountry()));
   }
 
   @SchemaMapping
@@ -102,14 +94,9 @@ public class GuildController {
       DataLoader<String, UserV2> userLoader) {
     return Mono.fromFuture(loader.load(guild.id()))
         .flatMapIterable(GuildV2Members::members)
-        .flatMap(
-            member ->
-                Mono.fromFuture(userLoader.load(member.getName()))
-                    .map(
-                        user ->
-                            new GuildMember(
-                                new User(user.user().getId(), user.user().getName()),
-                                member.getDate())))
+        .flatMap(member -> Mono.fromFuture(userLoader.load(member.getName()))
+            .map(user -> new GuildMember(
+                new User(user.user().getId(), user.user().getName()), member.getDate())))
         .collectList();
   }
 }

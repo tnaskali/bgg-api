@@ -20,9 +20,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/guild")
 public class GuildResource {
 
-  @Autowired private BggGuildV2Repository guildsRepository;
+  @Autowired
+  private BggGuildV2Repository guildsRepository;
 
-  @Autowired private XmlProcessor xmlProcessor;
+  @Autowired
+  private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(

@@ -24,9 +24,10 @@ public class BggGeeklistV1Repository {
   public Mono<String> getGeeklist(Integer id, BggGeeklistV1QueryParams params) {
     return webClient
         .get()
-        .uri(
-            uriBuilder ->
-                uriBuilder.queryParams(QueryParameters.fromPojo(params)).path("/{id}").build(id))
+        .uri(uriBuilder -> uriBuilder
+            .queryParams(QueryParameters.fromPojo(params))
+            .path("/{id}")
+            .build(id))
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()

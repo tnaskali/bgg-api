@@ -23,9 +23,8 @@ public class AuthenticationService {
 
   public Mono<BggAuthenticationToken> requiredAuthentication() {
     return authentication()
-        .switchIfEmpty(
-            Mono.error(
-                new ResponseStatusException(HttpStatus.UNAUTHORIZED, "authentication required")));
+        .switchIfEmpty(Mono.error(
+            new ResponseStatusException(HttpStatus.UNAUTHORIZED, "authentication required")));
   }
 
   public Mono<Optional<BggAuthenticationToken>> optionalAuthentication() {

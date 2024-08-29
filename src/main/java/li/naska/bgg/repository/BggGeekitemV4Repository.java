@@ -18,7 +18,8 @@ import reactor.core.publisher.Mono;
 @Repository
 public class BggGeekitemV4Repository {
 
-  @Autowired private ObjectMapper objectMapper;
+  @Autowired
+  private ObjectMapper objectMapper;
 
   private final WebClient webClient;
 
@@ -32,31 +33,26 @@ public class BggGeekitemV4Repository {
       BggGeekitemLinkeditemsV4QueryParams params) {
     return webClient
         .get()
-        .uri(
-            uriBuilder ->
-                uriBuilder
-                    .path("/linkeditems")
-                    .queryParams(QueryParameters.fromPojo(params))
-                    .build())
+        .uri(uriBuilder -> uriBuilder
+            .path("/linkeditems")
+            .queryParams(QueryParameters.fromPojo(params))
+            .build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .onStatus(
             httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
-            clientResponse ->
-                Mono.error(
-                    new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
+            clientResponse -> Mono.error(
+                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
         .toEntity(String.class)
-        .<BggGeekitemLinkeditemsV4ResponseBody>handle(
-            (entity, sink) -> {
-              try {
-                sink.next(
-                    objectMapper.readValue(
-                        entity.getBody(), BggGeekitemLinkeditemsV4ResponseBody.class));
-              } catch (JsonProcessingException e) {
-                sink.error(
-                    new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
-              }
-            });
+        .<BggGeekitemLinkeditemsV4ResponseBody>handle((entity, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(
+                entity.getBody(), BggGeekitemLinkeditemsV4ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(
+                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        });
   }
 }

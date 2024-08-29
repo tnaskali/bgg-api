@@ -18,7 +18,8 @@ import reactor.core.publisher.Mono;
 @Repository
 public class BggGeekitemsV4Repository {
 
-  @Autowired private ObjectMapper objectMapper;
+  @Autowired
+  private ObjectMapper objectMapper;
 
   private final WebClient webClient;
 
@@ -31,25 +32,23 @@ public class BggGeekitemsV4Repository {
   public Mono<BggGeekitemsV4ResponseBody> getGeekitems(BggGeekitemsV4QueryParams params) {
     return webClient
         .get()
-        .uri(uriBuilder -> uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
+        .uri(uriBuilder ->
+            uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .onStatus(
             httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
-            clientResponse ->
-                Mono.error(
-                    new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
+            clientResponse -> Mono.error(
+                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
         .toEntity(String.class)
-        .<BggGeekitemsV4ResponseBody>handle(
-            (entity, sink) -> {
-              try {
-                sink.next(
-                    objectMapper.readValue(entity.getBody(), BggGeekitemsV4ResponseBody.class));
-              } catch (JsonProcessingException e) {
-                sink.error(
-                    new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
-              }
-            });
+        .<BggGeekitemsV4ResponseBody>handle((entity, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(entity.getBody(), BggGeekitemsV4ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(
+                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        });
   }
 }

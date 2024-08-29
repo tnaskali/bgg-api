@@ -23,9 +23,10 @@ public class BggThreadV1Repository {
   public Mono<String> getThread(Integer id, BggThreadV1QueryParams params) {
     return webClient
         .get()
-        .uri(
-            uriBuilder ->
-                uriBuilder.path("/{ids}").queryParams(QueryParameters.fromPojo(params)).build(id))
+        .uri(uriBuilder -> uriBuilder
+            .path("/{ids}")
+            .queryParams(QueryParameters.fromPojo(params))
+            .build(id))
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()

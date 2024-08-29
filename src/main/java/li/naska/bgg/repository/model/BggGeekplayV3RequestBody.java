@@ -39,9 +39,7 @@ public class BggGeekplayV3RequestBody {
   private String action;
 
   @Min(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Id of the play to update or delete.
           """)
   private Integer playid;
@@ -49,8 +47,7 @@ public class BggGeekplayV3RequestBody {
   @Min(1)
   @Max(1)
   @Parameter(
-      description =
-          """
+      description = """
           Set to 1 during a deletion to bypass validation.
           """)
   private Integer finalize;

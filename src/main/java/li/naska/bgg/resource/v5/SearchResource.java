@@ -21,7 +21,8 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v5/search")
 public class SearchResource {
 
-  @Autowired private BggSearchV5Repository searchRepository;
+  @Autowired
+  private BggSearchV5Repository searchRepository;
 
   @GetMapping(path = "/{context}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

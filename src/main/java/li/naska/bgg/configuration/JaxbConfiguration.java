@@ -94,25 +94,18 @@ public class JaxbConfiguration {
                   .flatMap(
                       packageName -> ClasspathUtils.getClassesInPackage(packageName, classLoader)),
               Arrays.stream(JAXB_REFLECTION_CLASSES).map(ReflectionUtils::getClass))
-          .forEach(
-              clazz ->
-                  hints
-                      .reflection()
-                      .registerType(
-                          clazz,
-                          MemberCategory.DECLARED_FIELDS,
-                          MemberCategory.INVOKE_DECLARED_METHODS,
-                          MemberCategory.INVOKE_DECLARED_CONSTRUCTORS));
+          .forEach(clazz -> hints
+              .reflection()
+              .registerType(
+                  clazz,
+                  MemberCategory.DECLARED_FIELDS,
+                  MemberCategory.INVOKE_DECLARED_METHODS,
+                  MemberCategory.INVOKE_DECLARED_CONSTRUCTORS));
 
-      Arrays.stream(JAXB_PROXY_INTERFACES)
-          .forEach(
-              item ->
-                  hints
-                      .proxies()
-                      .registerJdkProxy(
-                          Arrays.stream(item)
-                              .map(ReflectionUtils::getClass)
-                              .toArray(Class<?>[]::new)));
+      Arrays.stream(JAXB_PROXY_INTERFACES).forEach(item -> hints
+          .proxies()
+          .registerJdkProxy(
+              Arrays.stream(item).map(ReflectionUtils::getClass).toArray(Class<?>[]::new)));
     }
   }
 }

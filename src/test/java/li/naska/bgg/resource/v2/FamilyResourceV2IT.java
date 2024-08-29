@@ -27,10 +27,9 @@ public class FamilyResourceV2IT extends AbstractMockServerIT {
 
   @PostConstruct
   private void postConstruct() {
-    webTestClient =
-        WebTestClient.bindToServer()
-            .baseUrl("http://localhost:" + port + "/bgg-api/api/v2/family")
-            .build();
+    webTestClient = WebTestClient.bindToServer()
+        .baseUrl("http://localhost:" + port + "/bgg-api/api/v2/family")
+        .build();
   }
 
   @Nested
@@ -38,14 +37,12 @@ public class FamilyResourceV2IT extends AbstractMockServerIT {
   class Do {
 
     private final BiFunction<MultiValueMap<String, String>, MediaType, WebTestClient.ResponseSpec>
-        partialTest =
-            (MultiValueMap<String, String> params, MediaType mediaType) ->
-                webTestClient
-                    .get()
-                    .uri(builder -> builder.queryParams(params).build())
-                    .accept(mediaType)
-                    .acceptCharset(StandardCharsets.UTF_8)
-                    .exchange();
+        partialTest = (MultiValueMap<String, String> params, MediaType mediaType) -> webTestClient
+        .get()
+        .uri(builder -> builder.queryParams(params).build())
+        .accept(mediaType)
+        .acceptCharset(StandardCharsets.UTF_8)
+        .exchange();
 
     @Nested
     @DisplayName("given remote repository answers 200")
@@ -106,19 +103,18 @@ public class FamilyResourceV2IT extends AbstractMockServerIT {
       class When_2 {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest =
-            (MediaType mediaType) ->
-                Do.this.partialTest.apply(
-                    new LinkedMultiValueMap<>() {
-                      {
-                        add("id", "666");
-                        add("id", "667,668");
-                        add("type", "boardgamefamily");
-                        add("type", "rpg,rpgperiodical");
-                        // undeclared
-                        add("undeclared_param", "abc123");
-                      }
-                    },
-                    mediaType);
+            (MediaType mediaType) -> Do.this.partialTest.apply(
+                new LinkedMultiValueMap<>() {
+                  {
+                    add("id", "666");
+                    add("id", "667,668");
+                    add("type", "boardgamefamily");
+                    add("type", "rpg,rpgperiodical");
+                    // undeclared
+                    add("undeclared_param", "abc123");
+                  }
+                },
+                mediaType);
 
         @Nested
         @DisplayName("when accept XML")
@@ -151,10 +147,9 @@ public class FamilyResourceV2IT extends AbstractMockServerIT {
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
                   .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
               assertThat(recordedRequest.getPath())
-                  .isEqualTo(
-                      "/xmlapi2/family"
-                          + "?id=666,667,668"
-                          + "&type=boardgamefamily,rpg,rpgperiodical");
+                  .isEqualTo("/xmlapi2/family"
+                      + "?id=666,667,668"
+                      + "&type=boardgamefamily,rpg,rpgperiodical");
             }
 
             @Test
@@ -202,10 +197,9 @@ public class FamilyResourceV2IT extends AbstractMockServerIT {
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
                   .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
               assertThat(recordedRequest.getPath())
-                  .isEqualTo(
-                      "/xmlapi2/family"
-                          + "?id=666,667,668"
-                          + "&type=boardgamefamily,rpg,rpgperiodical");
+                  .isEqualTo("/xmlapi2/family"
+                      + "?id=666,667,668"
+                      + "&type=boardgamefamily,rpg,rpgperiodical");
             }
 
             @Test

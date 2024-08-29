@@ -20,7 +20,8 @@ import org.springframework.util.xml.StaxUtils;
 @Slf4j
 public class XmlProcessor {
 
-  @Autowired private ObjectMapper objectMapper;
+  @Autowired
+  private ObjectMapper objectMapper;
 
   public <T> T toJavaObject(String xmlString, Class<T> targetClass) {
     try {

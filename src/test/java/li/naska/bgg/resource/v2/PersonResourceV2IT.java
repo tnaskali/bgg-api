@@ -27,10 +27,9 @@ public class PersonResourceV2IT extends AbstractMockServerIT {
 
   @PostConstruct
   private void postConstruct() {
-    webTestClient =
-        WebTestClient.bindToServer()
-            .baseUrl("http://localhost:" + port + "/bgg-api/api/v2/person")
-            .build();
+    webTestClient = WebTestClient.bindToServer()
+        .baseUrl("http://localhost:" + port + "/bgg-api/api/v2/person")
+        .build();
   }
 
   @Nested
@@ -38,14 +37,12 @@ public class PersonResourceV2IT extends AbstractMockServerIT {
   class Do {
 
     private final BiFunction<MultiValueMap<String, String>, MediaType, WebTestClient.ResponseSpec>
-        partialTest =
-            (MultiValueMap<String, String> params, MediaType mediaType) ->
-                webTestClient
-                    .get()
-                    .uri(builder -> builder.queryParams(params).build())
-                    .accept(mediaType)
-                    .acceptCharset(StandardCharsets.UTF_8)
-                    .exchange();
+        partialTest = (MultiValueMap<String, String> params, MediaType mediaType) -> webTestClient
+        .get()
+        .uri(builder -> builder.queryParams(params).build())
+        .accept(mediaType)
+        .acceptCharset(StandardCharsets.UTF_8)
+        .exchange();
 
     @Nested
     @DisplayName("given remote repository answers 200")
@@ -110,18 +107,17 @@ public class PersonResourceV2IT extends AbstractMockServerIT {
       class When_2 {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest =
-            (MediaType mediaType) ->
-                Do.this.partialTest.apply(
-                    new LinkedMultiValueMap<>() {
-                      {
-                        add("id", "22");
-                        add("type", "boardgamedesigner");
-                        add("videos", "1");
-                        // undeclared
-                        add("undeclared_param", "abc123");
-                      }
-                    },
-                    mediaType);
+            (MediaType mediaType) -> Do.this.partialTest.apply(
+                new LinkedMultiValueMap<>() {
+                  {
+                    add("id", "22");
+                    add("type", "boardgamedesigner");
+                    add("videos", "1");
+                    // undeclared
+                    add("undeclared_param", "abc123");
+                  }
+                },
+                mediaType);
 
         @Nested
         @DisplayName("when accept XML")

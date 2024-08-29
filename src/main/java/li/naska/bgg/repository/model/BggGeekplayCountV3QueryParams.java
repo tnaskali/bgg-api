@@ -24,28 +24,19 @@ public class BggGeekplayCountV3QueryParams {
   private String action;
 
   @NotNull
-  @Parameter(
-      example = "205637",
-      description =
-          """
+  @Parameter(example = "205637", description = """
           Object id.
           """)
   private Integer objectid;
 
   @NotNull
   @Pattern(regexp = "^(thing|family)$")
-  @Parameter(
-      example = "thing",
-      description =
-          """
+  @Parameter(example = "thing", description = """
           Object type.
           """)
   private String objecttype;
 
-  @Parameter(
-      example = "825923",
-      description =
-          """
+  @Parameter(example = "825923", description = """
           User id.
           """)
   private Integer userid;

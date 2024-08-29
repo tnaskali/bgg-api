@@ -27,10 +27,9 @@ public class PlaysResourceV2IT extends AbstractMockServerIT {
 
   @PostConstruct
   private void postConstruct() {
-    webTestClient =
-        WebTestClient.bindToServer()
-            .baseUrl("http://localhost:" + port + "/bgg-api/api/v2/plays")
-            .build();
+    webTestClient = WebTestClient.bindToServer()
+        .baseUrl("http://localhost:" + port + "/bgg-api/api/v2/plays")
+        .build();
   }
 
   @Nested
@@ -38,14 +37,12 @@ public class PlaysResourceV2IT extends AbstractMockServerIT {
   class Do {
 
     private final BiFunction<MultiValueMap<String, String>, MediaType, WebTestClient.ResponseSpec>
-        partialTest =
-            (MultiValueMap<String, String> params, MediaType mediaType) ->
-                webTestClient
-                    .get()
-                    .uri(builder -> builder.queryParams(params).build())
-                    .accept(mediaType)
-                    .acceptCharset(StandardCharsets.UTF_8)
-                    .exchange();
+        partialTest = (MultiValueMap<String, String> params, MediaType mediaType) -> webTestClient
+        .get()
+        .uri(builder -> builder.queryParams(params).build())
+        .accept(mediaType)
+        .acceptCharset(StandardCharsets.UTF_8)
+        .exchange();
 
     @Nested
     @DisplayName("given remote repository answers 200")
@@ -110,22 +107,21 @@ public class PlaysResourceV2IT extends AbstractMockServerIT {
       class When_2 {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest =
-            (MediaType mediaType) ->
-                Do.this.partialTest.apply(
-                    new LinkedMultiValueMap<>() {
-                      {
-                        add("username", "gandalf");
-                        add("id", "666");
-                        add("type", "thing");
-                        add("mindate", "2021-01-01");
-                        add("maxdate", "2021-01-31");
-                        add("subtype", "boardgame");
-                        add("page", "1");
-                        // undeclared
-                        add("undeclared_param", "abc123");
-                      }
-                    },
-                    mediaType);
+            (MediaType mediaType) -> Do.this.partialTest.apply(
+                new LinkedMultiValueMap<>() {
+                  {
+                    add("username", "gandalf");
+                    add("id", "666");
+                    add("type", "thing");
+                    add("mindate", "2021-01-01");
+                    add("maxdate", "2021-01-31");
+                    add("subtype", "boardgame");
+                    add("page", "1");
+                    // undeclared
+                    add("undeclared_param", "abc123");
+                  }
+                },
+                mediaType);
 
         @Nested
         @DisplayName("when accept XML")
@@ -158,15 +154,14 @@ public class PlaysResourceV2IT extends AbstractMockServerIT {
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
                   .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
               assertThat(recordedRequest.getPath())
-                  .isEqualTo(
-                      "/xmlapi2/plays"
-                          + "?username=gandalf"
-                          + "&id=666"
-                          + "&type=thing"
-                          + "&mindate=2021-01-01"
-                          + "&maxdate=2021-01-31"
-                          + "&subtype=boardgame"
-                          + "&page=1");
+                  .isEqualTo("/xmlapi2/plays"
+                      + "?username=gandalf"
+                      + "&id=666"
+                      + "&type=thing"
+                      + "&mindate=2021-01-01"
+                      + "&maxdate=2021-01-31"
+                      + "&subtype=boardgame"
+                      + "&page=1");
             }
 
             @Test
@@ -214,15 +209,14 @@ public class PlaysResourceV2IT extends AbstractMockServerIT {
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
                   .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
               assertThat(recordedRequest.getPath())
-                  .isEqualTo(
-                      "/xmlapi2/plays"
-                          + "?username=gandalf"
-                          + "&id=666"
-                          + "&type=thing"
-                          + "&mindate=2021-01-01"
-                          + "&maxdate=2021-01-31"
-                          + "&subtype=boardgame"
-                          + "&page=1");
+                  .isEqualTo("/xmlapi2/plays"
+                      + "?username=gandalf"
+                      + "&id=666"
+                      + "&type=thing"
+                      + "&mindate=2021-01-01"
+                      + "&maxdate=2021-01-31"
+                      + "&subtype=boardgame"
+                      + "&page=1");
             }
 
             @Test

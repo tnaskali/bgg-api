@@ -20,9 +20,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v1/search")
 public class SearchResource {
 
-  @Autowired private BggSearchV1Repository searchRepository;
+  @Autowired
+  private BggSearchV1Repository searchRepository;
 
-  @Autowired private XmlProcessor xmlProcessor;
+  @Autowired
+  private XmlProcessor xmlProcessor;
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(

@@ -27,37 +27,24 @@ public class UserController {
   public UserController(BatchLoaderRegistry registry, GraphQLUsersService usersService) {
     registry
         .forTypePair(Integer.class, UserV4.class)
-        .registerMappedBatchLoader(
-            (ids, env) ->
-                Flux.fromIterable(ids)
-                    .flatMap(id -> Mono.just(id).zipWith(usersService.getUser(id)))
-                    .collectMap(Tuple2::getT1, tuple -> new UserV4(tuple.getT2())));
+        .registerMappedBatchLoader((ids, env) -> Flux.fromIterable(ids)
+            .flatMap(id -> Mono.just(id).zipWith(usersService.getUser(id)))
+            .collectMap(Tuple2::getT1, tuple -> new UserV4(tuple.getT2())));
     registry
         .forTypePair(String.class, UserV2.class)
-        .registerMappedBatchLoader(
-            (usernames, env) ->
-                Flux.fromIterable(usernames)
-                    .flatMap(
-                        username -> Mono.just(username).zipWith(usersService.getUser(username)))
-                    .collectMap(Tuple2::getT1, tuple -> new UserV2(tuple.getT2())));
+        .registerMappedBatchLoader((usernames, env) -> Flux.fromIterable(usernames)
+            .flatMap(username -> Mono.just(username).zipWith(usersService.getUser(username)))
+            .collectMap(Tuple2::getT1, tuple -> new UserV2(tuple.getT2())));
     registry
         .forTypePair(String.class, UserV2Guilds.class)
-        .registerMappedBatchLoader(
-            (usernames, env) ->
-                Flux.fromIterable(usernames)
-                    .flatMap(
-                        username ->
-                            Mono.just(username).zipWith(usersService.getUserGuilds(username)))
-                    .collectMap(Tuple2::getT1, tuple -> new UserV2Guilds(tuple.getT2())));
+        .registerMappedBatchLoader((usernames, env) -> Flux.fromIterable(usernames)
+            .flatMap(username -> Mono.just(username).zipWith(usersService.getUserGuilds(username)))
+            .collectMap(Tuple2::getT1, tuple -> new UserV2Guilds(tuple.getT2())));
     registry
         .forTypePair(String.class, UserV2Buddies.class)
-        .registerMappedBatchLoader(
-            (usernames, env) ->
-                Flux.fromIterable(usernames)
-                    .flatMap(
-                        username ->
-                            Mono.just(username).zipWith(usersService.getUserBuddies(username)))
-                    .collectMap(Tuple2::getT1, tuple -> new UserV2Buddies(tuple.getT2())));
+        .registerMappedBatchLoader((usernames, env) -> Flux.fromIterable(usernames)
+            .flatMap(username -> Mono.just(username).zipWith(usersService.getUserBuddies(username)))
+            .collectMap(Tuple2::getT1, tuple -> new UserV2Buddies(tuple.getT2())));
   }
 
   @QueryMapping
@@ -165,23 +152,19 @@ public class UserController {
   public Mono<List<Guild>> guilds(User user, DataLoader<String, UserV2Guilds> loader) {
     return Mono.fromFuture(loader.load(user.username()))
         .map(UserV2Guilds::guilds)
-        .map(
-            data ->
-                data.stream()
-                    .map(com.boardgamegeek.user.v2.Guild::getId)
-                    .map(Guild::new)
-                    .collect(Collectors.toList()));
+        .map(data -> data.stream()
+            .map(com.boardgamegeek.user.v2.Guild::getId)
+            .map(Guild::new)
+            .collect(Collectors.toList()));
   }
 
   @SchemaMapping
   public Mono<List<User>> buddies(User user, DataLoader<String, UserV2Buddies> loader) {
     return Mono.fromFuture(loader.load(user.username()))
         .map(UserV2Buddies::buddies)
-        .map(
-            data ->
-                data.stream()
-                    .map(buddy -> new User(buddy.getId(), buddy.getName()))
-                    .collect(Collectors.toList()));
+        .map(data -> data.stream()
+            .map(buddy -> new User(buddy.getId(), buddy.getName()))
+            .collect(Collectors.toList()));
   }
 
   @SchemaMapping
@@ -197,16 +180,14 @@ public class UserController {
   @SchemaMapping
   public Mono<Address> address(User user, DataLoader<Integer, UserV4> loader) {
     return Mono.fromFuture(loader.load(user.id()))
-        .map(
-            data ->
-                new Address(
-                    null,
-                    null,
-                    null,
-                    data.user().getCity(),
-                    data.user().getState(),
-                    data.user().getIsocountry(),
-                    data.user().getCountry()));
+        .map(data -> new Address(
+            null,
+            null,
+            null,
+            data.user().getCity(),
+            data.user().getState(),
+            data.user().getIsocountry(),
+            data.user().getCountry()));
   }
 
   @SchemaMapping

@@ -36,7 +36,8 @@ public class BggCollectionV2Repository {
     }
     return webClient
         .get()
-        .uri(uriBuilder -> uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
+        .uri(uriBuilder ->
+            uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .headers(headers -> cookie.ifPresent(c -> headers.add(HttpHeaders.COOKIE, c)))
@@ -46,15 +47,13 @@ public class BggCollectionV2Repository {
             status -> status == HttpStatus.ACCEPTED,
             response -> Mono.error(new BggResponseNotReadyException()))
         .bodyToMono(String.class)
-        .retryWhen(
-            Retry.backoff(4, Duration.ofSeconds(4))
-                .filter(throwable -> throwable instanceof BggResponseNotReadyException))
-        .doOnNext(
-            body -> {
-              if (body.equals(
-                  "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\" ?>\n<errors>\n\t<error>\n\t\t<message>Invalid username specified</message>\n\t</error>\n</errors>")) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Collection not found");
-              }
-            });
+        .retryWhen(Retry.backoff(4, Duration.ofSeconds(4))
+            .filter(throwable -> throwable instanceof BggResponseNotReadyException))
+        .doOnNext(body -> {
+          if (body.equals(
+              "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\" ?>\n<errors>\n\t<error>\n\t\t<message>Invalid username specified</message>\n\t</error>\n</errors>")) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Collection not found");
+          }
+        });
   }
 }

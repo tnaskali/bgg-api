@@ -21,7 +21,8 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/threads")
 public class ThreadsResource {
 
-  @Autowired private BggThreadsV4Repository threadsRepository;
+  @Autowired
+  private BggThreadsV4Repository threadsRepository;
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

@@ -12,10 +12,9 @@ public class QueryParameters {
     MultiValueMap<String, String> result = new LinkedMultiValueMap<>();
     Map<String, Object> fieldMap =
         new ObjectMapper().convertValue(source, new TypeReference<>() {});
-    fieldMap.forEach(
-        (k, v) -> {
-          if (v != null) result.set(k, v.toString());
-        });
+    fieldMap.forEach((k, v) -> {
+      if (v != null) result.set(k, v.toString());
+    });
     return result;
   }
 }

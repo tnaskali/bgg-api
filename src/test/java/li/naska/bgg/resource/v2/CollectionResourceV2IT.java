@@ -27,10 +27,9 @@ public class CollectionResourceV2IT extends AbstractMockServerIT {
 
   @PostConstruct
   private void postConstruct() {
-    webTestClient =
-        WebTestClient.bindToServer()
-            .baseUrl("http://localhost:" + port + "/bgg-api/api/v2/collection")
-            .build();
+    webTestClient = WebTestClient.bindToServer()
+        .baseUrl("http://localhost:" + port + "/bgg-api/api/v2/collection")
+        .build();
   }
 
   @Nested
@@ -38,14 +37,12 @@ public class CollectionResourceV2IT extends AbstractMockServerIT {
   class Do {
 
     private final BiFunction<MultiValueMap<String, String>, MediaType, WebTestClient.ResponseSpec>
-        partialTest =
-            (MultiValueMap<String, String> params, MediaType mediaType) ->
-                webTestClient
-                    .get()
-                    .uri(builder -> builder.queryParams(params).build())
-                    .accept(mediaType)
-                    .acceptCharset(StandardCharsets.UTF_8)
-                    .exchange();
+        partialTest = (MultiValueMap<String, String> params, MediaType mediaType) -> webTestClient
+        .get()
+        .uri(builder -> builder.queryParams(params).build())
+        .accept(mediaType)
+        .acceptCharset(StandardCharsets.UTF_8)
+        .exchange();
 
     @Nested
     @DisplayName("given remote repository answers 200")
@@ -107,45 +104,44 @@ public class CollectionResourceV2IT extends AbstractMockServerIT {
       class When_2 {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest =
-            (MediaType mediaType) ->
-                Do.this.partialTest.apply(
-                    new LinkedMultiValueMap<>() {
-                      {
-                        add("username", "gandalf");
-                        add("version", "1");
-                        add("subtype", "boardgame");
-                        add("excludesubtype", "boardgameexpansion");
-                        add("id", "666");
-                        add("brief", "1");
-                        add("stats", "1");
-                        add("own", "1");
-                        add("rated", "1");
-                        add("played", "1");
-                        add("comment", "1");
-                        add("trade", "1");
-                        add("want", "1");
-                        add("wishlist", "1");
-                        add("wishlistpriority", "1");
-                        add("preordered", "1");
-                        add("wanttoplay", "1");
-                        add("wanttobuy", "1");
-                        add("prevowned", "1");
-                        add("hasparts", "1");
-                        add("wantparts", "1");
-                        add("minrating", "1");
-                        add("rating", "1");
-                        add("minbggrating", "1");
-                        add("bggrating", "1");
-                        add("minplays", "1");
-                        add("maxplays", "1");
-                        add("showprivate", "1");
-                        add("collid", "1");
-                        add("modifiedsince", "2021-01-31 00:00:00");
-                        // undeclared
-                        add("undeclared_param", "abc123");
-                      }
-                    },
-                    mediaType);
+            (MediaType mediaType) -> Do.this.partialTest.apply(
+                new LinkedMultiValueMap<>() {
+                  {
+                    add("username", "gandalf");
+                    add("version", "1");
+                    add("subtype", "boardgame");
+                    add("excludesubtype", "boardgameexpansion");
+                    add("id", "666");
+                    add("brief", "1");
+                    add("stats", "1");
+                    add("own", "1");
+                    add("rated", "1");
+                    add("played", "1");
+                    add("comment", "1");
+                    add("trade", "1");
+                    add("want", "1");
+                    add("wishlist", "1");
+                    add("wishlistpriority", "1");
+                    add("preordered", "1");
+                    add("wanttoplay", "1");
+                    add("wanttobuy", "1");
+                    add("prevowned", "1");
+                    add("hasparts", "1");
+                    add("wantparts", "1");
+                    add("minrating", "1");
+                    add("rating", "1");
+                    add("minbggrating", "1");
+                    add("bggrating", "1");
+                    add("minplays", "1");
+                    add("maxplays", "1");
+                    add("showprivate", "1");
+                    add("collid", "1");
+                    add("modifiedsince", "2021-01-31 00:00:00");
+                    // undeclared
+                    add("undeclared_param", "abc123");
+                  }
+                },
+                mediaType);
 
         @Nested
         @DisplayName("when accept XML")
@@ -178,38 +174,37 @@ public class CollectionResourceV2IT extends AbstractMockServerIT {
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
                   .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
               assertThat(recordedRequest.getPath())
-                  .isEqualTo(
-                      "/xmlapi2/collection"
-                          + "?username=gandalf"
-                          + "&version=1"
-                          + "&subtype=boardgame"
-                          + "&excludesubtype=boardgameexpansion"
-                          + "&id=666"
-                          + "&brief=1"
-                          + "&stats=1"
-                          + "&own=1"
-                          + "&rated=1"
-                          + "&played=1"
-                          + "&comment=1"
-                          + "&trade=1"
-                          + "&want=1"
-                          + "&wishlist=1"
-                          + "&wishlistpriority=1"
-                          + "&preordered=1"
-                          + "&wanttoplay=1"
-                          + "&wanttobuy=1"
-                          + "&prevowned=1"
-                          + "&hasparts=1"
-                          + "&wantparts=1"
-                          + "&minrating=1"
-                          + "&rating=1"
-                          + "&minbggrating=1"
-                          + "&bggrating=1"
-                          + "&minplays=1"
-                          + "&maxplays=1"
-                          + "&showprivate=1"
-                          + "&collid=1"
-                          + "&modifiedsince=2021-01-31%2000:00:00");
+                  .isEqualTo("/xmlapi2/collection"
+                      + "?username=gandalf"
+                      + "&version=1"
+                      + "&subtype=boardgame"
+                      + "&excludesubtype=boardgameexpansion"
+                      + "&id=666"
+                      + "&brief=1"
+                      + "&stats=1"
+                      + "&own=1"
+                      + "&rated=1"
+                      + "&played=1"
+                      + "&comment=1"
+                      + "&trade=1"
+                      + "&want=1"
+                      + "&wishlist=1"
+                      + "&wishlistpriority=1"
+                      + "&preordered=1"
+                      + "&wanttoplay=1"
+                      + "&wanttobuy=1"
+                      + "&prevowned=1"
+                      + "&hasparts=1"
+                      + "&wantparts=1"
+                      + "&minrating=1"
+                      + "&rating=1"
+                      + "&minbggrating=1"
+                      + "&bggrating=1"
+                      + "&minplays=1"
+                      + "&maxplays=1"
+                      + "&showprivate=1"
+                      + "&collid=1"
+                      + "&modifiedsince=2021-01-31%2000:00:00");
             }
 
             @Test
@@ -257,38 +252,37 @@ public class CollectionResourceV2IT extends AbstractMockServerIT {
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
                   .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
               assertThat(recordedRequest.getPath())
-                  .isEqualTo(
-                      "/xmlapi2/collection"
-                          + "?username=gandalf"
-                          + "&version=1"
-                          + "&subtype=boardgame"
-                          + "&excludesubtype=boardgameexpansion"
-                          + "&id=666"
-                          + "&brief=1"
-                          + "&stats=1"
-                          + "&own=1"
-                          + "&rated=1"
-                          + "&played=1"
-                          + "&comment=1"
-                          + "&trade=1"
-                          + "&want=1"
-                          + "&wishlist=1"
-                          + "&wishlistpriority=1"
-                          + "&preordered=1"
-                          + "&wanttoplay=1"
-                          + "&wanttobuy=1"
-                          + "&prevowned=1"
-                          + "&hasparts=1"
-                          + "&wantparts=1"
-                          + "&minrating=1"
-                          + "&rating=1"
-                          + "&minbggrating=1"
-                          + "&bggrating=1"
-                          + "&minplays=1"
-                          + "&maxplays=1"
-                          + "&showprivate=1"
-                          + "&collid=1"
-                          + "&modifiedsince=2021-01-31%2000:00:00");
+                  .isEqualTo("/xmlapi2/collection"
+                      + "?username=gandalf"
+                      + "&version=1"
+                      + "&subtype=boardgame"
+                      + "&excludesubtype=boardgameexpansion"
+                      + "&id=666"
+                      + "&brief=1"
+                      + "&stats=1"
+                      + "&own=1"
+                      + "&rated=1"
+                      + "&played=1"
+                      + "&comment=1"
+                      + "&trade=1"
+                      + "&want=1"
+                      + "&wishlist=1"
+                      + "&wishlistpriority=1"
+                      + "&preordered=1"
+                      + "&wanttoplay=1"
+                      + "&wanttobuy=1"
+                      + "&prevowned=1"
+                      + "&hasparts=1"
+                      + "&wantparts=1"
+                      + "&minrating=1"
+                      + "&rating=1"
+                      + "&minbggrating=1"
+                      + "&bggrating=1"
+                      + "&minplays=1"
+                      + "&maxplays=1"
+                      + "&showprivate=1"
+                      + "&collid=1"
+                      + "&modifiedsince=2021-01-31%2000:00:00");
             }
 
             @Test

@@ -24,11 +24,9 @@ public class BggCompanyV1Repository {
   public Mono<String> getCompanies(Set<Integer> ids) {
     return webClient
         .get()
-        .uri(
-            uriBuilder ->
-                uriBuilder
-                    .path("/{ids}")
-                    .build(ids.stream().map(Objects::toString).collect(Collectors.joining(","))))
+        .uri(uriBuilder -> uriBuilder
+            .path("/{ids}")
+            .build(ids.stream().map(Objects::toString).collect(Collectors.joining(","))))
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()

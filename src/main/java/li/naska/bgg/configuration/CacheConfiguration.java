@@ -42,17 +42,13 @@ public class CacheConfiguration {
 
     @Override
     public void registerHints(@NotNull RuntimeHints hints, ClassLoader classLoader) {
-      Arrays.stream(CACHE_REFLECTION_CLASSES)
-          .map(ReflectionUtils::getClass)
-          .forEach(
-              clazz ->
-                  hints
-                      .reflection()
-                      .registerType(
-                          clazz,
-                          MemberCategory.DECLARED_FIELDS,
-                          MemberCategory.INVOKE_DECLARED_METHODS,
-                          MemberCategory.INVOKE_DECLARED_CONSTRUCTORS));
+      Arrays.stream(CACHE_REFLECTION_CLASSES).map(ReflectionUtils::getClass).forEach(clazz -> hints
+          .reflection()
+          .registerType(
+              clazz,
+              MemberCategory.DECLARED_FIELDS,
+              MemberCategory.INVOKE_DECLARED_METHODS,
+              MemberCategory.INVOKE_DECLARED_CONSTRUCTORS));
     }
   }
 }

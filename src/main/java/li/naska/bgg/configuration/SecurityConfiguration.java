@@ -15,7 +15,8 @@ import org.springframework.security.web.server.savedrequest.NoOpServerRequestCac
 @Configuration
 public class SecurityConfiguration {
 
-  @Autowired private BggAuthenticationManager authenticationManager;
+  @Autowired
+  private BggAuthenticationManager authenticationManager;
 
   @Bean
   public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {

@@ -19,7 +19,8 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/listitems")
 public class ListitemsResource {
 
-  @Autowired private BggListitemsV4Repository listitemsRepository;
+  @Autowired
+  private BggListitemsV4Repository listitemsRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

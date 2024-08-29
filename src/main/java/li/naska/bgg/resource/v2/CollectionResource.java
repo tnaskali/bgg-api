@@ -23,11 +23,14 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/collection")
 public class CollectionResource {
 
-  @Autowired private BggCollectionV2Repository collectionRepository;
+  @Autowired
+  private BggCollectionV2Repository collectionRepository;
 
-  @Autowired private XmlProcessor xmlProcessor;
+  @Autowired
+  private XmlProcessor xmlProcessor;
 
-  @Autowired private AuthenticationService authenticationService;
+  @Autowired
+  private AuthenticationService authenticationService;
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
@@ -50,10 +53,8 @@ public class CollectionResource {
     boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
     return authenticationService
         .optionalAuthentication()
-        .flatMap(
-            authn ->
-                collectionRepository.getCollection(
-                    authn.map(BggAuthenticationToken::buildBggRequestHeader), params))
+        .flatMap(authn -> collectionRepository.getCollection(
+            authn.map(BggAuthenticationToken::buildBggRequestHeader), params))
         .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Items.class));
   }
 }

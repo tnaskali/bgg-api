@@ -22,13 +22,17 @@ public class GraphQLUsersService {
 
   private static final int BGG_USER_GUILDS_PAGE_SIZE = 1000;
 
-  @Autowired private BggUserV2Repository usersV2Repository;
+  @Autowired
+  private BggUserV2Repository usersV2Repository;
 
-  @Autowired private BggUsersV4Repository usersV4Repository;
+  @Autowired
+  private BggUsersV4Repository usersV4Repository;
 
-  @Autowired private XmlProcessor xmlProcessor;
+  @Autowired
+  private XmlProcessor xmlProcessor;
 
-  @Autowired private BatchLoaderRegistry registry;
+  @Autowired
+  private BatchLoaderRegistry registry;
 
   public Mono<BggUsersV4ResponseBody> getUser(Integer id) {
     return usersV4Repository.getUser(id);
@@ -51,51 +55,37 @@ public class GraphQLUsersService {
   }
 
   public Mono<List<Buddy>> getUserBuddies(String username) {
-    return getUser(username, Domain.boardgame, 1)
-        .flatMap(
-            user -> {
-              int numPages =
-                  Math.max(
-                      1,
-                      (int)
-                          Math.ceil(
-                              (double) user.getBuddies().getTotal() / BGG_USER_BUDDIES_PAGE_SIZE));
-              return Flux.range(1, numPages)
-                  .flatMapSequential(
-                      page -> {
-                        if (page == 1) {
-                          return Mono.just(user);
-                        }
-                        return getUser(username, Domain.boardgame, page);
-                      })
-                  .map(User::getBuddies)
-                  .flatMapIterable(Buddies::getBuddies)
-                  .collect(Collectors.toList());
-            });
+    return getUser(username, Domain.boardgame, 1).flatMap(user -> {
+      int numPages = Math.max(
+          1, (int) Math.ceil((double) user.getBuddies().getTotal() / BGG_USER_BUDDIES_PAGE_SIZE));
+      return Flux.range(1, numPages)
+          .flatMapSequential(page -> {
+            if (page == 1) {
+              return Mono.just(user);
+            }
+            return getUser(username, Domain.boardgame, page);
+          })
+          .map(User::getBuddies)
+          .flatMapIterable(Buddies::getBuddies)
+          .collect(Collectors.toList());
+    });
   }
 
   public Mono<List<Guild>> getUserGuilds(String username) {
-    return getUser(username, Domain.boardgame, 1)
-        .flatMap(
-            user -> {
-              int numPages =
-                  Math.max(
-                      1,
-                      (int)
-                          Math.ceil(
-                              (double) user.getGuilds().getTotal() / BGG_USER_GUILDS_PAGE_SIZE));
-              return Flux.range(1, numPages)
-                  .flatMapSequential(
-                      page -> {
-                        if (page == 1) {
-                          return Mono.just(user);
-                        }
-                        return getUser(username, Domain.boardgame, page);
-                      })
-                  .map(User::getGuilds)
-                  .flatMapIterable(Guilds::getGuilds)
-                  .collect(Collectors.toList());
-            });
+    return getUser(username, Domain.boardgame, 1).flatMap(user -> {
+      int numPages = Math.max(
+          1, (int) Math.ceil((double) user.getGuilds().getTotal() / BGG_USER_GUILDS_PAGE_SIZE));
+      return Flux.range(1, numPages)
+          .flatMapSequential(page -> {
+            if (page == 1) {
+              return Mono.just(user);
+            }
+            return getUser(username, Domain.boardgame, page);
+          })
+          .map(User::getGuilds)
+          .flatMapIterable(Guilds::getGuilds)
+          .collect(Collectors.toList());
+    });
   }
 
   public Mono<Ranking> getUserRanking(String username, String type, Domain domain) {

@@ -19,11 +19,10 @@ public class SafeLocalDateTimeJacksonDeserializer
 
   public static final SafeLocalDateTimeJacksonDeserializer INSTANCE =
       new SafeLocalDateTimeJacksonDeserializer();
-  private static final DateTimeFormatter CUSTOM_FORMATTER =
-      new DateTimeFormatterBuilder()
-          .appendOptional(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-          .appendOptional(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
-          .toFormatter();
+  private static final DateTimeFormatter CUSTOM_FORMATTER = new DateTimeFormatterBuilder()
+      .appendOptional(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+      .appendOptional(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+      .toFormatter();
 
   protected SafeLocalDateTimeJacksonDeserializer() {
     this(CUSTOM_FORMATTER);

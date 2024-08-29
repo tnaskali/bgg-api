@@ -23,9 +23,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v1/geeklist")
 public class GeeklistResource {
 
-  @Autowired private BggGeeklistV1Repository geeklistRepository;
+  @Autowired
+  private BggGeeklistV1Repository geeklistRepository;
 
-  @Autowired private XmlProcessor xmlProcessor;
+  @Autowired
+  private XmlProcessor xmlProcessor;
 
   @GetMapping(
       value = "/{id}",

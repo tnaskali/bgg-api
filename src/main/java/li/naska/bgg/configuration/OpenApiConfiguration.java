@@ -23,17 +23,26 @@ public class OpenApiConfiguration {
 
   @Bean
   public GroupedOpenApi bggApiV1() {
-    return GroupedOpenApi.builder().group("v1 - XML API (v1)").pathsToMatch("/api/v1/**").build();
+    return GroupedOpenApi.builder()
+        .group("v1 - XML API (v1)")
+        .pathsToMatch("/api/v1/**")
+        .build();
   }
 
   @Bean
   public GroupedOpenApi bggApiV2() {
-    return GroupedOpenApi.builder().group("v2 - XML API (v2)").pathsToMatch("/api/v2/**").build();
+    return GroupedOpenApi.builder()
+        .group("v2 - XML API (v2)")
+        .pathsToMatch("/api/v2/**")
+        .build();
   }
 
   @Bean
   public GroupedOpenApi bggApiV3() {
-    return GroupedOpenApi.builder().group("v3 - JSON API (PHP)").pathsToMatch("/api/v3/**").build();
+    return GroupedOpenApi.builder()
+        .group("v3 - JSON API (PHP)")
+        .pathsToMatch("/api/v3/**")
+        .build();
   }
 
   @Bean

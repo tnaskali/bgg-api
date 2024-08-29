@@ -23,7 +23,8 @@ public class BggSearchV1Repository {
   public Mono<String> getResults(BggSearchV1QueryParams params) {
     return webClient
         .get()
-        .uri(uriBuilder -> uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
+        .uri(uriBuilder ->
+            uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()

@@ -9,7 +9,8 @@ import reactor.core.publisher.Mono;
 @Service
 public class GraphQLMicrobadgesService {
 
-  @Autowired private BggMicrobadgesV4Repository microbadgesRepository;
+  @Autowired
+  private BggMicrobadgesV4Repository microbadgesRepository;
 
   public Mono<BggMicrobadgesV4ResponseBody> getMicrobadge(Integer id) {
     return microbadgesRepository.getMicrobadge(id);

@@ -19,7 +19,8 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/forums")
 public class ForumsResource {
 
-  @Autowired private BggForumsV4Repository forumsRepository;
+  @Autowired
+  private BggForumsV4Repository forumsRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

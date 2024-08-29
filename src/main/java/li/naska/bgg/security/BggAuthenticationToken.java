@@ -23,45 +23,35 @@ public class BggAuthenticationToken extends AbstractAuthenticationToken {
 
   public BggAuthenticationToken(List<String> setCookieHeaders) {
     super(AuthorityUtils.NO_AUTHORITIES);
-    String bggSessionId =
-        setCookieHeaders.stream()
-            .filter(e -> e.startsWith("SessionID"))
-            .findFirst()
-            .flatMap(
-                sessionIdCookie -> {
-                  Matcher sessionIdMatcher = SESSIONID_COOKIE_PATTERN.matcher(sessionIdCookie);
-                  return sessionIdMatcher.find()
-                      ? Optional.of(sessionIdMatcher.group(1))
-                      : Optional.empty();
-                })
-            .orElseThrow(() -> new IllegalStateException("no sessionId cookie found"));
+    String bggSessionId = setCookieHeaders.stream()
+        .filter(e -> e.startsWith("SessionID"))
+        .findFirst()
+        .flatMap(sessionIdCookie -> {
+          Matcher sessionIdMatcher = SESSIONID_COOKIE_PATTERN.matcher(sessionIdCookie);
+          return sessionIdMatcher.find()
+              ? Optional.of(sessionIdMatcher.group(1))
+              : Optional.empty();
+        })
+        .orElseThrow(() -> new IllegalStateException("no sessionId cookie found"));
     setDetails(bggSessionId);
-    bggUsername =
-        setCookieHeaders.stream()
-            .filter(e -> !e.startsWith("bggusername=deleted;"))
-            .filter(e -> e.startsWith("bggusername"))
-            .findFirst()
-            .flatMap(
-                usernameCookie -> {
-                  Matcher usernameMatcher = BGGUSERNAME_COOKIE_PATTERN.matcher(usernameCookie);
-                  return usernameMatcher.find()
-                      ? Optional.of(usernameMatcher.group(1))
-                      : Optional.empty();
-                })
-            .orElseThrow(() -> new IllegalStateException("no username cookie found"));
-    bggPassword =
-        setCookieHeaders.stream()
-            .filter(e -> !e.startsWith("bggpassword=deleted;"))
-            .filter(e -> e.startsWith("bggpassword"))
-            .findFirst()
-            .flatMap(
-                passwordCookie -> {
-                  Matcher passwordMatcher = BGGPASSWORD_COOKIE_PATTERN.matcher(passwordCookie);
-                  return passwordMatcher.find()
-                      ? Optional.of(passwordMatcher.group(1))
-                      : Optional.empty();
-                })
-            .orElseThrow(() -> new IllegalStateException("no password cookie found"));
+    bggUsername = setCookieHeaders.stream()
+        .filter(e -> !e.startsWith("bggusername=deleted;"))
+        .filter(e -> e.startsWith("bggusername"))
+        .findFirst()
+        .flatMap(usernameCookie -> {
+          Matcher usernameMatcher = BGGUSERNAME_COOKIE_PATTERN.matcher(usernameCookie);
+          return usernameMatcher.find() ? Optional.of(usernameMatcher.group(1)) : Optional.empty();
+        })
+        .orElseThrow(() -> new IllegalStateException("no username cookie found"));
+    bggPassword = setCookieHeaders.stream()
+        .filter(e -> !e.startsWith("bggpassword=deleted;"))
+        .filter(e -> e.startsWith("bggpassword"))
+        .findFirst()
+        .flatMap(passwordCookie -> {
+          Matcher passwordMatcher = BGGPASSWORD_COOKIE_PATTERN.matcher(passwordCookie);
+          return passwordMatcher.find() ? Optional.of(passwordMatcher.group(1)) : Optional.empty();
+        })
+        .orElseThrow(() -> new IllegalStateException("no password cookie found"));
     setAuthenticated(true);
   }
 

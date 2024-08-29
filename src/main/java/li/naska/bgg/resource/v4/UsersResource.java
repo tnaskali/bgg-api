@@ -20,7 +20,8 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/users")
 public class UsersResource {
 
-  @Autowired private BggUsersV4Repository usersRepository;
+  @Autowired
+  private BggUsersV4Repository usersRepository;
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

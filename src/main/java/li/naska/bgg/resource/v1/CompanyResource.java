@@ -20,9 +20,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v1/company")
 public class CompanyResource {
 
-  @Autowired private BggCompanyV1Repository companyRepository;
+  @Autowired
+  private BggCompanyV1Repository companyRepository;
 
-  @Autowired private XmlProcessor xmlProcessor;
+  @Autowired
+  private XmlProcessor xmlProcessor;
 
   @GetMapping(
       value = "/{ids}",

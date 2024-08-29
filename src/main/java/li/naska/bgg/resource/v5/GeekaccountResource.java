@@ -18,9 +18,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v5/geekaccount")
 public class GeekaccountResource {
 
-  @Autowired private BggGeekaccountV5Repository geekaccountRepository;
+  @Autowired
+  private BggGeekaccountV5Repository geekaccountRepository;
 
-  @Autowired private AuthenticationService authenticationService;
+  @Autowired
+  private AuthenticationService authenticationService;
 
   @GetMapping(path = "/toplist")
   @Operation(
@@ -31,8 +33,7 @@ public class GeekaccountResource {
       @Validated @ParameterObject BggGeekaccountToplistV5QueryParams params) {
     return authenticationService
         .requiredAuthentication()
-        .flatMap(
-            authn ->
-                geekaccountRepository.getGeekaccountToplist(authn.buildBggRequestHeader(), params));
+        .flatMap(authn ->
+            geekaccountRepository.getGeekaccountToplist(authn.buildBggRequestHeader(), params));
   }
 }

@@ -17,7 +17,8 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/geekitems")
 public class GeekitemsResource {
 
-  @Autowired private BggGeekitemsV4Repository geekitemsRepository;
+  @Autowired
+  private BggGeekitemsV4Repository geekitemsRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

@@ -27,10 +27,9 @@ public class CompanyResourceV1IT extends AbstractMockServerIT {
 
   @PostConstruct
   private void postConstruct() {
-    webTestClient =
-        WebTestClient.bindToServer()
-            .baseUrl("http://localhost:" + port + "/bgg-api/api/v1/company/{id}")
-            .build();
+    webTestClient = WebTestClient.bindToServer()
+        .baseUrl("http://localhost:" + port + "/bgg-api/api/v1/company/{id}")
+        .build();
   }
 
   @Nested
@@ -40,13 +39,12 @@ public class CompanyResourceV1IT extends AbstractMockServerIT {
     private final TriFunction<
             Object, MultiValueMap<String, String>, MediaType, WebTestClient.ResponseSpec>
         partialTest =
-            (Object id, MultiValueMap<String, String> params, MediaType mediaType) ->
-                webTestClient
-                    .get()
-                    .uri(builder -> builder.queryParams(params).build(id))
-                    .accept(mediaType)
-                    .acceptCharset(StandardCharsets.UTF_8)
-                    .exchange();
+            (Object id, MultiValueMap<String, String> params, MediaType mediaType) -> webTestClient
+                .get()
+                .uri(builder -> builder.queryParams(params).build(id))
+                .accept(mediaType)
+                .acceptCharset(StandardCharsets.UTF_8)
+                .exchange();
 
     @Nested
     @DisplayName("given remote repository answers 200")
@@ -74,10 +72,8 @@ public class CompanyResourceV1IT extends AbstractMockServerIT {
       @DisplayName("when invalid path parameter")
       class When_1 {
 
-        private final Supplier<WebTestClient.ResponseSpec> test =
-            () ->
-                Do.this.partialTest.apply(
-                    "toto", new LinkedMultiValueMap<>(), MediaType.APPLICATION_XML);
+        private final Supplier<WebTestClient.ResponseSpec> test = () -> Do.this.partialTest.apply(
+            "toto", new LinkedMultiValueMap<>(), MediaType.APPLICATION_XML);
 
         @Nested
         @DisplayName("then")

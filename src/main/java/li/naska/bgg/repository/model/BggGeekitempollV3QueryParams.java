@@ -42,20 +42,14 @@ public class BggGeekitempollV3QueryParams {
 
   @NotNull
   @Min(1)
-  @Parameter(
-      example = "366013",
-      description =
-          """
+  @Parameter(example = "366013", description = """
           Object Id.
           """)
   private Integer objectid;
 
   @NotNull
   @Pattern(regexp = "^(thing)$")
-  @Parameter(
-      example = "thing",
-      description =
-          """
+  @Parameter(example = "thing", description = """
           Object type.
           """)
   private String objecttype;

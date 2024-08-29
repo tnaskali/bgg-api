@@ -16,7 +16,8 @@ import reactor.core.publisher.Mono;
 @Repository
 public class BggMicrobadgesV4Repository {
 
-  @Autowired private ObjectMapper objectMapper;
+  @Autowired
+  private ObjectMapper objectMapper;
 
   private final WebClient webClient;
 
@@ -34,15 +35,13 @@ public class BggMicrobadgesV4Repository {
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .toEntity(String.class)
-        .<BggMicrobadgesV4ResponseBody>handle(
-            (entity, sink) -> {
-              try {
-                sink.next(
-                    objectMapper.readValue(entity.getBody(), BggMicrobadgesV4ResponseBody.class));
-              } catch (JsonProcessingException e) {
-                sink.error(
-                    new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
-              }
-            });
+        .<BggMicrobadgesV4ResponseBody>handle((entity, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(entity.getBody(), BggMicrobadgesV4ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(
+                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        });
   }
 }

@@ -19,7 +19,8 @@ import reactor.core.publisher.Mono;
 @Repository
 public class BggThreadsV4Repository {
 
-  @Autowired private ObjectMapper objectMapper;
+  @Autowired
+  private ObjectMapper objectMapper;
 
   private final WebClient webClient;
 
@@ -36,46 +37,40 @@ public class BggThreadsV4Repository {
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .toEntity(String.class)
-        .<BggThreadV4ResponseBody>handle(
-            (entity, sink) -> {
-              try {
-                sink.next(objectMapper.readValue(entity.getBody(), BggThreadV4ResponseBody.class));
-              } catch (JsonProcessingException e) {
-                sink.error(
-                    new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
-              }
-            });
+        .<BggThreadV4ResponseBody>handle((entity, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(entity.getBody(), BggThreadV4ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(
+                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        });
   }
 
   public Mono<BggThreadReactionsV4ResponseBody> getThreadReactions(
       Integer id, BggThreadReactionsV4QueryParams params) {
     return webClient
         .get()
-        .uri(
-            uriBuilder ->
-                uriBuilder
-                    .path("/{id}/reactions")
-                    .queryParams(QueryParameters.fromPojo(params))
-                    .build(id))
+        .uri(uriBuilder -> uriBuilder
+            .path("/{id}/reactions")
+            .queryParams(QueryParameters.fromPojo(params))
+            .build(id))
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .onStatus(
             httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
-            clientResponse ->
-                Mono.error(
-                    new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
+            clientResponse -> Mono.error(
+                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
         .toEntity(String.class)
-        .<BggThreadReactionsV4ResponseBody>handle(
-            (entity, sink) -> {
-              try {
-                sink.next(
-                    objectMapper.readValue(
-                        entity.getBody(), BggThreadReactionsV4ResponseBody.class));
-              } catch (JsonProcessingException e) {
-                sink.error(
-                    new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
-              }
-            });
+        .<BggThreadReactionsV4ResponseBody>handle((entity, sink) -> {
+          try {
+            sink.next(
+                objectMapper.readValue(entity.getBody(), BggThreadReactionsV4ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(
+                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        });
   }
 }

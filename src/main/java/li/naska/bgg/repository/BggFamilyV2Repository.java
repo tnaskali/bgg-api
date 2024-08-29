@@ -25,15 +25,15 @@ public class BggFamilyV2Repository {
   public Mono<String> getFamilies(BggFamilyV2QueryParams params) {
     return webClient
         .get()
-        .uri(uriBuilder -> uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
+        .uri(uriBuilder ->
+            uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .onStatus(
             httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
-            clientResponse ->
-                Mono.error(
-                    new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
+            clientResponse -> Mono.error(
+                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
         .bodyToMono(String.class);
   }
 }

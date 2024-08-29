@@ -27,12 +27,10 @@ public class BggBoardgameV1Repository {
   public Mono<String> getBoardgames(Set<Integer> ids, BggBoardgameV1QueryParams params) {
     return webClient
         .get()
-        .uri(
-            uriBuilder ->
-                uriBuilder
-                    .path("/{ids}")
-                    .queryParams(QueryParameters.fromPojo(params))
-                    .build(ids.stream().map(Objects::toString).collect(Collectors.joining(","))))
+        .uri(uriBuilder -> uriBuilder
+            .path("/{ids}")
+            .queryParams(QueryParameters.fromPojo(params))
+            .build(ids.stream().map(Objects::toString).collect(Collectors.joining(","))))
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()

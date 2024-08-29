@@ -28,31 +28,29 @@ public class BggForumV2Repository {
   public Mono<String> getForum(BggForumV2QueryParams params) {
     return webClient
         .get()
-        .uri(uriBuilder -> uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
+        .uri(uriBuilder ->
+            uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .toEntity(String.class)
-        .doOnNext(
-            entity -> {
-              if (MediaType.TEXT_HTML.equalsTypeAndSubtype(entity.getHeaders().getContentType())) {
-                Matcher matcher =
-                    Pattern.compile("<div class='messagebox error'>([\\s\\S]*?)</div>")
-                        .matcher(entity.getBody());
-                if (matcher.find()) {
-                  String error = matcher.group(1).trim();
-                  if ("Object does not exist".equals(error)) {
-                    throw new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Object does not exist");
-                  } else {
-                    throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, error);
-                  }
-                } else {
-                  throw new ResponseStatusException(
-                      HttpStatus.INTERNAL_SERVER_ERROR, "BGG Service error");
-                }
+        .doOnNext(entity -> {
+          if (MediaType.TEXT_HTML.equalsTypeAndSubtype(entity.getHeaders().getContentType())) {
+            Matcher matcher = Pattern.compile("<div class='messagebox error'>([\\s\\S]*?)</div>")
+                .matcher(entity.getBody());
+            if (matcher.find()) {
+              String error = matcher.group(1).trim();
+              if ("Object does not exist".equals(error)) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Object does not exist");
+              } else {
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, error);
               }
-            })
+            } else {
+              throw new ResponseStatusException(
+                  HttpStatus.INTERNAL_SERVER_ERROR, "BGG Service error");
+            }
+          }
+        })
         .map(HttpEntity::getBody);
   }
 }

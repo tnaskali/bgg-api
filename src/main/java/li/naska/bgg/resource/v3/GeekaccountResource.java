@@ -16,9 +16,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v3/geekaccount")
 public class GeekaccountResource {
 
-  @Autowired private BggGeekaccountV3Repository geekaccountRepository;
+  @Autowired
+  private BggGeekaccountV3Repository geekaccountRepository;
 
-  @Autowired private AuthenticationService authenticationService;
+  @Autowired
+  private AuthenticationService authenticationService;
 
   @GetMapping(path = "/contact", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
@@ -29,9 +31,8 @@ public class GeekaccountResource {
       @Validated @ParameterObject BggGeekaccountContactV3QueryParams params) {
     return authenticationService
         .requiredAuthentication()
-        .flatMap(
-            authn ->
-                geekaccountRepository.getGeekaccountContact(authn.buildBggRequestHeader(), params));
+        .flatMap(authn ->
+            geekaccountRepository.getGeekaccountContact(authn.buildBggRequestHeader(), params));
   }
 
   @PostMapping(
@@ -46,10 +47,8 @@ public class GeekaccountResource {
       @Validated @RequestBody BggGeekaccountContactV3RequestBody body) {
     return authenticationService
         .requiredAuthentication()
-        .flatMap(
-            authn ->
-                geekaccountRepository.updateGeekaccountContact(
-                    authn.buildBggRequestHeader(), body));
+        .flatMap(authn ->
+            geekaccountRepository.updateGeekaccountContact(authn.buildBggRequestHeader(), body));
   }
 
   @PostMapping(
@@ -64,9 +63,7 @@ public class GeekaccountResource {
       @Validated @RequestBody BggGeekaccountToplistV3RequestBody body) {
     return authenticationService
         .requiredAuthentication()
-        .flatMap(
-            authn ->
-                geekaccountRepository.updateGeekaccountToplist(
-                    authn.buildBggRequestHeader(), body));
+        .flatMap(authn ->
+            geekaccountRepository.updateGeekaccountToplist(authn.buildBggRequestHeader(), body));
   }
 }

@@ -17,7 +17,8 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/fans")
 public class FansResource {
 
-  @Autowired private BggFansV4Repository fansRepository;
+  @Autowired
+  private BggFansV4Repository fansRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

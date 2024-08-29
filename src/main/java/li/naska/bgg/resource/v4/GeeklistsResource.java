@@ -19,7 +19,8 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/geeklists")
 public class GeeklistsResource {
 
-  @Autowired private BggGeeklistsV4Repository geeklistsRepository;
+  @Autowired
+  private BggGeeklistsV4Repository geeklistsRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

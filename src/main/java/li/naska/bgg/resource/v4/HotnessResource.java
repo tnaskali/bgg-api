@@ -17,7 +17,8 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/hotness")
 public class HotnessResource {
 
-  @Autowired private BggHotnessV4Repository hotnessRepository;
+  @Autowired
+  private BggHotnessV4Repository hotnessRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

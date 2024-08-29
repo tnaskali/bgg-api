@@ -22,9 +22,11 @@ public class BggGeekaccountContactV3RequestBody {
           """)
   private String action;
 
-  @NotNull private String username;
+  @NotNull
+  private String username;
 
-  @NotNull private String password;
+  @NotNull
+  private String password;
 
   private String firstname;
 

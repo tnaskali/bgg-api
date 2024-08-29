@@ -25,17 +25,17 @@ public class BggGuildV2Repository {
   public Mono<String> getGuild(BggGuildV2QueryParams params) {
     return webClient
         .get()
-        .uri(uriBuilder -> uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
+        .uri(uriBuilder ->
+            uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .bodyToMono(String.class)
-        .doOnNext(
-            body -> {
-              if (body.matches(
-                  "^<\\?xml version=\"1.0\" encoding=\"utf-8\"\\?><guild id=\".*\"  termsofuse=\"https://boardgamegeek.com/xmlapi/termsofuse\">\n<error>Guild not found\\.</error>\n</guild>\n$")) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Guild not found");
-              }
-            });
+        .doOnNext(body -> {
+          if (body.matches(
+              "^<\\?xml version=\"1.0\" encoding=\"utf-8\"\\?><guild id=\".*\"  termsofuse=\"https://boardgamegeek.com/xmlapi/termsofuse\">\n<error>Guild not found\\.</error>\n</guild>\n$")) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Guild not found");
+          }
+        });
   }
 }

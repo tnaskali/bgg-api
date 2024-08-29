@@ -19,7 +19,8 @@ public abstract class AbstractMockServerIT {
 
   protected static MockWebServer mockWebServer;
 
-  @LocalServerPort protected int port;
+  @LocalServerPort
+  protected int port;
 
   @BeforeAll
   static void setupMockWebServer() throws Exception {
@@ -38,16 +39,15 @@ public abstract class AbstractMockServerIT {
   }
 
   protected void dispatch(int responseCode, String mockResponseBody) {
-    mockWebServer.setDispatcher(
-        new Dispatcher() {
-          @Override
-          public MockResponse dispatch(RecordedRequest request) {
-            return new MockResponse()
-                .setResponseCode(responseCode)
-                .addHeader("Content-Type", "application/xml")
-                .setBody(mockResponseBody);
-          }
-        });
+    mockWebServer.setDispatcher(new Dispatcher() {
+      @Override
+      public MockResponse dispatch(RecordedRequest request) {
+        return new MockResponse()
+            .setResponseCode(responseCode)
+            .addHeader("Content-Type", "application/xml")
+            .setBody(mockResponseBody);
+      }
+    });
   }
 
   protected RecordedRequest record() {

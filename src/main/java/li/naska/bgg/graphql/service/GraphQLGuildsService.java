@@ -18,9 +18,11 @@ public class GraphQLGuildsService {
 
   private static final int BGG_GUILD_MEMBERS_PAGE_SIZE = 25;
 
-  @Autowired private BggGuildV2Repository guildsRepository;
+  @Autowired
+  private BggGuildV2Repository guildsRepository;
 
-  @Autowired private XmlProcessor xmlProcessor;
+  @Autowired
+  private XmlProcessor xmlProcessor;
 
   public Mono<Guild> getGuild(Integer id) {
     return getGuild(id, 1);
@@ -35,25 +37,20 @@ public class GraphQLGuildsService {
   }
 
   public Mono<List<Member>> getMembers(Integer id) {
-    return getGuild(id, 1)
-        .flatMap(
-            guild -> {
-              int numPages =
-                  (int)
-                      Math.ceil(
-                          (double) guild.getMembers().getCount() / BGG_GUILD_MEMBERS_PAGE_SIZE);
-              return Flux.range(1, numPages)
-                  .flatMapSequential(
-                      page -> {
-                        if (page == 1) {
-                          return Mono.just(guild);
-                        }
-                        return getGuild(id, page);
-                      })
-                  .map(Guild::getMembers)
-                  .flatMapIterable(Members::getMembers)
-                  .collect(Collectors.toList());
-            });
+    return getGuild(id, 1).flatMap(guild -> {
+      int numPages =
+          (int) Math.ceil((double) guild.getMembers().getCount() / BGG_GUILD_MEMBERS_PAGE_SIZE);
+      return Flux.range(1, numPages)
+          .flatMapSequential(page -> {
+            if (page == 1) {
+              return Mono.just(guild);
+            }
+            return getGuild(id, page);
+          })
+          .map(Guild::getMembers)
+          .flatMapIterable(Members::getMembers)
+          .collect(Collectors.toList());
+    });
   }
 
   private Mono<Guild> getGuild(BggGuildV2QueryParams queryParams) {

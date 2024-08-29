@@ -25,17 +25,17 @@ public class BggThreadV2Repository {
   public Mono<String> getThread(BggThreadV2QueryParams params) {
     return webClient
         .get()
-        .uri(uriBuilder -> uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
+        .uri(uriBuilder ->
+            uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .bodyToMono(String.class)
-        .doOnNext(
-            body -> {
-              if (body.equals(
-                  "<?xml version=\"1.0\" encoding=\"utf-8\"?><error message='Thread Not Found' />")) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Thread not found");
-              }
-            });
+        .doOnNext(body -> {
+          if (body.equals(
+              "<?xml version=\"1.0\" encoding=\"utf-8\"?><error message='Thread Not Found' />")) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Thread not found");
+          }
+        });
   }
 }

@@ -19,7 +19,8 @@ import reactor.core.publisher.Mono;
 @Repository
 public class BggArticlesV4Repository {
 
-  @Autowired private ObjectMapper objectMapper;
+  @Autowired
+  private ObjectMapper objectMapper;
 
   private final WebClient webClient;
 
@@ -32,26 +33,24 @@ public class BggArticlesV4Repository {
   public Mono<BggArticlesV4ResponseBody> getArticles(BggArticlesV4QueryParams params) {
     return webClient
         .get()
-        .uri(uriBuilder -> uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
+        .uri(uriBuilder ->
+            uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .onStatus(
             httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
-            clientResponse ->
-                Mono.error(
-                    new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
+            clientResponse -> Mono.error(
+                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
         .toEntity(String.class)
-        .<BggArticlesV4ResponseBody>handle(
-            (entity, sink) -> {
-              try {
-                sink.next(
-                    objectMapper.readValue(entity.getBody(), BggArticlesV4ResponseBody.class));
-              } catch (JsonProcessingException e) {
-                sink.error(
-                    new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
-              }
-            });
+        .<BggArticlesV4ResponseBody>handle((entity, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(entity.getBody(), BggArticlesV4ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(
+                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        });
   }
 
   public Mono<BggArticleV4ResponseBody> getArticle(Integer id) {
@@ -62,14 +61,13 @@ public class BggArticlesV4Repository {
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .toEntity(String.class)
-        .<BggArticleV4ResponseBody>handle(
-            (entity, sink) -> {
-              try {
-                sink.next(objectMapper.readValue(entity.getBody(), BggArticleV4ResponseBody.class));
-              } catch (JsonProcessingException e) {
-                sink.error(
-                    new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
-              }
-            });
+        .<BggArticleV4ResponseBody>handle((entity, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(entity.getBody(), BggArticleV4ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(
+                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        });
   }
 }

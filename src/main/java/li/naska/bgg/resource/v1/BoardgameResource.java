@@ -23,9 +23,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v1/boardgame")
 public class BoardgameResource {
 
-  @Autowired private BggBoardgameV1Repository boardgameRepository;
+  @Autowired
+  private BggBoardgameV1Repository boardgameRepository;
 
-  @Autowired private XmlProcessor xmlProcessor;
+  @Autowired
+  private XmlProcessor xmlProcessor;
 
   @GetMapping(
       path = "/{ids}",

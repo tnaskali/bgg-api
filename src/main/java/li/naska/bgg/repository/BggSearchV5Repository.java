@@ -19,7 +19,8 @@ import reactor.core.publisher.Mono;
 @Repository
 public class BggSearchV5Repository {
 
-  @Autowired private ObjectMapper objectMapper;
+  @Autowired
+  private ObjectMapper objectMapper;
 
   private final WebClient webClient;
 
@@ -32,24 +33,21 @@ public class BggSearchV5Repository {
       SearchContext context, BggSearchV5QueryParams params) {
     return webClient
         .get()
-        .uri(
-            uriBuilder ->
-                uriBuilder
-                    .path("/{context}")
-                    .queryParams(QueryParameters.fromPojo(params))
-                    .build(context))
+        .uri(uriBuilder -> uriBuilder
+            .path("/{context}")
+            .queryParams(QueryParameters.fromPojo(params))
+            .build(context))
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .toEntity(String.class)
-        .handle(
-            (entity, sink) -> {
-              try {
-                sink.next(objectMapper.readValue(entity.getBody(), BggSearchV5ResponseBody.class));
-              } catch (JsonProcessingException e) {
-                sink.error(
-                    new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
-              }
-            });
+        .handle((entity, sink) -> {
+          try {
+            sink.next(objectMapper.readValue(entity.getBody(), BggSearchV5ResponseBody.class));
+          } catch (JsonProcessingException e) {
+            sink.error(
+                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+          }
+        });
   }
 }

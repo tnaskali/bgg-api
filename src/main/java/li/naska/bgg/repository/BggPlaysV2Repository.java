@@ -25,17 +25,17 @@ public class BggPlaysV2Repository {
   public Mono<String> getPlays(BggPlaysV2QueryParams params) {
     return webClient
         .get()
-        .uri(uriBuilder -> uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
+        .uri(uriBuilder ->
+            uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .retrieve()
         .bodyToMono(String.class)
-        .doOnNext(
-            body -> {
-              if (body.equals(
-                  "<?xml version=\"1.0\" encoding=\"utf-8\"?><error message='Not Found'/>")) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Play not found");
-              }
-            });
+        .doOnNext(body -> {
+          if (body.equals(
+              "<?xml version=\"1.0\" encoding=\"utf-8\"?><error message='Not Found'/>")) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Play not found");
+          }
+        });
   }
 }

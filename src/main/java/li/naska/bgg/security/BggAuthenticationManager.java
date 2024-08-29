@@ -11,7 +11,8 @@ import reactor.core.publisher.Mono;
 @Component
 public class BggAuthenticationManager implements ReactiveAuthenticationManager {
 
-  @Autowired private LoginService loginService;
+  @Autowired
+  private LoginService loginService;
 
   @Override
   public Mono<Authentication> authenticate(final Authentication authentication)

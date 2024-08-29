@@ -27,10 +27,9 @@ public class ThingResourceV2IT extends AbstractMockServerIT {
 
   @PostConstruct
   private void postConstruct() {
-    webTestClient =
-        WebTestClient.bindToServer()
-            .baseUrl("http://localhost:" + port + "/bgg-api/api/v2/thing")
-            .build();
+    webTestClient = WebTestClient.bindToServer()
+        .baseUrl("http://localhost:" + port + "/bgg-api/api/v2/thing")
+        .build();
   }
 
   @Nested
@@ -38,14 +37,12 @@ public class ThingResourceV2IT extends AbstractMockServerIT {
   class Do {
 
     private final BiFunction<MultiValueMap<String, String>, MediaType, WebTestClient.ResponseSpec>
-        partialTest =
-            (MultiValueMap<String, String> params, MediaType mediaType) ->
-                webTestClient
-                    .get()
-                    .uri(builder -> builder.queryParams(params).build())
-                    .accept(mediaType)
-                    .acceptCharset(StandardCharsets.UTF_8)
-                    .exchange();
+        partialTest = (MultiValueMap<String, String> params, MediaType mediaType) -> webTestClient
+        .get()
+        .uri(builder -> builder.queryParams(params).build())
+        .accept(mediaType)
+        .acceptCharset(StandardCharsets.UTF_8)
+        .exchange();
 
     @Nested
     @DisplayName("given remote repository answers 200")
@@ -106,29 +103,28 @@ public class ThingResourceV2IT extends AbstractMockServerIT {
       class When_2 {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest =
-            (MediaType mediaType) ->
-                Do.this.partialTest.apply(
-                    new LinkedMultiValueMap<>() {
-                      {
-                        add("id", "666");
-                        add("id", "667,668");
-                        add("type", "boardgame");
-                        add("type", "boardgameaccessory,boardgameexpansion");
-                        add("versions", "1");
-                        add("videos", "1");
-                        add("stats", "1");
-                        add("historical", "1");
-                        add("marketplace", "1");
-                        add("comments", "1");
-                        add("page", "1");
-                        add("pagesize", "10");
-                        add("from", "2001-01-01");
-                        add("to", "2001-12-31");
-                        // undeclared
-                        add("undeclared_param", "abc123");
-                      }
-                    },
-                    mediaType);
+            (MediaType mediaType) -> Do.this.partialTest.apply(
+                new LinkedMultiValueMap<>() {
+                  {
+                    add("id", "666");
+                    add("id", "667,668");
+                    add("type", "boardgame");
+                    add("type", "boardgameaccessory,boardgameexpansion");
+                    add("versions", "1");
+                    add("videos", "1");
+                    add("stats", "1");
+                    add("historical", "1");
+                    add("marketplace", "1");
+                    add("comments", "1");
+                    add("page", "1");
+                    add("pagesize", "10");
+                    add("from", "2001-01-01");
+                    add("to", "2001-12-31");
+                    // undeclared
+                    add("undeclared_param", "abc123");
+                  }
+                },
+                mediaType);
 
         @Nested
         @DisplayName("when accept XML")
@@ -161,20 +157,19 @@ public class ThingResourceV2IT extends AbstractMockServerIT {
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
                   .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
               assertThat(recordedRequest.getPath())
-                  .isEqualTo(
-                      "/xmlapi2/thing"
-                          + "?id=666,667,668"
-                          + "&type=boardgame,boardgameaccessory,boardgameexpansion"
-                          + "&versions=1"
-                          + "&videos=1"
-                          + "&stats=1"
-                          + "&historical=1"
-                          + "&marketplace=1"
-                          + "&comments=1"
-                          + "&page=1"
-                          + "&pagesize=10"
-                          + "&from=2001-01-01"
-                          + "&to=2001-12-31");
+                  .isEqualTo("/xmlapi2/thing"
+                      + "?id=666,667,668"
+                      + "&type=boardgame,boardgameaccessory,boardgameexpansion"
+                      + "&versions=1"
+                      + "&videos=1"
+                      + "&stats=1"
+                      + "&historical=1"
+                      + "&marketplace=1"
+                      + "&comments=1"
+                      + "&page=1"
+                      + "&pagesize=10"
+                      + "&from=2001-01-01"
+                      + "&to=2001-12-31");
             }
 
             @Test
@@ -222,20 +217,19 @@ public class ThingResourceV2IT extends AbstractMockServerIT {
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
                   .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
               assertThat(recordedRequest.getPath())
-                  .isEqualTo(
-                      "/xmlapi2/thing"
-                          + "?id=666,667,668"
-                          + "&type=boardgame,boardgameaccessory,boardgameexpansion"
-                          + "&versions=1"
-                          + "&videos=1"
-                          + "&stats=1"
-                          + "&historical=1"
-                          + "&marketplace=1"
-                          + "&comments=1"
-                          + "&page=1"
-                          + "&pagesize=10"
-                          + "&from=2001-01-01"
-                          + "&to=2001-12-31");
+                  .isEqualTo("/xmlapi2/thing"
+                      + "?id=666,667,668"
+                      + "&type=boardgame,boardgameaccessory,boardgameexpansion"
+                      + "&versions=1"
+                      + "&videos=1"
+                      + "&stats=1"
+                      + "&historical=1"
+                      + "&marketplace=1"
+                      + "&comments=1"
+                      + "&page=1"
+                      + "&pagesize=10"
+                      + "&from=2001-01-01"
+                      + "&to=2001-12-31");
             }
 
             @Test

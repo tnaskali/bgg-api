@@ -19,7 +19,8 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v1/thread")
 public class ThreadResource {
 
-  @Autowired private BggThreadV1Repository threadRepository;
+  @Autowired
+  private BggThreadV1Repository threadRepository;
 
   @Deprecated
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_XML_VALUE)

@@ -17,7 +17,8 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v5/login")
 public class LoginResource {
 
-  @Autowired private LoginService loginService;
+  @Autowired
+  private LoginService loginService;
 
   @PostMapping(
       consumes = MediaType.APPLICATION_JSON_VALUE,

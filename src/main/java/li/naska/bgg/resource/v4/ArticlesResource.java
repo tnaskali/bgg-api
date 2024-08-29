@@ -21,7 +21,8 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/articles")
 public class ArticlesResource {
 
-  @Autowired private BggArticlesV4Repository articlesRepository;
+  @Autowired
+  private BggArticlesV4Repository articlesRepository;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

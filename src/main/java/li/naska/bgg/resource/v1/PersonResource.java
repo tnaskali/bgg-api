@@ -20,9 +20,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v1/person")
 public class PersonResource {
 
-  @Autowired private BggPersonV1Repository personRepository;
+  @Autowired
+  private BggPersonV1Repository personRepository;
 
-  @Autowired private XmlProcessor xmlProcessor;
+  @Autowired
+  private XmlProcessor xmlProcessor;
 
   @GetMapping(
       value = "/{ids}",

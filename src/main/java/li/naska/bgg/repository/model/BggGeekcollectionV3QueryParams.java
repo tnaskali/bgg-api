@@ -41,8 +41,7 @@ public class BggGeekcollectionV3QueryParams {
   @NotNull
   @Parameter(
       example = "Hilaryg",
-      description =
-          """
+      description = """
           Type username whose collection to export.
           """)
   private String username;

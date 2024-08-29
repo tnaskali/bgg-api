@@ -20,11 +20,9 @@ public class MicrobadgeController {
       BatchLoaderRegistry registry, BggMicrobadgesV4Repository microbadgesService) {
     registry
         .forTypePair(Integer.class, MicrobadgeV4.class)
-        .registerMappedBatchLoader(
-            (ids, env) ->
-                Flux.fromIterable(ids)
-                    .flatMap(id -> Mono.just(id).zipWith(microbadgesService.getMicrobadge(id)))
-                    .collectMap(Tuple2::getT1, tuple -> new MicrobadgeV4(tuple.getT2())));
+        .registerMappedBatchLoader((ids, env) -> Flux.fromIterable(ids)
+            .flatMap(id -> Mono.just(id).zipWith(microbadgesService.getMicrobadge(id)))
+            .collectMap(Tuple2::getT1, tuple -> new MicrobadgeV4(tuple.getT2())));
   }
 
   @QueryMapping
@@ -36,11 +34,13 @@ public class MicrobadgeController {
 
   @SchemaMapping
   public Mono<String> name(Microbadge microbadge, DataLoader<Integer, MicrobadgeV4> loader) {
-    return Mono.fromFuture(loader.load(microbadge.id())).map(data -> data.microbadge().getName());
+    return Mono.fromFuture(loader.load(microbadge.id()))
+        .map(data -> data.microbadge().getName());
   }
 
   @SchemaMapping
   public Mono<String> imagesrc(Microbadge microbadge, DataLoader<Integer, MicrobadgeV4> loader) {
-    return Mono.fromFuture(loader.load(microbadge.id())).map(data -> data.microbadge().getSrc());
+    return Mono.fromFuture(loader.load(microbadge.id()))
+        .map(data -> data.microbadge().getSrc());
   }
 }
