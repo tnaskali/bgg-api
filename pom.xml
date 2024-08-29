@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -14,20 +13,14 @@
   <version>1.0.0-SNAPSHOT</version>
   <name>bgg-api</name>
   <description>API for BGG</description>
-  <inceptionYear>2020</inceptionYear>
 
   <url>https://github.com/tnaskali/bgg-api</url>
+  <inceptionYear>2020</inceptionYear>
 
-  <scm>
-    <url>https://github.com/tnaskali/bgg-api</url>
-    <connection>scm:git:git://github.com/tnaskali/bgg-api.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/tnaskali/bgg-api.git</developerConnection>
-  </scm>
-
-  <issueManagement>
-    <system>GitHub Issues</system>
-    <url>https://github.com/tnaskali/bgg-api/issues</url>
-  </issueManagement>
+  <organization>
+    <name>Thomas Naskali</name>
+    <url>https://www.naska.li</url>
+  </organization>
 
   <licenses>
     <license>
@@ -36,30 +29,32 @@
     </license>
   </licenses>
 
-  <organization>
-    <url>https://www.naska.li</url>
-    <name>Thomas Naskali</name>
-  </organization>
-
   <developers>
     <developer>
+      <id>tnaskali</id>
       <name>Thomas Naskali</name>
       <email>thomas@naska.li</email>
-      <id>tnaskali</id>
       <url>https://github.com/tnaskali</url>
     </developer>
   </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/tnaskali/bgg-api.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/tnaskali/bgg-api.git</developerConnection>
+    <url>https://github.com/tnaskali/bgg-api</url>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/tnaskali/bgg-api/issues</url>
+  </issueManagement>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>17</java.version>
-    <sonar.coverage.jacoco.xmlReportPaths>
-      ${project.basedir}/target/site/jacoco/jacoco.xml,${project.basedir}/target/site/jacoco-it/jacoco.xml
-    </sonar.coverage.jacoco.xmlReportPaths>
-    <sonar.junit.reportPaths>
-      ${project.basedir}/target/surefire-reports/,${project.basedir}/target/failsafe-reports/
-    </sonar.junit.reportPaths>
+    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml,${project.basedir}/target/site/jacoco-it/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+    <sonar.junit.reportPaths>${project.basedir}/target/surefire-reports/,${project.basedir}/target/failsafe-reports/</sonar.junit.reportPaths>
   </properties>
 
   <dependencyManagement>
@@ -202,6 +197,11 @@
                 <style>GOOGLE</style>
               </palantirJavaFormat>
             </java>
+            <pom>
+              <sortPom>
+                <expandEmptyElements>false</expandEmptyElements>
+              </sortPom>
+            </pom>
           </configuration>
         </plugin>
         <plugin>
