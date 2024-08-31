@@ -1,5 +1,6 @@
 package li.naska.bgg.configuration;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -36,8 +37,9 @@ public class JacksonConfiguration {
         LocalDate.class,
         SafeLocalDateJacksonDeserializer.INSTANCE); // see BggGeekitemV4ResponseBody#commercelinks
     mapper.registerModule(javaTimeModule);
-    // mapper.setDefaultPropertyInclusion(NON_EMPTY); // FIXME
-    // https://stackoverflow.com/a/56008395/4074057
+    // FIXME https://stackoverflow.com/a/56008395/4074057
+    mapper.setDefaultPropertyInclusion(Include.NON_NULL); // NON_EMPTY breaks graphiql
+    mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
     mapper.enable(
         DeserializationFeature
             .ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT); // see BggUserV4ResponseBody#adminBadges
