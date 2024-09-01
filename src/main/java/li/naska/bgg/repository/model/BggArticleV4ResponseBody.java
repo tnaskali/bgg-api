@@ -17,6 +17,8 @@ public class BggArticleV4ResponseBody {
 
   private String href;
 
+  private String canonical_link;
+
   private Boolean collapsed;
 
   private Boolean rollsEnabled;
@@ -36,6 +38,8 @@ public class BggArticleV4ResponseBody {
   private String bodyXml;
 
   private Integer rollsCount;
+
+  private Errors errors;
 
   @Data
   public static class Source {
@@ -59,5 +63,10 @@ public class BggArticleV4ResponseBody {
     private String rel;
 
     private String uri;
+  }
+
+  @Data
+  public static class Errors {
+    private String error;
   }
 }

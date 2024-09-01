@@ -13,4 +13,11 @@ public class BggArticlesV4ResponseBody {
   private Integer perPage;
 
   private Integer total;
+
+  private Errors errors;
+
+  @Data
+  public static class Errors {
+    private String error;
+  }
 }
