@@ -12,14 +12,14 @@ public class BggFansV4QueryParams {
   @NotNull
   @Min(1)
   @Parameter(
-      example = "1000",
+      example = "177",
       description =
           """
           The object id.
           <p>
-          <i>Syntax</i> : /fans?objectid={id}&objecttype={type]
+          <i>Syntax</i> : /fans?objectid={id}&objecttype={type}
           <p>
-          <i>Example</i> : /fans?objectid=1000&objecttype=thing
+          <i>Example</i> : /fans?objectid=177&objecttype=thing
           """)
   private Integer objectid;
 
@@ -32,9 +32,33 @@ public class BggFansV4QueryParams {
           """
           The object type.
           <p>
-          <i>Syntax</i> : /fans?objectid={id}&objecttype={type]
+          <i>Syntax</i> : /fans?objectid={id}&objecttype={type}
           <p>
-          <i>Example</i> : /fans?objectid=1000&objecttype=thing
+          <i>Example</i> : /fans?objectid=177&objecttype=thing
           """)
   private String objecttype;
+
+  @Min(1)
+  @Parameter(
+      example = "825923",
+      description =
+          """
+          The user id of a fan.
+          <p>
+          <i>Syntax</i> : /fans?objectid={id}&objecttype={type}&userid={userid}
+          <p>
+          <i>Example</i> : /fans?objectid=177&objecttype=thing&userid=825923
+          """)
+  private Integer userid;
+
+  @Deprecated
+  @Min(1)
+  @Parameter(
+      description =
+          """
+          Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
+          <p>
+          Seems to be present with a value of "1" in all requests.
+          """)
+  private Integer nosession;
 }

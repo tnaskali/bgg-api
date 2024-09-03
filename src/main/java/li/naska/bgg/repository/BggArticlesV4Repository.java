@@ -2,10 +2,10 @@ package li.naska.bgg.repository;
 
 import java.nio.charset.StandardCharsets;
 import li.naska.bgg.exception.UnexpectedServerResponseException;
-import li.naska.bgg.mapper.ServerResponseBodyMapper;
 import li.naska.bgg.repository.model.BggArticleV4ResponseBody;
 import li.naska.bgg.repository.model.BggArticlesV4QueryParams;
 import li.naska.bgg.repository.model.BggArticlesV4ResponseBody;
+import li.naska.bgg.util.JsonProcessor;
 import li.naska.bgg.util.QueryParameters;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,16 +20,16 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class BggArticlesV4Repository {
 
-  private final ServerResponseBodyMapper bodyMapper;
+  private final JsonProcessor jsonProcessor;
 
   private final WebClient webClient;
 
   public BggArticlesV4Repository(
       @Value("${bgg.endpoints.v4.articles}") String endpoint,
       WebClient.Builder builder,
-      ServerResponseBodyMapper bodyMapper) {
+      JsonProcessor jsonProcessor) {
     this.webClient = builder.baseUrl(endpoint).build();
-    this.bodyMapper = bodyMapper;
+    this.jsonProcessor = jsonProcessor;
   }
 
   public Mono<BggArticlesV4ResponseBody> getArticles(BggArticlesV4QueryParams params) {
@@ -37,7 +37,7 @@ public class BggArticlesV4Repository {
         .get()
         .uri(uriBuilder ->
             uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
-        .accept(MediaType.APPLICATION_XML)
+        .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
           if (clientResponse.statusCode() == HttpStatus.NOT_FOUND) {
@@ -48,7 +48,7 @@ public class BggArticlesV4Repository {
           return clientResponse
               .bodyToMono(String.class)
               .defaultIfEmpty("")
-              .map(body -> bodyMapper.parse(body, BggArticlesV4ResponseBody.class))
+              .map(body -> jsonProcessor.toJavaObject(body, BggArticlesV4ResponseBody.class))
               .doOnNext(responseBody -> {
                 if (responseBody.getErrors() != null
                     && "Invalid threadid".equals(responseBody.getErrors().getError())) {
@@ -70,7 +70,7 @@ public class BggArticlesV4Repository {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder.path("/{id}").build(id))
-        .accept(MediaType.APPLICATION_XML)
+        .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
           if (clientResponse.statusCode() == HttpStatus.NOT_FOUND) {
@@ -81,7 +81,7 @@ public class BggArticlesV4Repository {
           return clientResponse
               .bodyToMono(String.class)
               .defaultIfEmpty("")
-              .map(body -> bodyMapper.parse(body, BggArticleV4ResponseBody.class))
+              .map(body -> jsonProcessor.toJavaObject(body, BggArticleV4ResponseBody.class))
               .doOnNext(responseBody -> {
                 if (responseBody.getErrors() != null
                     && "Invalid article".equals(responseBody.getErrors().getError())) {
