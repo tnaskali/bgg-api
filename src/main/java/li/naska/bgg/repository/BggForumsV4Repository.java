@@ -1,13 +1,11 @@
 package li.naska.bgg.repository;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
-import li.naska.bgg.repository.model.BggForumsThreadsV4QueryParams;
-import li.naska.bgg.repository.model.BggForumsThreadsV4ResponseBody;
-import li.naska.bgg.repository.model.BggForumsV4QueryParams;
-import li.naska.bgg.repository.model.BggForumsV4ResponseBody;
+import li.naska.bgg.exception.UnexpectedServerResponseException;
+import li.naska.bgg.repository.model.*;
+import li.naska.bgg.util.JsonProcessor;
 import li.naska.bgg.util.QueryParameters;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -18,16 +16,39 @@ import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 @Repository
+@Slf4j
 public class BggForumsV4Repository {
 
-  @Autowired
-  private ObjectMapper objectMapper;
+  private final JsonProcessor jsonProcessor;
 
   private final WebClient webClient;
 
   public BggForumsV4Repository(
-      @Autowired WebClient.Builder builder, @Value("${bgg.endpoints.v4.forums}") String endpoint) {
+      @Autowired WebClient.Builder builder,
+      @Value("${bgg.endpoints.v4.forums}") String endpoint,
+      JsonProcessor jsonProcessor) {
     this.webClient = builder.baseUrl(endpoint).build();
+    this.jsonProcessor = jsonProcessor;
+  }
+
+  public Mono<BggForumV4ResponseBody> getForum(Long id) {
+    return webClient
+        .get()
+        .uri(uriBuilder ->
+            uriBuilder.path("/{id}").queryParam("partial", "essential").build(id))
+        .accept(MediaType.APPLICATION_JSON)
+        .acceptCharset(StandardCharsets.UTF_8)
+        .exchangeToMono(clientResponse -> {
+          if (clientResponse.statusCode() == HttpStatus.NOT_FOUND) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Forum not found");
+          } else if (clientResponse.statusCode() != HttpStatus.OK) {
+            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
+          }
+          return clientResponse
+              .bodyToMono(String.class)
+              .defaultIfEmpty("")
+              .map(body -> jsonProcessor.toJavaObject(body, BggForumV4ResponseBody.class));
+        });
   }
 
   public Mono<BggForumsV4ResponseBody> getForums(BggForumsV4QueryParams params) {
@@ -35,21 +56,16 @@ public class BggForumsV4Repository {
         .get()
         .uri(uriBuilder ->
             uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
-        .accept(MediaType.APPLICATION_XML)
+        .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
-        .retrieve()
-        .onStatus(
-            httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
-            clientResponse -> Mono.error(
-                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .toEntity(String.class)
-        .<BggForumsV4ResponseBody>handle((entity, sink) -> {
-          try {
-            sink.next(objectMapper.readValue(entity.getBody(), BggForumsV4ResponseBody.class));
-          } catch (JsonProcessingException e) {
-            sink.error(
-                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+        .exchangeToMono(clientResponse -> {
+          if (clientResponse.statusCode() != HttpStatus.OK) {
+            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
           }
+          return clientResponse
+              .bodyToMono(String.class)
+              .defaultIfEmpty("")
+              .map(body -> jsonProcessor.toJavaObject(body, BggForumsV4ResponseBody.class));
         });
   }
 
@@ -60,22 +76,16 @@ public class BggForumsV4Repository {
             .path("/threads")
             .queryParams(QueryParameters.fromPojo(params))
             .build())
-        .accept(MediaType.APPLICATION_XML)
+        .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
-        .retrieve()
-        .onStatus(
-            httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
-            clientResponse -> Mono.error(
-                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .toEntity(String.class)
-        .<BggForumsThreadsV4ResponseBody>handle((entity, sink) -> {
-          try {
-            sink.next(
-                objectMapper.readValue(entity.getBody(), BggForumsThreadsV4ResponseBody.class));
-          } catch (JsonProcessingException e) {
-            sink.error(
-                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+        .exchangeToMono(clientResponse -> {
+          if (clientResponse.statusCode() != HttpStatus.OK) {
+            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
           }
+          return clientResponse
+              .bodyToMono(String.class)
+              .defaultIfEmpty("")
+              .map(body -> jsonProcessor.toJavaObject(body, BggForumsThreadsV4ResponseBody.class));
         });
   }
 }

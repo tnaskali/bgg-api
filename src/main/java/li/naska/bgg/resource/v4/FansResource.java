@@ -1,6 +1,7 @@
 package li.naska.bgg.resource.v4;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import li.naska.bgg.repository.BggFansV4Repository;
 import li.naska.bgg.repository.model.BggFansV4QueryParams;
@@ -74,7 +75,8 @@ public class FansResource {
           <i>Example</i> : /fans/{12345}
           """,
       security = @SecurityRequirement(name = "basicAuth"))
-  public Mono<BggFansV4ResponseBody> deleteFan(@Validated @PathVariable Integer id) {
+  public Mono<BggFansV4ResponseBody> deleteFan(
+      @Validated @PathVariable @Parameter(example = "12345", description = "Fan id.") Integer id) {
     return authenticationService
         .requiredAuthentication()
         .flatMap(authn -> fansRepository.deleteFan(authn.buildBggRequestHeader(), id));

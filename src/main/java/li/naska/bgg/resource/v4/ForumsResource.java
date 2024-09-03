@@ -1,16 +1,15 @@
 package li.naska.bgg.resource.v4;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import li.naska.bgg.repository.BggForumsV4Repository;
-import li.naska.bgg.repository.model.BggForumsThreadsV4QueryParams;
-import li.naska.bgg.repository.model.BggForumsThreadsV4ResponseBody;
-import li.naska.bgg.repository.model.BggForumsV4QueryParams;
-import li.naska.bgg.repository.model.BggForumsV4ResponseBody;
+import li.naska.bgg.repository.model.*;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
@@ -21,6 +20,22 @@ public class ForumsResource {
 
   @Autowired
   private BggForumsV4Repository forumsRepository;
+
+  @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  @Operation(
+      summary = "Get forum",
+      description =
+          """
+          Get forum by id.
+          <p>
+          <i>Syntax</i> : /forums/{id}
+          <p>
+          <i>Example</i> : /forums/65
+          """)
+  public Mono<BggForumV4ResponseBody> getForum(
+      @Validated @PathVariable @Parameter(example = "65", description = "Forum id.") Long id) {
+    return forumsRepository.getForum(id);
+  }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
