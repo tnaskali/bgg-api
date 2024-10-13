@@ -35,6 +35,8 @@ public class BggGeekitemsV4ResponseBody {
 
     private String href;
 
+    private String canonical_link;
+
     private String subtype;
 
     private List<String> subtypes;
@@ -51,7 +53,7 @@ public class BggGeekitemsV4ResponseBody {
 
     // --- type specific properties
     // type=thing,subtype=bgsleeve
-    private Integer mfgid;
+    private String mfgid;
     // type=thing,subtype=boardgame
     private Integer minplaytime;
     private Integer maxplaytime;
@@ -65,6 +67,7 @@ public class BggGeekitemsV4ResponseBody {
     private Integer focus_videoid;
     private Integer howtoplay_videoid;
     private String bggstore_product;
+    private String bggstore_variant;
     private String short_description;
     // type=thing,subtype=rpgitem
     private String seriescode;
@@ -75,6 +78,8 @@ public class BggGeekitemsV4ResponseBody {
     private Map<String, List<LinkedItem>> links;
 
     private Map<String, Integer> linkcounts;
+
+    private Map<String, Integer> linkcounts_chain;
 
     private List<CommerceLink> commercelinks;
 
@@ -152,6 +157,8 @@ public class BggGeekitemsV4ResponseBody {
     private String itemstate;
 
     private String href;
+
+    private String canonical_link;
   }
 
   @Data

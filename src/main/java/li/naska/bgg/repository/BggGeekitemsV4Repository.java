@@ -1,12 +1,11 @@
 package li.naska.bgg.repository;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
+import li.naska.bgg.exception.UnexpectedServerResponseException;
 import li.naska.bgg.repository.model.BggGeekitemsV4QueryParams;
 import li.naska.bgg.repository.model.BggGeekitemsV4ResponseBody;
+import li.naska.bgg.util.JsonProcessor;
 import li.naska.bgg.util.QueryParameters;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,15 +17,16 @@ import reactor.core.publisher.Mono;
 @Repository
 public class BggGeekitemsV4Repository {
 
-  @Autowired
-  private ObjectMapper objectMapper;
-
   private final WebClient webClient;
 
+  private final JsonProcessor jsonProcessor;
+
   public BggGeekitemsV4Repository(
-      @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v4.geekitems}") String endpoint) {
+      @Value("${bgg.endpoints.v4.geekitems}") String endpoint,
+      WebClient.Builder builder,
+      JsonProcessor jsonProcessor) {
     this.webClient = builder.baseUrl(endpoint).build();
+    this.jsonProcessor = jsonProcessor;
   }
 
   public Mono<BggGeekitemsV4ResponseBody> getGeekitems(BggGeekitemsV4QueryParams params) {
@@ -36,19 +36,16 @@ public class BggGeekitemsV4Repository {
             uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
-        .retrieve()
-        .onStatus(
-            httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
-            clientResponse -> Mono.error(
-                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .toEntity(String.class)
-        .<BggGeekitemsV4ResponseBody>handle((entity, sink) -> {
-          try {
-            sink.next(objectMapper.readValue(entity.getBody(), BggGeekitemsV4ResponseBody.class));
-          } catch (JsonProcessingException e) {
-            sink.error(
-                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+        .exchangeToMono(clientResponse -> {
+          if (clientResponse.statusCode() == HttpStatus.NOT_FOUND) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Geekitem not found");
+          } else if (clientResponse.statusCode() != HttpStatus.OK) {
+            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
           }
+          return clientResponse
+              .bodyToMono(String.class)
+              .defaultIfEmpty("")
+              .map(body -> jsonProcessor.toJavaObject(body, BggGeekitemsV4ResponseBody.class));
         });
   }
 }
