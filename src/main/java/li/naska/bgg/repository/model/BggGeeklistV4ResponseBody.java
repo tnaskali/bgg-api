@@ -18,6 +18,8 @@ public class BggGeeklistV4ResponseBody {
 
   private String href;
 
+  private String canonical_link;
+
   private ZonedDateTime postdate;
 
   private ZonedDateTime editdate;

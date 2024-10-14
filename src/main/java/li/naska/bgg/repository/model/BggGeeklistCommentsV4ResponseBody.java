@@ -54,6 +54,8 @@ public class BggGeeklistCommentsV4ResponseBody {
 
     private String href;
 
+    private String canonical_link;
+
     private Boolean collapsed;
 
     private List<Link> links;

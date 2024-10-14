@@ -43,6 +43,8 @@ public class BggGeeklistTipsV4ResponseBody {
 
     private String href;
 
+    private String canonical_link;
+
     private String firstname;
 
     private String lastname;
