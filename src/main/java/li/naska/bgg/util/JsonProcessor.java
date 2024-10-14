@@ -1,6 +1,7 @@
 package li.naska.bgg.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,16 @@ public class JsonProcessor {
   public <T> T toJavaObject(String jsonString, Class<T> clazz) {
     try {
       return objectMapper.readValue(jsonString, clazz);
+    } catch (JsonProcessingException e) {
+      log.error("Error parsing response body", e);
+      throw new ResponseStatusException(
+          HttpStatus.INTERNAL_SERVER_ERROR, "Error parsing server response");
+    }
+  }
+
+  public <T> T toJavaObject(String jsonString, TypeReference<T> typeReference) {
+    try {
+      return objectMapper.readValue(jsonString, typeReference);
     } catch (JsonProcessingException e) {
       log.error("Error parsing response body", e);
       throw new ResponseStatusException(
