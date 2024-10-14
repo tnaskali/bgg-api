@@ -242,6 +242,8 @@ public class BggGeekitemsV4ResponseBody {
 
     private Image square100;
 
+    private Image mediacard100;
+
     private Image mediacard;
   }
 

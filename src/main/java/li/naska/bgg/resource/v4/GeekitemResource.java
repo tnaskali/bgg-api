@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggGeekitemV4Repository;
 import li.naska.bgg.repository.model.BggGeekitemLinkeditemsV4QueryParams;
 import li.naska.bgg.repository.model.BggGeekitemLinkeditemsV4ResponseBody;
+import li.naska.bgg.repository.model.BggGeekitemRecsV4QueryParams;
+import li.naska.bgg.repository.model.BggGeekitemRecsV4ResponseBody;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -34,5 +36,21 @@ public class GeekitemResource {
   public Mono<BggGeekitemLinkeditemsV4ResponseBody> getLinkeditems(
       @Validated @ParameterObject BggGeekitemLinkeditemsV4QueryParams params) {
     return geekitemRepository.getLinkeditems(params);
+  }
+
+  @GetMapping(path = "/recs", produces = MediaType.APPLICATION_JSON_VALUE)
+  @Operation(
+      summary = "Get recommandations",
+      description =
+          """
+          Get recommandations for a given item.
+          <p>
+          <i>Syntax</i> : /linkeditems?objectid={id}&objecttype={type}&pageid={page}&showcount={count}
+          <p>
+          <i>Example</i> : /linkeditems?objectid=205637&objecttype=thing&pageid=1&showcount=10
+          """)
+  public Mono<BggGeekitemRecsV4ResponseBody> getLinkeditems(
+      @Validated @ParameterObject BggGeekitemRecsV4QueryParams params) {
+    return geekitemRepository.getRecs(params);
   }
 }
