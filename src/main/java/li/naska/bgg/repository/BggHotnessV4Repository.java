@@ -1,7 +1,6 @@
 package li.naska.bgg.repository;
 
 import java.nio.charset.StandardCharsets;
-
 import li.naska.bgg.exception.UnexpectedServerResponseException;
 import li.naska.bgg.repository.model.BggHotnessV4QueryParams;
 import li.naska.bgg.repository.model.BggHotnessV4ResponseBody;

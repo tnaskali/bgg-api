@@ -6,7 +6,6 @@ import li.naska.bgg.repository.model.*;
 import li.naska.bgg.util.JsonProcessor;
 import li.naska.bgg.util.QueryParameters;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,13 +18,13 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class BggForumsV4Repository {
 
-  private final JsonProcessor jsonProcessor;
-
   private final WebClient webClient;
 
+  private final JsonProcessor jsonProcessor;
+
   public BggForumsV4Repository(
-      @Autowired WebClient.Builder builder,
       @Value("${bgg.endpoints.v4.forums}") String endpoint,
+      WebClient.Builder builder,
       JsonProcessor jsonProcessor) {
     this.webClient = builder.baseUrl(endpoint).build();
     this.jsonProcessor = jsonProcessor;

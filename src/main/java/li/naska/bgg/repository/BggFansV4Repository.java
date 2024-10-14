@@ -21,9 +21,9 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class BggFansV4Repository {
 
-  private final JsonProcessor jsonProcessor;
-
   private final WebClient webClient;
+
+  private final JsonProcessor jsonProcessor;
 
   public BggFansV4Repository(
       @Value("${bgg.endpoints.v4.fans}") String endpoint,

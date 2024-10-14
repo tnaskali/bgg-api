@@ -20,9 +20,9 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class BggArticlesV4Repository {
 
-  private final JsonProcessor jsonProcessor;
-
   private final WebClient webClient;
+
+  private final JsonProcessor jsonProcessor;
 
   public BggArticlesV4Repository(
       @Value("${bgg.endpoints.v4.articles}") String endpoint,
