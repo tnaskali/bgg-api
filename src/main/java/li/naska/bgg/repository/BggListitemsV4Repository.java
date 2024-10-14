@@ -1,33 +1,31 @@
 package li.naska.bgg.repository;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
+import li.naska.bgg.exception.UnexpectedServerResponseException;
 import li.naska.bgg.repository.model.*;
+import li.naska.bgg.util.JsonProcessor;
 import li.naska.bgg.util.QueryParameters;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 @Repository
 public class BggListitemsV4Repository {
 
-  @Autowired
-  private ObjectMapper objectMapper;
-
   private final WebClient webClient;
 
+  private final JsonProcessor jsonProcessor;
+
   public BggListitemsV4Repository(
-      @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v4.listitems}") String endpoint) {
+      @Value("${bgg.endpoints.v4.listitems}") String endpoint,
+      WebClient.Builder builder,
+      JsonProcessor jsonProcessor) {
     this.webClient = builder.baseUrl(endpoint).build();
+    this.jsonProcessor = jsonProcessor;
   }
 
   public Mono<BggListitemsV4ResponseBody> getListitems(BggListitemsV4QueryParams params) {
@@ -37,19 +35,14 @@ public class BggListitemsV4Repository {
             uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
-        .retrieve()
-        .onStatus(
-            httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
-            clientResponse -> Mono.error(
-                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .toEntity(String.class)
-        .<BggListitemsV4ResponseBody>handle((entity, sink) -> {
-          try {
-            sink.next(objectMapper.readValue(entity.getBody(), BggListitemsV4ResponseBody.class));
-          } catch (JsonProcessingException e) {
-            sink.error(
-                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+        .exchangeToMono(clientResponse -> {
+          if (clientResponse.statusCode() != HttpStatus.OK) {
+            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
           }
+          return clientResponse
+              .bodyToMono(String.class)
+              .defaultIfEmpty("")
+              .map(body -> jsonProcessor.toJavaObject(body, BggListitemsV4ResponseBody.class));
         });
   }
 
@@ -59,19 +52,14 @@ public class BggListitemsV4Repository {
         .uri(uriBuilder -> uriBuilder.path("/{id}").build(id))
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
-        .retrieve()
-        .onStatus(
-            httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
-            clientResponse -> Mono.error(
-                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .toEntity(String.class)
-        .<BggListitemV4ResponseBody>handle((entity, sink) -> {
-          try {
-            sink.next(objectMapper.readValue(entity.getBody(), BggListitemV4ResponseBody.class));
-          } catch (JsonProcessingException e) {
-            sink.error(
-                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+        .exchangeToMono(clientResponse -> {
+          if (clientResponse.statusCode() != HttpStatus.OK) {
+            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
           }
+          return clientResponse
+              .bodyToMono(String.class)
+              .defaultIfEmpty("")
+              .map(body -> jsonProcessor.toJavaObject(body, BggListitemV4ResponseBody.class));
         });
   }
 
@@ -85,22 +73,18 @@ public class BggListitemsV4Repository {
             .build(id))
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
-        .retrieve()
-        .onStatus(
-            httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
-            clientResponse -> Mono.error(
-                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .toEntity(String.class)
-        .map(HttpEntity::getBody)
-        .map(body ->
-            StringUtils.isNumeric(body) ? String.format("{ \"totalCount\": %s }", body) : body)
-        .<BggListitemCommentsV4ResponseBody>handle((body, sink) -> {
-          try {
-            sink.next(objectMapper.readValue(body, BggListitemCommentsV4ResponseBody.class));
-          } catch (JsonProcessingException e) {
-            sink.error(
-                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+        .exchangeToMono(clientResponse -> {
+          if (clientResponse.statusCode() != HttpStatus.OK) {
+            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
           }
+          return clientResponse
+              .bodyToMono(String.class)
+              .defaultIfEmpty("")
+              .mapNotNull(body -> StringUtils.isNumeric(body)
+                  ? String.format("{ \"totalCount\": %s }", body)
+                  : body)
+              .map(body ->
+                  jsonProcessor.toJavaObject(body, BggListitemCommentsV4ResponseBody.class));
         });
   }
 
@@ -114,20 +98,15 @@ public class BggListitemsV4Repository {
             .build(id))
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
-        .retrieve()
-        .onStatus(
-            httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
-            clientResponse -> Mono.error(
-                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .toEntity(String.class)
-        .<BggListitemReactionsV4ResponseBody>handle((entity, sink) -> {
-          try {
-            sink.next(
-                objectMapper.readValue(entity.getBody(), BggListitemReactionsV4ResponseBody.class));
-          } catch (JsonProcessingException e) {
-            sink.error(
-                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+        .exchangeToMono(clientResponse -> {
+          if (clientResponse.statusCode() != HttpStatus.OK) {
+            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
           }
+          return clientResponse
+              .bodyToMono(String.class)
+              .defaultIfEmpty("")
+              .map(body ->
+                  jsonProcessor.toJavaObject(body, BggListitemReactionsV4ResponseBody.class));
         });
   }
 
@@ -141,20 +120,14 @@ public class BggListitemsV4Repository {
             .build(id))
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
-        .retrieve()
-        .onStatus(
-            httpStatus -> httpStatus == HttpStatus.BAD_REQUEST,
-            clientResponse -> Mono.error(
-                new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown remote error")))
-        .toEntity(String.class)
-        .<BggListitemTipsV4ResponseBody>handle((entity, sink) -> {
-          try {
-            sink.next(
-                objectMapper.readValue(entity.getBody(), BggListitemTipsV4ResponseBody.class));
-          } catch (JsonProcessingException e) {
-            sink.error(
-                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+        .exchangeToMono(clientResponse -> {
+          if (clientResponse.statusCode() != HttpStatus.OK) {
+            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
           }
+          return clientResponse
+              .bodyToMono(String.class)
+              .defaultIfEmpty("")
+              .map(body -> jsonProcessor.toJavaObject(body, BggListitemTipsV4ResponseBody.class));
         });
   }
 }
