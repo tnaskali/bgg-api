@@ -8,7 +8,6 @@ import lombok.Data;
 
 @Data
 public class BggGeekplayPlaysV3ResponseBody {
-
   private List<Play> plays;
   private Integer eventcount;
   private Integer userid;

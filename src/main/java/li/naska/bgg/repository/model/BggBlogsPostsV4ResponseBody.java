@@ -7,14 +7,11 @@ import lombok.Data;
 
 @Data
 public class BggBlogsPostsV4ResponseBody {
-
   private List<Post> posts;
-
   private Config config;
 
   @Data
   private static class Post {
-
     private String title;
     private Integer postid;
     private Integer numpositive;
@@ -26,7 +23,6 @@ public class BggBlogsPostsV4ResponseBody {
 
     @Data
     private static class User {
-
       private String username;
       private Integer avatar;
       private String avatarfile;

@@ -5,6 +5,5 @@ import lombok.Data;
 
 @Data
 public class BggGeekaccountToplistV5ResponseBody {
-
   private List<Integer> toplistitems;
 }

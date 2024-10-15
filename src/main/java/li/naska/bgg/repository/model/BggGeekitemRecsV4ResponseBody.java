@@ -68,12 +68,10 @@ public class BggGeekitemRecsV4ResponseBody {
 
       @Data
       public static class ImageSets {
-
+        private Image square;
         private Image square100;
-
-        private Image mediacard100;
-
         private Image mediacard;
+        private Image mediacard100;
       }
     }
 

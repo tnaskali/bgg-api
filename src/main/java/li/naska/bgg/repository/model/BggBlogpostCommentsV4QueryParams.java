@@ -31,7 +31,7 @@ public class BggBlogpostCommentsV4QueryParams {
           <p>
           <i>Syntax</i> : /blogposts/{id}/comments?perPage={count}
           <p>
-          <i>Example</i> : /blogposts/166224/comments?perPage=10
+          <i>Example</i> : /blogposts/166224/comments?perPage=1
           """)
   private Integer perPage;
 

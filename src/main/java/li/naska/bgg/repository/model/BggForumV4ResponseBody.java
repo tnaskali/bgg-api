@@ -8,7 +8,6 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(value = {"hasAngularLink", "descriptors"})
 public class BggForumV4ResponseBody {
-
   private String type;
   private Long id;
   private String name;
@@ -28,17 +27,14 @@ public class BggForumV4ResponseBody {
 
   @Data
   public static class ImageSets {
-
+    private Image square;
     private Image square100;
-
-    private Image mediacard100;
-
     private Image mediacard;
+    private Image mediacard100;
   }
 
   @Data
   public static class Image {
-
     private String src;
 
     @JsonProperty(value = "src@2x")
