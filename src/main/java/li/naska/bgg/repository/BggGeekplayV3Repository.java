@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import li.naska.bgg.repository.model.*;
 import li.naska.bgg.util.QueryParameters;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,15 +19,16 @@ import reactor.core.publisher.Mono;
 @Repository
 public class BggGeekplayV3Repository {
 
-  @Autowired
-  private ObjectMapper objectMapper;
-
   private final WebClient webClient;
 
+  private final ObjectMapper objectMapper;
+
   public BggGeekplayV3Repository(
-      @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v3.geekplay}") String endpoint) {
+      @Value("${bgg.endpoints.v3.geekplay}") String endpoint,
+      WebClient.Builder builder,
+      ObjectMapper objectMapper) {
     this.webClient = builder.baseUrl(endpoint).build();
+    this.objectMapper = objectMapper;
   }
 
   public Mono<BggGeekplayPlaysV3ResponseBody> getGeekplayPlays(

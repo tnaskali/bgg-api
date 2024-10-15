@@ -6,7 +6,6 @@ import li.naska.bgg.repository.model.BggGeekaccountToplistV5QueryParams;
 import li.naska.bgg.repository.model.BggGeekaccountToplistV5ResponseBody;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -20,8 +19,7 @@ public class BggGeekaccountV5Repository {
   private final WebClient webClient;
 
   public BggGeekaccountV5Repository(
-      @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v5.geekaccount}") String endpoint) {
+      @Value("${bgg.endpoints.v5.geekaccount}") String endpoint, WebClient.Builder builder) {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 

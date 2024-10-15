@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import li.naska.bgg.repository.BggForumsV4Repository;
 import li.naska.bgg.repository.model.*;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +17,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/forums")
 public class ForumsResource {
 
-  @Autowired
-  private BggForumsV4Repository forumsRepository;
+  private final BggForumsV4Repository forumsRepository;
+
+  public ForumsResource(BggForumsV4Repository forumsRepository) {
+    this.forumsRepository = forumsRepository;
+  }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

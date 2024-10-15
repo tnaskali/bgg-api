@@ -7,7 +7,6 @@ import li.naska.bgg.repository.model.BggGeekitemLinkeditemsV4ResponseBody;
 import li.naska.bgg.repository.model.BggGeekitemRecsV4QueryParams;
 import li.naska.bgg.repository.model.BggGeekitemRecsV4ResponseBody;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +18,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/geekitem")
 public class GeekitemResource {
 
-  @Autowired
-  private BggGeekitemV4Repository geekitemRepository;
+  private final BggGeekitemV4Repository geekitemRepository;
+
+  public GeekitemResource(BggGeekitemV4Repository geekitemRepository) {
+    this.geekitemRepository = geekitemRepository;
+  }
 
   @GetMapping(path = "/linkeditems", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

@@ -8,7 +8,6 @@ import li.naska.bgg.repository.model.BggThreadReactionsV4QueryParams;
 import li.naska.bgg.repository.model.BggThreadReactionsV4ResponseBody;
 import li.naska.bgg.repository.model.BggThreadV4ResponseBody;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +20,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/threads")
 public class ThreadsResource {
 
-  @Autowired
-  private BggThreadsV4Repository threadsRepository;
+  private final BggThreadsV4Repository threadsRepository;
+
+  public ThreadsResource(BggThreadsV4Repository threadsRepository) {
+    this.threadsRepository = threadsRepository;
+  }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

@@ -7,7 +7,6 @@ import li.naska.bgg.repository.BggFamilyV2Repository;
 import li.naska.bgg.repository.model.BggFamilyV2QueryParams;
 import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.annotation.Validated;
@@ -20,11 +19,14 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/family")
 public class FamilyResource {
 
-  @Autowired
-  private BggFamilyV2Repository familiesRepository;
+  private final BggFamilyV2Repository familiesRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  private final XmlProcessor xmlProcessor;
+
+  public FamilyResource(BggFamilyV2Repository familiesRepository, XmlProcessor xmlProcessor) {
+    this.familiesRepository = familiesRepository;
+    this.xmlProcessor = xmlProcessor;
+  }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(

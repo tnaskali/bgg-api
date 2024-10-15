@@ -7,7 +7,6 @@ import li.naska.bgg.repository.BggForumlistV2Repository;
 import li.naska.bgg.repository.model.BggForumlistV2QueryParams;
 import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.annotation.Validated;
@@ -20,11 +19,15 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/forumlist")
 public class ForumListResource {
 
-  @Autowired
-  private BggForumlistV2Repository forumListsRepository;
+  private final BggForumlistV2Repository forumListsRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  private final XmlProcessor xmlProcessor;
+
+  public ForumListResource(
+      BggForumlistV2Repository forumListsRepository, XmlProcessor xmlProcessor) {
+    this.forumListsRepository = forumListsRepository;
+    this.xmlProcessor = xmlProcessor;
+  }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(

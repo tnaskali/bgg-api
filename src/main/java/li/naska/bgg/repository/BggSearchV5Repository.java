@@ -7,7 +7,6 @@ import li.naska.bgg.repository.model.BggSearchV5QueryParams;
 import li.naska.bgg.repository.model.BggSearchV5ResponseBody;
 import li.naska.bgg.resource.v5.model.SearchContext;
 import li.naska.bgg.util.QueryParameters;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,14 +18,15 @@ import reactor.core.publisher.Mono;
 @Repository
 public class BggSearchV5Repository {
 
-  @Autowired
-  private ObjectMapper objectMapper;
-
   private final WebClient webClient;
+  private final ObjectMapper objectMapper;
 
   public BggSearchV5Repository(
-      @Autowired WebClient.Builder builder, @Value("${bgg.endpoints.v5.search}") String endpoint) {
+      @Value("${bgg.endpoints.v5.search}") String endpoint,
+      WebClient.Builder builder,
+      ObjectMapper objectMapper) {
     this.webClient = builder.baseUrl(endpoint).build();
+    this.objectMapper = objectMapper;
   }
 
   public Mono<BggSearchV5ResponseBody> getSearchResults(

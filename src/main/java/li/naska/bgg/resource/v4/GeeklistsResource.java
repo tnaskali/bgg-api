@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import li.naska.bgg.repository.BggGeeklistsV4Repository;
 import li.naska.bgg.repository.model.*;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +18,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/geeklists")
 public class GeeklistsResource {
 
-  @Autowired
-  private BggGeeklistsV4Repository geeklistsRepository;
+  private final BggGeeklistsV4Repository geeklistsRepository;
+
+  public GeeklistsResource(BggGeeklistsV4Repository geeklistsRepository) {
+    this.geeklistsRepository = geeklistsRepository;
+  }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

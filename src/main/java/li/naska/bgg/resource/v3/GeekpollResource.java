@@ -8,7 +8,6 @@ import li.naska.bgg.repository.model.BggGeekpollV3ResponseBody;
 import li.naska.bgg.security.BggAuthenticationToken;
 import li.naska.bgg.service.AuthenticationService;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +19,15 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v3/geekpoll")
 public class GeekpollResource {
 
-  @Autowired
-  private BggGeekpollV3Repository geekpollRepository;
+  private final BggGeekpollV3Repository geekpollRepository;
 
-  @Autowired
-  private AuthenticationService authenticationService;
+  private final AuthenticationService authenticationService;
+
+  public GeekpollResource(
+      BggGeekpollV3Repository geekpollRepository, AuthenticationService authenticationService) {
+    this.geekpollRepository = geekpollRepository;
+    this.authenticationService = authenticationService;
+  }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

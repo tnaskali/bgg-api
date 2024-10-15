@@ -9,7 +9,6 @@ import li.naska.bgg.repository.BggUsersV4Repository;
 import li.naska.bgg.repository.model.BggUserV2QueryParams;
 import li.naska.bgg.repository.model.BggUsersV4ResponseBody;
 import li.naska.bgg.util.XmlProcessor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.execution.BatchLoaderRegistry;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -22,17 +21,24 @@ public class GraphQLUsersService {
 
   private static final int BGG_USER_GUILDS_PAGE_SIZE = 1000;
 
-  @Autowired
-  private BggUserV2Repository usersV2Repository;
+  private final BggUserV2Repository usersV2Repository;
 
-  @Autowired
-  private BggUsersV4Repository usersV4Repository;
+  private final BggUsersV4Repository usersV4Repository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  private final XmlProcessor xmlProcessor;
 
-  @Autowired
-  private BatchLoaderRegistry registry;
+  private final BatchLoaderRegistry registry;
+
+  public GraphQLUsersService(
+      BggUserV2Repository usersV2Repository,
+      BggUsersV4Repository usersV4Repository,
+      XmlProcessor xmlProcessor,
+      BatchLoaderRegistry registry) {
+    this.usersV2Repository = usersV2Repository;
+    this.usersV4Repository = usersV4Repository;
+    this.xmlProcessor = xmlProcessor;
+    this.registry = registry;
+  }
 
   public Mono<BggUsersV4ResponseBody> getUser(Integer id) {
     return usersV4Repository.getUser(id);

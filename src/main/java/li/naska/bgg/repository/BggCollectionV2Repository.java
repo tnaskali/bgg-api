@@ -6,7 +6,6 @@ import java.util.Optional;
 import li.naska.bgg.exception.BggResponseNotReadyException;
 import li.naska.bgg.repository.model.BggCollectionV2QueryParams;
 import li.naska.bgg.util.QueryParameters;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,8 +22,7 @@ public class BggCollectionV2Repository {
   private final WebClient webClient;
 
   public BggCollectionV2Repository(
-      @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v2.collection}") String endpoint) {
+      @Value("${bgg.endpoints.v2.collection}") String endpoint, WebClient.Builder builder) {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 

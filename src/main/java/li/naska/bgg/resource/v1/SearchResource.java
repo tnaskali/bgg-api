@@ -7,7 +7,6 @@ import li.naska.bgg.repository.BggSearchV1Repository;
 import li.naska.bgg.repository.model.BggSearchV1QueryParams;
 import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.annotation.Validated;
@@ -20,11 +19,14 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v1/search")
 public class SearchResource {
 
-  @Autowired
-  private BggSearchV1Repository searchRepository;
+  private final BggSearchV1Repository searchRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  private final XmlProcessor xmlProcessor;
+
+  public SearchResource(BggSearchV1Repository searchRepository, XmlProcessor xmlProcessor) {
+    this.searchRepository = searchRepository;
+    this.xmlProcessor = xmlProcessor;
+  }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(

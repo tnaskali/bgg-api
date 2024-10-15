@@ -8,7 +8,6 @@ import li.naska.bgg.repository.model.BggArticleV4ResponseBody;
 import li.naska.bgg.repository.model.BggArticlesV4QueryParams;
 import li.naska.bgg.repository.model.BggArticlesV4ResponseBody;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +20,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/articles")
 public class ArticlesResource {
 
-  @Autowired
-  private BggArticlesV4Repository articlesRepository;
+  private final BggArticlesV4Repository articlesRepository;
+
+  public ArticlesResource(BggArticlesV4Repository articlesRepository) {
+    this.articlesRepository = articlesRepository;
+  }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

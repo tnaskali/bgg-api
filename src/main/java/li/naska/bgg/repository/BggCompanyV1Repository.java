@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
@@ -17,7 +16,7 @@ public class BggCompanyV1Repository {
   private final WebClient webClient;
 
   public BggCompanyV1Repository(
-      @Autowired WebClient.Builder builder, @Value("${bgg.endpoints.v1.company}") String endpoint) {
+      @Value("${bgg.endpoints.v1.company}") String endpoint, WebClient.Builder builder) {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 

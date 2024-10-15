@@ -9,7 +9,6 @@ import li.naska.bgg.repository.BggGeeklistV1Repository;
 import li.naska.bgg.repository.model.BggGeeklistV1QueryParams;
 import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.annotation.Validated;
@@ -23,11 +22,14 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v1/geeklist")
 public class GeeklistResource {
 
-  @Autowired
-  private BggGeeklistV1Repository geeklistRepository;
+  private final BggGeeklistV1Repository geeklistRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  private final XmlProcessor xmlProcessor;
+
+  public GeeklistResource(BggGeeklistV1Repository geeklistRepository, XmlProcessor xmlProcessor) {
+    this.geeklistRepository = geeklistRepository;
+    this.xmlProcessor = xmlProcessor;
+  }
 
   @GetMapping(
       value = "/{id}",

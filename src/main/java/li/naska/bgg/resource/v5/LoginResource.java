@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import li.naska.bgg.service.LoginService;
 import li.naska.bgg.service.model.LoginParams;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +16,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v5/login")
 public class LoginResource {
 
-  @Autowired
-  private LoginService loginService;
+  private final LoginService loginService;
+
+  public LoginResource(LoginService loginService) {
+    this.loginService = loginService;
+  }
 
   @PostMapping(
       consumes = MediaType.APPLICATION_JSON_VALUE,

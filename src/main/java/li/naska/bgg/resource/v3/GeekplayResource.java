@@ -6,7 +6,6 @@ import li.naska.bgg.repository.BggGeekplayV3Repository;
 import li.naska.bgg.repository.model.*;
 import li.naska.bgg.service.AuthenticationService;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +15,15 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v3/geekplay")
 public class GeekplayResource {
 
-  @Autowired
-  private BggGeekplayV3Repository geekplayRepository;
+  private final BggGeekplayV3Repository geekplayRepository;
 
-  @Autowired
-  private AuthenticationService authenticationService;
+  private final AuthenticationService authenticationService;
+
+  public GeekplayResource(
+      BggGeekplayV3Repository geekplayRepository, AuthenticationService authenticationService) {
+    this.geekplayRepository = geekplayRepository;
+    this.authenticationService = authenticationService;
+  }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

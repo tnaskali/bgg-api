@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import li.naska.bgg.repository.model.BggGeekitempollV3QueryParams;
 import li.naska.bgg.repository.model.BggGeekitempollV3ResponseBody;
 import li.naska.bgg.util.QueryParameters;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,15 +21,16 @@ import reactor.core.publisher.Mono;
 @Repository
 public class BggGeekitempollV3Repository {
 
-  @Autowired
-  private ObjectMapper objectMapper;
-
   private final WebClient webClient;
 
+  private final ObjectMapper objectMapper;
+
   public BggGeekitempollV3Repository(
-      @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v3.geekpollitem}") String endpoint) {
+      @Value("${bgg.endpoints.v3.geekpollitem}") String endpoint,
+      WebClient.Builder builder,
+      ObjectMapper objectMapper) {
     this.webClient = builder.baseUrl(endpoint).build();
+    this.objectMapper = objectMapper;
   }
 
   public Mono<BggGeekitempollV3ResponseBody> getGeekitempoll(

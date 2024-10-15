@@ -8,7 +8,6 @@ import li.naska.bgg.repository.model.BggSearchV5QueryParams;
 import li.naska.bgg.repository.model.BggSearchV5ResponseBody;
 import li.naska.bgg.resource.v5.model.SearchContext;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +20,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v5/search")
 public class SearchResource {
 
-  @Autowired
-  private BggSearchV5Repository searchRepository;
+  private final BggSearchV5Repository searchRepository;
+
+  public SearchResource(BggSearchV5Repository searchRepository) {
+    this.searchRepository = searchRepository;
+  }
 
   @GetMapping(path = "/{context}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

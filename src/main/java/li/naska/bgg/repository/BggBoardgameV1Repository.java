@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import li.naska.bgg.repository.model.BggBoardgameV1QueryParams;
 import li.naska.bgg.util.QueryParameters;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
@@ -19,8 +18,7 @@ public class BggBoardgameV1Repository {
   private final WebClient webClient;
 
   public BggBoardgameV1Repository(
-      @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v1.boardgame}") String endpoint) {
+      @Value("${bgg.endpoints.v1.boardgame}") String endpoint, WebClient.Builder builder) {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 

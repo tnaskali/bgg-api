@@ -1,7 +1,6 @@
 package li.naska.bgg.configuration;
 
 import li.naska.bgg.security.BggAuthenticationManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -15,11 +14,9 @@ import org.springframework.security.web.server.savedrequest.NoOpServerRequestCac
 @Configuration
 public class SecurityConfiguration {
 
-  @Autowired
-  private BggAuthenticationManager authenticationManager;
-
   @Bean
-  public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+  public SecurityWebFilterChain securityWebFilterChain(
+      ServerHttpSecurity http, BggAuthenticationManager authenticationManager) {
     return http.authenticationManager(authenticationManager)
         .requestCache(spec -> spec.requestCache(NoOpServerRequestCache.getInstance()))
         .csrf(CsrfSpec::disable)

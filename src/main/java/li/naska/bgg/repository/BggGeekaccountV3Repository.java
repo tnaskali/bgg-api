@@ -10,7 +10,6 @@ import li.naska.bgg.util.QueryParameters;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,18 +23,19 @@ import reactor.core.publisher.Mono;
 @Repository
 public class BggGeekaccountV3Repository {
 
-  @Autowired
-  private ObjectMapper objectMapper;
-
   private final String endpoint;
 
   private final WebClient webClient;
 
+  private final ObjectMapper objectMapper;
+
   public BggGeekaccountV3Repository(
-      @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v3.geekaccount}") String endpoint) {
+      @Value("${bgg.endpoints.v3.geekaccount}") String endpoint,
+      WebClient.Builder builder,
+      ObjectMapper objectMapper) {
     this.endpoint = endpoint;
     this.webClient = builder.baseUrl(endpoint).build();
+    this.objectMapper = objectMapper;
   }
 
   public Mono<BggGeekaccountContactV3ResponseBody> getGeekaccountContact(

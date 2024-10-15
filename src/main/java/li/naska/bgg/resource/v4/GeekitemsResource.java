@@ -5,7 +5,6 @@ import li.naska.bgg.repository.BggGeekitemsV4Repository;
 import li.naska.bgg.repository.model.BggGeekitemsV4QueryParams;
 import li.naska.bgg.repository.model.BggGeekitemsV4ResponseBody;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +16,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/geekitems")
 public class GeekitemsResource {
 
-  @Autowired
-  private BggGeekitemsV4Repository geekitemsRepository;
+  private final BggGeekitemsV4Repository geekitemsRepository;
+
+  public GeekitemsResource(BggGeekitemsV4Repository geekitemsRepository) {
+    this.geekitemsRepository = geekitemsRepository;
+  }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

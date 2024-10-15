@@ -5,7 +5,6 @@ import li.naska.bgg.repository.BggHotnessV4Repository;
 import li.naska.bgg.repository.model.BggHotnessV4QueryParams;
 import li.naska.bgg.repository.model.BggHotnessV4ResponseBody;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +16,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/hotness")
 public class HotnessResource {
 
-  @Autowired
-  private BggHotnessV4Repository hotnessRepository;
+  private final BggHotnessV4Repository hotnessRepository;
+
+  public HotnessResource(BggHotnessV4Repository hotnessRepository) {
+    this.hotnessRepository = hotnessRepository;
+  }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

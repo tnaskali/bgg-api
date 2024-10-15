@@ -7,7 +7,6 @@ import li.naska.bgg.repository.BggHotV2Repository;
 import li.naska.bgg.repository.model.BggHotV2QueryParams;
 import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.annotation.Validated;
@@ -20,11 +19,14 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/hot")
 public class HotResource {
 
-  @Autowired
-  private BggHotV2Repository hotItemsRepository;
+  private final BggHotV2Repository hotItemsRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  private final XmlProcessor xmlProcessor;
+
+  public HotResource(BggHotV2Repository hotItemsRepository, XmlProcessor xmlProcessor) {
+    this.hotItemsRepository = hotItemsRepository;
+    this.xmlProcessor = xmlProcessor;
+  }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(

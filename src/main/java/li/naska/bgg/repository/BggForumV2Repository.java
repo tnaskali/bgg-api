@@ -5,7 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import li.naska.bgg.repository.model.BggForumV2QueryParams;
 import li.naska.bgg.util.QueryParameters;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,7 @@ public class BggForumV2Repository {
   private final WebClient webClient;
 
   public BggForumV2Repository(
-      @Autowired WebClient.Builder builder, @Value("${bgg.endpoints.v2.forum}") String endpoint) {
+      @Value("${bgg.endpoints.v2.forum}") String endpoint, WebClient.Builder builder) {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 

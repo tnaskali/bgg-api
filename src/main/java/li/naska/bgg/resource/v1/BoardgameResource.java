@@ -9,7 +9,6 @@ import li.naska.bgg.repository.BggBoardgameV1Repository;
 import li.naska.bgg.repository.model.BggBoardgameV1QueryParams;
 import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.annotation.Validated;
@@ -23,11 +22,15 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v1/boardgame")
 public class BoardgameResource {
 
-  @Autowired
-  private BggBoardgameV1Repository boardgameRepository;
+  private final BggBoardgameV1Repository boardgameRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  private final XmlProcessor xmlProcessor;
+
+  public BoardgameResource(
+      BggBoardgameV1Repository boardgameRepository, XmlProcessor xmlProcessor) {
+    this.boardgameRepository = boardgameRepository;
+    this.xmlProcessor = xmlProcessor;
+  }
 
   @GetMapping(
       path = "/{ids}",

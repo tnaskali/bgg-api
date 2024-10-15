@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import li.naska.bgg.repository.BggGuildV2Repository;
 import li.naska.bgg.repository.model.BggGuildV2QueryParams;
 import li.naska.bgg.util.XmlProcessor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -18,11 +17,14 @@ public class GraphQLGuildsService {
 
   private static final int BGG_GUILD_MEMBERS_PAGE_SIZE = 25;
 
-  @Autowired
-  private BggGuildV2Repository guildsRepository;
+  private final BggGuildV2Repository guildsRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  private final XmlProcessor xmlProcessor;
+
+  public GraphQLGuildsService(BggGuildV2Repository guildsRepository, XmlProcessor xmlProcessor) {
+    this.guildsRepository = guildsRepository;
+    this.xmlProcessor = xmlProcessor;
+  }
 
   public Mono<Guild> getGuild(Integer id) {
     return getGuild(id, 1);

@@ -6,7 +6,6 @@ import li.naska.bgg.repository.BggCompanyV2Repository;
 import li.naska.bgg.repository.model.BggCompanyV2QueryParams;
 import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.annotation.Validated;
@@ -19,11 +18,14 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/company")
 public class CompanyResource {
 
-  @Autowired
-  private BggCompanyV2Repository companiesRepository;
+  private final BggCompanyV2Repository companiesRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  private final XmlProcessor xmlProcessor;
+
+  public CompanyResource(BggCompanyV2Repository companiesRepository, XmlProcessor xmlProcessor) {
+    this.companiesRepository = companiesRepository;
+    this.xmlProcessor = xmlProcessor;
+  }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(

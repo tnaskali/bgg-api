@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import li.naska.bgg.repository.BggBlogpostsV4Repository;
 import li.naska.bgg.repository.model.*;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +18,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/blogposts")
 public class BlogpostsResource {
 
-  @Autowired
-  private BggBlogpostsV4Repository blogpostsRepository;
+  private final BggBlogpostsV4Repository blogpostsRepository;
+
+  public BlogpostsResource(BggBlogpostsV4Repository blogpostsRepository) {
+    this.blogpostsRepository = blogpostsRepository;
+  }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

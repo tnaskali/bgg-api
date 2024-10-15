@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 import li.naska.bgg.exception.BggResponseNotReadyException;
 import li.naska.bgg.repository.model.BggGeekcollectionV3QueryParams;
 import li.naska.bgg.util.QueryParameters;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -26,8 +25,7 @@ public class BggGeekcollectionV3Repository {
   private final WebClient webClient;
 
   public BggGeekcollectionV3Repository(
-      @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v3.geekcollection}") String endpoint) {
+      @Value("${bgg.endpoints.v3.geekcollection}") String endpoint, WebClient.Builder builder) {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 

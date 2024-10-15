@@ -12,7 +12,6 @@ import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.xml.StaxUtils;
 
@@ -20,8 +19,11 @@ import org.springframework.util.xml.StaxUtils;
 @Slf4j
 public class XmlProcessor {
 
-  @Autowired
-  private ObjectMapper objectMapper;
+  private final ObjectMapper objectMapper;
+
+  public XmlProcessor(ObjectMapper objectMapper) {
+    this.objectMapper = objectMapper;
+  }
 
   public <T> T toJavaObject(String xmlString, Class<T> targetClass) {
     try {

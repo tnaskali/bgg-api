@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import java.util.Set;
 import li.naska.bgg.repository.BggPersonV1Repository;
 import li.naska.bgg.util.XmlProcessor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +19,14 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v1/person")
 public class PersonResource {
 
-  @Autowired
-  private BggPersonV1Repository personRepository;
+  private final BggPersonV1Repository personRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  private final XmlProcessor xmlProcessor;
+
+  public PersonResource(BggPersonV1Repository personRepository, XmlProcessor xmlProcessor) {
+    this.personRepository = personRepository;
+    this.xmlProcessor = xmlProcessor;
+  }
 
   @GetMapping(
       value = "/{ids}",

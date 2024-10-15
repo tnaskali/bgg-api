@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import li.naska.bgg.repository.BggMicrobadgesV4Repository;
 import li.naska.bgg.repository.model.BggMicrobadgesV4ResponseBody;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +15,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/microbadges")
 public class MicrobadgesResource {
 
-  @Autowired
-  private BggMicrobadgesV4Repository microbadgesRepository;
+  private final BggMicrobadgesV4Repository microbadgesRepository;
+
+  public MicrobadgesResource(BggMicrobadgesV4Repository microbadgesRepository) {
+    this.microbadgesRepository = microbadgesRepository;
+  }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

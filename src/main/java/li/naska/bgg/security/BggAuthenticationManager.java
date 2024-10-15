@@ -1,7 +1,6 @@
 package li.naska.bgg.security;
 
 import li.naska.bgg.service.LoginService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -11,8 +10,11 @@ import reactor.core.publisher.Mono;
 @Component
 public class BggAuthenticationManager implements ReactiveAuthenticationManager {
 
-  @Autowired
-  private LoginService loginService;
+  private final LoginService loginService;
+
+  public BggAuthenticationManager(LoginService loginService) {
+    this.loginService = loginService;
+  }
 
   @Override
   public Mono<Authentication> authenticate(final Authentication authentication)

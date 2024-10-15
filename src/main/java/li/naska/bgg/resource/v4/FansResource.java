@@ -9,7 +9,6 @@ import li.naska.bgg.repository.model.BggFansV4RequestBody;
 import li.naska.bgg.repository.model.BggFansV4ResponseBody;
 import li.naska.bgg.service.AuthenticationService;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -20,11 +19,15 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/fans")
 public class FansResource {
 
-  @Autowired
-  private BggFansV4Repository fansRepository;
+  private final BggFansV4Repository fansRepository;
 
-  @Autowired
-  private AuthenticationService authenticationService;
+  private final AuthenticationService authenticationService;
+
+  public FansResource(
+      BggFansV4Repository fansRepository, AuthenticationService authenticationService) {
+    this.fansRepository = fansRepository;
+    this.authenticationService = authenticationService;
+  }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

@@ -8,7 +8,6 @@ import li.naska.bgg.repository.model.BggBlogV4ResponseBody;
 import li.naska.bgg.repository.model.BggBlogsPostsV4QueryParams;
 import li.naska.bgg.repository.model.BggBlogsPostsV4ResponseBody;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +20,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/blogs")
 public class BlogsResource {
 
-  @Autowired
-  private BggBlogsV4Repository blogsRepository;
+  private final BggBlogsV4Repository blogsRepository;
+
+  public BlogsResource(BggBlogsV4Repository blogsRepository) {
+    this.blogsRepository = blogsRepository;
+  }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

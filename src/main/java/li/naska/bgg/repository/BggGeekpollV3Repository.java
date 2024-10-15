@@ -8,7 +8,6 @@ import java.util.Optional;
 import li.naska.bgg.repository.model.BggGeekpollV3QueryParams;
 import li.naska.bgg.repository.model.BggGeekpollV3ResponseBody;
 import li.naska.bgg.util.QueryParameters;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,15 +20,16 @@ import reactor.core.publisher.Mono;
 @Repository
 public class BggGeekpollV3Repository {
 
-  @Autowired
-  private ObjectMapper objectMapper;
-
   private final WebClient webClient;
 
+  private final ObjectMapper objectMapper;
+
   public BggGeekpollV3Repository(
-      @Autowired WebClient.Builder builder,
-      @Value("${bgg.endpoints.v3.geekpoll}") String endpoint) {
+      @Value("${bgg.endpoints.v3.geekpoll}") String endpoint,
+      WebClient.Builder builder,
+      ObjectMapper objectMapper) {
     this.webClient = builder.baseUrl(endpoint).build();
+    this.objectMapper = objectMapper;
   }
 
   public Mono<BggGeekpollV3ResponseBody> getGeekpoll(

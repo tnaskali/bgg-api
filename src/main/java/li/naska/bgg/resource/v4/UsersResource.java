@@ -7,7 +7,6 @@ import li.naska.bgg.repository.BggUsersV4Repository;
 import li.naska.bgg.repository.model.BggUsersV4QueryParams;
 import li.naska.bgg.repository.model.BggUsersV4ResponseBody;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +19,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/users")
 public class UsersResource {
 
-  @Autowired
-  private BggUsersV4Repository usersRepository;
+  private final BggUsersV4Repository usersRepository;
+
+  public UsersResource(BggUsersV4Repository usersRepository) {
+    this.usersRepository = usersRepository;
+  }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

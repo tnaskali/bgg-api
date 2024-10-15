@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import li.naska.bgg.repository.BggThreadV1Repository;
 import li.naska.bgg.repository.model.BggThreadV1QueryParams;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +18,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v1/thread")
 public class ThreadResource {
 
-  @Autowired
-  private BggThreadV1Repository threadRepository;
+  private final BggThreadV1Repository threadRepository;
+
+  public ThreadResource(BggThreadV1Repository threadRepository) {
+    this.threadRepository = threadRepository;
+  }
 
   @Deprecated
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_XML_VALUE)

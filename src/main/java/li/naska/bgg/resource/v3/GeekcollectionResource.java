@@ -7,7 +7,6 @@ import li.naska.bgg.repository.model.BggGeekcollectionV3QueryParams;
 import li.naska.bgg.security.BggAuthenticationToken;
 import li.naska.bgg.service.AuthenticationService;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +17,16 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v3/geekcollection")
 public class GeekcollectionResource {
 
-  @Autowired
-  private BggGeekcollectionV3Repository geekcollectionRepository;
+  private final BggGeekcollectionV3Repository geekcollectionRepository;
 
-  @Autowired
-  private AuthenticationService authenticationService;
+  private final AuthenticationService authenticationService;
+
+  public GeekcollectionResource(
+      BggGeekcollectionV3Repository geekcollectionRepository,
+      AuthenticationService authenticationService) {
+    this.geekcollectionRepository = geekcollectionRepository;
+    this.authenticationService = authenticationService;
+  }
 
   @GetMapping(produces = "text/csv")
   @Operation(

@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import li.naska.bgg.repository.BggCommentsV4Repository;
 import li.naska.bgg.repository.model.*;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +18,11 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v4/comments")
 public class CommentsResource {
 
-  @Autowired
-  private BggCommentsV4Repository commentsRepository;
+  private final BggCommentsV4Repository commentsRepository;
+
+  public CommentsResource(BggCommentsV4Repository commentsRepository) {
+    this.commentsRepository = commentsRepository;
+  }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(

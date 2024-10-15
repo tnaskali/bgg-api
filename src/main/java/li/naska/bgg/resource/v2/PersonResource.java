@@ -6,7 +6,6 @@ import li.naska.bgg.repository.BggPersonV2Repository;
 import li.naska.bgg.repository.model.BggPersonV2QueryParams;
 import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.annotation.Validated;
@@ -19,11 +18,14 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/person")
 public class PersonResource {
 
-  @Autowired
-  private BggPersonV2Repository personsRepository;
+  private final BggPersonV2Repository personsRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  private final XmlProcessor xmlProcessor;
+
+  public PersonResource(BggPersonV2Repository personsRepository, XmlProcessor xmlProcessor) {
+    this.personsRepository = personsRepository;
+    this.xmlProcessor = xmlProcessor;
+  }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(

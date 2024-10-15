@@ -3,7 +3,6 @@ package li.naska.bgg.repository;
 import java.nio.charset.StandardCharsets;
 import li.naska.bgg.repository.model.BggFamilyV2QueryParams;
 import li.naska.bgg.util.QueryParameters;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,7 +17,7 @@ public class BggFamilyV2Repository {
   private final WebClient webClient;
 
   public BggFamilyV2Repository(
-      @Autowired WebClient.Builder builder, @Value("${bgg.endpoints.v2.family}") String endpoint) {
+      @Value("${bgg.endpoints.v2.family}") String endpoint, WebClient.Builder builder) {
     this.webClient = builder.baseUrl(endpoint).build();
   }
 

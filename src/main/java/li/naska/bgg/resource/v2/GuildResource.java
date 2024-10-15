@@ -7,7 +7,6 @@ import li.naska.bgg.repository.BggGuildV2Repository;
 import li.naska.bgg.repository.model.BggGuildV2QueryParams;
 import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.annotation.Validated;
@@ -20,11 +19,14 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/guild")
 public class GuildResource {
 
-  @Autowired
-  private BggGuildV2Repository guildsRepository;
+  private final BggGuildV2Repository guildsRepository;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  private final XmlProcessor xmlProcessor;
+
+  public GuildResource(BggGuildV2Repository guildsRepository, XmlProcessor xmlProcessor) {
+    this.guildsRepository = guildsRepository;
+    this.xmlProcessor = xmlProcessor;
+  }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(

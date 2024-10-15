@@ -11,7 +11,6 @@ import li.naska.bgg.security.BggAuthenticationToken;
 import li.naska.bgg.service.AuthenticationService;
 import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.annotation.Validated;
@@ -25,14 +24,20 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v1/collection")
 public class CollectionResource {
 
-  @Autowired
-  private BggCollectionV1Repository collectionRepository;
+  private final AuthenticationService authenticationService;
 
-  @Autowired
-  private XmlProcessor xmlProcessor;
+  private final BggCollectionV1Repository collectionRepository;
 
-  @Autowired
-  private AuthenticationService authenticationService;
+  private final XmlProcessor xmlProcessor;
+
+  public CollectionResource(
+      AuthenticationService authenticationService,
+      BggCollectionV1Repository collectionRepository,
+      XmlProcessor xmlProcessor) {
+    this.authenticationService = authenticationService;
+    this.collectionRepository = collectionRepository;
+    this.xmlProcessor = xmlProcessor;
+  }
 
   @GetMapping(
       path = "/{username}",
