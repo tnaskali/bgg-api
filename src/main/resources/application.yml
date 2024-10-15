@@ -32,6 +32,7 @@ bgg:
       geekpollitem: ${bgg.web.baseurl-bgs}/geekitempoll.php
     v4:
       articles: ${bgg.web.baseurl-bgs}/api/articles
+      blogposts: ${bgg.web.baseurl-bgs}/api/blogposts
       blogs: ${bgg.web.baseurl-bgs}/api/blogs
       fans: ${bgg.web.baseurl-bgs}/api/fans
       forums: ${bgg.web.baseurl-bgs}/api/forums
