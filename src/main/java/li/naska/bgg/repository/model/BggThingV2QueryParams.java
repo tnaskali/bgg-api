@@ -12,7 +12,7 @@ import lombok.Data;
 public class BggThingV2QueryParams {
 
   @NotNull
-  @Pattern(regexp = "^[1-9][0-9]*(,[1-9][0-9]*)*$")
+  @Pattern(regexp = "^[1-9][0-9]*(?:,[1-9][0-9]*)*+$")
   @Parameter(
       example = "1000,383974",
       description =

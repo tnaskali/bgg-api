@@ -11,7 +11,7 @@ import lombok.Data;
 public class BggCompanyV2QueryParams {
 
   @NotNull
-  @Pattern(regexp = "^[1-9][0-9]*(,[1-9][0-9]*)*$")
+  @Pattern(regexp = "^[1-9][0-9]*(?:,[1-9][0-9]*)*+$")
   @Parameter(
       example = "22924,30347",
       description =

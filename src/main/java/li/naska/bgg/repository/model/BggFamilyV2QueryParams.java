@@ -9,7 +9,7 @@ import lombok.Data;
 public class BggFamilyV2QueryParams {
 
   @NotNull
-  @Pattern(regexp = "^[1-9][0-9]*(,[1-9][0-9]*)*$")
+  @Pattern(regexp = "^[1-9][0-9]*(?:,[1-9][0-9]*)*+$")
   @Parameter(
       example = "8590,62408",
       description =

@@ -95,7 +95,7 @@ public class BggCollectionV2QueryParams {
           """)
   private String excludesubtype;
 
-  @Pattern(regexp = "^[1-9][0-9]*(,[1-9][0-9]*)*$")
+  @Pattern(regexp = "^[1-9][0-9]*(?:,[1-9][0-9]*)*+$")
   @Parameter(
       example = "16499",
       description =
