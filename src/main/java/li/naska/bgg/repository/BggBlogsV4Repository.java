@@ -58,7 +58,7 @@ public class BggBlogsV4Repository {
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
           if (clientResponse.statusCode() == HttpStatus.NOT_FOUND) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Article not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Blog not found");
           } else if (clientResponse.statusCode() != HttpStatus.OK) {
             return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
           }

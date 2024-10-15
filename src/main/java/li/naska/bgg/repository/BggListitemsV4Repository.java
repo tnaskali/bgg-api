@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 @Repository
@@ -33,7 +34,7 @@ public class BggListitemsV4Repository {
         .get()
         .uri(uriBuilder ->
             uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
-        .accept(MediaType.APPLICATION_XML)
+        .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
           if (clientResponse.statusCode() != HttpStatus.OK) {
@@ -50,10 +51,12 @@ public class BggListitemsV4Repository {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder.path("/{id}").build(id))
-        .accept(MediaType.APPLICATION_XML)
+        .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK) {
+          if (clientResponse.statusCode() == HttpStatus.NOT_FOUND) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Listitem not found");
+          } else if (clientResponse.statusCode() != HttpStatus.OK) {
             return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
           }
           return clientResponse
@@ -71,7 +74,7 @@ public class BggListitemsV4Repository {
             .path("/{id}/comments")
             .queryParams(QueryParameters.fromPojo(params))
             .build(id))
-        .accept(MediaType.APPLICATION_XML)
+        .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
           if (clientResponse.statusCode() != HttpStatus.OK) {
@@ -96,7 +99,7 @@ public class BggListitemsV4Repository {
             .path("/{id}/reactions")
             .queryParams(QueryParameters.fromPojo(params))
             .build(id))
-        .accept(MediaType.APPLICATION_XML)
+        .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
           if (clientResponse.statusCode() != HttpStatus.OK) {
@@ -118,7 +121,7 @@ public class BggListitemsV4Repository {
             .path("/{id}/tips")
             .queryParams(QueryParameters.fromPojo(params))
             .build(id))
-        .accept(MediaType.APPLICATION_XML)
+        .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
           if (clientResponse.statusCode() != HttpStatus.OK) {

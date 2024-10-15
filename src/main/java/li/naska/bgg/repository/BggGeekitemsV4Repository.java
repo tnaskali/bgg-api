@@ -34,7 +34,7 @@ public class BggGeekitemsV4Repository {
         .get()
         .uri(uriBuilder ->
             uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
-        .accept(MediaType.APPLICATION_XML)
+        .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
           if (clientResponse.statusCode() == HttpStatus.NOT_FOUND) {

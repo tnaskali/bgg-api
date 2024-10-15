@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 @Repository
@@ -30,10 +31,12 @@ public class BggMicrobadgesV4Repository {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder.path("/{id}").build(id))
-        .accept(MediaType.APPLICATION_XML)
+        .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK) {
+          if (clientResponse.statusCode() == HttpStatus.NOT_FOUND) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Microbadge not found");
+          } else if (clientResponse.statusCode() != HttpStatus.OK) {
             return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
           }
           return clientResponse

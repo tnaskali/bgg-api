@@ -83,7 +83,9 @@ public class BggFansV4Repository {
         .acceptCharset(StandardCharsets.UTF_8)
         .header(HttpHeaders.COOKIE, cookie)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK) {
+          if (clientResponse.statusCode() == HttpStatus.NOT_FOUND) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Fan not found");
+          } else if (clientResponse.statusCode() != HttpStatus.OK) {
             return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
           }
           return clientResponse

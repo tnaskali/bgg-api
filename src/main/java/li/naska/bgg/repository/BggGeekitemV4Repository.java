@@ -38,7 +38,7 @@ public class BggGeekitemV4Repository {
             .path("/linkeditems")
             .queryParams(QueryParameters.fromPojo(params))
             .build())
-        .accept(MediaType.APPLICATION_XML)
+        .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
           if (clientResponse.statusCode() != HttpStatus.OK) {
@@ -59,7 +59,7 @@ public class BggGeekitemV4Repository {
             .path("/recs")
             .queryParams(QueryParameters.fromPojo(params))
             .build())
-        .accept(MediaType.APPLICATION_XML)
+        .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
           if (clientResponse.statusCode() != HttpStatus.OK) {
