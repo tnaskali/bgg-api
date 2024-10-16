@@ -210,3 +210,25 @@ classDiagram
     Geekitem "many" --> "many" Geekitem: linked items
     Geekitem "many" --* "many" Weblink
     Geekitem "many" --> "many" User: fans
+
+    Comment "many" --> "1" User: author
+    Comment "1" --* "many" Tip
+    Comment "1" --* "many" Reaction
+
+    Reaction "many" --> "1" User: given by
+
+    Tip "many" --> "1" User: given by
+
+%% Inheritance from Object
+    Geekitem <|-- Company
+    Geekitem <|-- Component
+    Geekitem <|-- Event
+    Geekitem <|-- Family
+    Geekitem <|-- Media
+    Geekitem <|-- Person
+    Geekitem <|-- Property
+    Geekitem <|-- Thing
+    Geekitem <|-- Version
+    Geekitem <|-- Weblink
+
+```
