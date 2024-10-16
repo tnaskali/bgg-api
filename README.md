@@ -158,7 +158,55 @@ before deciding to use this API.
 # Credits and inspirations
 
 - BGG's XML API 2 : https://boardgamegeek.com/wiki/page/BGG_XML_API2
+- BGG's database structure : https://boardgamegeek.com/wiki/page/Database_Structure
 - Fisico's thread on BGG forum : https://boardgamegeek.com/thread/1010057/xml-schema-for-bgg-xml-api2
 - Reddit Thread on how to log plays programmatically : https://www.reddit.com/r/boardgames/comments/ez86me/uploading_games_plays_to_bgg_programmatically/
 - Baeldung's tutorial on Spring Security Custom Authentication Provider : https://www.baeldung.com/spring-security-authentication-provider
-- shaikezr's solution to caching Mono<?> : https://github.com/shaikezr/async-cacheable (until https://github.com/spring-projects/spring-framework/issues/17920 gets released)
+
+# Extras
+
+## BGG Data model
+
+```mermaid
+classDiagram
+
+%% Relationships
+    Guild "many" --> "many" User: members
+    Guild "many" --> "1" User: manager
+
+    User "1" --* "1" Collection
+    Collection "1" --* "many" Collectionitem
+    Collectionitem "many" --> "1" Thing
+    Collectionitem "many" --> "0..1" Version
+ 
+    User "many" --* "many" Play
+    Play "many" --> "1" Thing
+    Play "many" --> "many" User: players
+ 
+    User "1" --* "many" Geeklist
+    Geeklist "1" --* "many" Geeklistitem
+    Geeklist "1" --* "many" Tip
+    Geeklist "1" --* "many" Reaction
+    Geeklistitem "many" --> "1" Thing
+    Geeklistitem "1" --* "many" Comment
+    Geeklistitem "1" --* "many" Tip
+    Geeklistitem "1" --* "many" Reaction
+
+    Blog "1" --* "many" Blogpost
+    Blogpost "many" --> "1" User: author
+    Blogpost "1" --* "many" Comment
+    Blogpost "1" --* "many" Tip
+    Blogpost "1" --* "many" Reaction
+
+    Forum "1" --* "many" Thread
+    Thread "many" --> "1" User: author
+    Thread "many" --> "0..1" Geekitem
+    Thread "1" --* "many" Article
+    Thread "1" --* "many" Reaction
+    User "1" --* "many" Article
+    Article "1" --* "many" Tip
+    Article "1" --* "many" Reaction
+
+    Geekitem "many" --> "many" Geekitem: linked items
+    Geekitem "many" --* "many" Weblink
+    Geekitem "many" --> "many" User: fans
