@@ -47,6 +47,7 @@ bgg:
       users: ${bgg.web.baseurl-bgs}/api/users
     v5:
       geekaccount: ${bgg.web.baseurl-bgs}/geekaccount
+      item: ${bgg.web.baseurl-bgs}/item
       login: ${bgg.web.baseurl-bgs}/login/api/v1
       search: ${bgg.web.baseurl-bgs}/search
 
