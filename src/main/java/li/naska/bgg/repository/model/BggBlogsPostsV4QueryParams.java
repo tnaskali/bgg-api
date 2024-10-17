@@ -80,7 +80,6 @@ public class BggBlogsPostsV4QueryParams {
   @Min(1)
   @Max(50)
   @Parameter(
-      example = "10",
       description =
           """
           Page size for paged results.
@@ -108,13 +107,18 @@ public class BggBlogsPostsV4QueryParams {
       schema = @Schema(defaultValue = "recent"))
   private String sort;
 
-  @Pattern(regexp = "^(alltime)$")
+  @Pattern(regexp = "^(alltime|today|twodays|last7|last30|year)$")
   @Parameter(
       description =
           """
-          Interval.
+          Hot scope interval.
           <p>Valid intervals are:
-          <li/>alltime
+          <li/>alltime (default)
+          <li/>today
+          <li/>twodays
+          <li/>last7
+          <li/>last30
+          <li/>year
           <p>
           <i>Syntax</i> : /blogs/posts?objectid={id}&objecttype={type}&interval={interval}
           <p>

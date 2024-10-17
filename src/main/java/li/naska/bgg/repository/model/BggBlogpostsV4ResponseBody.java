@@ -25,7 +25,7 @@ public class BggBlogpostsV4ResponseBody {
     private ImageSets imageSets;
 
     @Data
-    @JsonIgnoreProperties(value = {"hasAngularLink", "descriptors", "breadcrumbs"})
+    @JsonIgnoreProperties(value = {"hasAngularLink", "breadcrumbs"})
     private static class BlogItem {
       private String type;
       private Integer id;
@@ -33,6 +33,13 @@ public class BggBlogpostsV4ResponseBody {
       private String href;
       private String label;
       private String labelpl;
+      private List<Descriptor> descriptors;
+
+      @Data
+      public static class Descriptor {
+        private String name;
+        private String displayValue;
+      }
     }
 
     @Data

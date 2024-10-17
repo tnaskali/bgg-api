@@ -68,7 +68,6 @@ public class BggGeekitemLinkeditemsV4QueryParams {
 
   @Min(1)
   @Parameter(
-      example = "10",
       description =
           """
           Page size for paged results.

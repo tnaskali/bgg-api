@@ -19,22 +19,28 @@ public class BggBlogpostsV4QueryParams {
           <p>
           <i>Syntax</i> : /blogposts?sort={sort}
           <p>
-          <i>Example</i> : /blogs/posts?sort=recent
+          <i>Example</i> : /blogposts?sort=recent
           """,
       schema = @Schema(defaultValue = "recent"))
   private String sort;
 
-  @Pattern(regexp = "^(alltime)$")
+  @Pattern(regexp = "^(alltime|today|twodays|last7|last30|year)$")
   @Parameter(
       description =
           """
-          Interval.
+          Hot scope interval.
           <p>Valid intervals are:
-          <li/>alltime
+          <li/>alltime (default)
+          <li/>today
+          <li/>twodays
+          <li/>last7
+          <li/>last30
+          <li/>year
           <p>
-          <i>Syntax</i> : /blogs/posts?interval={interval}
+          <i>Syntax</i> : /blogposts?interval={interval}
           <p>
-          <i>Example</i> : /blogs/posts?interval=alltime
-          """)
+          <i>Example</i> : /blogposts?interval=alltime
+          """,
+      schema = @Schema(defaultValue = "alltime"))
   private String interval;
 }

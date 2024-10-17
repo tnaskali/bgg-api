@@ -72,7 +72,6 @@ public class BggGeeklistsV4QueryParams {
   @Min(1)
   @Max(50)
   @Parameter(
-      example = "10",
       description =
           """
           Page size for paged results.
@@ -81,7 +80,7 @@ public class BggGeeklistsV4QueryParams {
           <p>
           <i>Example</i> : /geeklists?objectid=205637&objecttype=thing&showcount=10
           """,
-      schema = @Schema(defaultValue = "1"))
+      schema = @Schema(defaultValue = "10"))
   private Integer showcount;
 
   @Min(1)

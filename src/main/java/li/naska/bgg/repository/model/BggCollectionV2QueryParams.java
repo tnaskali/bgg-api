@@ -42,7 +42,6 @@ public class BggCollectionV2QueryParams {
       regexp =
           "^(boardgame|boardgameaccessory|boardgameexpansion|boardgameissue|rpgissue|rpgitem|videogame|videogamecompilation|videogameexpansion|videogamehardware)$")
   @Parameter(
-      example = "boardgame",
       description =
           """
           Specifies which collection you want to retrieve.

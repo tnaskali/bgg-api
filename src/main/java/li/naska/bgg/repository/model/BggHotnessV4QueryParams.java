@@ -12,7 +12,7 @@ import lombok.Data;
 public class BggHotnessV4QueryParams {
 
   @NotNull
-  @Pattern(regexp = "^(boardgame|rpg|videogame)$")
+  @Pattern(regexp = "^(boardgame|puzzle|rpg|videogame)$")
   @Parameter(
       description =
           """

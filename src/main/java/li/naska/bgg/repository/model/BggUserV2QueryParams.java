@@ -92,7 +92,7 @@ public class BggUserV2QueryParams {
           """)
   private Integer top;
 
-  @Pattern(regexp = "^(boardgame|rpg|videogame)$")
+  @Pattern(regexp = "^(boardgame|puzzle|rpg|videogame)$")
   @Parameter(
       description =
           """

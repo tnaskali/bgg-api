@@ -69,7 +69,6 @@ public class BggForumsThreadsV4QueryParams {
   @Min(1)
   @Max(50)
   @Parameter(
-      example = "10",
       description =
           """
           Page size for paged results.
