@@ -4,9 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.constraints.NotNull;
 import li.naska.bgg.repository.BggThreadsV4Repository;
-import li.naska.bgg.repository.model.BggThreadReactionsV4QueryParams;
-import li.naska.bgg.repository.model.BggThreadReactionsV4ResponseBody;
-import li.naska.bgg.repository.model.BggThreadV4ResponseBody;
+import li.naska.bgg.repository.model.*;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +22,22 @@ public class ThreadsResource {
 
   public ThreadsResource(BggThreadsV4Repository threadsRepository) {
     this.threadsRepository = threadsRepository;
+  }
+
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  @Operation(
+      summary = "Get threads",
+      description =
+          """
+          Get threads.
+          <p>
+          <i>Syntax</i> : /threads[?{parameters}]
+          <p>
+          <i>Example</i> : /threads?partial=listing&assocItemType=regions&assocItemId=1&pageid=1&sort=recent&perPage=50
+          """)
+  public Mono<BggThreadsV4ResponseBody> getThreads(
+      @Validated @ParameterObject BggThreadsV4QueryParams params) {
+    return threadsRepository.getThreads(params);
   }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

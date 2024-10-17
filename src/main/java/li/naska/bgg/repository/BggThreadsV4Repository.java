@@ -2,9 +2,7 @@ package li.naska.bgg.repository;
 
 import java.nio.charset.StandardCharsets;
 import li.naska.bgg.exception.UnexpectedServerResponseException;
-import li.naska.bgg.repository.model.BggThreadReactionsV4QueryParams;
-import li.naska.bgg.repository.model.BggThreadReactionsV4ResponseBody;
-import li.naska.bgg.repository.model.BggThreadV4ResponseBody;
+import li.naska.bgg.repository.model.*;
 import li.naska.bgg.util.JsonProcessor;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +26,24 @@ public class BggThreadsV4Repository {
       JsonProcessor jsonProcessor) {
     this.webClient = builder.baseUrl(endpoint).build();
     this.jsonProcessor = jsonProcessor;
+  }
+
+  public Mono<BggThreadsV4ResponseBody> getThreads(BggThreadsV4QueryParams params) {
+    return webClient
+        .get()
+        .uri(uriBuilder ->
+            uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
+        .accept(MediaType.APPLICATION_JSON)
+        .acceptCharset(StandardCharsets.UTF_8)
+        .exchangeToMono(clientResponse -> {
+          if (clientResponse.statusCode() != HttpStatus.OK) {
+            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
+          }
+          return clientResponse
+              .bodyToMono(String.class)
+              .defaultIfEmpty("")
+              .map(body -> jsonProcessor.toJavaObject(body, BggThreadsV4ResponseBody.class));
+        });
   }
 
   public Mono<BggThreadV4ResponseBody> getThread(Integer id) {
