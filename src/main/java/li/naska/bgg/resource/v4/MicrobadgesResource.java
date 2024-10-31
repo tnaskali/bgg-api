@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("MicrobadgesV4Resource")
+@RestController("microbadgesV4Resource")
 @RequestMapping("/api/v4/microbadges")
 public class MicrobadgesResource {
 

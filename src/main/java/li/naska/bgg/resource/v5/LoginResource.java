@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("LoginV5Resource")
+@RestController("loginV5Resource")
 @RequestMapping("/api/v5/login")
 public class LoginResource {
 

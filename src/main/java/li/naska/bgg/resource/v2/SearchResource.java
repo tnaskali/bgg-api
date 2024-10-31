@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("SearchV2Resource")
+@RestController("searchV2Resource")
 @RequestMapping("/api/v2/search")
 public class SearchResource {
 

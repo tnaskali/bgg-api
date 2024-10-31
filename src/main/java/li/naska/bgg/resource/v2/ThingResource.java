@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("ThingV2Resource")
+@RestController("thingV2Resource")
 @RequestMapping("/api/v2/thing")
 public class ThingResource {
 

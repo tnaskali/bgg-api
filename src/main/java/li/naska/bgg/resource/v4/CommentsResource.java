@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("CommentsV4Resource")
+@RestController("commentsV4Resource")
 @RequestMapping("/api/v4/comments")
 public class CommentsResource {
 

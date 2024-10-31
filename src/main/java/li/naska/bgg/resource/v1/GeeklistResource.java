@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("GeeklistV1Resource")
+@RestController("geeklistV1Resource")
 @RequestMapping("/api/v1/geeklist")
 public class GeeklistResource {
 

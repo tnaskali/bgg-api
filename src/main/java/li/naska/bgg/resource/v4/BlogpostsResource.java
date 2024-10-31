@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("BlogpostsV4Resource")
+@RestController("blogpostsV4Resource")
 @RequestMapping("/api/v4/blogposts")
 public class BlogpostsResource {
 

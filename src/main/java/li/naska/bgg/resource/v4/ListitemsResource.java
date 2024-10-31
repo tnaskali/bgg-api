@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("ListitemsV4Resource")
+@RestController("listitemsV4Resource")
 @RequestMapping("/api/v4/listitems")
 public class ListitemsResource {
 

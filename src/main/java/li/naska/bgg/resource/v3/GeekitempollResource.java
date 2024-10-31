@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("GeekitempollV3Resource")
+@RestController("geekitempollV3Resource")
 @RequestMapping("/api/v3/geekitempoll")
 public class GeekitempollResource {
 

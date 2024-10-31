@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("ForumV2Resource")
+@RestController("forumV2Resource")
 @RequestMapping("/api/v2/forum")
 public class ForumResource {
 

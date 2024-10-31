@@ -11,7 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-@RestController("GeekplayV3Resource")
+@RestController("geekplayV3Resource")
 @RequestMapping("/api/v3/geekplay")
 public class GeekplayResource {
 

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("ThreadsV4Resource")
+@RestController("threadsV4Resource")
 @RequestMapping("/api/v4/threads")
 public class ThreadsResource {
 

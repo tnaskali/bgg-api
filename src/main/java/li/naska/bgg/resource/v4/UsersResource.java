@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("UsersV4Resource")
+@RestController("usersV4Resource")
 @RequestMapping("/api/v4/users")
 public class UsersResource {
 

@@ -10,7 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-@RestController("ItemV5Resource")
+@RestController("itemV5Resource")
 @RequestMapping("/api/v5/item")
 public class ItemResource {
 

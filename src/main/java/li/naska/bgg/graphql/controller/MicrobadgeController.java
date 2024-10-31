@@ -13,7 +13,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
 
-@Controller("GraphQLMicrobadgeController")
+@Controller("graphQLMicrobadgeController")
 public class MicrobadgeController {
 
   public MicrobadgeController(

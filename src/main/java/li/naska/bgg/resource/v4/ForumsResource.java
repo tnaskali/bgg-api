@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("ForumsV4Resource")
+@RestController("forumsV4Resource")
 @RequestMapping("/api/v4/forums")
 public class ForumsResource {
 

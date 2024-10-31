@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("BoardgameV1Resource")
+@RestController("boardgameV1Resource")
 @RequestMapping("/api/v1/boardgame")
 public class BoardgameResource {
 

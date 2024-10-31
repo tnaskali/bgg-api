@@ -4,7 +4,6 @@ import com.boardgamegeek.common.IntegerValue;
 import com.boardgamegeek.common.StringValue;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 import li.naska.bgg.graphql.data.UserV2;
 import li.naska.bgg.graphql.data.UserV2Buddies;
 import li.naska.bgg.graphql.data.UserV2Guilds;
@@ -21,7 +20,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
 
-@Controller("GraphQLUserController")
+@Controller("graphQLUserController")
 public class UserController {
 
   public UserController(BatchLoaderRegistry registry, GraphQLUsersService usersService) {
@@ -155,16 +154,15 @@ public class UserController {
         .map(data -> data.stream()
             .map(com.boardgamegeek.user.v2.Guild::getId)
             .map(Guild::new)
-            .collect(Collectors.toList()));
+            .toList());
   }
 
   @SchemaMapping
   public Mono<List<User>> buddies(User user, DataLoader<String, UserV2Buddies> loader) {
     return Mono.fromFuture(loader.load(user.username()))
         .map(UserV2Buddies::buddies)
-        .map(data -> data.stream()
-            .map(buddy -> new User(buddy.getId(), buddy.getName()))
-            .collect(Collectors.toList()));
+        .map(data ->
+            data.stream().map(buddy -> new User(buddy.getId(), buddy.getName())).toList());
   }
 
   @SchemaMapping

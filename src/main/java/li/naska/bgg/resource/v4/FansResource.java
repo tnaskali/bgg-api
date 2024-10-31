@@ -15,7 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-@RestController("FansV4Resource")
+@RestController("fansV4Resource")
 @RequestMapping("/api/v4/fans")
 public class FansResource {
 

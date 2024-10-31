@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("GeekaccountV5Resource")
+@RestController("geekaccountV5Resource")
 @RequestMapping("/api/v5/geekaccount")
 public class GeekaccountResource {
 

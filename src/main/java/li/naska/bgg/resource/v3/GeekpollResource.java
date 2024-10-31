@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("GeekpollV3Resource")
+@RestController("geekpollV3Resource")
 @RequestMapping("/api/v3/geekpoll")
 public class GeekpollResource {
 

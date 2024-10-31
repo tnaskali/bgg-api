@@ -1,7 +1,6 @@
 package li.naska.bgg.graphql.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import li.naska.bgg.graphql.data.UserV2Ranking;
 import li.naska.bgg.graphql.model.RankedItem;
 import li.naska.bgg.graphql.model.Ranking;
@@ -15,7 +14,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
 
-@Controller("GraphQLRankingController")
+@Controller("graphQLRankingController")
 public class RankingController {
 
   public RankingController(BatchLoaderRegistry registry, GraphQLUsersService usersService) {
@@ -36,7 +35,7 @@ public class RankingController {
         .map(data -> data.ranking().getItems().stream()
             .map(item ->
                 new RankedItem(item.getRank(), item.getType(), item.getId(), item.getName()))
-            .collect(Collectors.toList()));
+            .toList());
   }
 
   @SchemaMapping
@@ -47,7 +46,7 @@ public class RankingController {
         .map(data -> data.ranking().getItems().stream()
             .map(item ->
                 new RankedItem(item.getRank(), item.getType(), item.getId(), item.getName()))
-            .collect(Collectors.toList()));
+            .toList());
   }
 
   @SchemaMapping
@@ -58,6 +57,6 @@ public class RankingController {
         .map(data -> data.ranking().getItems().stream()
             .map(item ->
                 new RankedItem(item.getRank(), item.getType(), item.getId(), item.getName()))
-            .collect(Collectors.toList()));
+            .toList());
   }
 }

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-@RestController("CollectionV2Resource")
+@RestController("collectionV2Resource")
 @RequestMapping("/api/v2/collection")
 public class CollectionResource {
 

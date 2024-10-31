@@ -72,9 +72,7 @@ public class UnexpectedServerResponseException extends ResponseStatusException {
     }
 
     public <A> Mono<A> buildAndThrow() {
-      return build().handle((exception, sink) -> {
-        sink.error(exception);
-      });
+      return build().handle((exception, sink) -> sink.error(exception));
     }
   }
 }

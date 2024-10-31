@@ -20,7 +20,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
 
-@Controller("GraphQLGuildController")
+@Controller("graphQLGuildController")
 public class GuildController {
 
   public GuildController(BatchLoaderRegistry registry, GraphQLGuildsService guildsService) {
