@@ -29,11 +29,11 @@ public class BlogpostsResource {
       summary = "Get blogposts",
       description =
           """
-          Get blogposts by object id and type.
+          Get blogposts.
           <p>
-          <i>Syntax</i> : /blogposts?objectid={id}&objecttype={type}
+          <i>Syntax</i> : /blogposts?sort={sort}
           <p>
-          <i>Example</i> : /blogposts?objectid=1000&objecttype=thing
+          <i>Example</i> : /blogposts?sort=recent
           """)
   public Mono<BggBlogpostsV4ResponseBody> getBlogposts(
       @Validated @ParameterObject BggBlogpostsV4QueryParams params) {

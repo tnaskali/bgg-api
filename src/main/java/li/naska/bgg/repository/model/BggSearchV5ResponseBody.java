@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class BggSearchV5ResponseBody {
-  public List<UnifiedSearchResult> items;
+  private List<UnifiedSearchResult> items;
 
   @Data
   public static class UnifiedSearchResult {
