@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class BggGeekaccountContactV3ResponseBody {
+  private String error;
   private String username;
   private String firstname;
   private String lastname;

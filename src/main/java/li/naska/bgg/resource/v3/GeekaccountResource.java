@@ -51,8 +51,8 @@ public class GeekaccountResource {
       @Validated @RequestBody BggGeekaccountContactV3RequestBody body) {
     return authenticationService
         .requiredAuthentication()
-        .flatMap(authn ->
-            geekaccountRepository.updateGeekaccountContact(authn.buildBggRequestHeader(), body));
+        .flatMap(authn -> geekaccountRepository.updateGeekaccountContact(
+            authn.buildBggRequestHeader(), authn.getPrincipal(), authn.getCredentials(), body));
   }
 
   @PostMapping(

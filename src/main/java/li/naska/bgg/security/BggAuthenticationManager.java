@@ -22,6 +22,8 @@ public class BggAuthenticationManager implements ReactiveAuthenticationManager {
     final String username = authentication.getName();
     final String password = authentication.getCredentials().toString();
 
-    return loginService.login(username, password).map(BggAuthenticationToken::new);
+    return loginService
+        .login(username, password)
+        .map(cookies -> new BggAuthenticationToken(username, password, cookies));
   }
 }

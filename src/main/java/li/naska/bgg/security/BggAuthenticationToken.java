@@ -21,8 +21,14 @@ public class BggAuthenticationToken extends AbstractAuthenticationToken {
 
   private final String bggPassword;
 
-  public BggAuthenticationToken(List<String> setCookieHeaders) {
+  private final String username;
+
+  private final String password;
+
+  public BggAuthenticationToken(String username, String password, List<String> setCookieHeaders) {
     super(AuthorityUtils.NO_AUTHORITIES);
+    this.username = username;
+    this.password = password;
     String bggSessionId = setCookieHeaders.stream()
         .filter(e -> e.startsWith("SessionID"))
         .findFirst()
@@ -57,11 +63,19 @@ public class BggAuthenticationToken extends AbstractAuthenticationToken {
 
   @Override
   public String getPrincipal() {
-    return bggUsername;
+    return username;
   }
 
   @Override
   public String getCredentials() {
+    return password;
+  }
+
+  public String getBggUsername() {
+    return bggUsername;
+  }
+
+  public String getBggPassword() {
     return bggPassword;
   }
 
