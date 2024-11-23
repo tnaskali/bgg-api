@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.3.6</version>
+    <version>3.4.0</version>
     <relativePath/>
   </parent>
 
@@ -63,6 +63,16 @@
         <groupId>com.graphql-java</groupId>
         <artifactId>graphql-java-extended-scalars</artifactId>
         <version>22.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.squareup.okhttp3</groupId>
+        <artifactId>okhttp</artifactId>
+        <version>4.12.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.squareup.okhttp3</groupId>
+        <artifactId>mockwebserver</artifactId>
+        <version>4.12.0</version>
       </dependency>
       <dependency>
         <groupId>jakarta.el</groupId>
