@@ -4,8 +4,9 @@ on:
   push:
     branches: [ 'master' ]
     tags: [ 'v*.*.*' ]
-  pull_request:
-    branches: [ "master" ]
+  # SonarCloud free tier doesn't support PR analysis
+  # pull_request:
+  #  branches: [ "master" ]
   workflow_dispatch:
 
 permissions:
