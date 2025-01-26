@@ -12,6 +12,7 @@ public class BggBlogsPostsV4ResponseBody {
 
   @Data
   private static class Post {
+    private String href;
     private String title;
     private Integer postid;
     private Integer numpositive;

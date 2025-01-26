@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
+@JsonIgnoreProperties(value = {"hasAngularLink"})
 public class BggBlogpostV4ResponseBody {
   private String type;
   private Integer id;
@@ -17,6 +18,7 @@ public class BggBlogpostV4ResponseBody {
   private ZonedDateTime postdate;
   private ZonedDateTime editdate;
   private String body;
+  private String status;
   private String bodyXml;
   private Boolean commentsAllowed;
   private List<String> domains;

@@ -40,6 +40,7 @@ public class BggGeekitemsV4ResponseBody {
     private Integer maxplaytime;
     private Integer minage;
     private Integer override_rankable;
+    private Integer reviews_restricted;
     private String targetco_url;
     private Integer walmart_id;
     private Integer instructional_videoid;
