@@ -27,7 +27,7 @@ public class BggThingV2QueryParams {
 
   @Pattern(
       regexp =
-          "^(bgsleeve|boardgame|boardgameaccessory|boardgameexpansion|rpgissue|rpgitem|videogame|videogamecompilation|videogameexpansion|videogamehardware)(,(bgsleeve|boardgame|boardgameaccessory|boardgameexpansion|rpgissue|rpgitem|videogame|videogamecompilation|videogameexpansion|videogamehardware))*$")
+          "^(bgsleeve|boardgame|boardgameaccessory|boardgameexpansion|boardgameissue|puzzle|rpgissue|rpgitem|videogame|videogamecompilation|videogameexpansion|videogamehardware)(,(bgsleeve|boardgame|boardgameaccessory|boardgameexpansion|boardgameissue|puzzle|rpgissue|rpgitem|videogame|videogamecompilation|videogameexpansion|videogamehardware))*$")
   @Parameter(
       example = "bgsleeve,boardgame",
       description =
@@ -40,6 +40,8 @@ public class BggThingV2QueryParams {
           <li/>boardgame
           <li/>boardgameaccessory
           <li/>boardgameexpansion
+          <li/>boardgameissue
+          <li/>puzzle
           <li/>rpgissue
           <li/>rpgitem
           <li/>videogame

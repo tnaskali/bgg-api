@@ -27,7 +27,7 @@ public class BggPersonV2QueryParams {
 
   @Pattern(
       regexp =
-          "^(boardgameartist|boardgameauthor|boardgamedesigner|boardgamedeveloper|boardgameeditor|boardgamegraphicdesigner|boardgameinsertdesigner|boardgamesculptor|boardgamesolodesigner|boardgamewriter|rpgartist|rpgdesigner|rpgproducer)(,(boardgameartist|boardgameauthor|boardgamedesigner|boardgamedeveloper|boardgameeditor|boardgamegraphicdesigner|boardgameinsertdesigner|boardgamesculptor|boardgamesolodesigner|boardgamewriter|rpgartist|rpgdesigner|rpgproducer))*$")
+          "^(boardgameartist|boardgameauthor|boardgamedesigner|boardgamedeveloper|boardgameeditor|boardgamegraphicdesigner|boardgameinsertdesigner|boardgamesculptor|boardgamesolodesigner|boardgamewriter|puzzleartist|puzzledesigner|rpgartist|rpgdesigner|rpgproducer)(,(boardgameartist|boardgameauthor|boardgamedesigner|boardgamedeveloper|boardgameeditor|boardgamegraphicdesigner|boardgameinsertdesigner|boardgamesculptor|boardgamesolodesigner|boardgamewriter|puzzleartist|puzzledesigner|rpgartist|rpgdesigner|rpgproducer))*$")
   @Parameter(
       example = "boardgamedeveloper,boardgameeditor",
       description =
@@ -46,6 +46,8 @@ public class BggPersonV2QueryParams {
           <li/>boardgamesculptor
           <li/>boardgamesolodesigner
           <li/>boardgamewriter
+          <li/>puzzleartist
+          <li/>puzzledesigner
           <li/>rpgartist
           <li/>rpgdesigner
           <li/>rpgproducer

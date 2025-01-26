@@ -26,7 +26,7 @@ public class BggCompanyV2QueryParams {
 
   @Pattern(
       regexp =
-          "^(bgsleevemfg|boardgamepublisher|rpgpublisher|videogamedeveloper|videogamehwmfg|videogamepublisher)(,(bgsleevemfg|boardgamepublisher|rpgpublisher|videogamedeveloper|videogamehwmfg|videogamepublisher))*$")
+          "^(bgsleevemfg|boardgamepublisher|puzzleproducer|rpgpublisher|videogamedeveloper|videogamehwmfg|videogamepublisher)(,(bgsleevemfg|boardgamepublisher|puzzleproducer|rpgpublisher|videogamedeveloper|videogamehwmfg|videogamepublisher))*$")
   @Parameter(
       example = "videogamehwmfg,videogamedeveloper",
       description =
@@ -36,6 +36,7 @@ public class BggCompanyV2QueryParams {
           The XMLAPI2 supports companies of the following company types:
           <li/>bgsleevemfg
           <li/>boardgamepublisher
+          <li/>puzzleproducer
           <li/>rpgpublisher
           <li/>videogamedeveloper
           <li/>videogamehwmfg

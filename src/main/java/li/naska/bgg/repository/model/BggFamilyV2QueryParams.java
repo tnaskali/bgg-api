@@ -24,12 +24,45 @@ public class BggFamilyV2QueryParams {
 
   @Pattern(
       regexp =
-          "^(award|awardcategory|awardset|bgaccessoryfamily|boardgamefamily|boardgamehonor|boardgamepodcast|boardgamesubdomain|rpg|rpgfamily|rpggenre|rpghonor|rpgperiodical|rpgpodcast|rpgseries|rpgsetting|rpgsystem|videogamecharacter|videogamefranchise|videogamehonor|videogameplatform|videogameseries)(,(award|awardcategory|awardset|bgaccessoryfamily|boardgamefamily|boardgamehonor|boardgamepodcast|boardgamesubdomain|rpg|rpgfamily|rpggenre|rpghonor|rpgperiodical|rpgpodcast|rpgseries|rpgsetting|rpgsystem|videogamecharacter|videogamefranchise|videogamehonor|videogameplatform|videogameseries))*$")
+          "^(award|awardcategory|awardset|bgaccessoryfamily|boardgamefamily|boardgamehonor|boardgameperiodical|boardgamepodcast|boardgamesubdomain|cardset|puzzlecategory|puzzlefamily|puzzlehonor|puzzlematerial|puzzlemechanism|puzzletype|rpg|rpgfamily|rpggenre|rpghonor|rpgperiodical|rpgpodcast|rpgseries|rpgsetting|rpgsystem|videogamecharacter|videogamefranchise|videogamehonor|videogameplatform|videogameseries)(,(award|awardcategory|awardset|bgaccessoryfamily|boardgamefamily|boardgamehonor|boardgameperiodical|boardgamepodcast|boardgamesubdomain|cardset|puzzlecategory|puzzlefamily|puzzlehonor|puzzlematerial|puzzlemechanism|puzzletype|rpg|rpgfamily|rpggenre|rpghonor|rpgperiodical|rpgpodcast|rpgseries|rpgsetting|rpgsystem|videogamecharacter|videogamefranchise|videogamehonor|videogameplatform|videogameseries))*$")
   @Parameter(
       example = "award,boardgamefamily",
       description =
           """
           Specifies that, regardless of the type of family asked for by id, the results are filtered by the family type(s) specified. Multiple family types can be specified in a comma-delimited list.
+          <p>
+          The XMLAPI2 supports companies of the following family types:
+          <li/>award
+          <li/>awardcategory
+          <li/>awardset
+          <li/>bgaccessoryfamily
+          <li/>boardgamefamily
+          <li/>boardgamehonor
+          <li/>boardgameperiodical
+          <li/>boardgamepodcast
+          <li/>boardgamesubdomain
+          <li/>cardset
+          <li/>puzzlecategory
+          <li/>puzzlefamily
+          <li/>puzzlehonor
+          <li/>puzzlematerial
+          <li/>puzzlemechanism
+          <li/>puzzletype
+          <li/>rpg
+          <li/>rpgfamily
+          <li/>rpggenre
+          <li/>rpghonor
+          <li/>rpgperiodical
+          <li/>rpgpodcast
+          <li/>rpgseries
+          <li/>rpgsetting
+          <li/>rpgsystem
+          <li/>videogamecharacter
+          <li/>videogamefranchise
+          <li/>videogamehonor
+          <li/>videogameplatform
+          <li/>videogameseries
+          <li/>videogamepublisher
           <p>
           <i>Syntax</i> : /family?id={ids}&type={types}
           <p>
