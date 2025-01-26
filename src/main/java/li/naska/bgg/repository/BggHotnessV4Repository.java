@@ -1,7 +1,7 @@
 package li.naska.bgg.repository;
 
 import java.nio.charset.StandardCharsets;
-import li.naska.bgg.exception.UnexpectedServerResponseException;
+import li.naska.bgg.exception.UnexpectedBggResponseException;
 import li.naska.bgg.repository.model.BggHotnessV4QueryParams;
 import li.naska.bgg.repository.model.BggHotnessV4ResponseBody;
 import li.naska.bgg.util.JsonProcessor;
@@ -29,6 +29,11 @@ public class BggHotnessV4Repository {
   }
 
   public Mono<BggHotnessV4ResponseBody> getHotness(BggHotnessV4QueryParams params) {
+    return getHotnessAsJson(params)
+        .map(body -> jsonProcessor.toJavaObject(body, BggHotnessV4ResponseBody.class));
+  }
+
+  public Mono<String> getHotnessAsJson(BggHotnessV4QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder ->
@@ -36,13 +41,15 @@ public class BggHotnessV4Repository {
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK) {
-            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
+          if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.APPLICATION_JSON::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
           }
-          return clientResponse
-              .bodyToMono(String.class)
-              .defaultIfEmpty("")
-              .map(body -> jsonProcessor.toJavaObject(body, BggHotnessV4ResponseBody.class));
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
         });
   }
 }

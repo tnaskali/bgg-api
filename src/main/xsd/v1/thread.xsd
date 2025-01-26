@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:thread="http://www.boardgamegeek.com/thread/v1"
+           targetNamespace="http://www.boardgamegeek.com/thread/v1">
+
+  <xs:complexType name="rss">
+    <xs:sequence>
+      <xs:element name="channel" type="thread:channel"/>
+    </xs:sequence>
+    <xs:attribute name="version" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="channel">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="image" type="thread:image" minOccurs="0"/>
+      <xs:element name="description" type="xs:string"/>
+      <xs:element name="language" type="xs:string"/>
+      <xs:element name="pubDate" type="xs:string"/>
+      <xs:element name="lastBuildDate" type="xs:string"/>
+      <xs:element name="link" type="xs:string"/>
+      <xs:element name="webMaster" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="image">
+    <xs:sequence>
+      <xs:element name="url" type="xs:string"/>
+      <xs:element name="link" type="xs:string"/>
+      <xs:element name="title" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="rss" type="thread:rss"/>
+
+</xs:schema>

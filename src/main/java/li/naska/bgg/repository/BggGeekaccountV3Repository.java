@@ -1,18 +1,12 @@
 package li.naska.bgg.repository;
 
-import jakarta.annotation.Nullable;
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import li.naska.bgg.exception.UnexpectedServerResponseException;
+import li.naska.bgg.exception.UnexpectedBggResponseException;
 import li.naska.bgg.repository.model.*;
+import li.naska.bgg.util.HtmlProcessor;
 import li.naska.bgg.util.JsonProcessor;
 import li.naska.bgg.util.QueryParameters;
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -33,66 +27,55 @@ public class BggGeekaccountV3Repository {
 
   private final JsonProcessor jsonProcessor;
 
+  private final HtmlProcessor htmlProcessor;
+
   public BggGeekaccountV3Repository(
       @Value("${bgg.endpoints.v3.geekaccount}") String endpoint,
       WebClient.Builder builder,
-      JsonProcessor jsonProcessor) {
+      JsonProcessor jsonProcessor,
+      HtmlProcessor htmlProcessor) {
     this.endpoint = endpoint;
     this.webClient = builder.baseUrl(endpoint).build();
     this.jsonProcessor = jsonProcessor;
+    this.htmlProcessor = htmlProcessor;
   }
 
   public Mono<BggGeekaccountContactV3ResponseBody> getGeekaccountContact(
       String cookie, BggGeekaccountContactV3QueryParams params) {
-    return webClient
-        .get()
-        .uri(uriBuilder ->
-            uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
-        .accept(MediaType.TEXT_HTML)
-        .acceptCharset(StandardCharsets.UTF_8)
-        .header(HttpHeaders.COOKIE, cookie)
-        .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK) {
-            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
-          } else if (!clientResponse
-              .headers()
-              .contentType()
-              .map(MediaType.TEXT_HTML::equalsTypeAndSubtype)
-              .orElse(false)) {
-            throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND,
-                String.format(
-                    "Unexpected response type: %s",
-                    clientResponse.headers().contentType().orElse(null)));
-          }
-          return clientResponse
-              .bodyToMono(String.class)
-              .defaultIfEmpty("")
-              .map(Jsoup::parse)
-              .map(doc -> {
-                BggGeekaccountContactV3ResponseBody result =
-                    new BggGeekaccountContactV3ResponseBody();
-                result.setError(getFirstElementValueByClass(doc, "messagebox error"));
-                result.setUsername(getElementValueById(doc, "username"));
-                result.setFirstname(getElementValueById(doc, "firstname"));
-                result.setLastname(getElementValueById(doc, "lastname"));
-                result.setStreetaddr1(getElementValueById(doc, "streetaddr1"));
-                result.setStreetaddr2(getElementValueById(doc, "streetaddr2"));
-                result.setCity(getElementValueById(doc, "city"));
-                result.setState(getElementValueById(doc, "state"));
-                result.setNewstate(getElementValueByName(doc, "newstate"));
-                result.setZipcode(getElementValueById(doc, "zipcode"));
-                result.setCountry(getSelectedElementValueByName(doc, "country"));
-                result.setEmail(getElementValueById(doc, "email"));
-                result.setWebsite(getElementValueById(doc, "website"));
-                result.setPhone(getElementValueById(doc, "phone"));
-                result.setXboxlive_gamertag(getElementValueById(doc, "xboxlive_gamertag"));
-                result.setBattlenet_account(getElementValueById(doc, "battlenet_account"));
-                result.setSteam_account(getElementValueById(doc, "steam_account"));
-                result.setWii_friendcode(getElementValueById(doc, "wii_friendcode"));
-                result.setPsn_id(getElementValueById(doc, "psn_id"));
-                return result;
-              });
+    return getGeekaccountContactAsHtml(cookie, params)
+        .map(htmlProcessor::parse)
+        .map(doc -> {
+          BggGeekaccountContactV3ResponseBody result = new BggGeekaccountContactV3ResponseBody();
+          result.setError(
+              htmlProcessor.getFirstElementTextByClass(doc, "messagebox error").orElse(null));
+          result.setUsername(htmlProcessor.getElementValueById(doc, "username").orElse(null));
+          result.setFirstname(
+              htmlProcessor.getElementValueById(doc, "firstname").orElse(null));
+          result.setLastname(htmlProcessor.getElementValueById(doc, "lastname").orElse(null));
+          result.setStreetaddr1(
+              htmlProcessor.getElementValueById(doc, "streetaddr1").orElse(null));
+          result.setStreetaddr2(
+              htmlProcessor.getElementValueById(doc, "streetaddr2").orElse(null));
+          result.setCity(htmlProcessor.getElementValueById(doc, "city").orElse(null));
+          result.setState(htmlProcessor.getElementValueById(doc, "state").orElse(null));
+          result.setNewstate(
+              htmlProcessor.getElementValueByName(doc, "newstate").orElse(null));
+          result.setZipcode(htmlProcessor.getElementValueById(doc, "zipcode").orElse(null));
+          result.setCountry(
+              htmlProcessor.getSelectedElementValueByName(doc, "country").orElse(null));
+          result.setEmail(htmlProcessor.getElementValueById(doc, "email").orElse(null));
+          result.setWebsite(htmlProcessor.getElementValueById(doc, "website").orElse(null));
+          result.setPhone(htmlProcessor.getElementValueById(doc, "phone").orElse(null));
+          result.setXboxlive_gamertag(
+              htmlProcessor.getElementValueById(doc, "xboxlive_gamertag").orElse(null));
+          result.setBattlenet_account(
+              htmlProcessor.getElementValueById(doc, "battlenet_account").orElse(null));
+          result.setSteam_account(
+              htmlProcessor.getElementValueById(doc, "steam_account").orElse(null));
+          result.setWii_friendcode(
+              htmlProcessor.getElementValueById(doc, "wii_friendcode").orElse(null));
+          result.setPsn_id(htmlProcessor.getElementValueById(doc, "psn_id").orElse(null));
+          return result;
         })
         .doOnNext(responseBody -> {
           if (responseBody.getError() != null) {
@@ -102,37 +85,50 @@ public class BggGeekaccountV3Repository {
         });
   }
 
-  public static @Nullable String getFirstElementValueByClass(
-      Document document, String elementClass) {
-    return Optional.ofNullable(document.getElementsByClass(elementClass).first())
-        .map(e -> e.attr("value"))
-        .orElse(null);
-  }
-
-  public static @Nullable String getElementValueById(Document document, String elementId) {
-    return Optional.ofNullable(document.getElementById(elementId))
-        .map(e -> e.attr("value"))
-        .orElse(null);
-  }
-
-  public static @Nullable String getElementValueByName(Document document, String elementName) {
-    return Optional.ofNullable(
-            document.getElementsByAttributeValue("name", elementName).first())
-        .map(e -> e.attr("value"))
-        .orElse(null);
-  }
-
-  public static @Nullable String getSelectedElementValueByName(
-      Document document, String elementId) {
-    return Optional.ofNullable(document.getElementById(elementId))
-        .map(Element::children)
-        .flatMap(
-            elements -> elements.stream().filter(e -> e.hasAttr("SELECTED")).findFirst())
-        .map(e -> e.attr("value"))
-        .orElse(null);
+  public Mono<String> getGeekaccountContactAsHtml(
+      String cookie, BggGeekaccountContactV3QueryParams params) {
+    return webClient
+        .get()
+        .uri(uriBuilder ->
+            uriBuilder.queryParams(QueryParameters.fromPojo(params)).build())
+        .accept(MediaType.TEXT_HTML)
+        .acceptCharset(StandardCharsets.UTF_8)
+        .header(HttpHeaders.COOKIE, cookie)
+        .exchangeToMono(clientResponse -> {
+          if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.TEXT_HTML::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
+          }
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
+        });
   }
 
   public Mono<BggGeekaccountContactV3ResponseBody> updateGeekaccountContact(
+      String cookie,
+      String username,
+      String password,
+      BggGeekaccountContactV3RequestBody requestBody) {
+    return updateGeekaccountContactAsHtml(cookie, username, password, requestBody)
+        .map(htmlProcessor::parse)
+        .map(doc -> {
+          BggGeekaccountContactV3ResponseBody result = new BggGeekaccountContactV3ResponseBody();
+          result.setError(
+              htmlProcessor.getFirstElementTextByClass(doc, "messagebox error").orElse(null));
+          return result;
+        })
+        .doOnNext(responseBody -> {
+          if (responseBody.getError() != null) {
+            throw new ResponseStatusException(
+                HttpStatus.INTERNAL_SERVER_ERROR, responseBody.getError());
+          }
+        });
+  }
+
+  public Mono<String> updateGeekaccountContactAsHtml(
       String cookie,
       String username,
       String password,
@@ -149,39 +145,25 @@ public class BggGeekaccountV3Repository {
             .with("password", password)
             .with("B1", "submit"))
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK) {
-            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
-          } else if (!clientResponse
-              .headers()
-              .contentType()
-              .map(MediaType.TEXT_HTML::equalsTypeAndSubtype)
-              .orElse(false)) {
-            throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND,
-                String.format(
-                    "Unexpected response type: %s",
-                    clientResponse.headers().contentType().orElse(null)));
+          if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.TEXT_HTML::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
           }
-          return clientResponse
-              .bodyToMono(String.class)
-              .defaultIfEmpty("")
-              .map(Jsoup::parse)
-              .map(doc -> {
-                BggGeekaccountContactV3ResponseBody result =
-                    new BggGeekaccountContactV3ResponseBody();
-                result.setError(getFirstElementValueByClass(doc, "messagebox error"));
-                return result;
-              });
-        })
-        .doOnNext(responseBody -> {
-          if (responseBody.getError() != null) {
-            throw new ResponseStatusException(
-                HttpStatus.INTERNAL_SERVER_ERROR, responseBody.getError());
-          }
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
         });
   }
 
   public Mono<BggGeekaccountToplistV3ResponseBody> updateGeekaccountToplist(
+      String cookie, BggGeekaccountToplistV3RequestBody requestBody) {
+    return updateGeekaccountToplistAsJson(cookie, requestBody)
+        .map(body -> jsonProcessor.toJavaObject(body, BggGeekaccountToplistV3ResponseBody.class));
+  }
+
+  public Mono<String> updateGeekaccountToplistAsJson(
       String cookie, BggGeekaccountToplistV3RequestBody requestBody) {
     return webClient
         .post()
@@ -191,43 +173,15 @@ public class BggGeekaccountV3Repository {
         .header(HttpHeaders.COOKIE, cookie)
         .bodyValue(QueryParameters.fromPojo(requestBody))
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK) {
-            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
+          if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.APPLICATION_JSON::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
           }
-          return clientResponse.bodyToMono(String.class).defaultIfEmpty("").map(body -> {
-            if (clientResponse
-                .headers()
-                .contentType()
-                .map(MediaType.TEXT_HTML::equalsTypeAndSubtype)
-                .orElse(false)) {
-              BggGeekaccountToplistV3ResponseBody responseBody =
-                  new BggGeekaccountToplistV3ResponseBody();
-              Matcher matcher = Pattern.compile("<div class='messagebox error'>([\\s\\S]*?)</div>")
-                  .matcher(body);
-              if (matcher.find()) {
-                String error = matcher.group(1).trim();
-                if ("Invalid action".equals(error)) {
-                  responseBody.setError(error);
-                  return responseBody;
-                }
-              }
-              log.error("Unable to extract error from HTML body");
-              responseBody.setError("Unknown error");
-              return responseBody;
-            } else {
-              return jsonProcessor.toJavaObject(body, BggGeekaccountToplistV3ResponseBody.class);
-            }
-          });
-        })
-        .doOnNext(responseBody -> {
-          if (responseBody.getError() != null) {
-            if ("Invalid item".equals(responseBody.getError())) {
-              throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid item");
-            } else {
-              throw new ResponseStatusException(
-                  HttpStatus.INTERNAL_SERVER_ERROR, responseBody.getError());
-            }
-          }
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
         });
   }
 }

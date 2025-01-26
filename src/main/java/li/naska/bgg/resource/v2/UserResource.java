@@ -1,11 +1,9 @@
 package li.naska.bgg.resource.v2;
 
-import com.boardgamegeek.user.v2.User;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggUserV2Repository;
 import li.naska.bgg.repository.model.BggUserV2QueryParams;
-import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -19,13 +17,10 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/user")
 public class UserResource {
 
-  private final BggUserV2Repository usersRepository;
+  private final BggUserV2Repository userRepository;
 
-  private final XmlProcessor xmlProcessor;
-
-  public UserResource(BggUserV2Repository usersRepository, XmlProcessor xmlProcessor) {
-    this.usersRepository = usersRepository;
-    this.xmlProcessor = xmlProcessor;
+  public UserResource(BggUserV2Repository userRepository) {
+    this.userRepository = userRepository;
   }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
@@ -45,9 +40,10 @@ public class UserResource {
               url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc8"))
   public Mono<String> getUser(
       @Validated @ParameterObject BggUserV2QueryParams params, ServerHttpRequest request) {
-    boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return usersRepository
-        .getUser(params)
-        .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, User.class));
+    if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {
+      return userRepository.getUserAsXml(params);
+    } else {
+      return userRepository.getUserAsJson(params);
+    }
   }
 }

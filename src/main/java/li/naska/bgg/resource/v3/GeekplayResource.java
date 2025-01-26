@@ -56,9 +56,8 @@ public class GeekplayResource {
   public Mono<BggGeekplayCountV3ResponseBody> getGeekplayCount(
       @Validated @ParameterObject BggGeekplayCountV3QueryParams params) {
     return authenticationService
-        .requiredAuthentication()
-        .flatMap(
-            authn -> geekplayRepository.getGeekplayCount(authn.buildBggRequestHeader(), params));
+        .authenticationCookieHeaderValue()
+        .flatMap(cookie -> geekplayRepository.getGeekplayCount(cookie, params));
   }
 
   @PostMapping(
@@ -71,7 +70,7 @@ public class GeekplayResource {
   public Mono<BggGeekplayV3ResponseBody> updateGeekplay(
       @Validated @RequestBody BggGeekplayV3RequestBody body) {
     return authenticationService
-        .requiredAuthentication()
-        .flatMap(authn -> geekplayRepository.updateGeekplay(authn.buildBggRequestHeader(), body));
+        .authenticationCookieHeaderValue()
+        .flatMap(cookie -> geekplayRepository.updateGeekplay(cookie, body));
   }
 }

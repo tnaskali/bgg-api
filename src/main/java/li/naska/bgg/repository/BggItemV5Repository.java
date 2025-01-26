@@ -1,7 +1,7 @@
 package li.naska.bgg.repository;
 
 import java.nio.charset.StandardCharsets;
-import li.naska.bgg.exception.UnexpectedServerResponseException;
+import li.naska.bgg.exception.UnexpectedBggResponseException;
 import li.naska.bgg.repository.model.BggItemWeblinksV5QueryParams;
 import li.naska.bgg.repository.model.BggItemWeblinksV5ResponseBody;
 import li.naska.bgg.util.JsonProcessor;
@@ -32,6 +32,11 @@ public class BggItemV5Repository {
   }
 
   public Mono<BggItemWeblinksV5ResponseBody> getItemWeblinks(BggItemWeblinksV5QueryParams params) {
+    return getItemWeblinksAsJson(params)
+        .map(body -> jsonProcessor.toJavaObject(body, BggItemWeblinksV5ResponseBody.class));
+  }
+
+  public Mono<String> getItemWeblinksAsJson(BggItemWeblinksV5QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -43,13 +48,15 @@ public class BggItemV5Repository {
         .exchangeToMono(clientResponse -> {
           if (clientResponse.statusCode() == HttpStatus.NOT_FOUND) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Forum not found");
-          } else if (clientResponse.statusCode() != HttpStatus.OK) {
-            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
+          } else if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.APPLICATION_JSON::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
           }
-          return clientResponse
-              .bodyToMono(String.class)
-              .defaultIfEmpty("")
-              .map(body -> jsonProcessor.toJavaObject(body, BggItemWeblinksV5ResponseBody.class));
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
         });
   }
 }

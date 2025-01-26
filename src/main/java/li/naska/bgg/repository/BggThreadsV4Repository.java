@@ -1,7 +1,7 @@
 package li.naska.bgg.repository;
 
 import java.nio.charset.StandardCharsets;
-import li.naska.bgg.exception.UnexpectedServerResponseException;
+import li.naska.bgg.exception.UnexpectedBggResponseException;
 import li.naska.bgg.repository.model.*;
 import li.naska.bgg.util.JsonProcessor;
 import li.naska.bgg.util.QueryParameters;
@@ -29,6 +29,11 @@ public class BggThreadsV4Repository {
   }
 
   public Mono<BggThreadsV4ResponseBody> getThreads(BggThreadsV4QueryParams params) {
+    return getThreadsAsJson(params)
+        .map(body -> jsonProcessor.toJavaObject(body, BggThreadsV4ResponseBody.class));
+  }
+
+  public Mono<String> getThreadsAsJson(BggThreadsV4QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder ->
@@ -36,17 +41,24 @@ public class BggThreadsV4Repository {
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK) {
-            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
+          if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.APPLICATION_JSON::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
           }
-          return clientResponse
-              .bodyToMono(String.class)
-              .defaultIfEmpty("")
-              .map(body -> jsonProcessor.toJavaObject(body, BggThreadsV4ResponseBody.class));
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
         });
   }
 
   public Mono<BggThreadV4ResponseBody> getThread(Integer id) {
+    return getThreadAsJson(id)
+        .map(body -> jsonProcessor.toJavaObject(body, BggThreadV4ResponseBody.class));
+  }
+
+  public Mono<String> getThreadAsJson(Integer id) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder.path("/{id}").build(id))
@@ -55,18 +67,25 @@ public class BggThreadsV4Repository {
         .exchangeToMono(clientResponse -> {
           if (clientResponse.statusCode() == HttpStatus.NOT_FOUND) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Thread not found");
-          } else if (clientResponse.statusCode() != HttpStatus.OK) {
-            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
+          } else if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.APPLICATION_JSON::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
           }
-          return clientResponse
-              .bodyToMono(String.class)
-              .defaultIfEmpty("")
-              .map(body -> jsonProcessor.toJavaObject(body, BggThreadV4ResponseBody.class));
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
         });
   }
 
   public Mono<BggThreadReactionsV4ResponseBody> getThreadReactions(
       Integer id, BggThreadReactionsV4QueryParams params) {
+    return getThreadReactionsAsJson(id, params)
+        .map(body -> jsonProcessor.toJavaObject(body, BggThreadReactionsV4ResponseBody.class));
+  }
+
+  public Mono<String> getThreadReactionsAsJson(Integer id, BggThreadReactionsV4QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -76,14 +95,15 @@ public class BggThreadsV4Repository {
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK) {
-            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
+          if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.APPLICATION_JSON::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
           }
-          return clientResponse
-              .bodyToMono(String.class)
-              .defaultIfEmpty("")
-              .map(
-                  body -> jsonProcessor.toJavaObject(body, BggThreadReactionsV4ResponseBody.class));
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
         });
   }
 }

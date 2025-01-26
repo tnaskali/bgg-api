@@ -8,6 +8,7 @@ import li.naska.bgg.repository.BggThreadV1Repository;
 import li.naska.bgg.repository.model.BggThreadV1QueryParams;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,14 +25,13 @@ public class ThreadResource {
     this.threadRepository = threadRepository;
   }
 
-  @Deprecated
-  @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_XML_VALUE)
+  @GetMapping(
+      value = "/{id}",
+      produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Retrieve the messages from a forum/game thread",
       description =
           """
-          <b>This endpoint doesn't seem to be working anymore as it gets redirected to an invalid URI.</b>
-          <p>
           Retrieve the messages from a forum/game thread.
           <p>
           <i>Note</i> : Your browser may interpret this as a request to subscribe to an RSS feed.
@@ -47,7 +47,12 @@ public class ThreadResource {
   public Mono<String> getThread(
       @NotNull @PathVariable @Parameter(description = "The thread id(s).", example = "381021")
           Integer id,
-      @ParameterObject BggThreadV1QueryParams params) {
-    return threadRepository.getThread(id, params);
+      @ParameterObject BggThreadV1QueryParams params,
+      ServerHttpRequest request) {
+    if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {
+      return threadRepository.getRssAsXml(id, params);
+    } else {
+      return threadRepository.getRssAsJson(id, params);
+    }
   }
 }

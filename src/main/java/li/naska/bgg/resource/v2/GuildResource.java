@@ -1,11 +1,9 @@
 package li.naska.bgg.resource.v2;
 
-import com.boardgamegeek.guild.v2.Guild;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggGuildV2Repository;
 import li.naska.bgg.repository.model.BggGuildV2QueryParams;
-import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -19,13 +17,10 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/guild")
 public class GuildResource {
 
-  private final BggGuildV2Repository guildsRepository;
+  private final BggGuildV2Repository guildRepository;
 
-  private final XmlProcessor xmlProcessor;
-
-  public GuildResource(BggGuildV2Repository guildsRepository, XmlProcessor xmlProcessor) {
-    this.guildsRepository = guildsRepository;
-    this.xmlProcessor = xmlProcessor;
+  public GuildResource(BggGuildV2Repository guildRepository) {
+    this.guildRepository = guildRepository;
   }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
@@ -45,9 +40,10 @@ public class GuildResource {
               url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc9"))
   public Mono<String> getGuild(
       @Validated @ParameterObject BggGuildV2QueryParams params, ServerHttpRequest request) {
-    boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return guildsRepository
-        .getGuild(params)
-        .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Guild.class));
+    if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {
+      return guildRepository.getGuildAsXml(params);
+    } else {
+      return guildRepository.getGuildAsJson(params);
+    }
   }
 }

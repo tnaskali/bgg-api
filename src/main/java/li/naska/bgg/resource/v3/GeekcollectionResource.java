@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import li.naska.bgg.repository.BggGeekcollectionV3Repository;
 import li.naska.bgg.repository.model.BggGeekcollectionV3QueryParams;
-import li.naska.bgg.security.BggAuthenticationToken;
 import li.naska.bgg.service.AuthenticationService;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.validation.annotation.Validated;
@@ -36,8 +35,7 @@ public class GeekcollectionResource {
   public Mono<String> getGeekcollection(
       @Validated @ParameterObject BggGeekcollectionV3QueryParams params) {
     return authenticationService
-        .optionalAuthentication()
-        .flatMap(authn -> geekcollectionRepository.getGeekcollection(
-            authn.map(BggAuthenticationToken::buildBggRequestHeader), params));
+        .optionalAuthenticationCookieHeaderValue()
+        .flatMap(cookie -> geekcollectionRepository.getGeekcollectionAsCsv(cookie, params));
   }
 }

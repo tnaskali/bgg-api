@@ -95,8 +95,6 @@ public class GraphQLUsersService {
   }
 
   private Mono<User> getUser(BggUserV2QueryParams queryParams) {
-    return usersV2Repository
-        .getUser(queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, User.class));
+    return usersV2Repository.getUser(queryParams);
   }
 }

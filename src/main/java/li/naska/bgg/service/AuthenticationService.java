@@ -30,4 +30,13 @@ public class AuthenticationService {
   public Mono<Optional<BggAuthenticationToken>> optionalAuthentication() {
     return authentication().singleOptional();
   }
+
+  public Mono<Optional<String>> optionalAuthenticationCookieHeaderValue() {
+    return optionalAuthentication()
+        .map(auth -> auth.map(BggAuthenticationToken::buildBggRequestHeader));
+  }
+
+  public Mono<String> authenticationCookieHeaderValue() {
+    return requiredAuthentication().map(BggAuthenticationToken::buildBggRequestHeader);
+  }
 }

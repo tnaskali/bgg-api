@@ -1,13 +1,11 @@
 package li.naska.bgg.resource.v1;
 
-import com.boardgamegeek.geeklist.v1.Geeklist;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.constraints.NotNull;
 import li.naska.bgg.repository.BggGeeklistV1Repository;
 import li.naska.bgg.repository.model.BggGeeklistV1QueryParams;
-import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -24,11 +22,8 @@ public class GeeklistResource {
 
   private final BggGeeklistV1Repository geeklistRepository;
 
-  private final XmlProcessor xmlProcessor;
-
-  public GeeklistResource(BggGeeklistV1Repository geeklistRepository, XmlProcessor xmlProcessor) {
+  public GeeklistResource(BggGeeklistV1Repository geeklistRepository) {
     this.geeklistRepository = geeklistRepository;
-    this.xmlProcessor = xmlProcessor;
   }
 
   @GetMapping(
@@ -55,9 +50,10 @@ public class GeeklistResource {
           Integer id,
       @Validated @ParameterObject BggGeeklistV1QueryParams params,
       ServerHttpRequest request) {
-    boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return geeklistRepository
-        .getGeeklist(id, params)
-        .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Geeklist.class));
+    if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {
+      return geeklistRepository.getGeeklistAsXml(id, params);
+    } else {
+      return geeklistRepository.getGeeklistAsJson(id, params);
+    }
   }
 }

@@ -36,6 +36,17 @@ public class GlobalErrorWebExceptionHandler extends AbstractErrorWebExceptionHan
   private Mono<ServerResponse> renderErrorResponse(ServerRequest request) {
     Map<String, Object> errorPropertiesMap = getErrorAttributes(
         request, ErrorAttributeOptions.defaults().including(ErrorAttributeOptions.Include.MESSAGE));
+    Throwable error = getError(request);
+    if (error instanceof UnexpectedBggResponseException exception) {
+      errorPropertiesMap.put("bggRequestUri", exception.getBggRequestUri());
+      errorPropertiesMap.put(
+          "bggResponseStatusCode", exception.getBggResponseStatusCode().value());
+      errorPropertiesMap.put(
+          "bggResponseContentType",
+          Optional.ofNullable(exception.getBggResponseContentType())
+              .map(Object::toString)
+              .orElse(null));
+    }
     int errorStatus =
         Optional.ofNullable((Integer) errorPropertiesMap.get("status")).orElse(500);
     return ServerResponse.status(errorStatus)

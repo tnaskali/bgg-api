@@ -62,8 +62,8 @@ public class FansResource {
       security = @SecurityRequirement(name = "basicAuth"))
   public Mono<BggFansV4ResponseBody> postFan(@Validated @RequestBody BggFansV4RequestBody body) {
     return authenticationService
-        .requiredAuthentication()
-        .flatMap(authn -> fansRepository.createFan(authn.buildBggRequestHeader(), body));
+        .authenticationCookieHeaderValue()
+        .flatMap(cookie -> fansRepository.createFan(cookie, body));
   }
 
   @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -81,7 +81,7 @@ public class FansResource {
   public Mono<BggFansV4ResponseBody> deleteFan(
       @Validated @PathVariable @Parameter(example = "12345", description = "Fan id.") Integer id) {
     return authenticationService
-        .requiredAuthentication()
-        .flatMap(authn -> fansRepository.deleteFan(authn.buildBggRequestHeader(), id));
+        .authenticationCookieHeaderValue()
+        .flatMap(cookie -> fansRepository.deleteFan(cookie, id));
   }
 }

@@ -1,11 +1,9 @@
 package li.naska.bgg.resource.v2;
 
-import com.boardgamegeek.family.v2.Items;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggFamilyV2Repository;
 import li.naska.bgg.repository.model.BggFamilyV2QueryParams;
-import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -19,13 +17,10 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/family")
 public class FamilyResource {
 
-  private final BggFamilyV2Repository familiesRepository;
+  private final BggFamilyV2Repository familyRepository;
 
-  private final XmlProcessor xmlProcessor;
-
-  public FamilyResource(BggFamilyV2Repository familiesRepository, XmlProcessor xmlProcessor) {
-    this.familiesRepository = familiesRepository;
-    this.xmlProcessor = xmlProcessor;
+  public FamilyResource(BggFamilyV2Repository familyRepository) {
+    this.familyRepository = familyRepository;
   }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
@@ -69,9 +64,10 @@ public class FamilyResource {
               url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc4"))
   public Mono<String> getFamilies(
       @Validated @ParameterObject BggFamilyV2QueryParams params, ServerHttpRequest request) {
-    boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return familiesRepository
-        .getFamilies(params)
-        .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Items.class));
+    if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {
+      return familyRepository.getItemsAsXml(params);
+    } else {
+      return familyRepository.getItemsAsJson(params);
+    }
   }
 }

@@ -1,7 +1,7 @@
 package li.naska.bgg.repository;
 
 import java.nio.charset.StandardCharsets;
-import li.naska.bgg.exception.UnexpectedServerResponseException;
+import li.naska.bgg.exception.UnexpectedBggResponseException;
 import li.naska.bgg.repository.model.BggGeekitemLinkeditemsV4QueryParams;
 import li.naska.bgg.repository.model.BggGeekitemLinkeditemsV4ResponseBody;
 import li.naska.bgg.repository.model.BggGeekitemRecsV4QueryParams;
@@ -32,6 +32,11 @@ public class BggGeekitemV4Repository {
 
   public Mono<BggGeekitemLinkeditemsV4ResponseBody> getLinkeditems(
       BggGeekitemLinkeditemsV4QueryParams params) {
+    return getLinkeditemsAsJson(params)
+        .map(body -> jsonProcessor.toJavaObject(body, BggGeekitemLinkeditemsV4ResponseBody.class));
+  }
+
+  public Mono<String> getLinkeditemsAsJson(BggGeekitemLinkeditemsV4QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -41,18 +46,24 @@ public class BggGeekitemV4Repository {
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK) {
-            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
+          if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.APPLICATION_JSON::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
           }
-          return clientResponse
-              .bodyToMono(String.class)
-              .defaultIfEmpty("")
-              .map(body ->
-                  jsonProcessor.toJavaObject(body, BggGeekitemLinkeditemsV4ResponseBody.class));
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
         });
   }
 
   public Mono<BggGeekitemRecsV4ResponseBody> getRecs(BggGeekitemRecsV4QueryParams params) {
+    return getRecsAsJson(params)
+        .map(body -> jsonProcessor.toJavaObject(body, BggGeekitemRecsV4ResponseBody.class));
+  }
+
+  public Mono<String> getRecsAsJson(BggGeekitemRecsV4QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -62,13 +73,15 @@ public class BggGeekitemV4Repository {
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK) {
-            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
+          if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.APPLICATION_JSON::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
           }
-          return clientResponse
-              .bodyToMono(String.class)
-              .defaultIfEmpty("")
-              .map(body -> jsonProcessor.toJavaObject(body, BggGeekitemRecsV4ResponseBody.class));
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
         });
   }
 }

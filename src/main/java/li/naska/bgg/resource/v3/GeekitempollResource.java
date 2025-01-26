@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import li.naska.bgg.repository.BggGeekitempollV3Repository;
 import li.naska.bgg.repository.model.BggGeekitempollV3QueryParams;
 import li.naska.bgg.repository.model.BggGeekitempollV3ResponseBody;
-import li.naska.bgg.security.BggAuthenticationToken;
 import li.naska.bgg.service.AuthenticationService;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
@@ -38,8 +37,7 @@ public class GeekitempollResource {
   public Mono<BggGeekitempollV3ResponseBody> getGeekitempoll(
       @Validated @ParameterObject BggGeekitempollV3QueryParams params) {
     return authenticationService
-        .optionalAuthentication()
-        .flatMap(authn -> geekitempollRepository.getGeekitempoll(
-            authn.map(BggAuthenticationToken::buildBggRequestHeader), params));
+        .optionalAuthenticationCookieHeaderValue()
+        .flatMap(cookie -> geekitempollRepository.getGeekitempoll(cookie, params));
   }
 }

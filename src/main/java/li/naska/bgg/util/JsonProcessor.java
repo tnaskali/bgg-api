@@ -3,6 +3,8 @@ package li.naska.bgg.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.JsonPath;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -35,6 +37,15 @@ public class JsonProcessor {
       log.error("Error parsing response body", e);
       throw new ResponseStatusException(
           HttpStatus.INTERNAL_SERVER_ERROR, "Error parsing server response");
+    }
+  }
+
+  public <T> Optional<T> jsonPathValue(String jsonString, String jsonPath) {
+    try {
+      return Optional.of(JsonPath.read(jsonString, jsonPath));
+    } catch (Exception e) {
+      log.error("Error parsing response body", e);
+      return Optional.empty();
     }
   }
 }

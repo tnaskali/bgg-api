@@ -1,10 +1,8 @@
 package li.naska.bgg.resource.v2;
 
-import com.boardgamegeek.person.v2.Items;
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggPersonV2Repository;
 import li.naska.bgg.repository.model.BggPersonV2QueryParams;
-import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -18,13 +16,10 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/person")
 public class PersonResource {
 
-  private final BggPersonV2Repository personsRepository;
+  private final BggPersonV2Repository personRepository;
 
-  private final XmlProcessor xmlProcessor;
-
-  public PersonResource(BggPersonV2Repository personsRepository, XmlProcessor xmlProcessor) {
-    this.personsRepository = personsRepository;
-    this.xmlProcessor = xmlProcessor;
+  public PersonResource(BggPersonV2Repository personRepository) {
+    this.personRepository = personRepository;
   }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
@@ -40,9 +35,10 @@ public class PersonResource {
           """)
   public Mono<String> getPerson(
       @Validated @ParameterObject BggPersonV2QueryParams params, ServerHttpRequest request) {
-    boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return personsRepository
-        .getPersons(params)
-        .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Items.class));
+    if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {
+      return personRepository.getItemsAsXml(params);
+    } else {
+      return personRepository.getItemsAsJson(params);
+    }
   }
 }

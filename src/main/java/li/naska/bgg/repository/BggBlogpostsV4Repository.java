@@ -1,7 +1,7 @@
 package li.naska.bgg.repository;
 
 import java.nio.charset.StandardCharsets;
-import li.naska.bgg.exception.UnexpectedServerResponseException;
+import li.naska.bgg.exception.UnexpectedBggResponseException;
 import li.naska.bgg.repository.model.*;
 import li.naska.bgg.util.JsonProcessor;
 import li.naska.bgg.util.QueryParameters;
@@ -37,8 +37,13 @@ public class BggBlogpostsV4Repository {
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK) {
-            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
+          if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.APPLICATION_JSON::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
           }
           return clientResponse
               .bodyToMono(String.class)
@@ -48,6 +53,11 @@ public class BggBlogpostsV4Repository {
   }
 
   public Mono<BggBlogpostV4ResponseBody> getBlogpost(Integer id) {
+    return getBlogpostAsJson(id)
+        .map(body -> jsonProcessor.toJavaObject(body, BggBlogpostV4ResponseBody.class));
+  }
+
+  public Mono<String> getBlogpostAsJson(Integer id) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder.path("/{id}").build(id))
@@ -56,17 +66,25 @@ public class BggBlogpostsV4Repository {
         .exchangeToMono(clientResponse -> {
           if (clientResponse.statusCode() == HttpStatus.NOT_FOUND) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Blogpost not found");
-          } else if (clientResponse.statusCode() != HttpStatus.OK) {
-            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
+          } else if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.APPLICATION_JSON::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
           }
-          return clientResponse
-              .bodyToMono(String.class)
-              .defaultIfEmpty("")
-              .map(body -> jsonProcessor.toJavaObject(body, BggBlogpostV4ResponseBody.class));
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
         });
   }
 
   public Mono<BggBlogpostCommentsV4ResponseBody> getBlogpostComments(
+      Integer id, BggBlogpostCommentsV4QueryParams params) {
+    return getBlogpostCommentsAsJson(id, params)
+        .map(body -> jsonProcessor.toJavaObject(body, BggBlogpostCommentsV4ResponseBody.class));
+  }
+
+  public Mono<String> getBlogpostCommentsAsJson(
       Integer id, BggBlogpostCommentsV4QueryParams params) {
     return webClient
         .get()
@@ -77,21 +95,27 @@ public class BggBlogpostsV4Repository {
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK) {
-            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
+          if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.APPLICATION_JSON::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
           }
-          return clientResponse
-              .bodyToMono(String.class)
-              .defaultIfEmpty("")
-              .mapNotNull(body -> StringUtils.isNumeric(body)
-                  ? String.format("{ \"totalCount\": %s }", body)
-                  : body)
-              .map(body ->
-                  jsonProcessor.toJavaObject(body, BggBlogpostCommentsV4ResponseBody.class));
-        });
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
+        })
+        .mapNotNull(body ->
+            StringUtils.isNumeric(body) ? String.format("{ \"totalCount\": %s }", body) : body);
   }
 
   public Mono<BggBlogpostReactionsV4ResponseBody> getBlogpostReactions(
+      Integer id, BggBlogpostReactionsV4QueryParams params) {
+    return getBlogpostReactionsAsJson(id, params)
+        .map(body -> jsonProcessor.toJavaObject(body, BggBlogpostReactionsV4ResponseBody.class));
+  }
+
+  public Mono<String> getBlogpostReactionsAsJson(
       Integer id, BggBlogpostReactionsV4QueryParams params) {
     return webClient
         .get()
@@ -102,19 +126,25 @@ public class BggBlogpostsV4Repository {
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK) {
-            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
+          if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.APPLICATION_JSON::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
           }
-          return clientResponse
-              .bodyToMono(String.class)
-              .defaultIfEmpty("")
-              .map(body ->
-                  jsonProcessor.toJavaObject(body, BggBlogpostReactionsV4ResponseBody.class));
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
         });
   }
 
   public Mono<BggBlogpostTipsV4ResponseBody> getBlogpostTips(
       Integer id, BggBlogpostTipsV4QueryParams params) {
+    return getBlogpostTipsAsJson(id, params)
+        .map(body -> jsonProcessor.toJavaObject(body, BggBlogpostTipsV4ResponseBody.class));
+  }
+
+  public Mono<String> getBlogpostTipsAsJson(Integer id, BggBlogpostTipsV4QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -124,13 +154,15 @@ public class BggBlogpostsV4Repository {
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK) {
-            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
+          if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.APPLICATION_JSON::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
           }
-          return clientResponse
-              .bodyToMono(String.class)
-              .defaultIfEmpty("")
-              .map(body -> jsonProcessor.toJavaObject(body, BggBlogpostTipsV4ResponseBody.class));
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
         });
   }
 }

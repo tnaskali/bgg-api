@@ -1,6 +1,7 @@
 bgg:
   web:
     baseurl-bgs: https://boardgamegeek.com
+    baseurl-geekdo: https://api.geekdo.com
   endpoints:
     v1:
       boardgame: ${bgg.web.baseurl-bgs}/xmlapi/boardgame
@@ -9,7 +10,8 @@ bgg:
       geeklist: ${bgg.web.baseurl-bgs}/xmlapi/geeklist
       person: ${bgg.web.baseurl-bgs}/xmlapi/person
       search: ${bgg.web.baseurl-bgs}/xmlapi/search
-      thread: ${bgg.web.baseurl-bgs}/xmlapi/thread
+      # /xmlapi/thread returns 302 Found towards /rss/thread
+      thread: ${bgg.web.baseurl-bgs}/rss/thread
     v2:
       collection: ${bgg.web.baseurl-bgs}/xmlapi2/collection
       company: ${bgg.web.baseurl-bgs}/xmlapi2/company
@@ -31,20 +33,20 @@ bgg:
       geekpoll: ${bgg.web.baseurl-bgs}/geekpoll.php
       geekpollitem: ${bgg.web.baseurl-bgs}/geekitempoll.php
     v4:
-      articles: ${bgg.web.baseurl-bgs}/api/articles
-      blogposts: ${bgg.web.baseurl-bgs}/api/blogposts
-      blogs: ${bgg.web.baseurl-bgs}/api/blogs
-      comments: ${bgg.web.baseurl-bgs}/api/comments
-      fans: ${bgg.web.baseurl-bgs}/api/fans
-      forums: ${bgg.web.baseurl-bgs}/api/forums
-      geekitem: ${bgg.web.baseurl-bgs}/api/geekitem
-      geekitems: ${bgg.web.baseurl-bgs}/api/geekitems
-      geeklists: ${bgg.web.baseurl-bgs}/api/geeklists
-      hotness: ${bgg.web.baseurl-bgs}/api/hotness
-      listitems: ${bgg.web.baseurl-bgs}/api/listitems
-      microbadges: ${bgg.web.baseurl-bgs}/api/microbadges
-      threads: ${bgg.web.baseurl-bgs}/api/threads
-      users: ${bgg.web.baseurl-bgs}/api/users
+      articles: ${bgg.web.baseurl-geekdo}/api/articles
+      blogposts: ${bgg.web.baseurl-geekdo}/api/blogposts
+      blogs: ${bgg.web.baseurl-geekdo}/api/blogs
+      comments: ${bgg.web.baseurl-geekdo}/api/comments
+      fans: ${bgg.web.baseurl-geekdo}/api/fans
+      forums: ${bgg.web.baseurl-geekdo}/api/forums
+      geekitem: ${bgg.web.baseurl-geekdo}/api/geekitem
+      geekitems: ${bgg.web.baseurl-geekdo}/api/geekitems
+      geeklists: ${bgg.web.baseurl-geekdo}/api/geeklists
+      hotness: ${bgg.web.baseurl-geekdo}/api/hotness
+      listitems: ${bgg.web.baseurl-geekdo}/api/listitems
+      microbadges: ${bgg.web.baseurl-geekdo}/api/microbadges
+      threads: ${bgg.web.baseurl-geekdo}/api/threads
+      users: ${bgg.web.baseurl-geekdo}/api/users
     v5:
       geekaccount: ${bgg.web.baseurl-bgs}/geekaccount
       item: ${bgg.web.baseurl-bgs}/item

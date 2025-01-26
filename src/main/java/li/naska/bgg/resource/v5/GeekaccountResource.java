@@ -36,8 +36,7 @@ public class GeekaccountResource {
   public Mono<BggGeekaccountToplistV5ResponseBody> getGeekaccountToplist(
       @Validated @ParameterObject BggGeekaccountToplistV5QueryParams params) {
     return authenticationService
-        .requiredAuthentication()
-        .flatMap(authn ->
-            geekaccountRepository.getGeekaccountToplist(authn.buildBggRequestHeader(), params));
+        .authenticationCookieHeaderValue()
+        .flatMap(cookie -> geekaccountRepository.getGeekaccountToplist(cookie, params));
   }
 }

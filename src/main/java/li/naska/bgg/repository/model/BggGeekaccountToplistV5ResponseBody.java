@@ -5,5 +5,15 @@ import lombok.Data;
 
 @Data
 public class BggGeekaccountToplistV5ResponseBody {
-  private List<Integer> toplistitems;
+  private List<TopListItem> toplistitems;
+
+  @Data
+  public static class TopListItem {
+    private Integer rank;
+    private Integer toplistitemid;
+    private String type;
+    private Integer id;
+    private String name;
+    private String href;
+  }
 }

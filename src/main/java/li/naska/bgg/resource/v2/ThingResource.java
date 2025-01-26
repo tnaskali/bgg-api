@@ -1,11 +1,9 @@
 package li.naska.bgg.resource.v2;
 
-import com.boardgamegeek.thing.v2.Items;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggThingV2Repository;
 import li.naska.bgg.repository.model.BggThingV2QueryParams;
-import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -19,13 +17,10 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/thing")
 public class ThingResource {
 
-  private final BggThingV2Repository thingsRepository;
+  private final BggThingV2Repository thingRepository;
 
-  private final XmlProcessor xmlProcessor;
-
-  public ThingResource(BggThingV2Repository thingsRepository, XmlProcessor xmlProcessor) {
-    this.thingsRepository = thingsRepository;
-    this.xmlProcessor = xmlProcessor;
+  public ThingResource(BggThingV2Repository thingRepository) {
+    this.thingRepository = thingRepository;
   }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
@@ -45,9 +40,10 @@ public class ThingResource {
               url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc3"))
   public Mono<String> getThings(
       @Validated @ParameterObject BggThingV2QueryParams params, ServerHttpRequest request) {
-    boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return thingsRepository
-        .getThings(params)
-        .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Items.class));
+    if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {
+      return thingRepository.getItemsAsXml(params);
+    } else {
+      return thingRepository.getItemsAsJson(params);
+    }
   }
 }

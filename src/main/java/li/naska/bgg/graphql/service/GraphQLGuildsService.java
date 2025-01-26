@@ -56,8 +56,6 @@ public class GraphQLGuildsService {
   }
 
   private Mono<Guild> getGuild(BggGuildV2QueryParams queryParams) {
-    return guildsRepository
-        .getGuild(queryParams)
-        .map(xml -> xmlProcessor.toJavaObject(xml, Guild.class));
+    return guildsRepository.getGuild(queryParams);
   }
 }

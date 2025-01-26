@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import li.naska.bgg.repository.BggGeekpollV3Repository;
 import li.naska.bgg.repository.model.BggGeekpollV3QueryParams;
 import li.naska.bgg.repository.model.BggGeekpollV3ResponseBody;
-import li.naska.bgg.security.BggAuthenticationToken;
 import li.naska.bgg.service.AuthenticationService;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
@@ -37,8 +36,7 @@ public class GeekpollResource {
   public Mono<BggGeekpollV3ResponseBody> getGeekpoll(
       @Validated @ParameterObject BggGeekpollV3QueryParams params) {
     return authenticationService
-        .optionalAuthentication()
-        .flatMap(authn -> geekpollRepository.getGeekpoll(
-            authn.map(BggAuthenticationToken::buildBggRequestHeader), params));
+        .optionalAuthenticationCookieHeaderValue()
+        .flatMap(cookie -> geekpollRepository.getGeekpoll(cookie, params));
   }
 }

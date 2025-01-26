@@ -1,13 +1,11 @@
 package li.naska.bgg.resource.v1;
 
-import com.boardgamegeek.boardgame.v1.Boardgames;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import java.util.Set;
 import li.naska.bgg.repository.BggBoardgameV1Repository;
 import li.naska.bgg.repository.model.BggBoardgameV1QueryParams;
-import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -24,12 +22,8 @@ public class BoardgameResource {
 
   private final BggBoardgameV1Repository boardgameRepository;
 
-  private final XmlProcessor xmlProcessor;
-
-  public BoardgameResource(
-      BggBoardgameV1Repository boardgameRepository, XmlProcessor xmlProcessor) {
+  public BoardgameResource(BggBoardgameV1Repository boardgameRepository) {
     this.boardgameRepository = boardgameRepository;
-    this.xmlProcessor = xmlProcessor;
   }
 
   @GetMapping(
@@ -56,9 +50,10 @@ public class BoardgameResource {
           Set<Integer> ids,
       @Validated @ParameterObject BggBoardgameV1QueryParams params,
       ServerHttpRequest request) {
-    boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return boardgameRepository
-        .getBoardgames(ids, params)
-        .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Boardgames.class));
+    if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {
+      return boardgameRepository.getBoardgamesAsXml(ids, params);
+    } else {
+      return boardgameRepository.getBoardgamesAsJson(ids, params);
+    }
   }
 }

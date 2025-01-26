@@ -1,11 +1,9 @@
 package li.naska.bgg.resource.v1;
 
-import com.boardgamegeek.search.v1.Boardgames;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggSearchV1Repository;
 import li.naska.bgg.repository.model.BggSearchV1QueryParams;
-import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -21,11 +19,8 @@ public class SearchResource {
 
   private final BggSearchV1Repository searchRepository;
 
-  private final XmlProcessor xmlProcessor;
-
-  public SearchResource(BggSearchV1Repository searchRepository, XmlProcessor xmlProcessor) {
+  public SearchResource(BggSearchV1Repository searchRepository) {
     this.searchRepository = searchRepository;
-    this.xmlProcessor = xmlProcessor;
   }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
@@ -45,9 +40,10 @@ public class SearchResource {
               url = "https://boardgamegeek.com/wiki/page/BGG_XML_API#toc3"))
   public Mono<String> getResults(
       @Validated @ParameterObject BggSearchV1QueryParams params, ServerHttpRequest request) {
-    boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return searchRepository
-        .getResults(params)
-        .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Boardgames.class));
+    if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {
+      return searchRepository.getBoardgamesAsXml(params);
+    } else {
+      return searchRepository.getBoardgamesAsJson(params);
+    }
   }
 }

@@ -1,10 +1,14 @@
 package li.naska.bgg.repository;
 
+import com.boardgamegeek.company.v1.Companies;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import li.naska.bgg.exception.UnexpectedBggResponseException;
+import li.naska.bgg.util.XmlProcessor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -15,12 +19,25 @@ public class BggCompanyV1Repository {
 
   private final WebClient webClient;
 
+  private final XmlProcessor xmlProcessor;
+
   public BggCompanyV1Repository(
-      @Value("${bgg.endpoints.v1.company}") String endpoint, WebClient.Builder builder) {
+      @Value("${bgg.endpoints.v1.company}") String endpoint,
+      WebClient.Builder builder,
+      XmlProcessor xmlProcessor) {
     this.webClient = builder.baseUrl(endpoint).build();
+    this.xmlProcessor = xmlProcessor;
   }
 
-  public Mono<String> getCompanies(Set<Integer> ids) {
+  public Mono<String> getCompaniesAsJson(Set<Integer> ids) {
+    return getCompanies(ids).map(xmlProcessor::toJsonString);
+  }
+
+  public Mono<Companies> getCompanies(Set<Integer> ids) {
+    return getCompaniesAsXml(ids).map(xml -> xmlProcessor.toJavaObject(xml, Companies.class));
+  }
+
+  public Mono<String> getCompaniesAsXml(Set<Integer> ids) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -28,7 +45,16 @@ public class BggCompanyV1Repository {
             .build(ids.stream().map(Objects::toString).collect(Collectors.joining(","))))
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
-        .retrieve()
-        .bodyToMono(String.class);
+        .exchangeToMono(clientResponse -> {
+          if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.TEXT_XML::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
+          }
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
+        });
   }
 }

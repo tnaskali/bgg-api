@@ -1,14 +1,11 @@
 package li.naska.bgg.resource.v2;
 
-import com.boardgamegeek.collection.v2.Items;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import li.naska.bgg.repository.BggCollectionV2Repository;
 import li.naska.bgg.repository.model.BggCollectionV2QueryParams;
-import li.naska.bgg.security.BggAuthenticationToken;
 import li.naska.bgg.service.AuthenticationService;
-import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -26,15 +23,10 @@ public class CollectionResource {
 
   private final BggCollectionV2Repository collectionRepository;
 
-  private final XmlProcessor xmlProcessor;
-
   public CollectionResource(
-      AuthenticationService authenticationService,
-      BggCollectionV2Repository collectionRepository,
-      XmlProcessor xmlProcessor) {
+      BggCollectionV2Repository collectionRepository, AuthenticationService authenticationService) {
     this.collectionRepository = collectionRepository;
     this.authenticationService = authenticationService;
-    this.xmlProcessor = xmlProcessor;
   }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
@@ -55,11 +47,12 @@ public class CollectionResource {
               url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc11"))
   public Mono<String> getCollection(
       @Validated @ParameterObject BggCollectionV2QueryParams params, ServerHttpRequest request) {
-    boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return authenticationService
-        .optionalAuthentication()
-        .flatMap(authn -> collectionRepository.getCollection(
-            authn.map(BggAuthenticationToken::buildBggRequestHeader), params))
-        .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Items.class));
+    return authenticationService.optionalAuthenticationCookieHeaderValue().flatMap(cookie -> {
+      if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {
+        return collectionRepository.getItemsAsXml(cookie, params);
+      } else {
+        return collectionRepository.getItemsAsJson(cookie, params);
+      }
+    });
   }
 }

@@ -1,11 +1,9 @@
 package li.naska.bgg.resource.v2;
 
-import com.boardgamegeek.forum.v2.Forum;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggForumV2Repository;
 import li.naska.bgg.repository.model.BggForumV2QueryParams;
-import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -19,13 +17,10 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/forum")
 public class ForumResource {
 
-  private final BggForumV2Repository forumsRepository;
+  private final BggForumV2Repository forumRepository;
 
-  private final XmlProcessor xmlProcessor;
-
-  public ForumResource(BggForumV2Repository forumsRepository, XmlProcessor xmlProcessor) {
-    this.forumsRepository = forumsRepository;
-    this.xmlProcessor = xmlProcessor;
+  public ForumResource(BggForumV2Repository forumRepository) {
+    this.forumRepository = forumRepository;
   }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
@@ -45,9 +40,10 @@ public class ForumResource {
               url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc6"))
   public Mono<String> getForum(
       @Validated @ParameterObject BggForumV2QueryParams params, ServerHttpRequest request) {
-    boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return forumsRepository
-        .getForum(params)
-        .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Forum.class));
+    if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {
+      return forumRepository.getForumAsXml(params);
+    } else {
+      return forumRepository.getForumAsJson(params);
+    }
   }
 }

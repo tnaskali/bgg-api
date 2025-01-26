@@ -1,36 +1,41 @@
 package li.naska.bgg.repository;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
+import li.naska.bgg.exception.UnexpectedBggResponseException;
 import li.naska.bgg.repository.model.BggSearchV5QueryParams;
 import li.naska.bgg.repository.model.BggSearchV5ResponseBody;
 import li.naska.bgg.resource.v5.model.SearchContext;
+import li.naska.bgg.util.JsonProcessor;
 import li.naska.bgg.util.QueryParameters;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 @Repository
 public class BggSearchV5Repository {
 
   private final WebClient webClient;
-  private final ObjectMapper objectMapper;
+
+  private final JsonProcessor jsonProcessor;
 
   public BggSearchV5Repository(
       @Value("${bgg.endpoints.v5.search}") String endpoint,
       WebClient.Builder builder,
-      ObjectMapper objectMapper) {
+      JsonProcessor jsonProcessor) {
     this.webClient = builder.baseUrl(endpoint).build();
-    this.objectMapper = objectMapper;
+    this.jsonProcessor = jsonProcessor;
   }
 
   public Mono<BggSearchV5ResponseBody> getSearchResults(
       SearchContext context, BggSearchV5QueryParams params) {
+    return getSearchResultsAsJson(context, params)
+        .map(body -> jsonProcessor.toJavaObject(body, BggSearchV5ResponseBody.class));
+  }
+
+  public Mono<String> getSearchResultsAsJson(SearchContext context, BggSearchV5QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -39,15 +44,16 @@ public class BggSearchV5Repository {
             .build(context))
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
-        .retrieve()
-        .toEntity(String.class)
-        .handle((entity, sink) -> {
-          try {
-            sink.next(objectMapper.readValue(entity.getBody(), BggSearchV5ResponseBody.class));
-          } catch (JsonProcessingException e) {
-            sink.error(
-                new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+        .exchangeToMono(clientResponse -> {
+          if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.APPLICATION_JSON::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
           }
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
         });
   }
 }

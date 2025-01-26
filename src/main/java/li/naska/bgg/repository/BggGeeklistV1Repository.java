@@ -1,9 +1,13 @@
 package li.naska.bgg.repository;
 
+import com.boardgamegeek.geeklist.v1.Geeklist;
 import java.nio.charset.StandardCharsets;
+import li.naska.bgg.exception.UnexpectedBggResponseException;
 import li.naska.bgg.repository.model.BggGeeklistV1QueryParams;
 import li.naska.bgg.util.QueryParameters;
+import li.naska.bgg.util.XmlProcessor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -14,12 +18,25 @@ public class BggGeeklistV1Repository {
 
   private final WebClient webClient;
 
+  private final XmlProcessor xmlProcessor;
+
   public BggGeeklistV1Repository(
-      @Value("${bgg.endpoints.v1.geeklist}") String endpoint, WebClient.Builder builder) {
+      @Value("${bgg.endpoints.v1.geeklist}") String endpoint,
+      WebClient.Builder builder,
+      XmlProcessor xmlProcessor) {
     this.webClient = builder.baseUrl(endpoint).build();
+    this.xmlProcessor = xmlProcessor;
   }
 
-  public Mono<String> getGeeklist(Integer id, BggGeeklistV1QueryParams params) {
+  public Mono<String> getGeeklistAsJson(Integer id, BggGeeklistV1QueryParams params) {
+    return getGeeklist(id, params).map(xmlProcessor::toJsonString);
+  }
+
+  public Mono<Geeklist> getGeeklist(Integer id, BggGeeklistV1QueryParams params) {
+    return getGeeklistAsXml(id, params).map(xml -> xmlProcessor.toJavaObject(xml, Geeklist.class));
+  }
+
+  public Mono<String> getGeeklistAsXml(Integer id, BggGeeklistV1QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -28,7 +45,16 @@ public class BggGeeklistV1Repository {
             .build(id))
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
-        .retrieve()
-        .bodyToMono(String.class);
+        .exchangeToMono(clientResponse -> {
+          if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.TEXT_XML::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
+          }
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
+        });
   }
 }

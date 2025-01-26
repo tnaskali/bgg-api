@@ -1,7 +1,7 @@
 package li.naska.bgg.repository;
 
 import java.nio.charset.StandardCharsets;
-import li.naska.bgg.exception.UnexpectedServerResponseException;
+import li.naska.bgg.exception.UnexpectedBggResponseException;
 import li.naska.bgg.repository.model.BggArticleV4ResponseBody;
 import li.naska.bgg.repository.model.BggArticlesV4QueryParams;
 import li.naska.bgg.repository.model.BggArticlesV4ResponseBody;
@@ -33,6 +33,24 @@ public class BggArticlesV4Repository {
   }
 
   public Mono<BggArticlesV4ResponseBody> getArticles(BggArticlesV4QueryParams params) {
+    return getArticlesAsJson(params)
+        .map(body -> jsonProcessor.toJavaObject(body, BggArticlesV4ResponseBody.class))
+        .doOnNext(responseBody -> {
+          if (responseBody.getErrors() != null
+              && "Invalid threadid".equals(responseBody.getErrors().getError())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid threadid");
+          } else if (responseBody.getErrors() != null) {
+            throw new ResponseStatusException(
+                HttpStatus.INTERNAL_SERVER_ERROR, responseBody.getErrors().getError());
+          } else if (responseBody.getArticles().isEmpty() && responseBody.getPageid() > 1) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid pageid");
+          } else if (responseBody.getArticles().isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid threadid");
+          }
+        });
+  }
+
+  public Mono<String> getArticlesAsJson(BggArticlesV4QueryParams params) {
     return webClient
         .get()
         .uri(uriBuilder ->
@@ -40,33 +58,33 @@ public class BggArticlesV4Repository {
         .accept(MediaType.APPLICATION_JSON)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() == HttpStatus.NOT_FOUND) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Thread not found");
-          } else if (clientResponse.statusCode() != HttpStatus.OK) {
-            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
+          if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.APPLICATION_JSON::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
           }
-          return clientResponse
-              .bodyToMono(String.class)
-              .defaultIfEmpty("")
-              .map(body -> jsonProcessor.toJavaObject(body, BggArticlesV4ResponseBody.class))
-              .doOnNext(responseBody -> {
-                if (responseBody.getErrors() != null
-                    && "Invalid threadid".equals(responseBody.getErrors().getError())) {
-                  throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid threadid");
-                } else if (responseBody.getArticles().isEmpty() && responseBody.getPageid() > 1) {
-                  throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid pageid");
-                } else if (responseBody.getErrors() != null) {
-                  throw UnexpectedServerResponseException.from(
-                          clientResponse.statusCode(), responseBody.toString())
-                      .build();
-                } else if (responseBody.getArticles().isEmpty()) {
-                  throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Thread not found");
-                }
-              });
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
         });
   }
 
   public Mono<BggArticleV4ResponseBody> getArticle(Integer id) {
+    return getArticleAsJson(id)
+        .map(body -> jsonProcessor.toJavaObject(body, BggArticleV4ResponseBody.class))
+        .doOnNext(responseBody -> {
+          if (responseBody.getErrors() != null
+              && "Invalid article".equals(responseBody.getErrors().getError())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid id");
+          } else if (responseBody.getErrors() != null) {
+            throw new ResponseStatusException(
+                HttpStatus.INTERNAL_SERVER_ERROR, responseBody.getErrors().getError());
+          }
+        });
+  }
+
+  public Mono<String> getArticleAsJson(Integer id) {
     return webClient
         .get()
         .uri(uriBuilder -> uriBuilder.path("/{id}").build(id))
@@ -75,23 +93,15 @@ public class BggArticlesV4Repository {
         .exchangeToMono(clientResponse -> {
           if (clientResponse.statusCode() == HttpStatus.NOT_FOUND) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Article not found");
-          } else if (clientResponse.statusCode() != HttpStatus.OK) {
-            return UnexpectedServerResponseException.from(clientResponse).buildAndThrow();
+          } else if (clientResponse.statusCode() != HttpStatus.OK
+              || clientResponse
+                  .headers()
+                  .contentType()
+                  .filter(MediaType.APPLICATION_JSON::equalsTypeAndSubtype)
+                  .isEmpty()) {
+            throw new UnexpectedBggResponseException(clientResponse);
           }
-          return clientResponse
-              .bodyToMono(String.class)
-              .defaultIfEmpty("")
-              .map(body -> jsonProcessor.toJavaObject(body, BggArticleV4ResponseBody.class))
-              .doOnNext(responseBody -> {
-                if (responseBody.getErrors() != null
-                    && "Invalid article".equals(responseBody.getErrors().getError())) {
-                  throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid id");
-                } else if (responseBody.getErrors() != null) {
-                  throw UnexpectedServerResponseException.from(
-                          clientResponse.statusCode(), responseBody.toString())
-                      .build();
-                }
-              });
+          return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
         });
   }
 }

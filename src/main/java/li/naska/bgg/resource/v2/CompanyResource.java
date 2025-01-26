@@ -1,10 +1,8 @@
 package li.naska.bgg.resource.v2;
 
-import com.boardgamegeek.company.v2.Items;
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggCompanyV2Repository;
 import li.naska.bgg.repository.model.BggCompanyV2QueryParams;
-import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -18,13 +16,10 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api/v2/company")
 public class CompanyResource {
 
-  private final BggCompanyV2Repository companiesRepository;
+  private final BggCompanyV2Repository companyRepository;
 
-  private final XmlProcessor xmlProcessor;
-
-  public CompanyResource(BggCompanyV2Repository companiesRepository, XmlProcessor xmlProcessor) {
-    this.companiesRepository = companiesRepository;
-    this.xmlProcessor = xmlProcessor;
+  public CompanyResource(BggCompanyV2Repository companyRepository) {
+    this.companyRepository = companyRepository;
   }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
@@ -40,9 +35,10 @@ public class CompanyResource {
           """)
   public Mono<String> getCompanies(
       @Validated @ParameterObject BggCompanyV2QueryParams params, ServerHttpRequest request) {
-    boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return companiesRepository
-        .getCompanies(params)
-        .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Items.class));
+    if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {
+      return companyRepository.getItemsAsXml(params);
+    } else {
+      return companyRepository.getItemsAsJson(params);
+    }
   }
 }

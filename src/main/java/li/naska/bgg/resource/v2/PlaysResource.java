@@ -1,11 +1,9 @@
 package li.naska.bgg.resource.v2;
 
-import com.boardgamegeek.plays.v2.Plays;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import li.naska.bgg.repository.BggPlaysV2Repository;
 import li.naska.bgg.repository.model.BggPlaysV2QueryParams;
-import li.naska.bgg.util.XmlProcessor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -21,11 +19,8 @@ public class PlaysResource {
 
   private final BggPlaysV2Repository playsRepository;
 
-  private final XmlProcessor xmlProcessor;
-
-  public PlaysResource(BggPlaysV2Repository playsRepository, XmlProcessor xmlProcessor) {
+  public PlaysResource(BggPlaysV2Repository playsRepository) {
     this.playsRepository = playsRepository;
-    this.xmlProcessor = xmlProcessor;
   }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
@@ -51,9 +46,10 @@ public class PlaysResource {
               url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc10"))
   public Mono<String> getPlays(
       @Validated @ParameterObject BggPlaysV2QueryParams params, ServerHttpRequest request) {
-    boolean keepXml = request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML);
-    return playsRepository
-        .getPlays(params)
-        .map(xml -> keepXml ? xml : xmlProcessor.toJsonString(xml, Plays.class));
+    if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {
+      return playsRepository.getPlaysAsXml(params);
+    } else {
+      return playsRepository.getPlaysAsJson(params);
+    }
   }
 }

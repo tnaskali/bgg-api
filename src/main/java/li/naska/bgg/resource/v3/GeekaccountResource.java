@@ -34,9 +34,8 @@ public class GeekaccountResource {
   public Mono<BggGeekaccountContactV3ResponseBody> getGeekaccountContact(
       @Validated @ParameterObject BggGeekaccountContactV3QueryParams params) {
     return authenticationService
-        .requiredAuthentication()
-        .flatMap(authn ->
-            geekaccountRepository.getGeekaccountContact(authn.buildBggRequestHeader(), params));
+        .authenticationCookieHeaderValue()
+        .flatMap(cookie -> geekaccountRepository.getGeekaccountContact(cookie, params));
   }
 
   @PostMapping(
@@ -66,8 +65,7 @@ public class GeekaccountResource {
   public Mono<BggGeekaccountToplistV3ResponseBody> updateGeekaccountToplist(
       @Validated @RequestBody BggGeekaccountToplistV3RequestBody body) {
     return authenticationService
-        .requiredAuthentication()
-        .flatMap(authn ->
-            geekaccountRepository.updateGeekaccountToplist(authn.buildBggRequestHeader(), body));
+        .authenticationCookieHeaderValue()
+        .flatMap(cookie -> geekaccountRepository.updateGeekaccountToplist(cookie, body));
   }
 }
