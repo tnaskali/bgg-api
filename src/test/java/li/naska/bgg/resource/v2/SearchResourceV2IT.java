@@ -80,20 +80,20 @@ public class SearchResourceV2IT extends AbstractMockServerIT {
           private RecordedRequest recordedRequest;
 
           @BeforeEach
-          public void setup() throws Exception {
+          public void setup() {
             result = test.get();
             recordedRequest = record();
           }
 
           @Test
           @DisplayName("should answer 400")
-          public void should_1() {
+          void should_1() {
             result.expectStatus().isBadRequest();
           }
 
           @Test
           @DisplayName("should not forward request")
-          public void should_2() {
+          void should_2() {
             assertThat(recordedRequest).isNull();
           }
         }
@@ -132,14 +132,14 @@ public class SearchResourceV2IT extends AbstractMockServerIT {
             private RecordedRequest recordedRequest;
 
             @BeforeEach
-            public void setup() throws Exception {
+            public void setup() {
               result = test.get();
               recordedRequest = record();
             }
 
             @Test
             @DisplayName("should forward request")
-            public void should_1() {
+            void should_1() {
               assertThat(recordedRequest).isNotNull();
               assertThat(recordedRequest.getMethod()).isEqualTo(HttpMethod.GET.name());
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT))
@@ -152,13 +152,13 @@ public class SearchResourceV2IT extends AbstractMockServerIT {
 
             @Test
             @DisplayName("should answer 200")
-            public void should_2() throws Exception {
+            void should_2() {
               result.expectStatus().isOk();
             }
 
             @Test
             @DisplayName("should render XML")
-            public void should_3() throws Exception {
+            void should_3() {
               result.expectBody().xml(mockResponseBody);
             }
           }
@@ -180,14 +180,14 @@ public class SearchResourceV2IT extends AbstractMockServerIT {
             private RecordedRequest recordedRequest;
 
             @BeforeEach
-            public void setup() throws Exception {
+            public void setup() {
               result = test.get();
               recordedRequest = record();
             }
 
             @Test
             @DisplayName("should forward request")
-            public void should_1() {
+            void should_1() {
               assertThat(recordedRequest).isNotNull();
               assertThat(recordedRequest.getMethod()).isEqualTo(HttpMethod.GET.name());
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT))
@@ -200,13 +200,13 @@ public class SearchResourceV2IT extends AbstractMockServerIT {
 
             @Test
             @DisplayName("should answer 200")
-            public void should_2() throws Exception {
+            void should_2() {
               result.expectStatus().isOk();
             }
 
             @Test
             @DisplayName("should render JSON")
-            public void should_3() throws Exception {
+            void should_3() {
               result.expectBody().jsonPath("$.items[0].id").isEqualTo(666);
             }
           }

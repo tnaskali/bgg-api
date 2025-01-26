@@ -39,6 +39,7 @@ public abstract class AbstractMockServerIT {
   @DynamicPropertySource
   static void registerProperties(DynamicPropertyRegistry registry) {
     registry.add("bgg.web.baseurl-bgs", () -> mockWebServer.url("/").url().toString());
+    registry.add("bgg.web.baseurl-geekdo", () -> mockWebServer.url("/").url().toString());
   }
 
   protected void dispatch(int responseCode, String mockResponseBody) {
@@ -47,7 +48,7 @@ public abstract class AbstractMockServerIT {
       public @NotNull MockResponse dispatch(@NotNull RecordedRequest request) {
         return new MockResponse()
             .setResponseCode(responseCode)
-            .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_XML_VALUE)
+            .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_XML_VALUE)
             .setBody(mockResponseBody);
       }
     });
