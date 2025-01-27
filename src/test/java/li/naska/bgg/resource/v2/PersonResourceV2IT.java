@@ -64,7 +64,7 @@ public class PersonResourceV2IT extends AbstractMockServerIT {
 
       @BeforeEach
       public void setup() {
-        dispatch(200, mockResponseBody);
+        dispatchXml(200, mockResponseBody);
       }
 
       @Nested
@@ -85,7 +85,7 @@ public class PersonResourceV2IT extends AbstractMockServerIT {
           @BeforeEach
           public void setup() {
             result = test.get();
-            recordedRequest = record();
+            recordedRequest = takeRequest();
           }
 
           @Test
@@ -137,7 +137,7 @@ public class PersonResourceV2IT extends AbstractMockServerIT {
             @BeforeEach
             public void setup() {
               result = test.get();
-              recordedRequest = record();
+              recordedRequest = takeRequest();
             }
 
             @Test
@@ -186,7 +186,7 @@ public class PersonResourceV2IT extends AbstractMockServerIT {
             @BeforeEach
             public void setup() {
               result = test.get();
-              recordedRequest = record();
+              recordedRequest = takeRequest();
             }
 
             @Test

@@ -61,7 +61,7 @@ public class SearchResourceV2IT extends AbstractMockServerIT {
 
       @BeforeEach
       public void setup() {
-        dispatch(200, mockResponseBody);
+        dispatchXml(200, mockResponseBody);
       }
 
       @Nested
@@ -82,7 +82,7 @@ public class SearchResourceV2IT extends AbstractMockServerIT {
           @BeforeEach
           public void setup() {
             result = test.get();
-            recordedRequest = record();
+            recordedRequest = takeRequest();
           }
 
           @Test
@@ -134,7 +134,7 @@ public class SearchResourceV2IT extends AbstractMockServerIT {
             @BeforeEach
             public void setup() {
               result = test.get();
-              recordedRequest = record();
+              recordedRequest = takeRequest();
             }
 
             @Test
@@ -182,7 +182,7 @@ public class SearchResourceV2IT extends AbstractMockServerIT {
             @BeforeEach
             public void setup() {
               result = test.get();
-              recordedRequest = record();
+              recordedRequest = takeRequest();
             }
 
             @Test

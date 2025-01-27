@@ -42,19 +42,31 @@ public abstract class AbstractMockServerIT {
     registry.add("bgg.web.baseurl-geekdo", () -> mockWebServer.url("/").url().toString());
   }
 
-  protected void dispatch(int responseCode, String mockResponseBody) {
+  protected void dispatchXml(int responseCode, String mockResponseBody) {
+    dispatch(responseCode, MediaType.TEXT_XML, mockResponseBody);
+  }
+
+  protected void dispatchJson(int responseCode, String mockResponseBody) {
+    dispatch(responseCode, MediaType.APPLICATION_JSON, mockResponseBody);
+  }
+
+  protected void dispatchHtml(int responseCode, String mockResponseBody) {
+    dispatch(responseCode, MediaType.TEXT_HTML, mockResponseBody);
+  }
+
+  protected void dispatch(int responseCode, MediaType mediaType, String mockResponseBody) {
     mockWebServer.setDispatcher(new Dispatcher() {
       @Override
       public @NotNull MockResponse dispatch(@NotNull RecordedRequest request) {
         return new MockResponse()
             .setResponseCode(responseCode)
-            .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_XML_VALUE)
+            .addHeader(HttpHeaders.CONTENT_TYPE, mediaType)
             .setBody(mockResponseBody);
       }
     });
   }
 
-  protected RecordedRequest record() {
+  protected RecordedRequest takeRequest() {
     try {
       return mockWebServer.takeRequest(500, TimeUnit.MILLISECONDS);
     } catch (InterruptedException e) {
