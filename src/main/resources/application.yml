@@ -10,8 +10,8 @@ bgg:
       geeklist: ${bgg.web.baseurl-bgs}/xmlapi/geeklist
       person: ${bgg.web.baseurl-bgs}/xmlapi/person
       search: ${bgg.web.baseurl-bgs}/xmlapi/search
-      # /xmlapi/thread returns 302 Found towards /rss/thread
-      thread: ${bgg.web.baseurl-bgs}/rss/thread
+      # /xmlapi/thread 302 redirects to /rss/thread
+      thread: ${bgg.web.baseurl-bgs}/xmlapi/thread
     v2:
       collection: ${bgg.web.baseurl-bgs}/xmlapi2/collection
       company: ${bgg.web.baseurl-bgs}/xmlapi2/company
@@ -53,7 +53,7 @@ bgg:
       login: ${bgg.web.baseurl-bgs}/login/api/v1
       search: ${bgg.web.baseurl-bgs}/search
 
-debug: false
+debug: true
 
 server:
   port: 8080
