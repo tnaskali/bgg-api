@@ -53,7 +53,7 @@ bgg:
       login: ${bgg.web.baseurl-bgs}/login/api/v1
       search: ${bgg.web.baseurl-bgs}/search
 
-debug: true
+debug: false
 
 server:
   port: 8080
