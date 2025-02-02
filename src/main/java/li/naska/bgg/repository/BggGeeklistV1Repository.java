@@ -2,6 +2,8 @@ package li.naska.bgg.repository;
 
 import com.boardgamegeek.geeklist.v1.Geeklist;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import li.naska.bgg.exception.BggResponseNotReadyException;
 import li.naska.bgg.exception.UnexpectedBggResponseException;
 import li.naska.bgg.repository.model.BggGeeklistV1QueryParams;
 import li.naska.bgg.util.QueryParameters;
@@ -12,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import reactor.util.retry.Retry;
 
 @Repository
 public class BggGeeklistV1Repository {
@@ -46,7 +49,10 @@ public class BggGeeklistV1Repository {
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK
+          if (clientResponse.statusCode() == HttpStatus.ACCEPTED) {
+            // retry later as BGG might queue the request
+            throw new BggResponseNotReadyException();
+          } else if (clientResponse.statusCode() != HttpStatus.OK
               || clientResponse
                   .headers()
                   .contentType()
@@ -55,6 +61,8 @@ public class BggGeeklistV1Repository {
             throw new UnexpectedBggResponseException(clientResponse);
           }
           return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
-        });
+        })
+        .retryWhen(Retry.backoff(4, Duration.ofSeconds(4))
+            .filter(BggResponseNotReadyException.class::isInstance));
   }
 }

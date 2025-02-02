@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 @Repository
@@ -59,6 +60,15 @@ public class BggBoardgameV1Repository {
             throw new UnexpectedBggResponseException(clientResponse);
           }
           return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
-        });
+        })
+        .doOnNext(body -> xmlProcessor
+            .xPathValue(body, "/boardgames/boardgame/error/@message")
+            .ifPresent(message -> {
+              if (message.equals("Item not found")) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+              } else {
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, message);
+              }
+            }));
   }
 }
