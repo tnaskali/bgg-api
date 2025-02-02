@@ -44,7 +44,7 @@ Prerequisites : have docker installed on your machine
 Steps :
 
 1. run `docker pull ghcr.io/tnaskali/bgg-api:master` (or any other tag)
-2. run `docker run --rm -p 8080:80 tnaskali/bgg-api:master`
+2. run `docker run --rm -p 8080:80 ghcr.io/tnaskali/bgg-api:master`
 3. navigate to http://localhost:8080/bgg-api/swagger-ui.html or http://localhost:8080/bgg-api/graphiql
 
 ## pull and run a docker native image (Linux / MacOS only)
@@ -54,7 +54,7 @@ Prerequisites : have docker installed on your machine
 Steps :
 
 1. run `docker pull ghcr.io/tnaskali/bgg-api-native:master` (or any other tag)
-2. run `docker run --rm -p 8080:8080 tnaskali/bgg-api-native:master`
+2. run `docker run --rm -p 8080:80 ghcr.io/tnaskali/bgg-api-native:master`
 3. navigate to http://localhost:8080/bgg-api/swagger-ui.html or http://localhost:8080/bgg-api/graphiql
 
 # Examples
