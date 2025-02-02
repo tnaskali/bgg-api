@@ -61,7 +61,7 @@ public class FamilyResource {
       externalDocs =
           @ExternalDocumentation(
               description = "original documentation",
-              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc4"))
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc5"))
   public Mono<String> getFamilies(
       @Validated @ParameterObject BggFamilyV2QueryParams params, ServerHttpRequest request) {
     if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {

@@ -37,7 +37,7 @@ public class UserResource {
       externalDocs =
           @ExternalDocumentation(
               description = "original documentation",
-              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc8"))
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc9"))
   public Mono<String> getUser(
       @Validated @ParameterObject BggUserV2QueryParams params, ServerHttpRequest request) {
     if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {

@@ -37,7 +37,7 @@ public class SearchResource {
       externalDocs =
           @ExternalDocumentation(
               description = "original documentation",
-              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc14"))
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc15"))
   public Mono<String> getResults(
       @Validated @ParameterObject BggSearchV2QueryParams params, ServerHttpRequest request) {
     if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {

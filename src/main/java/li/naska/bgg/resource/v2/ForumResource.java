@@ -37,7 +37,7 @@ public class ForumResource {
       externalDocs =
           @ExternalDocumentation(
               description = "original documentation",
-              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc6"))
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc7"))
   public Mono<String> getForum(
       @Validated @ParameterObject BggForumV2QueryParams params, ServerHttpRequest request) {
     if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {

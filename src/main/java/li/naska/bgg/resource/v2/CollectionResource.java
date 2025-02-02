@@ -44,7 +44,7 @@ public class CollectionResource {
       externalDocs =
           @ExternalDocumentation(
               description = "original documentation",
-              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc11"))
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc12"))
   public Mono<String> getCollection(
       @Validated @ParameterObject BggCollectionV2QueryParams params, ServerHttpRequest request) {
     return authenticationService.optionalAuthenticationCookieHeaderValue().flatMap(cookie -> {

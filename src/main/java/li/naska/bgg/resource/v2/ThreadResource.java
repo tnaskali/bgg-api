@@ -37,7 +37,7 @@ public class ThreadResource {
       externalDocs =
           @ExternalDocumentation(
               description = "original documentation",
-              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc7"))
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc8"))
   public Mono<String> getThread(
       @Validated @ParameterObject BggThreadV2QueryParams params, ServerHttpRequest request) {
     if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {

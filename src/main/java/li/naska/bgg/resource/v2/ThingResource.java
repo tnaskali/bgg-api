@@ -37,7 +37,7 @@ public class ThingResource {
       externalDocs =
           @ExternalDocumentation(
               description = "original documentation",
-              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc3"))
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc4"))
   public Mono<String> getThings(
       @Validated @ParameterObject BggThingV2QueryParams params, ServerHttpRequest request) {
     if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {

@@ -37,7 +37,7 @@ public class GuildResource {
       externalDocs =
           @ExternalDocumentation(
               description = "original documentation",
-              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc9"))
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc10"))
   public Mono<String> getGuild(
       @Validated @ParameterObject BggGuildV2QueryParams params, ServerHttpRequest request) {
     if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {

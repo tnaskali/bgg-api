@@ -37,7 +37,7 @@ public class HotResource {
       externalDocs =
           @ExternalDocumentation(
               description = "original documentation",
-              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc12"))
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc13"))
   public Mono<String> getHotItems(
       @Validated @ParameterObject BggHotV2QueryParams params, ServerHttpRequest request) {
     if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {

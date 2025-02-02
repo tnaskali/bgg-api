@@ -43,7 +43,7 @@ public class PlaysResource {
       externalDocs =
           @ExternalDocumentation(
               description = "original documentation",
-              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc10"))
+              url = "https://boardgamegeek.com/wiki/page/BGG_XML_API2#toc11"))
   public Mono<String> getPlays(
       @Validated @ParameterObject BggPlaysV2QueryParams params, ServerHttpRequest request) {
     if (request.getHeaders().getAccept().contains(MediaType.APPLICATION_XML)) {
