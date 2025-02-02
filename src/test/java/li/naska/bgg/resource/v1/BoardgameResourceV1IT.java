@@ -1,14 +1,14 @@
-package li.naska.bgg.resource.v2;
+package li.naska.bgg.resource.v1;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import jakarta.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import li.naska.bgg.resource.AbstractMockServerIT;
 import okhttp3.mockwebserver.RecordedRequest;
+import org.assertj.core.util.TriFunction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -20,55 +20,38 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-@DisplayName("User resource V2")
-public class UserResourceV2IT extends AbstractMockServerIT {
+@DisplayName("Boardgames resource V1")
+public class BoardgameResourceV1IT extends AbstractMockServerIT {
 
   private WebTestClient webTestClient;
 
   @PostConstruct
   private void postConstruct() {
     webTestClient = WebTestClient.bindToServer()
-        .baseUrl("http://localhost:" + port + "/bgg-api/api/v2/user")
+        .baseUrl("http://localhost:" + port + "/bgg-api/api/v1/boardgame/{id}")
         .build();
   }
 
   @Nested
-  @DisplayName("get user")
+  @DisplayName("get boardgame")
   class Do {
 
-    private final BiFunction<MultiValueMap<String, String>, MediaType, WebTestClient.ResponseSpec>
-        partialTest = (MultiValueMap<String, String> params, MediaType mediaType) -> webTestClient
-        .get()
-        .uri(builder -> builder.queryParams(params).build())
-        .accept(mediaType)
-        .acceptCharset(StandardCharsets.UTF_8)
-        .exchange();
+    private final TriFunction<
+            Object, MultiValueMap<String, String>, MediaType, WebTestClient.ResponseSpec>
+        partialTest =
+            (Object id, MultiValueMap<String, String> params, MediaType mediaType) -> webTestClient
+                .get()
+                .uri(builder -> builder.queryParams(params).build(id))
+                .accept(mediaType)
+                .acceptCharset(StandardCharsets.UTF_8)
+                .exchange();
 
     @Nested
-    @DisplayName("given remote repository answers 200")
-    class Given {
+    @DisplayName("given remote repository answers 200 with message Item not found")
+    class Given_1 {
 
       final String mockResponseBody =
-          """
-          <?xml version="1.0" encoding="utf-8"?>
-          <user id="666" name="gandalf" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
-              <firstname value="N/A" />
-              <lastname value="Mithrandir" />
-              <avatarlink value="N/A" />
-              <yearregistered value="2003" />
-              <lastlogin value="" />
-              <stateorprovince value="Unspecified" />
-              <country value="New Zealand" />
-              <webaddress value="" />
-              <xboxaccount value="" />
-              <wiiaccount value="" />
-              <psnaccount value="" />
-              <battlenetaccount value="" />
-              <steamaccount value="" />
-              <traderating value="0" />
-              <marketrating value="0" />
-          </user>
-          """;
+          readFileContent("responses/api/v1/boardgame/200_NOT_FOUND.xml");
 
       @BeforeEach
       public void setup() {
@@ -76,11 +59,49 @@ public class UserResourceV2IT extends AbstractMockServerIT {
       }
 
       @Nested
-      @DisplayName("when invalid parameters")
+      @DisplayName("when valid request")
+      class When {
+
+        private final Supplier<WebTestClient.ResponseSpec> test = () -> Do.this.partialTest.apply(
+            10000000, new LinkedMultiValueMap<>(), MediaType.APPLICATION_XML);
+
+        @Nested
+        @DisplayName("then")
+        class Then {
+
+          private WebTestClient.ResponseSpec result;
+
+          @BeforeEach
+          public void setup() {
+            result = test.get();
+          }
+
+          @Test
+          @DisplayName("should answer 404")
+          void should() {
+            result.expectStatus().isNotFound();
+          }
+        }
+      }
+    }
+
+    @Nested
+    @DisplayName("given remote repository answers 200")
+    class Given_2 {
+
+      final String mockResponseBody = readFileContent("responses/api/v1/boardgame/200_OK.xml");
+
+      @BeforeEach
+      public void setup() {
+        enqueueXml(200, mockResponseBody);
+      }
+
+      @Nested
+      @DisplayName("when invalid path parameter")
       class When_1 {
 
-        private final Supplier<WebTestClient.ResponseSpec> test =
-            () -> Do.this.partialTest.apply(new LinkedMultiValueMap<>(), MediaType.APPLICATION_XML);
+        private final Supplier<WebTestClient.ResponseSpec> test = () -> Do.this.partialTest.apply(
+            "toto", new LinkedMultiValueMap<>(), MediaType.APPLICATION_XML);
 
         @Nested
         @DisplayName("then")
@@ -115,21 +136,8 @@ public class UserResourceV2IT extends AbstractMockServerIT {
       class When_2 {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest =
-            (MediaType mediaType) -> Do.this.partialTest.apply(
-                new LinkedMultiValueMap<>() {
-                  {
-                    add("name", "gandalf");
-                    add("buddies", "1");
-                    add("guilds", "1");
-                    add("hot", "1");
-                    add("top", "1");
-                    add("domain", "boardgame");
-                    add("page", "1");
-                    // undeclared
-                    add("undeclared_param", "abc123");
-                  }
-                },
-                mediaType);
+            (MediaType mediaType) ->
+                Do.this.partialTest.apply(71317, new LinkedMultiValueMap<>(), mediaType);
 
         @Nested
         @DisplayName("when accept XML")
@@ -161,15 +169,7 @@ public class UserResourceV2IT extends AbstractMockServerIT {
                   .isEqualTo(MediaType.APPLICATION_XML_VALUE);
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
                   .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
-              assertThat(recordedRequest.getPath())
-                  .isEqualTo("/xmlapi2/user"
-                      + "?name=gandalf"
-                      + "&buddies=1"
-                      + "&guilds=1"
-                      + "&hot=1"
-                      + "&top=1"
-                      + "&domain=boardgame"
-                      + "&page=1");
+              assertThat(recordedRequest.getPath()).isEqualTo("/xmlapi/boardgame/71317");
             }
 
             @Test
@@ -216,15 +216,7 @@ public class UserResourceV2IT extends AbstractMockServerIT {
                   .isEqualTo(MediaType.APPLICATION_XML_VALUE);
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
                   .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
-              assertThat(recordedRequest.getPath())
-                  .isEqualTo("/xmlapi2/user"
-                      + "?name=gandalf"
-                      + "&buddies=1"
-                      + "&guilds=1"
-                      + "&hot=1"
-                      + "&top=1"
-                      + "&domain=boardgame"
-                      + "&page=1");
+              assertThat(recordedRequest.getPath()).isEqualTo("/xmlapi/boardgame/71317");
             }
 
             @Test
@@ -238,10 +230,10 @@ public class UserResourceV2IT extends AbstractMockServerIT {
             void should_3() {
               result
                   .expectBody()
-                  .jsonPath("$.id")
-                  .isEqualTo(666)
-                  .jsonPath("$.name")
-                  .isEqualTo("gandalf");
+                  .jsonPath("$.boardgames[0].objectid")
+                  .isEqualTo(71317)
+                  .jsonPath("$.boardgames[0].subtypemismatch")
+                  .isEqualTo(true);
             }
           }
         }

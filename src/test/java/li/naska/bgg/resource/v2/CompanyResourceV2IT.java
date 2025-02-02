@@ -69,7 +69,7 @@ public class CompanyResourceV2IT extends AbstractMockServerIT {
 
       @BeforeEach
       public void setup() {
-        dispatchXml(200, mockResponseBody);
+        enqueueXml(200, mockResponseBody);
       }
 
       @Nested

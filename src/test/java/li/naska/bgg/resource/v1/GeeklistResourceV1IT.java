@@ -4,9 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import jakarta.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import li.naska.bgg.resource.AbstractMockServerIT;
+import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.assertj.core.util.TriFunction;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,6 +31,7 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
   private void postConstruct() {
     webTestClient = WebTestClient.bindToServer()
         .baseUrl("http://localhost:" + port + "/bgg-api/api/v1/geeklist/{id}")
+        .responseTimeout(Duration.ofSeconds(20))
         .build();
   }
 
@@ -47,33 +50,65 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
                 .exchange();
 
     @Nested
-    @DisplayName("given remote repository answers 200")
-    class Given {
+    @DisplayName("given remote repository answers 202 and then 200")
+    class Given_1 {
 
-      final String mockResponseBody =
-          """
-          <geeklist id="666" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
-              <postdate>Wed, 12 Mar 2003 18:08:25 +0000</postdate>
-              <postdate_timestamp>1047492505</postdate_timestamp>
-              <editdate>Wed, 12 Mar 2003 18:08:25 +0000</editdate>
-              <editdate_timestamp>1047492505</editdate_timestamp>
-              <thumbs>3</thumbs>
-              <numitems>8</numitems>
-              <username>dlminsac</username>
-              <title>Bodily Functions</title>
-              <description>Games in which bodily functions play a prominant role.  Dedicated to Greg Schloesser.</description>
-              <item\s
-                  id="8414" objecttype="thing" subtype="boardgame" objectid="2940"
-                  objectname="A Dog&#039;s Life" username="dlminsac" postdate="Wed, 12 Mar 2003 18:08:25 +0000"
-                  editdate="Wed, 12 Mar 2003 18:08:25 +0000" thumbs="0" imageid="8508">
-                  <body>Stock up on that water so you can force the other dogs to sniff your pee.</body>
-              </item>
-          </geeklist>
-          """;
+      final String mockAcceptedBody = readFileContent("responses/api/v1/global/202_ACCEPTED.xml");
+      final String mockResponseBody = readFileContent("responses/api/v1/geeklist/200_OK.xml");
 
       @BeforeEach
       public void setup() {
-        dispatchXml(200, mockResponseBody);
+        enqueue(
+            new MockResponse()
+                .setResponseCode(202)
+                .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_XML)
+                .setBody(mockAcceptedBody),
+            new MockResponse()
+                .setResponseCode(202)
+                .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_XML)
+                .setBody(mockAcceptedBody),
+            new MockResponse()
+                .setResponseCode(200)
+                .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_XML)
+                .setBody(mockResponseBody));
+      }
+
+      @Nested
+      @DisplayName("when valid request")
+      class When {
+
+        private final Supplier<WebTestClient.ResponseSpec> test = () ->
+            Do.this.partialTest.apply(1000, new LinkedMultiValueMap<>(), MediaType.APPLICATION_XML);
+
+        @Nested
+        @DisplayName("then")
+        class Then {
+
+          private WebTestClient.ResponseSpec result;
+
+          @BeforeEach
+          public void setup() {
+            result = test.get();
+          }
+
+          @Test
+          @DisplayName("should wait and answer 200")
+          void should() {
+            result.expectStatus().isOk();
+          }
+        }
+      }
+    }
+
+    @Nested
+    @DisplayName("given remote repository answers 200")
+    class Given_2 {
+
+      final String mockResponseBody = readFileContent("responses/api/v1/geeklist/200_OK.xml");
+
+      @BeforeEach
+      public void setup() {
+        enqueueXml(200, mockResponseBody);
       }
 
       @Nested
@@ -116,7 +151,7 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
       class When_2 {
 
         private final Supplier<WebTestClient.ResponseSpec> test = () -> Do.this.partialTest.apply(
-            666,
+            1000,
             new LinkedMultiValueMap<>() {
               {
                 set("comments", "2");
@@ -158,7 +193,7 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest =
             (MediaType mediaType) -> Do.this.partialTest.apply(
-                666,
+                1000,
                 new LinkedMultiValueMap<>() {
                   {
                     add("comments", "1");
@@ -201,7 +236,7 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
                   .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
               assertThat(recordedRequest.getPath())
-                  .isEqualTo("/xmlapi/geeklist/666" + "?comments=1" + "&start=100" + "&count=200");
+                  .isEqualTo("/xmlapi/geeklist/1000?comments=1&start=100&count=200");
             }
 
             @Test
@@ -249,7 +284,7 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
                   .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
               assertThat(recordedRequest.getPath())
-                  .isEqualTo("/xmlapi/geeklist/666" + "?comments=1" + "&start=100" + "&count=200");
+                  .isEqualTo("/xmlapi/geeklist/1000" + "?comments=1" + "&start=100" + "&count=200");
             }
 
             @Test
@@ -261,7 +296,12 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
             @Test
             @DisplayName("should render JSON")
             void should_3() {
-              result.expectBody().jsonPath("$.id").isEqualTo(666);
+              result
+                  .expectBody()
+                  .jsonPath("$.id")
+                  .isEqualTo(1000)
+                  .jsonPath("$.postdate")
+                  .isEqualTo("2003-11-28T16:22:03Z");
             }
           }
         }

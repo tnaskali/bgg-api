@@ -1,0 +1,130 @@
+<boardgames termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+  <boardgame objectid="71317" subtypemismatch="true">
+    <yearpublished></yearpublished>
+    <minplayers></minplayers>
+    <maxplayers></maxplayers>
+    <playingtime></playingtime>
+    <minplaytime></minplaytime>
+    <maxplaytime></maxplaytime>
+    <age></age>
+    <name primary="true" sortindex="1">Ultima Online</name>
+    <name  sortindex="1">UO</name>
+    <description>&amp;quot;Ultima Online (UO) is a graphical massively multiplayer online role-playing game (MMORPG), released on September 25, 1997, by Origin Systems.&lt;br/&gt;&lt;br/&gt;Ultima Online continued the tradition of previous Ultima games in many ways, but due to advancing technology and the simple fact that it was Origin&#039;s first persistent online game, there were many new game mechanics as well. Partially designed as a social and economic experiment, the game had to account for the widespread player interaction as well as deal with the long history of players feeling as if they were the center of attention, as had been the case in single-player games. New to both the developers and the players, a lot that was planned never happened, and a lot that was unexpected did, and many new game mechanics were put in place to compensate.&lt;br/&gt;&amp;quot;&lt;br/&gt;&lt;br/&gt;Source: Wikipedia, &amp;quot;Ultima_Online,&amp;quot; available under the CC-BY-SA License.&lt;br/&gt;&lt;br/&gt;</description>
+    <thumbnail>https://cf.geekdo-images.com/5lHzrI_gfjUmHBEOQCR8vg__thumb/img/Nt3ogY5fmdUGgkI8lXqanGe1E2A=/fit-in/200x150/filters:strip_icc()/pic942924.jpg</thumbnail>
+    <image>https://cf.geekdo-images.com/5lHzrI_gfjUmHBEOQCR8vg__original/img/r3xrgvUctxUrT7qdXg7mMxuWiAM=/0x0/filters:format(jpeg)/pic942924.jpg</image>
+    <videogamehonor objectid="30147">1998 D.I.C.E. Best Massively Multiplayer Game of the Year Winner</videogamehonor>
+    <videogamehonor objectid="30370">1998 D.I.C.E. Best Online Gameplay of the Year Winner</videogamehonor>
+    <videogamehonor objectid="29610">1998 D.I.C.E. Best Gameplay Engineering of the Year Nominee</videogamehonor>
+    <videogamepublisher objectid="11469">Electronic Arts Inc. (EA)</videogamepublisher>
+    <videogamedeveloper objectid="11469">Electronic Arts Inc. (EA)</videogamedeveloper>
+    <videogametheme objectid="2148">Fantasy</videogametheme>
+    <vgcharacterversion objectid="259297">Hellhound</vgcharacterversion>
+    <videogamecharacter objectid="23753">Hellhound (Generic)</videogamecharacter>
+    <videogamemode objectid="2327">Massively Multiplayer</videogamemode>
+    <videogamegenre objectid="2162">MMO</videogamegenre>
+    <videogamedeveloper objectid="12359">Origin Systems Inc.</videogamedeveloper>
+    <videogamegenre objectid="2155">RPG</videogamegenre>
+    <videogamefranchise objectid="5413">Ultima</videogamefranchise>
+    <videogameexpansion objectid="102523">Ultima Online: Age of Shadows</videogameexpansion>
+    <videogameexpansion objectid="102522">Ultima Online: Lord Blackthorn&#039;s Revenge</videogameexpansion>
+    <videogameexpansion objectid="102526">Ultima Online: Mondain&#039;s Legacy</videogameexpansion>
+    <videogameexpansion objectid="102517">Ultima Online: Renaissance</videogameexpansion>
+    <videogameexpansion objectid="102525">Ultima Online: Samurai Empire</videogameexpansion>
+    <videogameexpansion objectid="102528">Ultima Online: Stygian Abyss</videogameexpansion>
+    <videogameexpansion objectid="83551">Ultima Online: The Second Age</videogameexpansion>
+    <videogameexpansion objectid="102520">Ultima Online: Third Dawn</videogameexpansion>
+    <videogameversion objectid="36677">Windows</videogameversion>
+    <videogameplatform objectid="4977">Windows</videogameplatform>
+    <poll name="suggested_numplayers" title="User Suggested Number of Players" totalvotes="0">
+      <results numplayers="0+">
+        <result value="Best" numvotes="0" />
+        <result value="Recommended" numvotes="0" />
+        <result value="Not Recommended" numvotes="0" />
+      </results>
+    </poll>
+    <poll-summary name="suggested_numplayers"  title="User Suggested Number of Players">
+      <result name="bestwith" value="" />
+      <result name="recommmendedwith" value="(no votes)" />
+    </poll-summary>
+    <poll name="language_dependence" title="Language Dependence" totalvotes="0">
+      <results>
+        <result level="1" value="No necessary in-game text" numvotes="0" />
+        <result level="2" value="Some necessary text - easily memorized or small crib sheet" numvotes="0" />
+        <result level="3" value="Moderate in-game text - needs crib sheet or paste ups" numvotes="0" />
+        <result level="4" value="Extensive use of text - massive conversion needed to be playable" numvotes="0" />
+        <result level="5" value="Unplayable in another language" numvotes="0" />
+      </results>
+    </poll>
+    <poll name="suggested_playerage" title="User Suggested Player Age" totalvotes="0">
+      <results>
+        <result value="2" numvotes="0" />
+        <result value="3" numvotes="0" />
+        <result value="4" numvotes="0" />
+        <result value="5" numvotes="0" />
+        <result value="6" numvotes="0" />
+        <result value="8" numvotes="0" />
+        <result value="10" numvotes="0" />
+        <result value="12" numvotes="0" />
+        <result value="14" numvotes="0" />
+        <result value="16" numvotes="0" />
+        <result value="18" numvotes="0" />
+        <result value="21 and up" numvotes="0" />
+      </results>
+    </poll>
+    <comment username="Almafeta" rating="5">Good for its time.</comment>
+    <comment username="Fribian" rating="10">I LOVED this game. It was my 1st ever mmorpg and I have so many stories I could tell people. Those who have never played will never understand. It was unbelievable. I quit playing when they separated the worlds and took the outright PvP out of the game. I would turn up volume to 11 if I could. I played this as a grand master archer, and had a home near the dungeon of Hythloth. </comment>
+    <comment username="Harlekin" rating="10">That was the best game ever created... until they divided the worlds.</comment>
+    <comment username="jaredh" rating="6">Relatively revolutionary in its day...suffered from some early issues that prevented me from getting into it.</comment>
+    <comment username="lukegothic" rating="10">The game that has most accurately represented a model of the reality set in a fantasy world.
+
+      Even thought the world is set in a fantastic setting, the core mechanics and skills make full sense, exceptionally remarkable is the way you gain skill levels by training harder and/or creating more challenging stuff.
+
+      Overall a fully inmersive experience that has brought me back again and again and again, either on the official servers or private ones to replay UO:T2A.
+
+      What do you want to be / Be want you want, is a perfect summary of the game that gives you complete freedom in the way you want to develop your character, and the concept of developing/building/levelling up your character(s) is one of the most powerful features of UO.
+
+      Although this review gives the feeling that this is a solo play, and yes, it is fully capable to play on your own, the human interaction is king here, killing players or being killed and looted of your possesions is a primal experience that is remembered forever. Not for the faint of heart.
+
+      Having player housing available is the cream of the crop, eclipsed by the fact that it was almost imposible to find a spot to place your house, it was one of, it not the first, to have this feature available to players.
+
+      10/10 will play forever.</comment>
+    <comment username="NowOrNever88" rating="4">Only tried Endless Journey briefly but its screen was too small for me to see even after adjusting the resolutions etc. May need to revisit more MMOs after getting a better computer/screen. Also a lot of lag clicking and had to restart the client about 3-4 times. Will leave on WTPlay for now since I didnt truly try it
+
+      Heard it was similar to OSRS with skill based progression as well, so would really like to try, esp since it went F2P after 20 years.
+
+      Also want to try UO Outlands as the supposed best private server for ultima online - edit nevermind, same issue of UI and oldness
+
+      So I revisited both the classic and enhanced UIs in Ultima online in 2019 April, and I really dislike the lack of a good tutorial. In class I was dropped in a city place without them teaching me what anything was. I didn&#039;t realize Papermate or whatever was just stats and even just talking to people is difficult. Then there&#039;s the fact that  the UI is shitty, and you can&#039;t see or enlarge the font in windows plus the coloration is bad. Private servers dont fix this either from googling UO private server Outlands vids as it uses similar source code similar/same ish UI issues. Then there&#039;s the fact that UO seems to be PvP based from what I read, and the janky grid voxel movement with the dpad and clicking and things being generally slow. It feels even more dated than OSRS/RPGMo and not in a good way. I was interested because I heard this had multi-skilling like OSRS/PG, but I dont think the weak/bad UI and such makes it worthwhile to go through all this. Legends of Aria is supposedly a modern/better remake but its p2p, and I&#039;m not sure I want to spend money on that when OSRS/RPGMO hit my tastes and are free plus lots of other F2P mmos and PG which is B2P but still better than 90% of MMOs I try. Anyway, I dont think Ultima online is for me based on this (less than 1 hour played, explored the starting area, saw some creatures, some npcs, tried interacting and moving and overall felt clunky and janky).</comment>
+    <comment username="royabun" rating="N/A">account cancelled</comment>
+    <comment username="seneca29" rating="4">This game is too much similar to a work (3 days before I can play?!?).</comment>
+    <comment username="Twinge" rating="9">An amazing gameplay experience back in 97-98 that can never be recreated.  The fact that UO was practically the only choice available if you wanted to play an MMORPG helped make it a truly unique and interesting experience by forcing all types of players together. The game had *emotion*.
+
+      Nowadays, the mere fact that there are so many choices available means no MMO experience can really compare.  The playerbase has changed drastically over the years too; even my own play style would now conflict with my idyllic UO of yore.
+
+      More thoughts on MMOs: https://www.twitch.tv/videos/82383782
+
+
+      Of course, if you DO still like the idea of an MMO these days, this is not a good place to look; by all accounts the modern game is garbage, even compared to the terrible competition.</comment>
+    <comment username="wourme" rating="8">My first and last MMORPG.</comment>
+    <statistics>
+      <ratings>
+        <usersrated>43</usersrated>
+        <average>7.55907</average>
+        <bayesaverage>6.43072</bayesaverage>
+        <ranks>
+          <rank type="subtype" id="32" name="videogame" friendlyname="Video Game Rank" value="1311" bayesaverage="6.43072" />
+          <rank type="family" id="4977" name="pc" friendlyname="Windows Rank" value="813" bayesaverage="6.56928" />
+        </ranks>
+        <stddev>2.05178</stddev>
+        <median>0</median>
+        <owned>60</owned>
+        <trading>0</trading>
+        <wanting>0</wanting>
+        <wishing>0</wishing>
+        <numcomments>10</numcomments>
+        <numweights>2</numweights>
+        <averageweight>2</averageweight>
+      </ratings>
+    </statistics>
+  </boardgame>
+</boardgames>

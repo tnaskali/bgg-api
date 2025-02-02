@@ -1,4 +1,4 @@
-package li.naska.bgg.resource.v2;
+package li.naska.bgg.resource.v1;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,20 +20,20 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-@DisplayName("User resource V2")
-public class UserResourceV2IT extends AbstractMockServerIT {
+@DisplayName("Search resource V1")
+public class SearchResourceV1IT extends AbstractMockServerIT {
 
   private WebTestClient webTestClient;
 
   @PostConstruct
   private void postConstruct() {
     webTestClient = WebTestClient.bindToServer()
-        .baseUrl("http://localhost:" + port + "/bgg-api/api/v2/user")
+        .baseUrl("http://localhost:" + port + "/bgg-api/api/v1/search")
         .build();
   }
 
   @Nested
-  @DisplayName("get user")
+  @DisplayName("get search")
   class Do {
 
     private final BiFunction<MultiValueMap<String, String>, MediaType, WebTestClient.ResponseSpec>
@@ -48,27 +48,7 @@ public class UserResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody =
-          """
-          <?xml version="1.0" encoding="utf-8"?>
-          <user id="666" name="gandalf" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
-              <firstname value="N/A" />
-              <lastname value="Mithrandir" />
-              <avatarlink value="N/A" />
-              <yearregistered value="2003" />
-              <lastlogin value="" />
-              <stateorprovince value="Unspecified" />
-              <country value="New Zealand" />
-              <webaddress value="" />
-              <xboxaccount value="" />
-              <wiiaccount value="" />
-              <psnaccount value="" />
-              <battlenetaccount value="" />
-              <steamaccount value="" />
-              <traderating value="0" />
-              <marketrating value="0" />
-          </user>
-          """;
+      final String mockResponseBody = readFileContent("responses/api/v1/search/200_OK.xml");
 
       @BeforeEach
       public void setup() {
@@ -76,11 +56,16 @@ public class UserResourceV2IT extends AbstractMockServerIT {
       }
 
       @Nested
-      @DisplayName("when invalid parameters")
+      @DisplayName("when invalid query parameter")
       class When_1 {
 
-        private final Supplier<WebTestClient.ResponseSpec> test =
-            () -> Do.this.partialTest.apply(new LinkedMultiValueMap<>(), MediaType.APPLICATION_XML);
+        private final Supplier<WebTestClient.ResponseSpec> test = () -> Do.this.partialTest.apply(
+            new LinkedMultiValueMap<>() {
+              {
+                add("toto", "tata");
+              }
+            },
+            MediaType.APPLICATION_XML);
 
         @Nested
         @DisplayName("then")
@@ -118,15 +103,8 @@ public class UserResourceV2IT extends AbstractMockServerIT {
             (MediaType mediaType) -> Do.this.partialTest.apply(
                 new LinkedMultiValueMap<>() {
                   {
-                    add("name", "gandalf");
-                    add("buddies", "1");
-                    add("guilds", "1");
-                    add("hot", "1");
-                    add("top", "1");
-                    add("domain", "boardgame");
-                    add("page", "1");
-                    // undeclared
-                    add("undeclared_param", "abc123");
+                    add("search", "corona");
+                    add("exact", "1");
                   }
                 },
                 mediaType);
@@ -162,14 +140,7 @@ public class UserResourceV2IT extends AbstractMockServerIT {
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
                   .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
               assertThat(recordedRequest.getPath())
-                  .isEqualTo("/xmlapi2/user"
-                      + "?name=gandalf"
-                      + "&buddies=1"
-                      + "&guilds=1"
-                      + "&hot=1"
-                      + "&top=1"
-                      + "&domain=boardgame"
-                      + "&page=1");
+                  .isEqualTo("/xmlapi/search?search=corona&exact=1");
             }
 
             @Test
@@ -217,14 +188,7 @@ public class UserResourceV2IT extends AbstractMockServerIT {
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
                   .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
               assertThat(recordedRequest.getPath())
-                  .isEqualTo("/xmlapi2/user"
-                      + "?name=gandalf"
-                      + "&buddies=1"
-                      + "&guilds=1"
-                      + "&hot=1"
-                      + "&top=1"
-                      + "&domain=boardgame"
-                      + "&page=1");
+                  .isEqualTo("/xmlapi/search?search=corona&exact=1");
             }
 
             @Test
@@ -238,10 +202,12 @@ public class UserResourceV2IT extends AbstractMockServerIT {
             void should_3() {
               result
                   .expectBody()
-                  .jsonPath("$.id")
-                  .isEqualTo(666)
-                  .jsonPath("$.name")
-                  .isEqualTo("gandalf");
+                  .jsonPath("$.boardgames[0].objectid")
+                  .isEqualTo(1000)
+                  .jsonPath("$.boardgames[0].name.value")
+                  .isEqualTo("Corona")
+                  .jsonPath("$.boardgames[0].yearpublished")
+                  .isEqualTo(1974);
             }
           }
         }

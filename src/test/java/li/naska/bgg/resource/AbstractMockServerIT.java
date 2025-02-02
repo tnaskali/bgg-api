@@ -1,11 +1,10 @@
 package li.naska.bgg.resource;
 
-import jakarta.validation.constraints.NotNull;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-import okhttp3.mockwebserver.Dispatcher;
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
-import okhttp3.mockwebserver.RecordedRequest;
+import lombok.SneakyThrows;
+import okhttp3.mockwebserver.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,6 +27,7 @@ public abstract class AbstractMockServerIT {
   @BeforeAll
   static void setupMockWebServer() throws Exception {
     mockWebServer = new MockWebServer();
+    mockWebServer.setDispatcher(new QueueDispatcher());
     mockWebServer.start();
   }
 
@@ -42,33 +42,42 @@ public abstract class AbstractMockServerIT {
     registry.add("bgg.web.baseurl-geekdo", () -> mockWebServer.url("/").url().toString());
   }
 
-  protected void dispatchXml(int responseCode, String mockResponseBody) {
-    dispatch(responseCode, MediaType.TEXT_XML, mockResponseBody);
+  protected void enqueueXml(int responseCode, String mockResponseBody) {
+    enqueue(new MockResponse()
+        .setResponseCode(responseCode)
+        .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_XML)
+        .setBody(mockResponseBody));
   }
 
-  protected void dispatchJson(int responseCode, String mockResponseBody) {
-    dispatch(responseCode, MediaType.APPLICATION_JSON, mockResponseBody);
+  protected void enqueueJson(int responseCode, String mockResponseBody) {
+    enqueue(new MockResponse()
+        .setResponseCode(responseCode)
+        .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
+        .setBody(mockResponseBody));
   }
 
-  protected void dispatchHtml(int responseCode, String mockResponseBody) {
-    dispatch(responseCode, MediaType.TEXT_HTML, mockResponseBody);
+  protected void enqueueHtml(int responseCode, String mockResponseBody) {
+    enqueue(new MockResponse()
+        .setResponseCode(responseCode)
+        .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
+        .setBody(mockResponseBody));
   }
 
-  protected void dispatch(int responseCode, MediaType mediaType, String mockResponseBody) {
-    mockWebServer.setDispatcher(new Dispatcher() {
-      @Override
-      public @NotNull MockResponse dispatch(@NotNull RecordedRequest request) {
-        return new MockResponse()
-            .setResponseCode(responseCode)
-            .addHeader(HttpHeaders.CONTENT_TYPE, mediaType)
-            .setBody(mockResponseBody);
-      }
-    });
+  protected void enqueue(MockResponse... responses) {
+    mockWebServer.setDispatcher(new QueueDispatcher());
+    Arrays.stream(responses).forEach(mockWebServer::enqueue);
+  }
+
+  @SneakyThrows
+  protected String readFileContent(String fileName) {
+    return new String(
+        Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(fileName))
+            .readAllBytes());
   }
 
   protected RecordedRequest takeRequest() {
     try {
-      return mockWebServer.takeRequest(500, TimeUnit.MILLISECONDS);
+      return mockWebServer.takeRequest(100, TimeUnit.MILLISECONDS);
     } catch (InterruptedException e) {
       return null;
     }

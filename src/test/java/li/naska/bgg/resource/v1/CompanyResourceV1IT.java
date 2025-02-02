@@ -47,25 +47,52 @@ public class CompanyResourceV1IT extends AbstractMockServerIT {
                 .exchange();
 
     @Nested
-    @DisplayName("given remote repository answers 200")
-    class Given {
+    @DisplayName("given remote repository answers 200 with message Item not found")
+    class Given_1 {
 
-      final String mockResponseBody =
-          """
-          <companies termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
-              <company>
-                  <name>Hans im Glück</name>
-                  <description>Microbadge
-
-           - Hans im Gl&amp;uuml;ck fan
-          </description>
-              </company>
-          </companies>
-          """;
+      final String mockResponseBody = readFileContent("responses/api/v1/company/200_NOT_FOUND.xml");
 
       @BeforeEach
       public void setup() {
-        dispatchXml(200, mockResponseBody);
+        enqueueXml(200, mockResponseBody);
+      }
+
+      @Nested
+      @DisplayName("when valid request")
+      class When {
+
+        private final Supplier<WebTestClient.ResponseSpec> test = () -> Do.this.partialTest.apply(
+            10000000, new LinkedMultiValueMap<>(), MediaType.APPLICATION_XML);
+
+        @Nested
+        @DisplayName("then")
+        class Then {
+
+          private WebTestClient.ResponseSpec result;
+
+          @BeforeEach
+          public void setup() {
+            result = test.get();
+          }
+
+          @Test
+          @DisplayName("should answer 404")
+          void should() {
+            result.expectStatus().isNotFound();
+          }
+        }
+      }
+    }
+
+    @Nested
+    @DisplayName("given remote repository answers 200")
+    class Given_2 {
+
+      final String mockResponseBody = readFileContent("responses/api/v1/company/200_OK.xml");
+
+      @BeforeEach
+      public void setup() {
+        enqueueXml(200, mockResponseBody);
       }
 
       @Nested
@@ -109,7 +136,7 @@ public class CompanyResourceV1IT extends AbstractMockServerIT {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest =
             (MediaType mediaType) ->
-                Do.this.partialTest.apply(133, new LinkedMultiValueMap<>(), mediaType);
+                Do.this.partialTest.apply(22222, new LinkedMultiValueMap<>(), mediaType);
 
         @Nested
         @DisplayName("when accept XML")
@@ -141,7 +168,7 @@ public class CompanyResourceV1IT extends AbstractMockServerIT {
                   .isEqualTo(MediaType.APPLICATION_XML_VALUE);
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
                   .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
-              assertThat(recordedRequest.getPath()).isEqualTo("/xmlapi/company/133");
+              assertThat(recordedRequest.getPath()).isEqualTo("/xmlapi/company/22222");
             }
 
             @Test
@@ -188,7 +215,7 @@ public class CompanyResourceV1IT extends AbstractMockServerIT {
                   .isEqualTo(MediaType.APPLICATION_XML_VALUE);
               assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
                   .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
-              assertThat(recordedRequest.getPath()).isEqualTo("/xmlapi/company/133");
+              assertThat(recordedRequest.getPath()).isEqualTo("/xmlapi/company/22222");
             }
 
             @Test
@@ -200,7 +227,7 @@ public class CompanyResourceV1IT extends AbstractMockServerIT {
             @Test
             @DisplayName("should render JSON")
             void should_3() {
-              result.expectBody().jsonPath("$.companies[0].name").isEqualTo("Hans im Glück");
+              result.expectBody().jsonPath("$.companies[0].name").isEqualTo("Demiurge Studios");
             }
           }
         }

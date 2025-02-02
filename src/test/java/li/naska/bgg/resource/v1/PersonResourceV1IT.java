@@ -47,30 +47,52 @@ public class PersonResourceV1IT extends AbstractMockServerIT {
                 .exchange();
 
     @Nested
-    @DisplayName("given remote repository answers 200")
-    class Given {
+    @DisplayName("given remote repository answers 200 with message Item not found")
+    class Given_1 {
 
-      final String mockResponseBody =
-          """
-          <people termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
-              <person>
-                  <name>Reiner Knizia</name>
-                  <description>Reiner Knizia (born 1957 in Germany) is a full-time game designer who lived for many years in England. He earned a PhD in mathematics and has previously worked in the banking industry. His first published games in 1990 were Gold Digger and Desperados. Since then he has been one of the world&#039;s most prolific game designers with more than 600 games and books published in numerous languages and countries including many global licences such as The Lord of the Rings, Game of Thrones, LEGO, Mensa, Disney, Monopoly, Playmobil, The Simpsons, Asterix, Star Trek and Star Wars. Over 13 million games and books sold worldwide. He is particularly notable for his auction trilogy and his tile-laying trilogy.  His name is pronounced &amp;quot;ry-ner k-NEE-zee-ah&amp;quot;
-
-           Awards\s
-
-               Complete List of Awards
-               2003 Origins Awards Hall of Fame inductee.
-               2008 Kinderspiel des Jahres award for Whoowasit?
-               2008 Spiel des Jahres award for Keltis
-          </description>
-              </person>
-          </people>
-          """;
+      final String mockResponseBody = readFileContent("responses/api/v1/person/200_NOT_FOUND.xml");
 
       @BeforeEach
       public void setup() {
-        dispatchXml(200, mockResponseBody);
+        enqueueXml(200, mockResponseBody);
+      }
+
+      @Nested
+      @DisplayName("when valid request")
+      class When {
+
+        private final Supplier<WebTestClient.ResponseSpec> test = () -> Do.this.partialTest.apply(
+            10000000, new LinkedMultiValueMap<>(), MediaType.APPLICATION_XML);
+
+        @Nested
+        @DisplayName("then")
+        class Then {
+
+          private WebTestClient.ResponseSpec result;
+
+          @BeforeEach
+          public void setup() {
+            result = test.get();
+          }
+
+          @Test
+          @DisplayName("should answer 404")
+          void should() {
+            result.expectStatus().isNotFound();
+          }
+        }
+      }
+    }
+
+    @Nested
+    @DisplayName("given remote repository answers 200")
+    class Given_2 {
+
+      final String mockResponseBody = readFileContent("responses/api/v1/person/200_OK.xml");
+
+      @BeforeEach
+      public void setup() {
+        enqueueXml(200, mockResponseBody);
       }
 
       @Nested
