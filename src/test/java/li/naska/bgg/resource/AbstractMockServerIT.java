@@ -1,71 +1,56 @@
 package li.naska.bgg.resource;
 
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+
+import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
+import com.github.tomakehurst.wiremock.matching.RequestPatternBuilder;
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 import lombok.SneakyThrows;
-import okhttp3.mockwebserver.*;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
+import org.wiremock.spring.ConfigureWireMock;
+import org.wiremock.spring.EnableWireMock;
+import org.wiremock.spring.InjectWireMock;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@DirtiesContext
+@EnableWireMock({@ConfigureWireMock(name = "bgg-service", baseUrlProperties = "bgg.web.baseurl-bgs")
+})
 public abstract class AbstractMockServerIT {
 
-  protected static MockWebServer mockWebServer;
+  @InjectWireMock("bgg-service")
+  protected WireMockServer wireMock;
 
   @LocalServerPort
   protected int port;
 
-  @BeforeAll
-  static void setupMockWebServer() throws Exception {
-    mockWebServer = new MockWebServer();
-    mockWebServer.setDispatcher(new QueueDispatcher());
-    mockWebServer.start();
-  }
-
-  @AfterAll
-  static void teardownMockWebServer() throws Exception {
-    mockWebServer.shutdown();
-  }
-
-  @DynamicPropertySource
-  static void registerProperties(DynamicPropertyRegistry registry) {
-    registry.add("bgg.web.baseurl-bgs", () -> mockWebServer.url("/").url().toString());
-    registry.add("bgg.web.baseurl-geekdo", () -> mockWebServer.url("/").url().toString());
-  }
-
   protected void enqueueXml(int responseCode, String mockResponseBody) {
-    enqueue(new MockResponse()
-        .setResponseCode(responseCode)
-        .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_XML)
-        .setBody(mockResponseBody));
+    enqueue(aResponse()
+        .withStatus(responseCode)
+        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_XML_VALUE)
+        .withBody(mockResponseBody));
   }
 
   protected void enqueueJson(int responseCode, String mockResponseBody) {
-    enqueue(new MockResponse()
-        .setResponseCode(responseCode)
-        .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
-        .setBody(mockResponseBody));
+    enqueue(aResponse()
+        .withStatus(responseCode)
+        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+        .withBody(mockResponseBody));
   }
 
   protected void enqueueHtml(int responseCode, String mockResponseBody) {
-    enqueue(new MockResponse()
-        .setResponseCode(responseCode)
-        .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML)
-        .setBody(mockResponseBody));
+    enqueue(aResponse()
+        .withStatus(responseCode)
+        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML_VALUE)
+        .withBody(mockResponseBody));
   }
 
-  protected void enqueue(MockResponse... responses) {
-    mockWebServer.setDispatcher(new QueueDispatcher());
-    Arrays.stream(responses).forEach(mockWebServer::enqueue);
+  protected void enqueue(ResponseDefinitionBuilder... responses) {
+    Arrays.stream(responses)
+        .forEach(response -> wireMock.stubFor(get(anyUrl()).willReturn(response)));
   }
 
   @SneakyThrows
@@ -75,11 +60,7 @@ public abstract class AbstractMockServerIT {
             .readAllBytes());
   }
 
-  protected RecordedRequest takeRequest() {
-    try {
-      return mockWebServer.takeRequest(100, TimeUnit.MILLISECONDS);
-    } catch (InterruptedException e) {
-      return null;
-    }
+  protected void verify(int count, RequestPatternBuilder requestPatternBuilder) {
+    wireMock.verify(count, requestPatternBuilder);
   }
 }

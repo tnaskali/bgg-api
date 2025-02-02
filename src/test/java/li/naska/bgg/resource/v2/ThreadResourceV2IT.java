@@ -1,6 +1,7 @@
 package li.naska.bgg.resource.v2;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
 
 import jakarta.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
@@ -8,13 +9,11 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import li.naska.bgg.resource.AbstractMockServerIT;
-import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.util.LinkedMultiValueMap;
@@ -84,12 +83,9 @@ public class ThreadResourceV2IT extends AbstractMockServerIT {
 
           private WebTestClient.ResponseSpec result;
 
-          private RecordedRequest recordedRequest;
-
           @BeforeEach
           public void setup() {
             result = test.get();
-            recordedRequest = takeRequest();
           }
 
           @Test
@@ -101,7 +97,7 @@ public class ThreadResourceV2IT extends AbstractMockServerIT {
           @Test
           @DisplayName("should not forward request")
           void should_2() {
-            assertThat(recordedRequest).isNull();
+            verify(0, getRequestedFor(anyUrl()));
           }
         }
       }
@@ -138,30 +134,23 @@ public class ThreadResourceV2IT extends AbstractMockServerIT {
 
             private WebTestClient.ResponseSpec result;
 
-            private RecordedRequest recordedRequest;
-
             @BeforeEach
             public void setup() {
               result = test.get();
-              recordedRequest = takeRequest();
             }
 
             @Test
             @DisplayName("should forward request")
             void should_1() {
-              assertThat(recordedRequest).isNotNull();
-              assertThat(recordedRequest.getMethod()).isEqualTo(HttpMethod.GET.name());
-              assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT))
-                  .isEqualTo(MediaType.APPLICATION_XML_VALUE);
-              assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
-                  .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
-              assertThat(recordedRequest.getPath())
-                  .isEqualTo("/xmlapi2/thread"
-                      + "?id=666"
-                      + "&minarticleid=100"
-                      + "&minarticledate=2021-01-31%2000:00:00"
-                      + "&count=1"
-                      + "&username=gandalf");
+              verify(
+                  1,
+                  getRequestedFor(
+                          urlEqualTo(
+                              "/xmlapi2/thread?id=666&minarticleid=100&minarticledate=2021-01-31%2000:00:00&count=1&username=gandalf"))
+                      .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
+                      .withHeader(
+                          HttpHeaders.ACCEPT_CHARSET,
+                          equalTo(StandardCharsets.UTF_8.displayName().toLowerCase())));
             }
 
             @Test
@@ -191,30 +180,23 @@ public class ThreadResourceV2IT extends AbstractMockServerIT {
 
             private WebTestClient.ResponseSpec result;
 
-            private RecordedRequest recordedRequest;
-
             @BeforeEach
             public void setup() {
               result = test.get();
-              recordedRequest = takeRequest();
             }
 
             @Test
             @DisplayName("should forward request")
             void should_1() {
-              assertThat(recordedRequest).isNotNull();
-              assertThat(recordedRequest.getMethod()).isEqualTo(HttpMethod.GET.name());
-              assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT))
-                  .isEqualTo(MediaType.APPLICATION_XML_VALUE);
-              assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
-                  .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
-              assertThat(recordedRequest.getPath())
-                  .isEqualTo("/xmlapi2/thread"
-                      + "?id=666"
-                      + "&minarticleid=100"
-                      + "&minarticledate=2021-01-31%2000:00:00"
-                      + "&count=1"
-                      + "&username=gandalf");
+              verify(
+                  1,
+                  getRequestedFor(
+                          urlEqualTo(
+                              "/xmlapi2/thread?id=666&minarticleid=100&minarticledate=2021-01-31%2000:00:00&count=1&username=gandalf"))
+                      .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
+                      .withHeader(
+                          HttpHeaders.ACCEPT_CHARSET,
+                          equalTo(StandardCharsets.UTF_8.displayName().toLowerCase())));
             }
 
             @Test

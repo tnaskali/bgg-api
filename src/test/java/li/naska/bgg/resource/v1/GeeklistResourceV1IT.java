@@ -1,22 +1,20 @@
 package li.naska.bgg.resource.v1;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
+import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import jakarta.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import li.naska.bgg.resource.AbstractMockServerIT;
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.RecordedRequest;
 import org.assertj.core.util.TriFunction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.util.LinkedMultiValueMap;
@@ -59,18 +57,18 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
       @BeforeEach
       public void setup() {
         enqueue(
-            new MockResponse()
-                .setResponseCode(202)
-                .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_XML)
-                .setBody(mockAcceptedBody),
-            new MockResponse()
-                .setResponseCode(202)
-                .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_XML)
-                .setBody(mockAcceptedBody),
-            new MockResponse()
-                .setResponseCode(200)
-                .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_XML)
-                .setBody(mockResponseBody));
+            new ResponseDefinitionBuilder()
+                .withStatus(202)
+                .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_XML_VALUE)
+                .withBody(mockAcceptedBody),
+            new ResponseDefinitionBuilder()
+                .withStatus(202)
+                .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_XML_VALUE)
+                .withBody(mockAcceptedBody),
+            new ResponseDefinitionBuilder()
+                .withStatus(200)
+                .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_XML_VALUE)
+                .withBody(mockResponseBody));
       }
 
       @Nested
@@ -124,12 +122,9 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
 
           private WebTestClient.ResponseSpec result;
 
-          private RecordedRequest recordedRequest;
-
           @BeforeEach
           public void setup() {
             result = test.get();
-            recordedRequest = takeRequest();
           }
 
           @Test
@@ -141,7 +136,7 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
           @Test
           @DisplayName("should not forward request")
           void should_2() {
-            assertThat(recordedRequest).isNull();
+            verify(0, getRequestedFor(anyUrl()));
           }
         }
       }
@@ -165,12 +160,9 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
 
           private WebTestClient.ResponseSpec result;
 
-          private RecordedRequest recordedRequest;
-
           @BeforeEach
           public void setup() {
             result = test.get();
-            recordedRequest = takeRequest();
           }
 
           @Test
@@ -182,7 +174,7 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
           @Test
           @DisplayName("should not forward request")
           void should_2() {
-            assertThat(recordedRequest).isNull();
+            verify(0, getRequestedFor(anyUrl()));
           }
         }
       }
@@ -218,25 +210,22 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
 
             private WebTestClient.ResponseSpec result;
 
-            private RecordedRequest recordedRequest;
-
             @BeforeEach
             public void setup() {
               result = test.get();
-              recordedRequest = takeRequest();
             }
 
             @Test
             @DisplayName("should forward request")
             void should_1() {
-              assertThat(recordedRequest).isNotNull();
-              assertThat(recordedRequest.getMethod()).isEqualTo(HttpMethod.GET.name());
-              assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT))
-                  .isEqualTo(MediaType.APPLICATION_XML_VALUE);
-              assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
-                  .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
-              assertThat(recordedRequest.getPath())
-                  .isEqualTo("/xmlapi/geeklist/1000?comments=1&start=100&count=200");
+              verify(
+                  1,
+                  getRequestedFor(
+                          urlEqualTo("/xmlapi/geeklist/1000?comments=1&start=100&count=200"))
+                      .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
+                      .withHeader(
+                          HttpHeaders.ACCEPT_CHARSET,
+                          equalTo(StandardCharsets.UTF_8.displayName().toLowerCase())));
             }
 
             @Test
@@ -266,25 +255,22 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
 
             private WebTestClient.ResponseSpec result;
 
-            private RecordedRequest recordedRequest;
-
             @BeforeEach
             public void setup() {
               result = test.get();
-              recordedRequest = takeRequest();
             }
 
             @Test
             @DisplayName("should forward request")
             void should_1() {
-              assertThat(recordedRequest).isNotNull();
-              assertThat(recordedRequest.getMethod()).isEqualTo(HttpMethod.GET.name());
-              assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT))
-                  .isEqualTo(MediaType.APPLICATION_XML_VALUE);
-              assertThat(recordedRequest.getHeader(HttpHeaders.ACCEPT_CHARSET))
-                  .isEqualTo(StandardCharsets.UTF_8.displayName().toLowerCase());
-              assertThat(recordedRequest.getPath())
-                  .isEqualTo("/xmlapi/geeklist/1000" + "?comments=1" + "&start=100" + "&count=200");
+              verify(
+                  1,
+                  getRequestedFor(
+                          urlEqualTo("/xmlapi/geeklist/1000?comments=1&start=100&count=200"))
+                      .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
+                      .withHeader(
+                          HttpHeaders.ACCEPT_CHARSET,
+                          equalTo(StandardCharsets.UTF_8.displayName().toLowerCase())));
             }
 
             @Test
