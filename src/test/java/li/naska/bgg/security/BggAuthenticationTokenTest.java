@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class BggAuthenticationTokenTest {
 
   @Test
-  public void authentication_WhenCookiesArePresent_ShouldBeSuccessful() {
+  void authentication_WhenCookiesArePresent_ShouldBeSuccessful() {
     String username = "foo";
     String password = "bar";
     String sessionIdCookie =
@@ -30,7 +30,7 @@ class BggAuthenticationTokenTest {
   }
 
   @Test
-  public void authentication_WhenUsernameCookieIsMissing_ShouldFail() {
+  void authentication_WhenUsernameCookieIsMissing_ShouldFail() {
     String username = "foo";
     String password = "bar";
     String sessionIdCookie =
@@ -44,7 +44,7 @@ class BggAuthenticationTokenTest {
   }
 
   @Test
-  public void authentication_WhenPasswordCookieIsMissing_ShouldFail() {
+  void authentication_WhenPasswordCookieIsMissing_ShouldFail() {
     String username = "foo";
     String password = "bar";
     String sessionIdCookie =
@@ -58,7 +58,7 @@ class BggAuthenticationTokenTest {
   }
 
   @Test
-  public void authentication_WhenSessionIdCookieIsMissing_ShouldFail() {
+  void authentication_WhenSessionIdCookieIsMissing_ShouldFail() {
     String username = "foo";
     String password = "bar";
     String usernameCookie =

@@ -4,9 +4,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.authority.AuthorityUtils;
 
+@EqualsAndHashCode(callSuper = true)
 public class BggAuthenticationToken extends AbstractAuthenticationToken {
 
   private static final Pattern SESSIONID_COOKIE_PATTERN = Pattern.compile("^SessionID=([^;]+);");
@@ -17,8 +20,10 @@ public class BggAuthenticationToken extends AbstractAuthenticationToken {
   private static final Pattern BGGPASSWORD_COOKIE_PATTERN =
       Pattern.compile("^bggpassword=([^;]+);");
 
+  @Getter
   private final String bggUsername;
 
+  @Getter
   private final String bggPassword;
 
   private final String username;
@@ -69,14 +74,6 @@ public class BggAuthenticationToken extends AbstractAuthenticationToken {
   @Override
   public String getCredentials() {
     return password;
-  }
-
-  public String getBggUsername() {
-    return bggUsername;
-  }
-
-  public String getBggPassword() {
-    return bggPassword;
   }
 
   @Override

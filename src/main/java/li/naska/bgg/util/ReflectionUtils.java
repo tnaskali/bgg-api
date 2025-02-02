@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 import lombok.SneakyThrows;
+import lombok.experimental.UtilityClass;
 
-public final class ReflectionUtils {
+@UtilityClass
+public class ReflectionUtils {
 
   @SneakyThrows
   public static @NotNull Class<?> getClass(@NotNull String className) {
