@@ -1,12 +1,11 @@
 package li.naska.bgg.util;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.experimental.UtilityClass;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.stream.Stream;
+import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class ClasspathUtils {
