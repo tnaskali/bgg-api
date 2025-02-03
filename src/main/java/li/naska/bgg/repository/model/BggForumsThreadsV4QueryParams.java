@@ -27,7 +27,7 @@ public class BggForumsThreadsV4QueryParams {
 
   @NotNull
   @Pattern(
-      regexp = "^(company|component|event|family|media|person|property|thing|version|weblink)$")
+      regexp = "^(?:company|component|event|family|media|person|property|thing|version|weblink)$")
   @Parameter(
       example = "thing",
       description =
@@ -80,7 +80,7 @@ public class BggForumsThreadsV4QueryParams {
       schema = @Schema(defaultValue = "1"))
   private Integer showcount;
 
-  @Pattern(regexp = "^(hot|recent)$")
+  @Pattern(regexp = "^(?:hot|recent)$")
   @Parameter(
       description =
           """

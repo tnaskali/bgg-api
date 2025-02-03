@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class BggBlogpostsV4QueryParams {
 
-  @Pattern(regexp = "^(hot|recent)$")
+  @Pattern(regexp = "^(?:hot|recent)$")
   @Parameter(
       description =
           """
@@ -24,7 +24,7 @@ public class BggBlogpostsV4QueryParams {
       schema = @Schema(defaultValue = "recent"))
   private String sort;
 
-  @Pattern(regexp = "^(alltime|today|twodays|last7|last30|year)$")
+  @Pattern(regexp = "^(?:alltime|today|twodays|last7|last30|year)$")
   @Parameter(
       description =
           """

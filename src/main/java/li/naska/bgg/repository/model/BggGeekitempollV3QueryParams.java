@@ -10,7 +10,7 @@ import lombok.Data;
 public class BggGeekitempollV3QueryParams {
 
   @NotNull
-  @Pattern(regexp = "^(view)$")
+  @Pattern(regexp = "^view$")
   @Parameter(
       example = "view",
       description =
@@ -24,7 +24,7 @@ public class BggGeekitempollV3QueryParams {
 
   @NotNull
   @Pattern(
-      regexp = "^(boardgamesubdomain|boardgameweight|languagedependence|numplayers|playerage)$")
+      regexp = "^(?:boardgamesubdomain|boardgameweight|languagedependence|numplayers|playerage)$")
   @Parameter(
       example = "boardgamesubdomain",
       description =
@@ -48,7 +48,7 @@ public class BggGeekitempollV3QueryParams {
   private Integer objectid;
 
   @NotNull
-  @Pattern(regexp = "^(thing)$")
+  @Pattern(regexp = "^thing$")
   @Parameter(example = "thing", description = """
           Object type.
           """)

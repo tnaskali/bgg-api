@@ -39,7 +39,7 @@ public class BggGuildV2QueryParams {
           """)
   private Integer members;
 
-  @Pattern(regexp = "^(username|date)$")
+  @Pattern(regexp = "^(?:username|date)$")
   @Parameter(
       description =
           """

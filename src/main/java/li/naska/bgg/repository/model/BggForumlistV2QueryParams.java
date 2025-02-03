@@ -26,7 +26,7 @@ public class BggForumlistV2QueryParams {
 
   @NotNull
   @Pattern(
-      regexp = "^(company|component|event|family|media|person|property|thing|version|weblink)$")
+      regexp = "^(?:company|component|event|family|media|person|property|thing|version|weblink)$")
   @Parameter(
       example = "family",
       description =

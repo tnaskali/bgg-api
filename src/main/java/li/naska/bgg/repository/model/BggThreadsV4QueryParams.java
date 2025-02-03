@@ -11,7 +11,7 @@ import lombok.Data;
 public class BggThreadsV4QueryParams {
 
   @NotNull
-  @Pattern(regexp = "^(listing)$")
+  @Pattern(regexp = "^listing$")
   @Parameter(
       example = "listing",
       description =
@@ -27,7 +27,7 @@ public class BggThreadsV4QueryParams {
   private String partial;
 
   @NotNull
-  @Pattern(regexp = "^(regions|things)$")
+  @Pattern(regexp = "^(?:regions|things)$")
   @Parameter(
       example = "regions",
       description =
@@ -57,7 +57,7 @@ public class BggThreadsV4QueryParams {
           """)
   private Integer assocItemId;
 
-  @Pattern(regexp = "^(active|hot|recent)$")
+  @Pattern(regexp = "^(?:active|hot|recent)$")
   @Parameter(
       description =
           """
@@ -74,7 +74,7 @@ public class BggThreadsV4QueryParams {
       schema = @Schema(defaultValue = "active"))
   private String sort;
 
-  @Pattern(regexp = "^(alltime|today|twodays|last7|last30|year)$")
+  @Pattern(regexp = "^(?:alltime|today|twodays|last7|last30|year)$")
   @Parameter(
       description =
           """

@@ -26,7 +26,7 @@ public class BggGeekitemRecsV4QueryParams {
 
   @NotNull
   @Pattern(
-      regexp = "^(company|component|event|family|media|person|property|thing|version|weblink)$")
+      regexp = "^(?:company|component|event|family|media|person|property|thing|version|weblink)$")
   @Parameter(
       example = "thing",
       description =

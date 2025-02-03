@@ -9,7 +9,7 @@ import lombok.Data;
 public class BggGeekaccountContactV3QueryParams {
 
   @NotNull
-  @Pattern(regexp = "^(editcontact)$")
+  @Pattern(regexp = "^editcontact$")
   @Parameter(
       example = "editcontact",
       description =

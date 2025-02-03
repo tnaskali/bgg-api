@@ -12,7 +12,7 @@ import lombok.Data;
 public class BggGeekaccountToplistV3RequestBody {
 
   @NotNull
-  @Pattern(regexp = "^(savetoplistitem|deletetoplistitem|savetoplistorder)$")
+  @Pattern(regexp = "^(?:savetoplistitem|deletetoplistitem|savetoplistorder)$")
   @Parameter(
       example = "savetoplistitem",
       description =
@@ -27,7 +27,7 @@ public class BggGeekaccountToplistV3RequestBody {
   private String action;
 
   @NotNull
-  @Pattern(regexp = "^(hot|top)$")
+  @Pattern(regexp = "^(?:hot|top)$")
   @Parameter(
       example = "top",
       description =
@@ -41,7 +41,7 @@ public class BggGeekaccountToplistV3RequestBody {
   private String listtype;
 
   @NotNull
-  @Pattern(regexp = "^(boardgame|rpg|videogame)$")
+  @Pattern(regexp = "^(?:boardgame|rpg|videogame)$")
   @Parameter(
       example = "boardgame",
       description =
@@ -75,7 +75,7 @@ public class BggGeekaccountToplistV3RequestBody {
   private Integer objectid;
 
   @Pattern(
-      regexp = "^(company|component|event|family|media|person|property|thing|version|weblink)$")
+      regexp = "^(?:company|component|event|family|media|person|property|thing|version|weblink)$")
   @Parameter(
       example = "thing",
       description =

@@ -40,7 +40,7 @@ public class BggCollectionV2QueryParams {
 
   @Pattern(
       regexp =
-          "^(boardgame|boardgameaccessory|boardgameexpansion|boardgameissue|rpgissue|rpgitem|videogame|videogamecompilation|videogameexpansion|videogamehardware)$")
+          "^(?:boardgame|boardgameaccessory|boardgameexpansion|boardgameissue|rpgissue|rpgitem|videogame|videogamecompilation|videogameexpansion|videogamehardware)$")
   @Parameter(
       description =
           """
@@ -69,7 +69,7 @@ public class BggCollectionV2QueryParams {
 
   @Pattern(
       regexp =
-          "^(boardgame|boardgameaccessory|boardgameexpansion|boardgameissue|rpgissue|rpgitem|videogame|videogamecompilation|videogameexpansion|videogamehardware)$")
+          "^(?:boardgame|boardgameaccessory|boardgameexpansion|boardgameissue|rpgissue|rpgitem|videogame|videogamecompilation|videogameexpansion|videogamehardware)$")
   @Parameter(
       example = "boardgameexpansion",
       description =
@@ -94,7 +94,7 @@ public class BggCollectionV2QueryParams {
           """)
   private String excludesubtype;
 
-  @Pattern(regexp = "^[1-9][0-9]*(?:,[1-9][0-9]*)*+$")
+  @Pattern(regexp = "^[1-9]\\d*(?:,[1-9]\\d*)*+$")
   @Parameter(
       example = "16499",
       description =
@@ -434,7 +434,7 @@ public class BggCollectionV2QueryParams {
 
   @Pattern(
       regexp =
-          "^([1-2][0-9])?[0-9][0-9]-[0-1][0-9]-[0-3][0-9]( [0-9][0-9]:[0-9][0-9]:[0-9][0-9])?$")
+          "^(?:[12]\\d)?\\d{2}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])(?: (?:0\\d|1\\d|2[0-3]):[0-5]\\d:[0-5]\\d)?$")
   @Parameter(
       example = "2008-08-09 12:00:00",
       description =

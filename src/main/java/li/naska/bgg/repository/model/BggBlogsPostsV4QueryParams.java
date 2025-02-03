@@ -24,7 +24,7 @@ public class BggBlogsPostsV4QueryParams {
   private Integer objectid;
 
   @Pattern(
-      regexp = "^(company|component|event|family|media|person|property|thing|version|weblink)$")
+      regexp = "^(?:company|component|event|family|media|person|property|thing|version|weblink)$")
   @Parameter(
       example = "thing",
       description =
@@ -91,7 +91,7 @@ public class BggBlogsPostsV4QueryParams {
       schema = @Schema(defaultValue = "10"))
   private Integer showcount;
 
-  @Pattern(regexp = "^(hot|recent)$")
+  @Pattern(regexp = "^(?:hot|recent)$")
   @Parameter(
       description =
           """
@@ -107,7 +107,7 @@ public class BggBlogsPostsV4QueryParams {
       schema = @Schema(defaultValue = "recent"))
   private String sort;
 
-  @Pattern(regexp = "^(alltime|today|twodays|last7|last30|year)$")
+  @Pattern(regexp = "^(?:alltime|today|twodays|last7|last30|year)$")
   @Parameter(
       description =
           """

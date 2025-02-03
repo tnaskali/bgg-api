@@ -9,7 +9,7 @@ import lombok.Data;
 public class BggFamilyV2QueryParams {
 
   @NotNull
-  @Pattern(regexp = "^[1-9][0-9]*(?:,[1-9][0-9]*)*+$")
+  @Pattern(regexp = "^[1-9]\\d*(?:,[1-9]\\d*)*+$")
   @Parameter(
       example = "8590,62408",
       description =
@@ -24,7 +24,7 @@ public class BggFamilyV2QueryParams {
 
   @Pattern(
       regexp =
-          "^(award|awardcategory|awardset|bgaccessoryfamily|boardgamefamily|boardgamehonor|boardgameperiodical|boardgamepodcast|boardgamesubdomain|cardset|puzzlecategory|puzzlefamily|puzzlehonor|puzzlematerial|puzzlemechanism|puzzletype|rpg|rpgfamily|rpggenre|rpghonor|rpgperiodical|rpgpodcast|rpgseries|rpgsetting|rpgsystem|videogamecharacter|videogamefranchise|videogamehonor|videogameplatform|videogameseries)(,(award|awardcategory|awardset|bgaccessoryfamily|boardgamefamily|boardgamehonor|boardgameperiodical|boardgamepodcast|boardgamesubdomain|cardset|puzzlecategory|puzzlefamily|puzzlehonor|puzzlematerial|puzzlemechanism|puzzletype|rpg|rpgfamily|rpggenre|rpghonor|rpgperiodical|rpgpodcast|rpgseries|rpgsetting|rpgsystem|videogamecharacter|videogamefranchise|videogamehonor|videogameplatform|videogameseries))*$")
+          "^(?:award|awardcategory|awardset|bgaccessoryfamily|boardgamefamily|boardgamehonor|boardgameperiodical|boardgamepodcast|boardgamesubdomain|cardset|puzzlecategory|puzzlefamily|puzzlehonor|puzzlematerial|puzzlemechanism|puzzletype|rpg|rpgfamily|rpggenre|rpghonor|rpgperiodical|rpgpodcast|rpgseries|rpgsetting|rpgsystem|videogamecharacter|videogamefranchise|videogamehonor|videogameplatform|videogameseries)(?:,(?:award|awardcategory|awardset|bgaccessoryfamily|boardgamefamily|boardgamehonor|boardgameperiodical|boardgamepodcast|boardgamesubdomain|cardset|puzzlecategory|puzzlefamily|puzzlehonor|puzzlematerial|puzzlemechanism|puzzletype|rpg|rpgfamily|rpggenre|rpghonor|rpgperiodical|rpgpodcast|rpgseries|rpgsetting|rpgsystem|videogamecharacter|videogamefranchise|videogamehonor|videogameplatform|videogameseries))*$")
   @Parameter(
       example = "award,boardgamefamily",
       description =

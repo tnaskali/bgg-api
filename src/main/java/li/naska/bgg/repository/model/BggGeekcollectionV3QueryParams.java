@@ -11,7 +11,7 @@ import lombok.Data;
 public class BggGeekcollectionV3QueryParams {
 
   @NotNull
-  @Pattern(regexp = "^(exportcsv)$")
+  @Pattern(regexp = "^exportcsv$")
   @Parameter(
       example = "exportcsv",
       description =
@@ -24,7 +24,7 @@ public class BggGeekcollectionV3QueryParams {
   private String action;
 
   @NotNull
-  @Pattern(regexp = "^(boardgame|rpg|videogame)$")
+  @Pattern(regexp = "^(?:boardgame|rpg|videogame)$")
   @Parameter(
       example = "boardgame",
       description =
@@ -67,7 +67,7 @@ public class BggGeekcollectionV3QueryParams {
   private Integer ajax;
 
   @Deprecated
-  @Pattern(regexp = "^(csv)$")
+  @Pattern(regexp = "^csv$")
   @Parameter(
       description =
           """

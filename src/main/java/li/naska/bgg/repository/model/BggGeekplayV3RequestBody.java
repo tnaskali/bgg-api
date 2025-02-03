@@ -25,7 +25,7 @@ public class BggGeekplayV3RequestBody {
   private Integer ajax;
 
   @NotNull
-  @Pattern(regexp = "^(save|delete)$")
+  @Pattern(regexp = "^(?:save|delete)$")
   @Parameter(
       example = "save",
       description =

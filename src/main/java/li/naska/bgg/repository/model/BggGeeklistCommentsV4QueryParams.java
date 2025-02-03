@@ -35,7 +35,7 @@ public class BggGeeklistCommentsV4QueryParams {
           """)
   private Integer commentid;
 
-  @Pattern(regexp = "^(backward)$")
+  @Pattern(regexp = "^backward$")
   @Parameter(
       example = "backward",
       description =

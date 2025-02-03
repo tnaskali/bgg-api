@@ -35,7 +35,7 @@ public class BggBlogpostCommentsV4QueryParams {
           """)
   private Integer perPage;
 
-  @Pattern(regexp = "^(backward)$")
+  @Pattern(regexp = "^backward$")
   @Parameter(
       example = "backward",
       description =

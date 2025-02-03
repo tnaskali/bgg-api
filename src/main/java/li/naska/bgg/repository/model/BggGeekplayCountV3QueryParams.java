@@ -11,7 +11,7 @@ import lombok.Data;
 public class BggGeekplayCountV3QueryParams {
 
   @NotNull
-  @Pattern(regexp = "^(getuserplaycount)$")
+  @Pattern(regexp = "^getuserplaycount$")
   @Parameter(
       example = "getuserplaycount",
       description =
@@ -30,7 +30,7 @@ public class BggGeekplayCountV3QueryParams {
   private Integer objectid;
 
   @NotNull
-  @Pattern(regexp = "^(thing|family)$")
+  @Pattern(regexp = "^(?:thing|family)$")
   @Parameter(example = "thing", description = """
           Object type.
           """)

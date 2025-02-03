@@ -10,7 +10,7 @@ import lombok.Data;
 public class BggGeekaccountContactV3RequestBody {
 
   @NotNull
-  @Pattern(regexp = "^(savecontact)$")
+  @Pattern(regexp = "^savecontact$")
   @Parameter(
       example = "savecontact",
       description =
@@ -57,7 +57,7 @@ public class BggGeekaccountContactV3RequestBody {
   private String psn_id;
 
   @Deprecated
-  @Pattern(regexp = "^(Submit)$")
+  @Pattern(regexp = "^Submit$")
   @Parameter(
       description =
           """

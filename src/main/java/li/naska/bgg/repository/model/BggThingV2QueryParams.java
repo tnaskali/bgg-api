@@ -12,7 +12,7 @@ import lombok.Data;
 public class BggThingV2QueryParams {
 
   @NotNull
-  @Pattern(regexp = "^[1-9][0-9]*(?:,[1-9][0-9]*)*+$")
+  @Pattern(regexp = "^[1-9]\\d*(?:,[1-9]\\d*)*+$")
   @Parameter(
       example = "1000,383974",
       description =
@@ -27,7 +27,7 @@ public class BggThingV2QueryParams {
 
   @Pattern(
       regexp =
-          "^(bgsleeve|boardgame|boardgameaccessory|boardgameexpansion|boardgameissue|puzzle|rpgissue|rpgitem|videogame|videogamecompilation|videogameexpansion|videogamehardware)(,(bgsleeve|boardgame|boardgameaccessory|boardgameexpansion|boardgameissue|puzzle|rpgissue|rpgitem|videogame|videogamecompilation|videogameexpansion|videogamehardware))*$")
+          "^(?:bgsleeve|boardgame|boardgameaccessory|boardgameexpansion|boardgameissue|puzzle|rpgissue|rpgitem|videogame|videogamecompilation|videogameexpansion|videogamehardware)(?:,(?:bgsleeve|boardgame|boardgameaccessory|boardgameexpansion|boardgameissue|puzzle|rpgissue|rpgitem|videogame|videogamecompilation|videogameexpansion|videogamehardware))*$")
   @Parameter(
       example = "bgsleeve,boardgame",
       description =
@@ -186,7 +186,7 @@ public class BggThingV2QueryParams {
   private Integer pagesize;
 
   @Deprecated
-  @Pattern(regexp = "^[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$")
+  @Pattern(regexp = "^[12]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
   @Parameter(
       description =
           """
@@ -199,7 +199,7 @@ public class BggThingV2QueryParams {
   private String from;
 
   @Deprecated
-  @Pattern(regexp = "^[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$")
+  @Pattern(regexp = "^[12]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
   @Parameter(
       description =
           """

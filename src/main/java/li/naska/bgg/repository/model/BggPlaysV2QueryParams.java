@@ -37,6 +37,7 @@ public class BggPlaysV2QueryParams {
           """)
   private Integer id;
 
+  @Pattern(regexp = "^(?:thing|family)$")
   @Parameter(
       example = "thing",
       description =
@@ -53,10 +54,9 @@ public class BggPlaysV2QueryParams {
           <p>
           <i>Example</i> : /plays?id=3085&type=thing
           """)
-  @Pattern(regexp = "^(thing|family)$")
   private String type;
 
-  @Pattern(regexp = "^[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$")
+  @Pattern(regexp = "^[12]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
   @Parameter(
       example = "2009-01-01",
       description =
@@ -69,7 +69,7 @@ public class BggPlaysV2QueryParams {
           """)
   private String mindate;
 
-  @Pattern(regexp = "^[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$")
+  @Pattern(regexp = "^[12]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
   @Parameter(
       example = "2009-12-31",
       description =
@@ -84,7 +84,7 @@ public class BggPlaysV2QueryParams {
 
   @Pattern(
       regexp =
-          "^(boardgame|boardgameexpansion|boardgameaccessory|boardgameintegration|boardgamecompilation|boardgameimplementation|rpg|rpgitem|videogame)$")
+          "^(?:boardgame|boardgameexpansion|boardgameaccessory|boardgameintegration|boardgamecompilation|boardgameimplementation|rpg|rpgitem|videogame)$")
   @Parameter(
       example = "boardgame",
       description =
@@ -124,8 +124,8 @@ public class BggPlaysV2QueryParams {
           """)
   private Integer page;
 
-  @AssertTrue(message = "You must include either a username or an id and type")
+  @AssertTrue(message = "You must include either a username or an id")
   private boolean isMandatoryFieldsCheck() {
-    return username != null || (id != null && type != null);
+    return username != null || id != null;
   }
 }

@@ -10,7 +10,7 @@ import lombok.Data;
 public class BggGeekpollV3QueryParams {
 
   @NotNull
-  @Pattern(regexp = "^(results)$")
+  @Pattern(regexp = "^results$")
   @Parameter(
       example = "results",
       description =
