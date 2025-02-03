@@ -186,7 +186,7 @@ public class BggThingV2QueryParams {
   private Integer pagesize;
 
   @Deprecated
-  @Pattern(regexp = "^[12]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
+  @Pattern(regexp = "^[1-9]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
   @Parameter(
       description =
           """
@@ -199,7 +199,7 @@ public class BggThingV2QueryParams {
   private String from;
 
   @Deprecated
-  @Pattern(regexp = "^[12]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
+  @Pattern(regexp = "^[1-9]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
   @Parameter(
       description =
           """

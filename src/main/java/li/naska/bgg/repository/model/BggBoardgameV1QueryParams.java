@@ -68,7 +68,7 @@ public class BggBoardgameV1QueryParams {
           """)
   private Integer historical;
 
-  @Pattern(regexp = "^[12]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
+  @Pattern(regexp = "^[1-9]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
   @Parameter(
       example = "2006-03-18",
       description =
@@ -81,7 +81,7 @@ public class BggBoardgameV1QueryParams {
           """)
   private String from;
 
-  @Pattern(regexp = "^[12]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
+  @Pattern(regexp = "^[1-9]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
   @Parameter(
       example = "2999-12-31",
       description =

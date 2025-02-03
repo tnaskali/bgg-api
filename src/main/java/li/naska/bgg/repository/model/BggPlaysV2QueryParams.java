@@ -56,7 +56,7 @@ public class BggPlaysV2QueryParams {
           """)
   private String type;
 
-  @Pattern(regexp = "^[12]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
+  @Pattern(regexp = "^[1-9]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
   @Parameter(
       example = "2009-01-01",
       description =
@@ -69,7 +69,7 @@ public class BggPlaysV2QueryParams {
           """)
   private String mindate;
 
-  @Pattern(regexp = "^[12]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
+  @Pattern(regexp = "^[1-9]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
   @Parameter(
       example = "2009-12-31",
       description =
