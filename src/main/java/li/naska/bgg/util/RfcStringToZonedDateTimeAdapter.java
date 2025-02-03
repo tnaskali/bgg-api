@@ -4,10 +4,11 @@ import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class StringToZonedDateTimeAdapter extends XmlAdapter<String, ZonedDateTime> {
+public class RfcStringToZonedDateTimeAdapter extends XmlAdapter<String, ZonedDateTime> {
 
-  /** Example : 2020-01-11T11:15:53+00:00 */
-  private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+  /** Example : Wed, 01 Apr 2020 19:50:39 +0000 */
+  private static final DateTimeFormatter FORMATTER =
+      DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss Z");
 
   @Override
   public String marshal(ZonedDateTime zonedDateTime) {

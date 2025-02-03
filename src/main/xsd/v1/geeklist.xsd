@@ -9,9 +9,9 @@
     <xs:simpleContent>
       <xs:extension base="xs:string">
         <xs:attribute name="username" type="xs:string" use="required"/>
-        <xs:attribute name="date" type="common:zonedDateTime" use="required"/>
-        <xs:attribute name="postdate" type="common:zonedDateTime" use="required"/>
-        <xs:attribute name="editdate" type="common:zonedDateTime" use="required"/>
+        <xs:attribute name="date" type="common:rfcZonedDateTime" use="required"/>
+        <xs:attribute name="postdate" type="common:rfcZonedDateTime" use="required"/>
+        <xs:attribute name="editdate" type="common:rfcZonedDateTime" use="required"/>
         <xs:attribute name="thumbs" type="xs:nonNegativeInteger" use="required"/>
       </xs:extension>
     </xs:simpleContent>
@@ -28,17 +28,17 @@
     <xs:attribute name="objectid" type="xs:nonNegativeInteger" use="required"/>
     <xs:attribute name="objectname" type="xs:string" use="required"/>
     <xs:attribute name="username" type="xs:string" use="required"/>
-    <xs:attribute name="postdate" type="common:zonedDateTime" use="required"/>
-    <xs:attribute name="editdate" type="common:zonedDateTime" use="required"/>
+    <xs:attribute name="postdate" type="common:rfcZonedDateTime" use="required"/>
+    <xs:attribute name="editdate" type="common:rfcZonedDateTime" use="required"/>
     <xs:attribute name="thumbs" type="xs:nonNegativeInteger" use="required"/>
     <xs:attribute name="imageid" type="xs:nonNegativeInteger" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="geeklist">
     <xs:sequence>
-      <xs:element name="postdate" type="common:zonedDateTime"/>
+      <xs:element name="postdate" type="common:rfcZonedDateTime"/>
       <xs:element name="postdate_timestamp" type="xs:nonNegativeInteger"/>
-      <xs:element name="editdate" type="common:zonedDateTime"/>
+      <xs:element name="editdate" type="common:rfcZonedDateTime"/>
       <xs:element name="editdate_timestamp" type="xs:nonNegativeInteger"/>
       <xs:element name="thumbs" type="xs:nonNegativeInteger"/>
       <xs:element name="numitems" type="xs:nonNegativeInteger"/>

@@ -127,7 +127,7 @@
 
   <xs:complexType name="listing">
     <xs:sequence>
-      <xs:element name="listdate" type="common:zonedDateTimeValue"/>
+      <xs:element name="listdate" type="common:rfcZonedDateTimeValue"/>
       <xs:element name="price" type="thing:listingPrice"/>
       <xs:element name="condition" type="common:stringValue"/>
       <xs:element name="notes" type="common:stringValue"/>

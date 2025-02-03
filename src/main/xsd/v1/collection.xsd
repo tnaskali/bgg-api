@@ -105,7 +105,7 @@
     </xs:sequence>
     <xs:attribute name="totalitems" type="xs:nonNegativeInteger" use="required"/>
     <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
-    <xs:attribute name="pubdate" type="common:zonedDateTime" use="required"/>
+    <xs:attribute name="pubdate" type="common:rfcZonedDateTime" use="required"/>
   </xs:complexType>
 
   <xs:element name="items" type="collection:collection"/>

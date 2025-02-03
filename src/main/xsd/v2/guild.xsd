@@ -18,7 +18,7 @@
 
   <xs:complexType name="member">
     <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="date" type="common:zonedDateTime" use="required"/>
+    <xs:attribute name="date" type="common:rfcZonedDateTime" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="members">
@@ -40,7 +40,7 @@
     </xs:sequence>
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="created" type="common:zonedDateTime" use="required"/>
+    <xs:attribute name="created" type="common:rfcZonedDateTime" use="required"/>
     <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
 

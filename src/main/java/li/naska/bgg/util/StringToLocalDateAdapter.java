@@ -9,7 +9,7 @@ public class StringToLocalDateAdapter extends XmlAdapter<String, LocalDate> {
   /**
    * Example : 2020-01-11
    */
-  private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+  private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
 
   @Override
   public String marshal(LocalDate localDate) {

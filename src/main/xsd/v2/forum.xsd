@@ -10,8 +10,8 @@
     <xs:attribute name="subject" type="xs:string" use="required"/>
     <xs:attribute name="author" type="xs:string" use="required"/>
     <xs:attribute name="numarticles" type="xs:integer" use="required"/>
-    <xs:attribute name="postdate" type="common:zonedDateTime" use="required"/>
-    <xs:attribute name="lastpostdate" type="common:zonedDateTime" use="required"/>
+    <xs:attribute name="postdate" type="common:rfcZonedDateTime" use="required"/>
+    <xs:attribute name="lastpostdate" type="common:rfcZonedDateTime" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="threads">
@@ -28,7 +28,7 @@
     <xs:attribute name="title" type="xs:string" use="required"/>
     <xs:attribute name="numthreads" type="xs:integer" use="required"/>
     <xs:attribute name="numposts" type="xs:integer" use="required"/>
-    <xs:attribute name="lastpostdate" type="common:zonedDateTime" use="required"/>
+    <xs:attribute name="lastpostdate" type="common:rfcZonedDateTime" use="required"/>
     <xs:attribute name="noposting" type="xs:boolean" use="required"/>
     <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
