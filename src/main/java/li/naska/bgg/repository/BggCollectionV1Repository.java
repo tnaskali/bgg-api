@@ -73,7 +73,7 @@ public class BggCollectionV1Repository {
         .doOnNext(
             body -> xmlProcessor.xPathValue(body, "/errors/error/message").ifPresent(message -> {
               if (message.equals("Invalid username specified")) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid username");
               } else {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, message);
               }

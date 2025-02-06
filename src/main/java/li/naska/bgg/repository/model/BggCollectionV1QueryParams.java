@@ -14,6 +14,33 @@ public class BggCollectionV1QueryParams {
       example = "1",
       description =
           """
+          Returns version info for each item in your collection.
+          <p>
+          <i>Syntax</i> : /collection/{username}?version=1
+          <p>
+          <i>Example</i> : /collection/zefquaavius?version=1
+          """)
+  private Integer version;
+
+  @Min(1)
+  @Max(1)
+  @Parameter(
+      description =
+          """
+          Returns more abbreviated results.
+          <p>
+          <i>Syntax</i> : /collection/{username}?brief=1
+          <p>
+          <i>Example</i> : /collection/eekspider?brief=1
+          """)
+  private Integer brief;
+
+  @Min(1)
+  @Max(1)
+  @Parameter(
+      example = "1",
+      description =
+          """
           In (or exclude for 0) a user's collection. That is, the user currently owns it.
           <p>
           <i>Syntax</i> : /collection/{username}?own={0,1}
