@@ -3,12 +3,13 @@
            xmlns:search="http://www.boardgamegeek.com/search/v1"
            targetNamespace="http://www.boardgamegeek.com/search/v1">
 
-  <xs:complexType name="name">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute name="primary" type="xs:boolean"/>
-      </xs:extension>
-    </xs:simpleContent>
+  <xs:element name="boardgames" type="search:boardgames"/>
+
+  <xs:complexType name="boardgames">
+    <xs:sequence>
+      <xs:element name="boardgame" type="search:boardgame" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="boardgame">
@@ -19,13 +20,12 @@
     <xs:attribute name="objectid" type="xs:positiveInteger" use="required"/>
   </xs:complexType>
 
-  <xs:complexType name="boardgames">
-    <xs:sequence>
-      <xs:element name="boardgame" type="search:boardgame" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
-    <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
+  <xs:complexType name="name">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="primary" type="xs:boolean"/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
-
-  <xs:element name="boardgames" type="search:boardgames"/>
 
 </xs:schema>

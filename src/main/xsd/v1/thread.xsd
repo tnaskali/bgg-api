@@ -3,6 +3,8 @@
            xmlns:thread="http://www.boardgamegeek.com/thread/v1"
            targetNamespace="http://www.boardgamegeek.com/thread/v1">
 
+  <xs:element name="rss" type="thread:rss"/>
+
   <xs:complexType name="rss">
     <xs:sequence>
       <xs:element name="channel" type="thread:channel"/>
@@ -30,7 +32,5 @@
       <xs:element name="title" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
-
-  <xs:element name="rss" type="thread:rss"/>
 
 </xs:schema>

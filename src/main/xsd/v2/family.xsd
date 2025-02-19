@@ -3,17 +3,13 @@
            xmlns:family="http://www.boardgamegeek.com/family/v2"
            targetNamespace="http://www.boardgamegeek.com/family/v2">
 
-  <xs:complexType name="name">
-    <xs:attribute name="type" type="xs:string" use="required"/>
-    <xs:attribute name="sortindex" type="xs:integer" use="required"/>
-    <xs:attribute name="value" type="xs:string" use="required"/>
-  </xs:complexType>
+  <xs:element name="items" type="family:families"/>
 
-  <xs:complexType name="link">
-    <xs:attribute name="type" type="xs:string" use="required"/>
-    <xs:attribute name="id" type="xs:integer" use="required"/>
-    <xs:attribute name="value" type="xs:string" use="required"/>
-    <xs:attribute name="inbound" type="xs:boolean"/>
+  <xs:complexType name="families">
+    <xs:sequence>
+      <xs:element name="item" type="family:family" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="family">
@@ -28,13 +24,17 @@
     <xs:attribute name="id" type="xs:integer" use="required"/>
   </xs:complexType>
 
-  <xs:complexType name="families">
-    <xs:sequence>
-      <xs:element name="item" type="family:family" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
-    <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
+  <xs:complexType name="name">
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="sortindex" type="xs:integer" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
 
-  <xs:element name="items" type="family:families"/>
+  <xs:complexType name="link">
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="inbound" type="xs:boolean"/>
+  </xs:complexType>
 
 </xs:schema>

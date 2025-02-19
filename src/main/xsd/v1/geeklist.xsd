@@ -5,6 +5,26 @@
            targetNamespace="http://www.boardgamegeek.com/geeklist/v1">
   <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
+  <xs:element name="geeklist" type="geeklist:geeklist"/>
+
+  <xs:complexType name="geeklist">
+    <xs:sequence>
+      <xs:element name="postdate" type="common:rfcZonedDateTime"/>
+      <xs:element name="postdate_timestamp" type="xs:nonNegativeInteger"/>
+      <xs:element name="editdate" type="common:rfcZonedDateTime"/>
+      <xs:element name="editdate_timestamp" type="xs:nonNegativeInteger"/>
+      <xs:element name="thumbs" type="xs:nonNegativeInteger"/>
+      <xs:element name="numitems" type="xs:nonNegativeInteger"/>
+      <xs:element name="username" type="xs:string"/>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="description" type="xs:string"/>
+      <xs:element name="comment" type="geeklist:comment" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="item" type="geeklist:item" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
+  </xs:complexType>
+
   <xs:complexType name="comment">
     <xs:simpleContent>
       <xs:extension base="xs:string">
@@ -33,25 +53,5 @@
     <xs:attribute name="thumbs" type="xs:nonNegativeInteger" use="required"/>
     <xs:attribute name="imageid" type="xs:nonNegativeInteger" use="required"/>
   </xs:complexType>
-
-  <xs:complexType name="geeklist">
-    <xs:sequence>
-      <xs:element name="postdate" type="common:rfcZonedDateTime"/>
-      <xs:element name="postdate_timestamp" type="xs:nonNegativeInteger"/>
-      <xs:element name="editdate" type="common:rfcZonedDateTime"/>
-      <xs:element name="editdate_timestamp" type="xs:nonNegativeInteger"/>
-      <xs:element name="thumbs" type="xs:nonNegativeInteger"/>
-      <xs:element name="numitems" type="xs:nonNegativeInteger"/>
-      <xs:element name="username" type="xs:string"/>
-      <xs:element name="title" type="xs:string"/>
-      <xs:element name="description" type="xs:string"/>
-      <xs:element name="comment" type="geeklist:comment" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="item" type="geeklist:item" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
-    <xs:attribute name="id" type="xs:nonNegativeInteger" use="required"/>
-    <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
-  </xs:complexType>
-
-  <xs:element name="geeklist" type="geeklist:geeklist"/>
 
 </xs:schema>

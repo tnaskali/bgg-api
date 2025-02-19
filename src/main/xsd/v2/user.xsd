@@ -5,45 +5,7 @@
            targetNamespace="http://www.boardgamegeek.com/user/v2">
   <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
-  <xs:complexType name="rankedItem">
-    <xs:attribute name="rank" type="xs:nonNegativeInteger" use="required"/>
-    <xs:attribute name="type" type="xs:string" use="required"/>
-    <xs:attribute name="id" type="xs:integer" use="required"/>
-    <xs:attribute name="name" type="xs:string" use="required"/>
-  </xs:complexType>
-
-  <xs:complexType name="ranking">
-    <xs:sequence>
-      <xs:element name="item" type="user:rankedItem" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
-    <xs:attribute name="domain" type="xs:string" use="required"/>
-  </xs:complexType>
-
-  <xs:complexType name="buddy">
-    <xs:attribute name="id" type="xs:integer" use="required"/>
-    <xs:attribute name="name" type="xs:string" use="required"/>
-  </xs:complexType>
-
-  <xs:complexType name="guild">
-    <xs:attribute name="id" type="xs:integer" use="required"/>
-    <xs:attribute name="name" type="xs:string" use="required"/>
-  </xs:complexType>
-
-  <xs:complexType name="buddies">
-    <xs:sequence>
-      <xs:element name="buddy" type="user:buddy" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
-    <xs:attribute name="total" type="xs:nonNegativeInteger" use="required"/>
-    <xs:attribute name="page" type="xs:positiveInteger" use="required"/>
-  </xs:complexType>
-
-  <xs:complexType name="guilds">
-    <xs:sequence>
-      <xs:element name="guild" type="user:guild" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
-    <xs:attribute name="total" type="xs:nonNegativeInteger" use="required"/>
-    <xs:attribute name="page" type="xs:positiveInteger" use="required"/>
-  </xs:complexType>
+  <xs:element name="user" type="user:user"/>
 
   <xs:complexType name="user">
     <xs:sequence>
@@ -72,6 +34,44 @@
     <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
 
-  <xs:element name="user" type="user:user"/>
+  <xs:complexType name="buddies">
+    <xs:sequence>
+      <xs:element name="buddy" type="user:buddy" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="total" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="page" type="xs:positiveInteger" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="buddy">
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="guilds">
+    <xs:sequence>
+      <xs:element name="guild" type="user:guild" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="total" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="page" type="xs:positiveInteger" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="guild">
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="ranking">
+    <xs:sequence>
+      <xs:element name="item" type="user:rankedItem" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="domain" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="rankedItem">
+    <xs:attribute name="rank" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
 
 </xs:schema>

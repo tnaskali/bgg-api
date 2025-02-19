@@ -54,6 +54,20 @@ public class BggCompanyV2QueryParams {
       example = "1",
       description =
           """
+          Returns version info for the company.
+          <p>
+          <i>Syntax</i> : /company?id={ids}&versions=1
+          <p>
+          <i>Example</i> : /company?id=22924&versions=1
+          """)
+  private Integer versions;
+
+  @Min(1)
+  @Max(1)
+  @Parameter(
+      example = "1",
+      description =
+          """
           Returns videos for the company.
           <p>
           <i>Syntax</i> : /company?id={ids}&videos=1
@@ -61,4 +75,18 @@ public class BggCompanyV2QueryParams {
           <i>Example</i> : /company?id=22924&videos=1
           """)
   private Integer videos;
+
+  @Min(1)
+  @Max(1)
+  @Parameter(
+      example = "1",
+      description =
+          """
+          Returns ranking and rating stats for the company.
+          <p>
+          <i>Syntax</i> : /company?id={ids}&stats=1
+          <p>
+          <i>Example</i> : /company?id=22924&stats=1
+          """)
+  private Integer stats;
 }

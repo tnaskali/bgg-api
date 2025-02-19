@@ -5,22 +5,13 @@
            targetNamespace="http://www.boardgamegeek.com/person/v2">
   <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
-  <xs:complexType name="video">
-    <xs:attribute name="id" type="xs:integer" use="required"/>
-    <xs:attribute name="title" type="xs:string" use="required"/>
-    <xs:attribute name="category" type="xs:string" use="required"/>
-    <xs:attribute name="language" type="xs:string" use="required"/>
-    <xs:attribute name="link" type="xs:anyURI" use="required"/>
-    <xs:attribute name="username" type="xs:string" use="required"/>
-    <xs:attribute name="userid" type="xs:integer" use="required"/>
-    <xs:attribute name="postdate" type="common:zonedDateTime" use="required"/>
-  </xs:complexType>
+  <xs:element name="items" type="person:persons"/>
 
-  <xs:complexType name="videos">
+  <xs:complexType name="persons">
     <xs:sequence>
-      <xs:element name="video" type="person:video" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="item" type="person:person" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="total" type="xs:integer" use="required"/>
+    <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="person">
@@ -33,13 +24,22 @@
     <xs:attribute name="id" type="xs:integer" use="required"/>
   </xs:complexType>
 
-  <xs:complexType name="persons">
+  <xs:complexType name="videos">
     <xs:sequence>
-      <xs:element name="item" type="person:person" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="video" type="person:video" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
+    <xs:attribute name="total" type="xs:integer" use="required"/>
   </xs:complexType>
 
-  <xs:element name="items" type="person:persons"/>
+  <xs:complexType name="video">
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="title" type="xs:string" use="required"/>
+    <xs:attribute name="category" type="xs:string" use="required"/>
+    <xs:attribute name="language" type="xs:string" use="required"/>
+    <xs:attribute name="link" type="xs:anyURI" use="required"/>
+    <xs:attribute name="username" type="xs:string" use="required"/>
+    <xs:attribute name="userid" type="xs:integer" use="required"/>
+    <xs:attribute name="postdate" type="common:zonedDateTime" use="required"/>
+  </xs:complexType>
 
 </xs:schema>

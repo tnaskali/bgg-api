@@ -5,16 +5,7 @@
            targetNamespace="http://www.boardgamegeek.com/forumlist/v2">
   <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
-  <xs:complexType name="forum">
-    <xs:attribute name="id" type="xs:integer" use="required"/>
-    <xs:attribute name="groupid" type="xs:integer" use="required"/>
-    <xs:attribute name="title" type="xs:string" use="required"/>
-    <xs:attribute name="noposting" type="xs:boolean" use="required"/>
-    <xs:attribute name="description" type="xs:string" use="required"/>
-    <xs:attribute name="numthreads" type="xs:integer" use="required"/>
-    <xs:attribute name="numposts" type="xs:integer" use="required"/>
-    <xs:attribute name="lastpostdate" type="common:rfcZonedDateTime" use="required"/>
-  </xs:complexType>
+  <xs:element name="forums" type="forumlist:forums"/>
 
   <xs:complexType name="forums">
     <xs:sequence>
@@ -25,6 +16,15 @@
     <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
 
-  <xs:element name="forums" type="forumlist:forums"/>
+  <xs:complexType name="forum">
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="groupid" type="xs:integer" use="required"/>
+    <xs:attribute name="title" type="xs:string" use="required"/>
+    <xs:attribute name="noposting" type="xs:boolean" use="required"/>
+    <xs:attribute name="description" type="xs:string" use="required"/>
+    <xs:attribute name="numthreads" type="xs:integer" use="required"/>
+    <xs:attribute name="numposts" type="xs:integer" use="required"/>
+    <xs:attribute name="lastpostdate" type="common:rfcZonedDateTime" use="required"/>
+  </xs:complexType>
 
 </xs:schema>

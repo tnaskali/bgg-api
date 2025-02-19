@@ -5,20 +5,7 @@
            targetNamespace="http://www.boardgamegeek.com/forum/v2">
   <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
-  <xs:complexType name="thread">
-    <xs:attribute name="id" type="xs:integer" use="required"/>
-    <xs:attribute name="subject" type="xs:string" use="required"/>
-    <xs:attribute name="author" type="xs:string" use="required"/>
-    <xs:attribute name="numarticles" type="xs:integer" use="required"/>
-    <xs:attribute name="postdate" type="common:rfcZonedDateTime" use="required"/>
-    <xs:attribute name="lastpostdate" type="common:rfcZonedDateTime" use="required"/>
-  </xs:complexType>
-
-  <xs:complexType name="threads">
-    <xs:sequence>
-      <xs:element name="thread" type="forum:thread" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
-  </xs:complexType>
+  <xs:element name="forum" type="forum:forum"/>
 
   <xs:complexType name="forum">
     <xs:sequence>
@@ -33,6 +20,19 @@
     <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
 
-  <xs:element name="forum" type="forum:forum"/>
+  <xs:complexType name="threads">
+    <xs:sequence>
+      <xs:element name="thread" type="forum:thread" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="thread">
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="subject" type="xs:string" use="required"/>
+    <xs:attribute name="author" type="xs:string" use="required"/>
+    <xs:attribute name="numarticles" type="xs:integer" use="required"/>
+    <xs:attribute name="postdate" type="common:rfcZonedDateTime" use="required"/>
+    <xs:attribute name="lastpostdate" type="common:rfcZonedDateTime" use="required"/>
+  </xs:complexType>
 
 </xs:schema>

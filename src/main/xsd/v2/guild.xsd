@@ -5,29 +5,7 @@
            targetNamespace="http://www.boardgamegeek.com/guild/v2">
   <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
-  <xs:complexType name="location">
-    <xs:sequence>
-      <xs:element name="addr1" type="xs:string"/>
-      <xs:element name="addr2" type="xs:string"/>
-      <xs:element name="city" type="xs:string"/>
-      <xs:element name="stateorprovince" type="xs:string"/>
-      <xs:element name="postalcode" type="xs:string"/>
-      <xs:element name="country" type="xs:string"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="member">
-    <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="date" type="common:rfcZonedDateTime" use="required"/>
-  </xs:complexType>
-
-  <xs:complexType name="members">
-    <xs:sequence>
-      <xs:element name="member" type="guild:member" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
-    <xs:attribute name="count" type="xs:positiveInteger" use="required"/>
-    <xs:attribute name="page" type="xs:positiveInteger" use="required"/>
-  </xs:complexType>
+  <xs:element name="guild" type="guild:guild"/>
 
   <xs:complexType name="guild">
     <xs:sequence>
@@ -44,6 +22,28 @@
     <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
 
-  <xs:element name="guild" type="guild:guild"/>
+  <xs:complexType name="location">
+    <xs:sequence>
+      <xs:element name="addr1" type="xs:string"/>
+      <xs:element name="addr2" type="xs:string"/>
+      <xs:element name="city" type="xs:string"/>
+      <xs:element name="stateorprovince" type="xs:string"/>
+      <xs:element name="postalcode" type="xs:string"/>
+      <xs:element name="country" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="members">
+    <xs:sequence>
+      <xs:element name="member" type="guild:member" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="count" type="xs:positiveInteger" use="required"/>
+    <xs:attribute name="page" type="xs:positiveInteger" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="member">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="date" type="common:rfcZonedDateTime" use="required"/>
+  </xs:complexType>
 
 </xs:schema>
