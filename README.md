@@ -5,8 +5,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tnaskali_bgg-api&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tnaskali_bgg-api)
 
 Spring Boot application acting as a proxy to
-BoardGameGeek's [XML API](https://boardgamegeek.com/wiki/page/BGG_XML_API), [XML API 2](https://boardgamegeek.com/wiki/page/BGG_XML_API2),
-as well as their undocumented Json API. Its purpose is to expose the same functionalities, mainly retrieving but also
+BoardGameGeek's [XML API](https://boardgamegeek.com/wiki/page/BGG_XML_API), [XML API 2](https://boardgamegeek.com/wiki/page/BGG_XML_API2) and [JSON API](https://boardgamegeek.com/wiki/page/BGG_JSON_API). Its purpose is to expose the same functionalities, mainly retrieving but also
 persisting data, in a more user-friendly and developer-friendly way.
 
 # Features

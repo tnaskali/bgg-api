@@ -6,7 +6,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class BggUsersV4ResponseBody {
+public class BggUserV4ResponseBody {
   private String type;
   private Integer id;
   private Integer userid;

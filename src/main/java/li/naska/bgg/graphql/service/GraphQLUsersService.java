@@ -7,7 +7,7 @@ import li.naska.bgg.graphql.model.enums.Domain;
 import li.naska.bgg.repository.BggUserV2Repository;
 import li.naska.bgg.repository.BggUsersV4Repository;
 import li.naska.bgg.repository.model.BggUserV2QueryParams;
-import li.naska.bgg.repository.model.BggUsersV4ResponseBody;
+import li.naska.bgg.repository.model.BggUserV4ResponseBody;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -29,7 +29,7 @@ public class GraphQLUsersService {
     this.usersV4Repository = usersV4Repository;
   }
 
-  public Mono<BggUsersV4ResponseBody> getUser(Integer id) {
+  public Mono<BggUserV4ResponseBody> getUser(Integer id) {
     return usersV4Repository.getUser(id);
   }
 
