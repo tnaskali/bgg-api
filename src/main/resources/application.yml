@@ -45,6 +45,7 @@ bgg:
       hotness: ${bgg.web.baseurl-geekdo}/api/hotness
       listitems: ${bgg.web.baseurl-geekdo}/api/listitems
       microbadges: ${bgg.web.baseurl-geekdo}/api/microbadges
+      subtypeinfo: ${bgg.web.baseurl-geekdo}/api/subtypeinfo
       threads: ${bgg.web.baseurl-geekdo}/api/threads
       users: ${bgg.web.baseurl-geekdo}/api/users
     v5:
