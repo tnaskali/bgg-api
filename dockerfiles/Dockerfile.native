@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:24.04
 
 ENV SERVER_PORT=80
 EXPOSE ${SERVER_PORT}
