@@ -4,13 +4,11 @@ import lombok.Builder;
 
 @Builder
 public record CollectionItem(
-    CollectionItemId id,
+    Integer objectid,
+    String objecttype,
     String subtype,
     Integer collid,
     String name,
     String originalname,
     Integer yearpublished,
-    Integer numplays) {
-
-  public record CollectionItemId(Integer objectid, String objecttype) {}
-}
+    Integer numplays) {}

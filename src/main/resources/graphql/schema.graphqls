@@ -72,18 +72,14 @@ enum CollectionSubtype {
 }
 
 type CollectionItem {
-    id: CollectionItemId!
-    subtype: String!
     collid: Int!
+    objecttype: String!
+    objectid: Int!
+    subtype: String!
     name: String!
     originalname: String
     yearpublished: Int!
     numplays: Int!
-}
-
-type CollectionItemId {
-    objectid: Int!
-    objecttype: String!
 }
 
 type Guild {
