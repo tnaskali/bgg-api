@@ -1,0 +1,14 @@
+package li.naska.bgg.graphql.model.enums;
+
+public enum CollectionSubtype {
+  BOARDGAME,
+  BOARDGAME_ACCESSORY,
+  BOARDGAME_EXPANSION,
+  BOARDGAME_ISSUE,
+  RPG_ISSUE,
+  RPG_ITEM,
+  VIDEOGAME,
+  VIDEOGAME_COMPILATION,
+  VIDEOGAME_EXPANSION,
+  VIDEOGAME_HARDWARE,
+}

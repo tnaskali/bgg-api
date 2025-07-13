@@ -2,7 +2,6 @@ package li.naska.bgg.graphql.service;
 
 import com.boardgamegeek.user.v2.*;
 import java.util.List;
-import java.util.stream.Collectors;
 import li.naska.bgg.graphql.model.enums.Domain;
 import li.naska.bgg.repository.BggUserV2Repository;
 import li.naska.bgg.repository.BggUsersV4Repository;
@@ -19,13 +18,13 @@ public class GraphQLUsersService {
 
   private static final int BGG_USER_GUILDS_PAGE_SIZE = 1000;
 
-  private final BggUserV2Repository usersV2Repository;
+  private final BggUserV2Repository userV2Repository;
 
   private final BggUsersV4Repository usersV4Repository;
 
   public GraphQLUsersService(
-      BggUserV2Repository usersV2Repository, BggUsersV4Repository usersV4Repository) {
-    this.usersV2Repository = usersV2Repository;
+      BggUserV2Repository userV2Repository, BggUsersV4Repository usersV4Repository) {
+    this.userV2Repository = userV2Repository;
     this.usersV4Repository = usersV4Repository;
   }
 
@@ -62,7 +61,7 @@ public class GraphQLUsersService {
           })
           .map(User::getBuddies)
           .flatMapIterable(Buddies::getBuddies)
-          .collect(Collectors.toList());
+          .collectList();
     });
   }
 
@@ -79,7 +78,7 @@ public class GraphQLUsersService {
           })
           .map(User::getGuilds)
           .flatMapIterable(Guilds::getGuilds)
-          .collect(Collectors.toList());
+          .collectList();
     });
   }
 
@@ -89,6 +88,6 @@ public class GraphQLUsersService {
   }
 
   private Mono<User> getUser(BggUserV2QueryParams queryParams) {
-    return usersV2Repository.getUser(queryParams);
+    return userV2Repository.getUser(queryParams);
   }
 }

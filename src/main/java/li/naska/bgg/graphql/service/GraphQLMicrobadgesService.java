@@ -8,13 +8,13 @@ import reactor.core.publisher.Mono;
 @Service
 public class GraphQLMicrobadgesService {
 
-  private final BggMicrobadgesV4Repository microbadgesRepository;
+  private final BggMicrobadgesV4Repository microbadgesV4Repository;
 
-  public GraphQLMicrobadgesService(BggMicrobadgesV4Repository microbadgesRepository) {
-    this.microbadgesRepository = microbadgesRepository;
+  public GraphQLMicrobadgesService(BggMicrobadgesV4Repository microbadgesV4Repository) {
+    this.microbadgesV4Repository = microbadgesV4Repository;
   }
 
   public Mono<BggMicrobadgesV4ResponseBody> getMicrobadge(Integer id) {
-    return microbadgesRepository.getMicrobadge(id);
+    return microbadgesV4Repository.getMicrobadge(id);
   }
 }

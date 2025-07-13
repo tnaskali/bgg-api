@@ -4,7 +4,6 @@ import com.boardgamegeek.guild.v2.Guild;
 import com.boardgamegeek.guild.v2.Member;
 import com.boardgamegeek.guild.v2.Members;
 import java.util.List;
-import java.util.stream.Collectors;
 import li.naska.bgg.repository.BggGuildV2Repository;
 import li.naska.bgg.repository.model.BggGuildV2QueryParams;
 import org.springframework.stereotype.Service;
@@ -16,10 +15,10 @@ public class GraphQLGuildsService {
 
   private static final int BGG_GUILD_MEMBERS_PAGE_SIZE = 25;
 
-  private final BggGuildV2Repository guildsRepository;
+  private final BggGuildV2Repository guildV2Repository;
 
-  public GraphQLGuildsService(BggGuildV2Repository guildsRepository) {
-    this.guildsRepository = guildsRepository;
+  public GraphQLGuildsService(BggGuildV2Repository guildV2Repository) {
+    this.guildV2Repository = guildV2Repository;
   }
 
   public Mono<Guild> getGuild(Integer id) {
@@ -47,11 +46,11 @@ public class GraphQLGuildsService {
           })
           .map(Guild::getMembers)
           .flatMapIterable(Members::getMembers)
-          .collect(Collectors.toList());
+          .collectList();
     });
   }
 
   private Mono<Guild> getGuild(BggGuildV2QueryParams queryParams) {
-    return guildsRepository.getGuild(queryParams);
+    return guildV2Repository.getGuild(queryParams);
   }
 }

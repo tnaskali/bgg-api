@@ -2,13 +2,16 @@ package li.naska.bgg.graphql.controller;
 
 import com.boardgamegeek.common.IntegerValue;
 import com.boardgamegeek.common.StringValue;
+import graphql.schema.DataFetchingEnvironment;
 import java.time.LocalDate;
 import java.util.List;
-import li.naska.bgg.graphql.data.UserV2;
-import li.naska.bgg.graphql.data.UserV2Buddies;
-import li.naska.bgg.graphql.data.UserV2Guilds;
-import li.naska.bgg.graphql.data.UserV4;
+import java.util.Optional;
+import li.naska.bgg.graphql.data.*;
 import li.naska.bgg.graphql.model.*;
+import li.naska.bgg.graphql.model.enums.CollectionSubtype;
+import li.naska.bgg.graphql.pagination.ListPageDataFetcher;
+import li.naska.bgg.graphql.pagination.Page;
+import li.naska.bgg.graphql.service.GraphQLCollectionService;
 import li.naska.bgg.graphql.service.GraphQLUsersService;
 import org.dataloader.DataLoader;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -23,7 +26,10 @@ import reactor.util.function.Tuple2;
 @Controller("graphQLUserController")
 public class UserController {
 
-  public UserController(BatchLoaderRegistry registry, GraphQLUsersService usersService) {
+  public UserController(
+      BatchLoaderRegistry registry,
+      GraphQLUsersService usersService,
+      GraphQLCollectionService collectionService) {
     registry
         .forTypePair(Integer.class, UserV4.class)
         .registerMappedBatchLoader((ids, env) -> Flux.fromIterable(ids)
@@ -44,6 +50,12 @@ public class UserController {
         .registerMappedBatchLoader((usernames, env) -> Flux.fromIterable(usernames)
             .flatMap(username -> Mono.just(username).zipWith(usersService.getUserBuddies(username)))
             .collectMap(Tuple2::getT1, tuple -> new UserV2Buddies(tuple.getT2())));
+    registry
+        .forTypePair(CollectionV2Items.CollectionItemsKey.class, CollectionV2Items.class)
+        .registerMappedBatchLoader((keys, env) -> Flux.fromIterable(keys)
+            .flatMap(key ->
+                Mono.just(key).zipWith(collectionService.getItems(key.username(), key.subtype())))
+            .collectMap(Tuple2::getT1, tuple -> new CollectionV2Items(tuple.getT2())));
   }
 
   @QueryMapping
@@ -218,5 +230,29 @@ public class UserController {
         .flatMapIterable(data -> data.user().getUserMicrobadges())
         .map(microbadge -> new Microbadge(microbadge.getBadgeid()))
         .collectList();
+  }
+
+  @SchemaMapping
+  public Mono<Page<CollectionItem>> collectionitems(
+      @Argument CollectionSubtype subtype,
+      User user,
+      DataLoader<CollectionV2Items.CollectionItemsKey, CollectionV2Items> collectionItemsLoader,
+      DataFetchingEnvironment environment) {
+    return Mono.fromFuture(collectionItemsLoader.load(
+            new CollectionV2Items.CollectionItemsKey(user.username(), subtype)))
+        .map(collectionItems -> collectionItems.items().getItems().stream()
+            .map(item -> CollectionItem.builder()
+                .id(new CollectionItem.CollectionItemId(item.getObjectid(), item.getObjecttype()))
+                .subtype(item.getSubtype())
+                .collid(item.getCollid())
+                .name(item.getName().getValue())
+                .originalname(item.getOriginalname())
+                .yearpublished(Optional.ofNullable(item.getYearpublished())
+                    .map(Integer::parseInt)
+                    .orElse(null))
+                .numplays(item.getNumplays())
+                .build())
+            .toList())
+        .map(items -> new ListPageDataFetcher<>(items).get(environment));
   }
 }

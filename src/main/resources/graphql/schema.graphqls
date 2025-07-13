@@ -5,6 +5,13 @@ enum UserDomain {
     boardgame, rpg, videogame
 }
 
+type PageInfo {
+    hasPreviousPage: Boolean!
+    hasNextPage: Boolean!
+    startIndex: Int!
+    endIndex: Int!
+}
+
 type Query {
     userByUsername(username: ID): User
     userById(id: ID): User
@@ -37,10 +44,50 @@ type User {
     designerid: Int
     publisherid: Int
     microbadges: [Microbadge!]
+    collectionitems(subtype: CollectionSubtype!, first: Int, after: Int): CollectionItemPage
+}
+
+type CollectionItemPage {
+    pageInfo: PageInfo!
+    pageItems: [CollectionItemPageItem!]!
+    totalItems: Int!
+}
+
+type CollectionItemPageItem {
+    index: Int!
+    item: CollectionItem!
+}
+
+enum CollectionSubtype {
+    BOARDGAME,
+    BOARDGAME_ACCESSORY,
+    BOARDGAME_EXPANSION,
+    BOARDGAME_ISSUE,
+    RPG_ISSUE,
+    RPG_ITEM,
+    VIDEOGAME,
+    VIDEOGAME_COMPILATION,
+    VIDEOGAME_EXPANSION,
+    VIDEOGAME_HARDWARE
+}
+
+type CollectionItem {
+    id: CollectionItemId!
+    subtype: String!
+    collid: Int!
+    name: String!
+    originalname: String
+    yearpublished: Int!
+    numplays: Int!
+}
+
+type CollectionItemId {
+    objectid: Int!
+    objecttype: String!
 }
 
 type Guild {
-    id: ID
+    id: ID!
     name: String
     created: DateTime
     category: String
@@ -80,7 +127,7 @@ type RankedItem {
 }
 
 type Microbadge {
-    id: ID
-    name: String,
+    id: ID!
+    name: String
     imagesrc: String
 }
