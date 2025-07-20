@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
@@ -50,11 +51,21 @@
   </issueManagement>
 
   <properties>
+    <expressly.version>6.0.0</expressly.version>
+    <jakarta-el.version>6.0.1</jakarta-el.version>
+    <java.version>17</java.version>
+    <jsoup.version>1.21.1</jsoup.version>
+    <maven.jacoco.version>0.8.13</maven.jacoco.version>
+    <maven.jaxb2.version>3.3.0</maven.jaxb2.version>
+    <maven.sonar.version>5.1.0.4751</maven.sonar.version>
+    <maven.spotless.version>2.45.0</maven.spotless.version>
+    <palantir-java-format.version>2.72.0</palantir-java-format.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <java.version>17</java.version>
     <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml,${project.basedir}/target/site/jacoco-it/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     <sonar.junit.reportPaths>${project.basedir}/target/surefire-reports/,${project.basedir}/target/failsafe-reports/</sonar.junit.reportPaths>
+    <springdoc-openapi.version>2.8.9</springdoc-openapi.version>
+    <wiremock.version>3.10.0</wiremock.version>
   </properties>
 
   <dependencyManagement>
@@ -62,48 +73,81 @@
       <dependency>
         <groupId>com.graphql-java</groupId>
         <artifactId>graphql-java-extended-scalars</artifactId>
-        <version>24.0</version>
+        <version>${graphql-java.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.palantir.javaformat</groupId>
+        <artifactId>palantir-java-format</artifactId>
+        <version>${palantir-java-format.version}</version>
       </dependency>
       <dependency>
         <groupId>jakarta.el</groupId>
         <artifactId>jakarta.el-api</artifactId>
-        <version>6.0.1</version>
+        <version>${jakarta-el.version}</version>
       </dependency>
       <dependency>
         <groupId>org.glassfish.expressly</groupId>
         <artifactId>expressly</artifactId>
-        <version>6.0.0</version>
+        <version>${expressly.version}</version>
       </dependency>
       <dependency>
         <groupId>org.jsoup</groupId>
         <artifactId>jsoup</artifactId>
-        <version>1.21.1</version>
+        <version>${jsoup.version}</version>
       </dependency>
       <dependency>
         <groupId>org.springdoc</groupId>
         <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
-        <version>2.8.3</version>
+        <version>${springdoc-openapi.version}</version>
       </dependency>
       <dependency>
         <groupId>org.wiremock.integrations</groupId>
         <artifactId>wiremock-spring-boot</artifactId>
-        <version>3.10.0</version>
+        <version>${wiremock.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-webflux</artifactId>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-security</artifactId>
+      <groupId>com.github.ben-manes.caffeine</groupId>
+      <artifactId>caffeine</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-logging</artifactId>
+      <groupId>com.graphql-java</groupId>
+      <artifactId>graphql-java-extended-scalars</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.jayway.jsonpath</groupId>
+      <artifactId>json-path</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.el</groupId>
+      <artifactId>jakarta.el-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.xml.bind</groupId>
+      <artifactId>jakarta.xml.bind-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.expressly</groupId>
+      <artifactId>expressly</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jsoup</groupId>
+      <artifactId>jsoup</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -114,63 +158,31 @@
       <artifactId>spring-boot-starter-cache</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.github.ben-manes.caffeine</groupId>
-      <artifactId>caffeine</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-graphql</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.graphql-java</groupId>
-      <artifactId>graphql-java-extended-scalars</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-logging</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.hibernate.validator</groupId>
-      <artifactId>hibernate-validator</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
     <dependency>
-      <groupId>jakarta.el</groupId>
-      <artifactId>jakarta.el-api</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-webflux</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.glassfish.expressly</groupId>
-      <artifactId>expressly</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.xml.bind</groupId>
-      <artifactId>jakarta.xml.bind-api</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.jayway.jsonpath</groupId>
-      <artifactId>json-path</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.jsoup</groupId>
-      <artifactId>jsoup</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jsr310</artifactId>
-    </dependency>
-
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <scope>provided</scope>
     </dependency>
-
     <dependency>
       <groupId>org.glassfish.jaxb</groupId>
       <artifactId>jaxb-runtime</artifactId>
       <scope>runtime</scope>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -189,17 +201,20 @@
         <plugin>
           <groupId>com.diffplug.spotless</groupId>
           <artifactId>spotless-maven-plugin</artifactId>
-          <version>2.45.0</version>
+          <version>${maven.spotless.version}</version>
           <configuration>
             <java>
               <palantirJavaFormat>
-                <version>2.52.0</version>
+                <version>${palantir-java-format.version}</version>
                 <style>GOOGLE</style>
               </palantirJavaFormat>
             </java>
             <pom>
               <sortPom>
                 <expandEmptyElements>false</expandEmptyElements>
+                <sortDependencies>scope,groupId,artifactId</sortDependencies>
+                <sortDependencyManagement>groupId,artifactId</sortDependencyManagement>
+                <sortProperties>true</sortProperties>
               </sortPom>
             </pom>
           </configuration>
@@ -220,7 +235,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>jaxb2-maven-plugin</artifactId>
-          <version>3.3.0</version>
+          <version>${maven.jaxb2.version}</version>
           <executions>
             <execution>
               <id>xjc</id>
@@ -233,7 +248,7 @@
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.8.13</version>
+          <version>${maven.jacoco.version}</version>
           <executions>
             <execution>
               <id>prepare-surefire</id>
@@ -264,7 +279,7 @@
         <plugin>
           <groupId>org.sonarsource.scanner.maven</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
-          <version>5.1.0.4751</version>
+          <version>${maven.sonar.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
