@@ -55,7 +55,7 @@
     <graphql-java-extended-scalars.version>24.0</graphql-java-extended-scalars.version>
     <jakarta-el.version>6.0.1</jakarta-el.version>
     <java.version>17</java.version>
-    <jsoup.version>1.21.1</jsoup.version>
+    <jsoup.version>1.21.2</jsoup.version>
     <maven.jacoco.version>0.8.13</maven.jacoco.version>
     <maven.jaxb2.version>3.3.0</maven.jaxb2.version>
     <maven.sonar.version>5.1.0.4751</maven.sonar.version>
