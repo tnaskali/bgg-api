@@ -59,7 +59,7 @@
     <maven.jacoco.version>0.8.13</maven.jacoco.version>
     <maven.jaxb2.version>3.3.0</maven.jaxb2.version>
     <maven.sonar.version>5.2.0.4988</maven.sonar.version>
-    <maven.spotless.version>2.46.1</maven.spotless.version>
+    <maven.spotless.version>3.0.0</maven.spotless.version>
     <palantir-java-format.version>2.74.0</palantir-java-format.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
