@@ -1,4 +1,4 @@
-FROM eclipse-temurin:24-jre
+FROM eclipse-temurin:25-jre
 
 ENV SERVER_PORT=80
 EXPOSE ${SERVER_PORT}
