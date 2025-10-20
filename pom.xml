@@ -60,7 +60,7 @@
     <maven.jaxb2.version>3.3.0</maven.jaxb2.version>
     <maven.sonar.version>5.2.0.4988</maven.sonar.version>
     <maven.spotless.version>3.0.0</maven.spotless.version>
-    <palantir-java-format.version>2.77.0</palantir-java-format.version>
+    <palantir-java-format.version>2.80.0</palantir-java-format.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml,${project.basedir}/target/site/jacoco-it/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
