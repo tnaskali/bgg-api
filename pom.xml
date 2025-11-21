@@ -65,7 +65,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml,${project.basedir}/target/site/jacoco-it/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     <sonar.junit.reportPaths>${project.basedir}/target/surefire-reports/,${project.basedir}/target/failsafe-reports/</sonar.junit.reportPaths>
-    <springdoc-openapi.version>2.8.9</springdoc-openapi.version>
+    <springdoc-openapi.version>3.0.0</springdoc-openapi.version>
     <wiremock.version>4.0.8</wiremock.version>
   </properties>
 
