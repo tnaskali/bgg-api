@@ -29,7 +29,8 @@ Prerequisites : have Java 17+ and maven installed on your machine
 Steps :
 
 1. clone this repository on your local machine
-2. run `mvn spring-boot:run`
+2. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
+3. run `mvn spring-boot:run`
 
 ## build and run a native application locally
 
@@ -38,8 +39,9 @@ Prerequisites : have GraalVM JDK 17+ and maven installed on your machine
 Steps :
 
 1. clone this repository on your local machine
-2. run `mvn native:compile -Pnative` to build the native image (takes about 5 minutes)
-3. run `./target/bgg-api`
+2. run `mvn native:compile -Pnative` to build the native image (takes about 10 minutes)
+3. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
+4. run `./target/bgg-api`
 
 ## pull and run a docker java image (Linux / MacOS only)
 
@@ -48,7 +50,8 @@ Prerequisites : have docker installed on your machine
 Steps :
 
 1. run `docker pull ghcr.io/tnaskali/bgg-api:master` (or any other tag)
-2. run `docker run --rm -p 8080:80 ghcr.io/tnaskali/bgg-api:master`
+2. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
+3. run `docker run --rm -p 8080:80 -e BGG_APPLICATION_TOKEN=${BGG_APPLICATION_TOKEN} ghcr.io/tnaskali/bgg-api:master`
 
 ## pull and run a docker native image (Linux / MacOS only)
 
@@ -57,7 +60,8 @@ Prerequisites : have docker installed on your machine
 Steps :
 
 1. run `docker pull ghcr.io/tnaskali/bgg-api-native:master` (or any other tag)
-2. run `docker run --rm -p 8080:80 ghcr.io/tnaskali/bgg-api-native:master`
+2. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
+3. run `docker run --rm -p 8080:80 -e BGG_APPLICATION_TOKEN=${BGG_APPLICATION_TOKEN} ghcr.io/tnaskali/bgg-api-native:master`
 
 # Usage
 
@@ -73,22 +77,14 @@ The GraphiQL UI is available at http://localhost:8080/bgg-api/graphiql once the 
 
 ## Authentication
 
-### XML endpoints
-
-(not yet implemented) Since late 2025, all XML API endpoints require authentication. Only Bearer token authentication is
-supported. See https://boardgamegeek.com/using_the_xml_api for details on how to create an application and generate a
-bearer token.
-
-### JSON endpoints
-
 Some JSON API endpoints require authentication. Only basic authentication using your BGG username and password is
 supported. Under the hood, these will be exchanged for a session cookie used to authenticate requests to BGG.
 
 ### A word about security
 
-Bearer tokens and basic credentials will be transmitted in clear using unsecured HTTP protocol from your browser to the
-locally running Spring Boot application and will only be kept in memory for the duration of the session. The API itself
-will use a secure HTTPS connection to perform authentication to boardgamegeek.com.
+Credentials will be transmitted in clear using unsecured HTTP protocol from your browser to the locally running Spring
+Boot application and will only be kept in memory for the duration of the session. The API itself will use a secure HTTPS
+connection to perform authentication to BGG.
 
 ## Sample request body for logging a play
 

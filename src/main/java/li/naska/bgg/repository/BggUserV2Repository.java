@@ -7,10 +7,12 @@ import li.naska.bgg.repository.model.BggUserV2QueryParams;
 import li.naska.bgg.util.QueryParameters;
 import li.naska.bgg.util.XmlProcessor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 @Repository
@@ -22,9 +24,13 @@ public class BggUserV2Repository {
 
   public BggUserV2Repository(
       @Value("${bgg.endpoints.v2.user}") String endpoint,
+      @Value("${bgg.application.token:UNDEFINED}") String applicationToken,
       WebClient.Builder builder,
       XmlProcessor xmlProcessor) {
-    this.webClient = builder.baseUrl(endpoint).build();
+    this.webClient = builder
+        .baseUrl(endpoint)
+        .defaultHeader(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", applicationToken))
+        .build();
     this.xmlProcessor = xmlProcessor;
   }
 
@@ -44,13 +50,14 @@ public class BggUserV2Repository {
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() == HttpStatus.OK
-              && clientResponse
-                  .headers()
-                  .contentType()
-                  .filter(MediaType.TEXT_HTML::equalsTypeAndSubtype)
-                  .isPresent()) {
-            throw new UnexpectedBggResponseException(clientResponse, HttpStatus.NOT_FOUND);
+          if (clientResponse.statusCode() == HttpStatus.NOT_FOUND
+              || (clientResponse.statusCode() == HttpStatus.OK
+                  && clientResponse
+                      .headers()
+                      .contentType()
+                      .filter(MediaType.TEXT_HTML::equalsTypeAndSubtype)
+                      .isPresent())) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
           } else if (clientResponse.statusCode() != HttpStatus.OK
               || clientResponse
                   .headers()

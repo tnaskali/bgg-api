@@ -7,6 +7,7 @@ import li.naska.bgg.repository.model.BggFamilyV2QueryParams;
 import li.naska.bgg.util.QueryParameters;
 import li.naska.bgg.util.XmlProcessor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
@@ -22,9 +23,13 @@ public class BggFamilyV2Repository {
 
   public BggFamilyV2Repository(
       @Value("${bgg.endpoints.v2.family}") String endpoint,
+      @Value("${bgg.application.token:UNDEFINED}") String applicationToken,
       WebClient.Builder builder,
       XmlProcessor xmlProcessor) {
-    this.webClient = builder.baseUrl(endpoint).build();
+    this.webClient = builder
+        .baseUrl(endpoint)
+        .defaultHeader(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", applicationToken))
+        .build();
     this.xmlProcessor = xmlProcessor;
   }
 
