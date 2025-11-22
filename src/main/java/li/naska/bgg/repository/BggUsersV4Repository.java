@@ -1,6 +1,5 @@
 package li.naska.bgg.repository;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
+import tools.jackson.core.type.TypeReference;
 
 @Repository
 public class BggUsersV4Repository {

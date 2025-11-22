@@ -1,8 +1,5 @@
 package li.naska.bgg.util;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.JAXBException;
@@ -23,6 +20,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.xml.StaxUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 @Component
 @Slf4j
@@ -60,10 +59,8 @@ public class XmlProcessor {
 
   public <T> String toJsonString(T object) {
     try {
-      return objectMapper
-          .addMixIn(JAXBElement.class, JAXBElementMixin.class)
-          .writeValueAsString(object);
-    } catch (JsonProcessingException e) {
+      return objectMapper.writeValueAsString(object);
+    } catch (JacksonException e) {
       log.error("JSON processing error", e);
       throw new IllegalStateException(e);
     }
@@ -76,22 +73,5 @@ public class XmlProcessor {
         .parse(new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8)));
     Node node = (Node) xPathFactory.newXPath().evaluate(expression, document, XPathConstants.NODE);
     return Optional.ofNullable(node).map(Node::getTextContent);
-  }
-
-  abstract static class JAXBElementMixin<T> {
-    @JsonIgnore
-    protected abstract Class<T> getDeclaredType();
-
-    @JsonIgnore
-    protected abstract Class<?> getScope();
-
-    @JsonIgnore
-    protected abstract boolean isNil();
-
-    @JsonIgnore
-    protected abstract boolean isGlobalScope();
-
-    @JsonIgnore
-    protected abstract boolean isTypeSubstituted();
   }
 }

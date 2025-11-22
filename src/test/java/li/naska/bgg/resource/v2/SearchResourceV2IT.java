@@ -47,8 +47,7 @@ public class SearchResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody =
-          """
+      final String mockResponseBody = """
           <?xml version="1.0" encoding="utf-8"?>
           <items total="1" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
               <item type="rpgitem" id="666">
@@ -136,7 +135,7 @@ public class SearchResourceV2IT extends AbstractMockServerIT {
               verify(
                   1,
                   getRequestedFor(
-                          urlEqualTo("/xmlapi2/search?query=bag%20end&type=rpgitem&exact=1"))
+                          urlEqualTo("/xmlapi2/search?exact=1&query=bag%20end&type=rpgitem"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,
@@ -181,7 +180,7 @@ public class SearchResourceV2IT extends AbstractMockServerIT {
               verify(
                   1,
                   getRequestedFor(
-                          urlEqualTo("/xmlapi2/search?query=bag%20end&type=rpgitem&exact=1"))
+                          urlEqualTo("/xmlapi2/search?exact=1&query=bag%20end&type=rpgitem"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,

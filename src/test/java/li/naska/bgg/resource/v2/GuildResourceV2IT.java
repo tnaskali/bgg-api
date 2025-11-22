@@ -47,8 +47,7 @@ public class GuildResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody =
-          """
+      final String mockResponseBody = """
           <?xml version="1.0" encoding="utf-8"?>
           <guild id="666" name="Shire, Middle Earth" created="Mon, 16 Mar 2009 17:25:14 +0000" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
               <category>region</category>
@@ -145,7 +144,7 @@ public class GuildResourceV2IT extends AbstractMockServerIT {
               verify(
                   1,
                   getRequestedFor(
-                          urlEqualTo("/xmlapi2/guild?id=666&members=1&sort=username&page=1"))
+                          urlEqualTo("/xmlapi2/guild?id=666&members=1&page=1&sort=username"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,
@@ -190,7 +189,7 @@ public class GuildResourceV2IT extends AbstractMockServerIT {
               verify(
                   1,
                   getRequestedFor(
-                          urlEqualTo("/xmlapi2/guild?id=666&members=1&sort=username&page=1"))
+                          urlEqualTo("/xmlapi2/guild?id=666&members=1&page=1&sort=username"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,

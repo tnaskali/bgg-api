@@ -46,8 +46,7 @@ public class CollectionResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody =
-          """
+      final String mockResponseBody = """
           <?xml version="1.0" encoding="utf-8"?>
           <items totalitems="389" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse" pubdate="Sat, 18 Dec 2021 12:16:30 +0000">
               <item objecttype="thing" objectid="94246" subtype="boardgame" collid="67682351">
@@ -163,7 +162,7 @@ public class CollectionResourceV2IT extends AbstractMockServerIT {
                   1,
                   getRequestedFor(
                           urlEqualTo(
-                              "/xmlapi2/collection?username=gandalf&version=1&subtype=boardgame&excludesubtype=boardgameexpansion&id=666&brief=1&stats=1&own=1&rated=1&played=1&comment=1&trade=1&want=1&wishlist=1&wishlistpriority=1&preordered=1&wanttoplay=1&wanttobuy=1&prevowned=1&hasparts=1&wantparts=1&minrating=1&rating=1&minbggrating=1&bggrating=1&minplays=1&maxplays=1&showprivate=1&collid=1&modifiedsince=2021-01-31%2000:00:00"))
+                              "/xmlapi2/collection?bggrating=1&brief=1&collid=1&comment=1&excludesubtype=boardgameexpansion&hasparts=1&id=666&maxplays=1&minbggrating=1&minplays=1&minrating=1&modifiedsince=2021-01-31%2000:00:00&own=1&played=1&preordered=1&prevowned=1&rated=1&rating=1&showprivate=1&stats=1&subtype=boardgame&trade=1&username=gandalf&version=1&want=1&wantparts=1&wanttobuy=1&wanttoplay=1&wishlist=1&wishlistpriority=1"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,
@@ -209,7 +208,7 @@ public class CollectionResourceV2IT extends AbstractMockServerIT {
                   1,
                   getRequestedFor(
                           urlEqualTo(
-                              "/xmlapi2/collection?username=gandalf&version=1&subtype=boardgame&excludesubtype=boardgameexpansion&id=666&brief=1&stats=1&own=1&rated=1&played=1&comment=1&trade=1&want=1&wishlist=1&wishlistpriority=1&preordered=1&wanttoplay=1&wanttobuy=1&prevowned=1&hasparts=1&wantparts=1&minrating=1&rating=1&minbggrating=1&bggrating=1&minplays=1&maxplays=1&showprivate=1&collid=1&modifiedsince=2021-01-31%2000:00:00"))
+                              "/xmlapi2/collection?bggrating=1&brief=1&collid=1&comment=1&excludesubtype=boardgameexpansion&hasparts=1&id=666&maxplays=1&minbggrating=1&minplays=1&minrating=1&modifiedsince=2021-01-31%2000:00:00&own=1&played=1&preordered=1&prevowned=1&rated=1&rating=1&showprivate=1&stats=1&subtype=boardgame&trade=1&username=gandalf&version=1&want=1&wantparts=1&wanttobuy=1&wanttoplay=1&wishlist=1&wishlistpriority=1"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,

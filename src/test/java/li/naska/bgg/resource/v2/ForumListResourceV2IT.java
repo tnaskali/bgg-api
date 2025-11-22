@@ -47,8 +47,7 @@ public class ForumListResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody =
-          """
+      final String mockResponseBody = """
           <?xml version="1.0" encoding="utf-8"?>
           <forums type="thing" id="666" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
               <forum id="123541" groupid="0" title="Reviews" noposting="0" description="Post your game reviews in this forum.  &lt;A href=&quot;/thread/59278&quot;&gt;Click here for help on writing game reviews.&lt;/A&gt;" numthreads="0" numposts="0" lastpostdate="" />

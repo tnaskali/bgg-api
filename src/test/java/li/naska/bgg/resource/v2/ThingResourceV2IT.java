@@ -47,8 +47,7 @@ public class ThingResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody =
-          """
+      final String mockResponseBody = """
           <?xml version="1.0" encoding="utf-8"?>
           <items termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
             <item type="boardgame" id="666">
@@ -147,7 +146,7 @@ public class ThingResourceV2IT extends AbstractMockServerIT {
                   1,
                   getRequestedFor(
                           urlEqualTo(
-                              "/xmlapi2/thing?id=666,667,668&type=boardgame,boardgameaccessory,boardgameexpansion&versions=1&videos=1&stats=1&historical=1&marketplace=1&comments=1&page=1&pagesize=10&from=2001-01-01&to=2001-12-31"))
+                              "/xmlapi2/thing?comments=1&from=2001-01-01&historical=1&id=666,667,668&marketplace=1&page=1&pagesize=10&stats=1&to=2001-12-31&type=boardgame,boardgameaccessory,boardgameexpansion&versions=1&videos=1"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,
@@ -193,7 +192,7 @@ public class ThingResourceV2IT extends AbstractMockServerIT {
                   1,
                   getRequestedFor(
                           urlEqualTo(
-                              "/xmlapi2/thing?id=666,667,668&type=boardgame,boardgameaccessory,boardgameexpansion&versions=1&videos=1&stats=1&historical=1&marketplace=1&comments=1&page=1&pagesize=10&from=2001-01-01&to=2001-12-31"))
+                              "/xmlapi2/thing?comments=1&from=2001-01-01&historical=1&id=666,667,668&marketplace=1&page=1&pagesize=10&stats=1&to=2001-12-31&type=boardgame,boardgameaccessory,boardgameexpansion&versions=1&videos=1"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,

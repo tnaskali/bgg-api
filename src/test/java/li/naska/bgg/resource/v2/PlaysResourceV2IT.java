@@ -46,8 +46,7 @@ public class PlaysResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody =
-          """
+      final String mockResponseBody = """
           <?xml version="1.0" encoding="utf-8"?>
           <plays username="gandalf" userid="666" total="23" page="1" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
               <play id="666" date="2021-12-05" quantity="1" length="0" incomplete="0" nowinstats="0" location="Bag End">
@@ -143,7 +142,7 @@ public class PlaysResourceV2IT extends AbstractMockServerIT {
                   1,
                   getRequestedFor(
                           urlEqualTo(
-                              "/xmlapi2/plays?username=gandalf&id=666&type=thing&mindate=2021-01-01&maxdate=2021-01-31&subtype=boardgame&page=1"))
+                              "/xmlapi2/plays?id=666&maxdate=2021-01-31&mindate=2021-01-01&page=1&subtype=boardgame&type=thing&username=gandalf"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,
@@ -189,7 +188,7 @@ public class PlaysResourceV2IT extends AbstractMockServerIT {
                   1,
                   getRequestedFor(
                           urlEqualTo(
-                              "/xmlapi2/plays?username=gandalf&id=666&type=thing&mindate=2021-01-01&maxdate=2021-01-31&subtype=boardgame&page=1"))
+                              "/xmlapi2/plays?id=666&maxdate=2021-01-31&mindate=2021-01-01&page=1&subtype=boardgame&type=thing&username=gandalf"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,
