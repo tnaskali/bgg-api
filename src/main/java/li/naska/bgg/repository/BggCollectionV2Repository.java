@@ -28,9 +28,13 @@ public class BggCollectionV2Repository {
 
   public BggCollectionV2Repository(
       @Value("${bgg.endpoints.v2.collection}") String endpoint,
+      @Value("${bgg.application.token:UNDEFINED}") String applicationToken,
       WebClient.Builder builder,
       XmlProcessor xmlProcessor) {
-    this.webClient = builder.baseUrl(endpoint).build();
+    this.webClient = builder
+        .baseUrl(endpoint)
+        .defaultHeader(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", applicationToken))
+        .build();
     this.xmlProcessor = xmlProcessor;
   }
 

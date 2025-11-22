@@ -7,6 +7,7 @@ import li.naska.bgg.repository.model.BggSearchV2QueryParams;
 import li.naska.bgg.util.QueryParameters;
 import li.naska.bgg.util.XmlProcessor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
@@ -22,9 +23,13 @@ public class BggSearchV2Repository {
 
   public BggSearchV2Repository(
       @Value("${bgg.endpoints.v2.search}") String endpoint,
+      @Value("${bgg.application.token:UNDEFINED}") String applicationToken,
       WebClient.Builder builder,
       XmlProcessor xmlProcessor) {
-    this.webClient = builder.baseUrl(endpoint).build();
+    this.webClient = builder
+        .baseUrl(endpoint)
+        .defaultHeader(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", applicationToken))
+        .build();
     this.xmlProcessor = xmlProcessor;
   }
 
