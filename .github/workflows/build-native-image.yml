@@ -27,7 +27,6 @@ jobs:
         with:
           java-version: '25'
           distribution: 'graalvm'
-          components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Cache Maven packages
