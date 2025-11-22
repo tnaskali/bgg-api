@@ -5,7 +5,9 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tnaskali_bgg-api&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tnaskali_bgg-api)
 
 Spring Boot application acting as a proxy to
-BoardGameGeek's [XML API](https://boardgamegeek.com/wiki/page/BGG_XML_API), [XML API 2](https://boardgamegeek.com/wiki/page/BGG_XML_API2) and [JSON API](https://boardgamegeek.com/wiki/page/BGG_JSON_API). Its purpose is to expose the same functionalities, mainly retrieving but also
+BoardGameGeek's [XML API](https://boardgamegeek.com/wiki/page/BGG_XML_API), [XML API 2](https://boardgamegeek.com/wiki/page/BGG_XML_API2)
+and [JSON API](https://boardgamegeek.com/wiki/page/BGG_JSON_API). Its purpose is to expose the same functionalities,
+mainly retrieving but also
 persisting data, in a more user-friendly and developer-friendly way.
 
 # Features
@@ -13,11 +15,12 @@ persisting data, in a more user-friendly and developer-friendly way.
 - Static BGG XML API schemas in XSD format (located under [src/main/xsd](src/main/xsd))
 - Proxied XML and Json API for querying data based on their public API (no authentication required)
 - Proxied Json API for mutating data (e.g. logging games) based on their public API (basic authentication required)
-- (in progress) custom GraphQL API unifying these different API endpoints (schema under [src/main/resources/graphql](src/main/resources/graphql)) and GraphiQL UI (/bgg-api/graphiql) web interface
+- (in progress) custom GraphQL API unifying these different API endpoints (schema
+  under [src/main/resources/graphql](src/main/resources/graphql)) and GraphiQL UI (/bgg-api/graphiql) web interface
 - OpenAPI definition and Swagger UI (/bgg-api/swagger-ui.html) web interface
 - Support for building both Java and native artifacts and images
 
-# Usage
+# Setup
 
 ## build and run a java application locally
 
@@ -27,18 +30,16 @@ Steps :
 
 1. clone this repository on your local machine
 2. run `mvn spring-boot:run`
-3. navigate to http://localhost:8080/bgg-api/swagger-ui.html or http://localhost:8080/bgg-api/graphiql
 
 ## build and run a native application locally
 
-Prerequisites : have GraalVM 22+ (java17) and maven installed on your machine
+Prerequisites : have GraalVM JDK 17+ and maven installed on your machine
 
 Steps :
 
 1. clone this repository on your local machine
 2. run `mvn native:compile -Pnative` to build the native image (takes about 5 minutes)
 3. run `./target/bgg-api`
-4. navigate to http://localhost:8080/bgg-api/swagger-ui.html or http://localhost:8080/bgg-api/graphiql
 
 ## pull and run a docker java image (Linux / MacOS only)
 
@@ -48,7 +49,6 @@ Steps :
 
 1. run `docker pull ghcr.io/tnaskali/bgg-api:master` (or any other tag)
 2. run `docker run --rm -p 8080:80 ghcr.io/tnaskali/bgg-api:master`
-3. navigate to http://localhost:8080/bgg-api/swagger-ui.html or http://localhost:8080/bgg-api/graphiql
 
 ## pull and run a docker native image (Linux / MacOS only)
 
@@ -58,9 +58,37 @@ Steps :
 
 1. run `docker pull ghcr.io/tnaskali/bgg-api-native:master` (or any other tag)
 2. run `docker run --rm -p 8080:80 ghcr.io/tnaskali/bgg-api-native:master`
-3. navigate to http://localhost:8080/bgg-api/swagger-ui.html or http://localhost:8080/bgg-api/graphiql
 
-# Examples
+# Usage
+
+## Web interfaces
+
+### Swagger UI
+
+The Swagger UI is available at http://localhost:8080/bgg-api/swagger-ui.html once the application is running.
+
+### GraphiQL UI
+
+The GraphiQL UI is available at http://localhost:8080/bgg-api/graphiql once the application is running.
+
+## Authentication
+
+### XML endpoints
+
+(not yet implemented) Since late 2025, all XML API endpoints require authentication. Only Bearer token authentication is
+supported. See https://boardgamegeek.com/using_the_xml_api for details on how to create an application and generate a
+bearer token.
+
+### JSON endpoints
+
+Some JSON API endpoints require authentication. Only basic authentication using your BGG username and password is
+supported. Under the hood, these will be exchanged for a session cookie used to authenticate requests to BGG.
+
+### A word about security
+
+Bearer tokens and basic credentials will be transmitted in clear using unsecured HTTP protocol from your browser to the
+locally running Spring Boot application and will only be kept in memory for the duration of the session. The API itself
+will use a secure HTTPS connection to perform authentication to boardgamegeek.com.
 
 ## Sample request body for logging a play
 
@@ -94,7 +122,6 @@ endpoint: /bgg-api/api/v3/geekplay (POST, basic auth)
   ]
 }
 ```
-
 
 ## Sample graphQL user query
 
@@ -146,12 +173,6 @@ endpoint: /bgg-api/graphql (POST, no auth)
 }
 ```
 
-# A word about security
-
-The games logging API will prompt for your BGG username and password. These will be transmitted in clear using unsecured
-HTTP protocol from your browser to the locally running Spring Boot application and will only be kept in memory for the
-duration of the session. Then the API will use a secure HTTPS connection to perform authentication to boardgamegeek.com.
-
 # Terms of use
 
 This is just a proxy to BoardGameGeek's API, so
@@ -163,8 +184,10 @@ before deciding to use this API.
 - BGG's XML API 2 : https://boardgamegeek.com/wiki/page/BGG_XML_API2
 - BGG's database structure : https://boardgamegeek.com/wiki/page/Database_Structure
 - Fisico's thread on BGG forum : https://boardgamegeek.com/thread/1010057/xml-schema-for-bgg-xml-api2
-- Reddit Thread on how to log plays programmatically : https://www.reddit.com/r/boardgames/comments/ez86me/uploading_games_plays_to_bgg_programmatically/
-- Baeldung's tutorial on Spring Security Custom Authentication Provider : https://www.baeldung.com/spring-security-authentication-provider
+- Reddit Thread on how to log plays
+  programmatically : https://www.reddit.com/r/boardgames/comments/ez86me/uploading_games_plays_to_bgg_programmatically/
+- Baeldung's tutorial on Spring Security Custom Authentication
+  Provider : https://www.baeldung.com/spring-security-authentication-provider
 
 # Extras
 
@@ -176,16 +199,13 @@ classDiagram
 %% Relationships
     Guild "many" --> "many" User: members
     Guild "many" --> "1" User: manager
-
     User "1" --* "1" Collection
     Collection "1" --* "many" Collectionitem
     Collectionitem "many" --> "1" Thing
     Collectionitem "many" --> "0..1" Version
- 
     User "many" --* "many" Play
     Play "many" --> "1" Thing
     Play "many" --> "many" User: players
- 
     User "1" --* "many" Geeklist
     Geeklist "1" --* "many" Geeklistitem
     Geeklist "1" --* "many" Tip
@@ -194,13 +214,11 @@ classDiagram
     Geeklistitem "1" --* "many" Comment
     Geeklistitem "1" --* "many" Tip
     Geeklistitem "1" --* "many" Reaction
-
     Blog "1" --* "many" Blogpost
     Blogpost "many" --> "1" User: author
     Blogpost "1" --* "many" Comment
     Blogpost "1" --* "many" Tip
     Blogpost "1" --* "many" Reaction
-
     Forum "1" --* "many" Thread
     Thread "many" --> "1" User: author
     Thread "many" --> "0..1" Geekitem
@@ -209,19 +227,14 @@ classDiagram
     User "1" --* "many" Article
     Article "1" --* "many" Tip
     Article "1" --* "many" Reaction
-
     Geekitem "many" --> "many" Geekitem: linked items
     Geekitem "many" --* "many" Weblink
     Geekitem "many" --> "many" User: fans
-
     Comment "many" --> "1" User: author
     Comment "1" --* "many" Tip
     Comment "1" --* "many" Reaction
-
     Reaction "many" --> "1" User: given by
-
     Tip "many" --> "1" User: given by
-
 %% Inheritance from Object
     Geekitem <|-- Company
     Geekitem <|-- Component
