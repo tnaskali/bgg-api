@@ -128,7 +128,7 @@ public class SearchResourceV1IT extends AbstractMockServerIT {
             void should_1() {
               verify(
                   1,
-                  getRequestedFor(urlEqualTo("/xmlapi/search?search=corona&exact=1"))
+                  getRequestedFor(urlEqualTo("/xmlapi/search?exact=1&search=corona"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,
@@ -172,7 +172,7 @@ public class SearchResourceV1IT extends AbstractMockServerIT {
             void should_1() {
               verify(
                   1,
-                  getRequestedFor(urlEqualTo("/xmlapi/search?search=corona&exact=1"))
+                  getRequestedFor(urlEqualTo("/xmlapi/search?exact=1&search=corona"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,

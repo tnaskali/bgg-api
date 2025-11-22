@@ -249,7 +249,7 @@ public class CollectionResourceV1IT extends AbstractMockServerIT {
                   1,
                   getRequestedFor(
                           urlEqualTo(
-                              "/xmlapi/collection/gandalf?version=1&brief=1&own=1&rated=1&played=1&comment=1&trade=1&want=1&wishlist=1&wanttoplay=1&wanttobuy=1&prevowned=1&preordered=1&hasparts=1&wantparts=1&wishlistpriority=1&minrating=1&minbggrating=1&minplays=1&maxplays=1&showprivate=1"))
+                              "/xmlapi/collection/gandalf?brief=1&comment=1&hasparts=1&maxplays=1&minbggrating=1&minplays=1&minrating=1&own=1&played=1&preordered=1&prevowned=1&rated=1&showprivate=1&trade=1&version=1&want=1&wantparts=1&wanttobuy=1&wanttoplay=1&wishlist=1&wishlistpriority=1"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,
@@ -295,7 +295,7 @@ public class CollectionResourceV1IT extends AbstractMockServerIT {
                   1,
                   getRequestedFor(
                           urlEqualTo(
-                              "/xmlapi/collection/gandalf?version=1&brief=1&own=1&rated=1&played=1&comment=1&trade=1&want=1&wishlist=1&wanttoplay=1&wanttobuy=1&prevowned=1&preordered=1&hasparts=1&wantparts=1&wishlistpriority=1&minrating=1&minbggrating=1&minplays=1&maxplays=1&showprivate=1"))
+                              "/xmlapi/collection/gandalf?brief=1&comment=1&hasparts=1&maxplays=1&minbggrating=1&minplays=1&minrating=1&own=1&played=1&preordered=1&prevowned=1&rated=1&showprivate=1&trade=1&version=1&want=1&wantparts=1&wanttobuy=1&wanttoplay=1&wishlist=1&wishlistpriority=1"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,

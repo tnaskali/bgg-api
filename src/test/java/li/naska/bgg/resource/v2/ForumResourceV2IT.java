@@ -47,8 +47,7 @@ public class ForumResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody =
-          """
+      final String mockResponseBody = """
           <?xml version="1.0" encoding="utf-8"?>
           <forum id="666" title="Sessions" numthreads="39" numposts="211" lastpostdate="Thu, 01 Jan 1970 00:00:00 +0000" noposting="0" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
               <threads>

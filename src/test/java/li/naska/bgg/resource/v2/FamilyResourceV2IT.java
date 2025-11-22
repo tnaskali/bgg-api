@@ -47,8 +47,7 @@ public class FamilyResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody =
-          """
+      final String mockResponseBody = """
           <?xml version="1.0" encoding="utf-8"?>
           <items termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
             <item type="boardgamefamily" id="666">

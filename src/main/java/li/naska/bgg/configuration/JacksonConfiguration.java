@@ -1,52 +1,72 @@
 package li.naska.bgg.configuration;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.JAXBElement;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.stream.Stream;
-import li.naska.bgg.util.ClasspathUtils;
-import li.naska.bgg.util.ReflectionUtils;
-import li.naska.bgg.util.SafeLocalDateJacksonDeserializer;
-import li.naska.bgg.util.SafeLocalDateTimeJacksonDeserializer;
+import li.naska.bgg.util.*;
 import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
-import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.boot.jackson.autoconfigure.JsonMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportRuntimeHints;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.cfg.DateTimeFeature;
+import tools.jackson.databind.module.SimpleDeserializers;
+import tools.jackson.databind.module.SimpleModule;
 
 @Configuration
 @ImportRuntimeHints(JacksonConfiguration.JacksonRuntimeHints.class)
 public class JacksonConfiguration {
 
   @Bean
-  public Jackson2ObjectMapperBuilderCustomizer objectMapperBuilderCustomizer() {
-    return builder -> {
-      // Use ISO-8601 for dates
-      builder.featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-      // see BggUserV4ResponseBody#adminBadges
-      builder.featuresToEnable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
-      // set to true to increase strictness
-      builder.failOnUnknownProperties(false);
-      builder.postConfigurer(objectMapper -> {
-        // FIXME https://stackoverflow.com/a/56008395/4074057
-        objectMapper.setDefaultPropertyInclusion(Include.NON_NULL);
-        SimpleModule javaTimeModule = new JavaTimeModule();
-        // deserialize bad formatted dates to null
-        javaTimeModule.addDeserializer(
-            LocalDateTime.class, SafeLocalDateTimeJacksonDeserializer.INSTANCE);
-        // see BggGeekitemV4ResponseBody#commercelinks
-        javaTimeModule.addDeserializer(LocalDate.class, SafeLocalDateJacksonDeserializer.INSTANCE);
-        objectMapper.registerModule(javaTimeModule);
-      });
-    };
+  public JsonMapperBuilderCustomizer objectMapperBuilderCustomizer() {
+    return builder -> builder
+        // Use ISO-8601 for dates
+        .disable(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
+        // see BggUserV4ResponseBody#adminBadges
+        .enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT)
+        // set to enabled to increase strictness
+        .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+        .changeDefaultPropertyInclusion(incl -> incl.withValueInclusion(Include.NON_NULL))
+        .addModule(new SafeJavaTimeModule())
+        .addMixIn(JAXBElement.class, JAXBElementMixin.class);
+  }
+
+  interface JAXBElementMixin<T> {
+    @JsonIgnore
+    Class<T> getDeclaredType();
+
+    @JsonIgnore
+    Class<?> getScope();
+
+    @JsonIgnore
+    boolean isNil();
+
+    @JsonIgnore
+    boolean isGlobalScope();
+
+    @JsonIgnore
+    boolean isTypeSubstituted();
+  }
+
+  public static class SafeJavaTimeModule extends SimpleModule {
+    @Override
+    public void setupModule(SetupContext context) {
+      SimpleDeserializers deserializers = new SimpleDeserializers();
+      // see BggGeekitemV4ResponseBody#commercelinks
+      deserializers.addDeserializer(
+          LocalDateTime.class, SafeLocalDateTimeJacksonDeserializer.INSTANCE);
+      // see BggGeekitemV4ResponseBody#commercelinks
+      deserializers.addDeserializer(LocalDate.class, SafeLocalDateJacksonDeserializer.INSTANCE);
+      context.addDeserializers(deserializers);
+    }
   }
 
   static class JacksonRuntimeHints implements RuntimeHintsRegistrar {
@@ -66,7 +86,7 @@ public class JacksonConfiguration {
               .reflection()
               .registerType(
                   clazz,
-                  MemberCategory.DECLARED_FIELDS,
+                  MemberCategory.ACCESS_DECLARED_FIELDS,
                   MemberCategory.INVOKE_DECLARED_METHODS,
                   MemberCategory.INVOKE_DECLARED_CONSTRUCTORS));
     }

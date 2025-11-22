@@ -221,7 +221,7 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
               verify(
                   1,
                   getRequestedFor(
-                          urlEqualTo("/xmlapi/geeklist/1000?comments=1&start=100&count=200"))
+                          urlEqualTo("/xmlapi/geeklist/1000?comments=1&count=200&start=100"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,
@@ -266,7 +266,7 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
               verify(
                   1,
                   getRequestedFor(
-                          urlEqualTo("/xmlapi/geeklist/1000?comments=1&start=100&count=200"))
+                          urlEqualTo("/xmlapi/geeklist/1000?comments=1&count=200&start=100"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,

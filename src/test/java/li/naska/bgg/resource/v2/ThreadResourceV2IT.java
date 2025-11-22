@@ -47,8 +47,7 @@ public class ThreadResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody =
-          """
+      final String mockResponseBody = """
           <?xml version="1.0" encoding="utf-8"?>
           <thread id="666" numarticles="1" link="https://boardgamegeek.com/thread/666" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
               <subject>Preview</subject>
@@ -146,7 +145,7 @@ public class ThreadResourceV2IT extends AbstractMockServerIT {
                   1,
                   getRequestedFor(
                           urlEqualTo(
-                              "/xmlapi2/thread?id=666&minarticleid=100&minarticledate=2021-01-31%2000:00:00&count=1&username=gandalf"))
+                              "/xmlapi2/thread?count=1&id=666&minarticledate=2021-01-31%2000:00:00&minarticleid=100&username=gandalf"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,
@@ -192,7 +191,7 @@ public class ThreadResourceV2IT extends AbstractMockServerIT {
                   1,
                   getRequestedFor(
                           urlEqualTo(
-                              "/xmlapi2/thread?id=666&minarticleid=100&minarticledate=2021-01-31%2000:00:00&count=1&username=gandalf"))
+                              "/xmlapi2/thread?count=1&id=666&minarticledate=2021-01-31%2000:00:00&minarticleid=100&username=gandalf"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,

@@ -1,21 +1,17 @@
 package li.naska.bgg.util;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.datatype.jsr310.deser.JSR310DateTimeDeserializerBase;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import lombok.extern.slf4j.Slf4j;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.ext.javatime.deser.LocalDateTimeDeserializer;
 
 @Slf4j
-public class SafeLocalDateTimeJacksonDeserializer
-    extends JSR310DateTimeDeserializerBase<LocalDateTime> {
+public class SafeLocalDateTimeJacksonDeserializer extends LocalDateTimeDeserializer {
 
   private static final DateTimeFormatter CUSTOM_FORMATTER = new DateTimeFormatterBuilder()
       .appendOptional(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
@@ -30,7 +26,7 @@ public class SafeLocalDateTimeJacksonDeserializer
   }
 
   protected SafeLocalDateTimeJacksonDeserializer(DateTimeFormatter dtf) {
-    super(LocalDateTime.class, dtf);
+    super(dtf);
   }
 
   protected SafeLocalDateTimeJacksonDeserializer(
@@ -39,33 +35,33 @@ public class SafeLocalDateTimeJacksonDeserializer
   }
 
   @Override
-  public JsonDeserializer<LocalDateTime> getDelegatee() {
+  public LocalDateTimeDeserializer getDelegatee() {
     return new LocalDateTimeDeserializer(_formatter);
   }
 
   @Override
-  public LocalDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+  public LocalDateTime deserialize(JsonParser p, DeserializationContext ctxt) {
     try {
       return getDelegatee().deserialize(p, ctxt);
-    } catch (JsonMappingException dtpe) {
+    } catch (JacksonException dtpe) {
       // handle values formatted as 0000-00-00 00:00:00 or similar
-      log.info("bad date format was mapped to null : {}", p.getText());
+      log.info("bad date format was mapped to null : {}", p.getString());
       return null;
     }
   }
 
   @Override
-  protected JSR310DateTimeDeserializerBase<LocalDateTime> withDateFormat(DateTimeFormatter dtf) {
+  protected LocalDateTimeDeserializer withDateFormat(DateTimeFormatter dtf) {
     return new SafeLocalDateTimeJacksonDeserializer(dtf);
   }
 
   @Override
-  protected JSR310DateTimeDeserializerBase<LocalDateTime> withLeniency(Boolean leniency) {
+  protected LocalDateTimeDeserializer withLeniency(Boolean leniency) {
     return new SafeLocalDateTimeJacksonDeserializer(this, leniency);
   }
 
   @Override
-  protected JSR310DateTimeDeserializerBase<LocalDateTime> withShape(JsonFormat.Shape shape) {
+  protected LocalDateTimeDeserializer withShape(JsonFormat.Shape shape) {
     return this;
   }
 }

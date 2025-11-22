@@ -21,12 +21,12 @@ import org.springframework.context.annotation.ImportRuntimeHints;
 public class CacheConfiguration {
 
   @Bean
-  public Caffeine<Object, Object> caffeineConfig() {
+  public Caffeine<@NotNull Object, @NotNull Object> caffeineConfig() {
     return Caffeine.newBuilder().maximumSize(100).expireAfterWrite(60, TimeUnit.SECONDS);
   }
 
   @Bean
-  public CacheManager caffeineCacheManager(Caffeine<Object, Object> caffeine) {
+  public CacheManager caffeineCacheManager(Caffeine<@NotNull Object, @NotNull Object> caffeine) {
     CaffeineCacheManager caffeineCacheManager = new CaffeineCacheManager();
     caffeineCacheManager.setCaffeine(caffeine);
     caffeineCacheManager.setAsyncCacheMode(true);
@@ -46,7 +46,7 @@ public class CacheConfiguration {
           .reflection()
           .registerType(
               clazz,
-              MemberCategory.DECLARED_FIELDS,
+              MemberCategory.ACCESS_DECLARED_FIELDS,
               MemberCategory.INVOKE_DECLARED_METHODS,
               MemberCategory.INVOKE_DECLARED_CONSTRUCTORS));
     }

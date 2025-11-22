@@ -47,8 +47,7 @@ public class UserResourceV2IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody =
-          """
+      final String mockResponseBody = """
           <?xml version="1.0" encoding="utf-8"?>
           <user id="666" name="gandalf" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
               <firstname value="N/A" />
@@ -152,7 +151,7 @@ public class UserResourceV2IT extends AbstractMockServerIT {
                   1,
                   getRequestedFor(
                           urlEqualTo(
-                              "/xmlapi2/user?name=gandalf&buddies=1&guilds=1&hot=1&top=1&domain=boardgame&page=1"))
+                              "/xmlapi2/user?buddies=1&domain=boardgame&guilds=1&hot=1&name=gandalf&page=1&top=1"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,
@@ -198,7 +197,7 @@ public class UserResourceV2IT extends AbstractMockServerIT {
                   1,
                   getRequestedFor(
                           urlEqualTo(
-                              "/xmlapi2/user?name=gandalf&buddies=1&guilds=1&hot=1&top=1&domain=boardgame&page=1"))
+                              "/xmlapi2/user?buddies=1&domain=boardgame&guilds=1&hot=1&name=gandalf&page=1&top=1"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,

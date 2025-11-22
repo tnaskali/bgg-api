@@ -98,7 +98,7 @@ public class JaxbConfiguration {
               .reflection()
               .registerType(
                   clazz,
-                  MemberCategory.DECLARED_FIELDS,
+                  MemberCategory.ACCESS_DECLARED_FIELDS,
                   MemberCategory.INVOKE_DECLARED_METHODS,
                   MemberCategory.INVOKE_DECLARED_CONSTRUCTORS));
 

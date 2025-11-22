@@ -60,10 +60,11 @@ server:
   port: 8080
 
 spring:
-  codec:
-    max-in-memory-size: 16MB
   graphql:
     graphiql:
       enabled: true
+  http:
+    codecs:
+      max-in-memory-size: 16MB
   webflux:
     base-path: /bgg-api
