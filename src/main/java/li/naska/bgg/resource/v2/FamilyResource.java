@@ -26,8 +26,7 @@ public class FamilyResource {
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Family items",
-      description =
-          """
+      description = """
           In the BGG database, more abstract or esoteric concepts are represented by something called a family.
           <p>
           The XMLAPI2 supports families of the following family types:

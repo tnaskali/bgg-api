@@ -25,10 +25,7 @@ public class CommentsResource {
   }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get comment",
-      description =
-          """
+  @Operation(summary = "Get comment", description = """
           Get comment by id.
           <p>
           <i>Syntax</i> : /comments/{id}
@@ -42,10 +39,7 @@ public class CommentsResource {
   }
 
   @GetMapping(path = "/{id}/reactions", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get comment reactions",
-      description =
-          """
+  @Operation(summary = "Get comment reactions", description = """
           Get reactions for a given comment.
           <p>
           <i>Syntax</i> : /comments/{id}/reactions[?{parameters}]
@@ -60,10 +54,7 @@ public class CommentsResource {
   }
 
   @GetMapping(path = "/{id}/tips", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get comment tips",
-      description =
-          """
+  @Operation(summary = "Get comment tips", description = """
           Get tips for a given comment.
           <p>
           <i>Syntax</i> : /comments/{id}/tips[?{parameters}]

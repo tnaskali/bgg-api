@@ -11,10 +11,7 @@ public class BggGeekaccountContactV3RequestBody {
 
   @NotNull
   @Pattern(regexp = "^savecontact$")
-  @Parameter(
-      example = "savecontact",
-      description =
-          """
+  @Parameter(example = "savecontact", description = """
           Action to perform.
           <p>
           Possible values are:
@@ -58,9 +55,7 @@ public class BggGeekaccountContactV3RequestBody {
 
   @Deprecated
   @Pattern(regexp = "^Submit$")
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Corresponds to the "Submit" form button and always has a value of "Submit".

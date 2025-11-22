@@ -27,10 +27,7 @@ public class ArticlesResource {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get articles",
-      description =
-          """
+  @Operation(summary = "Get articles", description = """
           Get article by thread id.
           <p>
           <i>Syntax</i> : /articles?threadid={id}[&{parameters}]
@@ -43,10 +40,7 @@ public class ArticlesResource {
   }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get article",
-      description =
-          """
+  @Operation(summary = "Get article", description = """
           Get article by id.
           <p>
           <i>Syntax</i> : /articles/{id}

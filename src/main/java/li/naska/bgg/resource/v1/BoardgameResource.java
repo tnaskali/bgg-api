@@ -31,8 +31,7 @@ public class BoardgameResource {
       produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Retrieve information about a particular game or games",
-      description =
-          """
+      description = """
           Retrieve information about a particular game or games.
           <p>
           <i>Syntax</i> : /boardgame/{ids}[?{parameters}]

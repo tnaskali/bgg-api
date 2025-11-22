@@ -30,10 +30,7 @@ public class FansResource {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get fans",
-      description =
-          """
+  @Operation(summary = "Get fans", description = """
           Get fans information for a given object.
           <p>
           <i>Syntax</i> : /fans?objectid={id}&objecttype={type}
@@ -51,8 +48,7 @@ public class FansResource {
   @ResponseStatus(HttpStatus.CREATED)
   @Operation(
       summary = "Add self to fans",
-      description =
-          """
+      description = """
           Adds the current user to the fans.
           <p>
           <i>Syntax</i> : /fans/{id}
@@ -69,8 +65,7 @@ public class FansResource {
   @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Delete self from fans",
-      description =
-          """
+      description = """
           Delete the current user from the fans.
           <p>
           <i>Syntax</i> : /fans/{id}

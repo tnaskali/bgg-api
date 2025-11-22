@@ -11,10 +11,7 @@ public class BggGeekpollV3QueryParams {
 
   @NotNull
   @Pattern(regexp = "^results$")
-  @Parameter(
-      example = "results",
-      description =
-          """
+  @Parameter(example = "results", description = """
           Action to perform.
           <p>
           Possible values are:

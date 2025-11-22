@@ -11,10 +11,7 @@ public class BggArticlesV4QueryParams {
 
   @NotNull
   @Min(1)
-  @Parameter(
-      example = "12345",
-      description =
-          """
+  @Parameter(example = "12345", description = """
           Thread id.
           <p>
           <i>Syntax</i> : /articles?threadid={threadid}
@@ -24,15 +21,12 @@ public class BggArticlesV4QueryParams {
   private Integer threadid;
 
   @Min(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Page number. Page size is 25.
           <p>
           <i>Syntax</i> : /articles?threadid={threadid}&pageid={pageid}
           <p>
           <i>Example</i> : /articles?threadid=12345&pageid=2
-          """,
-      schema = @Schema(defaultValue = "1"))
+          """, schema = @Schema(defaultValue = "1"))
   private Integer pageid;
 }

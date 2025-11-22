@@ -23,10 +23,7 @@ public class PersonResource {
   }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-  @Operation(
-      summary = "Person items",
-      description =
-          """
+  @Operation(summary = "Person items", description = """
           In the BGG database, any real person is called a person.
           <p>
           <i>Syntax</i> : /person?id={ids}[&{parameters}]

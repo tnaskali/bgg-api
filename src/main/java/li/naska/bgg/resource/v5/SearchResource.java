@@ -27,10 +27,7 @@ public class SearchResource {
   }
 
   @GetMapping(path = "/{context}", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Quick search",
-      description =
-          """
+  @Operation(summary = "Quick search", description = """
           Quick item search.
           <p>
           <i>Syntax</i> : /search/{context}?q={query}[&{parameters}]

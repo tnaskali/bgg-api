@@ -10,10 +10,7 @@ public class BggSubtypeinfoV4QueryParams {
 
   @NotNull
   // @Pattern(regexp = ...)
-  @Parameter(
-      example = "boardgameintegration",
-      description =
-          """
+  @Parameter(example = "boardgameintegration", description = """
           The object type.
           <p>
           <i>Syntax</i> : /subtypeinfo?subtype={type}
@@ -24,9 +21,7 @@ public class BggSubtypeinfoV4QueryParams {
 
   @Deprecated
   @Min(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Seems to be present with a value of "1" in all requests.

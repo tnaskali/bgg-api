@@ -11,10 +11,7 @@ public class BggThreadV2QueryParams {
 
   @NotNull
   @Min(1)
-  @Parameter(
-      example = "666",
-      description =
-          """
+  @Parameter(example = "666", description = """
           Specifies the id of the thread to retrieve.
           <p>
           <i>Syntax</i> : /thread?id={id}
@@ -24,10 +21,7 @@ public class BggThreadV2QueryParams {
   private Integer id;
 
   @Min(1)
-  @Parameter(
-      example = "700",
-      description =
-          """
+  @Parameter(example = "700", description = """
           Filters the results so that only articles with an equal or higher id than NNN will be returned.
           <p>
           <i>Syntax</i> : /thread?id={id}&minarticleid={id}
@@ -39,10 +33,7 @@ public class BggThreadV2QueryParams {
   @Pattern(
       regexp =
           "^(?:[1-9]\\d)?\\d{2}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])(?: (?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d)?$")
-  @Parameter(
-      example = "2002-01-01 12:00:00",
-      description =
-          """
+  @Parameter(example = "2002-01-01 12:00:00", description = """
           Filters the results so that only articles on the specified date or later will be returned.
           <p>
           <i>Syntax</i> : /thread?id={id}&minarticledate={date}
@@ -54,10 +45,7 @@ public class BggThreadV2QueryParams {
   private String minarticledate;
 
   @Min(1)
-  @Parameter(
-      example = "100",
-      description =
-          """
+  @Parameter(example = "100", description = """
           Limits the number of articles returned to no more than NNN.
           <p>
           <i>Syntax</i> : /thread?id={id}&count={count}
@@ -67,9 +55,7 @@ public class BggThreadV2QueryParams {
   private Integer count;
 
   @Deprecated
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           <i>Not currently supported.</i>
           <p>
           <i>Syntax</i> : /thread?id={id}&username={username}

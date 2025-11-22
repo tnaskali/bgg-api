@@ -13,10 +13,7 @@ public class BggGeeklistsV4QueryParams {
 
   @NotNull
   @Min(1)
-  @Parameter(
-      example = "1000",
-      description =
-          """
+  @Parameter(example = "1000", description = """
           The object id.
           <p>
           <i>Syntax</i> : /geeklists?objectid={id}&objecttype={type}
@@ -28,10 +25,7 @@ public class BggGeeklistsV4QueryParams {
   @NotNull
   @Pattern(
       regexp = "^(?:company|component|event|family|media|person|property|thing|version|weblink)$")
-  @Parameter(
-      example = "thing",
-      description =
-          """
+  @Parameter(example = "thing", description = """
           The object type.
           <p>
           <i>Syntax</i> : /geeklists?objectid={id}&objecttype={type}
@@ -41,9 +35,7 @@ public class BggGeeklistsV4QueryParams {
   private String objecttype;
 
   @Pattern(regexp = "^(?:hot|recent)$")
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Sort order.
           <p>Valid sort orders are:
           <li/>hot
@@ -52,58 +44,45 @@ public class BggGeeklistsV4QueryParams {
           <i>Syntax</i> : /geeklists?objectid={id}&objecttype={type}&sort={sort}
           <p>
           <i>Example</i> : /geeklists?objectid=205637&objecttype=thing&sort=recent
-          """,
-      schema = @Schema(defaultValue = "recent"))
+          """, schema = @Schema(defaultValue = "recent"))
   private String sort;
 
   @Min(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Page number for paged results.
           <p>
           <i>Syntax</i> : /geeklists?objectid={id}&objecttype={type}&pageid={page}
           <p>
           <i>Example</i> : /geeklists?objectid=205637&objecttype=thing&pageid=2
-          """,
-      schema = @Schema(defaultValue = "1"))
+          """, schema = @Schema(defaultValue = "1"))
   private Integer pageid;
 
   @Min(1)
   @Max(50)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Page size for paged results.
           <p>
           <i>Syntax</i> : /geeklists?objectid={id}&objecttype={type}&showcount={count}
           <p>
           <i>Example</i> : /geeklists?objectid=205637&objecttype=thing&showcount=10
-          """,
-      schema = @Schema(defaultValue = "10"))
+          """, schema = @Schema(defaultValue = "10"))
   private Integer showcount;
 
   @Min(1)
   @Max(50)
-  @Parameter(
-      example = "3",
-      description =
-          """
+  @Parameter(example = "3", description = """
           Number of items to retrieve per geeklist.
           <p>
           <i>Syntax</i> : /geeklists?objectid={id}&objecttype={type}&itemcount={count}
           <p>
           <i>Example</i> : /geeklists?objectid=205637&objecttype=thing&itemcount=3
-          """,
-      schema = @Schema(defaultValue = "0"))
+          """, schema = @Schema(defaultValue = "0"))
   private Integer itemcount;
 
   @Deprecated
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Seems to be present with a value of "1" in all requests.
@@ -113,9 +92,7 @@ public class BggGeeklistsV4QueryParams {
   @Deprecated
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Seems to be present with a value of "1" in all requests.

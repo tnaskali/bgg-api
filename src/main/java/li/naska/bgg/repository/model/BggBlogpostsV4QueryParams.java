@@ -9,9 +9,7 @@ import lombok.Data;
 public class BggBlogpostsV4QueryParams {
 
   @Pattern(regexp = "^(?:hot|recent)$")
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Sort order.
           <p>Valid sort orders are:
           <li/>hot
@@ -20,14 +18,11 @@ public class BggBlogpostsV4QueryParams {
           <i>Syntax</i> : /blogposts?sort={sort}
           <p>
           <i>Example</i> : /blogposts?sort=recent
-          """,
-      schema = @Schema(defaultValue = "recent"))
+          """, schema = @Schema(defaultValue = "recent"))
   private String sort;
 
   @Pattern(regexp = "^(?:alltime|today|twodays|last7|last30|year)$")
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Hot scope interval.
           <p>Valid intervals are:
           <li/>alltime (default)
@@ -40,7 +35,6 @@ public class BggBlogpostsV4QueryParams {
           <i>Syntax</i> : /blogposts?interval={interval}
           <p>
           <i>Example</i> : /blogposts?interval=alltime
-          """,
-      schema = @Schema(defaultValue = "alltime"))
+          """, schema = @Schema(defaultValue = "alltime"))
   private String interval;
 }

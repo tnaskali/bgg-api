@@ -10,10 +10,7 @@ import lombok.Data;
 public class BggSearchV5QueryParams {
 
   @NotNull
-  @Parameter(
-      example = "corona",
-      description =
-          """
+  @Parameter(example = "corona", description = """
           Search string.
           <p>
           <i>Syntax</i> : /search?q={query}
@@ -25,10 +22,7 @@ public class BggSearchV5QueryParams {
   @NotNull
   @Min(1)
   @Max(100)
-  @Parameter(
-      example = "20",
-      description =
-          """
+  @Parameter(example = "20", description = """
           Limits the number of results.
           <p>
           <i>Syntax</i> : /search?q={query}&showcount={count}
@@ -39,9 +33,7 @@ public class BggSearchV5QueryParams {
 
   @Deprecated
   @Min(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Seems to be present with a value of "1" in all requests.

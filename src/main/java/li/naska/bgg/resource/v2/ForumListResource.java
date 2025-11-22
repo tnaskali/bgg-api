@@ -26,8 +26,7 @@ public class ForumListResource {
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Forum Lists",
-      description =
-          """
+      description = """
           You can request a list of forums for a particular type/id through the XMLAPI2.
           <p>
           <i>Syntax</i> : /forumlist?id={id}&type={type}

@@ -13,10 +13,7 @@ public class BggGuildV2QueryParams {
 
   @NotNull
   @Min(1)
-  @Parameter(
-      example = "666",
-      description =
-          """
+  @Parameter(example = "666", description = """
           ID of the guild you want to view.
           <p>
           <i>Syntax</i> : /guild?id={id}
@@ -27,10 +24,7 @@ public class BggGuildV2QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      example = "1",
-      description =
-          """
+  @Parameter(example = "1", description = """
           Include member roster in the results. Member list is paged and sorted.
           <p>
           <i>Syntax</i> : /guild?id={id}&members=1
@@ -40,9 +34,7 @@ public class BggGuildV2QueryParams {
   private Integer members;
 
   @Pattern(regexp = "^(?:username|date)$")
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Specifies how to sort the members list; default is username.
           <p>
           Valid values are:
@@ -52,20 +44,16 @@ public class BggGuildV2QueryParams {
           <i>Syntax</i> : /guild?id={id}&members=1&sort={sortType}
           <p>
           <i>Example</i> : /guild?id=666&members=1&sort=date
-          """,
-      schema = @Schema(defaultValue = "username"))
+          """, schema = @Schema(defaultValue = "username"))
   private String sort;
 
   @Min(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           The page of the members list to return. Page size is 25.
           <p>
           <i>Syntax</i> : /guild?id={id}&members=1&page={page}
           <p>
           <i>Example</i> : /guild?id=666&members=1&page=1
-          """,
-      schema = @Schema(defaultValue = "1"))
+          """, schema = @Schema(defaultValue = "1"))
   private Integer page;
 }

@@ -11,10 +11,7 @@ import lombok.Data;
 public class BggSearchV2QueryParams {
 
   @NotNull
-  @Parameter(
-      example = "Crossbows+and+Catapults",
-      description =
-          """
+  @Parameter(example = "Crossbows+and+Catapults", description = """
           Returns all types of Items that match the query string. Spaces in the query string are replaced by a +.
           <p>
           <i>Syntax</i> : /search?query={queryString}
@@ -23,10 +20,7 @@ public class BggSearchV2QueryParams {
           """)
   private String query;
 
-  @Parameter(
-      example = "boardgame",
-      description =
-          """
+  @Parameter(example = "boardgame", description = """
           Return all items that match the query string of a specific type. You can return multiple types by listing them
           separated by commas, e.g. type=TYPE1,TYPE2,TYPE3.
           <p>
@@ -52,16 +46,12 @@ public class BggSearchV2QueryParams {
           <i>Syntax</i> : /search?query={queryString}&type={type}
           <p>
           <i>Example</i> : /search?query=Crossbows+and+Catapults&type=boardgame
-          """,
-      schema = @Schema(defaultValue = "thing"))
+          """, schema = @Schema(defaultValue = "thing"))
   private String type;
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      example = "1",
-      description =
-          """
+  @Parameter(example = "1", description = """
           Limit results to items that match the query exactly.
           <p>
           <i>Syntax</i> : /search?query={queryString}&exact=1

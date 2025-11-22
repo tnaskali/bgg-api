@@ -26,8 +26,7 @@ public class UserResource {
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Users",
-      description =
-          """
+      description = """
           With the XMLAPI2 you can request basic public profile information about a user by username.
           <p>
           <i>Syntax</i> : /user?name={username}[&{parameters}]

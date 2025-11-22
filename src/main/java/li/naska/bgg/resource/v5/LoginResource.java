@@ -25,10 +25,7 @@ public class LoginResource {
   @PostMapping(
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Login",
-      description =
-          """
+  @Operation(summary = "Login", description = """
           Login to BGG.
           <p>
           <i>Syntax</i> : /login

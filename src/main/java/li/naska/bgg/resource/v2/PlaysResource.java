@@ -26,8 +26,7 @@ public class PlaysResource {
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Plays",
-      description =
-          """
+      description = """
           Request plays logged by a particular user or for a particular item. Data is returned in backwards-chronological form.
           <p>
           You must include either a username or an id and type to get results.

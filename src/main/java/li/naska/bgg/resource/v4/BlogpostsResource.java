@@ -25,10 +25,7 @@ public class BlogpostsResource {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get blogposts",
-      description =
-          """
+  @Operation(summary = "Get blogposts", description = """
           Get blogposts.
           <p>
           <i>Syntax</i> : /blogposts?sort={sort}
@@ -41,10 +38,7 @@ public class BlogpostsResource {
   }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get blogpost",
-      description =
-          """
+  @Operation(summary = "Get blogpost", description = """
           Get blogpost by id.
           <p>
           <i>Syntax</i> : /blogposts/{id}
@@ -58,10 +52,7 @@ public class BlogpostsResource {
   }
 
   @GetMapping(path = "/{id}/reactions", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get blogpost reactions",
-      description =
-          """
+  @Operation(summary = "Get blogpost reactions", description = """
           Get reactions for a given blogpost.
           <p>
           <i>Syntax</i> : /blogposts/{id}/reactions[?{parameters}]
@@ -76,10 +67,7 @@ public class BlogpostsResource {
   }
 
   @GetMapping(path = "/{id}/tips", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get blogpost tips",
-      description =
-          """
+  @Operation(summary = "Get blogpost tips", description = """
           Get tips for a given blogpost.
           <p>
           <i>Syntax</i> : /blogposts/{id}/tips[?{parameters}]
@@ -94,10 +82,7 @@ public class BlogpostsResource {
   }
 
   @GetMapping(path = "/{id}/comments", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get blogpost comments",
-      description =
-          """
+  @Operation(summary = "Get blogpost comments", description = """
           Get comments for a given blogpost.
           <p>
           <i>Syntax</i> : /blogposts/{id}/comments[?{parameters}]

@@ -12,10 +12,7 @@ public class BggPersonV2QueryParams {
 
   @NotNull
   @Pattern(regexp = "^[1-9]\\d*(?:,[1-9]\\d*)*+$")
-  @Parameter(
-      example = "153580,150831",
-      description =
-          """
+  @Parameter(example = "153580,150831", description = """
           Specifies the id of the person(s) to retrieve. To request multiple persons with a single query, one can specify a
           comma-delimited list of ids.
           <p>
@@ -28,10 +25,7 @@ public class BggPersonV2QueryParams {
   @Pattern(
       regexp =
           "^(?:boardgameartist|boardgameauthor|boardgamedesigner|boardgamedeveloper|boardgameeditor|boardgamegraphicdesigner|boardgameinsertdesigner|boardgamesculptor|boardgamesolodesigner|boardgamewriter|puzzleartist|puzzledesigner|rpgartist|rpgdesigner|rpgproducer)(?:,(?:boardgameartist|boardgameauthor|boardgamedesigner|boardgamedeveloper|boardgameeditor|boardgamegraphicdesigner|boardgameinsertdesigner|boardgamesculptor|boardgamesolodesigner|boardgamewriter|puzzleartist|puzzledesigner|rpgartist|rpgdesigner|rpgproducer))*$")
-  @Parameter(
-      example = "boardgamedeveloper,boardgameeditor",
-      description =
-          """
+  @Parameter(example = "boardgamedeveloper,boardgameeditor", description = """
           Specifies that, regardless of the type of person asked for by id, the results are filtered by the person
           type(s) specified. Multiple person type can be specified in a comma-delimited list.
           <p>
@@ -60,10 +54,7 @@ public class BggPersonV2QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      example = "1",
-      description =
-          """
+  @Parameter(example = "1", description = """
           Returns videos for the person.
           <p>
           <i>Syntax</i> : /person?id={ids}&videos=1

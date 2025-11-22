@@ -11,10 +11,7 @@ public class BggGeekitempollV3QueryParams {
 
   @NotNull
   @Pattern(regexp = "^view$")
-  @Parameter(
-      example = "view",
-      description =
-          """
+  @Parameter(example = "view", description = """
           Action to perform.
           <p>
           Possible values are:
@@ -25,10 +22,7 @@ public class BggGeekitempollV3QueryParams {
   @NotNull
   @Pattern(
       regexp = "^(?:boardgamesubdomain|boardgameweight|languagedependence|numplayers|playerage)$")
-  @Parameter(
-      example = "boardgamesubdomain",
-      description =
-          """
+  @Parameter(example = "boardgamesubdomain", description = """
           Poll type.
           <p>
           Possible values are:

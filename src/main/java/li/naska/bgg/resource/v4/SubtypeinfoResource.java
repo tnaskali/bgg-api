@@ -23,10 +23,7 @@ public class SubtypeinfoResource {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get subtype information",
-      description =
-          """
+  @Operation(summary = "Get subtype information", description = """
           Get subtype information.
           <p>
           <i>Syntax</i> : /subtypeinfo?subtype={type}

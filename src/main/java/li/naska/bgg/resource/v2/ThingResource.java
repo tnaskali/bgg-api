@@ -26,8 +26,7 @@ public class ThingResource {
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Thing Items",
-      description =
-          """
+      description = """
           In the BGG database, any physical, tangible product is called a thing.
           <p>
           <i>Syntax</i> : /thing?id={ids}[&{parameters}]

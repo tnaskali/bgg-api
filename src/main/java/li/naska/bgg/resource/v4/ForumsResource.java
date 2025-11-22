@@ -24,10 +24,7 @@ public class ForumsResource {
   }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get forum",
-      description =
-          """
+  @Operation(summary = "Get forum", description = """
           Get forum by id.
           <p>
           <i>Syntax</i> : /forums/{id}
@@ -40,10 +37,7 @@ public class ForumsResource {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get forums",
-      description =
-          """
+  @Operation(summary = "Get forums", description = """
           Get forums information for a given object.
           <p>
           <i>Syntax</i> : /forums?objectid={id}&objecttype={type}
@@ -56,10 +50,7 @@ public class ForumsResource {
   }
 
   @GetMapping(path = "/threads", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get threads",
-      description =
-          """
+  @Operation(summary = "Get threads", description = """
           Get thread for a given object id and type.
           <p>
           <i>Syntax</i> : /forums/threads?objectid={id}&objecttype={type}

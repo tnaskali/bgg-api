@@ -21,10 +21,7 @@ public class ItemResource {
   }
 
   @GetMapping(path = "/weblinks", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get item weblinks",
-      description =
-          """
+  @Operation(summary = "Get item weblinks", description = """
           Get item weblinks.
           <p>
           <i>Syntax</i> : /item/weblinks?objectid={objectid}&objecttype={objecttype}&showcount={showcount}[&{parameters}]

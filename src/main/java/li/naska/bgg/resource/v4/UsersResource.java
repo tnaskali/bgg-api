@@ -33,10 +33,7 @@ public class UsersResource {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get user by username",
-      description =
-          """
+  @Operation(summary = "Get user by username", description = """
           Get user by username.
           <p>
           <i>Syntax</i> : /users?username={username}
@@ -51,8 +48,7 @@ public class UsersResource {
   @GetMapping(path = "/current", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get current user",
-      description =
-          """
+      description = """
           Get current user.
           <p>
           <i>Syntax</i> : /users/current
@@ -73,8 +69,7 @@ public class UsersResource {
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get user by id",
-      description =
-          """
+      description = """
           Get user by id.
           <p>
           <i>Syntax</i> : /users/{id}

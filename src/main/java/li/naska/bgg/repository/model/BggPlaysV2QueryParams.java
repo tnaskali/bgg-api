@@ -10,10 +10,7 @@ import lombok.Data;
 @Data
 public class BggPlaysV2QueryParams {
 
-  @Parameter(
-      example = "eekspider",
-      description =
-          """
+  @Parameter(example = "eekspider", description = """
           Name of the player you want to request play information for.
           <p>
           <i>Syntax</i> : /plays?username={username}
@@ -23,10 +20,7 @@ public class BggPlaysV2QueryParams {
   private String username;
 
   @Min(1)
-  @Parameter(
-      example = "3085",
-      description =
-          """
+  @Parameter(example = "3085", description = """
           Id number of the item you want to request play information for.
           <p>
           <i>Note</i> : Must be used together with "type" unless "username" is also set.
@@ -38,10 +32,7 @@ public class BggPlaysV2QueryParams {
   private Integer id;
 
   @Pattern(regexp = "^(?:thing|family)$")
-  @Parameter(
-      example = "thing",
-      description =
-          """
+  @Parameter(example = "thing", description = """
           Type of the item you want to request play information for.
           <p>
           Valid types include:
@@ -57,10 +48,7 @@ public class BggPlaysV2QueryParams {
   private String type;
 
   @Pattern(regexp = "^[1-9]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
-  @Parameter(
-      example = "2009-01-01",
-      description =
-          """
+  @Parameter(example = "2009-01-01", description = """
           Returns only plays of the specified date or later.
           <p>
           <i>Syntax</i> : /plays?mindate={date}
@@ -70,10 +58,7 @@ public class BggPlaysV2QueryParams {
   private String mindate;
 
   @Pattern(regexp = "^[1-9]\\d{3}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$")
-  @Parameter(
-      example = "2009-12-31",
-      description =
-          """
+  @Parameter(example = "2009-12-31", description = """
           Returns only plays of the specified date or earlier.
           <p>
           <i>Syntax</i> : /plays?maxdate={date}
@@ -85,10 +70,7 @@ public class BggPlaysV2QueryParams {
   @Pattern(
       regexp =
           "^(?:boardgame|boardgameexpansion|boardgameaccessory|boardgameintegration|boardgamecompilation|boardgameimplementation|rpg|rpgitem|videogame)$")
-  @Parameter(
-      example = "boardgame",
-      description =
-          """
+  @Parameter(example = "boardgame", description = """
           Limits play results to the specified subtype; boardgame is the default.
           <p>
           Valid subtypes include:
@@ -107,15 +89,11 @@ public class BggPlaysV2QueryParams {
           <i>Syntax</i> : /plays?subtype={subtype}
           <p>
           <i>Example</i> : /plays?subtype=boardgame
-          """,
-      schema = @Schema(defaultValue = "boardgame"))
+          """, schema = @Schema(defaultValue = "boardgame"))
   private String subtype;
 
   @Min(1)
-  @Parameter(
-      example = "1",
-      description =
-          """
+  @Parameter(example = "1", description = """
           The page of information to request. Page size is 100 records.
           <p>
           <i>Syntax</i> : /plays?page={page}

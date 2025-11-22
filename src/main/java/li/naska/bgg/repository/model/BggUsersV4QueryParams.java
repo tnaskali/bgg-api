@@ -8,10 +8,7 @@ import lombok.Data;
 public class BggUsersV4QueryParams {
 
   @NotNull
-  @Parameter(
-      example = "Jester",
-      description =
-          """
+  @Parameter(example = "Jester", description = """
           Username.
           <p>
           <i>Syntax</i> : /users?username={username}

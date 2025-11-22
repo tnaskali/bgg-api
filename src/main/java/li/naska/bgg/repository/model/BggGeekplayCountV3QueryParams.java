@@ -12,10 +12,7 @@ public class BggGeekplayCountV3QueryParams {
 
   @NotNull
   @Pattern(regexp = "^getuserplaycount$")
-  @Parameter(
-      example = "getuserplaycount",
-      description =
-          """
+  @Parameter(example = "getuserplaycount", description = """
           Action to perform.
           <p>
           Possible values are:
@@ -44,9 +41,7 @@ public class BggGeekplayCountV3QueryParams {
   @Deprecated
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Seems to be present with a value of "1" in all requests.

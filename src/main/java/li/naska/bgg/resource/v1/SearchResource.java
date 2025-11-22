@@ -26,8 +26,7 @@ public class SearchResource {
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Search for games by name and by AKAs",
-      description =
-          """
+      description = """
           Search for games by name and by AKAs.
           <p>
           <i>Syntax</i> : /search?search={searchString}[&{parameters}]

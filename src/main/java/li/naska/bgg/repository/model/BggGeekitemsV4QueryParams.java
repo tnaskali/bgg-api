@@ -11,10 +11,7 @@ public class BggGeekitemsV4QueryParams {
 
   @NotNull
   @Min(1)
-  @Parameter(
-      example = "1000",
-      description =
-          """
+  @Parameter(example = "1000", description = """
           The object id.
           <p>
           <i>Syntax</i> : /geekitems?objectid={id}&objecttype={type}
@@ -26,10 +23,7 @@ public class BggGeekitemsV4QueryParams {
   @NotNull
   @Pattern(
       regexp = "^(?:company|component|event|family|media|person|property|thing|version|weblink)$")
-  @Parameter(
-      example = "thing",
-      description =
-          """
+  @Parameter(example = "thing", description = """
           The object type.
           <p>
           <i>Syntax</i> : /geekitems?objectid={id}&objecttype={type}

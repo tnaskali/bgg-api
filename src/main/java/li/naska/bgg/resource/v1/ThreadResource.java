@@ -30,8 +30,7 @@ public class ThreadResource {
       produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Retrieve the messages from a forum/game thread",
-      description =
-          """
+      description = """
           Retrieve the messages from a forum/game thread.
           <p>
           <i>Note</i> : Your browser may interpret this as a request to subscribe to an RSS feed.

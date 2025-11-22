@@ -25,10 +25,7 @@ public class ThreadsResource {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get threads",
-      description =
-          """
+  @Operation(summary = "Get threads", description = """
           Get threads.
           <p>
           <i>Syntax</i> : /threads[?{parameters}]
@@ -41,10 +38,7 @@ public class ThreadsResource {
   }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get thread",
-      description =
-          """
+  @Operation(summary = "Get thread", description = """
           Get thread by id.
           <p>
           <i>Syntax</i> : /threads/{id}
@@ -57,10 +51,7 @@ public class ThreadsResource {
   }
 
   @GetMapping(path = "/{id}/reactions", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get thread reactions",
-      description =
-          """
+  @Operation(summary = "Get thread reactions", description = """
           Get reactions for a given thread.
           <p>
           <i>Syntax</i> : /threads/{id}/reactions[?{parameters}]

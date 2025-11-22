@@ -28,8 +28,7 @@ public class PersonResource {
       produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Retrieve information about a particular person or persons",
-      description =
-          """
+      description = """
           Retrieve information about a particular person or persons.
           <p>
           <i>Syntax</i> : /person/{ids}

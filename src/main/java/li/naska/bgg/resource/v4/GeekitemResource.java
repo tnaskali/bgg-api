@@ -25,10 +25,7 @@ public class GeekitemResource {
   }
 
   @GetMapping(path = "/linkeditems", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get linked items",
-      description =
-          """
+  @Operation(summary = "Get linked items", description = """
           Get items linked to a given item.
           <p>
           <i>Syntax</i> : /linkeditems?objectid={id}&objecttype={type}&linkdata_index={linktype}
@@ -41,10 +38,7 @@ public class GeekitemResource {
   }
 
   @GetMapping(path = "/recs", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get recommandations",
-      description =
-          """
+  @Operation(summary = "Get recommandations", description = """
           Get recommandations for a given item.
           <p>
           <i>Syntax</i> : /linkeditems?objectid={id}&objecttype={type}&pageid={page}&showcount={count}

@@ -25,10 +25,7 @@ public class GeeklistsResource {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get geeklists",
-      description =
-          """
+  @Operation(summary = "Get geeklists", description = """
           Get geeklists by object id and type.
           <p>
           <i>Syntax</i> : /geeklists?objectid={id}&objecttype={type}
@@ -41,10 +38,7 @@ public class GeeklistsResource {
   }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get geeklist",
-      description =
-          """
+  @Operation(summary = "Get geeklist", description = """
           Get geeklist by id.
           <p>
           <i>Syntax</i> : /geeklists/{id}
@@ -58,10 +52,7 @@ public class GeeklistsResource {
   }
 
   @GetMapping(path = "/{id}/reactions", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get geeklist reactions",
-      description =
-          """
+  @Operation(summary = "Get geeklist reactions", description = """
           Get reactions for a given geeklist.
           <p>
           <i>Syntax</i> : /geeklists/{id}/reactions[?{parameters}]
@@ -76,10 +67,7 @@ public class GeeklistsResource {
   }
 
   @GetMapping(path = "/{id}/tips", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get geeklist tips",
-      description =
-          """
+  @Operation(summary = "Get geeklist tips", description = """
           Get tips for a given geeklist.
           <p>
           <i>Syntax</i> : /geeklists/{id}/tips[?{parameters}]
@@ -94,10 +82,7 @@ public class GeeklistsResource {
   }
 
   @GetMapping(path = "/{id}/comments", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get geeklist comments",
-      description =
-          """
+  @Operation(summary = "Get geeklist comments", description = """
           Get comments for a given geeklist.
           <p>
           <i>Syntax</i> : /geeklists/{id}/comments[?{parameters}]

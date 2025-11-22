@@ -16,20 +16,14 @@ public class BggGeekplayV3RequestBody {
   @NotNull
   @Min(1)
   @Max(1)
-  @Parameter(
-      example = "1",
-      description =
-          """
+  @Parameter(example = "1", description = """
           Required to have data returned as JSON instead of HTML.
           """)
   private Integer ajax;
 
   @NotNull
   @Pattern(regexp = "^(?:save|delete)$")
-  @Parameter(
-      example = "save",
-      description =
-          """
+  @Parameter(example = "save", description = """
           Action to perform.
           <p>
           Possible values are:
@@ -46,8 +40,7 @@ public class BggGeekplayV3RequestBody {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description = """
+  @Parameter(description = """
           Set to 1 during a deletion to bypass validation.
           """)
   private Integer finalize;

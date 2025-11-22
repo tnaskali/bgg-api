@@ -23,10 +23,7 @@ public class GeekitemsResource {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get item",
-      description =
-          """
+  @Operation(summary = "Get item", description = """
           Get item for a given id and type.
           <p>
           <i>Syntax</i> : /geekitems?objectid={id}&objecttype={type}

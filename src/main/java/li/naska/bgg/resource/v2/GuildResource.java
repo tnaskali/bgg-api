@@ -26,8 +26,7 @@ public class GuildResource {
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Guilds",
-      description =
-          """
+      description = """
           Request information about particular guilds.
           <p>
           <i>Syntax</i> : /guild?id={id}[&{parameters}]

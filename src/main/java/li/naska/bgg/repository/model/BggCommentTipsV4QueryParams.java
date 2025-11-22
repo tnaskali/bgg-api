@@ -10,9 +10,7 @@ public class BggCommentTipsV4QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Shows only tips total count.
           <p>
           <i>Syntax</i> : /comments/{id}/tips?totalonly=1

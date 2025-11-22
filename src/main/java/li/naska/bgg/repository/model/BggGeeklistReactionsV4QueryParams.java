@@ -10,23 +10,18 @@ import lombok.Data;
 public class BggGeeklistReactionsV4QueryParams {
 
   @Min(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Page id. Page size is 20.
           <p>
           <i>Syntax</i> : /geeklists/{id}/reactions?pageid={page}
           <p>
           <i>Example</i> : /geeklists/250030/reactions?pageid=2
-          """,
-      schema = @Schema(defaultValue = "1"))
+          """, schema = @Schema(defaultValue = "1"))
   private Integer pageid;
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Shows only reactions total count.
           <p>
           <i>Syntax</i> : /geeklists/{id}/reactions?totalonly=1

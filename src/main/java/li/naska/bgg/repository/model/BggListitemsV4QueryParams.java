@@ -11,10 +11,7 @@ public class BggListitemsV4QueryParams {
 
   @NotNull
   @Min(1)
-  @Parameter(
-      example = "250030",
-      description =
-          """
+  @Parameter(example = "250030", description = """
           The geeklist id.
           <p>
           <i>Syntax</i> : /listitems?listid={listid}
@@ -24,15 +21,12 @@ public class BggListitemsV4QueryParams {
   private Integer listid;
 
   @Min(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           The page number. Page size is 25.
           <p>
           <i>Syntax</i> : /listitems?listid={listid}&page={count}
           <p>
           <i>Example</i> : /listitems?listid=250030&page=2
-          """,
-      schema = @Schema(defaultValue = "1"))
+          """, schema = @Schema(defaultValue = "1"))
   private Integer page;
 }

@@ -10,9 +10,7 @@ public class BggListitemReactionsV4QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Shows only reactions total count.
           <p>
           <i>Syntax</i> : /listitems/{id}/reactions?totalonly=1

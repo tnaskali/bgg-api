@@ -12,10 +12,7 @@ public class BggThreadsV4QueryParams {
 
   @NotNull
   @Pattern(regexp = "^listing$")
-  @Parameter(
-      example = "listing",
-      description =
-          """
+  @Parameter(example = "listing", description = """
           Partial results option.
           <p>Valid options are:
           <li/>listing
@@ -28,10 +25,7 @@ public class BggThreadsV4QueryParams {
 
   @NotNull
   @Pattern(regexp = "^(?:regions|things)$")
-  @Parameter(
-      example = "regions",
-      description =
-          """
+  @Parameter(example = "regions", description = """
           Associated item type.
           <p>Valid options are:
           <li/>regions
@@ -45,10 +39,7 @@ public class BggThreadsV4QueryParams {
 
   @NotNull
   @Min(1)
-  @Parameter(
-      example = "1",
-      description =
-          """
+  @Parameter(example = "1", description = """
           Associated item id.
           <p>
           <i>Syntax</i> : /threads?partial={partial}&assocItemType={assocItemType}&assocItemId={assocItemId}
@@ -58,9 +49,7 @@ public class BggThreadsV4QueryParams {
   private Integer assocItemId;
 
   @Pattern(regexp = "^(?:active|hot|recent)$")
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Sort order.
           <p>Valid sort orders are:
           <li/>active (default)
@@ -70,14 +59,11 @@ public class BggThreadsV4QueryParams {
           <i>Syntax</i> : /threads?partial={partial}&assocItemType={assocItemType}&assocItemId={assocItemId}&sort={sort}
           <p>
           <i>Example</i> : /threads?partial=listing&assocItemType=regions&assocItemId=1&sort=active
-          """,
-      schema = @Schema(defaultValue = "active"))
+          """, schema = @Schema(defaultValue = "active"))
   private String sort;
 
   @Pattern(regexp = "^(?:alltime|today|twodays|last7|last30|year)$")
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Hot scope interval. Only when sort=hot.
           <p>Valid intervals are:
           <li/>alltime
@@ -90,33 +76,26 @@ public class BggThreadsV4QueryParams {
           <i>Syntax</i> : /threads?partial={partial}&assocItemType={assocItemType}&assocItemId={assocItemId}&sort=hot&interval={interval}
           <p>
           <i>Example</i> : /threads?partial=listing&assocItemType=regions&assocItemId=1&sort=hot&interval=twodays
-          """,
-      schema = @Schema(defaultValue = "twodays"))
+          """, schema = @Schema(defaultValue = "twodays"))
   private String interval;
 
   @Min(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Page size.
           <p>
           <i>Syntax</i> : /threads?partial={partial}&assocItemType={assocItemType}&assocItemId={assocItemId}&perPage={count}
           <p>
           <i>Example</i> : /threads?partial=listing&assocItemType=regions&assocItemId=1&perPage=1
-          """,
-      schema = @Schema(defaultValue = "5"))
+          """, schema = @Schema(defaultValue = "5"))
   private Integer perPage;
 
   @Min(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Page number. Page size is 25.
           <p>
           <i>Syntax</i> : /threads?partial={partial}&assocItemType={assocItemType}&assocItemId={assocItemId}&pageid={pageid}
           <p>
           <i>Example</i> : /threads?partial=listing&assocItemType=regions&assocItemId=1&pageid=2
-          """,
-      schema = @Schema(defaultValue = "1"))
+          """, schema = @Schema(defaultValue = "1"))
   private Integer pageid;
 }

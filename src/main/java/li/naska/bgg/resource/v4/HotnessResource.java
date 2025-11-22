@@ -23,10 +23,7 @@ public class HotnessResource {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get hotness",
-      description =
-          """
+  @Operation(summary = "Get hotness", description = """
           Get hotness information.
           <p>
           <i>Syntax</i> : /hotness?objectid={id}&objecttype={type}

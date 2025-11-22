@@ -10,10 +10,7 @@ public class BggGeekaccountContactV3QueryParams {
 
   @NotNull
   @Pattern(regexp = "^editcontact$")
-  @Parameter(
-      example = "editcontact",
-      description =
-          """
+  @Parameter(example = "editcontact", description = """
           Action to perform.
           <p>
           Possible values are:

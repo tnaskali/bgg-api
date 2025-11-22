@@ -23,10 +23,7 @@ public class CompanyResource {
   }
 
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-  @Operation(
-      summary = "Company items",
-      description =
-          """
+  @Operation(summary = "Company items", description = """
           In the BGG database, any commercial entity is called a company.
           <p>
           <i>Syntax</i> : /company?id={ids}[&{parameters}]

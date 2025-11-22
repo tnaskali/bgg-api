@@ -26,8 +26,7 @@ public class SearchResource {
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Search",
-      description =
-          """
+      description = """
           You can search for items from the database by name.
           <p>
           <i>Syntax</i> : /search?query={queryString}[&{parameters}]

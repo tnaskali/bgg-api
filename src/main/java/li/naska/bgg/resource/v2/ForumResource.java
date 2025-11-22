@@ -26,8 +26,7 @@ public class ForumResource {
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Forums",
-      description =
-          """
+      description = """
           You can request a list of threads in a particular forum through the XMLAPI2.
           <p>
           <i>Syntax</i> : /forum?id={id}[&page={page}]

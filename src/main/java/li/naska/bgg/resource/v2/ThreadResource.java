@@ -26,8 +26,7 @@ public class ThreadResource {
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Threads",
-      description =
-          """
+      description = """
           With the XMLAPI2 you can request forum threads by thread id. A thread consists of some basic information about the thread and a series of articles or individual postings.
           <p>
           <i>Syntax</i> : /thread?id={id}[&{parameters}]

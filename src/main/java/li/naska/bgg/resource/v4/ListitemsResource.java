@@ -25,10 +25,7 @@ public class ListitemsResource {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get listitems",
-      description =
-          """
+  @Operation(summary = "Get listitems", description = """
           Get listitems by geeklist id.
           <p>
           <i>Syntax</i> : /listitems?listid={listid}[&{parameters}]
@@ -41,10 +38,7 @@ public class ListitemsResource {
   }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get listitem",
-      description =
-          """
+  @Operation(summary = "Get listitem", description = """
           Get listitem by id.
           <p>
           <i>Syntax</i> : /listitems/{id}
@@ -58,10 +52,7 @@ public class ListitemsResource {
   }
 
   @GetMapping(path = "/{id}/reactions", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get listitem reactions",
-      description =
-          """
+  @Operation(summary = "Get listitem reactions", description = """
           Get reactions for a given listitem.
           <p>
           <i>Syntax</i> : /listitems/{id}/reactions[?{parameters}]
@@ -76,10 +67,7 @@ public class ListitemsResource {
   }
 
   @GetMapping(path = "/{id}/tips", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get listitem tips",
-      description =
-          """
+  @Operation(summary = "Get listitem tips", description = """
           Get tips for a given listitem.
           <p>
           <i>Syntax</i> : /listitems/{id}/tips[?{parameters}]
@@ -94,10 +82,7 @@ public class ListitemsResource {
   }
 
   @GetMapping(path = "/{id}/comments", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get listitem comments",
-      description =
-          """
+  @Operation(summary = "Get listitem comments", description = """
           Get comments for a given listitem.
           <p>
           <i>Syntax</i> : /listitems/{id}/comments[?{parameters}]

@@ -12,10 +12,7 @@ public class BggCompanyV2QueryParams {
 
   @NotNull
   @Pattern(regexp = "^[1-9]\\d*(?:,[1-9]\\d*)*+$")
-  @Parameter(
-      example = "22924,30347",
-      description =
-          """
+  @Parameter(example = "22924,30347", description = """
           Specifies the id of the company(ies) to retrieve. To request multiple companies with a single query, one can specify a comma-delimited list of ids.
           <p>
           <i>Syntax</i> : /company?id={ids}
@@ -27,10 +24,7 @@ public class BggCompanyV2QueryParams {
   @Pattern(
       regexp =
           "^(?:bgsleevemfg|boardgamepublisher|puzzleproducer|rpgpublisher|videogamedeveloper|videogamehwmfg|videogamepublisher)(?:,(?:bgsleevemfg|boardgamepublisher|puzzleproducer|rpgpublisher|videogamedeveloper|videogamehwmfg|videogamepublisher))*$")
-  @Parameter(
-      example = "videogamehwmfg,videogamedeveloper",
-      description =
-          """
+  @Parameter(example = "videogamehwmfg,videogamedeveloper", description = """
           Specifies that, regardless of the type of company asked for by id, the results are filtered by the company type(s) specified. Multiple company types can be specified in a comma-delimited list.
           <p>
           The XMLAPI2 supports companies of the following company types:
@@ -50,10 +44,7 @@ public class BggCompanyV2QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      example = "1",
-      description =
-          """
+  @Parameter(example = "1", description = """
           Returns version info for the company.
           <p>
           <i>Syntax</i> : /company?id={ids}&versions=1
@@ -64,10 +55,7 @@ public class BggCompanyV2QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      example = "1",
-      description =
-          """
+  @Parameter(example = "1", description = """
           Returns videos for the company.
           <p>
           <i>Syntax</i> : /company?id={ids}&videos=1
@@ -78,10 +66,7 @@ public class BggCompanyV2QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      example = "1",
-      description =
-          """
+  @Parameter(example = "1", description = """
           Returns ranking and rating stats for the company.
           <p>
           <i>Syntax</i> : /company?id={ids}&stats=1

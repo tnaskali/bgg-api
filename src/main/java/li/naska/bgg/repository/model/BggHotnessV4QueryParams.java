@@ -13,43 +13,34 @@ public class BggHotnessV4QueryParams {
 
   @NotNull
   @Pattern(regexp = "^(?:boardgame|puzzle|rpg|videogame)$")
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           The domain.
           <p>
           <i>Syntax</i> : /hotness?geeksite={domain}
           <p>
           <i>Example</i> : /hotness?geeksite=boardgame
-          """,
-      schema = @Schema(defaultValue = "boardgame"))
+          """, schema = @Schema(defaultValue = "boardgame"))
   private String geeksite;
 
   @NotNull
   @Pattern(regexp = "^(?:company|person|thing)$")
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           The object type.
           <p>
           <i>Syntax</i> : /hotness?geeksite={domain}&objecttype={type}
           <p>
           <i>Example</i> : /hotness?geeksite=boardgame&objecttype=company
-          """,
-      schema = @Schema(defaultValue = "thing"))
+          """, schema = @Schema(defaultValue = "thing"))
   private String objecttype;
 
   @Min(1)
   @Max(50)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           The number of results to retrieve.
           <p>
           <i>Syntax</i> : /hotness?geeksite={domain}&objecttype={type}&showcount={count}
           <p>
           <i>Example</i> : /hotness?geeksite=boardgame&objecttype=company&showcount=10
-          """,
-      schema = @Schema(defaultValue = "50"))
+          """, schema = @Schema(defaultValue = "50"))
   private Integer showcount;
 }

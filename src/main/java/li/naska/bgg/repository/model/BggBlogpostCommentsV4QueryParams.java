@@ -10,10 +10,7 @@ import lombok.Data;
 public class BggBlogpostCommentsV4QueryParams {
 
   @Min(0)
-  @Parameter(
-      example = "8494604",
-      description =
-          """
+  @Parameter(example = "8494604", description = """
           Paging cursor. Page is calculated from there.
           <p>
           <i>Syntax</i> : /blogposts/{id}/comments?commentid={cursor}
@@ -23,10 +20,7 @@ public class BggBlogpostCommentsV4QueryParams {
   private Integer commentid;
 
   @Min(1)
-  @Parameter(
-      example = "1",
-      description =
-          """
+  @Parameter(example = "1", description = """
           Page size. Default is all comments.
           <p>
           <i>Syntax</i> : /blogposts/{id}/comments?perPage={count}
@@ -36,10 +30,7 @@ public class BggBlogpostCommentsV4QueryParams {
   private Integer perPage;
 
   @Pattern(regexp = "^backward$")
-  @Parameter(
-      example = "backward",
-      description =
-          """
+  @Parameter(example = "backward", description = """
           Changes paging direction (forward by default).
           <p>
           <i>Syntax</i> : /blogposts/{id}/comments?commentid={cursor}
@@ -50,9 +41,7 @@ public class BggBlogpostCommentsV4QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Shows only comments total count.
           <p>
           <i>Syntax</i> : /blogposts/{id}/comments?totalonly=1
@@ -63,9 +52,7 @@ public class BggBlogpostCommentsV4QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Shows only comments metadata.
           <p>
           <i>Syntax</i> : /blogposts/{id}/comments?metaonly=1

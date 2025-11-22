@@ -22,10 +22,7 @@ public class MicrobadgesResource {
   }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get microbadge by id",
-      description =
-          """
+  @Operation(summary = "Get microbadge by id", description = """
           Get microbadge by id.
           <p>
           <i>Syntax</i> : /microbadges/{id}

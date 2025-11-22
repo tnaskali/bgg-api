@@ -26,8 +26,7 @@ public class HotResource {
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Hot Items",
-      description =
-          """
+      description = """
           You can retrieve the list of most active items on the site.
           <p>
           <i>Syntax</i> : /hot?type={type}

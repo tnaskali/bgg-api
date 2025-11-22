@@ -13,10 +13,7 @@ public class BggItemWeblinksV5QueryParams {
 
   @NotNull
   @Min(1)
-  @Parameter(
-      example = "261980",
-      description =
-          """
+  @Parameter(example = "261980", description = """
           The object id.
           <p>
           <i>Syntax</i> : /geeklists?objectid={id}&objecttype={type}
@@ -28,10 +25,7 @@ public class BggItemWeblinksV5QueryParams {
   @NotNull
   @Pattern(
       regexp = "^(?:company|component|event|family|media|person|property|thing|version|weblink)$")
-  @Parameter(
-      example = "thing",
-      description =
-          """
+  @Parameter(example = "thing", description = """
           The object type.
           <p>
           <i>Syntax</i> : /geeklists?objectid={id}&objecttype={type}
@@ -43,10 +37,7 @@ public class BggItemWeblinksV5QueryParams {
   @NotNull
   @Min(1)
   @Max(50)
-  @Parameter(
-      example = "10",
-      description =
-          """
+  @Parameter(example = "10", description = """
           Page size for paged results.
           <p>
           <i>Syntax</i> : /geeklists?objectid={id}&objecttype={type}&showcount={count}
@@ -56,22 +47,18 @@ public class BggItemWeblinksV5QueryParams {
   private Integer showcount;
 
   @Min(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Page number for paged results.
           <p>
           <i>Syntax</i> : /geeklists?objectid={id}&objecttype={type}&showcount=10&pageid={page}
           <p>
           <i>Example</i> : /geeklists?objectid=261980&objecttype=thing&showcount=10&pageid=2
-          """,
-      schema = @Schema(defaultValue = "1"))
+          """, schema = @Schema(defaultValue = "1"))
   private Integer pageid;
 
   @Parameter(
       example = "%7B%22languagefilter%22:2184,%22categoryfilter%22:2708%7D",
-      description =
-          """
+      description = """
           Filter to apply to the results. Can filter by language or category.
           <p>
           <i>Syntax</i> : /geeklists?objectid={id}&objecttype={type}&showcount={page}&filter=%7B%22languagefilter%22:{languageid},%22categoryfilter%22:{categoryid}%7D
@@ -86,9 +73,7 @@ public class BggItemWeblinksV5QueryParams {
   @Deprecated
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Seems to be present with a value of "1" in all requests.
@@ -96,9 +81,7 @@ public class BggItemWeblinksV5QueryParams {
   private Integer ajax;
 
   @Deprecated
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful
           <p>
           Seems to be present with a value of "" (no value) in all requests.
@@ -108,9 +91,7 @@ public class BggItemWeblinksV5QueryParams {
   @Deprecated
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful
           <p>
           Seems to be present with a value of "1" in all requests.
@@ -118,9 +99,7 @@ public class BggItemWeblinksV5QueryParams {
   private Integer totalonly;
 
   @Deprecated
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful
           <p>
           Seems to be present with a value of "v5" in all requests.

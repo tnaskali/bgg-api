@@ -28,8 +28,7 @@ public class CompanyResource {
       produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Retrieve information about a particular company or companies",
-      description =
-          """
+      description = """
           Retrieve information about a particular company or companies.
           <p>
           <i>Syntax</i> : /company/{ids}

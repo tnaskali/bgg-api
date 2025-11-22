@@ -11,10 +11,7 @@ public class BggFansV4QueryParams {
 
   @NotNull
   @Min(1)
-  @Parameter(
-      example = "177",
-      description =
-          """
+  @Parameter(example = "177", description = """
           The object id.
           <p>
           <i>Syntax</i> : /fans?objectid={id}&objecttype={type}
@@ -26,10 +23,7 @@ public class BggFansV4QueryParams {
   @NotNull
   @Pattern(
       regexp = "^(?:company|component|event|family|media|person|property|thing|version|weblink)$")
-  @Parameter(
-      example = "thing",
-      description =
-          """
+  @Parameter(example = "thing", description = """
           The object type.
           <p>
           <i>Syntax</i> : /fans?objectid={id}&objecttype={type}
@@ -39,10 +33,7 @@ public class BggFansV4QueryParams {
   private String objecttype;
 
   @Min(1)
-  @Parameter(
-      example = "825923",
-      description =
-          """
+  @Parameter(example = "825923", description = """
           The user id of a fan.
           <p>
           <i>Syntax</i> : /fans?objectid={id}&objecttype={type}&userid={userid}
@@ -53,9 +44,7 @@ public class BggFansV4QueryParams {
 
   @Deprecated
   @Min(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Seems to be present with a value of "1" in all requests.

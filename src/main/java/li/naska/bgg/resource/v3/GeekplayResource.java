@@ -26,10 +26,7 @@ public class GeekplayResource {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get plays details",
-      description =
-          """
+  @Operation(summary = "Get plays details", description = """
           Get plays details.
           <p>
           <i>Syntax</i> : /geekplay?action={action}&objectid={id}&objecttype={type}
@@ -44,8 +41,7 @@ public class GeekplayResource {
   @GetMapping(path = "/count", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(
       summary = "Get play count information for the current user",
-      description =
-          """
+      description = """
           Get play count information for the current user.
           <p>
           <i>Syntax</i> : /geekplay/count?action=getuserplaycount[?{parameters}]

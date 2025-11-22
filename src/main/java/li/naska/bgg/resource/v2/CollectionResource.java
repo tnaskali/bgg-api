@@ -32,8 +32,7 @@ public class CollectionResource {
   @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Collection",
-      description =
-          """
+      description = """
           Request details about a user's collection.
           <p>
           <i>Syntax</i> : /collection?username={username}[&{parameters}]

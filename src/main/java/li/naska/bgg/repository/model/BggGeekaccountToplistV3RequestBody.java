@@ -13,10 +13,7 @@ public class BggGeekaccountToplistV3RequestBody {
 
   @NotNull
   @Pattern(regexp = "^(?:savetoplistitem|deletetoplistitem|savetoplistorder)$")
-  @Parameter(
-      example = "savetoplistitem",
-      description =
-          """
+  @Parameter(example = "savetoplistitem", description = """
           Action to perform.
           <p>
           Possible values are:
@@ -28,10 +25,7 @@ public class BggGeekaccountToplistV3RequestBody {
 
   @NotNull
   @Pattern(regexp = "^(?:hot|top)$")
-  @Parameter(
-      example = "top",
-      description =
-          """
+  @Parameter(example = "top", description = """
           List type.
           <p>
           Possible values are:
@@ -42,10 +36,7 @@ public class BggGeekaccountToplistV3RequestBody {
 
   @NotNull
   @Pattern(regexp = "^(?:boardgame|rpg|videogame)$")
-  @Parameter(
-      example = "boardgame",
-      description =
-          """
+  @Parameter(example = "boardgame", description = """
           Domain.
           <p>
           Possible values are any domain:
@@ -55,19 +46,14 @@ public class BggGeekaccountToplistV3RequestBody {
           """)
   private String domain;
 
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Internal Id of the toplistitem to delete.
           <p>
           Only relevant for "action=deletetoplistitem"
           """)
   private Integer id;
 
-  @Parameter(
-      example = "205637",
-      description =
-          """
+  @Parameter(example = "205637", description = """
           Id of the object to add to the toplist.
           <p>
           Only relevant for "action=savetoplistitem"
@@ -76,10 +62,7 @@ public class BggGeekaccountToplistV3RequestBody {
 
   @Pattern(
       regexp = "^(?:company|component|event|family|media|person|property|thing|version|weblink)$")
-  @Parameter(
-      example = "thing",
-      description =
-          """
+  @Parameter(example = "thing", description = """
           Type or subtype of the object to add to the toplist.
           <p>
           Only relevant for "action=savetoplistitem"
@@ -99,9 +82,7 @@ public class BggGeekaccountToplistV3RequestBody {
           """)
   private String objecttype;
 
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           New ordering of the elements of the toplist.
           <p>
           Only relevant for "action=savetoplistorder"
@@ -113,9 +94,7 @@ public class BggGeekaccountToplistV3RequestBody {
   @Deprecated
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Seems to be present with a value of "1" in all requests.
@@ -126,9 +105,7 @@ public class BggGeekaccountToplistV3RequestBody {
 
   @Deprecated
   @Pattern(regexp = "^Save$")
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Seems to be present with a value of "Save" in the case of action=savetoplistitem.
@@ -136,9 +113,7 @@ public class BggGeekaccountToplistV3RequestBody {
   private String save;
 
   @Deprecated
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Seems to correspond to the object name or AKA selected in the search box in the case of action=savetoplistitem.
@@ -146,9 +121,7 @@ public class BggGeekaccountToplistV3RequestBody {
   private String geekitemname;
 
   @Deprecated
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Corresponds to the "Submit" form button and always has a value of "Submit".

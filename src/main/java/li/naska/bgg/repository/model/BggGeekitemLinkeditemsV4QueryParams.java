@@ -13,10 +13,7 @@ public class BggGeekitemLinkeditemsV4QueryParams {
 
   @NotNull
   @Min(1)
-  @Parameter(
-      example = "205637",
-      description =
-          """
+  @Parameter(example = "205637", description = """
           The object id.
           <p>
           <i>Syntax</i> : /linkeditems?objectid={id}&objecttype={type}&linkdata_index={linktype}
@@ -28,10 +25,7 @@ public class BggGeekitemLinkeditemsV4QueryParams {
   @NotNull
   @Pattern(
       regexp = "^(?:company|component|event|family|media|person|property|thing|version|weblink)$")
-  @Parameter(
-      example = "thing",
-      description =
-          """
+  @Parameter(example = "thing", description = """
           The object type.
           <p>
           <i>Syntax</i> : /linkeditems?objectid={id}&objecttype={type}&linkdata_index={linktype}
@@ -41,10 +35,7 @@ public class BggGeekitemLinkeditemsV4QueryParams {
   private String objecttype;
 
   @NotNull
-  @Parameter(
-      example = "reimplementation",
-      description =
-          """
+  @Parameter(example = "reimplementation", description = """
           The link type. Valid link types depends on object type and subtype.
           <p>
           <i>Syntax</i> : /linkeditems?objectid={id}&objecttype={type}&linkdata_index={linktype}
@@ -54,41 +45,32 @@ public class BggGeekitemLinkeditemsV4QueryParams {
   private String linkdata_index;
 
   @Min(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Page number for paged results.
           <p>
           <i>Syntax</i> : /linkeditems?objectid={id}&objecttype={type}&linkdata_index={linktype}&pageid={page}
           <p>
           <i>Example</i> : /linkeditems?objectid=205637&objecttype=thing&linkdata_index=reimplementation&pageid=2
-          """,
-      schema = @Schema(defaultValue = "1"))
+          """, schema = @Schema(defaultValue = "1"))
   private Integer pageid;
 
   @Min(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Page size for paged results.
           <p>
           <i>Syntax</i> : /linkeditems?objectid={id}&objecttype={type}&linkdata_index={linktype}&showcount={count}
           <p>
           <i>Example</i> : /linkeditems?objectid=205637&objecttype=thing&linkdata_index=reimplementation&showcount=10
-          """,
-      schema = @Schema(defaultValue = "1"))
+          """, schema = @Schema(defaultValue = "1"))
   private Integer showcount;
 
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Sort order. Valid sort orders depends on object type and subtype.
           <p>
           <i>Syntax</i> : /linkeditems?objectid={id}&objecttype={type}&linkdata_index={linktype}&sort={sort}
           <p>
           <i>Example</i> : /linkeditems?objectid=205637&objecttype=thing&linkdata_index=reimplementation&sort=name
-          """,
-      schema = @Schema(defaultValue = "name"))
+          """, schema = @Schema(defaultValue = "name"))
   private String sort;
 
   private String subtype;
@@ -96,9 +78,7 @@ public class BggGeekitemLinkeditemsV4QueryParams {
   @Deprecated
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Seems to be present with a value of "1" in all requests.
@@ -108,9 +88,7 @@ public class BggGeekitemLinkeditemsV4QueryParams {
   @Deprecated
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Mined from bgg website, but marked as deprecated as it isn't required and doesn't seem useful.
           <p>
           Seems to be present with a value of "1" in all requests.

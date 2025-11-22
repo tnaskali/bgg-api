@@ -36,8 +36,7 @@ public class CollectionResource {
       produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Retrieve games in a user's collection",
-      description =
-          """
+      description = """
           Retrieve games in a user's collection.
           <p>
           Important definition: A user's collection includes any games the user has added to her collection on BGG. This includes games she owns, games she used to own, games she's rated, games upon which she's commented, games she's played, and games on her wishlist, just to name a few. In this section, references to the collection mean this broader sense of BGG collection, not the user's personal stash of games.

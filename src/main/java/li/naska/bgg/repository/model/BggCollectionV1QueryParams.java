@@ -10,10 +10,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      example = "1",
-      description =
-          """
+  @Parameter(example = "1", description = """
           Returns version info for each item in your collection.
           <p>
           <i>Syntax</i> : /collection/{username}?version=1
@@ -24,9 +21,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Returns more abbreviated results.
           <p>
           <i>Syntax</i> : /collection/{username}?brief=1
@@ -37,10 +32,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      example = "1",
-      description =
-          """
+  @Parameter(example = "1", description = """
           In (or exclude for 0) a user's collection. That is, the user currently owns it.
           <p>
           <i>Syntax</i> : /collection/{username}?own={0,1}
@@ -53,9 +45,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Include (or exclude) games that the user has rated.
           <p>
           <i>Syntax</i> : /collection/{username}?rated={0,1}
@@ -68,9 +58,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Include (or exclude) games that the user has played.
           <p>
           <i>Syntax</i> : /collection/{username}?played={0,1}
@@ -83,9 +71,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Include (or exclude) games the user has commented.
           <p>
           <i>Syntax</i> : /collection/{username}?comment={0,1}
@@ -98,9 +84,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Include (or exclude) games the user has listed for trade.
           <p>
           <i>Syntax</i> : /collection/{username}?trade={0,1}
@@ -113,9 +97,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Include (or exclude) games the user wants.
           <p>
           <i>Syntax</i> : /collection/{username}?want={0,1}
@@ -128,9 +110,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Include (or exclude) games the user wants for trade.
           <p>
           <i>Syntax</i> : /collection/{username}?wantintrade={0,1}
@@ -143,9 +123,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Include (or exclude) games that are on the user's wishlist.
           <p>
           <i>Syntax</i> : /collection/{username}?wishlist={0,1}
@@ -158,9 +136,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Include (or exclude) games the user wants to play.
           <p>
           <i>Syntax</i> : /collection/{username}?wanttoplay={0,1}
@@ -173,9 +149,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Include (or exclude) games the user wants to buy.
           <p>
           <i>Syntax</i> : /collection/{username}?wanttobuy={0,1}
@@ -188,9 +162,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Include (or exclude) games the user previously owned.
           <p>
           <i>Syntax</i> : /collection/{username}?prevowned={0,1}
@@ -203,9 +175,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Include (or exclude) games the user has preordered.
           <p>
           <i>Syntax</i> : /collection/{username}?preordered={0,1}
@@ -218,9 +188,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Include (or exclude) games the user has spare parts of up for offer.
           <p>
           <i>Syntax</i> : /collection/{username}?hasparts={0,1}
@@ -233,9 +201,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Include (or exclude) games the user is looking for spare parts of.
           <p>
           <i>Syntax</i> : /collection/{username}?wantparts={0,1}
@@ -248,9 +214,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Include (or exclude) games for which the user does get a geekmail whenever they receive new content on BGG.
           <p>
           <i>Syntax</i> : /collection/{username}?notifycontent={0,1}
@@ -263,9 +227,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Include (or exclude) games for which the user does get a geekmail whenever a copy is listed in BGGM.
           <p>
           <i>Syntax</i> : /collection/{username}?notifysale={0,1}
@@ -278,9 +240,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Include (or exclude) games for which the user does get a geekmail whenever a copy is listed in a geekgold or eBay auction on BGG.
           <p>
           <i>Syntax</i> : /collection/{username}?notifyauction={0,1}
@@ -293,9 +253,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(5)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Wishlist priority.
           <p>
           <i>Syntax</i> : /collection/{username}?wishlistpriority={1,5}
@@ -306,9 +264,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(10)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Minimum user rating.
           <p>
           <i>Syntax</i> : /collection/{username}?minrating={1,10}
@@ -319,9 +275,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(10)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Maximum user rating.
           <p>
           <i>Note</i> : May be broken in BGG 2.0, or may require other parameters.
@@ -334,9 +288,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(10)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Minimum bgg rating.
           <p>
           <i>Syntax</i> : /collection/{username}?minbggrating={1,10}
@@ -347,9 +299,7 @@ public class BggCollectionV1QueryParams {
 
   @Min(1)
   @Max(10)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Maximum bgg rating.
           <p>
           <i>Note</i> : May be broken in BGG 2.0, or may require other parameters.
@@ -361,9 +311,7 @@ public class BggCollectionV1QueryParams {
   private Integer maxbggrating;
 
   @Min(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Minimum number of recorded plays.
           <p>
           <i>Syntax</i> : /collection/{username}?minplays={1,}
@@ -375,9 +323,7 @@ public class BggCollectionV1QueryParams {
   private Integer minplays;
 
   @Min(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Maximum number of recorded plays.
           <p>
           <i>Syntax</i> : /collection/{username}?maxplays={1,}
@@ -389,10 +335,7 @@ public class BggCollectionV1QueryParams {
   private Integer maxplays;
 
   @Min(1)
-  @Parameter(
-      example = "1",
-      description =
-          """
+  @Parameter(example = "1", description = """
           Show the private fields (purchase price, etc). Default is 1 for logged in users, 0 otherwise, and showprivate=1 only works on your own collection, when you are logged in.
           <p>
           <i>Syntax</i> : /collection/{username}?showprivate={0,1}

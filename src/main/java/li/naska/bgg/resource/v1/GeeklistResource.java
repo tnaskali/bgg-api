@@ -31,8 +31,7 @@ public class GeeklistResource {
       produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
   @Operation(
       summary = "Retrieve entries from a geeklist",
-      description =
-          """
+      description = """
           Retrieve entries from a geeklist.
           <p>
           <i>Note</i> : the old "start" and "count" parameters are obsolete and no longer supported. They were required in the original api if you wanted to retreive all items on a geeklist longer than 150 items as that's the most that could be returned on a single api call. Currently however the geeklist xml api returns the entire geeklist (all items) in a single call.

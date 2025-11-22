@@ -27,10 +27,7 @@ public class BlogsResource {
   }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get blog",
-      description =
-          """
+  @Operation(summary = "Get blog", description = """
           Get blog by id.
           <p>
           <i>Syntax</i> : /blogs/{id}
@@ -43,10 +40,7 @@ public class BlogsResource {
   }
 
   @GetMapping(path = "/posts", produces = MediaType.APPLICATION_JSON_VALUE)
-  @Operation(
-      summary = "Get blogs posts",
-      description =
-          """
+  @Operation(summary = "Get blogs posts", description = """
           Get blogs posts.
           <p>
           <i>Syntax</i> : /blogs/posts?objectid={id}&objecttype={type}[&{parameters}]

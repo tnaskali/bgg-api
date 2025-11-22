@@ -10,10 +10,7 @@ public class BggFamilyV2QueryParams {
 
   @NotNull
   @Pattern(regexp = "^[1-9]\\d*(?:,[1-9]\\d*)*+$")
-  @Parameter(
-      example = "8590,62408",
-      description =
-          """
+  @Parameter(example = "8590,62408", description = """
           Specifies the id of the family to retrieve. To request multiple families with a single query, one can specify a comma-delimited list of ids.
           <p>
           <i>Syntax</i> : /family?id={ids}
@@ -25,10 +22,7 @@ public class BggFamilyV2QueryParams {
   @Pattern(
       regexp =
           "^(?:award|awardcategory|awardset|bgaccessoryfamily|boardgamefamily|boardgamehonor|boardgameperiodical|boardgamepodcast|boardgamesubdomain|cardset|puzzlecategory|puzzlefamily|puzzlehonor|puzzlematerial|puzzlemechanism|puzzletype|rpg|rpgfamily|rpggenre|rpghonor|rpgperiodical|rpgpodcast|rpgseries|rpgsetting|rpgsystem|videogamecharacter|videogamefranchise|videogamehonor|videogameplatform|videogameseries)(?:,(?:award|awardcategory|awardset|bgaccessoryfamily|boardgamefamily|boardgamehonor|boardgameperiodical|boardgamepodcast|boardgamesubdomain|cardset|puzzlecategory|puzzlefamily|puzzlehonor|puzzlematerial|puzzlemechanism|puzzletype|rpg|rpgfamily|rpggenre|rpghonor|rpgperiodical|rpgpodcast|rpgseries|rpgsetting|rpgsystem|videogamecharacter|videogamefranchise|videogamehonor|videogameplatform|videogameseries))*$")
-  @Parameter(
-      example = "award,boardgamefamily",
-      description =
-          """
+  @Parameter(example = "award,boardgamefamily", description = """
           Specifies that, regardless of the type of family asked for by id, the results are filtered by the family type(s) specified. Multiple family types can be specified in a comma-delimited list.
           <p>
           The XMLAPI2 supports companies of the following family types:

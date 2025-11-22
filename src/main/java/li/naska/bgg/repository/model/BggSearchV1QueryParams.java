@@ -10,10 +10,7 @@ import lombok.Data;
 public class BggSearchV1QueryParams {
 
   @NotNull
-  @Parameter(
-      example = "Crossbows and Catapults",
-      description =
-          """
+  @Parameter(example = "Crossbows and Catapults", description = """
           String to search for (required).
           <p>
           <i>Syntax</i> : /search?search={searchString}
@@ -25,9 +22,7 @@ public class BggSearchV1QueryParams {
   @Deprecated
   @Min(1)
   @Max(1)
-  @Parameter(
-      description =
-          """
+  @Parameter(description = """
           Exact name/aka search only (set it to 1, absent by default).
           <p>
           <i>Note</i> : exact doesn't seem to work yet in BGG 2.0
