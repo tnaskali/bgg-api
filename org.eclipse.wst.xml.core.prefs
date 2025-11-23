@@ -1,0 +1,12 @@
+fixXMLDeclaration=true
+formatCommentText=false
+formatCommentJoinLines=false
+lineWidth=120
+splitMultiAttrs=false
+alignEndBracket=false
+spaceBeforeEmptyCloseTag=false
+preserveCDATAContent=true
+indentationChar=space
+indentationSize=2
+clearAllBlankLines=false
+resolveExternalURI=true

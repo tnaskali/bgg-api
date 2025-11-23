@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:common="http://www.boardgamegeek.com/common"
-           xmlns:forum="http://www.boardgamegeek.com/forum/v2"
-           targetNamespace="http://www.boardgamegeek.com/forum/v2">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://www.boardgamegeek.com/common"
+  xmlns:forum="http://www.boardgamegeek.com/forum/v2" targetNamespace="http://www.boardgamegeek.com/forum/v2">
   <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
   <xs:element name="forum" type="forum:forum"/>

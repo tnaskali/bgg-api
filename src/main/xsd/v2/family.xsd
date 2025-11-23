@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:family="http://www.boardgamegeek.com/family/v2"
-           targetNamespace="http://www.boardgamegeek.com/family/v2">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:family="http://www.boardgamegeek.com/family/v2"
+  targetNamespace="http://www.boardgamegeek.com/family/v2">
 
   <xs:element name="items" type="family:families"/>
 

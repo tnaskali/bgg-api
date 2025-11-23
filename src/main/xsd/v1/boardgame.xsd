@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:boardgame="http://www.boardgamegeek.com/boardgame/v1"
-           targetNamespace="http://www.boardgamegeek.com/boardgame/v1">
+  xmlns:boardgame="http://www.boardgamegeek.com/boardgame/v1"
+  targetNamespace="http://www.boardgamegeek.com/boardgame/v1">
 
   <xs:element name="boardgames" type="boardgame:boardgames"/>
 

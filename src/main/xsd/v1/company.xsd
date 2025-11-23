@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:company="http://www.boardgamegeek.com/company/v1"
-           targetNamespace="http://www.boardgamegeek.com/company/v1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:company="http://www.boardgamegeek.com/company/v1"
+  targetNamespace="http://www.boardgamegeek.com/company/v1">
 
   <xs:element name="companies" type="company:companies"/>
 

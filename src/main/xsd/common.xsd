@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:common="http://www.boardgamegeek.com/common"
-           targetNamespace="http://www.boardgamegeek.com/common">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://www.boardgamegeek.com/common"
+  targetNamespace="http://www.boardgamegeek.com/common">
 
   <xs:simpleType name="localDate">
     <xs:restriction base="xs:string">
@@ -14,8 +13,7 @@
   <xs:simpleType name="localDateTime">
     <xs:restriction base="xs:string">
       <!-- 2020-01-11 11:15:53 -->
-      <xs:pattern
-          value="[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]) ([01]\d|2[0-3]):[0-5]\d:[0-5]\d"/>
+      <xs:pattern value="[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]) ([01]\d|2[0-3]):[0-5]\d:[0-5]\d"/>
       <xs:length value="19"/>
     </xs:restriction>
   </xs:simpleType>
@@ -24,7 +22,7 @@
     <xs:restriction base="xs:string">
       <!-- 2020-01-11T11:15:53+00:00 -->
       <xs:pattern
-          value="[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])T([01]\d|2[0-3]):[0-5]\d:[0-5]\d([+-]([01]\d|2[0-3]):[0-5]\d|Z)"/>
+        value="[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])T([01]\d|2[0-3]):[0-5]\d:[0-5]\d([+-]([01]\d|2[0-3]):[0-5]\d|Z)"/>
       <xs:length value="25"/>
     </xs:restriction>
   </xs:simpleType>
@@ -33,7 +31,7 @@
     <xs:restriction base="xs:string">
       <!-- Wed, 01 Apr 2020 19:50:39 +0000 -->
       <xs:pattern
-          value="(Mon|Tue|Wed|Thu|Fri|Sat|Sun), (0[1-9]|[12]\d|3[01]) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) [1-9]\d{3} ([01]\d|2[0-3]):[0-5]\d:[0-5]\d [+-]([01]\d|2[0-3])[0-5]\d"/>
+        value="(Mon|Tue|Wed|Thu|Fri|Sat|Sun), (0[1-9]|[12]\d|3[01]) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) [1-9]\d{3} ([01]\d|2[0-3]):[0-5]\d:[0-5]\d [+-]([01]\d|2[0-3])[0-5]\d"/>
       <xs:length value="31"/>
     </xs:restriction>
   </xs:simpleType>

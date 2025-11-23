@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:common="http://www.boardgamegeek.com/common"
-           xmlns:collection="http://www.boardgamegeek.com/collection/v1"
-           targetNamespace="http://www.boardgamegeek.com/collection/v1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://www.boardgamegeek.com/common"
+  xmlns:collection="http://www.boardgamegeek.com/collection/v1"
+  targetNamespace="http://www.boardgamegeek.com/collection/v1">
   <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
   <xs:element name="items" type="collection:items"/>

@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:search="http://www.boardgamegeek.com/search/v1"
-           targetNamespace="http://www.boardgamegeek.com/search/v1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:search="http://www.boardgamegeek.com/search/v1"
+  targetNamespace="http://www.boardgamegeek.com/search/v1">
 
   <xs:element name="boardgames" type="search:boardgames"/>
 
