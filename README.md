@@ -4,6 +4,8 @@
 ![build status](https://github.com/tnaskali/bgg-api/actions/workflows/build-native-image.yml/badge.svg)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tnaskali_bgg-api&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tnaskali_bgg-api)
 
+[![BGG-API Logo](https://cf.geekdo-images.com/HZy35cmzmmyV9BarSuk6ug__small/img/gbE7sulIurZE_Tx8EQJXnZSKI6w=/fit-in/200x150/filters:strip_icc()/pic7779581.png)](https://boardgamegeek.com/using_the_xml_api#toc13)
+
 Spring Boot application acting as a proxy to
 BoardGameGeek's [XML API](https://boardgamegeek.com/wiki/page/BGG_XML_API), [XML API 2](https://boardgamegeek.com/wiki/page/BGG_XML_API2)
 and [JSON API](https://boardgamegeek.com/wiki/page/BGG_JSON_API). Its purpose is to expose the same functionalities,
@@ -21,6 +23,11 @@ persisting data, in a more user-friendly and developer-friendly way.
 - Support for building both Java and native artifacts and images
 
 # Setup
+
+## Getting a BGG application token
+
+To use this application, you need to request and obtain an application token from BoardGameGeek. The steps are described
+in [this page](https://boardgamegeek.com/using_the_xml_api).
 
 ## build and run a java application locally
 
@@ -61,7 +68,8 @@ Steps :
 
 1. run `docker pull ghcr.io/tnaskali/bgg-api-native:master` (or any other tag)
 2. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
-3. run `docker run --rm -p 8080:80 -e BGG_APPLICATION_TOKEN=${BGG_APPLICATION_TOKEN} ghcr.io/tnaskali/bgg-api-native:master`
+3. run
+   `docker run --rm -p 8080:80 -e BGG_APPLICATION_TOKEN=${BGG_APPLICATION_TOKEN} ghcr.io/tnaskali/bgg-api-native:master`
 
 # Usage
 
