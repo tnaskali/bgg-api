@@ -69,9 +69,7 @@ public class OpenApiConfiguration {
   static class OpenApiRuntimeHints implements RuntimeHintsRegistrar {
 
     private static final String[] OPENAPI_REFLECTION_CLASSES = {
-      "io.swagger.v3.core.jackson.mixin.Schema31Mixin$TypeSerializer",
-      "org.springdoc.core.providers.SpringWebProvider",
-      "org.springdoc.core.providers.SpringWebProvider$$SpringCGLIB$$0"
+      "io.swagger.v3.core.jackson.mixin.Schema31Mixin$TypeSerializer"
     };
 
     @Override
