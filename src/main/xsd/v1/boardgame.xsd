@@ -93,9 +93,6 @@
   </xs:complexType>
 
   <xs:complexType name="result">
-    <xs:sequence>
-      <xs:element name="result" type="boardgame:result"/>
-    </xs:sequence>
     <xs:attribute name="level" type="xs:positiveInteger"/>
     <xs:attribute name="value" type="xs:string" use="required"/>
     <xs:attribute name="numvotes" type="xs:nonNegativeInteger" use="required"/>
