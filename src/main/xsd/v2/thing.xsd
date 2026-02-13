@@ -104,6 +104,7 @@
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element name="thumbnail" type="xs:anyURI"/>
       <xs:element name="image" type="xs:anyURI"/>
+      <xs:element name="canonicalname" type="common:stringValue"/>
       <xs:element name="name" type="thing:name"/>
       <xs:element name="yearpublished" type="common:integerValue"/>
       <xs:element name="link" type="thing:versionLink"/>
