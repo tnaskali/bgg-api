@@ -25,7 +25,8 @@
       <xs:element name="stats" type="collection:stats" minOccurs="0"/>
       <xs:element name="status" type="collection:status"/>
       <xs:element name="numplays" type="xs:nonNegativeInteger"/>
-      <xs:element name="privateinfo" type="collection:privateinfo" minOccurs="0"/>
+      <xs:element name="privateinfo" type="collection:privateInfo" minOccurs="0"/>
+      <xs:element name="version" type="collection:version" minOccurs="0"/>
       <xs:element name="wantpartslist" type="xs:string" minOccurs="0"/>
       <xs:element name="haspartslist" type="xs:string" minOccurs="0"/>
       <xs:element name="wishlistcomment" type="xs:string" minOccurs="0"/>
@@ -91,22 +92,73 @@
     <xs:attribute name="wanttoplay" type="xs:boolean" use="required"/>
     <xs:attribute name="wanttobuy" type="xs:boolean" use="required"/>
     <xs:attribute name="wishlist" type="xs:boolean" use="required"/>
+    <xs:attribute name="wishlistpriority" type="xs:integer"/>
     <xs:attribute name="preordered" type="xs:boolean" use="required"/>
     <xs:attribute name="lastmodified" type="common:localDateTime" use="required"/>
   </xs:complexType>
 
-  <xs:complexType name="privateinfo">
+  <xs:complexType name="privateInfo">
     <xs:sequence>
       <xs:element name="pp_currency" type="xs:string"/>
-      <xs:element name="pricepaid" type="xs:decimal"/>
+      <xs:element name="pricepaid" type="common:optionalDecimal"/>
       <xs:element name="cv_currency" type="xs:string"/>
-      <xs:element name="currvalue" type="xs:decimal"/>
-      <xs:element name="quantity" type="xs:integer"/>
-      <xs:element name="acquisitiondate" type="common:localDate"/>
+      <xs:element name="currvalue" type="common:optionalDecimal"/>
+      <xs:element name="quantity" type="common:optionalInteger"/>
+      <xs:element name="acquisitiondate" type="common:optionalLocalDate"/>
       <xs:element name="acquiredfrom" type="xs:string"/>
       <xs:element name="privatecomment" type="xs:string"/>
       <xs:element name="inventorylocation" type="xs:string"/>
     </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="version">
+    <xs:sequence>
+      <xs:element name="imageid" type="common:integerValue" minOccurs="0"/>
+      <xs:element name="year" type="xs:integer" minOccurs="0"/>
+      <xs:element name="publisher" type="collection:versionPublisher" minOccurs="0"/>
+      <xs:element name="other" type="xs:string" minOccurs="0"/>
+      <xs:element name="barcode" type="xs:string" minOccurs="0"/>
+      <xs:element name="item" type="collection:versionItem" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="versionPublisher">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="publisherid" type="xs:integer" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="versionItem">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="thumbnail" type="xs:anyURI"/>
+      <xs:element name="image" type="xs:anyURI"/>
+      <xs:element name="canonicalname" type="common:stringValue"/>
+      <xs:element name="name" type="collection:versionName"/>
+      <xs:element name="yearpublished" type="common:integerValue"/>
+      <xs:element name="link" type="collection:versionLink"/>
+      <xs:element name="productcode" type="common:stringValue"/>
+      <xs:element name="width" type="common:decimalValue"/>
+      <xs:element name="length" type="common:decimalValue"/>
+      <xs:element name="depth" type="common:decimalValue"/>
+      <xs:element name="weight" type="common:decimalValue"/>
+    </xs:choice>
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="versionName">
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="sortindex" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="versionLink">
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="inbound" type="xs:boolean"/>
   </xs:complexType>
 
 </xs:schema>

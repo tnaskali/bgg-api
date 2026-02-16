@@ -92,20 +92,21 @@
     <xs:attribute name="wanttoplay" type="xs:boolean" use="required"/>
     <xs:attribute name="wanttobuy" type="xs:boolean" use="required"/>
     <xs:attribute name="wishlist" type="xs:boolean" use="required"/>
+    <xs:attribute name="wishlistpriority" type="xs:integer"/>
     <xs:attribute name="preordered" type="xs:boolean" use="required"/>
     <xs:attribute name="lastmodified" type="common:localDateTime" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="privateInfo">
     <xs:sequence>
-      <xs:element name="privatecomment" type="xs:string" minOccurs="0"/>
+      <xs:element name="privatecomment" type="xs:string"/>
     </xs:sequence>
     <xs:attribute name="pp_currency" type="xs:string"/>
-    <xs:attribute name="pricepaid" type="xs:decimal"/>
+    <xs:attribute name="pricepaid" type="common:optionalDecimal"/>
     <xs:attribute name="cv_currency" type="xs:string"/>
-    <xs:attribute name="currvalue" type="xs:decimal"/>
-    <xs:attribute name="quantity" type="xs:integer"/>
-    <xs:attribute name="acquisitiondate" type="common:localDate"/>
+    <xs:attribute name="currvalue" type="common:optionalDecimal"/>
+    <xs:attribute name="quantity" type="common:optionalInteger"/>
+    <xs:attribute name="acquisitiondate" type="common:optionalLocalDate"/>
     <xs:attribute name="acquiredfrom" type="xs:string"/>
     <xs:attribute name="inventorylocation" type="xs:string"/>
   </xs:complexType>
@@ -133,6 +134,7 @@
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element name="thumbnail" type="xs:anyURI"/>
       <xs:element name="image" type="xs:anyURI"/>
+      <xs:element name="canonicalname" type="common:stringValue"/>
       <xs:element name="name" type="collection:versionName"/>
       <xs:element name="yearpublished" type="common:integerValue"/>
       <xs:element name="link" type="collection:versionLink"/>

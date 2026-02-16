@@ -2,11 +2,33 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://www.boardgamegeek.com/common"
   targetNamespace="http://www.boardgamegeek.com/common">
 
+  <xs:simpleType name="optionalInteger">
+    <xs:restriction base="xs:string">
+      <!-- integer or empty string -->
+      <xs:pattern value="(\d+|)"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="optionalDecimal">
+    <xs:restriction base="xs:string">
+      <!-- decimal or empty string -->
+      <xs:pattern value="(\d+(\.\d+)?|)"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="localDate">
     <xs:restriction base="xs:string">
       <!-- 2020-01-11 -->
       <xs:pattern value="[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])"/>
       <xs:length value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="optionalLocalDate">
+    <xs:restriction base="xs:string">
+      <!-- 2020-01-11 or empty string -->
+      <xs:pattern value="([1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])|)"/>
+      <xs:maxLength value="10"/>
     </xs:restriction>
   </xs:simpleType>
 
