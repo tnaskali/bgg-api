@@ -1,12 +1,20 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:company="http://www.boardgamegeek.com/company/v1"
-  targetNamespace="http://www.boardgamegeek.com/company/v1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
+  jaxb:version="3.0">
 
-  <xs:element name="companies" type="company:companies"/>
+  <xs:annotation>
+    <xs:appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="com.boardgamegeek.company.v1"/>
+      </jaxb:schemaBindings>
+    </xs:appinfo>
+  </xs:annotation>
+
+  <xs:element name="companies" type="companies"/>
 
   <xs:complexType name="companies">
     <xs:sequence>
-      <xs:element name="company" type="company:company" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="company" type="company" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>

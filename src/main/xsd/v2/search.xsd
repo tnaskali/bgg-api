@@ -1,12 +1,21 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:search="http://www.boardgamegeek.com/search/v2"
-  targetNamespace="http://www.boardgamegeek.com/search/v2">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
+  jaxb:version="3.0">
+  <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
-  <xs:element name="items" type="search:items"/>
+  <xs:annotation>
+    <xs:appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="com.boardgamegeek.search.v2"/>
+      </jaxb:schemaBindings>
+    </xs:appinfo>
+  </xs:annotation>
+
+  <xs:element name="items" type="items"/>
 
   <xs:complexType name="items">
     <xs:sequence>
-      <xs:element name="item" type="search:item" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="item" type="item" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="total" type="xs:nonNegativeInteger" use="required"/>
     <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
@@ -14,7 +23,7 @@
 
   <xs:complexType name="item">
     <xs:sequence>
-      <xs:element name="name" type="search:name"/>
+      <xs:element name="name" type="name"/>
       <xs:element name="yearpublished" type="xs:integer" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="type" type="xs:string" use="required"/>

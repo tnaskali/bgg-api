@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <jaxb:bindings xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:common="http://www.boardgamegeek.com/common" jaxb:version="3.0"
-  jaxb:extensionBindingPrefixes="xjc">
+  xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" jaxb:version="3.0" jaxb:extensionBindingPrefixes="xjc">
 
   <jaxb:globalBindings>
     <jaxb:serializable/>
@@ -10,20 +9,6 @@
       adapter="li.naska.bgg.util.IntegerToIntegerAdapter"/>
     <xjc:javaType name="java.time.ZonedDateTime" xmlType="xs:dateTime"
       adapter="li.naska.bgg.util.DateTimeToZonedDateTimeAdapter"/>
-    <xjc:javaType name="java.lang.Integer" xmlType="common:optionalInteger"
-      adapter="li.naska.bgg.util.OptionalStringToIntegerAdapter"/>
-    <xjc:javaType name="java.math.BigDecimal" xmlType="common:optionalDecimal"
-      adapter="li.naska.bgg.util.OptionalStringToDecimalAdapter"/>
-    <xjc:javaType name="java.time.LocalDate" xmlType="common:localDate"
-      adapter="li.naska.bgg.util.StringToLocalDateAdapter"/>
-    <xjc:javaType name="java.time.LocalDate" xmlType="common:optionalLocalDate"
-      adapter="li.naska.bgg.util.OptionalStringToLocalDateAdapter"/>
-    <xjc:javaType name="java.time.LocalDateTime" xmlType="common:localDateTime"
-      adapter="li.naska.bgg.util.StringToLocalDateTimeAdapter"/>
-    <xjc:javaType name="java.time.ZonedDateTime" xmlType="common:zonedDateTime"
-      adapter="li.naska.bgg.util.StringToZonedDateTimeAdapter"/>
-    <xjc:javaType name="java.time.ZonedDateTime" xmlType="common:rfcZonedDateTime"
-      adapter="li.naska.bgg.util.RfcStringToZonedDateTimeAdapter"/>
   </jaxb:globalBindings>
 
 </jaxb:bindings>

@@ -1,13 +1,21 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://www.boardgamegeek.com/common"
-  xmlns:plays="http://www.boardgamegeek.com/plays/v2" targetNamespace="http://www.boardgamegeek.com/plays/v2">
+  xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" jaxb:version="3.0">
   <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
-  <xs:element name="plays" type="plays:plays"/>
+  <xs:annotation>
+    <xs:appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="com.boardgamegeek.plays.v2"/>
+      </jaxb:schemaBindings>
+    </xs:appinfo>
+  </xs:annotation>
+
+  <xs:element name="plays" type="plays"/>
 
   <xs:complexType name="plays">
     <xs:sequence>
-      <xs:element name="play" type="plays:play" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="play" type="play" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="username" type="xs:string" use="required"/>
     <xs:attribute name="userid" type="xs:integer" use="required"/>
@@ -18,9 +26,9 @@
 
   <xs:complexType name="play">
     <xs:sequence>
-      <xs:element name="item" type="plays:item"/>
+      <xs:element name="item" type="item"/>
       <xs:element name="comments" type="xs:string" minOccurs="0"/>
-      <xs:element name="players" type="plays:players" minOccurs="0">
+      <xs:element name="players" type="players" minOccurs="0">
       </xs:element>
     </xs:sequence>
     <xs:attribute name="id" type="xs:integer" use="required"/>
@@ -34,7 +42,7 @@
 
   <xs:complexType name="players">
     <xs:sequence>
-      <xs:element name="player" type="plays:player" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="player" type="player" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -52,7 +60,7 @@
 
   <xs:complexType name="item">
     <xs:sequence>
-      <xs:element name="subtypes" type="plays:subtype" minOccurs="0"/>
+      <xs:element name="subtypes" type="subtype" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="objecttype" type="xs:string" use="required"/>
@@ -61,7 +69,7 @@
 
   <xs:complexType name="subtype">
     <xs:sequence>
-      <xs:element name="subtype" type="plays:subtypeValue" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="subtype" type="subtypeValue" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 

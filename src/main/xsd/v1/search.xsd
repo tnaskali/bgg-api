@@ -1,19 +1,27 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:search="http://www.boardgamegeek.com/search/v1"
-  targetNamespace="http://www.boardgamegeek.com/search/v1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
+  jaxb:version="3.0">
 
-  <xs:element name="boardgames" type="search:boardgames"/>
+  <xs:annotation>
+    <xs:appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="com.boardgamegeek.search.v1"/>
+      </jaxb:schemaBindings>
+    </xs:appinfo>
+  </xs:annotation>
+
+  <xs:element name="boardgames" type="boardgames"/>
 
   <xs:complexType name="boardgames">
     <xs:sequence>
-      <xs:element name="boardgame" type="search:boardgame" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgame" type="boardgame" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="boardgame">
     <xs:sequence>
-      <xs:element name="name" type="search:name"/>
+      <xs:element name="name" type="name"/>
       <xs:element name="yearpublished" type="xs:nonNegativeInteger" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="objectid" type="xs:positiveInteger" use="required"/>

@@ -1,14 +1,21 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://www.boardgamegeek.com/common"
-  xmlns:collection="http://www.boardgamegeek.com/collection/v1"
-  targetNamespace="http://www.boardgamegeek.com/collection/v1">
+  xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" jaxb:version="3.0">
   <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
-  <xs:element name="items" type="collection:items"/>
+  <xs:annotation>
+    <xs:appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="com.boardgamegeek.collection.v1"/>
+      </jaxb:schemaBindings>
+    </xs:appinfo>
+  </xs:annotation>
+
+  <xs:element name="items" type="items"/>
 
   <xs:complexType name="items">
     <xs:sequence>
-      <xs:element name="item" type="collection:item" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="item" type="item" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="totalitems" type="xs:nonNegativeInteger" use="required"/>
     <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
@@ -17,16 +24,16 @@
 
   <xs:complexType name="item">
     <xs:sequence>
-      <xs:element name="name" type="collection:name"/>
+      <xs:element name="name" type="name"/>
       <xs:element name="originalname" type="xs:string" minOccurs="0"/>
       <xs:element name="yearpublished" type="xs:string" minOccurs="0"/>
       <xs:element name="image" type="xs:anyURI" minOccurs="0"/>
       <xs:element name="thumbnail" type="xs:anyURI" minOccurs="0"/>
-      <xs:element name="stats" type="collection:stats" minOccurs="0"/>
-      <xs:element name="status" type="collection:status"/>
+      <xs:element name="stats" type="stats" minOccurs="0"/>
+      <xs:element name="status" type="status"/>
       <xs:element name="numplays" type="xs:nonNegativeInteger"/>
-      <xs:element name="privateinfo" type="collection:privateInfo" minOccurs="0"/>
-      <xs:element name="version" type="collection:version" minOccurs="0"/>
+      <xs:element name="privateinfo" type="privateInfo" minOccurs="0"/>
+      <xs:element name="version" type="version" minOccurs="0"/>
       <xs:element name="wantpartslist" type="xs:string" minOccurs="0"/>
       <xs:element name="haspartslist" type="xs:string" minOccurs="0"/>
       <xs:element name="wishlistcomment" type="xs:string" minOccurs="0"/>
@@ -47,7 +54,7 @@
 
   <xs:complexType name="stats">
     <xs:sequence>
-      <xs:element name="rating" type="collection:rating"/>
+      <xs:element name="rating" type="rating"/>
     </xs:sequence>
     <xs:attribute name="minplayers" type="xs:nonNegativeInteger" use="required"/>
     <xs:attribute name="maxplayers" type="xs:nonNegativeInteger" use="required"/>
@@ -64,14 +71,14 @@
       <xs:element name="bayesaverage" type="common:decimalValue"/>
       <xs:element name="stddev" type="common:decimalValue"/>
       <xs:element name="median" type="common:decimalValue"/>
-      <xs:element name="ranks" type="collection:ranks"/>
+      <xs:element name="ranks" type="ranks"/>
     </xs:sequence>
     <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="ranks">
     <xs:sequence>
-      <xs:element name="rank" type="collection:rank" maxOccurs="unbounded"/>
+      <xs:element name="rank" type="rank" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -115,10 +122,10 @@
     <xs:sequence>
       <xs:element name="imageid" type="common:integerValue" minOccurs="0"/>
       <xs:element name="year" type="xs:integer" minOccurs="0"/>
-      <xs:element name="publisher" type="collection:versionPublisher" minOccurs="0"/>
+      <xs:element name="publisher" type="versionPublisher" minOccurs="0"/>
       <xs:element name="other" type="xs:string" minOccurs="0"/>
       <xs:element name="barcode" type="xs:string" minOccurs="0"/>
-      <xs:element name="item" type="collection:versionItem" minOccurs="0"/>
+      <xs:element name="item" type="versionItem" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -135,9 +142,9 @@
       <xs:element name="thumbnail" type="xs:anyURI"/>
       <xs:element name="image" type="xs:anyURI"/>
       <xs:element name="canonicalname" type="common:stringValue"/>
-      <xs:element name="name" type="collection:versionName"/>
+      <xs:element name="name" type="versionName"/>
       <xs:element name="yearpublished" type="common:integerValue"/>
-      <xs:element name="link" type="collection:versionLink"/>
+      <xs:element name="link" type="versionLink"/>
       <xs:element name="productcode" type="common:stringValue"/>
       <xs:element name="width" type="common:decimalValue"/>
       <xs:element name="length" type="common:decimalValue"/>

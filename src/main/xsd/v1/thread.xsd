@@ -1,12 +1,20 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:thread="http://www.boardgamegeek.com/thread/v1"
-  targetNamespace="http://www.boardgamegeek.com/thread/v1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
+  jaxb:version="3.0">
 
-  <xs:element name="rss" type="thread:rss"/>
+  <xs:annotation>
+    <xs:appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="com.boardgamegeek.thread.v1"/>
+      </jaxb:schemaBindings>
+    </xs:appinfo>
+  </xs:annotation>
+
+  <xs:element name="rss" type="rss"/>
 
   <xs:complexType name="rss">
     <xs:sequence>
-      <xs:element name="channel" type="thread:channel"/>
+      <xs:element name="channel" type="channel"/>
     </xs:sequence>
     <xs:attribute name="version" type="xs:string" use="required"/>
   </xs:complexType>
@@ -14,7 +22,7 @@
   <xs:complexType name="channel">
     <xs:sequence>
       <xs:element name="title" type="xs:string"/>
-      <xs:element name="image" type="thread:image" minOccurs="0"/>
+      <xs:element name="image" type="image" minOccurs="0"/>
       <xs:element name="description" type="xs:string"/>
       <xs:element name="language" type="xs:string"/>
       <xs:element name="pubDate" type="xs:string"/>

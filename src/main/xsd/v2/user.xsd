@@ -1,9 +1,17 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://www.boardgamegeek.com/common"
-  xmlns:user="http://www.boardgamegeek.com/user/v2" targetNamespace="http://www.boardgamegeek.com/user/v2">
+  xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" jaxb:version="3.0">
   <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
 
-  <xs:element name="user" type="user:user"/>
+  <xs:annotation>
+    <xs:appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="com.boardgamegeek.user.v2"/>
+      </jaxb:schemaBindings>
+    </xs:appinfo>
+  </xs:annotation>
+
+  <xs:element name="user" type="user"/>
 
   <xs:complexType name="user">
     <xs:sequence>
@@ -22,10 +30,10 @@
       <xs:element name="steamaccount" type="common:stringValue"/>
       <xs:element name="marketrating" type="common:integerValue"/>
       <xs:element name="traderating" type="common:integerValue"/>
-      <xs:element name="buddies" type="user:buddies" minOccurs="0"/>
-      <xs:element name="guilds" type="user:guilds" minOccurs="0"/>
-      <xs:element name="top" type="user:ranking" minOccurs="0"/>
-      <xs:element name="hot" type="user:ranking" minOccurs="0"/>
+      <xs:element name="buddies" type="buddies" minOccurs="0"/>
+      <xs:element name="guilds" type="guilds" minOccurs="0"/>
+      <xs:element name="top" type="ranking" minOccurs="0"/>
+      <xs:element name="hot" type="ranking" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="name" type="xs:string" use="required"/>
@@ -34,7 +42,7 @@
 
   <xs:complexType name="buddies">
     <xs:sequence>
-      <xs:element name="buddy" type="user:buddy" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="buddy" type="buddy" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="total" type="xs:nonNegativeInteger" use="required"/>
     <xs:attribute name="page" type="xs:positiveInteger" use="required"/>
@@ -47,7 +55,7 @@
 
   <xs:complexType name="guilds">
     <xs:sequence>
-      <xs:element name="guild" type="user:guild" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="guild" type="guild" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="total" type="xs:nonNegativeInteger" use="required"/>
     <xs:attribute name="page" type="xs:positiveInteger" use="required"/>
@@ -60,7 +68,7 @@
 
   <xs:complexType name="ranking">
     <xs:sequence>
-      <xs:element name="item" type="user:rankedItem" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="item" type="rankedItem" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="domain" type="xs:string" use="required"/>
   </xs:complexType>
