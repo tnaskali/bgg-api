@@ -1,6 +1,6 @@
 package li.naska.bgg.graphql.service;
 
-import com.boardgamegeek.collection.v2.Items;
+import com.boardgamegeek.xml.collection.v2.Items;
 import java.util.Optional;
 import li.naska.bgg.graphql.model.enums.CollectionStatus;
 import li.naska.bgg.graphql.model.enums.CollectionSubtype;

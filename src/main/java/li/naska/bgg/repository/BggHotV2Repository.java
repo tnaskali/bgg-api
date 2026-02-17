@@ -1,6 +1,6 @@
 package li.naska.bgg.repository;
 
-import com.boardgamegeek.hot.v2.Items;
+import com.boardgamegeek.xml.hot.v2.Items;
 import java.nio.charset.StandardCharsets;
 import li.naska.bgg.exception.UnexpectedBggResponseException;
 import li.naska.bgg.repository.model.BggHotV2QueryParams;

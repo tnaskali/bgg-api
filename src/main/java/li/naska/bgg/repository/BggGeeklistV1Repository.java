@@ -1,6 +1,6 @@
 package li.naska.bgg.repository;
 
-import com.boardgamegeek.geeklist.v1.Geeklist;
+import com.boardgamegeek.xml.geeklist.v1.Geeklist;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import li.naska.bgg.exception.BggResponseNotReadyException;

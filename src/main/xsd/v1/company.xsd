@@ -5,7 +5,7 @@
   <xs:annotation>
     <xs:appinfo>
       <jaxb:schemaBindings>
-        <jaxb:package name="com.boardgamegeek.company.v1"/>
+        <jaxb:package name="com.boardgamegeek.xml.company.v1"/>
       </jaxb:schemaBindings>
     </xs:appinfo>
   </xs:annotation>

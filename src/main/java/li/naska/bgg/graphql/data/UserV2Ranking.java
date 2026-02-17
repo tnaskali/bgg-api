@@ -1,6 +1,6 @@
 package li.naska.bgg.graphql.data;
 
-import com.boardgamegeek.user.v2.Ranking;
+import com.boardgamegeek.xml.user.v2.Ranking;
 
 public record UserV2Ranking(Ranking ranking) {
 

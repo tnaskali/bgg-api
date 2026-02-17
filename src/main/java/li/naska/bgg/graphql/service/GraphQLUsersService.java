@@ -1,6 +1,6 @@
 package li.naska.bgg.graphql.service;
 
-import com.boardgamegeek.user.v2.*;
+import com.boardgamegeek.xml.user.v2.*;
 import java.util.List;
 import li.naska.bgg.graphql.model.enums.Domain;
 import li.naska.bgg.repository.BggUserV2Repository;

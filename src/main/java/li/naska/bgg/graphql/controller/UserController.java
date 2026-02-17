@@ -1,7 +1,5 @@
 package li.naska.bgg.graphql.controller;
 
-import com.boardgamegeek.common.IntegerValue;
-import com.boardgamegeek.common.StringValue;
 import graphql.schema.DataFetchingEnvironment;
 import java.time.LocalDate;
 import java.util.List;
@@ -13,6 +11,8 @@ import li.naska.bgg.graphql.pagination.ListPageDataFetcher;
 import li.naska.bgg.graphql.pagination.Page;
 import li.naska.bgg.graphql.service.GraphQLCollectionService;
 import li.naska.bgg.graphql.service.GraphQLUsersService;
+import li.naska.bgg.xml.common.IntegerValue;
+import li.naska.bgg.xml.common.StringValue;
 import org.dataloader.DataLoader;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
@@ -164,7 +164,7 @@ public class UserController {
     return Mono.fromFuture(loader.load(user.username()))
         .map(UserV2Guilds::guilds)
         .map(data -> data.stream()
-            .map(com.boardgamegeek.user.v2.Guild::getId)
+            .map(com.boardgamegeek.xml.user.v2.Guild::getId)
             .map(Guild::new)
             .toList());
   }
