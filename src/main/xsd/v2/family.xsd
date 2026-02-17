@@ -1,12 +1,20 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:family="http://www.boardgamegeek.com/family/v2"
-  targetNamespace="http://www.boardgamegeek.com/family/v2">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
+  jaxb:version="3.0">
 
-  <xs:element name="items" type="family:families"/>
+  <xs:annotation>
+    <xs:appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="com.boardgamegeek.xml.family.v2"/>
+      </jaxb:schemaBindings>
+    </xs:appinfo>
+  </xs:annotation>
+
+  <xs:element name="items" type="families"/>
 
   <xs:complexType name="families">
     <xs:sequence>
-      <xs:element name="item" type="family:family" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="item" type="family" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
@@ -15,9 +23,9 @@
     <xs:sequence>
       <xs:element name="thumbnail" type="xs:anyURI"/>
       <xs:element name="image" type="xs:anyURI"/>
-      <xs:element name="name" type="family:name" maxOccurs="unbounded"/>
+      <xs:element name="name" type="name" maxOccurs="unbounded"/>
       <xs:element name="description" type="xs:string"/>
-      <xs:element name="link" type="family:link" maxOccurs="unbounded"/>
+      <xs:element name="link" type="link" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>

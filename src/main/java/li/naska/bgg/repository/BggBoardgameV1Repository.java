@@ -1,6 +1,6 @@
 package li.naska.bgg.repository;
 
-import com.boardgamegeek.boardgame.v1.Boardgames;
+import com.boardgamegeek.xml.boardgame.v1.Boardgames;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Set;

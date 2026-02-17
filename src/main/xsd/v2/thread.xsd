@@ -1,13 +1,21 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:thread="http://www.boardgamegeek.com/thread/v2"
-  targetNamespace="http://www.boardgamegeek.com/thread/v2">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb"
+  jaxb:version="3.0">
 
-  <xs:element name="thread" type="thread:thread"/>
+  <xs:annotation>
+    <xs:appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="com.boardgamegeek.xml.thread.v2"/>
+      </jaxb:schemaBindings>
+    </xs:appinfo>
+  </xs:annotation>
+
+  <xs:element name="thread" type="thread"/>
 
   <xs:complexType name="thread">
     <xs:sequence>
       <xs:element name="subject" type="xs:string"/>
-      <xs:element name="articles" type="thread:articles" minOccurs="0"/>
+      <xs:element name="articles" type="articles" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="numarticles" type="xs:integer" use="required"/>
@@ -17,7 +25,7 @@
 
   <xs:complexType name="articles">
     <xs:sequence>
-      <xs:element name="article" type="thread:article" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="article" type="article" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 

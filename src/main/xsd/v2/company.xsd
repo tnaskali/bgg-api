@@ -1,13 +1,21 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://www.boardgamegeek.com/common"
-  xmlns:company="http://www.boardgamegeek.com/company/v2" targetNamespace="http://www.boardgamegeek.com/company/v2">
-  <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://bgg.naska.li/xml/common"
+  xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" jaxb:version="3.0">
+  <xs:import schemaLocation="../common.xsd" namespace="http://bgg.naska.li/xml/common"/>
 
-  <xs:element name="items" type="company:companies"/>
+  <xs:annotation>
+    <xs:appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="com.boardgamegeek.xml.company.v2"/>
+      </jaxb:schemaBindings>
+    </xs:appinfo>
+  </xs:annotation>
+
+  <xs:element name="items" type="companies"/>
 
   <xs:complexType name="companies">
     <xs:sequence>
-      <xs:element name="item" type="company:company" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="item" type="company" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
@@ -16,12 +24,12 @@
     <xs:sequence>
       <xs:element name="thumbnail" type="xs:anyURI"/>
       <xs:element name="image" type="xs:anyURI"/>
-      <xs:element name="name" type="company:name" maxOccurs="unbounded"/>
+      <xs:element name="name" type="name" maxOccurs="unbounded"/>
       <xs:element name="description" type="xs:string"/>
-      <xs:element name="link" type="company:link" maxOccurs="unbounded"/>
-      <xs:element name="videos" type="company:videos" minOccurs="0"/>
-      <xs:element name="versions" type="company:versions"/>
-      <xs:element name="statistics" type="company:statistics"/>
+      <xs:element name="link" type="link" maxOccurs="unbounded"/>
+      <xs:element name="videos" type="videos" minOccurs="0"/>
+      <xs:element name="versions" type="versions"/>
+      <xs:element name="statistics" type="statistics"/>
     </xs:sequence>
     <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
@@ -53,14 +61,14 @@
 
   <xs:complexType name="videos">
     <xs:sequence>
-      <xs:element name="video" type="company:video" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="video" type="video" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="total" type="xs:integer" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="versions">
     <xs:sequence>
-      <xs:element name="item" type="company:version" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="item" type="version" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -68,8 +76,8 @@
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element name="thumbnail" type="xs:anyURI"/>
       <xs:element name="image" type="xs:anyURI"/>
-      <xs:element name="name" type="company:name"/>
-      <xs:element name="link" type="company:versionLink"/>
+      <xs:element name="name" type="name"/>
+      <xs:element name="link" type="versionLink"/>
       <xs:element name="yearpublished" type="common:integerValue"/>
       <xs:element name="productcode" type="common:stringValue"/>
       <xs:element name="width" type="common:decimalValue"/>
@@ -90,7 +98,7 @@
 
   <xs:complexType name="statistics">
     <xs:sequence>
-      <xs:element name="ratings" type="company:ratings" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="ratings" type="ratings" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="page" type="xs:string" use="required"/>
   </xs:complexType>
@@ -100,7 +108,7 @@
       <xs:element name="usersrated" type="common:integerValue"/>
       <xs:element name="average" type="common:decimalValue"/>
       <xs:element name="bayesaverage" type="common:decimalValue"/>
-      <xs:element name="ranks" type="company:ranks" minOccurs="0"/>
+      <xs:element name="ranks" type="ranks" minOccurs="0"/>
       <xs:element name="stddev" type="common:decimalValue"/>
       <xs:element name="median" type="common:decimalValue"/>
       <xs:element name="owned" type="common:integerValue"/>
@@ -116,7 +124,7 @@
 
   <xs:complexType name="ranks">
     <xs:sequence>
-      <xs:element name="rank" type="company:rank" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="rank" type="rank" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 

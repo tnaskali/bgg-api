@@ -18,26 +18,27 @@ public class JaxbConfiguration {
   static class JaxbRuntimeHints implements RuntimeHintsRegistrar {
 
     private static final String[] JAXB_MODEL_PACKAGES = {
-      "com.boardgamegeek.boardgame.v1",
-      "com.boardgamegeek.collection.v1",
-      "com.boardgamegeek.company.v1",
-      "com.boardgamegeek.geeklist.v1",
-      "com.boardgamegeek.person.v1",
-      "com.boardgamegeek.search.v1",
-      "com.boardgamegeek.collection.v2",
-      "com.boardgamegeek.company.v2",
-      "com.boardgamegeek.family.v2",
-      "com.boardgamegeek.forum.v2",
-      "com.boardgamegeek.forumlist.v2",
-      "com.boardgamegeek.guild.v2",
-      "com.boardgamegeek.hot.v2",
-      "com.boardgamegeek.person.v2",
-      "com.boardgamegeek.plays.v2",
-      "com.boardgamegeek.search.v2",
-      "com.boardgamegeek.thing.v2",
-      "com.boardgamegeek.thread.v2",
-      "com.boardgamegeek.user.v2",
-      "com.boardgamegeek.common"
+      "com.boardgamegeek.xml.boardgame.v1",
+      "com.boardgamegeek.xml.collection.v1",
+      "com.boardgamegeek.xml.company.v1",
+      "com.boardgamegeek.xml.geeklist.v1",
+      "com.boardgamegeek.xml.person.v1",
+      "com.boardgamegeek.xml.search.v1",
+      "com.boardgamegeek.xml.thread.v1",
+      "com.boardgamegeek.xml.collection.v2",
+      "com.boardgamegeek.xml.company.v2",
+      "com.boardgamegeek.xml.family.v2",
+      "com.boardgamegeek.xml.forum.v2",
+      "com.boardgamegeek.xml.forumlist.v2",
+      "com.boardgamegeek.xml.guild.v2",
+      "com.boardgamegeek.xml.hot.v2",
+      "com.boardgamegeek.xml.person.v2",
+      "com.boardgamegeek.xml.plays.v2",
+      "com.boardgamegeek.xml.search.v2",
+      "com.boardgamegeek.xml.thing.v2",
+      "com.boardgamegeek.xml.thread.v2",
+      "com.boardgamegeek.xml.user.v2",
+      "li.naska.bgg.xml.common"
     };
 
     private static final String[] JAXB_REFLECTION_CLASSES = {

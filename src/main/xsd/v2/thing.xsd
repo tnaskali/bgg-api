@@ -1,13 +1,21 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://www.boardgamegeek.com/common"
-  xmlns:thing="http://www.boardgamegeek.com/thing/v2" targetNamespace="http://www.boardgamegeek.com/thing/v2">
-  <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://bgg.naska.li/xml/common"
+  xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" jaxb:version="3.0">
+  <xs:import schemaLocation="../common.xsd" namespace="http://bgg.naska.li/xml/common"/>
 
-  <xs:element name="items" type="thing:items"/>
+  <xs:annotation>
+    <xs:appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="com.boardgamegeek.xml.thing.v2"/>
+      </jaxb:schemaBindings>
+    </xs:appinfo>
+  </xs:annotation>
+
+  <xs:element name="items" type="items"/>
 
   <xs:complexType name="items">
     <xs:sequence>
-      <xs:element name="item" type="thing:item" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="item" type="item" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
   </xs:complexType>
@@ -16,7 +24,7 @@
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element name="thumbnail" type="xs:anyURI"/>
       <xs:element name="image" type="xs:anyURI"/>
-      <xs:element name="name" type="thing:name"/>
+      <xs:element name="name" type="name"/>
       <xs:element name="description" type="xs:string"/>
       <xs:element name="yearpublished" type="common:integerValue"/>
       <xs:element name="datepublished" type="common:stringValue"/>
@@ -24,18 +32,18 @@
       <xs:element name="minplayers" type="common:integerValue"/>
       <xs:element name="maxplayers" type="common:integerValue"/>
       <xs:element name="releasedate" type="common:localDateValue"/>
-      <xs:element name="link" type="thing:link"/>
+      <xs:element name="link" type="link"/>
       <xs:element name="seriescode" type="common:stringValue"/>
-      <xs:element name="poll" type="thing:poll"/>
+      <xs:element name="poll" type="poll"/>
       <xs:element name="playingtime" type="common:integerValue"/>
       <xs:element name="minplaytime" type="common:integerValue"/>
       <xs:element name="maxplaytime" type="common:integerValue"/>
       <xs:element name="minage" type="common:integerValue"/>
-      <xs:element name="videos" type="thing:videos"/>
-      <xs:element name="versions" type="thing:versions"/>
-      <xs:element name="comments" type="thing:comments"/>
-      <xs:element name="statistics" type="thing:statistics"/>
-      <xs:element name="marketplacelistings" type="thing:marketplacelistings"/>
+      <xs:element name="videos" type="videos"/>
+      <xs:element name="versions" type="versions"/>
+      <xs:element name="comments" type="comments"/>
+      <xs:element name="statistics" type="statistics"/>
+      <xs:element name="marketplacelistings" type="marketplacelistings"/>
     </xs:choice>
     <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
@@ -56,7 +64,7 @@
 
   <xs:complexType name="poll">
     <xs:sequence>
-      <xs:element name="results" type="thing:results" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="results" type="results" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="title" type="xs:string" use="required"/>
@@ -65,7 +73,7 @@
 
   <xs:complexType name="results">
     <xs:sequence>
-      <xs:element name="result" type="thing:result" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="result" type="result" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="numplayers" type="xs:string"/>
   </xs:complexType>
@@ -78,7 +86,7 @@
 
   <xs:complexType name="videos">
     <xs:sequence>
-      <xs:element name="video" type="thing:video" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="video" type="video" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="total" type="xs:integer" use="required"/>
   </xs:complexType>
@@ -96,7 +104,7 @@
 
   <xs:complexType name="versions">
     <xs:sequence>
-      <xs:element name="item" type="thing:version" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="item" type="version" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -105,9 +113,9 @@
       <xs:element name="thumbnail" type="xs:anyURI"/>
       <xs:element name="image" type="xs:anyURI"/>
       <xs:element name="canonicalname" type="common:stringValue"/>
-      <xs:element name="name" type="thing:name"/>
+      <xs:element name="name" type="name"/>
       <xs:element name="yearpublished" type="common:integerValue"/>
-      <xs:element name="link" type="thing:versionLink"/>
+      <xs:element name="link" type="versionLink"/>
       <xs:element name="productcode" type="common:stringValue"/>
       <xs:element name="width" type="common:decimalValue"/>
       <xs:element name="length" type="common:decimalValue"/>
@@ -127,7 +135,7 @@
 
   <xs:complexType name="comments">
     <xs:sequence>
-      <xs:element name="comment" type="thing:comment" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="comment" type="comment" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="page" type="xs:string" use="required"/>
     <xs:attribute name="totalitems" type="xs:integer" use="required"/>
@@ -141,7 +149,7 @@
 
   <xs:complexType name="statistics">
     <xs:sequence>
-      <xs:element name="ratings" type="thing:ratings" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="ratings" type="ratings" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="page" type="xs:string" use="required"/>
   </xs:complexType>
@@ -151,7 +159,7 @@
       <xs:element name="usersrated" type="common:integerValue"/>
       <xs:element name="average" type="common:decimalValue"/>
       <xs:element name="bayesaverage" type="common:decimalValue"/>
-      <xs:element name="ranks" type="thing:ranks" minOccurs="0"/>
+      <xs:element name="ranks" type="ranks" minOccurs="0"/>
       <xs:element name="stddev" type="common:decimalValue"/>
       <xs:element name="median" type="common:decimalValue"/>
       <xs:element name="owned" type="common:integerValue"/>
@@ -167,7 +175,7 @@
 
   <xs:complexType name="ranks">
     <xs:sequence>
-      <xs:element name="rank" type="thing:rank" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="rank" type="rank" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -182,17 +190,17 @@
 
   <xs:complexType name="marketplacelistings">
     <xs:sequence>
-      <xs:element name="listing" type="thing:listing" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="listing" type="listing" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="listing">
     <xs:sequence>
       <xs:element name="listdate" type="common:rfcZonedDateTimeValue"/>
-      <xs:element name="price" type="thing:listingPrice"/>
+      <xs:element name="price" type="listingPrice"/>
       <xs:element name="condition" type="common:stringValue"/>
       <xs:element name="notes" type="common:stringValue"/>
-      <xs:element name="link" type="thing:listingLink"/>
+      <xs:element name="link" type="listingLink"/>
     </xs:sequence>
   </xs:complexType>
 

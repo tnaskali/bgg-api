@@ -1,14 +1,21 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://www.boardgamegeek.com/common"
-  xmlns:forumlist="http://www.boardgamegeek.com/forumlist/v2"
-  targetNamespace="http://www.boardgamegeek.com/forumlist/v2">
-  <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://bgg.naska.li/xml/common"
+  xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" jaxb:version="3.0">
+  <xs:import schemaLocation="../common.xsd" namespace="http://bgg.naska.li/xml/common"/>
 
-  <xs:element name="forums" type="forumlist:forums"/>
+  <xs:annotation>
+    <xs:appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="com.boardgamegeek.xml.forumlist.v2"/>
+      </jaxb:schemaBindings>
+    </xs:appinfo>
+  </xs:annotation>
+
+  <xs:element name="forums" type="forums"/>
 
   <xs:complexType name="forums">
     <xs:sequence>
-      <xs:element name="forum" type="forumlist:forum" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="forum" type="forum" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>

@@ -1,9 +1,17 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://www.boardgamegeek.com/common"
-  xmlns:geeklist="http://www.boardgamegeek.com/geeklist/v1" targetNamespace="http://www.boardgamegeek.com/geeklist/v1">
-  <xs:import schemaLocation="../common.xsd" namespace="http://www.boardgamegeek.com/common"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://bgg.naska.li/xml/common"
+  xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" jaxb:version="3.0">
+  <xs:import schemaLocation="../common.xsd" namespace="http://bgg.naska.li/xml/common"/>
 
-  <xs:element name="geeklist" type="geeklist:geeklist"/>
+  <xs:annotation>
+    <xs:appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="com.boardgamegeek.xml.geeklist.v1"/>
+      </jaxb:schemaBindings>
+    </xs:appinfo>
+  </xs:annotation>
+
+  <xs:element name="geeklist" type="geeklist"/>
 
   <xs:complexType name="geeklist">
     <xs:sequence>
@@ -16,8 +24,8 @@
       <xs:element name="username" type="xs:string"/>
       <xs:element name="title" type="xs:string"/>
       <xs:element name="description" type="xs:string"/>
-      <xs:element name="comment" type="geeklist:comment" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="item" type="geeklist:item" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="comment" type="comment" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="item" type="item" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:nonNegativeInteger" use="required"/>
     <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
@@ -38,7 +46,7 @@
   <xs:complexType name="item">
     <xs:sequence>
       <xs:element name="body" type="xs:string"/>
-      <xs:element name="comment" type="geeklist:comment" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="comment" type="comment" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="id" type="xs:nonNegativeInteger" use="required"/>
     <xs:attribute name="objecttype" type="xs:string" use="required"/>

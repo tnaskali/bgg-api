@@ -1,6 +1,14 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://www.boardgamegeek.com/common"
-  targetNamespace="http://www.boardgamegeek.com/common">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://bgg.naska.li/xml/common"
+  xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" jaxb:version="3.0" targetNamespace="http://bgg.naska.li/xml/common">
+
+  <xs:annotation>
+    <xs:appinfo>
+      <jaxb:schemaBindings>
+        <jaxb:package name="li.naska.bgg.xml.common"/>
+      </jaxb:schemaBindings>
+    </xs:appinfo>
+  </xs:annotation>
 
   <xs:simpleType name="optionalInteger">
     <xs:restriction base="xs:string">
