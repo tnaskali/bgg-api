@@ -144,14 +144,6 @@ public class UserController {
   }
 
   @SchemaMapping
-  public Mono<Integer> marketrating(User user, DataLoader<String, UserV2> loader) {
-    return Mono.fromFuture(loader.load(user.username()))
-        .mapNotNull(data -> data.user().getMarketrating())
-        .map(IntegerValue::getValue)
-        .filter(value -> value != 0);
-  }
-
-  @SchemaMapping
   public Mono<Integer> traderating(User user, DataLoader<String, UserV2> loader) {
     return Mono.fromFuture(loader.load(user.username()))
         .mapNotNull(data -> data.user().getTraderating())

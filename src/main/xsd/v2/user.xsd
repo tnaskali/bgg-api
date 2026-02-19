@@ -19,7 +19,6 @@
       <xs:element name="psnaccount" type="common:stringValue"/>
       <xs:element name="battlenetaccount" type="common:stringValue"/>
       <xs:element name="steamaccount" type="common:stringValue"/>
-      <xs:element name="marketrating" type="common:integerValue"/>
       <xs:element name="traderating" type="common:integerValue"/>
       <xs:element name="buddies" type="buddies" minOccurs="0"/>
       <xs:element name="guilds" type="guilds" minOccurs="0"/>

@@ -34,7 +34,6 @@ type User {
     psnaccount: String
     battlenetaccount: String
     steamaccount: String
-    marketrating: Int
     traderating: Int
     guilds: [Guild!]
     buddies: [User!]

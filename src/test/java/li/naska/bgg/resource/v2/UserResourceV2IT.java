@@ -64,7 +64,6 @@ public class UserResourceV2IT extends AbstractMockServerIT {
               <battlenetaccount value="" />
               <steamaccount value="" />
               <traderating value="0" />
-              <marketrating value="0" />
           </user>
           """;
 
