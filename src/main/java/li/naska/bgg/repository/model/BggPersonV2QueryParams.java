@@ -55,6 +55,17 @@ public class BggPersonV2QueryParams {
   @Min(1)
   @Max(1)
   @Parameter(example = "1", description = """
+          Returns version info for the person.
+          <p>
+          <i>Syntax</i> : /person?id={ids}&versions=1
+          <p>
+          <i>Example</i> : /person?id=153580&versions=1
+          """)
+  private Integer versions;
+
+  @Min(1)
+  @Max(1)
+  @Parameter(example = "1", description = """
           Returns videos for the person.
           <p>
           <i>Syntax</i> : /person?id={ids}&videos=1
@@ -62,4 +73,15 @@ public class BggPersonV2QueryParams {
           <i>Example</i> : /person?id=153580&videos=1
           """)
   private Integer videos;
+
+  @Min(1)
+  @Max(1)
+  @Parameter(example = "1", description = """
+          Returns ranking and rating stats for the person.
+          <p>
+          <i>Syntax</i> : /person?id={ids}&stats=1
+          <p>
+          <i>Example</i> : /person?id=153580&stats=1
+          """)
+  private Integer stats;
 }
