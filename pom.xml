@@ -524,7 +524,7 @@
                   <source>${project.basedir}/src/main/xsd/v2/search.xsd</source>
                 </sources>
                 <xjbSources>
-                  <xjbSource>${project.basedir}/src/main/xjb-bindings/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/common.xjb</xjbSource>
                   <xjbSource>${project.basedir}/src/main/xjb-bindings/v2/search.xjb</xjbSource>
                 </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
