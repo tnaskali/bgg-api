@@ -26,6 +26,7 @@
       <xs:element name="link" type="link"/>
       <xs:element name="seriescode" type="common:stringValue"/>
       <xs:element name="poll" type="poll"/>
+      <xs:element name="poll-summary" type="pollSummary"/>
       <xs:element name="playingtime" type="common:integerValue"/>
       <xs:element name="minplaytime" type="common:integerValue"/>
       <xs:element name="maxplaytime" type="common:integerValue"/>
@@ -64,15 +65,28 @@
 
   <xs:complexType name="results">
     <xs:sequence>
-      <xs:element name="result" type="result" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="result" type="pollResult" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="numplayers" type="xs:string"/>
   </xs:complexType>
 
-  <xs:complexType name="result">
+  <xs:complexType name="pollResult">
     <xs:attribute name="value" type="xs:string" use="required"/>
     <xs:attribute name="numvotes" type="xs:integer" use="required"/>
     <xs:attribute name="level" type="xs:integer"/>
+  </xs:complexType>
+
+  <xs:complexType name="pollSummary">
+    <xs:sequence>
+      <xs:element name="result" type="pollSummaryResult" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="title" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="pollSummaryResult">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="videos">
