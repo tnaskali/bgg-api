@@ -189,8 +189,8 @@
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="friendlyname" type="xs:string" use="required"/>
-    <xs:attribute name="value" type="xs:integer" use="required"/>
-    <xs:attribute name="bayesaverage" type="xs:decimal" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="bayesaverage" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="marketplacelistings">

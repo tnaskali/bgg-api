@@ -412,7 +412,7 @@
                   <source>${project.basedir}/src/main/xsd/v2/family.xsd</source>
                 </sources>
                 <xjbSources>
-                  <xjbSource>${project.basedir}/src/main/xjb-bindings/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/common.xjb</xjbSource>
                   <xjbSource>${project.basedir}/src/main/xjb-bindings/v2/family.xjb</xjbSource>
                 </xjbSources>
                 <clearOutputDir>false</clearOutputDir>

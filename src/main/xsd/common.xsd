@@ -71,8 +71,16 @@
     <xs:attribute name="value" type="xs:integer" use="required"/>
   </xs:complexType>
 
+  <xs:complexType name="optionalIntegerValue">
+    <xs:attribute name="value" type="common:optionalInteger" use="required"/>
+  </xs:complexType>
+
   <xs:complexType name="decimalValue">
     <xs:attribute name="value" type="xs:decimal" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="optionalDecimalValue">
+    <xs:attribute name="value" type="common:optionalDecimal" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="stringValue">
