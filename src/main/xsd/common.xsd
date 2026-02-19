@@ -58,6 +58,15 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="optionalRfcZonedDateTime">
+    <xs:restriction base="xs:string">
+      <!-- Wed, 01 Apr 2020 19:50:39 +0000 or empty string -->
+      <xs:pattern
+        value="((Mon|Tue|Wed|Thu|Fri|Sat|Sun), (0[1-9]|[12]\d|3[01]) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) [1-9]\d{3} ([01]\d|2[0-3]):[0-5]\d:[0-5]\d [+-]([01]\d|2[0-3])[0-5]\d|)"/>
+      <xs:maxLength value="31"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:complexType name="integerValue">
     <xs:attribute name="value" type="xs:integer" use="required"/>
   </xs:complexType>

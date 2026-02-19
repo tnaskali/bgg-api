@@ -24,6 +24,8 @@
       adapter="li.naska.bgg.util.StringToZonedDateTimeAdapter"/>
     <xjc:javaType name="java.time.ZonedDateTime" xmlType="common:rfcZonedDateTime"
       adapter="li.naska.bgg.util.RfcStringToZonedDateTimeAdapter"/>
+    <xjc:javaType name="java.time.ZonedDateTime" xmlType="common:optionalRfcZonedDateTime"
+      adapter="li.naska.bgg.util.OptionalRfcStringToZonedDateTimeAdapter"/>
   </jaxb:globalBindings>
 
 </jaxb:bindings>
