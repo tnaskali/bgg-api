@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<jaxb:bindings xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" jaxb:version="3.0">
+
+  <jaxb:bindings schemaLocation="../../xsd/v2/person.xsd">
+    <jaxb:schemaBindings>
+      <jaxb:package name="com.boardgamegeek.xml.person.v2"/>
+    </jaxb:schemaBindings>
+  </jaxb:bindings>
+
+</jaxb:bindings>

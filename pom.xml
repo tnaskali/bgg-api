@@ -267,6 +267,10 @@
                 <sources>
                   <source>${project.basedir}/src/main/xsd/v1/boardgame.xsd</source>
                 </sources>
+                <xjbSources>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v1/boardgame.xjb</xjbSource>
+                </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
             </execution>
@@ -280,7 +284,8 @@
                   <source>${project.basedir}/src/main/xsd/v1/collection.xsd</source>
                 </sources>
                 <xjbSources>
-                  <xjbSource>${project.basedir}/src/main/xjb-common/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/common.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v1/collection.xjb</xjbSource>
                 </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
@@ -294,6 +299,10 @@
                 <sources>
                   <source>${project.basedir}/src/main/xsd/v1/company.xsd</source>
                 </sources>
+                <xjbSources>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v1/company.xjb</xjbSource>
+                </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
             </execution>
@@ -307,7 +316,8 @@
                   <source>${project.basedir}/src/main/xsd/v1/geeklist.xsd</source>
                 </sources>
                 <xjbSources>
-                  <xjbSource>${project.basedir}/src/main/xjb-common/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/common.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v1/geeklist.xjb</xjbSource>
                 </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
@@ -321,6 +331,10 @@
                 <sources>
                   <source>${project.basedir}/src/main/xsd/v1/person.xsd</source>
                 </sources>
+                <xjbSources>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v1/person.xjb</xjbSource>
+                </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
             </execution>
@@ -333,6 +347,10 @@
                 <sources>
                   <source>${project.basedir}/src/main/xsd/v1/search.xsd</source>
                 </sources>
+                <xjbSources>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v1/search.xjb</xjbSource>
+                </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
             </execution>
@@ -345,6 +363,10 @@
                 <sources>
                   <source>${project.basedir}/src/main/xsd/v1/thread.xsd</source>
                 </sources>
+                <xjbSources>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v1/thread.xjb</xjbSource>
+                </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
             </execution>
@@ -358,7 +380,8 @@
                   <source>${project.basedir}/src/main/xsd/v2/collection.xsd</source>
                 </sources>
                 <xjbSources>
-                  <xjbSource>${project.basedir}/src/main/xjb-common/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/common.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v2/collection.xjb</xjbSource>
                 </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
@@ -373,7 +396,8 @@
                   <source>${project.basedir}/src/main/xsd/v2/company.xsd</source>
                 </sources>
                 <xjbSources>
-                  <xjbSource>${project.basedir}/src/main/xjb-common/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/common.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v2/company.xjb</xjbSource>
                 </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
@@ -387,6 +411,10 @@
                 <sources>
                   <source>${project.basedir}/src/main/xsd/v2/family.xsd</source>
                 </sources>
+                <xjbSources>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v2/family.xjb</xjbSource>
+                </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
             </execution>
@@ -400,7 +428,8 @@
                   <source>${project.basedir}/src/main/xsd/v2/forum.xsd</source>
                 </sources>
                 <xjbSources>
-                  <xjbSource>${project.basedir}/src/main/xjb-common/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/common.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v2/forum.xjb</xjbSource>
                 </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
@@ -415,7 +444,8 @@
                   <source>${project.basedir}/src/main/xsd/v2/forumlist.xsd</source>
                 </sources>
                 <xjbSources>
-                  <xjbSource>${project.basedir}/src/main/xjb-common/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/common.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v2/forumlist.xjb</xjbSource>
                 </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
@@ -430,7 +460,8 @@
                   <source>${project.basedir}/src/main/xsd/v2/guild.xsd</source>
                 </sources>
                 <xjbSources>
-                  <xjbSource>${project.basedir}/src/main/xjb-common/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/common.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v2/guild.xjb</xjbSource>
                 </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
@@ -445,7 +476,8 @@
                   <source>${project.basedir}/src/main/xsd/v2/hot.xsd</source>
                 </sources>
                 <xjbSources>
-                  <xjbSource>${project.basedir}/src/main/xjb-common/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/common.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v2/hot.xjb</xjbSource>
                 </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
@@ -460,7 +492,8 @@
                   <source>${project.basedir}/src/main/xsd/v2/person.xsd</source>
                 </sources>
                 <xjbSources>
-                  <xjbSource>${project.basedir}/src/main/xjb-common/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/common.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v2/person.xjb</xjbSource>
                 </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
@@ -475,7 +508,8 @@
                   <source>${project.basedir}/src/main/xsd/v2/plays.xsd</source>
                 </sources>
                 <xjbSources>
-                  <xjbSource>${project.basedir}/src/main/xjb-common/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/common.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v2/plays.xjb</xjbSource>
                 </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
@@ -489,6 +523,10 @@
                 <sources>
                   <source>${project.basedir}/src/main/xsd/v2/search.xsd</source>
                 </sources>
+                <xjbSources>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v2/search.xjb</xjbSource>
+                </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
             </execution>
@@ -502,7 +540,8 @@
                   <source>${project.basedir}/src/main/xsd/v2/thing.xsd</source>
                 </sources>
                 <xjbSources>
-                  <xjbSource>${project.basedir}/src/main/xjb-common/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/common.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v2/thing.xjb</xjbSource>
                 </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
@@ -516,11 +555,15 @@
                 <sources>
                   <source>${project.basedir}/src/main/xsd/v2/thread.xsd</source>
                 </sources>
+                <xjbSources>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v2/thread.xjb</xjbSource>
+                </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>
             </execution>
             <execution>
-              <id>xjc-user-v2</id>
+              <id>xjc-user</id>
               <goals>
                 <goal>xjc</goal>
               </goals>
@@ -529,7 +572,8 @@
                   <source>${project.basedir}/src/main/xsd/v2/user.xsd</source>
                 </sources>
                 <xjbSources>
-                  <xjbSource>${project.basedir}/src/main/xjb-common/global.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/common.xjb</xjbSource>
+                  <xjbSource>${project.basedir}/src/main/xjb-bindings/v2/user.xjb</xjbSource>
                 </xjbSources>
                 <clearOutputDir>false</clearOutputDir>
               </configuration>

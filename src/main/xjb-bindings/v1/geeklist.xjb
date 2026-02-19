@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<jaxb:bindings xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" jaxb:version="3.0">
+
+  <jaxb:bindings schemaLocation="../../xsd/v1/geeklist.xsd">
+    <jaxb:schemaBindings>
+      <jaxb:package name="com.boardgamegeek.xml.geeklist.v1"/>
+    </jaxb:schemaBindings>
+  </jaxb:bindings>
+
+</jaxb:bindings>
