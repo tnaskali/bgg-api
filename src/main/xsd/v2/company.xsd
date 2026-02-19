@@ -13,14 +13,14 @@
 
   <xs:complexType name="company">
     <xs:sequence>
-      <xs:element name="thumbnail" type="xs:anyURI"/>
-      <xs:element name="image" type="xs:anyURI"/>
+      <xs:element name="thumbnail" type="xs:anyURI" minOccurs="0"/>
+      <xs:element name="image" type="xs:anyURI" minOccurs="0"/>
       <xs:element name="name" type="name" maxOccurs="unbounded"/>
-      <xs:element name="description" type="xs:string"/>
-      <xs:element name="link" type="link" maxOccurs="unbounded"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="link" type="link" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="videos" type="videos" minOccurs="0"/>
-      <xs:element name="versions" type="versions"/>
-      <xs:element name="statistics" type="statistics"/>
+      <xs:element name="versions" type="versions" minOccurs="0"/>
+      <xs:element name="statistics" type="statistics" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="id" type="xs:integer" use="required"/>
@@ -39,6 +39,13 @@
     <xs:attribute name="inbound" type="xs:boolean"/>
   </xs:complexType>
 
+  <xs:complexType name="videos">
+    <xs:sequence>
+      <xs:element name="video" type="video" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="total" type="xs:integer" use="required"/>
+  </xs:complexType>
+
   <xs:complexType name="video">
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="title" type="xs:string" use="required"/>
@@ -48,13 +55,6 @@
     <xs:attribute name="username" type="xs:string" use="required"/>
     <xs:attribute name="userid" type="xs:integer" use="required"/>
     <xs:attribute name="postdate" type="common:zonedDateTime" use="required"/>
-  </xs:complexType>
-
-  <xs:complexType name="videos">
-    <xs:sequence>
-      <xs:element name="video" type="video" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
-    <xs:attribute name="total" type="xs:integer" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="versions">
@@ -67,8 +67,10 @@
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element name="thumbnail" type="xs:anyURI"/>
       <xs:element name="image" type="xs:anyURI"/>
-      <xs:element name="name" type="name"/>
+      <xs:element name="canonicalname" type="common:stringValue" minOccurs="0"/>
       <xs:element name="link" type="versionLink"/>
+      <xs:element name="name" type="name"/>
+      <xs:element name="releasedate" type="common:stringValue"/>
       <xs:element name="yearpublished" type="common:integerValue"/>
       <xs:element name="productcode" type="common:stringValue"/>
       <xs:element name="width" type="common:decimalValue"/>
@@ -96,19 +98,19 @@
 
   <xs:complexType name="ratings">
     <xs:sequence>
-      <xs:element name="usersrated" type="common:integerValue"/>
-      <xs:element name="average" type="common:decimalValue"/>
-      <xs:element name="bayesaverage" type="common:decimalValue"/>
+      <xs:element name="usersrated" type="common:optionalIntegerValue"/>
+      <xs:element name="average" type="common:optionalDecimalValue"/>
+      <xs:element name="bayesaverage" type="common:optionalDecimalValue"/>
       <xs:element name="ranks" type="ranks" minOccurs="0"/>
-      <xs:element name="stddev" type="common:decimalValue"/>
-      <xs:element name="median" type="common:decimalValue"/>
-      <xs:element name="owned" type="common:integerValue"/>
-      <xs:element name="trading" type="common:integerValue"/>
-      <xs:element name="wanting" type="common:integerValue"/>
-      <xs:element name="wishing" type="common:integerValue"/>
-      <xs:element name="numcomments" type="common:integerValue"/>
-      <xs:element name="numweights" type="common:integerValue"/>
-      <xs:element name="averageweight" type="common:decimalValue"/>
+      <xs:element name="stddev" type="common:optionalDecimalValue"/>
+      <xs:element name="median" type="common:optionalDecimalValue"/>
+      <xs:element name="owned" type="common:optionalIntegerValue"/>
+      <xs:element name="trading" type="common:optionalIntegerValue"/>
+      <xs:element name="wanting" type="common:optionalIntegerValue"/>
+      <xs:element name="wishing" type="common:optionalIntegerValue"/>
+      <xs:element name="numcomments" type="common:optionalIntegerValue"/>
+      <xs:element name="numweights" type="common:optionalIntegerValue"/>
+      <xs:element name="averageweight" type="common:optionalDecimalValue"/>
     </xs:sequence>
     <xs:attribute name="date" type="common:localDate"/>
   </xs:complexType>
@@ -124,8 +126,8 @@
     <xs:attribute name="id" type="xs:integer" use="required"/>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="friendlyname" type="xs:string" use="required"/>
-    <xs:attribute name="value" type="xs:integer" use="required"/>
-    <xs:attribute name="bayesaverage" type="xs:decimal" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="bayesaverage" type="xs:string" use="required"/>
   </xs:complexType>
 
 </xs:schema>
