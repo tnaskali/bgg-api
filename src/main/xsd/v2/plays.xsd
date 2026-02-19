@@ -8,8 +8,8 @@
     <xs:sequence>
       <xs:element name="play" type="play" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="username" type="xs:string" use="required"/>
-    <xs:attribute name="userid" type="xs:integer" use="required"/>
+    <xs:attribute name="username" type="xs:string"/>
+    <xs:attribute name="userid" type="xs:integer"/>
     <xs:attribute name="total" type="xs:nonNegativeInteger" use="required"/>
     <xs:attribute name="page" type="xs:positiveInteger" use="required"/>
     <xs:attribute name="termsofuse" type="xs:anyURI" use="required"/>
@@ -22,7 +22,8 @@
       <xs:element name="players" type="players" minOccurs="0">
       </xs:element>
     </xs:sequence>
-    <xs:attribute name="id" type="xs:integer" use="required"/>
+    <xs:attribute name="id" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="userid" type="xs:nonNegativeInteger"/>
     <xs:attribute name="date" type="common:localDate" use="required"/>
     <xs:attribute name="quantity" type="xs:positiveInteger" use="required"/>
     <xs:attribute name="length" type="xs:nonNegativeInteger" use="required"/>
@@ -45,7 +46,7 @@
     <xs:attribute name="color" type="xs:string" use="required"/>
     <xs:attribute name="score" type="xs:string" use="required"/>
     <xs:attribute name="new" type="xs:boolean" use="required"/>
-    <xs:attribute name="rating" type="xs:positiveInteger" use="required"/>
+    <xs:attribute name="rating" type="xs:nonNegativeInteger" use="required"/>
     <xs:attribute name="win" type="xs:boolean" use="required"/>
   </xs:complexType>
 
