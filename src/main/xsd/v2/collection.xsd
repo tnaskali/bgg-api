@@ -22,7 +22,7 @@
       <xs:element name="thumbnail" type="xs:anyURI" minOccurs="0"/>
       <xs:element name="stats" type="stats" minOccurs="0"/>
       <xs:element name="status" type="status"/>
-      <xs:element name="numplays" type="xs:nonNegativeInteger"/>
+      <xs:element name="numplays" type="xs:nonNegativeInteger" minOccurs="0"/>
       <xs:element name="privateinfo" type="privateInfo" minOccurs="0"/>
       <xs:element name="version" type="version" minOccurs="0"/>
       <xs:element name="wantpartslist" type="xs:string" minOccurs="0"/>
