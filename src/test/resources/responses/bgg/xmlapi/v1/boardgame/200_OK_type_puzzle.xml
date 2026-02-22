@@ -1,0 +1,56 @@
+<!-- /xmlapi/boardgame/381682 -->
+<boardgames termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+  <boardgame objectid="381682" subtypemismatch="true">
+    <yearpublished></yearpublished>
+    <minplayers></minplayers>
+    <maxplayers></maxplayers>
+    <playingtime></playingtime>
+    <minplaytime></minplaytime>
+    <maxplaytime></maxplaytime>
+    <age></age>
+    <name primary="true" sortindex="1">3 the peg</name>
+    <description>3 the peg is a metal puzzle, made of anodized aluminium and brass. The goal is to remove the peg.
+
+    </description>
+    <thumbnail>https://cf.geekdo-images.com/nanfOEAhS267eCpO7bXMFQ__small/img/LhSXOZGdcMu2x6HeCT6tLrLYrxI=/fit-in/200x150/filters:strip_icc()/pic7382600.jpg</thumbnail>
+    <image>https://cf.geekdo-images.com/nanfOEAhS267eCpO7bXMFQ__original/img/KfdCT42H672G0sbl4ld4CvU2v54=/0x0/filters:format(jpeg)/pic7382600.jpg</image>
+    <puzzleversion objectid="651973">First release</puzzleversion>
+    <puzzledesigner objectid="151821">Matthew Williams</puzzledesigner>
+    <puzzletype objectid="78219">Mechanical Puzzles</puzzletype>
+    <puzzlematerial objectid="77919">Metal</puzzlematerial>
+    <puzzleproducer objectid="53599">MW Puzzles</puzzleproducer>
+    <puzzlecategory objectid="78476">Take apart</puzzlecategory>
+    <poll name="suggested_numplayers" title="User Suggested Number of Players" totalvotes="0">
+      <results numplayers="0+">
+      </results>
+    </poll>
+    <poll-summary name="suggested_numplayers"  title="User Suggested Number of Players">
+      <result name="bestwith" value="" />
+      <result name="recommmendedwith" value="(no votes)" />
+    </poll-summary>
+    <poll name="language_dependence" title="Language Dependence" totalvotes="0">
+    </poll>
+    <poll name="suggested_playerage" title="User Suggested Player Age" totalvotes="0">
+    </poll>
+    <statistics>
+      <ratings>
+        <usersrated>1</usersrated>
+        <average>9</average>
+        <bayesaverage>0</bayesaverage>
+        <ranks>
+          <rank type="subtype" id="105" name="puzzle" friendlyname="Puzzle Rank" value="Not Ranked" bayesaverage="Not Ranked" />
+          <rank type="family" id="78219" name="mechanicalpuzzles" friendlyname="Mechanical Puzzle Rank" value="Not Ranked" bayesaverage="Not Ranked" />
+        </ranks>
+        <stddev>0</stddev>
+        <median>0</median>
+        <owned>1</owned>
+        <trading>0</trading>
+        <wanting>0</wanting>
+        <wishing>0</wishing>
+        <numcomments>0</numcomments>
+        <numweights>0</numweights>
+        <averageweight>0</averageweight>
+      </ratings>
+    </statistics>
+  </boardgame>
+</boardgames>

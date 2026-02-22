@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- /xmlapi2/plays?username=tnaskali -->
+<plays username="tnaskali" userid="825923" total="24" page="1" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+  <play id="110707887" date="2026-02-22" quantity="1" length="0" incomplete="0" nowinstats="1" location="">
+    <item name="Books about Roleplaying Games" objecttype="family" objectid="1235">
+      <subtypes>
+        <subtype value="rpg" />
+      </subtypes>
+    </item>
+    <comments>this is a family</comments>
+    <players>
+      <player username="" userid="0" name="me" startposition="" color="" score="" new="0" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="75289989" date="2023-08-03" quantity="4" length="60" incomplete="0" nowinstats="0" location="Home">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <comments>comments go here</comments>
+    <players>
+      <player username="" userid="0" name="Non-BGG Friend" startposition="1" color="blue" score="18" new="0" rating="7" win="1" />
+      <player username="tnaskali" userid="825923" name="" startposition="" color="" score="" new="1" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="75289932" date="2023-08-03" quantity="1" length="60" incomplete="0" nowinstats="0" location="Home">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <comments>comments go here</comments>
+    <players>
+      <player username="" userid="0" name="Non-BGG Friend" startposition="1" color="blue" score="18" new="0" rating="7" win="1" />
+      <player username="tnaskali" userid="825923" name="" startposition="" color="" score="" new="1" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="56158728" date="2021-12-05" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Carambole: Set-up rack" objecttype="thing" objectid="263949">
+      <subtypes>
+        <subtype value="boardgameaccessory" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="56159459" date="2021-12-05" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Paranoia (1st Edition)" objecttype="family" objectid="374">
+      <subtypes>
+        <subtype value="rpg" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="56159542" date="2021-12-05" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="World of Warcraft: Battle Chest (2007)" objecttype="thing" objectid="103691">
+      <subtypes>
+        <subtype value="videogame" />
+        <subtype value="videogamecompilation" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="56158998" date="2021-12-05" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="World of Warcraft: The Burning Crusade" objecttype="thing" objectid="72464">
+      <subtypes>
+        <subtype value="videogame" />
+        <subtype value="videogameexpansion" />
+        <subtype value="videogamebg" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="46021474" date="2020-10-04" quantity="1" length="30" incomplete="0" nowinstats="0" location="home">
+    <item name="Othello" objecttype="thing" objectid="2389">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <players>
+      <player username="" userid="0" name="Joel Naskali" startposition="1" color="green" score="22" new="0" rating="0" win="0" />
+      <player username="tnaskali" userid="825923" name="Thomas Naskali" startposition="2" color="red" score="42" new="0" rating="0" win="1" />
+    </players>
+  </play>
+  <play id="46021623" date="2020-10-03" quantity="1" length="30" incomplete="0" nowinstats="0" location="home">
+    <item name="Dominion" objecttype="thing" objectid="36218">
+      <subtypes>
+        <subtype value="boardgame" />
+        <subtype value="boardgameintegration" />
+      </subtypes>
+    </item>
+    <comments>"First game" setup, but replaced milicia with bureaucracy</comments>
+    <players>
+      <player username="" userid="0" name="Joel Naskali" startposition="3" color="" score="9" new="0" rating="0" win="0" />
+      <player username="tnaskali" userid="825923" name="Thomas Naskali" startposition="4" color="" score="35" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Maria Naskali" startposition="2" color="" score="36" new="0" rating="0" win="1" />
+      <player username="" userid="0" name="Valo Naskali" startposition="1" color="" score="18" new="0" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="46021913" date="2020-10-03" quantity="1" length="30" incomplete="0" nowinstats="0" location="">
+    <item name="Just One" objecttype="thing" objectid="254640">
+      <subtypes>
+        <subtype value="boardgame" />
+        <subtype value="boardgameimplementation" />
+        <subtype value="boardgameintegration" />
+      </subtypes>
+    </item>
+    <comments>score : 7/13</comments>
+    <players>
+      <player username="tnaskali" userid="825923" name="Thomas Naskali" startposition="" color="players" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Joel Naskali" startposition="" color="players" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Maria Naskali" startposition="" color="players" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Valo Naskali" startposition="" color="players" score="" new="0" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="46021561" date="2020-10-03" quantity="1" length="60" incomplete="0" nowinstats="0" location="home">
+    <item name="Star Wars: Unlock!" objecttype="thing" objectid="312267">
+      <subtypes>
+        <subtype value="boardgame" />
+        <subtype value="boardgamecompilation" />
+      </subtypes>
+    </item>
+    <comments>scenario: la bataille de Hoth
+      hints: 0
+      penalties: 4x1m
+      time: 50m10s
+      score: :star::star::star::star::star:</comments>
+    <players>
+      <player username="" userid="0" name="Joel Naskali" startposition="" color="players" score="" new="1" rating="0" win="1" />
+      <player username="tnaskali" userid="825923" name="Thomas Naskali" startposition="" color="players" score="" new="1" rating="0" win="1" />
+      <player username="" userid="0" name="Maria Naskali" startposition="" color="players" score="" new="1" rating="0" win="1" />
+      <player username="" userid="0" name="Valo Naskali" startposition="" color="players" score="" new="1" rating="0" win="1" />
+    </players>
+  </play>
+  <play id="46021985" date="2020-10-02" quantity="1" length="60" incomplete="0" nowinstats="0" location="club">
+    <item name="Azul" objecttype="thing" objectid="230802">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <players>
+      <player username="" userid="0" name="Lucie Bruchez" startposition="" color="" score="55" new="0" rating="0" win="0" />
+      <player username="tnaskali" userid="825923" name="Thomas Naskali" startposition="" color="" score="76" new="0" rating="0" win="1" />
+      <player username="" userid="0" name="Bénédicte Fournier" startposition="" color="" score="46" new="1" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="46022051" date="2020-10-02" quantity="1" length="0" incomplete="0" nowinstats="0" location="club">
+    <item name="Fugitive" objecttype="thing" objectid="197443">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <comments>#1: Thomas won as fugitive
+      #2: Lucie won as fugitive
+      #3: Lucie won as marshall
+      #4: Thomas won as marshall</comments>
+    <players>
+      <player username="" userid="0" name="Lucie Bruchez" startposition="" color="" score="" new="1" rating="0" win="0" />
+      <player username="tnaskali" userid="825923" name="Thomas Naskali" startposition="" color="" score="" new="0" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="46021953" date="2020-10-02" quantity="1" length="45" incomplete="0" nowinstats="0" location="club">
+    <item name="Star Wars: Unlock!" objecttype="thing" objectid="312267">
+      <subtypes>
+        <subtype value="boardgame" />
+        <subtype value="boardgamecompilation" />
+      </subtypes>
+    </item>
+    <comments>scenario: la bataille de Hoth
+      hints: 2
+      time: 34m
+      score: :star::star::star::star:</comments>
+    <players>
+      <player username="" userid="0" name="Lucie Bruchez" startposition="" color="players" score="" new="1" rating="0" win="1" />
+      <player username="" userid="0" name="Bénédicte Fournier" startposition="" color="players" score="" new="1" rating="0" win="1" />
+    </players>
+  </play>
+  <play id="45904283" date="2020-09-27" quantity="1" length="120" incomplete="0" nowinstats="0" location="home">
+    <item name="Dominion" objecttype="thing" objectid="36218">
+      <subtypes>
+        <subtype value="boardgame" />
+        <subtype value="boardgameintegration" />
+      </subtypes>
+    </item>
+    <comments>« First game » setup</comments>
+    <players>
+      <player username="tnaskali" userid="825923" name="Thomas Naskali" startposition="1" color="" score="28" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Maria Naskali" startposition="3" color="" score="32" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Valo Naskali" startposition="2" color="" score="23" new="1" rating="0" win="0" />
+      <player username="" userid="0" name="Joel Naskali" startposition="4" color="" score="33" new="1" rating="0" win="1" />
+    </players>
+  </play>
+  <play id="45883989" date="2020-09-26" quantity="1" length="90" incomplete="0" nowinstats="0" location="home">
+    <item name="EXIT: The Game – The Sinister Mansion" objecttype="thing" objectid="226520">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <comments>time: 97 minutes
+      hints: 4
+      final score: :star::star::star::star:</comments>
+    <players>
+      <player username="tnaskali" userid="825923" name="Thomas Naskali" startposition="" color="players" score="" new="0" rating="0" win="1" />
+      <player username="" userid="0" name="Joel Naskali" startposition="" color="players" score="" new="0" rating="0" win="1" />
+      <player username="" userid="0" name="Valo Naskali" startposition="" color="players" score="" new="0" rating="0" win="1" />
+      <player username="" userid="0" name="Maria Naskali" startposition="" color="players" score="" new="0" rating="0" win="1" />
+    </players>
+  </play>
+  <play id="45797344" date="2020-09-22" quantity="1" length="30" incomplete="0" nowinstats="0" location="home">
+    <item name="Blokus" objecttype="thing" objectid="2453">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <players>
+      <player username="tnaskali" userid="825923" name="Thomas Naskali" startposition="2" color="yellow/green" score="10" new="0" rating="0" win="1" />
+      <player username="" userid="0" name="Joel Naskali" startposition="1" color="red/blue" score="11" new="0" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="45750025" date="2020-09-20" quantity="1" length="90" incomplete="0" nowinstats="1" location="home">
+    <item name="Concordia" objecttype="thing" objectid="124361">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <comments>Italia map</comments>
+    <players>
+      <player username="tnaskali" userid="825923" name="Thomas Naskali" startposition="1" color="green" score="94" new="0" rating="0" win="1" />
+      <player username="" userid="0" name="Valo Naskali" startposition="2" color="yellow" score="85" new="0" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="45679548" date="2020-09-16" quantity="1" length="60" incomplete="0" nowinstats="0" location="home">
+    <item name="Forbidden Island" objecttype="thing" objectid="65244">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <players>
+      <player username="tnaskali" userid="825923" name="Thomas Naskali" startposition="" color="players" score="" new="0" rating="0" win="1" />
+      <player username="" userid="0" name="Maria Naskali" startposition="" color="players" score="" new="0" rating="0" win="1" />
+      <player username="" userid="0" name="Joel Naskali" startposition="" color="players" score="" new="0" rating="0" win="1" />
+    </players>
+  </play>
+  <play id="46021884" date="2020-09-04" quantity="1" length="30" incomplete="0" nowinstats="0" location="club">
+    <item name="Bla5t" objecttype="thing" objectid="220461">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <players>
+      <player username="tnaskali" userid="825923" name="Thomas Naskali" startposition="" color="1" score="26" new="1" rating="0" win="1" />
+      <player username="" userid="0" name="Lucie Bruchez" startposition="" color="2" score="57" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Bénédicte Fournier" startposition="" color="3" score="50" new="1" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="46021901" date="2020-09-04" quantity="1" length="30" incomplete="0" nowinstats="0" location="club">
+    <item name="Just One" objecttype="thing" objectid="254640">
+      <subtypes>
+        <subtype value="boardgame" />
+        <subtype value="boardgameimplementation" />
+        <subtype value="boardgameintegration" />
+      </subtypes>
+    </item>
+    <comments>score : 7/13</comments>
+    <players>
+      <player username="tnaskali" userid="825923" name="Thomas Naskali" startposition="" color="players" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Lucie Bruchez" startposition="" color="players" score="" new="1" rating="0" win="0" />
+      <player username="" userid="0" name="Bénédicte Fournier" startposition="" color="players" score="" new="1" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="46021853" date="2020-09-04" quantity="1" length="30" incomplete="0" nowinstats="0" location="club">
+    <item name="Sumoku" objecttype="thing" objectid="66695">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <players>
+      <player username="tnaskali" userid="825923" name="Thomas Naskali" startposition="" color="1" score="364" new="1" rating="0" win="1" />
+      <player username="" userid="0" name="Lucie Bruchez" startposition="" color="2" score="350" new="1" rating="0" win="0" />
+      <player username="" userid="0" name="Bénédicte Fournier" startposition="" color="3" score="328" new="1" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="42832765" date="2020-05-03" quantity="1" length="60" incomplete="0" nowinstats="0" location="home">
+    <item name="Unlock!: Epic Adventures" objecttype="thing" objectid="294612">
+      <subtypes>
+        <subtype value="boardgame" />
+        <subtype value="boardgamecompilation" />
+      </subtypes>
+    </item>
+    <comments>scenario: 7e art &amp; décès
+      score: 5 stars (49 min, 1 penalty, 0 hints)</comments>
+    <players>
+      <player username="" userid="0" name="Maria Naskali" startposition="" color="players" score="5 stars" new="0" rating="0" win="1" />
+      <player username="" userid="0" name="Valo Naskali" startposition="" color="players" score="5 stars" new="0" rating="0" win="1" />
+      <player username="" userid="0" name="Joel Naskali" startposition="" color="players" score="5 stars" new="0" rating="0" win="1" />
+      <player username="tnaskali" userid="825923" name="Thomas Naskali" startposition="" color="players" score="5 stars" new="0" rating="0" win="1" />
+    </players>
+  </play>
+  <play id="55341483" date="2020-02-01" quantity="1" length="60" incomplete="0" nowinstats="0" location="Home">
+    <item name="Arkham Horror: The Card Game" objecttype="thing" objectid="205637">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <comments>comments go here</comments>
+    <players>
+      <player username="" userid="0" name="Non-BGG Friend" startposition="" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Me!" startposition="" color="" score="" new="0" rating="0" win="0" />
+    </players>
+  </play>
+</plays>

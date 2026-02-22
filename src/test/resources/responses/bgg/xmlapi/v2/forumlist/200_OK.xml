@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- /xmlapi2/forumlist?id=1&type=company -->
+<forums type="company" id="1" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+  <forum id="603142" groupid="0" title="General" noposting="0" description="Post general information about this publisher here." numthreads="0" numposts="0" lastpostdate="" />
+  <forum id="603143" groupid="0" title="News" noposting="0" description="Post news about the publisher here." numthreads="0" numposts="0" lastpostdate="" />
+  <forum id="603144" groupid="0" title="Off Topic" noposting="0" description="Post off topic messages about the publisher here." numthreads="0" numposts="0" lastpostdate="" />
+</forums>

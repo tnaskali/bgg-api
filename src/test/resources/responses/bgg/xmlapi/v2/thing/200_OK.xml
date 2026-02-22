@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- /xmlapi2/thing?id=1001&type=boardgame&versions=1&videos=1&ratingcomments=1&stats=1&marketplace=1 -->
+<items termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+  <item type="boardgame" id="1001">
+    <thumbnail>https://cf.geekdo-images.com/f98JQ3qEwxA88GBa69y3XA__small/img/-eAaT7_O6QdB2sDnsEOrF-7lDlY=/fit-in/200x150/filters:strip_icc()/pic193052.jpg</thumbnail>
+    <image>https://cf.geekdo-images.com/f98JQ3qEwxA88GBa69y3XA__original/img/p4Gxsmh5GZYLhosQq6QenPZSTf8=/0x0/filters:format(jpeg)/pic193052.jpg</image>
+    <name type="primary" sortindex="1" value="Vendetta" />
+    <name type="alternate" sortindex="1" value="Cosa Nostra" />
+    <name type="alternate" sortindex="1" value="Vengeance à Chicago" />
+    <description>Move your "Godfather" safely through town. The large spinner in the center of the board decides which spaces on the board take hits from the hit man in the car.
+
+    </description>
+    <yearpublished value="1988" />
+    <minplayers value="2" />
+    <maxplayers value="4" />
+    <poll name="suggested_numplayers" title="User Suggested Number of Players" totalvotes="5">
+      <results numplayers="1">
+        <result value="Best" numvotes="0" />
+        <result value="Recommended" numvotes="1" />
+        <result value="Not Recommended" numvotes="2" />
+      </results>
+      <results numplayers="2">
+        <result value="Best" numvotes="0" />
+        <result value="Recommended" numvotes="2" />
+        <result value="Not Recommended" numvotes="1" />
+      </results>
+      <results numplayers="3">
+        <result value="Best" numvotes="0" />
+        <result value="Recommended" numvotes="3" />
+        <result value="Not Recommended" numvotes="1" />
+      </results>
+      <results numplayers="4">
+        <result value="Best" numvotes="5" />
+        <result value="Recommended" numvotes="0" />
+        <result value="Not Recommended" numvotes="0" />
+      </results>
+      <results numplayers="4+">
+        <result value="Best" numvotes="0" />
+        <result value="Recommended" numvotes="0" />
+        <result value="Not Recommended" numvotes="2" />
+      </results>
+    </poll>
+    <poll-summary name="suggested_numplayers"  title="User Suggested Number of Players">
+      <result name="bestwith" value="Best with 4 players" />
+      <result name="recommmendedwith" value="Recommended with 2–4 players" />
+    </poll-summary>
+    <playingtime value="30" />
+    <minplaytime value="30" />
+    <maxplaytime value="30" />
+    <minage value="8" />
+    <poll name="suggested_playerage" title="User Suggested Player Age" totalvotes="4">
+      <results>
+        <result value="2" numvotes="0" />
+        <result value="3" numvotes="0" />
+        <result value="4" numvotes="0" />
+        <result value="5" numvotes="0" />
+        <result value="6" numvotes="2" />
+        <result value="8" numvotes="0" />
+        <result value="10" numvotes="0" />
+        <result value="12" numvotes="2" />
+        <result value="14" numvotes="0" />
+        <result value="16" numvotes="0" />
+        <result value="18" numvotes="0" />
+        <result value="21 and up" numvotes="0" />
+      </results>
+    </poll>
+    <poll name="language_dependence" title="Language Dependence" totalvotes="3">
+      <results>
+        <result level="1" value="No necessary in-game text" numvotes="3" />
+        <result level="2" value="Some necessary text - easily memorized or small crib sheet" numvotes="0" />
+        <result level="3" value="Moderate in-game text - needs crib sheet or paste ups" numvotes="0" />
+        <result level="4" value="Extensive use of text - massive conversion needed to be playable" numvotes="0" />
+        <result level="5" value="Unplayable in another language" numvotes="0" />
+      </results>
+    </poll>
+    <link type="boardgamecategory" id="1033" value="Mafia" />
+    <link type="boardgamemechanic" id="2072" value="Dice Rolling" />
+    <link type="boardgamemechanic" id="2850" value="Events" />
+    <link type="boardgamemechanic" id="2876" value="Race" />
+    <link type="boardgamemechanic" id="2035" value="Roll / Spin and Move" />
+    <link type="boardgamemechanic" id="2861" value="Static Capture" />
+    <link type="boardgamemechanic" id="2939" value="Track Movement" />
+    <link type="boardgamefamily" id="22783" value="Admin: Better Description Needed!" />
+    <link type="boardgamefamily" id="18227" value="Cities: Chicago (Illinois, USA)" />
+    <link type="boardgamefamily" id="5607" value="Components: 3-Dimensional (3D)" />
+    <link type="boardgamefamily" id="25158" value="Components: Miniatures" />
+    <link type="boardgamefamily" id="14835" value="Country: USA" />
+    <link type="boardgamefamily" id="44377" value="Interwar period (Nov. 1918 - Aug. 1939)" />
+    <link type="boardgamefamily" id="14661" value="Theme: Mystery / Crime" />
+    <link type="boardgamedesigner" id="32993" value="Carlo Monticolombi" />
+    <link type="boardgamepublisher" id="4680" value="Borras Plana S.A." />
+    <link type="boardgamepublisher" id="2831" value="Elfin Design" />
+    <link type="boardgamepublisher" id="13103" value="El Greco" />
+    <link type="boardgamepublisher" id="28" value="Parker Brothers" />
+    <link type="boardgamepublisher" id="3994" value="Playmix" />
+    <videos total="3">
+      <video id="476367" title="Attic Raiders Retro Reviews" category="review" language="English" link="http://www.youtube.com/watch?v=9bTbvU6LIqc" username="fmoros" userid="4064" postdate="2024-01-23T03:30:06-06:00" />
+      <video id="204004" title="Vendetta - The Hit Game published by Elfin Design 1988 | Board Game Review 2019" category="review" language="English" link="http://www.youtube.com/watch?v=8CBsjIyORQw" username="Daami666" userid="1777236" postdate="2019-01-11T10:04:44-06:00" />
+      <video id="108489" title="VENDETTA - ΠΑΛΙΟ ΕΠΙΤΡΑΠΕΖΙΟ GREEK COMMERCIAL" category="other" language="Greek" link="http://www.youtube.com/watch?v=tGPfB2v0u8g" username="pank" userid="1360762" postdate="2016-08-20T11:08:54-05:00" />
+    </videos>
+    <versions>
+      <item type="boardgameversion" id="111618">
+        <thumbnail>https://cf.geekdo-images.com/Co1ADgaoJpVdq8u8runQVg__small/img/n60bp411SeK1O3HQ-7UdT0xo9Fg=/fit-in/200x150/filters:strip_icc()/pic98927.jpg</thumbnail>
+        <image>https://cf.geekdo-images.com/Co1ADgaoJpVdq8u8runQVg__original/img/pIMfX-vrcGS_YE73ND27SBg6nMY=/0x0/filters:format(jpeg)/pic98927.jpg</image>
+        <canonicalname value="Vendetta"></canonicalname>
+        <link type="boardgameversion" id="1001" value="Vendetta" inbound="true"/>
+        <name type="primary" sortindex="1" value="Borras Spanish edition" />
+        <link type="boardgamepublisher" id="4680" value="Borras Plana S.A." />
+        <yearpublished value="0" />
+        <productcode value="" />
+        <width value="0" />
+        <length value="0" />
+        <depth value="0" />
+        <weight value="0" />
+        <link type="language" id="2203" value="Spanish" />
+      </item>
+      <item type="boardgameversion" id="158181">
+        <thumbnail>https://cf.geekdo-images.com/dXz-InXakSoaHmFbXoBx_Q__small/img/y0FPn0SEo5UwlqmCckgkX3frm9I=/fit-in/200x150/filters:strip_icc()/pic50717.jpg</thumbnail>
+        <image>https://cf.geekdo-images.com/dXz-InXakSoaHmFbXoBx_Q__original/img/dHHnLOURzXaiEXilpvlbM9MqqcY=/0x0/filters:format(jpeg)/pic50717.jpg</image>
+        <canonicalname value="Vendetta"></canonicalname>
+        <link type="boardgameversion" id="1001" value="Vendetta" inbound="true"/>
+        <name type="primary" sortindex="1" value="Elfin first edition" />
+        <link type="boardgamepublisher" id="2831" value="Elfin Design" />
+        <yearpublished value="1987" />
+        <productcode value="" />
+        <width value="0" />
+        <length value="0" />
+        <depth value="0" />
+        <weight value="0" />
+        <link type="language" id="2184" value="English" />
+      </item>
+      <item type="boardgameversion" id="105085">
+        <thumbnail>https://cf.geekdo-images.com/f98JQ3qEwxA88GBa69y3XA__small/img/-eAaT7_O6QdB2sDnsEOrF-7lDlY=/fit-in/200x150/filters:strip_icc()/pic193052.jpg</thumbnail>
+        <image>https://cf.geekdo-images.com/f98JQ3qEwxA88GBa69y3XA__original/img/p4Gxsmh5GZYLhosQq6QenPZSTf8=/0x0/filters:format(jpeg)/pic193052.jpg</image>
+        <canonicalname value="Vendetta"></canonicalname>
+        <link type="boardgameversion" id="1001" value="Vendetta" inbound="true"/>
+        <name type="primary" sortindex="1" value="Parker Brothers Dutch edition" />
+        <link type="boardgamepublisher" id="28" value="Parker Brothers" />
+        <yearpublished value="1990" />
+        <productcode value="" />
+        <width value="20" />
+        <length value="10" />
+        <depth value="2" />
+        <weight value="0" />
+        <link type="language" id="2183" value="Dutch" />
+      </item>
+      <item type="boardgameversion" id="222967">
+        <thumbnail>https://cf.geekdo-images.com/f98JQ3qEwxA88GBa69y3XA__small/img/-eAaT7_O6QdB2sDnsEOrF-7lDlY=/fit-in/200x150/filters:strip_icc()/pic193052.jpg</thumbnail>
+        <image>https://cf.geekdo-images.com/f98JQ3qEwxA88GBa69y3XA__original/img/p4Gxsmh5GZYLhosQq6QenPZSTf8=/0x0/filters:format(jpeg)/pic193052.jpg</image>
+        <canonicalname value="Vendetta"></canonicalname>
+        <link type="boardgameversion" id="1001" value="Vendetta" inbound="true"/>
+        <name type="primary" sortindex="1" value="Parker Brothers English/European edition" />
+        <link type="boardgamepublisher" id="28" value="Parker Brothers" />
+        <yearpublished value="1990" />
+        <productcode value="" />
+        <width value="0" />
+        <length value="0" />
+        <depth value="0" />
+        <weight value="0" />
+        <link type="language" id="2184" value="English" />
+      </item>
+      <item type="boardgameversion" id="78523">
+        <thumbnail>https://cf.geekdo-images.com/UaRd2Rua7gcwCQW_l3WX4A__small/img/U0qzlq0kGoKwJRkf6fRPx7lpMiY=/fit-in/200x150/filters:strip_icc()/pic890869.jpg</thumbnail>
+        <image>https://cf.geekdo-images.com/UaRd2Rua7gcwCQW_l3WX4A__original/img/0iqQkYaa_ClEI-iazSPLYq2mlz4=/0x0/filters:format(jpeg)/pic890869.jpg</image>
+        <canonicalname value="Vengeance à Chicago"></canonicalname>
+        <link type="boardgameversion" id="1001" value="Vendetta" inbound="true"/>
+        <name type="primary" sortindex="1" value="Parker Brothers French edition" />
+        <link type="boardgamepublisher" id="28" value="Parker Brothers" />
+        <yearpublished value="1987" />
+        <productcode value="" />
+        <width value="0" />
+        <length value="0" />
+        <depth value="0" />
+        <weight value="0" />
+        <link type="language" id="2187" value="French" />
+      </item>
+      <item type="boardgameversion" id="32057">
+        <thumbnail>https://cf.geekdo-images.com/yO8pLCptFv8nI0URIbUHqQ__small/img/CFKhHwDfqMoGzSn7_b56BOYTGP8=/fit-in/200x150/filters:strip_icc()/pic1314173.jpg</thumbnail>
+        <image>https://cf.geekdo-images.com/yO8pLCptFv8nI0URIbUHqQ__original/img/WV6Sqi0VMP4D7ZX-c14BjTMZjCM=/0x0/filters:format(jpeg)/pic1314173.jpg</image>
+        <canonicalname value="Cosa Nostra"></canonicalname>
+        <link type="boardgameversion" id="1001" value="Vendetta" inbound="true"/>
+        <name type="primary" sortindex="1" value="Parker Brothers German edition" />
+        <link type="boardgamepublisher" id="28" value="Parker Brothers" />
+        <yearpublished value="1990" />
+        <productcode value="" />
+        <width value="10.25" />
+        <length value="20" />
+        <depth value="2.5" />
+        <weight value="0" />
+        <link type="language" id="2188" value="German" />
+      </item>
+      <item type="boardgameversion" id="200599">
+        <thumbnail>https://cf.geekdo-images.com/UXKcG4Sbp6TCpkAtbr5QeQ__small/img/GeOio9gLyWN7QB_zuSsyzF8jlVE=/fit-in/200x150/filters:strip_icc()/pic1579066.jpg</thumbnail>
+        <image>https://cf.geekdo-images.com/UXKcG4Sbp6TCpkAtbr5QeQ__original/img/AZNZV1wg49eoT6edyMXmc759Bbk=/0x0/filters:format(jpeg)/pic1579066.jpg</image>
+        <canonicalname value="Vendetta"></canonicalname>
+        <link type="boardgameversion" id="1001" value="Vendetta" inbound="true"/>
+        <name type="primary" sortindex="1" value="Parker Brothers Greek edition" />
+        <name type="alternate" sortindex="1" value="Parker Brothers Greek edition" />
+        <link type="boardgamepublisher" id="13103" value="El Greco" />
+        <link type="boardgamepublisher" id="28" value="Parker Brothers" />
+        <yearpublished value="1988" />
+        <productcode value="" />
+        <width value="0" />
+        <length value="0" />
+        <depth value="0" />
+        <weight value="0" />
+        <link type="language" id="2189" value="Greek" />
+      </item>
+      <item type="boardgameversion" id="258462">
+        <thumbnail>https://cf.geekdo-images.com/5X9pSQvah7_VfCEiOrVuAA__small/img/-roSfzWYOYKqdnYZLAwHdjIKuAY=/fit-in/200x150/filters:strip_icc()/pic2299606.jpg</thumbnail>
+        <image>https://cf.geekdo-images.com/5X9pSQvah7_VfCEiOrVuAA__original/img/WiozR-5W1cRm1AG_jS54WmkiGuU=/0x0/filters:format(jpeg)/pic2299606.jpg</image>
+        <canonicalname value="Vendetta"></canonicalname>
+        <link type="boardgameversion" id="1001" value="Vendetta" inbound="true"/>
+        <name type="primary" sortindex="1" value="Parker Brothers Nordic edition" />
+        <link type="boardgamepublisher" id="28" value="Parker Brothers" />
+        <link type="boardgamepublisher" id="3994" value="Playmix" />
+        <yearpublished value="1991" />
+        <productcode value="" />
+        <width value="10.2362" />
+        <length value="19.8819" />
+        <depth value="2.55906" />
+        <weight value="2.13848" />
+        <link type="language" id="2182" value="Danish" />
+        <link type="language" id="2186" value="Finnish" />
+        <link type="language" id="2198" value="Norwegian" />
+        <link type="language" id="2204" value="Swedish" />
+      </item>
+    </versions>
+    <comments page="1" totalitems="239">
+      <comment username="Igmatto" rating="1" value="" />
+      <comment username="yaqqay" rating="1" value="" />
+      <comment username="ralphii" rating="2" value="" />
+      <comment username="Rojack" rating="2" value="" />
+      <comment username="tsaw" rating="2" value="" />
+      <comment username="crackedlcd81" rating="2" value="You'd think a themed Backgammon variant with drive-by shootings and a massive spinner on the board would be a lot more fun.  It isn't.  It's the  sort of gimmicky game that tricks you into thinking it's going to be really cool but winds up being boring, turgid, and depressingly dull.  Once you've spun the cars two or three times, you've pretty much hit the ceiling on this one." />
+      <comment username="Swing" rating="2" value="That afternoon I wasn't myself." />
+      <comment username="Daniel_ms" rating="2" value="" />
+      <comment username="john_lennon999" rating="2" value="" />
+      <comment username="GoF_Fenrir" rating="2" value="" />
+      <comment username="varjo" rating="2" value="One bodyguard is missing and the original wooden dice are replaced with plastice dice. Nonetheless, otherwise the game is in a good condition — especially considering it’s age.
+
+- - -
+
+EDIT (7.6.19):
+
+I was unable to find a buyer for this game (even for 1 euro) so I gave it away." />
+      <comment username="Fuzzcrumbler" rating="2" value="Good God. Yech. Friend found it at a thrift shop for $1. Thrown into the garbage after 1 play." />
+      <comment username="Funnylolo" rating="2" value="" />
+      <comment username="Maja Dorn" rating="3" value="" />
+      <comment username="Bryan Arroyo" rating="3" value="" />
+      <comment username="Thraetaona" rating="3" value="" />
+      <comment username="Kuessel" rating="3" value="" />
+      <comment username="pmyteh" rating="3" value="" />
+      <comment username="PzVIE" rating="3" value="" />
+      <comment username="uferan" rating="3" value="" />
+      <comment username="Oxyligen" rating="3" value="" />
+      <comment username="erguti" rating="3" value="" />
+      <comment username="Anakin1981" rating="3" value="Nice little game for families/kids. Had it's time of popularity in Hellas back in the early 90's if I remember correct." />
+      <comment username="Missu" rating="3" value="" />
+      <comment username="Lili Marleen" rating="3" value="" />
+      <comment username="catachan" rating="3" value="" />
+      <comment username="sky1ark" rating="3" value="" />
+      <comment username="muhonen" rating="3" value="" />
+      <comment username="Rerun" rating="3" value="" />
+      <comment username="Castlevanio" rating="3" value="Perdido para siempre en algún desván al que ya no tengo acceso.
+
+____
+
+Jugué muchas partidas de pequeño. Es una chusta, pero volvería a tenerlo, sólo por nostalgia." />
+      <comment username="speededdi" rating="3" value="" />
+      <comment username="Argamae" rating="3" value="" />
+      <comment username="NeutralGnome" rating="3" value="" />
+      <comment username="Chucks" rating="3" value="" />
+      <comment username="Kaengi" rating="3" value="This game obviously did not pass the test of time.
+
+The board and figures are aesthetically pleasing and i like the theme and idea of the game.
+
+But playing the rules by the book - the game can be rushed through in 4-6 rolls.
+
+There is no incentive to follow the intended gameplay loop, as rushing your boss through solo turns out to lead to quicker, more reliable wins.
+
+After 2 games which both ended in under 6 turns, we decided to move on.
+
+Spinning the Cosa-Nostra-Wheel is very satisfying though, you could probably come up with a better way to play this.
+
+Maybe add a house-rule, that the boss can never be more than 3 spaces ahead of another goon. Or something like that." />
+      <comment username="Kuula" rating="3.25" value="" />
+      <comment username="HerbertML" rating="3.5" value="" />
+      <comment username="montsegur" rating="3.5" value="" />
+      <comment username="Hoffs" rating="4" value="" />
+      <comment username="srrossi" rating="4" value="" />
+      <comment username="HappyMountain" rating="4" value="" />
+      <comment username="Ench" rating="4" value="Nice and fun family game." />
+      <comment username="Tallandor" rating="4" value="" />
+      <comment username="f-p-p-m" rating="4" value="" />
+      <comment username="cafeine" rating="4" value="Boring roll &amp; move. Nice &quot;mafia goons&quot; plastic minis though." />
+      <comment username="col_w" rating="4" value="" />
+      <comment username="spielwitz" rating="4" value="" />
+      <comment username="jueja" rating="4" value="" />
+      <comment username="bdegroot" rating="4" value="" />
+      <comment username="Bernhard N." rating="4" value="" />
+      <comment username="gimli043" rating="4" value="" />
+      <comment username="lori6569" rating="4" value="" />
+      <comment username="Trochosa Ruricola" rating="4" value="" />
+      <comment username="Teppolainen" rating="4" value="Yet another Pachisi/Ludo variant, this time with a single &quot;Godfather&quot; piece flanked by several expendable thugs and the gimmick of a spinner in the form of two 1930's convertibles doing drive-bys against opposing pieces. It's still the same old Pachisi at heart though, take it or leave it. Hint: Lots of plastic gangsters for your own Mafia-themed games, and of course the two miniature cars :)" />
+      <comment username="jmdsplotter" rating="4" value="" />
+      <comment username="ComicEncounter" rating="4" value="" />
+      <comment username="loopoocat" rating="4" value="" />
+      <comment username="BLACKADDERGR" rating="4" value="" />
+      <comment username="imagicnation" rating="4" value="Had some fun with this as a kid." />
+      <comment username="malushky" rating="4" value="" />
+      <comment username="GrzeL" rating="4" value="" />
+      <comment username="Hessu68" rating="4" value="" />
+      <comment username="Pola" rating="4" value="" />
+      <comment username="Tjolmir" rating="4" value="" />
+      <comment username="RoadHouse" rating="4" value="" />
+      <comment username="tasosdio" rating="4" value="" />
+      <comment username="georoid" rating="4" value="" />
+      <comment username="IceScrat" rating="4" value="" />
+      <comment username="Pompkin" rating="4" value="" />
+      <comment username="McSwoop" rating="4" value="" />
+      <comment username="Hybridhibrid" rating="4" value="" />
+      <comment username="OGRussHood" rating="4" value="" />
+      <comment username="The Tristero" rating="4" value="" />
+      <comment username="Rob Beekman" rating="4" value="Childhood game" />
+      <comment username="Toffi4" rating="4" value="" />
+      <comment username="relfy" rating="4.5" value="A game that revolves around a drive by, quite literally. The aim is to maneuver around the board while avoiding the spinning gangster drive by in the middle. A good mechanic but have so far not felt the need for another play. " />
+      <comment username="madchiotis" rating="4.5" value="" />
+      <comment username="Haffner" rating="5" value="" />
+      <comment username="Terry Egan" rating="5" value="This feels like a combination of parcheesi and backgammon with random mob hits thrown in. But it's a good throw-0in ... the gangsta hitman car spinner of death is the key attraction of Vendetta/Cosa Nostra and one of the more unusual game bits I've ever seen.." />
+      <comment username="iorlas" rating="5" value="" />
+      <comment username="fellonmyhead" rating="5" value="Backgammon with a twist; not bad at all, amusing gimmicks." />
+      <comment username="Ludo le gars" rating="5" value="" />
+      <comment username="barnyams36" rating="5" value="Nice easy game.  Just have some fun trying not to be killed by the people from the spinner.  Some tactics are needed" />
+      <comment username="DukeOfEarl" rating="5" value="" />
+      <comment username="Scarlet" rating="5" value="" />
+      <comment username="Afkamm" rating="5" value="Vendetta is an ok game." />
+      <comment username="emonika" rating="5" value="" />
+      <comment username="supersiamesisk" rating="5" value="Gotta love the bits. :D" />
+      <comment username="Bagpuss64" rating="5" value="Charity store purchase. It was cheap and looks like it would be good fun with my sons. They'll be amused by the whole drive-by shooting and general 'whacking' element of it all." />
+      <comment username="jnroe" rating="5" value="" />
+      <comment username="QuickNick" rating="5" value="" />
+      <comment username="xanthie" rating="5" value="" />
+      <comment username="lexen" rating="5" value="A chessy but fun to play a couple of times. wears out fast though..." />
+      <comment username="TheMummy" rating="5" value="" />
+      <comment username="Albtown" rating="5" value="" />
+      <comment username="feverdream" rating="5" value="" />
+      <comment username="gerlof101" rating="5" value="" />
+      <comment username="Seepa" rating="5" value="" />
+      <comment username="AccelDrag" rating="5" value="" />
+      <comment username="Baartoszz" rating="5" value="" />
+    </comments>
+    <statistics page="1">
+      <ratings >
+        <usersrated value="239" />
+        <average value="5.13745" />
+        <bayesaverage value="5.45857" />
+        <ranks>
+          <rank type="subtype" id="1" name="boardgame" friendlyname="Board Game Rank" value="29432" bayesaverage="5.45857" />
+          <rank type="family" id="4665" name="childrensgames" friendlyname="Children&#039;s Game Rank" value="791" bayesaverage="5.33071" />
+          <rank type="family" id="5499" name="familygames" friendlyname="Family Game Rank" value="3430" bayesaverage="5.44406" />
+        </ranks>
+        <stddev value="1.53002" />
+        <median value="0" />
+        <owned value="548" />
+        <trading value="36" />
+        <wanting value="4" />
+        <wishing value="26" />
+        <numcomments value="87" />
+        <numweights value="25" />
+        <averageweight value="1.28" />
+      </ratings>
+    </statistics>
+    <marketplacelistings>
+      <listing>
+        <listdate value="Sun, 27 Dec 2015 16:20:05 +0000" />
+        <price currency="EUR" value="80.00" />
+        <condition value="new" />
+        <notes value="" />
+        <link href="https://boardgamegeek.com/market/product/857696" title="marketlisting" />
+      </listing>
+      <listing>
+        <listdate value="Thu, 16 Feb 2017 05:59:39 +0000" />
+        <price currency="EUR" value="50.00" />
+        <condition value="new" />
+        <notes value="" />
+        <link href="https://boardgamegeek.com/market/product/1138556" title="marketlisting" />
+      </listing>
+      <listing>
+        <listdate value="Sun, 04 Mar 2018 17:30:21 +0000" />
+        <price currency="EUR" value="35.00" />
+        <condition value="new" />
+        <notes value="" />
+        <link href="https://boardgamegeek.com/market/product/1438056" title="marketlisting" />
+      </listing>
+      <listing>
+        <listdate value="Tue, 10 Apr 2018 07:26:51 +0000" />
+        <price currency="EUR" value="5.00" />
+        <condition value="verygood" />
+        <notes value="" />
+        <link href="https://boardgamegeek.com/market/product/1464613" title="marketlisting" />
+      </listing>
+      <listing>
+        <listdate value="Tue, 01 Sep 2020 12:38:44 +0000" />
+        <price currency="EUR" value="9.00" />
+        <condition value="good" />
+        <notes value="+ ITA rules" />
+        <link href="https://boardgamegeek.com/market/product/2301831" title="marketlisting" />
+      </listing>
+      <listing>
+        <listdate value="Wed, 02 Sep 2020 09:00:57 +0000" />
+        <price currency="GBP" value="3.00" />
+        <condition value="verygood" />
+        <notes value="" />
+        <link href="https://boardgamegeek.com/market/product/2302500" title="marketlisting" />
+      </listing>
+      <listing>
+        <listdate value="Sun, 10 Jan 2021 16:42:25 +0000" />
+        <price currency="EUR" value="10.00" />
+        <condition value="verygood" />
+        <notes value="Complete
+Very good shape
+Box has minor shelfwear
+Dutch edition
+
+
+I pay the Geekcommission, you pay the Paypalcosts" />
+        <link href="https://boardgamegeek.com/market/product/2426709" title="marketlisting" />
+      </listing>
+      <listing>
+        <listdate value="Mon, 23 May 2022 10:00:57 +0000" />
+        <price currency="GBP" value="5.00" />
+        <condition value="verygood" />
+        <notes value="Complete and in very good condition.
+Will send to UK addresses. Estimate postage at £5. Welcome collection - live close to Junction 10 of M1." />
+        <link href="https://boardgamegeek.com/market/product/2875644" title="marketlisting" />
+      </listing>
+      <listing>
+        <listdate value="Fri, 02 Dec 2022 15:37:10 +0000" />
+        <price currency="EUR" value="12.00" />
+        <condition value="verygood" />
+        <notes value="SP20-2356" />
+        <link href="https://boardgamegeek.com/market/product/3029853" title="marketlisting" />
+      </listing>
+      <listing>
+        <listdate value="Thu, 07 Dec 2023 11:43:14 +0000" />
+        <price currency="EUR" value="25.00" />
+        <condition value="good" />
+        <notes value="The box shows that it's already old. The box is worn, but the contents are in good condition.
+
+More information and pics:
+https://www.thomastechnologie.com/add-tovabb/" />
+        <link href="https://boardgamegeek.com/market/product/3332815" title="marketlisting" />
+      </listing>
+      <listing>
+        <listdate value="Fri, 07 Jun 2024 23:55:06 +0000" />
+        <price currency="EUR" value="5.00" />
+        <condition value="verygood" />
+        <notes value="" />
+        <link href="https://boardgamegeek.com/market/product/3472814" title="marketlisting" />
+      </listing>
+      <listing>
+        <listdate value="Sat, 08 Feb 2025 21:17:32 +0000" />
+        <price currency="EUR" value="5.00" />
+        <condition value="good" />
+        <notes value="German rules.
+
+Feel free to ask for more details or photos!
+
+Information regarding payment, shipping, pickup (in 1110 or 2514), discounts... see below, at the &quot;Seller Notes&quot;-section.
+
+See all my other games for sale! https://boardgamegeek.com/market/user/m19Oe?pageid=1 and following pages." />
+        <link href="https://boardgamegeek.com/market/product/3666919" title="marketlisting" />
+      </listing>
+      <listing>
+        <listdate value="Fri, 16 May 2025 11:07:40 +0000" />
+        <price currency="EUR" value="6.00" />
+        <condition value="good" />
+        <notes value="sp17-990" />
+        <link href="https://boardgamegeek.com/market/product/3748044" title="marketlisting" />
+      </listing>
+      <listing>
+        <listdate value="Wed, 22 Oct 2025 10:13:37 +0000" />
+        <price currency="EUR" value="2.00" />
+        <condition value="acceptable" />
+        <notes value="Please enter your country and I will tell you the current shipping costs
+Anyone who buys 3 games gets a 5% discount on the games.
+Anyone who buys 6 or more games gets a 10% discount on the games.
+If you buy 3 or more games that are not in their original packaging, you get 15% off the games.
+
+
+
+geben sie ihr Land an und ich Teile Ihnen die aktuellen Versandkosten mit
+wer 3 Spiele kauft, bekommt 5% Rabatt auf die Spiele.
+wer 6 Spiele oder mehr kauft, bekommt 10% Rabatt auf die Spiele
+Wer 3 Spiele oder mehr kauft, die nicht OVP sind bekommt 15% auf die Spiele." />
+        <link href="https://boardgamegeek.com/market/product/3860842" title="marketlisting" />
+      </listing>
+      <listing>
+        <listdate value="Wed, 28 Jan 2026 17:07:02 +0000" />
+        <price currency="EUR" value="6.50" />
+        <condition value="good" />
+        <notes value="German Parker 'Cosa Nostra' edition. Components are language independent.
+
+Box shows some wear. Inside everything there in very good condition." />
+        <link href="https://boardgamegeek.com/market/product/3946419" title="marketlisting" />
+      </listing>
+    </marketplacelistings>
+  </item>
+</items>

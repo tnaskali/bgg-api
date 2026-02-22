@@ -48,7 +48,7 @@ public class PersonResourceV1IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200 with message Item not found")
     class Given_1 {
 
-      final String mockResponseBody = readFileContent("responses/api/v1/person/200_NOT_FOUND.xml");
+      final String mockResponseBody = readFileContent("responses/bgg/xmlapi/v1/person/200_NOT_FOUND.xml");
 
       @BeforeEach
       public void setup() {
@@ -86,7 +86,7 @@ public class PersonResourceV1IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given_2 {
 
-      final String mockResponseBody = readFileContent("responses/api/v1/person/200_OK.xml");
+      final String mockResponseBody = readFileContent("responses/bgg/xmlapi/v1/person/200_OK.xml");
 
       @BeforeEach
       public void setup() {

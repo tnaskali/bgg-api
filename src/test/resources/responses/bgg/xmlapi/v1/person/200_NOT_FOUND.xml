@@ -1,0 +1,6 @@
+<!-- /xmlapi/person/10000000 -->
+<people termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+  <person>
+    <error message="Item not found"/>
+  </person>
+</people>

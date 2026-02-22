@@ -1,0 +1,873 @@
+<!-- /xmlapi/boardgame/822 -->
+<boardgames termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+  <boardgame objectid="822">
+    <yearpublished>2000</yearpublished>
+    <minplayers>2</minplayers>
+    <maxplayers>5</maxplayers>
+    <playingtime>45</playingtime>
+    <minplaytime>30</minplaytime>
+    <maxplaytime>45</maxplaytime>
+    <age>7</age>
+    <name primary="true" sortindex="1">Carcassonne</name>
+    <name  sortindex="1">Carcassonne da viaggio</name>
+    <name  sortindex="1">Carcassonne de voyage</name>
+    <name  sortindex="1">Carcassonne Jubilee Edition</name>
+    <name  sortindex="1">Carcassonne: Plus</name>
+    <name  sortindex="1">Carcassonne: Reiseditie</name>
+    <name  sortindex="1">Domínio de Carcassonne</name>
+    <name  sortindex="1">Reise-Carcassonne</name>
+    <name  sortindex="1">Travel Carcassonne</name>
+    <name  sortindex="1">Τα Κάστρα του Μυστρά</name>
+    <name  sortindex="1">Каркасон</name>
+    <name  sortindex="1">Каркасон</name>
+    <name  sortindex="1">Каркассон</name>
+    <name  sortindex="1">Средневековье</name>
+    <name  sortindex="1">קרקסון</name>
+    <name  sortindex="1">كاركاسون</name>
+    <name  sortindex="1">คาร์คาซอนน์</name>
+    <name  sortindex="1">カルカソンヌ</name>
+    <name  sortindex="1">カルカソンヌ21</name>
+    <name  sortindex="1">カルカソンヌＪ</name>
+    <name  sortindex="1">卡卡頌</name>
+    <name  sortindex="1">卡卡颂</name>
+    <name  sortindex="1">카르카손</name>
+    <description>Carcassonne is a tile placement game in which the players draw and place a tile with a piece of southern French landscape represented on it. The tile might feature a city, a road, a cloister, grassland or some combination thereof, and it must be placed adjacent to tiles that have already been played, in such a way that cities are connected to cities, roads to roads, et cetera. Having placed a tile, the player can then decide to place one of their meeples in one of the areas on it: in the city as a knight, on the road as a robber, in the cloister as a monk, or in the field as a farmer. When that area is complete that meeple scores points for its owner.
+
+      During a game of Carcassonne, players are faced with decisions like: "Is it really worth putting my last meeple there?" or "Should I use this tile to expand my city, or should I place it near my opponent instead, thus making it a harder for them to complete it and score points?" Since players place only one tile and have the option to place one meeple on it, turns proceed quickly even if it is a game full of options and possibilities.
+
+      First game in the Carcassonne series.
+
+    </description>
+    <thumbnail>https://cf.geekdo-images.com/peUgu3A20LRmAXAMyDQfpQ__small/img/oEEslN-EGqh82sNI6Aj4_MFXYg0=/fit-in/200x150/filters:strip_icc()/pic8621446.jpg</thumbnail>
+    <image>https://cf.geekdo-images.com/peUgu3A20LRmAXAMyDQfpQ__original/img/bP18m_PYjyFOv1IBGgMOteQUneA=/0x0/filters:format(jpeg)/pic8621446.jpg</image>
+    <boardgamehonor objectid="8663">2001 Spiel des Jahres Winner</boardgamehonor>
+    <boardgamepublisher objectid="133">Hans im Glück</boardgamepublisher>
+    <boardgamepodcastepisode objectid="284137">[Sortons le grand jeu] Carcassonne – Klaus-Jürgen Wrede</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="416934">#35 - Whodunnit?</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="553035">#37 Playing Through Your Shelf of Shame</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="167106">10-19-15: Galaxy of Trian, Carcassonne on tap, Sylvion, Essen 2015, Big Beer Buyout</boardgamepodcastepisode>
+    <boardgameexpansion objectid="167903">20 Jahre Darmstadt Spielt</boardgameexpansion>
+    <boardgamehonor objectid="107331">2000 Meeples Choice Award Nominee</boardgamehonor>
+    <boardgamehonor objectid="13416">2000 Meeples Choice Award Winner</boardgamehonor>
+    <boardgamehonor objectid="19830">2001 Deutscher Spiele Preis Best Family/Adult Game Winner</boardgamehonor>
+    <boardgamehonor objectid="12816">2001 International Gamers Awards - General Strategy; Multi-player Nominee</boardgamehonor>
+    <boardgamehonor objectid="13145">2001 Nederlandse Spellenprijs Nominee</boardgamehonor>
+    <boardgamehonor objectid="12236">2001 Spiel der Spiele Hit mit Freunden Recommended</boardgamehonor>
+    <boardgamehonor objectid="8664">2001 Spiel des Jahres Nominee</boardgamehonor>
+    <boardgamehonor objectid="9122">2002 Årets Spel Best Family Game Winner</boardgamehonor>
+    <boardgamehonor objectid="13155">2004 Hra roku Nominee</boardgamehonor>
+    <boardgamehonor objectid="12899">2004 Vuoden Peli Family Game of the Year Nominee</boardgamehonor>
+    <boardgamehonor objectid="12575">2004 Vuoden Peli Family Game of the Year Winner</boardgamehonor>
+    <boardgamehonor objectid="65419">2011 Jocul Anului în România Best Game in Romanian Finalist</boardgamehonor>
+    <boardgamehonor objectid="22606">2012 Ludo Award Best Board Game Editor&#039;s Choice Winner</boardgamehonor>
+    <cardset objectid="84083">2014 and earlier editions with River expansion; MINDOK Polish (2015) and Hans im Glück &#039;Book&#039; (2018) editions</cardset>
+    <boardgamehonor objectid="109049">2025 BoardGameGeek Hall of Fame Inductee</boardgamehonor>
+    <boardgamepodcastepisode objectid="187308">25 – The Family Gamers Podcast – Solo play</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="86468">28 Games Later: Carcassonne</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="168555">30: Twelve Days of Boardgames</boardgamepodcastepisode>
+    <boardgamepublisher objectid="24874">64 Ounce Games</boardgamepublisher>
+    <boardgamepublisher objectid="267">999 Games</boardgamepublisher>
+    <cardset objectid="110019">999 Games Dutch edition with monasteries (2014)</cardset>
+    <boardgameaccessory objectid="289598">The Adults of Carcassonne</boardgameaccessory>
+    <boardgamepublisher objectid="4304">Albi</boardgamepublisher>
+    <boardgameversion objectid="31146">Albi Polish edition 2001</boardgameversion>
+    <cardset objectid="109063">All 2015 and later editions, other than those with their own card sets</cardset>
+    <boardgameexpansion objectid="376556">Antwerpen (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="318136">Apothecaries (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="248789">Apothecaries and Tithes (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameversion objectid="518799">Arabic/English edition</boardgameversion>
+    <boardgameexpansion objectid="362915">Archery Tournament (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamemechanic objectid="2080">Area Majority / Influence</boardgamemechanic>
+    <boardgameimplementation objectid="6779">The Ark of the Covenant</boardgameimplementation>
+    <boardgamepublisher objectid="7340">Astrel Games</boardgamepublisher>
+    <boardgamepodcastepisode objectid="190531">Bad Detectives</boardgamepodcastepisode>
+    <boardgameversion objectid="517872">Baltic edition</boardgameversion>
+    <boardgameversion objectid="517871">Baltic edition 2005 (with River expansion)</boardgameversion>
+    <boardgameversion objectid="24686">Baltic edition 2008 (with River expansion)</boardgameversion>
+    <boardgameversion objectid="141689">Baltic edition 2011</boardgameversion>
+    <boardgameversion objectid="550258">Baltic edition 2013</boardgameversion>
+    <boardgameversion objectid="333422">Baltic edition 2015</boardgameversion>
+    <boardgameversion objectid="729787">Baltic edition 2021</boardgameversion>
+    <boardgameversion objectid="352112">Baltic first edition</boardgameversion>
+    <boardgamepublisher objectid="9074">Bard Centrum Gier</boardgamepublisher>
+    <boardgameversion objectid="647341">Basque edition 2020</boardgameversion>
+    <boardgameexpansion objectid="318408">Die Bettler (fan-erweiterung für Carcassonne)</boardgameexpansion>
+    <boardgamepodcastepisode objectid="135837">BGA Ep 51 - King of Tokyo vs. King of New York</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="177525">BGA Episode 100 - Top 100 Games of All Time</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="209764">BGP 007: Top 5 Tile Placement Games</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="86306">BGTG - April 22, 2005 (Family boardgaming)</boardgamepodcastepisode>
+    <boardgameexpansion objectid="302315">The Big Black Pig Escape (fan expansion to Carcassonne)</boardgameexpansion>
+    <boardgamepodcastepisode objectid="325098">Black Friday Bonus Episode</boardgamepodcastepisode>
+    <boardgameexpansion objectid="447763">The Black Rider</boardgameexpansion>
+    <boardgamepodcastepisode objectid="258074">Board Game Buffet#29 &quot;Economic and Tile Laying Games&quot;</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="408885">Bonusepisode: Børn og brætspil</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="541011">Boxfart! Episode 3</boardgamepodcastepisode>
+    <boardgameversion objectid="743776">Braille edition</boardgameversion>
+    <boardgamepublisher objectid="7162">Brain Games</boardgamepublisher>
+    <boardgameversion objectid="174799">Brazilian edition 2012</boardgameversion>
+    <boardgameversion objectid="250072">Brazilian second edition 2014 with standard box</boardgameversion>
+    <boardgameexpansion objectid="248790">Breweries (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameversion objectid="241932">Bulgarian edition</boardgameversion>
+    <boardgameversion objectid="289200">Bulgarian second edition</boardgameversion>
+    <boardgamepodcastepisode objectid="67074">Carcassone with Art Tebbel on Pizza Games and Zombies Podcast (Papa John’s Pizza)</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="61406">Carcassonne</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="162461">Carcassonne</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="290916">Carcassonne</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="527972">Carcassonne</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="401235">Carcassonne - A Funny Thing Keeps Happening</boardgamepodcastepisode>
+    <videogamebg objectid="241534">Carcassonne - Tiles &amp; Tactics</videogamebg>
+    <videogamebg objectid="69072">Carcassonne (2007)</videogamebg>
+    <videogamebg objectid="79400">Carcassonne (2009 / DS)</videogamebg>
+    <videogamebg objectid="125174">Carcassonne (2010)</videogamebg>
+    <videogamebg objectid="311833">Carcassonne (2011)</videogamebg>
+    <boardgamecompilation objectid="142057">Carcassonne Big Box</boardgamecompilation>
+    <boardgamecompilation objectid="141008">Carcassonne Big Box 2</boardgamecompilation>
+    <boardgamecompilation objectid="141007">Carcassonne Big Box 3</boardgamecompilation>
+    <boardgamecompilation objectid="140711">Carcassonne Big Box 4</boardgamecompilation>
+    <boardgamecompilation objectid="164127">Carcassonne Big Box 5</boardgamecompilation>
+    <boardgamecompilation objectid="230914">Carcassonne Big Box 6</boardgamecompilation>
+    <boardgamecompilation objectid="364405">Carcassonne Big Box 7</boardgamecompilation>
+    <boardgameimplementation objectid="137492">Carcassonne Demo</boardgameimplementation>
+    <boardgameimplementation objectid="230751">Carcassonne für 2</boardgameimplementation>
+    <boardgamecompilation objectid="161729">Carcassonne inklusive Händler &amp; Baumeister</boardgamecompilation>
+    <boardgamecompilation objectid="154094">Carcassonne Limited Edition</boardgamecompilation>
+    <boardgameexpansion objectid="291514">Carcassonne Maps: Benelux</boardgameexpansion>
+    <boardgameexpansion objectid="291518">Carcassonne Maps: Chips</boardgameexpansion>
+    <boardgameexpansion objectid="276673">Carcassonne Maps: Deutschland</boardgameexpansion>
+    <boardgameexpansion objectid="291512">Carcassonne Maps: France</boardgameexpansion>
+    <boardgameexpansion objectid="291515">Carcassonne Maps: Great Britain</boardgameexpansion>
+    <boardgameexpansion objectid="388042">Carcassonne Maps: Nordics</boardgameexpansion>
+    <boardgameexpansion objectid="291516">Carcassonne Maps: Península Ibérica</boardgameexpansion>
+    <boardgameexpansion objectid="349185">Carcassonne Maps: Taiwan</boardgameexpansion>
+    <boardgameexpansion objectid="372322">Carcassonne Maps: Ukraine</boardgameexpansion>
+    <boardgameexpansion objectid="322457">Carcassonne Maps: USA East</boardgameexpansion>
+    <boardgameexpansion objectid="322458">Carcassonne Maps: USA West</boardgameexpansion>
+    <boardgamecompilation objectid="147782">Carcassonne Müller Exklusiv-Edition</boardgamecompilation>
+    <boardgamecompilation objectid="89952">Carcassonne: 10 Year Special Edition</boardgamecompilation>
+    <boardgamecompilation objectid="329954">Carcassonne: 20th Anniversary Edition</boardgamecompilation>
+    <boardgameexpansion objectid="400565">Carcassonne: 3D Starting Landscape</boardgameexpansion>
+    <boardgameexpansion objectid="433231">Carcassonne: 4 Seasons – The Autumn</boardgameexpansion>
+    <boardgameexpansion objectid="420726">Carcassonne: 4 Seasons – The Spring</boardgameexpansion>
+    <boardgameexpansion objectid="442633">Carcassonne: 4 Seasons – The Summer</boardgameexpansion>
+    <boardgameaccessory objectid="323606">Carcassonne: 50/100 Scoring Tiles</boardgameaccessory>
+    <boardgameexpansion objectid="31784">Carcassonne: Abbey &amp; Mayor</boardgameexpansion>
+    <boardgameimplementation objectid="206940">Carcassonne: Amazonas</boardgameimplementation>
+    <boardgameexpansion objectid="167744">Carcassonne: Bonusplättchen Spiel 2014</boardgameexpansion>
+    <boardgameexpansion objectid="186143">Carcassonne: Bonusplättchen Spiel 2015</boardgameexpansion>
+    <boardgameexpansion objectid="210799">Carcassonne: Bonusplättchen Spiel 2016</boardgameexpansion>
+    <boardgameexpansion objectid="238416">Carcassonne: Bonusplättchen Spiel 2017</boardgameexpansion>
+    <boardgameexpansion objectid="263941">Carcassonne: Bonusplättchen Spiel 2018</boardgameexpansion>
+    <boardgameexpansion objectid="292749">Carcassonne: Bonusplättchen Spiel 2019</boardgameexpansion>
+    <boardgameexpansion objectid="321496">Carcassonne: Bonusplättchen Spiel 2020</boardgameexpansion>
+    <boardgameexpansion objectid="349121">Carcassonne: Bonusplättchen Spiel 2021</boardgameexpansion>
+    <boardgameexpansion objectid="372334">Carcassonne: Bonusplättchen Spiel 2022</boardgameexpansion>
+    <boardgameexpansion objectid="402965">Carcassonne: Bonusplättchen Spiel 2023</boardgameexpansion>
+    <boardgameexpansion objectid="430140">Carcassonne: Bonusplättchen Spiel 2024</boardgameexpansion>
+    <boardgameexpansion objectid="456854">Carcassonne: Bonusplättchen Spiel 2025</boardgameexpansion>
+    <boardgameaccessory objectid="271421">Carcassonne: Broken Token Organizer</boardgameaccessory>
+    <boardgameaccessory objectid="274244">Carcassonne: Broken Token Organizer – Extra Dividers</boardgameaccessory>
+    <boardgameexpansion objectid="458734">Carcassonne: Castles &amp; Bridges</boardgameexpansion>
+    <boardgameexpansion objectid="175653">Carcassonne: Castles in Germany</boardgameexpansion>
+    <boardgameexpansion objectid="38855">Carcassonne: Catapult</boardgameexpansion>
+    <boardgameexpansion objectid="217006">Carcassonne: Circus &amp; Artists</boardgameexpansion>
+    <boardgameexpansion objectid="120686">Carcassonne: Corn Circles II</boardgameexpansion>
+    <boardgameexpansion objectid="35666">Carcassonne: Cult, Siege &amp; Creativity</boardgameexpansion>
+    <boardgameexpansion objectid="232336">Carcassonne: CutCassonne</boardgameexpansion>
+    <boardgameexpansion objectid="168121">Carcassonne: Darmstadt</boardgameexpansion>
+    <boardgameexpansion objectid="195771">Carcassonne: Das Labyrinth</boardgameexpansion>
+    <boardgameexpansion objectid="59065">Carcassonne: Der Tunnel</boardgameexpansion>
+    <boardgameexpansion objectid="166518">Carcassonne: Die Belagerer</boardgameexpansion>
+    <boardgameexpansion objectid="13300">Carcassonne: Die Katharer</boardgameexpansion>
+    <boardgameexpansion objectid="67055">Carcassonne: Die Kornkreise</boardgameexpansion>
+    <boardgameexpansion objectid="199988">Carcassonne: Die Wahrsagerin</boardgameexpansion>
+    <boardgameexpansion objectid="131676">Carcassonne: Die Windrosen</boardgameexpansion>
+    <boardgameexpansion objectid="15158">Carcassonne: Dragon &amp; Fairy</boardgameexpansion>
+    <boardgameaccessory objectid="308977">Carcassonne: e-Raptor Insert</boardgameaccessory>
+    <boardgameexpansion objectid="184578">Carcassonne: Easter in Carcassonne</boardgameexpansion>
+    <boardgameexpansion objectid="33458">Carcassonne: Expansion 6 – Count, King &amp; Robber</boardgameexpansion>
+    <boardgameexpansion objectid="66646">Carcassonne: Expansion 8 – Bridges, Castles and Bazaars</boardgameexpansion>
+    <boardgameaccessory objectid="239508">Carcassonne: Faltschachtel-Set für Mini-Erweiterungen</boardgameaccessory>
+    <boardgameaccessory objectid="306365">Carcassonne: Folded Space Insert</boardgameaccessory>
+    <boardgameaccessory objectid="189469">Carcassonne: GameGuard Organizer</boardgameaccessory>
+    <boardgameexpansion objectid="196080">Carcassonne: German Cathedrals</boardgameexpansion>
+    <boardgameimplementation objectid="163370">Carcassonne: Gold Rush</boardgameimplementation>
+    <boardgameexpansion objectid="26615">Carcassonne: GQ Promo Tiles</boardgameexpansion>
+    <boardgameexpansion objectid="309267">Carcassonne: Halb so Wild</boardgameexpansion>
+    <boardgameexpansion objectid="166052">Carcassonne: Halb so wild I</boardgameexpansion>
+    <boardgameexpansion objectid="169392">Carcassonne: Halb so wild II</boardgameexpansion>
+    <boardgameimplementation objectid="4390">Carcassonne: Hunters and Gatherers</boardgameimplementation>
+    <boardgameexpansion objectid="2993">Carcassonne: Inns &amp; Cathedrals</boardgameexpansion>
+    <boardgameexpansion objectid="455826">Carcassonne: Jousts &amp; Crests</boardgameexpansion>
+    <boardgameexpansion objectid="373289">Carcassonne: Karácsonyi ajándék</boardgameexpansion>
+    <boardgameexpansion objectid="7707">Carcassonne: King &amp; Scout</boardgameexpansion>
+    <boardgameexpansion objectid="158041">Carcassonne: Klöster in Deutschland</boardgameexpansion>
+    <boardgameexpansion objectid="24506">Carcassonne: Kreivi ja Kuningas</boardgameexpansion>
+    <boardgameexpansion objectid="72295">Carcassonne: La Porxada</boardgameexpansion>
+    <boardgameaccessory objectid="142934">Carcassonne: Le Sac</boardgameaccessory>
+    <boardgameexpansion objectid="130998">Carcassonne: Little Buildings</boardgameexpansion>
+    <boardgameexpansion objectid="118618">Carcassonne: Mage &amp; Witch</boardgameexpansion>
+    <boardgameexpansion objectid="435141">Carcassonne: Medina Azahara</boardgameexpansion>
+    <boardgameaccessory objectid="295890">Carcassonne: Meeple Flags</boardgameaccessory>
+    <boardgameaccessory objectid="138364">Carcassonne: Meeple Stickers</boardgameaccessory>
+    <boardgameaccessory objectid="379198">Carcassonne: Meeple-bags in a set</boardgameaccessory>
+    <boardgameaccessory objectid="156477">Carcassonne: Meeples</boardgameaccessory>
+    <boardgameexpansion objectid="458641">Carcassonne: Messengers &amp; Mayors</boardgameexpansion>
+    <boardgameexpansion objectid="414486">Carcassonne: Mini-Bundle I</boardgameexpansion>
+    <boardgameexpansion objectid="215144">Каркассон: Соловей-Разбойник и Водяной (Carcassonne: Nightingale the Robber and the Water Spirit)</boardgameexpansion>
+    <boardgameexpansion objectid="215210">Carcassonne: Nikolaus-Zählleiste</boardgameexpansion>
+    <boardgameimplementation objectid="182082">Carcassonne: Over Hill and Dale</boardgameimplementation>
+    <boardgameexpansion objectid="367759">Carcassonne: Promo Carcassonne Spain 2022</boardgameexpansion>
+    <videogamebg objectid="147185">Carcassonne: Ritter, Räuber, Ränkeschmiede</videogamebg>
+    <boardgameimplementation objectid="256065">Carcassonne: Safari</boardgameimplementation>
+    <boardgameaccessory objectid="352661">Carcassonne: Scoring Flags</boardgameaccessory>
+    <boardgameexpansion objectid="153773">Carcassonne: Sheep &amp; Shepherds</boardgameexpansion>
+    <boardgameexpansion objectid="451659">Carcassonne: Siege &amp; Defense</boardgameexpansion>
+    <boardgameexpansion objectid="420727">Carcassonne: Snakes and Ladders</boardgameexpansion>
+    <boardgameimplementation objectid="147303">Carcassonne: South Seas</boardgameimplementation>
+    <boardgameexpansion objectid="260589">Carcassonne: Spiel Doch Mini Expansion</boardgameexpansion>
+    <boardgameexpansion objectid="331479">Carcassonne: Spiel Doch! Expansion</boardgameexpansion>
+    <boardgameimplementation objectid="180564">Carcassonne: Star Wars</boardgameimplementation>
+    <boardgameexpansion objectid="186144">Carcassonne: Starttableau</boardgameexpansion>
+    <boardgameaccessory objectid="176847">Carcassonne: Stoffbeutel</boardgameaccessory>
+    <videogamebg objectid="268011">Carcassonne: The Abbot</videogamebg>
+    <boardgameexpansion objectid="456446">Carcassonne: The Abbot</boardgameexpansion>
+    <boardgameexpansion objectid="262563">Carcassonne: The Barber-Surgeons</boardgameexpansion>
+    <boardgameexpansion objectid="372858">Carcassonne: The Bets</boardgameexpansion>
+    <boardgameimplementation objectid="7717">Carcassonne: The Castle</boardgameimplementation>
+    <boardgameimplementation objectid="12902">Carcassonne: The City</boardgameimplementation>
+    <boardgameexpansion objectid="179919">Carcassonne: The City Gates</boardgameexpansion>
+    <boardgameexpansion objectid="12903">Carcassonne: The Count of Carcassonne</boardgameexpansion>
+    <boardgameexpansion objectid="38431">Carcassonne: The Cult</boardgameexpansion>
+    <boardgameimplementation objectid="16216">Carcassonne: The Discovery</boardgameimplementation>
+    <boardgameexpansion objectid="406740">Carcassonne: The Drawbridges</boardgameexpansion>
+    <boardgameexpansion objectid="118614">Carcassonne: The Ferries</boardgameexpansion>
+    <boardgameexpansion objectid="123905">Carcassonne: The Festival</boardgameexpansion>
+    <boardgameexpansion objectid="118615">Carcassonne: The Flying Machines</boardgameexpansion>
+    <boardgameexpansion objectid="248979">Carcassonne: The Fruit-Bearing Trees</boardgameexpansion>
+    <boardgameaccessory objectid="348556">Carcassonne: The GiftForge All-in Insert</boardgameaccessory>
+    <boardgameaccessory objectid="348555">Carcassonne: The GiftForge Insert</boardgameaccessory>
+    <boardgameexpansion objectid="349162">Carcassonne: The Gifts</boardgameexpansion>
+    <boardgameexpansion objectid="118617">Carcassonne: The Gold Mines</boardgameexpansion>
+    <boardgameexpansion objectid="308636">Carcassonne: The Land Surveyors</boardgameexpansion>
+    <boardgameexpansion objectid="235057">Carcassonne: The Markets of Leipzig</boardgameexpansion>
+    <boardgameexpansion objectid="118619">Carcassonne: The Messengers</boardgameexpansion>
+    <boardgameexpansion objectid="324940">Carcassonne: The Peasant Revolts</boardgameexpansion>
+    <boardgameexpansion objectid="92332">Carcassonne: The Phantom</boardgameexpansion>
+    <boardgameexpansion objectid="85003">Carcassonne: The Plague</boardgameexpansion>
+    <boardgameexpansion objectid="2591">Carcassonne: The River</boardgameexpansion>
+    <boardgameexpansion objectid="18836">Carcassonne: The River II</boardgameexpansion>
+    <boardgameexpansion objectid="118616">Carcassonne: The Robbers</boardgameexpansion>
+    <boardgameexpansion objectid="104634">Carcassonne: The School</boardgameexpansion>
+    <boardgameexpansion objectid="352169">Carcassonne: The Signposts</boardgameexpansion>
+    <boardgameexpansion objectid="291517">Carcassonne: The Tollkeepers</boardgameexpansion>
+    <boardgameaccessory objectid="323607">Carcassonne: The Tower</boardgameaccessory>
+    <boardgameexpansion objectid="211023">Carcassonne: The Watchtowers</boardgameexpansion>
+    <boardgameexpansion objectid="400738">Carcassonne: The Wonders of Humanity</boardgameexpansion>
+    <boardgameexpansion objectid="428459">Carcassonne: The Wonders of Humanity Set II</boardgameexpansion>
+    <boardgameexpansion objectid="459193">Carcassonne: The Wonders of Humanity Set III</boardgameexpansion>
+    <boardgameaccessory objectid="330075">Carcassonne: Tile Tower Dispenser</boardgameaccessory>
+    <boardgameaccessory objectid="271752">Carcassonne: Tower Rex Organizer</boardgameaccessory>
+    <boardgameaccessory objectid="273596">Carcassonne: Tower Rex Travel Box</boardgameaccessory>
+    <boardgameexpansion objectid="21385">Carcassonne: Towers &amp; Thieves</boardgameexpansion>
+    <boardgameexpansion objectid="5405">Carcassonne: Traders &amp; Builders</boardgameexpansion>
+    <boardgameexpansion objectid="372336">Carcassonne: Ukraine Promo Tile</boardgameexpansion>
+    <boardgameaccessory objectid="453126">Carcassonne: Wertungsfähnchen</boardgameaccessory>
+    <boardgameintegration objectid="45748">Carcassonne: Wheel of Fortune</boardgameintegration>
+    <boardgameimplementation objectid="131014">Carcassonne: Winter Edition</boardgameimplementation>
+    <boardgameaccessory objectid="197502">Carcassonne: Zähltafel &quot;Magneto&quot;</boardgameaccessory>
+    <boardgameexpansion objectid="302920">Castles in Hungary (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameversion objectid="112265">Catalan edition 2011</boardgameversion>
+    <boardgameversion objectid="769979">Catalan edition 2021</boardgameversion>
+    <boardgameversion objectid="275419">Catalan second edition 2015</boardgameversion>
+    <boardgamefamily objectid="77906">Category: Dized Tutorial</boardgamefamily>
+    <boardgameexpansion objectid="376550">Celestial Events (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameversion objectid="81643">Chinese edition 2009</boardgameversion>
+    <boardgameversion objectid="518156">Chinese edition 2010</boardgameversion>
+    <boardgameversion objectid="269127">Chinese edition 2014</boardgameversion>
+    <boardgameversion objectid="507630">Chinese edition 2016</boardgameversion>
+    <boardgameversion objectid="630353">Chinese edition 2022</boardgameversion>
+    <boardgameexpansion objectid="320469">Circles in the Forest (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamefamily objectid="67858">Cities: Carcassonne (France)</boardgamefamily>
+    <boardgameexpansion objectid="340341">Cleric and Serf (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="320439">The Coast (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepodcastepisode objectid="196103">Colt Express</boardgamepodcastepisode>
+    <boardgamefamily objectid="79006">Components:  Meeples</boardgamefamily>
+    <boardgamefamily objectid="81601">Components: Map (Regional scale)</boardgamefamily>
+    <boardgamefamily objectid="68769">Components: Wooden pieces &amp; boards</boardgamefamily>
+    <boardgameexpansion objectid="362781">The Constable (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamefamily objectid="109935">Containers: Tin/Metal Box</boardgamefamily>
+    <boardgameexpansion objectid="248791">Corn Circles 3 (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="376551">Cosmic Portal: Mirror Zone (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamefamily objectid="11006">Country: France</boardgamefamily>
+    <boardgamepodcastepisode objectid="188794">Cult of the New Board Game Podcast Episode 000 (2016) – Top 25 Games</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="161551">Cult of the New Board Game Podcast Episode 001</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="185826">Cult of the New Board Game Podcast Episode 024 – Top 10 iOS Games</boardgamepodcastepisode>
+    <boardgamepublisher objectid="24631">cutia.ro</boardgamepublisher>
+    <boardgameversion objectid="192405">Czech edition 2001</boardgameversion>
+    <boardgameversion objectid="518111">Czech edition 2004</boardgameversion>
+    <boardgameversion objectid="192423">Czech edition 2005</boardgameversion>
+    <boardgameversion objectid="518100">Czech edition 2009</boardgameversion>
+    <boardgameversion objectid="518103">Czech edition 2012</boardgameversion>
+    <boardgameversion objectid="780996">Czech edition 2025</boardgameversion>
+    <boardgameversion objectid="331886">Czech/Slovak second edition 2015</boardgameversion>
+    <boardgamepodcastepisode objectid="6057">D6G Episode 12: Carcassone, What makes a good board game, Raef&#039;s Round Table</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="495740">DDP 106 Trees, Bees, Worms, and space in-between</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="446024">Der Kleine Wurf - SpieleWahnsinn Herne 2022</boardgamepodcastepisode>
+    <boardgamepublisher objectid="2366">Devir</boardgamepublisher>
+    <boardgamefamily objectid="104952">Digital Implementations: Apple App Store</boardgamefamily>
+    <boardgamefamily objectid="70360">Digital Implementations: Board Game Arena</boardgamefamily>
+    <boardgamefamily objectid="76458">Digital Implementations: BrettspielWelt</boardgamefamily>
+    <boardgamefamily objectid="78432">Digital Implementations: Google Play</boardgamefamily>
+    <boardgamefamily objectid="77349">Digital Implementations: Steam</boardgamefamily>
+    <boardgamefamily objectid="81575">Digital Implementations: VASSAL</boardgamefamily>
+    <boardgameexpansion objectid="320437">Divided Cities (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepodcastepisode objectid="137728">DJ73: Campionats a Sant Andreu de la Barca</boardgamepodcastepisode>
+    <boardgameexpansion objectid="340399">Dragon Hunters (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="335282">Dragon Killers (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="318438">Dragon Rider Slayer (fan expansion for Carcassonne: The Princess &amp; The Dragon)</boardgameexpansion>
+    <boardgamepodcastepisode objectid="161041">Dragon’s Demize Podcast Episode 3 – Carcassonne</boardgamepodcastepisode>
+    <boardgameexpansion objectid="248793">Drought and Pestilence (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="362694">Dual Dragon (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepodcastepisode objectid="103482">Durchgespielt – Spiel des Jahres 2001: Carcassonne</boardgamepodcastepisode>
+    <boardgameversion objectid="21194">Dutch edition 2000</boardgameversion>
+    <boardgameversion objectid="287528">Dutch edition 2005</boardgameversion>
+    <boardgameversion objectid="259618">Dutch edition 2014</boardgameversion>
+    <boardgameversion objectid="517602">Dutch edition 2014 with monasteries expansion</boardgameversion>
+    <boardgameversion objectid="298277">Dutch edition 2016</boardgameversion>
+    <boardgameversion objectid="523060">Dutch edition 2020</boardgameversion>
+    <boardgameversion objectid="693877">Dutch edition 2021</boardgameversion>
+    <boardgameversion objectid="34487">Dutch first edition</boardgameversion>
+    <boardgameversion objectid="275855">Dutch second edition with scoretrack on the box</boardgameversion>
+    <boardgameversion objectid="775052">Dutch/English edition</boardgameversion>
+    <boardgameexpansion objectid="318402">Eisenbahn (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamemechanic objectid="2043">Enclosure</boardgamemechanic>
+    <boardgameversion objectid="51314">English edition</boardgameversion>
+    <boardgameversion objectid="32872">English edition 2000</boardgameversion>
+    <boardgameversion objectid="197410">English edition 2000 with River</boardgameversion>
+    <boardgameversion objectid="23959">English edition 2001 with River</boardgameversion>
+    <boardgameversion objectid="170612">English edition 2002 with River</boardgameversion>
+    <boardgameversion objectid="187468">English edition 2012 with River</boardgameversion>
+    <boardgameversion objectid="259791">English edition 2014</boardgameversion>
+    <boardgameversion objectid="474895">English edition 2016</boardgameversion>
+    <boardgameversion objectid="523056">English edition 2020</boardgameversion>
+    <boardgameversion objectid="627422">English edition 2022</boardgameversion>
+    <boardgameversion objectid="733210">English edition 2024</boardgameversion>
+    <boardgameversion objectid="775899">English edition 2025</boardgameversion>
+    <boardgameversion objectid="76856">English third edition</boardgameversion>
+    <boardgamepublisher objectid="6784">Enigma (Bergsala Enigma)</boardgamepublisher>
+    <boardgamepodcastepisode objectid="179856">Ep 031 – Asmodee, Apps, and our Top 5 Euro Games of All Time</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="187317">Ep 2 - Recommended Games for Playing with Your Family</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="350891">Ep 24- Top 3 Games From The 20th Century</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="377454">Ep 33- A Christmas Trainwreck &amp;amp; An Important Announcement</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="161332">Ep_006 – The Crew is Forced to Choose 5 Board Games</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="227747">Episode #29: Relaxing Games</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="436119">Episode 0: Introduction &amp;amp; Top 5 Games That Influenced Us</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="90419">Episode 003</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="182656">Episode 1 - Conventions</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="19528">Episode 1 - News and Carcassonne</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="143018">Episode 1 - Our Introduction Into Gaming</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="371997">EPISODE 100!! Carcassonne, Scotland Yard, Risk: Godstorm, Cosmic Encounter, Acquire, Ticket to Ride, Arkham Horror, Catan, Lords of Waterdeep</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="295966">Episode 17 - Res Arcana and 10 Essential Games</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="302954">Episode 20 - Top 50 Games Part 1</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="245495">Episode 21: Prolific Expansions</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="463362">Episode 26: Top 30 Countdown, Part I (30-21)</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="134652">Episode 4: Star Wars: Imperial Assault, Neuroshima Hex Contest, Castles of Mad King Ludwig and Medieval Night</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="253986">Episode 4. Carcassonne, MindTrap And Angry Birds Card Game</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="198202">Episode 44 :: Gloomhaven Review - Granite Game Summit</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="500286">Episode 49: Games Into Horror Movies</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="213602">Episode 58 :: Codenames Duet Review + Kingdomino Review</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="229796">Episode 67 :: Godfather Review + Top 21-30 Board Games</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="241767">Episode 74 :: Our Favorite Board Games (21-50) + Origins Meetup Discussion</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="560370">Episode 80: The board game roast!!!</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="152200">Episode 9 - Carcassonne</boardgamepodcastepisode>
+    <boardgameexpansion objectid="320374">Die Eroberer (fan Expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepodcastepisode objectid="131891">Essen 2014 - Hans im Glück</boardgamepodcastepisode>
+    <boardgameexpansion objectid="340828">Evergreen Forest (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="336761">Family Feud (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamesubdomain objectid="5499">Family Games</boardgamesubdomain>
+    <boardgamepublisher objectid="22560">Fantasmagoria</boardgamepublisher>
+    <boardgamepublisher objectid="36981">Feelindigo</boardgamepublisher>
+    <boardgameexpansion objectid="248795">Fields and Vineyards (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepublisher objectid="5657">Filosofia Éditions</boardgamepublisher>
+    <boardgameversion objectid="269209">Finnish edition 2014</boardgameversion>
+    <boardgameversion objectid="509003">Finnish edition 2016</boardgameversion>
+    <boardgameversion objectid="544353">Finnish edition 2020</boardgameversion>
+    <boardgameversion objectid="772948">Finnish edition 2021</boardgameversion>
+    <boardgameversion objectid="25755">Finnish first edition with River</boardgameversion>
+    <boardgameversion objectid="22244">Finnish second edition</boardgameversion>
+    <boardgameexpansion objectid="317976">Fischerhütte (fan-erweiterung für Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="248798">Fisherman: Angler &amp; Fish Farm (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="248799">Fisherman: Swan Lake (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="248800">Fisherman: Waterfalls (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="337769">Fishing Boats (fan expansion to Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="248801">Forests (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="248802">Forests: An Apple a Day (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="248803">Forests: Fairy Tales (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="248804">Forests: The Forest Fire (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="248805">Forests: Timber! (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameversion objectid="258527">French edition 2014</boardgameversion>
+    <boardgameversion objectid="639343">French edition 2021</boardgameversion>
+    <boardgameversion objectid="85457">French first edition</boardgameversion>
+    <boardgameversion objectid="85459">French second edition</boardgameversion>
+    <boardgameversion objectid="84514">French/Italian edition</boardgameversion>
+    <boardgameexpansion objectid="318048">Friar &amp; Farmhand (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="340450">Fruit Trader (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="248814">The Gallows (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamefamily objectid="2">Game: Carcassonne</boardgamefamily>
+    <boardgamepodcastepisode objectid="80469">GameBreak Audio: Episode #012 - Classically Trained Boardgamers</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="108719">Garrett&#039;s Games 388 - Expansions and Alternatives: Qwirkle, Catan, and Carcassonne</boardgamepodcastepisode>
+    <boardgameversion objectid="24414">German edition 2000</boardgameversion>
+    <boardgameversion objectid="684883">German edition 2001 with big SdJ mark</boardgameversion>
+    <boardgameversion objectid="24418">German edition 2001 with small SdJ mark</boardgameversion>
+    <boardgameversion objectid="25214">German edition 2002</boardgameversion>
+    <boardgameversion objectid="25220">German edition 2004</boardgameversion>
+    <boardgameversion objectid="587017">German edition 2005 with &quot;3 Mio verkauft&quot;</boardgameversion>
+    <boardgameversion objectid="25701">German edition 2008</boardgameversion>
+    <boardgameversion objectid="77319">German edition 2008 &quot;4 Mio verkauft&quot;</boardgameversion>
+    <boardgameversion objectid="91060">German edition 2009 with &quot;6 million sold&quot; meeple mark</boardgameversion>
+    <boardgameversion objectid="24900">German edition 2010 with die Kornkreise</boardgameversion>
+    <boardgameversion objectid="225831">German edition 2012 with &quot;6 Mio verkauft&quot;</boardgameversion>
+    <boardgameversion objectid="227069">German edition 2013</boardgameversion>
+    <boardgameversion objectid="253710">German edition 2014</boardgameversion>
+    <boardgameversion objectid="332061">German edition 2016</boardgameversion>
+    <boardgameversion objectid="518288">German edition 2020</boardgameversion>
+    <boardgameversion objectid="588317">German edition 2021</boardgameversion>
+    <boardgameversion objectid="36053">German/French/Italian edition</boardgameversion>
+    <boardgamepublisher objectid="5530">Giochi Uniti</boardgamepublisher>
+    <boardgameversion objectid="192421">Giochi Uniti Italian edition</boardgameversion>
+    <boardgameexpansion objectid="248806">Gold Mines (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamecompilation objectid="301201">El Grande &amp; Carcassonne</boardgamecompilation>
+    <boardgamepodcastepisode objectid="464352">Great Games for Giving</boardgamepodcastepisode>
+    <boardgameversion objectid="100203">Greek edition</boardgameversion>
+    <boardgameversion objectid="260397">Greek edition 2014</boardgameversion>
+    <boardgameversion objectid="303039">Greek edition 2015</boardgameversion>
+    <boardgameversion objectid="649153">Greek edition 2020</boardgameversion>
+    <boardgameversion objectid="639928">Greek edition 2022</boardgameversion>
+    <boardgameversion objectid="686523">Greek/Serbian edition 2014</boardgameversion>
+    <boardgameexpansion objectid="248815">The Grim Reaple (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameartist objectid="127899">Marcel Gröber</boardgameartist>
+    <boardgamepublisher objectid="858">Grow Jogos e Brinquedos</boardgamepublisher>
+    <boardgamepodcastepisode objectid="67354">Guia de compras y recomendaciones de juegos de mesa 2011 Parte 1</boardgamepodcastepisode>
+    <boardgameversion objectid="408243">Hans im Glück book limited edition</boardgameversion>
+    <boardgameversion objectid="241915">Hebrew first edition</boardgameversion>
+    <boardgameversion objectid="518803">Hebrew second edition</boardgameversion>
+    <boardgamepodcastepisode objectid="173281">HLG 1: De Start</boardgamepodcastepisode>
+    <boardgamepublisher objectid="18852">Hobby World</boardgamepublisher>
+    <boardgameexpansion objectid="317988">Holzfäller &amp; Müller (fan-erweiterung für Carcassonne)</boardgameexpansion>
+    <boardgameversion objectid="130761">Hungarian first edition 2000</boardgameversion>
+    <boardgameversion objectid="272170">Hungarian second edition 2015</boardgameversion>
+    <boardgameversion objectid="353133">Hungarian third edition 2017</boardgameversion>
+    <boardgamepodcastepisode objectid="342285">Hvis du kan lide …</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="70098">I&#039;ve Been Diced! episode 27: An expanding universe of expansions</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="446009">I’ve Been Diced! episode 13: Guilty pleasure board games</boardgamepodcastepisode>
+    <boardgameversion objectid="550263">Icelandic edition 2003</boardgameversion>
+    <boardgameversion objectid="517932">Icelandic edition 2018</boardgameversion>
+    <boardgamepodcastepisode objectid="179475">If You Buy One Game - Relaxing Games</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="128924">Il Giocatore - Episodio 4 - Juegos Introductorios</boardgamepodcastepisode>
+    <boardgameexpansion objectid="248808">In the Stocks (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="337445">Inn &amp; Stable Owners (fan expansion to Carcassonne)</boardgameexpansion>
+    <boardgamepublisher objectid="5020">Ísöld ehf.</boardgamepublisher>
+    <boardgameversion objectid="261480">Italian edition 2013</boardgameversion>
+    <boardgameversion objectid="447362">Italian edition 2017</boardgameversion>
+    <boardgameversion objectid="614238">Italian edition 2021</boardgameversion>
+    <boardgameversion objectid="101078">Japanese edition</boardgameversion>
+    <boardgameversion objectid="620131">Japanese edition</boardgameversion>
+    <boardgameversion objectid="261792">Japanese second edition</boardgameversion>
+    <boardgameversion objectid="351832">Japanese third edition 2016</boardgameversion>
+    <boardgameexpansion objectid="337826">The Jester and the Minstrel (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="457233">The Journey to Carcassonne</boardgameexpansion>
+    <boardgameexpansion objectid="248809">Jousting Tournament (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepodcastepisode objectid="229380">JTRPodcast 035 – 2018 Rogues Gallery</boardgamepodcastepisode>
+    <boardgamepublisher objectid="6214">Kaissa Chess &amp; Games</boardgamepublisher>
+    <boardgameexpansion objectid="340743">Kettle of Fish (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamemechanic objectid="2871">Kill Steal</boardgamemechanic>
+    <boardgamepublisher objectid="8291">Korea Boardgames</boardgamepublisher>
+    <boardgameversion objectid="518997">Korean edition</boardgameversion>
+    <boardgameversion objectid="241914">Korean edition 2004</boardgameversion>
+    <boardgameversion objectid="369894">Korean edition 2016</boardgameversion>
+    <boardgameversion objectid="758835">Korean edition 2022</boardgameversion>
+    <boardgameexpansion objectid="316394">Lakelands (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="323386">The Land Surveyors 2 (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="318419">Landschaftskarten die Dritte (fan-erweiterung für Carcassonne)</boardgameexpansion>
+    <boardgamepublisher objectid="36210">Lanlalen</boardgamepublisher>
+    <boardgamepublisher objectid="3218">Lautapelit.fi</boardgamepublisher>
+    <boardgameexpansion objectid="336602">Lavender Fields (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="248811">Lord of the Manor (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepodcastepisode objectid="33356">Love Talk with Kartok (Happy Valentine&#039;s Day!)</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="168788">Low Player Count - Ep 17 - Replayability</boardgamepodcastepisode>
+    <boardgamemechanic objectid="2959">Map Addition</boardgamemechanic>
+    <boardgameartist objectid="74">Doris Matthäus</boardgameartist>
+    <boardgamecategory objectid="1035">Medieval</boardgamecategory>
+    <boardgameexpansion objectid="318174">The Medieval Expansion (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="340495">Merry Men (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepublisher objectid="3395">Midgaard Games</boardgamepublisher>
+    <boardgameversion objectid="30014">Midgaard Scandinavian edition 2001</boardgameversion>
+    <boardgameexpansion objectid="248812">Mills and Bakeries (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepublisher objectid="7992">MINDOK</boardgamepublisher>
+    <boardgamefamily objectid="109134">Misc: BGG Hall of Fame</boardgamefamily>
+    <boardgamefamily objectid="105030">Misc: Dice Tower Hall of Fame</boardgamefamily>
+    <boardgamefamily objectid="78198">Misc: Watch It Played How To Videos</boardgamefamily>
+    <boardgamepodcastepisode objectid="253722">Mission: Impossible - Fallout, Sails of Glory, and The Betway Reds - Ep61</boardgamepodcastepisode>
+    <boardgameintegration objectid="358124">Mists over Carcassonne</boardgameintegration>
+    <boardgamepodcastepisode objectid="132679">MN 0025 Expansions!</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="137661">MN 0040 Two Player Games</boardgamepodcastepisode>
+    <boardgamepublisher objectid="3504">Möbius Games</boardgamepublisher>
+    <boardgamepodcastepisode objectid="443438">Modern Classics</boardgamepodcastepisode>
+    <boardgameexpansion objectid="362625">Monasteries in Spain (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepublisher objectid="23628">Monkey Time</boardgamepublisher>
+    <boardgameexpansion objectid="317987">More River (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="289733">The Mount of the Duke (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="248813">Mountains (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameimplementation objectid="41010">My First Carcassonne</boardgameimplementation>
+    <boardgamepodcastepisode objectid="448758">N°135 – Chroniques</boardgamepodcastepisode>
+    <boardgameexpansion objectid="401313">Nebel über Carcassonne: Die Bannkreise</boardgameexpansion>
+    <boardgamepublisher objectid="32395">NeoTroy Games</boardgamepublisher>
+    <boardgameimplementation objectid="34615">New World: A Carcassonne Game</boardgameimplementation>
+    <boardgameexpansion objectid="318418">Nochmal neue Landschaftskarten (fan-erweiterung für Carcassonne)</boardgameexpansion>
+    <boardgamepublisher objectid="44407">Nordic Games ehf</boardgamepublisher>
+    <boardgamepodcastepisode objectid="17026">OBG 050: It&#039;s Epic</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="89242">OBG 92: Cult of the Old</boardgamepodcastepisode>
+    <boardgamefamily objectid="69363">Occupation: Farmer</boardgamefamily>
+    <boardgameexpansion objectid="248816">The Ocean (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="248817">The Orders of Chivalry (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepodcastepisode objectid="322905">Our favorite 2 player board games</boardgamepodcastepisode>
+    <boardgameexpansion objectid="340648">Outposts (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepublisher objectid="2528">Paper Iyagi</boardgamepublisher>
+    <boardgamepodcastepisode objectid="163045">Papstinenser er i luften</boardgamepodcastepisode>
+    <boardgamemechanic objectid="2048">Pattern Building</boardgamemechanic>
+    <boardgameartist objectid="43873">Anne Pätzke</boardgameartist>
+    <boardgamepublisher objectid="22">Piatnik</boardgamepublisher>
+    <boardgamepublisher objectid="62145">Piatnik Distribution</boardgamepublisher>
+    <boardgameexpansion objectid="318516">Pirate Coast (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamefamily objectid="113768">Players: Games with expansions that change player count</boardgamefamily>
+    <boardgameversion objectid="150803">Polish edition 2009</boardgameversion>
+    <boardgameversion objectid="237190">Polish edition 2012</boardgameversion>
+    <boardgameversion objectid="274789">Polish edition 2015</boardgameversion>
+    <boardgameversion objectid="442170">Polish edition 2016</boardgameversion>
+    <boardgameversion objectid="518287">Polish edition 2020</boardgameversion>
+    <boardgameversion objectid="689345">Polish edition 2021</boardgameversion>
+    <boardgamepublisher objectid="31904">Ponva d.o.o.</boardgamepublisher>
+    <boardgameexpansion objectid="248819">The Pope of Avignon (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameversion objectid="289131">Portuguese edition 2015</boardgameversion>
+    <boardgameversion objectid="641783">Portuguese edition 2021</boardgameversion>
+    <boardgameversion objectid="33199">Portuguese/Spanish edition 2000</boardgameversion>
+    <boardgameversion objectid="192418">Portuguese/Spanish edition 2008</boardgameversion>
+    <boardgameexpansion objectid="362847">Prison (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepodcastepisode objectid="179551">Przystanek Planszówka – odcinek 1 – Kakao, Carcassonne</boardgamepodcastepisode>
+    <boardgameartist objectid="14057">Chris Quilliams</boardgameartist>
+    <boardgameexpansion objectid="317689">Ramparts (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepodcastepisode objectid="171191">RDTN Episode 83 – Fortress Around Your Heart – Stronghold 2nd Edition Review and a bunch more</boardgamepodcastepisode>
+    <boardgamefamily objectid="57940">Region: Languedoc (France)</boardgamefamily>
+    <boardgamefamily objectid="75169">Religious: Monks/Abbots &amp; Monasteries/Abbeys</boardgamefamily>
+    <boardgamepublisher objectid="3">Rio Grande Games</boardgamepublisher>
+    <boardgameexpansion objectid="317702">River System (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepodcastepisode objectid="109958">RJ29: El pare, el campió, els hongaresos i el somriure</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="113301">RJ30: Shopping victorious</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="114644">RJ31: Ora et Col·labora</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="115954">RJ32: La community manager, els LCG, les marietes i un tal Ignacy</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="124946">RJ37: 150 (o quasi), el m&amp;egrave;tode Rip&amp;ouml;ll i les palletes d&#039;or</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="91306">RJ7: Un any més, torna la misteriosa llum!</boardgamepodcastepisode>
+    <boardgameexpansion objectid="354960">The Roads of Europe (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameversion objectid="226946">Romanian edition 2012</boardgameversion>
+    <boardgameversion objectid="261776">Romanian edition 2013</boardgameversion>
+    <boardgameversion objectid="289132">Romanian edition 2015</boardgameversion>
+    <boardgameversion objectid="74722">Romanian first edition with &quot;Die Kornkreise&quot; (&quot;Cercuri in lan&quot;)</boardgameversion>
+    <boardgameversion objectid="192422">Russian edition 2011</boardgameversion>
+    <boardgameversion objectid="472525">Russian edition 2019</boardgameversion>
+    <boardgameversion objectid="685959">Russian edition 2023</boardgameversion>
+    <boardgameversion objectid="29690">Russian first edition</boardgameversion>
+    <boardgameversion objectid="29688">Russian second edition</boardgameversion>
+    <boardgameversion objectid="45968">Russian third edition</boardgameversion>
+    <boardgamepodcastepisode objectid="95048">S1 EP 10 - Carcassone with Art Tebble</boardgamepodcastepisode>
+    <boardgameexpansion objectid="354528">La Sagrada Familia (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameversion objectid="25733">Scandinavian edition 2001</boardgameversion>
+    <boardgameversion objectid="303480">Scandinavian edition 2012</boardgameversion>
+    <boardgameversion objectid="280306">Scandinavian edition 2014</boardgameversion>
+    <boardgameversion objectid="639064">Scandinavian edition 2019</boardgameversion>
+    <boardgameversion objectid="672451">Scandinavian edition 2021</boardgameversion>
+    <boardgamepublisher objectid="38">Schmidt Spiele</boardgamepublisher>
+    <boardgameversion objectid="533595">Slovenian/Croatian/Serbian edition 2020</boardgameversion>
+    <boardgamepublisher objectid="8313">Smart Ltd</boardgamepublisher>
+    <boardgameversion objectid="239536">Spanish edition 2013</boardgameversion>
+    <boardgameversion objectid="286832">Spanish edition 2015</boardgameversion>
+    <boardgameversion objectid="526555">Spanish edition 2020</boardgameversion>
+    <boardgameversion objectid="605551">Spanish edition 2022</boardgameversion>
+    <boardgameexpansion objectid="331478">Spielbox-Almanach 25 Jahre Hans im Glück Beilage</boardgameexpansion>
+    <boardgamemechanic objectid="2940">Square Grid</boardgamemechanic>
+    <boardgameartist objectid="145317">Franz-Georg Stämmele</boardgameartist>
+    <boardgamegraphicdesigner objectid="145317">Franz-Georg Stämmele</boardgamegraphicdesigner>
+    <boardgamepublisher objectid="9235">Stupor Mundi</boardgamepublisher>
+    <boardgamepublisher objectid="48279">SuperHeated Neurons</boardgamepublisher>
+    <boardgamepublisher objectid="9234">Swan Panasia Co., Ltd.</boardgamepublisher>
+    <boardgameexpansion objectid="354958">The Teams Courtyard (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamecategory objectid="1086">Territory Building</boardgamecategory>
+    <boardgamepodcastepisode objectid="221073">TGT 065: A Deck of Cards</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="221652">TGT 066: Getting Non-Gamers to Game</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="228774">TGT 076: Gaming Vocabulary</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="232538">TGT 082: Games Requiring Continued Investment</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="235197">TGT 087: The Wirecutter Article</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="241817">TGT 093: King Making</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="243832">TGT 095: Two Plus Players at Two Players</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="253700">TGT 104 On Topic: Euro, Work, and Why Feedback</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="255089">TGT 106 On Topic: Playing Older Games You’ve Missed</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="268961">TGT 111 On Topic: Complicated Games</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="268959">TGT 113 On Topic: Replayability</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="273080">TGT 122: $250 Game Collection</boardgamepodcastepisode>
+    <boardgameversion objectid="269131">Thai edition 2014</boardgameversion>
+    <boardgameversion objectid="759530">Thai third edition</boardgameversion>
+    <boardgamepodcastepisode objectid="129264">The Game Pit - Episode 29: The Expanded Expansion Special</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="116871">The Game Pit Episode 21 - The Vault</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="126200">The Long View: Carcassonne</boardgamepodcastepisode>
+    <boardgamemechanic objectid="2002">Tile Placement</boardgamemechanic>
+    <boardgameexpansion objectid="318135">Tithe barns (fan expansion to Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="355072">The Towers of the Black Prince (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="362964">Treasure Hunt (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="318082">Troubadours (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepodcastepisode objectid="294195">True Awkward</boardgamepodcastepisode>
+    <boardgameexpansion objectid="318412">Truppenaufmarsch (fan-erweiterung für Carcassonne)</boardgameexpansion>
+    <boardgameversion objectid="307056">Turkish edition 2016</boardgameversion>
+    <boardgameversion objectid="519876">Turkish edition 2020</boardgameversion>
+    <boardgameversion objectid="585415">Ukrainian edition 2021</boardgameversion>
+    <boardgameversion objectid="637380">Ukrainian edition 2022</boardgameversion>
+    <boardgameexpansion objectid="248821">Upper Carcassonne (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepublisher objectid="131">Venice Connection</boardgamepublisher>
+    <boardgameversion objectid="85373">Venice Connection Italian edition</boardgameversion>
+    <boardgameversion objectid="517953">Ventura English edition with SdJ</boardgameversion>
+    <boardgameversion objectid="759342">Ventura English first edition</boardgameversion>
+    <boardgamepublisher objectid="1511">Ventura Games</boardgamepublisher>
+    <boardgameexpansion objectid="318386">Wald (fan-erweiterung für Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="319124">Die Wälder von Carcassonne V2 (fan-erweiterung für Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="317977">Weg durch die Stadt (fan-erweiterung für Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="248822">Wells (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="248823">Wells: Fountain of Youth (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="248824">Wells: Wishing Wells (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgamepodcastepisode objectid="149157">What Did You Play This Week Podcast Thing Week 28!!!</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="163947">What Did You Play This Week Podcast Thing Week 47!!! ft Chris and Joe from Cardboard Architect</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="164589">What Did You Play This Week Podcast Thing Week 49!! Featuring Chris and Joe from Cardboard Architects, Eric Booth, AnnaBeth and Kerensa</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="169867">What Did You Play This Week Podcast Thing Week 56!!!</boardgamepodcastepisode>
+    <boardgamepodcastepisode objectid="185035">What Did You Play This Week Podcast Thing Week 85!</boardgamepodcastepisode>
+    <boardgameexpansion objectid="248796">Wheat Fields (fan expansion for Carcassonne)</boardgameexpansion>
+    <boardgameexpansion objectid="336603">Wine Merchant (fan expansion to Carcassonne)</boardgameexpansion>
+    <boardgamedesigner objectid="398">Klaus-Jürgen Wrede</boardgamedesigner>
+    <boardgamepublisher objectid="538">Z-Man Games</boardgamepublisher>
+    <boardgameexpansion objectid="160096">Каркассон: Дворяне и Башни</boardgameexpansion>
+    <boardgamecompilation objectid="160094">Каркассон: Королевский Подарок</boardgamecompilation>
+    <boardgamecompilation objectid="316344">Каркассон: Королевский подарок. Новое издание</boardgamecompilation>
+    <boardgameexpansion objectid="211659">Каркассон: Наука и магия</boardgameexpansion>
+    <boardgameexpansion objectid="160095">Каркассон: Предместья и обитатели</boardgameexpansion>
+    <boardgameexpansion objectid="177728">Каркассон: тайл Избушка</boardgameexpansion>
+    <boardgameintegration objectid="45748" inbound="true">Carcassonne: Wheel of Fortune</boardgameintegration>
+    <boardgameintegration objectid="358124" inbound="true">Mists over Carcassonne</boardgameintegration>
+    <poll name="suggested_numplayers" title="User Suggested Number of Players" totalvotes="2736">
+      <results numplayers="1">
+        <result value="Best" numvotes="7" />
+        <result value="Recommended" numvotes="80" />
+        <result value="Not Recommended" numvotes="1708" />
+      </results>
+      <results numplayers="2">
+        <result value="Best" numvotes="1455" />
+        <result value="Recommended" numvotes="975" />
+        <result value="Not Recommended" numvotes="130" />
+      </results>
+      <results numplayers="3">
+        <result value="Best" numvotes="1217" />
+        <result value="Recommended" numvotes="1176" />
+        <result value="Not Recommended" numvotes="48" />
+      </results>
+      <results numplayers="4">
+        <result value="Best" numvotes="754" />
+        <result value="Recommended" numvotes="1402" />
+        <result value="Not Recommended" numvotes="195" />
+      </results>
+      <results numplayers="5">
+        <result value="Best" numvotes="204" />
+        <result value="Recommended" numvotes="1116" />
+        <result value="Not Recommended" numvotes="792" />
+      </results>
+      <results numplayers="5+">
+        <result value="Best" numvotes="36" />
+        <result value="Recommended" numvotes="249" />
+        <result value="Not Recommended" numvotes="1416" />
+      </results>
+    </poll>
+    <poll-summary name="suggested_numplayers"  title="User Suggested Number of Players">
+      <result name="bestwith" value="Best with 2 players" />
+      <result name="recommmendedwith" value="Recommended with 2–5 players" />
+    </poll-summary>
+    <poll name="language_dependence" title="Language Dependence" totalvotes="493">
+      <results>
+        <result level="1" value="No necessary in-game text" numvotes="484" />
+        <result level="2" value="Some necessary text - easily memorized or small crib sheet" numvotes="7" />
+        <result level="3" value="Moderate in-game text - needs crib sheet or paste ups" numvotes="1" />
+        <result level="4" value="Extensive use of text - massive conversion needed to be playable" numvotes="0" />
+        <result level="5" value="Unplayable in another language" numvotes="1" />
+      </results>
+    </poll>
+    <poll name="suggested_playerage" title="User Suggested Player Age" totalvotes="789">
+      <results>
+        <result value="2" numvotes="2" />
+        <result value="3" numvotes="1" />
+        <result value="4" numvotes="13" />
+        <result value="5" numvotes="55" />
+        <result value="6" numvotes="238" />
+        <result value="8" numvotes="366" />
+        <result value="10" numvotes="90" />
+        <result value="12" numvotes="19" />
+        <result value="14" numvotes="4" />
+        <result value="16" numvotes="1" />
+        <result value="18" numvotes="0" />
+        <result value="21 and up" numvotes="0" />
+      </results>
+    </poll>
+    <comment username="Mantidman" rating="N/A">with Mists over Carcassonne, a co-op version with ghosts.</comment>
+    <comment username="Re-Animator" rating="N/A">Not played it yet, heard its great for 2 players</comment>
+    <comment username="pstaab" rating="N/A">I picked up the expansion tiles at Essen 2001 as well.</comment>
+    <comment username="mythboy" rating="N/A">Logged many hours on this in the earlier days</comment>
+    <comment username="sirnovember" rating="N/A">All of us love it.</comment>
+    <comment username="medew" rating="N/A">$18 - BGG
+
+      Canada</comment>
+    <comment username="caumont" rating="N/A">i&amp;#039;ve done 126 sessions of this game... i still love it !</comment>
+    <comment username="Hrothgarrr" rating="N/A">Tile laying, which I like. Interesting for two, good for four.</comment>
+    <comment username="Sigerson" rating="N/A">Fun game. Have only played 2 player.</comment>
+    <comment username="philafan2000" rating="N/A">w/ River expansion</comment>
+    <comment username="Geppeddooo" rating="N/A">I have heard a lot of good things, would like to learn it</comment>
+    <comment username="demiankatz" rating="N/A">Rio Grande Games edition with River expansion</comment>
+    <comment username="steepcreekin" rating="N/A">This is best with 3 player. Horning in on someone else&#039;s city or road is particularly fun with three players.</comment>
+    <comment username="Kubigaruma" rating="N/A">Played once with six.  It was painful.  I heard it was a good 2 player game, so I&#039;m removing my rating until I decide to try it again with two.</comment>
+    <comment username="Jonny Z" rating="N/A">Opened but never played.  Mint Condition.</comment>
+    <comment username="Lingster2005" rating="N/A">Stored within Carcassonne: The City (Wooden box)</comment>
+    <comment username="JulieD" rating="N/A">Sounds fun</comment>
+    <comment username="chaman bri" rating="N/A">Achat:26,95$ au Valet d&#039;Coeur, automne 2003.</comment>
+    <comment username="takayoshi" rating="N/A">Rio Grande Ed.</comment>
+    <comment username="chaman" rating="N/A">Achat:26,95$ au Valet d&#039;Coeur, automne 2003.</comment>
+    <comment username="mjburrage" rating="N/A">I need to get some [url=http://www.boardgamegeek.com/image/594418]Metal Meeples[/url]</comment>
+    <comment username="wilcotgroup" rating="N/A">I love this game! Something about all of the choices and everyone watching what everyone else does. Even the tension of seeing if someone gets that one odd piece they need to complete something is really cool.</comment>
+    <comment username="mystik" rating="N/A">Brilliant, loads of fun and super easy to play.</comment>
+    <comment username="Mariov" rating="N/A">I always play this game with 3 tiles in my hands, and I think this home rule version scores 9: it&#039;s a masterpiece. Instead the regular version with only a tile depends too much by fortune</comment>
+    <comment username="Hierax" rating="N/A">A fine game but Hunters and Gatherers is better. </comment>
+    <comment username="drummermark" rating="N/A">My Wife LOVES this game.
+
+      Edit-6/2010: Now that my wife has acquired a better taste for playing boardgames I wonder if she&#039;ll login as me and change her thoughts...</comment>
+    <comment username="juliedb" rating="N/A">Great game, a modern classic. We often take it to cafes and play during our meal. Simple rules and  interactions makes for enjoyable and challenging play without it being a brain burner.
+      (I&#039;ve only played two player.)
+      Recommended.</comment>
+    <comment username="Servotron" rating="N/A">I like the vanilla version (OK with the river tiles too) the best.</comment>
+    <comment username="_Dani_" rating="N/A">Beate</comment>
+    <comment username="Unco" rating="N/A">Digital: iPad, Xbox 360</comment>
+    <comment username="matthew.marquand" rating="N/A">Basic game is okay although we never play it without the Inns and Cathedrals expansion.</comment>
+    <comment username="Surya" rating="N/A">Very good, scales well, lots of replayability, especially with the expansions.</comment>
+    <comment username="davidjw" rating="N/A">Rio Grande Games
+      [23]</comment>
+    <comment username="Wolf825" rating="N/A">For Sale (have two)</comment>
+    <comment username="YLVA" rating="N/A">Contains &quot;The River&quot;.</comment>
+    <comment username="muzzynyc" rating="N/A">GG</comment>
+    <comment username="KMcPartland" rating="N/A">This is the best game for introducing new game players to euros, and great for kids, too.  Suffers a bit in replay value.</comment>
+    <comment username="mkirschenbaum" rating="N/A">My first Euro.</comment>
+    <comment username="Sargondai" rating="N/A">A great gateway game, but I&#039;m starting to tire of it.</comment>
+    <comment username="Soledade" rating="N/A">My wife gave it to me as a gift.
+      Entertaining but too much lucky pick.
+
+      PORTUGUÊS: Um presente da minha mulher. O jogo é entretido (ela gostou) mas é um bocadinho dependente de sorte a mais para o meu gosto.
+
+      (T)</comment>
+    <comment username="Yargo" rating="N/A">Look for tuckboxes for all these</comment>
+    <comment username="alfonzos" rating="N/A">Fine game.</comment>
+    <comment username="william_henshaw" rating="N/A">NIS</comment>
+    <comment username="Regai" rating="N/A">A tile laying game with some deep strategy.  Can be cut throat with the right players and expansions.</comment>
+    <comment username="warmonger" rating="N/A">After sorting my too many expansions back out, this is a good game again. Expand in moderation.
+    </comment>
+    <comment username="Evergreen" rating="N/A">2-5P, 2B</comment>
+    <comment username="hholzgrafe" rating="N/A">Tuckboxes posted.
+      Also recommend the posted graphic list of tiles in game for easy sorting.</comment>
+    <comment username="hmocc" rating="N/A">This game is on my brother-in-law&#039;s shelf, along with a few expansions. It&#039;s regularly played, apparently.</comment>
+    <comment username="Oldschoolhexman" rating="N/A">I want to try this game</comment>
+    <comment username="btravis72" rating="N/A">Own both physical and digital editions</comment>
+    <comment username="manux" rating="N/A">Self Made</comment>
+    <comment username="OverGauss" rating="N/A">I guess I just don&#039;t get it and need to give it another go a few more times.
+
+      so far rates an 8.5 outta 10 on my meh-ometer.</comment>
+    <comment username="luckyknight" rating="N/A">Fun, quick game I have played a couple of times.</comment>
+    <comment username="nhyone" rating="N/A">9/2006</comment>
+    <comment username="okaraburger" rating="N/A">2-6 players (adding in the grey meeples from Expansion 1).</comment>
+    <comment username="gilesclone" rating="N/A">So far I&#039;ve only got to play it with my 4 year old (simplified rules).</comment>
+    <comment username="abgg" rating="N/A">brendanm, ndru, Dion</comment>
+    <comment username="erincdavis" rating="N/A">This is one of the games that brought me to BGG and into serious gaming, but it&#039;s not my favorite game.</comment>
+    <comment username="frediccini" rating="N/A">Really wasn&#039;t my thing...and Ryuu wanted it.</comment>
+    <comment username="Rontay" rating="N/A">X</comment>
+    <comment username="vanimpe" rating="N/A">classic!!!</comment>
+    <comment username="Ramaris" rating="N/A">X-mas gift 2006 from Mark</comment>
+    <comment username="mfischer" rating="N/A">And some expansions.</comment>
+    <comment username="ubirata" rating="N/A">jogo gateway...bom pra iniciar, fácil, belo e rápido, bom com 2-5 pessoas...</comment>
+    <comment username="arttu" rating="N/A">Limited Edition (includes expansions)</comment>
+    <comment username="Aioros" rating="N/A">Con dos expansiones</comment>
+    <comment username="CyberneticZombie" rating="N/A">would like the 2006 big box edition</comment>
+    <comment username="KillerTaco" rating="N/A">Designed by Klaus-Jürgen Wrede (2-5 players).</comment>
+    <comment username="decidor" rating="N/A">in the big box</comment>
+    <comment username="chinkee" rating="N/A">wasn&#039;t a fan on my first play through.  The concept is simple, but those who do really well are people who can plan far in advance.  I played the vanilla version, but I hear the expansions are fun and add a lot more to the game.  </comment>
+    <comment username="Game_Storm" rating="N/A">Includes Inns &amp; Cathedrals, King &amp; Scout, The River, Traders &amp; Builders and Cities &amp; Knights |
+      Owned by OSFCI |
+      Inventory January 2010</comment>
+    <comment username="tsmaster" rating="N/A">&quot;Complete&quot; edition, containing Basic Game, The River, Inns &amp; Cathedrals, Traders &amp; Builders</comment>
+    <comment username="GuiseKnights" rating="N/A">2-5 players</comment>
+    <comment username="Loaded_Dice" rating="N/A">Family Game</comment>
+    <comment username="beachdude" rating="N/A">Rick 2017</comment>
+    <comment username="Maquis7" rating="N/A">Played very little.</comment>
+    <comment username="wilwheaton" rating="N/A">Love this on Xbox, because it does all the scoring for me. Much more fun to play the boardgame edition if I hold three tiles in my hand to reduce the randomness.</comment>
+    <comment username="RichyRambo" rating="N/A">Not yet played</comment>
+    <comment username="Reniel" rating="N/A">2-4 great</comment>
+    <comment username="Nickel City Gamers" rating="N/A">Bobbie, Brendan, Don, Jenna, Ed, Rob, Joe, Scott, Rodney, Joel, Jesse, Laurie, Kevin, Jared</comment>
+    <comment username="KlausKnechtskern" rating="N/A">tin box</comment>
+    <comment username="Morgain" rating="N/A">I guess this is sort of a &quot;must have&quot;.</comment>
+    <comment username="ahoodedfigure" rating="N/A">This one can be a bit messed up if you let yourself get too competitive.
+
+      Least favorite tile:  The 90 degree road turn, dubbed the &quot;crappy little elbow&quot; between my wife and me.</comment>
+    <comment username="HouseSollitt" rating="N/A">We&#039;re eager to try this</comment>
+    <comment username="the_moodys" rating="N/A">Carcassonne - BIG BOX.  We get over 150 tiles!  yea!!!</comment>
+    <comment username="LewisHampton" rating="N/A">SDJ 2001
+      1st Ed 2000</comment>
+    <comment username="Byrns" rating="N/A">AGW 1.9</comment>
+    <comment username="trader415" rating="N/A">Open box, great condition, no missing parts.</comment>
+    <comment username="WIDKWDYWTP" rating="N/A">A light tile-laying game where players pull a tile from the pool and place it against one of the previously played tiles. If you start a city, road, farm or monastery, you can place one of your control markers on the tile, which is then scored when that feature is complete. However, farmers are not returned and will score points at the game end.
+
+      Awards
+      2000 Meeples&#039; Choice Award
+      Winner of the 2001 Spiel des Jahres.
+      Winner of the 2001 Deutscher Spiele Preis.
+    </comment>
+    <comment username="RiotGrrl" rating="N/A">Overhyped beyond anything else, after 5-6 plays, I still don&#039;t see the appeal of Carc. Perhaps my score is too low because I&#039;ve yet to play the game in a confrontational manner, but the whole thing seems rather boring and dry. </comment>
+    <comment username="PurpleCat" rating="N/A">Big Box edition</comment>
+    <comment username="jrutley" rating="N/A">It&#039;s simple to learn, can be played quickly, and there&#039;s quite a bit of strategy involved.
+
+      The downside is that there&#039;s a bit too much luck involved when playing with 5 people.  I&#039;ve played the basic version and the River expansion, with I&amp;C and T&amp;B in the mail right now.
+      From what I&#039;ve read, those make it more playable for larger groups.</comment>
+    <comment username="docreason" rating="N/A">Look to get into interested hands/right fit.  Indication to trade is willingness to let go of from collection.</comment>
+    <comment username="Solamar" rating="N/A">Want 4: Medium Low. CCE Travel Edition Rio Grande Games July 2007</comment>
+    <comment username="Moradin" rating="N/A">Only played this a few times Game feels light no interest from other parties to get this back on the table</comment>
+    <comment username="pascalvdbossche" rating="N/A">Dutch rules</comment>
+    <comment username="jbliii" rating="N/A">SI2013</comment>
+    <comment username="balugoci" rating="N/A">SS.GM.CL</comment>
+    <comment username="pdb64" rating="N/A">Case 3 - Shelf 5</comment>
+    <comment username="grosen" rating="N/A">Great game. Easy to learn.</comment>
+    <statistics>
+      <ratings>
+        <usersrated>138466</usersrated>
+        <average>7.41571</average>
+        <bayesaverage>7.29819</bayesaverage>
+        <ranks>
+          <rank type="subtype" id="1" name="boardgame" friendlyname="Board Game Rank" value="240" bayesaverage="7.29819" />
+          <rank type="family" id="5499" name="familygames" friendlyname="Family Game Rank" value="55" bayesaverage="7.29042" />
+        </ranks>
+        <stddev>1.3119</stddev>
+        <median>0</median>
+        <owned>220549</owned>
+        <trading>2066</trading>
+        <wanting>710</wanting>
+        <wishing>10885</wishing>
+        <numcomments>23201</numcomments>
+        <numweights>8598</numweights>
+        <averageweight>1.8857</averageweight>
+      </ratings>
+    </statistics>
+  </boardgame>
+</boardgames>

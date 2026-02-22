@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- /xmlapi2/user?name=tnaskali&domain=boardgame&buddies=1&guilds=1&hot=1&top=1 -->
+<user id="825923" name="tnaskali" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+  <firstname value="Thomas" />
+  <lastname value="Naskali" />
+  <avatarlink value="N/A" />
+  <yearregistered value="2014" />
+  <lastlogin value="2026-02-22" />
+  <stateorprovince value="Uusimaa" />
+  <country value="Finland" />
+  <webaddress value="https://www.naska.li" />
+  <xboxaccount value="" />
+  <wiiaccount value="" />
+  <psnaccount value="" />
+  <battlenetaccount value="toto" />
+  <steamaccount value="tnaskali" />
+  <traderating value="0" />
+  <buddies total="0" page="1"></buddies>
+  <guilds total="2" page="1">
+    <guild id="1229" name="Geek Tools" />
+    <guild id="3308" name="Le Seigneur du Jeu" />
+  </guilds>
+  <top domain="boardgame">
+    <item rank="1" type="thing" id="233783" name="Dwarf" />
+    <item rank="2" type="thing" id="348692" name="Caverna: The Cave Farmers – Dwarf Weapon Dials" />
+    <item rank="3" type="person" id="38148" name="Dwayne Hendrickson" />
+    <item rank="4" type="person" id="78712" name="Dwayne Biddix" />
+    <item rank="5" type="company" id="12620" name="Dwarfstar Games" />
+    <item rank="6" type="family" id="11307" name="Magazine: White Dwarf" />
+    <item rank="7" type="family" id="71298" name="Cthulhu Wars accessories" />
+    <item rank="8" type="event" id="29" name="Spiel 2019" />
+  </top>
+  <hot domain="boardgame">
+    <item rank="1" type="thing" id="123" name="Green Thumb Cards" />
+    <item rank="2" type="person" id="10060" name="Steve Finn" />
+    <item rank="3" type="thing" id="124" name="Primordial Soup" />
+    <item rank="4" type="weblink" id="337985" name="" />
+    <item rank="5" type="component" id="209" name="" />
+    <item rank="6" type="thing" id="1000" name="Corona" />
+    <item rank="7" type="version" id="206130" name="Captain&#039;s Log #38 (Captain&#039;s Log #38)" />
+  </hot>
+</user>

@@ -47,11 +47,11 @@
     <xs:sequence>
       <xs:element name="rating" type="rating"/>
     </xs:sequence>
-    <xs:attribute name="minplayers" type="xs:nonNegativeInteger" use="required"/>
-    <xs:attribute name="maxplayers" type="xs:nonNegativeInteger" use="required"/>
-    <xs:attribute name="minplaytime" type="xs:nonNegativeInteger" use="required"/>
-    <xs:attribute name="maxplaytime" type="xs:nonNegativeInteger" use="required"/>
-    <xs:attribute name="playingtime" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="minplayers" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="maxplayers" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="minplaytime" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="maxplaytime" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="playingtime" type="xs:nonNegativeInteger"/>
     <xs:attribute name="numowned" type="xs:nonNegativeInteger" use="required"/>
   </xs:complexType>
 
@@ -62,7 +62,7 @@
       <xs:element name="bayesaverage" type="common:decimalValue"/>
       <xs:element name="stddev" type="common:decimalValue"/>
       <xs:element name="median" type="common:decimalValue"/>
-      <xs:element name="ranks" type="ranks"/>
+      <xs:element name="ranks" type="ranks" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>

@@ -1,0 +1,39 @@
+<!-- /xmlapi/search?search=SETI -->
+<boardgames termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+  <boardgame objectid="190743">
+    <name primary="true">Kemet: Skills and Black Power Tile For Ta-Seti</name>
+    <yearpublished>2015</yearpublished>
+  </boardgame>
+  <boardgame objectid="161842">
+    <name primary="true">Kemet: Ta-Seti</name>
+    <yearpublished>2015</yearpublished>
+  </boardgame>
+  <boardgame objectid="17785">
+    <name primary="true">Seti</name>
+    <yearpublished>1979</yearpublished>
+  </boardgame>
+  <boardgame objectid="418059">
+    <name primary="true">SETI: Search for Extraterrestrial Intelligence</name>
+    <yearpublished>2024</yearpublished>
+  </boardgame>
+  <boardgame objectid="456891">
+    <name primary="true">SETI: Search for Extraterrestrial Intelligence – DLR Promo Card</name>
+    <yearpublished>2025</yearpublished>
+  </boardgame>
+  <boardgame objectid="437940">
+    <name primary="true">SETI: Search for Extraterrestrial Intelligence – Gateway to Mars Promo Card</name>
+    <yearpublished>2025</yearpublished>
+  </boardgame>
+  <boardgame objectid="430027">
+    <name primary="true">SETI: Search for Extraterrestrial Intelligence – Pluto Promo Card</name>
+    <yearpublished>2024</yearpublished>
+  </boardgame>
+  <boardgame objectid="445048">
+    <name primary="true">SETI: Space Agencies</name>
+    <yearpublished>2025</yearpublished>
+  </boardgame>
+  <boardgame objectid="453310">
+    <name primary="true">SETI: Space Agencies – Space Agencies Promo Card</name>
+    <yearpublished>2025</yearpublished>
+  </boardgame>
+</boardgames>

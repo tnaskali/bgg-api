@@ -90,7 +90,7 @@ public class CollectionResourceV1IT extends AbstractMockServerIT {
     class Given_1 {
 
       final String mockResponseBody =
-          readFileContent("responses/api/v1/collection/200_BAD_REQUEST.xml");
+          readFileContent("responses/bgg/xmlapi/v1/collection/200_BAD_REQUEST.xml");
 
       @BeforeEach
       public void setup() {
@@ -128,8 +128,8 @@ public class CollectionResourceV1IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 202 and then 200")
     class Given_2 {
 
-      final String mockAcceptedBody = readFileContent("responses/api/v1/global/202_ACCEPTED.xml");
-      final String mockResponseBody = readFileContent("responses/api/v1/collection/200_OK.xml");
+      final String mockAcceptedBody = readFileContent("responses/bgg/xmlapi/v1/geeklist/202_ACCEPTED.xml");
+      final String mockResponseBody = readFileContent("responses/bgg/xmlapi/v1/collection/200_OK.xml");
 
       @BeforeEach
       public void setup() {
@@ -179,7 +179,7 @@ public class CollectionResourceV1IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given_3 {
 
-      final String mockResponseBody = readFileContent("responses/api/v1/collection/200_OK.xml");
+      final String mockResponseBody = readFileContent("responses/bgg/xmlapi/v1/collection/200_OK.xml");
 
       @BeforeEach
       public void setup() {

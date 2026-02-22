@@ -60,7 +60,7 @@
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="title" type="xs:string" use="required"/>
-    <xs:attribute name="totalvotes" type="xs:integer" use="required"/>
+    <xs:attribute name="totalvotes" type="xs:nonNegativeInteger" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="results">
@@ -71,9 +71,9 @@
   </xs:complexType>
 
   <xs:complexType name="pollResult">
+    <xs:attribute name="level" type="xs:integer"/>
     <xs:attribute name="value" type="xs:string" use="required"/>
     <xs:attribute name="numvotes" type="xs:integer" use="required"/>
-    <xs:attribute name="level" type="xs:integer"/>
   </xs:complexType>
 
   <xs:complexType name="pollSummary">

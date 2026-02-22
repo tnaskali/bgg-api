@@ -51,8 +51,8 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 202 and then 200")
     class Given_1 {
 
-      final String mockAcceptedBody = readFileContent("responses/api/v1/global/202_ACCEPTED.xml");
-      final String mockResponseBody = readFileContent("responses/api/v1/geeklist/200_OK.xml");
+      final String mockAcceptedBody = readFileContent("responses/bgg/xmlapi/v1/geeklist/202_ACCEPTED.xml");
+      final String mockResponseBody = readFileContent("responses/bgg/xmlapi/v1/geeklist/200_OK.xml");
 
       @BeforeEach
       public void setup() {
@@ -102,7 +102,7 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given_2 {
 
-      final String mockResponseBody = readFileContent("responses/api/v1/geeklist/200_OK.xml");
+      final String mockResponseBody = readFileContent("responses/bgg/xmlapi/v1/geeklist/200_OK.xml");
 
       @BeforeEach
       public void setup() {

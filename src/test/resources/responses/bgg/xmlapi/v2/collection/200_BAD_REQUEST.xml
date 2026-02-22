@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<!-- /xmlapi2/collection -->
+<errors>
+  <error>
+    <message>Invalid username specified</message>
+  </error>
+</errors>

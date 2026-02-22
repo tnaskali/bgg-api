@@ -47,7 +47,7 @@ public class SearchResourceV1IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody = readFileContent("responses/api/v1/search/200_OK.xml");
+      final String mockResponseBody = readFileContent("responses/bgg/xmlapi/v1/search/200_OK.xml");
 
       @BeforeEach
       public void setup() {
@@ -191,11 +191,11 @@ public class SearchResourceV1IT extends AbstractMockServerIT {
               result
                   .expectBody()
                   .jsonPath("$.boardgames[0].objectid")
-                  .isEqualTo(1000)
+                  .isEqualTo(190743)
                   .jsonPath("$.boardgames[0].name.value")
-                  .isEqualTo("Corona")
+                  .isEqualTo("Kemet: Skills and Black Power Tile For Ta-Seti")
                   .jsonPath("$.boardgames[0].yearpublished")
-                  .isEqualTo(1974);
+                  .isEqualTo(2015);
             }
           }
         }

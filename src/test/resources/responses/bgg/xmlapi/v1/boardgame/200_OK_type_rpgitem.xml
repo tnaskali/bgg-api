@@ -1,0 +1,197 @@
+<!-- /xmlapi/boardgame/255277 -->
+<boardgames termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+  <boardgame objectid="255277" subtypemismatch="true">
+    <yearpublished></yearpublished>
+    <minplayers></minplayers>
+    <maxplayers></maxplayers>
+    <playingtime></playingtime>
+    <minplaytime></minplaytime>
+    <maxplaytime></maxplaytime>
+    <age></age>
+    <name primary="true" sortindex="1">Masks of Nyarlathotep (5th edition)</name>
+    <name  sortindex="1">니알라토텝의 가면들</name>
+    <description>From the back cover:
+
+      An Epic Globetrotting Campaign Remastered
+
+      A dire plan has been enacted, which if allowed to come to fruition threatens to destroy humanity as we know it. But all is not lost. If a few brave souls can uncover and piece together certain information, they might stand against the darkness and prevent the unspeakable from happening.
+
+      Facing dark cults, strange lore, hideous monsters, and a host of implacable foes, the investigators embark on a journey of discovery to face the ultimate horror. This is their story and yours to tell.
+
+      Award Winning
+      Long considered to be one of the finest and most engaging roleplaying campaigns ever written, Masks of Nyarlathotep won Best Roleplaying Adventure by the Academy of Adventure Gaming Arts &amp; Design.
+
+      This Call of Cthulhu roleplaying classic is a series of linked adventures forming one unforgettable campaign. Beginning in Peru in 1921, an exciting prologue to the campaign introduces the investigators to Jackson Elias, the charming author whose research uncovers a sinister plot. Ultimately, the investigations follow the trail of the mysterious Carlyle Expedition, picking up clues in New York City in 1925 and then moving overseas to England, Egypt, Kenya, Western Australia, and China. With enemies at every turn, the path is fraught with danger.
+
+      The Stars Are Right!
+      Masks of Nyarlathotep has been comprehensively revised and updated for use with Call of Cthulhu 7th edition, but may also be run with the Pulp Cthulhu supplement.
+
+      Global campaign covering seven countries in five continents!
+      Packed with encounters, side-track adventures, detailed adversaries, geographical information, and more!
+      Presented in full color, with new artwork, maps and floor plans, and ready to use player handouts.
+      Appendices collect spells, tomes, artifacts, and travel advice.
+      Ultimate edition, packed full of advice and tips.
+
+
+    </description>
+    <thumbnail>https://cf.geekdo-images.com/sDE1gDz4jcl8w0kTZW1uyw__small/img/YJYE31FTtEcgCmXiM4skPoPKigQ=/fit-in/200x150/filters:strip_icc()/pic4197752.png</thumbnail>
+    <image>https://cf.geekdo-images.com/sDE1gDz4jcl8w0kTZW1uyw__original/img/OjLZmXHFsTTj3SgUc8sUQnU3qoM=/0x0/filters:format(png)/pic4197752.png</image>
+    <rpghonor objectid="58226">2019 ENnie - Best Adventure - Gold Winner</rpghonor>
+    <rpghonor objectid="56197">2019 Origins Awards Best Role Playing Supplement Nominee</rpghonor>
+    <rpgartist objectid="32122">David Ardila</rpgartist>
+    <rpg objectid="23113">Call of Cthulhu (7th Edition)</rpg>
+    <rpgpublisher objectid="23">Chaosium</rpgpublisher>
+    <rpgartist objectid="14426">Caleb Cleveland</rpgartist>
+    <rpgartist objectid="39953">Michal E. Cross</rpgartist>
+    <rpgsetting objectid="2572">Cthulhu Classic (1920s &amp; 1930s)</rpgsetting>
+    <rpgpublisher objectid="28355">Dayspring Games</rpgpublisher>
+    <rpgdesigner objectid="16653">Larry DiTillio</rpgdesigner>
+    <rpgdesigner objectid="37431">Scott Dorward</rpgdesigner>
+    <rpgdesigner objectid="17795">Paul Fricker</rpgdesigner>
+    <rpgproducer objectid="29405">Tim Grey</rpgproducer>
+    <rpgdesigner objectid="16343">Lynne Hardy</rpgdesigner>
+    <rpgpublisher objectid="18852">Hobby World</rpgpublisher>
+    <rpggenre objectid="988">Horror (Cthulhu Mythos)</rpggenre>
+    <rpgpodcastepisode objectid="278416">HSG59: Call of Cthulhu RPG</rpgpodcastepisode>
+    <rpgartist objectid="66727">Sam Lamont</rpgartist>
+    <rpgartist objectid="16399">Andrew Law</rpgartist>
+    <rpgitemversion objectid="639668">Leatherette Slipcase Set</rpgitemversion>
+    <rpgartist objectid="12589">Eric Lofgren</rpgartist>
+    <rpgartist objectid="66924">Antonio Maínez</rpgartist>
+    <rpgitemversion objectid="705671">Le Maschere di Nyarlathotep</rpgitemversion>
+    <rpgitemversion objectid="638486">Masken des Nyarlathotep</rpgitemversion>
+    <rpgdesigner objectid="14824">Mike Mason</rpgdesigner>
+    <rpgproducer objectid="14824">Mike Mason</rpgproducer>
+    <rpgartist objectid="16924">M. Wayne Miller</rpgartist>
+    <rpgartist objectid="60346">Víctor Manuel Leza Moreno</rpgartist>
+    <rpgartist objectid="60452">Loïc Muzy</rpgartist>
+    <rpgproducer objectid="68112">Nicholas Nacario</rpgproducer>
+    <rpgitemversion objectid="410032">PDF version</rpgitemversion>
+    <rpgpublisher objectid="39">Pegasus Spiele</rpgpublisher>
+    <rpgitemversion objectid="595477">Polish Slipcased hardcover version</rpgitemversion>
+    <rpgartist objectid="99097">Rhys Pugh</rpgartist>
+    <rpgpublisher objectid="3242">Raven Distribution</rpgpublisher>
+    <rpgartist objectid="54215">Olivier &quot;Akae&quot; Sanfilippo</rpgartist>
+    <rpgcategory objectid="2084">Scenario / Adventure / Module</rpgcategory>
+    <rpgitemversion objectid="429934">Slipcased hardcover version</rpgitemversion>
+    <rpgartist objectid="85165">Petr Štovik</rpgartist>
+    <rpgartist objectid="80021">Cristina Vela</rpgartist>
+    <rpgdesigner objectid="27">Lynn Willis</rpgdesigner>
+    <rpgartist objectid="37478">Jonathan Wyke</rpgartist>
+    <rpgitemversion objectid="732546">Маски Ньярлатхотепа: Набор Хранителя</rpgitemversion>
+    <rpgitemversion objectid="732544">Маски Ньярлатхотепа: Том 1 – Тёмные планы возвещают о конце света</rpgitemversion>
+    <rpgitemversion objectid="762252">Маски Ньярлатхотепа: Том 2 – Тёмные планы возвещают о конце света</rpgitemversion>
+    <rpgitemversion objectid="512839">니알라토텝의 가면들</rpgitemversion>
+    <poll name="suggested_numplayers" title="User Suggested Number of Players" totalvotes="0">
+      <results numplayers="0+">
+        <result value="Best" numvotes="0" />
+        <result value="Recommended" numvotes="0" />
+        <result value="Not Recommended" numvotes="0" />
+      </results>
+    </poll>
+    <poll-summary name="suggested_numplayers"  title="User Suggested Number of Players">
+      <result name="bestwith" value="" />
+      <result name="recommmendedwith" value="(no votes)" />
+    </poll-summary>
+    <poll name="language_dependence" title="Language Dependence" totalvotes="0">
+      <results>
+        <result level="1" value="No necessary in-game text" numvotes="0" />
+        <result level="2" value="Some necessary text - easily memorized or small crib sheet" numvotes="0" />
+        <result level="3" value="Moderate in-game text - needs crib sheet or paste ups" numvotes="0" />
+        <result level="4" value="Extensive use of text - massive conversion needed to be playable" numvotes="0" />
+        <result level="5" value="Unplayable in another language" numvotes="0" />
+      </results>
+    </poll>
+    <poll name="suggested_playerage" title="User Suggested Player Age" totalvotes="0">
+      <results>
+        <result value="2" numvotes="0" />
+        <result value="3" numvotes="0" />
+        <result value="4" numvotes="0" />
+        <result value="5" numvotes="0" />
+        <result value="6" numvotes="0" />
+        <result value="8" numvotes="0" />
+        <result value="10" numvotes="0" />
+        <result value="12" numvotes="0" />
+        <result value="14" numvotes="0" />
+        <result value="16" numvotes="0" />
+        <result value="18" numvotes="0" />
+        <result value="21 and up" numvotes="0" />
+      </results>
+    </poll>
+    <comment username="grim0235" rating="N/A">- PDF</comment>
+    <comment username="detritus9" rating="N/A">Cthulhu.</comment>
+    <comment username="Desmeos" rating="N/A">Call of Cthulhu: Adventure Book</comment>
+    <comment username="Octopues" rating="N/A">CoC</comment>
+    <comment username="Hobbosnorken" rating="N/A">Physical Copy</comment>
+    <comment username="CrowberryCake" rating="N/A">want to GM</comment>
+    <comment username="Biscuit_J" rating="N/A">Call of Cthulhu (7th Edition)</comment>
+    <comment username="Starkriller" rating="7">Played the campaign as player. 2 years long.</comment>
+    <comment username="Warthur" rating="7">Still pulpier than I am happy with, but a good effort is made to update this one. Full review: https://refereeingandreflection.wordpress.com/2021/11/01/the-greater-festival-of-masks/</comment>
+    <comment username="Warthur" rating="7">Still pulpier than I am happy with, but a good effort is made to update this one. Full review: https://refereeingandreflection.wordpress.com/2021/11/01/the-greater-festival-of-masks/</comment>
+    <comment username="Malarchist" rating="7">PC</comment>
+    <comment username="Mallet" rating="8">(game still in shrink-wrap. though)</comment>
+    <comment username="PzVIE" rating="8">On of the iconic Call of Cthulhu campaigns. We played for &gt;66 hours. Great and exotic locations, good and interesting story line combined with outdated rules (yes, even the 7th ed. feels old) and a somewhat anti-climatic end.</comment>
+    <comment username="CongratulatoryWisdom" rating="8">Note: I don&#039;t run Pulp Cthulhu so my comment will reflect the standard Call of Cthulhu 7th Edition ruleset experience.
+
+      Masks of Nyarlathotep is the best of the best of the ultra long campaigns.
+
+      It also suffers from being a massively long mega campaign due to the realities of time and space. The real cosmic horror, innit?
+
+      I am lucky enough to have the slipcase edition with the custom keeper screen, handouts, and hard copy books. They&#039;re all easy to read, easy to use, and a benchmark in RPGs. You do not need anything more than this, the box is a complete experience.
+
+      My main complaint is not really a criticism, I just enjoy the scenarios so much that I want to run them as independent sandboxes and let the players loose. But that would cut a lot of intrigue and interesting set-up, the entire reason you need a campaign. The problem of time, space, and real life.
+
+      Maybe if I had more time to make a short best of version I&#039;d rate this a 10. Because it is amazing, I just don&#039;t like ultra long campaigns.
+
+      ...I say that, and I&#039;ve still rated this an 8/10 - Very Good.</comment>
+    <comment username="jbmgc" rating="9">Love to play.</comment>
+    <comment username="saheko" rating="9">Greatest campaign ever for Cthulhu made little greater. Tons of material. I still think that playability was best in first edition boxed set. Combine this with the Masks of Nyarlathotep Companion and you have over 1300 pages of material!!!
+      +++++ Played this for three years and 60+ sessions. Some problems with detailed look. MON Companion fills some holes. Really text heavy in parts. Like original, parts of campaign have slight lesser effect than others. Cairo and Nairobi are highlights. Our campaign ended in Australia and I don&#039;t think it&#039;s best part for climax. Some changes were unnecessary and didn&#039;t make sense. Dropping rating to 9.</comment>
+    <comment username="Kniaziu" rating="9">+ PDF
+      + PL</comment>
+    <comment username="scissors_lizard" rating="9">Beautiful, awesome, get it.
+
+      Only reason for 9 is that the &quot;pulp&quot; option sidebars inflate the book if you&#039;re not making use of them. Would have preferred they printed a separate version/product if you want to run it as pulp, rather than double-coding the content. Just takes up a lot of unnecessary space.  </comment>
+    <comment username="Pokeweed Mitogen" rating="10">:star:
+
+      Arguably the finest RPG adventure of all time.  </comment>
+    <comment username="Pioootr89" rating="10">Call of Cthulhu</comment>
+    <comment username="jhkiley" rating="10">Currently running a campaign with this.</comment>
+    <comment username="wobbel" rating="10">Masks of Nyarlathotep 10</comment>
+    <comment username="HiveGod" rating="10">[size=18][b]This is it—the greatest campaign in RPG history.[/b][/size]
+
+      Only the luckiest of players get to spend 2+ years immersed in mystery, danger, and violent cartharsis; only the most elite game masters may run her.
+
+      Do yourself a favor [I]and get in here now[/i].
+
+      [b][thread=3444189][/thread][/b]
+
+      Includes:
+
+      [rpgitem=260213][/rpgitem]
+      The Golden Mirror
+      Eye of Light and Darkness
+
+      [url=https://boardgamegeek.com/plays/thing/255277?userid=9685][i]Our plays.[/i][/url]</comment>
+    <comment username="VanillaCokeMule" rating="10">This is one of the best RPG books I&#039;ve ever read. The story&#039;s as good as it&#039;s ever been. I like the addition of the optional Peru chapter and the focus on balancing cultural sensitivity with being able to play a fun, pulpy game without slowing things down. The look and feel of the books inside and out matches any 5E book for quality and I just love it. The props in particular look great. There are a still a few typos but I&#039;m blown away by the overall level of quality here. I can only hope that Horror on the Orient Express gets a similar treatment some day.</comment>
+    <statistics>
+      <ratings>
+        <usersrated>58</usersrated>
+        <average>9.03793</average>
+        <bayesaverage>7.54968</bayesaverage>
+        <ranks>
+          <rank type="subtype" id="16" name="rpgitem" friendlyname="RPG Item Rank" value="56" bayesaverage="7.54968" />
+        </ranks>
+        <stddev>1.30091</stddev>
+        <median>0</median>
+        <owned>345</owned>
+        <trading>0</trading>
+        <wanting>4</wanting>
+        <wishing>51</wishing>
+        <numcomments>24</numcomments>
+        <numweights>6</numweights>
+        <averageweight>3.5</averageweight>
+      </ratings>
+    </statistics>
+  </boardgame>
+</boardgames>

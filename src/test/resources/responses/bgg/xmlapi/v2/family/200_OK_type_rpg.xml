@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- /xmlapi2/family?id=1235&versions=1&videos=1&ratingcomments=1&stats=1 -->
+<items termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+  <item type="rpg" id="1235">
+    <thumbnail>https://cf.geekdo-images.com/FlP99FzTBN_nmgj-_VQVpg__small/img/cLGSLOOO7TrsDoyrHsBMjU_98dE=/fit-in/200x150/filters:strip_icc()/pic6975119.png</thumbnail>
+    <image>https://cf.geekdo-images.com/FlP99FzTBN_nmgj-_VQVpg__original/img/hRkvqISWdDCqUh9ptwD-gjdW8jw=/0x0/filters:format(png)/pic6975119.png</image>
+    <name type="primary" sortindex="1" value="Books about Roleplaying Games" />
+    <name type="alternate" sortindex="1" value="Books about Role-Playing Games" />
+    <description>This record is for items that are about roleplaying games, but are not actually games themselves.
+
+      If you are looking for non-game-specific gaming material such as tips on being a better game master, or a book of maps to use in any campaign, or a book on medieval guilds you can use in your games, etc., see Generic / Universal.
+
+    </description>
+    <link type="rpg" id="214338" value="Random Encounters Volume 4: 20 ADDITIONAL Epic Ideas to Try in Your Role-Playing Game" inbound="true"/>
+    <link type="rpg" id="214335" value="Random Encounters Volume 1: 20 Epic Ideas to Try in Your Role-Playing Game" inbound="true"/>
+    <link type="rpg" id="214337" value="Random Encounters Volume 3: 20 FURTHER Epic Ideas to Try in Your Role-Playing Game" inbound="true"/>
+    <link type="rpg" id="214336" value="Random Encounters Volume 2: 20 MORE Epic Ideas to Try in Your Role-Playing Game" inbound="true"/>
+    <link type="rpg" id="214339" value="Random Encounters Volume 5: 20 NEW Epic Ideas to Try in Your Role-Playing Game" inbound="true"/>
+    <link type="rpg" id="50891" value="30 Years of Adventure: A Celebration of Dungeons &amp; Dragons" inbound="true"/>
+    <link type="rpg" id="174094" value="40 Years of Gen Con" inbound="true"/>
+    <link type="rpg" id="258786" value="The ABCs of RPGs" inbound="true"/>
+    <link type="rpg" id="258785" value="The ABCs of RPGs Activity Book" inbound="true"/>
+    <link type="rpg" id="282046" value="Abenteuer gestalten" inbound="true"/>
+    <link type="rpg" id="236111" value="Adventure and Game World Design Concepts for Role-Playing Games" inbound="true"/>
+    <link type="rpg" id="367686" value="Adventure Begins Here" inbound="true"/>
+    <link type="rpg" id="107569" value="Adventure Creation Handbook" inbound="true"/>
+    <link type="rpg" id="236211" value="The Adventure Creation Handbook (Revised)" inbound="true"/>
+    <link type="rpg" id="267683" value="Adventure Design in Practice" inbound="true"/>
+    <link type="rpg" id="236210" value="Adventure Idea Factory (Revised &amp; Expanded)" inbound="true"/>
+    <link type="rpg" id="82254" value="The Adventurer&#039;s Handbook: A Guide to Role-Playing Games" inbound="true"/>
+    <link type="rpg" id="327461" value="Aliens, Dystopias, &amp; Monster Ecologies: Worldbuilding Essays for Writers and GMs" inbound="true"/>
+    <link type="rpg" id="394298" value="Als das Rad zerbrach - 25 Jahre ohne Ulrich Kiesow" inbound="true"/>
+    <link type="rpg" id="324460" value="The Anatomy of Adventure" inbound="true"/>
+    <link type="rpg" id="391883" value="The Anatomy of Adventure Second Edition" inbound="true"/>
+    <link type="rpg" id="307898" value="Arbiter of Worlds: A Primer for Gamemasters" inbound="true"/>
+    <link type="rpg" id="258427" value="Art &amp; Arcana: A Visual History" inbound="true"/>
+    <link type="rpg" id="157708" value="The Art of the Dragonlance Saga" inbound="true"/>
+    <link type="rpg" id="214346" value="The Arts of LARP" inbound="true"/>
+    <link type="rpg" id="125674" value="As Larp Grows Up" inbound="true"/>
+    <link type="rpg" id="156794" value="Beetle Fire: Haiku" inbound="true"/>
+    <link type="rpg" id="214349" value="Better Lairs and Dungeons" inbound="true"/>
+    <link type="rpg" id="70876" value="Beyond Role and Play" inbound="true"/>
+    <link type="rpg" id="243076" value="Birth of Larp in the Arabic World" inbound="true"/>
+    <link type="rpg" id="109814" value="The Bones: Us and Our Dice" inbound="true"/>
+    <link type="rpg" id="153299" value="The Book of Names" inbound="true"/>
+    <link type="rpg" id="180576" value="The Book: The First Knutepunkt Book Ever" inbound="true"/>
+    <link type="rpg" id="166072" value="2011 Wyrd Con Companion Book: Branches of Play" inbound="true"/>
+    <link type="rpg" id="78990" value="A Brief History of Gnolls" inbound="true"/>
+    <link type="rpg" id="56227" value="The Broken Rules Compendium" inbound="true"/>
+    <link type="rpg" id="309235" value="Building Blocks of Tabletop Game Design: An Encyclopedia of Mechanisms" inbound="true"/>
+    <link type="rpg" id="56650" value="The Cabin Boy&#039;s Pocket Pirate Hand Book" inbound="true"/>
+    <link type="rpg" id="125408" value="The Cabin Boy’s Pocket Pirate Hand Book Appendix: Roleplaying Tips and Aids" inbound="true"/>
+    <link type="rpg" id="128273" value="Cheers Gary" inbound="true"/>
+    <link type="rpg" id="175242" value="Chicks Dig Gaming" inbound="true"/>
+    <link type="rpg" id="58413" value="Chris Wheeler Role-Playing Conography" inbound="true"/>
+    <link type="rpg" id="206589" value="Cinema and Sorcery: The Comprehensive Guide to Fantasy Film" inbound="true"/>
+    <link type="rpg" id="213009" value="The Civilized Guide to Tabletop Gaming: Rules Every Gamer Must Live By" inbound="true"/>
+    <link type="rpg" id="110131" value="Volume 1: The Collected Adventures of Phil and Dixie" inbound="true"/>
+    <link type="rpg" id="448380" value="Come essere un GM (davvero!) – Guida pratica per condurre partite vive, condivise e senza copione" inbound="true"/>
+    <link type="rpg" id="49855" value="Come scrivere un libro-gioco" inbound="true"/>
+    <link type="rpg" id="283933" value="The Complete Guide to Creating Epic Campaigns" inbound="true"/>
+    <link type="rpg" id="374601" value="The Complete Guide to Creating Epic Campaigns (Remastered)" inbound="true"/>
+    <link type="rpg" id="121811" value="The Complete Guide to Role-Playing Games" inbound="true"/>
+    <link type="rpg" id="139699" value="Complete Kobold Guide to Game Design" inbound="true"/>
+    <link type="rpg" id="50792" value="Confessions of a Part-Time Sorceress" inbound="true"/>
+    <link type="rpg" id="288832" value="Consent in Gaming" inbound="true"/>
+    <link type="rpg" id="220522" value="Conventional Thinking" inbound="true"/>
+    <link type="rpg" id="220523" value="Conventional Thinking Volume 2" inbound="true"/>
+    <link type="rpg" id="291792" value="Cool Words for Gamers" inbound="true"/>
+    <link type="rpg" id="49856" value="Costruire i libri-gioco" inbound="true"/>
+    <link type="rpg" id="214334" value="The Creation of Narrative in Tabletop Role-Playing Games" inbound="true"/>
+    <link type="rpg" id="152612" value="Crossing Habitual Borders" inbound="true"/>
+    <link type="rpg" id="152611" value="Crossing Physical Borders" inbound="true"/>
+    <link type="rpg" id="152613" value="Crossing Theoretical Borders" inbound="true"/>
+    <link type="rpg" id="235611" value="Cthulhu How?" inbound="true"/>
+    <link type="rpg" id="166852" value="The Cutting Edge of Nordic Larp" inbound="true"/>
+    <link type="rpg" id="194821" value="Dangerous Games: What the Moral Panic over Role-Playing Games Says about Play, Religion, and Imagined Worlds" inbound="true"/>
+    <link type="rpg" id="51278" value="Dark Dungeons" inbound="true"/>
+    <link type="rpg" id="229294" value="Dave Arneson&#039;s True Genius" inbound="true"/>
+    <link type="rpg" id="332132" value="Design Lenses: A Deck of Lenses for Designing TTRPGs" inbound="true"/>
+    <link type="rpg" id="63280" value="Design Patterns of Successful Roleplaying Games" inbound="true"/>
+    <link type="rpg" id="105418" value="Designers &amp; Dragons" inbound="true"/>
+    <link type="rpg" id="164997" value="Designers &amp; Dragons: The 00s" inbound="true"/>
+    <link type="rpg" id="163794" value="Designers &amp; Dragons: The 70s" inbound="true"/>
+    <link type="rpg" id="163795" value="Designers &amp; Dragons: The 80s" inbound="true"/>
+    <link type="rpg" id="164721" value="Designers &amp; Dragons: The 90s" inbound="true"/>
+    <link type="rpg" id="179907" value="Designers &amp; Dragons: The Platinum Appendix" inbound="true"/>
+    <link type="rpg" id="118246" value="Dice and Dramatics" inbound="true"/>
+    <link type="rpg" id="79522" value="Dice and Dramatics (Revised)" inbound="true"/>
+    <link type="rpg" id="399876" value="Dice Men: The Origin Story of Games Workshop" inbound="true"/>
+    <link type="rpg" id="290676" value="Dice-Rolling Mechanisms in RPGs" inbound="true"/>
+    <link type="rpg" id="251348" value="Dice-Rolls in Role-Playing Games" inbound="true"/>
+    <link type="rpg" id="46447" value="Dicing with Dragons" inbound="true"/>
+    <link type="rpg" id="236021" value="Dig-In For Victory!" inbound="true"/>
+    <link type="rpg" id="125983" value="Dissecting larp" inbound="true"/>
+    <link type="rpg" id="200958" value="Diversity Dungeons: Worldbuilding &amp; Game Design in the Safe Space Age" inbound="true"/>
+    <link type="rpg" id="125622" value="Do Larp: Documentary Writings from KP2011" inbound="true"/>
+    <link type="rpg" id="142884" value="Dork Covenant: The Collected Dork Tower, Volume 1" inbound="true"/>
+    <link type="rpg" id="113290" value="Dork Decade" inbound="true"/>
+    <link type="rpg" id="142885" value="Dork Shadows: The Collected Dork Tower, Volume II" inbound="true"/>
+    <link type="rpg" id="370370" value="Dork Side of The Goon" inbound="true"/>
+    <link type="rpg" id="109808" value="Downer 1: Wandering Monster" inbound="true"/>
+    <link type="rpg" id="157474" value="Drachenväter: Die Geschichte des Rollenspiels und die Geburt der virtuellen Welt" inbound="true"/>
+    <link type="rpg" id="394295" value="Drachenväter: Die Interviews" inbound="true"/>
+    <link type="rpg" id="153253" value="Dragonbane: The Legacy" inbound="true"/>
+    <link type="rpg" id="170699" value="Dragonmeet 2014 - Official Programme" inbound="true"/>
+    <link type="rpg" id="167100" value="Drawing Your Alter Egos" inbound="true"/>
+    <link type="rpg" id="85542" value="The Dungeon Master" inbound="true"/>
+    <link type="rpg" id="72163" value="Dungeon Master 4th Edition for Dummies" inbound="true"/>
+    <link type="rpg" id="72157" value="Dungeon Master for Dummies" inbound="true"/>
+    <link type="rpg" id="46727" value="Dungeon Survival Guide" inbound="true"/>
+    <link type="rpg" id="207570" value="Dungeonology" inbound="true"/>
+    <link type="rpg" id="72162" value="Dungeons &amp; Dragons 4th Edition for Dummies" inbound="true"/>
+    <link type="rpg" id="194817" value="Dungeons &amp; Dragons and Philosophy: Raiding the Temple of Wisdom" inbound="true"/>
+    <link type="rpg" id="46009" value="Dungeons &amp; Dragons for Dummies" inbound="true"/>
+    <link type="rpg" id="215152" value="Dungeons and Dragons and Philosophy: Read and Gain Advantage on All Wisdom Checks" inbound="true"/>
+    <link type="rpg" id="238348" value="Elegant Encounter Design" inbound="true"/>
+    <link type="rpg" id="135153" value="The Elfish Gene" inbound="true"/>
+    <link type="rpg" id="174322" value="Elusive Legends: Building Story in Tabletop Roleplaying Games" inbound="true"/>
+    <link type="rpg" id="330638" value="The Elusive Shift" inbound="true"/>
+    <link type="rpg" id="181256" value="Empire of Imagination" inbound="true"/>
+    <link type="rpg" id="237511" value="Encyclopedia of Golden Age Superheroes" inbound="true"/>
+    <link type="rpg" id="74624" value="The Evolution of Fantasy Role-Playing Games" inbound="true"/>
+    <link type="rpg" id="398020" value="Existential Dragons: A guide for mental health therapists that would like to use Dungeons &amp; Dragons or other role-playing games as a group therapy tool" inbound="true"/>
+    <link type="rpg" id="227322" value="An Exploratory Study on the Players of Dungeons and Dragons" inbound="true"/>
+    <link type="rpg" id="47366" value="Faith and Gaming" inbound="true"/>
+    <link type="rpg" id="183849" value="Faith and Gaming (Revised and Expanded Edition)" inbound="true"/>
+    <link type="rpg" id="164228" value="A False Machine" inbound="true"/>
+    <link type="rpg" id="61373" value="Fantasy Freaks and Gaming Geeks" inbound="true"/>
+    <link type="rpg" id="79730" value="The Fantasy Gamers&#039; Dictionary and Glossary" inbound="true"/>
+    <link type="rpg" id="85540" value="Fantasy Role Playing Games" inbound="true"/>
+    <link type="rpg" id="136453" value="The Fantasy Role-Playing Game" inbound="true"/>
+    <link type="rpg" id="49374" value="The Fantasy Roleplaying Gamer&#039;s Bible" inbound="true"/>
+    <link type="rpg" id="205862" value="Farm, Forge and Steam" inbound="true"/>
+    <link type="rpg" id="119746" value="Fastaval 1986-2011" inbound="true"/>
+    <link type="rpg" id="364293" value="Field Guide to Random Table Design in RPGs" inbound="true"/>
+    <link type="rpg" id="84151" value="Filling the Empty Chair" inbound="true"/>
+    <link type="rpg" id="53711" value="The Finieous Treasury" inbound="true"/>
+    <link type="rpg" id="180549" value="Focal Point: The Complete Game Master&#039;s Guide to Running Extraordinary Sessions" inbound="true"/>
+    <link type="rpg" id="119429" value="Foreningsmappen" inbound="true"/>
+    <link type="rpg" id="167085" value="The Foundation Stone of Nordic Larp" inbound="true"/>
+    <link type="rpg" id="74951" value="French Name Tables" inbound="true"/>
+    <link type="rpg" id="259417" value="Frustration to Freedom: 30 Days to Legendary Solo Roleplaying Adventures" inbound="true"/>
+    <link type="rpg" id="87875" value="The Functions of Role-Playing Games" inbound="true"/>
+    <link type="rpg" id="315179" value="Game Angry: How to RPG the Angry Way" inbound="true"/>
+    <link type="rpg" id="214333" value="The Game Inventor&#039;s Guidebook" inbound="true"/>
+    <link type="rpg" id="236165" value="Game Magic: A Designer&#039;s Guide to Magic Systems in Theory and Practice" inbound="true"/>
+    <link type="rpg" id="122116" value="The Game Master: A Guide to the Art and Theory of Roleplaying" inbound="true"/>
+    <link type="rpg" id="363765" value="Game Wizards: The Epic Battle for Dungeons &amp; Dragons" inbound="true"/>
+    <link type="rpg" id="104562" value="Gamemastering" inbound="true"/>
+    <link type="rpg" id="65001" value="Gamemastering" inbound="true"/>
+    <link type="rpg" id="176832" value="Gamer&#039;s Guide to Fantasy Roleplaying, Volume I" inbound="true"/>
+    <link type="rpg" id="156708" value="Games in Libraries: Essays on Using Play to Connect and Instruct" inbound="true"/>
+    <link type="rpg" id="120199" value="GamesMaster Catalog:  A Comprehensive Illustrated Guide to Games" inbound="true"/>
+    <link type="rpg" id="194815" value="Gaming As Culture: Essays on Reality, Identity and Experience in Fantasy Games" inbound="true"/>
+    <link type="rpg" id="50643" value="Giochi di ruolo - Estetica e immaginario di un nuovo scenario giovanile" inbound="true"/>
+    <link type="rpg" id="250461" value="Glorantha Con IV Conpendium" inbound="true"/>
+    <link type="rpg" id="74941" value="GM-fu: Session Prep" inbound="true"/>
+    <link type="rpg" id="131674" value="The GM&#039;s Field Guide to Players" inbound="true"/>
+    <link type="rpg" id="370371" value="Go, Dork. Go!" inbound="true"/>
+    <link type="rpg" id="180237" value="God Loves the Freaks" inbound="true"/>
+    <link type="rpg" id="78124" value="Das große Buch der Fantasy-Rollenspiele" inbound="true"/>
+    <link type="rpg" id="166511" value="Guide to Playing Alone" inbound="true"/>
+    <link type="rpg" id="74952" value="Halfling Name Tables" inbound="true"/>
+    <link type="rpg" id="79038" value="Hamlet&#039;s Hit Points" inbound="true"/>
+    <link type="rpg" id="213539" value="HAWK &amp; MOOR I" inbound="true"/>
+    <link type="rpg" id="214205" value="HAWK &amp; MOOR II" inbound="true"/>
+    <link type="rpg" id="217855" value="HAWK &amp; MOOR III" inbound="true"/>
+    <link type="rpg" id="217856" value="HAWK &amp; MOOR IV" inbound="true"/>
+    <link type="rpg" id="243169" value="HAWK &amp; MOOR V" inbound="true"/>
+    <link type="rpg" id="217857" value="HAWK &amp; MOOR: The Steam Tunnel Incident" inbound="true"/>
+    <link type="rpg" id="142886" value="Heart of Dorkness: The Collected Dork Tower, Volume III" inbound="true"/>
+    <link type="rpg" id="46381" value="Heroic Worlds" inbound="true"/>
+    <link type="rpg" id="113607" value="How To Be A Great GM: Running Role Playing Games with Excellence" inbound="true"/>
+    <link type="rpg" id="191536" value="How to Draw Fantasy Art and RPG Maps: Step by Step Cartography for Gamers and Fans" inbound="true"/>
+    <link type="rpg" id="338315" value="How to Gamemaster" inbound="true"/>
+    <link type="rpg" id="166548" value="How to Play Roleplaying Games" inbound="true"/>
+    <link type="rpg" id="166547" value="How to Run Roleplaying Games" inbound="true"/>
+    <link type="rpg" id="199560" value="How to Run: An Advanced Guide to Managing Role-playing Games" inbound="true"/>
+    <link type="rpg" id="225362" value="How to Write Adventure Modules that Don&#039;t Suck (Revised)" inbound="true"/>
+    <link type="rpg" id="96519" value="Hunters of Dragons" inbound="true"/>
+    <link type="rpg" id="218436" value="Imagining a Constructionist Game-Based Pedagogical Model" inbound="true"/>
+    <link type="rpg" id="194823" value="Immersive Gameplay: Essays on Participatory Media and Role-Playing" inbound="true"/>
+    <link type="rpg" id="448379" value="Impara a Giocare di Ruolo (davvero) – Un manuale pratico per comunicare meglio al tavolo" inbound="true"/>
+    <link type="rpg" id="265937" value="Improv for Gamers" inbound="true"/>
+    <link type="rpg" id="377902" value="Improv for Gamers (Second Edition)" inbound="true"/>
+    <link type="rpg" id="389756" value="Improv for Gamers Workbook" inbound="true"/>
+    <link type="rpg" id="48415" value="In principio era il drago" inbound="true"/>
+    <link type="rpg" id="109949" value="In Search of the Unknown:  Campaign Sourcebook" inbound="true"/>
+    <link type="rpg" id="227216" value="Inner Worlds: Love, Politics, and Role-Playing Games" inbound="true"/>
+    <link type="rpg" id="205858" value="Instant Campaign Builder" inbound="true"/>
+    <link type="rpg" id="346294" value="Intellectual Property in RPGs" inbound="true"/>
+    <link type="rpg" id="48419" value="Inventare destini. I giochi di ruolo per l&#039;educazione" inbound="true"/>
+    <link type="rpg" id="389761" value="Jester David&#039;s How-To Guide to Fantasy Worldbuilding" inbound="true"/>
+    <link type="rpg" id="165977" value="2010 Wyrd Con Companion Book: Journeys to Another World" inbound="true"/>
+    <link type="rpg" id="47379" value="Judges Guild&#039;s Bob &amp; Bill, A Cautionary Tale" inbound="true"/>
+    <link type="rpg" id="73793" value="Knaurs Buch der Rollenspiele" inbound="true"/>
+    <link type="rpg" id="168648" value="Kobold Guide to Combat" inbound="true"/>
+    <link type="rpg" id="157588" value="Kobold Guide to Magic" inbound="true"/>
+    <link type="rpg" id="135940" value="The Kobold Guide to Worldbuilding" inbound="true"/>
+    <link type="rpg" id="51337" value="Labirinti per imparare" inbound="true"/>
+    <link type="rpg" id="464776" value="LARP Design: Creating Role-Play Experiences" inbound="true"/>
+    <link type="rpg" id="54048" value="Larp, the Universe and Everything" inbound="true"/>
+    <link type="rpg" id="147179" value="Larpinjärjestäjän käsikirja" inbound="true"/>
+    <link type="rpg" id="205809" value="Larppaajan Käsikirja" inbound="true"/>
+    <link type="rpg" id="167755" value="Leaving Mundania" inbound="true"/>
+    <link type="rpg" id="165962" value="Levande rollspel - Handbok" inbound="true"/>
+    <link type="rpg" id="125677" value="Lifelike" inbound="true"/>
+    <link type="rpg" id="129273" value="Den Lille Boka Om Rollespill" inbound="true"/>
+    <link type="rpg" id="160557" value="Live-Rollenspiel" inbound="true"/>
+    <link type="rpg" id="110099" value="Livin&#039; La Vida Dorka" inbound="true"/>
+    <link type="rpg" id="174490" value="Le livre des Jeux de rôle" inbound="true"/>
+    <link type="rpg" id="275543" value="Ludotronics: A Comprehensive Game Design Methodology From First Ideas to Spectacular Pitches and Proposals" inbound="true"/>
+    <link type="rpg" id="110133" value="Volume 3: The Magic Years" inbound="true"/>
+    <link type="rpg" id="178608" value="The Making of Savage Worlds" inbound="true"/>
+    <link type="rpg" id="48416" value="La maschera e il volto. Il mondo virtuale e sociale dei giocatori di ruolo" inbound="true"/>
+    <link type="rpg" id="85538" value="Master of the Game" inbound="true"/>
+    <link type="rpg" id="187501" value="Master Solo Engines" inbound="true"/>
+    <link type="rpg" id="167510" value="Matka Keskiaikaan - Opas live-roolipelaajalle" inbound="true"/>
+    <link type="rpg" id="181002" value="The Maverick&#039;s Space &amp; Fantasy Gamer&#039;s Guide" inbound="true"/>
+    <link type="rpg" id="203447" value="Mazes and Monsters" inbound="true"/>
+    <link type="rpg" id="250610" value="Medusa&#039;s Guide for Gamer Girls: Feminism and Gaming" inbound="true"/>
+    <link type="rpg" id="207501" value="Medusa&#039;s Guide For Gamer Girls: Gaming With Kids" inbound="true"/>
+    <link type="rpg" id="131293" value="Methodische Spielleitung: Techniken für dramatisches Rollenspiel" inbound="true"/>
+    <link type="rpg" id="50873" value="I Mille Volti della Fantasia" inbound="true"/>
+    <link type="rpg" id="46990" value="The Munchkin&#039;s Guide to Power Gaming" inbound="true"/>
+    <link type="rpg" id="373943" value="Muster: A Primer for War" inbound="true"/>
+    <link type="rpg" id="195392" value="My First Character" inbound="true"/>
+    <link type="rpg" id="59365" value="My First Larp" inbound="true"/>
+    <link type="rpg" id="214347" value="My Guide to RPG Storytelling" inbound="true"/>
+    <link type="rpg" id="214348" value="My Storytelling Guide Companion" inbound="true"/>
+    <link type="rpg" id="125888" value="Never Unprepared: The Complete Game Master&#039;s Guide to Session Prep" inbound="true"/>
+    <link type="rpg" id="292121" value="The No-Prep Gamemaster" inbound="true"/>
+    <link type="rpg" id="447466" value="The No-Prep Gamemaster Second Edition" inbound="true"/>
+    <link type="rpg" id="110063" value="Nodwick Adventure Log: Volume 1" inbound="true"/>
+    <link type="rpg" id="157387" value="Nordic Larp" inbound="true"/>
+    <link type="rpg" id="48610" value="The Kobold Guide to Game Design, Volume 1: Adventures" inbound="true"/>
+    <link type="rpg" id="143463" value="Odyssey: The Complete Game Master&#039;s Guide to Campaign Management" inbound="true"/>
+    <link type="rpg" id="145931" value="Of Dice and Men" inbound="true"/>
+    <link type="rpg" id="73796" value="The Official Price Guide to Role-Playing Games" inbound="true"/>
+    <link type="rpg" id="382279" value="Old School Gamemastering" inbound="true"/>
+    <link type="rpg" id="236182" value="Once Upon a Nordic Larp" inbound="true"/>
+    <link type="rpg" id="52847" value="Open Game Table: The Anthology of Roleplaying Game Blogs, Volume 1" inbound="true"/>
+    <link type="rpg" id="77653" value="Open Game Table: The Anthology of Roleplaying Game Blogs, Volume 2" inbound="true"/>
+    <link type="rpg" id="258431" value="The Overstreet Guide to Collecting Tabletop Games" inbound="true"/>
+    <link type="rpg" id="50609" value="I padroni della menzogna" inbound="true"/>
+    <link type="rpg" id="47207" value="The Pen is Mightier Than the Sword" inbound="true"/>
+    <link type="rpg" id="110132" value="Volume 2: Phil Foglio&#039;s What&#039;s New 2" inbound="true"/>
+    <link type="rpg" id="181451" value="Play Dirty 15th Anniversary Edition" inbound="true"/>
+    <link type="rpg" id="47201" value="Play Unsafe" inbound="true"/>
+    <link type="rpg" id="361349" value="Play with Class" inbound="true"/>
+    <link type="rpg" id="224307" value="Play Your Character Like a F***ing Boss" inbound="true"/>
+    <link type="rpg" id="71960" value="The Play&#039;s The Thing: Tips for Playing Beyond Win or Lose" inbound="true"/>
+    <link type="rpg" id="125984" value="Playground Worlds: Creating and Evaluating Experiences of Role-Playing Games" inbound="true"/>
+    <link type="rpg" id="132086" value="Playing at the World" inbound="true"/>
+    <link type="rpg" id="445791" value="Playing at the World (2E) Volume 2: Three Pillars of Roleplaying Games" inbound="true"/>
+    <link type="rpg" id="417846" value="Playing at the World (2E), Volume 1: The Invention of Dungeons &amp; Dragons" inbound="true"/>
+    <link type="rpg" id="332973" value="Playing Kindly" inbound="true"/>
+    <link type="rpg" id="125982" value="Playing Reality" inbound="true"/>
+    <link type="rpg" id="377977" value="Playless Play 玩而不玩 The ZOZ Koans of Dungeon Master Foo" inbound="true"/>
+    <link type="rpg" id="154953" value="A Pocket Guide to American Freeform" inbound="true"/>
+    <link type="rpg" id="374602" value="The Practical Guide to Becoming a Great GM" inbound="true"/>
+    <link type="rpg" id="49957" value="Quando protagonista è il lettore" inbound="true"/>
+    <link type="rpg" id="363895" value="¿Qué son los juegos de rol? Guía didáctica" inbound="true"/>
+    <link type="rpg" id="201471" value="Questions Without Answers" inbound="true"/>
+    <link type="rpg" id="51791" value="Questlines II: Another Gloranthan Journeybook" inbound="true"/>
+    <link type="rpg" id="52119" value="Questlines: A Gloranthan Journeybook" inbound="true"/>
+    <link type="rpg" id="448378" value="Resistenza GDR – Per un Gioco di Ruolo Libero, Creativo e Condiviso" inbound="true"/>
+    <link type="rpg" id="236520" value="The Rise and Fall of the Gamebook" inbound="true"/>
+    <link type="rpg" id="225011" value="Rise of the Dungeon Master: Gary Gygax and the Creation of D&amp;D" inbound="true"/>
+    <link type="rpg" id="46689" value="Robin&#039;s Laws of Good Gamemastering" inbound="true"/>
+    <link type="rpg" id="214341" value="Role Playing Games" inbound="true"/>
+    <link type="rpg" id="228726" value="Role Playing Materials" inbound="true"/>
+    <link type="rpg" id="177657" value="The Role-Playing Game Primer and Old School Playbook" inbound="true"/>
+    <link type="rpg" id="47198" value="Role-Playing Mastery" inbound="true"/>
+    <link type="rpg" id="281947" value="The Role-Playing Society: Essays on the Cultural Influence of RPGs" inbound="true"/>
+    <link type="rpg" id="125671" value="Role, Play, Art: Collected Experiences of Role-Playing" inbound="true"/>
+    <link type="rpg" id="220826" value="Roleplaying Emotion" inbound="true"/>
+    <link type="rpg" id="46493" value="Roleplaying Games for Absolute Beginners" inbound="true"/>
+    <link type="rpg" id="421065" value="Roleplaying Games in the Digital Age: Essays on Transmedia Storytelling, Tabletop RPGs and Fandom" inbound="true"/>
+    <link type="rpg" id="293239" value="Roll Inclusive: Diversity und Repräsentation im Rollenspiel" inbound="true"/>
+    <link type="rpg" id="248831" value="Roll to Save Vs. Prejudice: Race in Dungeons &amp; Dragons" inbound="true"/>
+    <link type="rpg" id="87445" value="Rollespil" inbound="true"/>
+    <link type="rpg" id="86862" value="Rollespilsfotos 2008" inbound="true"/>
+    <link type="rpg" id="151217" value="Roolipelaaminen - Eläytymistä ja fantasiaharrastusverkostoja" inbound="true"/>
+    <link type="rpg" id="152020" value="Roolipelikirja" inbound="true"/>
+    <link type="rpg" id="152021" value="Roolipelimanifesti" inbound="true"/>
+    <link type="rpg" id="147544" value="Roolipeliopas" inbound="true"/>
+    <link type="rpg" id="157206" value="Ropelopedia Nordica" inbound="true"/>
+    <link type="rpg" id="281037" value="RPG Design Zine: A How-to Zine About Tabletop Roleplaying Game Design" inbound="true"/>
+    <link type="rpg" id="143953" value="RPG Handbook" inbound="true"/>
+    <link type="rpg" id="72921" value="The Kobold Guide to Game Design, Volume 3: Tools &amp; Techniques" inbound="true"/>
+    <link type="rpg" id="57923" value="Second Person: Role-Playing and Story in Games and Playable Media" inbound="true"/>
+    <link type="rpg" id="316615" value="Seikkailuja ja Sankareita" inbound="true"/>
+    <link type="rpg" id="236222" value="Setting and Emergent Stories" inbound="true"/>
+    <link type="rpg" id="206011" value="Setting Design for Writers and Roleplayers" inbound="true"/>
+    <link type="rpg" id="75462" value="Sex, Dice and Gamer Chicks" inbound="true"/>
+    <link type="rpg" id="250382" value="Sexuality in Role-Playing Games" inbound="true"/>
+    <link type="rpg" id="46446" value="Shared Fantasy" inbound="true"/>
+    <link type="rpg" id="424103" value="Slaying the Dragon: A Secret History of Dungeons and Dragons" inbound="true"/>
+    <link type="rpg" id="269686" value="Small Company Big Mess: A History of Guardians of Order and Big Eyes Small Mouth" inbound="true"/>
+    <link type="rpg" id="214340" value="So You&#039;ve Decided To Run A Role-Playing Game" inbound="true"/>
+    <link type="rpg" id="195391" value="So You&#039;ve Never Played an RPG?" inbound="true"/>
+    <link type="rpg" id="224344" value="Solo Roleplayer: The Collected Archives" inbound="true"/>
+    <link type="rpg" id="307676" value="Spillenes Verden" inbound="true"/>
+    <link type="rpg" id="126436" value="States of Play: Nordic Larp Around the World" inbound="true"/>
+    <link type="rpg" id="341624" value="The Sticky GM" inbound="true"/>
+    <link type="rpg" id="168583" value="The Storyteller&#039;s Thesaurus: Fantasy, History, &amp; Horror" inbound="true"/>
+    <link type="rpg" id="421091" value="Strictly Fantasy: The Cultural Roots of Tabletop Role-Playing Games" inbound="true"/>
+    <link type="rpg" id="49461" value="Suppressed Transmission: The First Broadcast" inbound="true"/>
+    <link type="rpg" id="49463" value="Suppressed Transmission: The Second Broadcast" inbound="true"/>
+    <link type="rpg" id="399048" value="Tabletop Analog Game Design" inbound="true"/>
+    <link type="rpg" id="398018" value="Tabletop Role-Playing Therapy: A Guide for the Clinician Game Master" inbound="true"/>
+    <link type="rpg" id="125623" value="Talk Larp:  Provocative Writings from KP2011" inbound="true"/>
+    <link type="rpg" id="49901" value="Il Teatro della Mente" inbound="true"/>
+    <link type="rpg" id="200940" value="Techniques for LarpJam" inbound="true"/>
+    <link type="rpg" id="109723" value="Tempus Fugit: A Guide to Historical Roleplaying" inbound="true"/>
+    <link type="rpg" id="236167" value="Tensions in Live-Action Roleplaying Game Design" inbound="true"/>
+    <link type="rpg" id="398019" value="Therapeutically Applied Role-Playing Games" inbound="true"/>
+    <link type="rpg" id="110811" value="There and Back Again: The Construction of Nostalgia in Advanced Adventures" inbound="true"/>
+    <link type="rpg" id="62729" value="Things We Think About Games" inbound="true"/>
+    <link type="rpg" id="125625" value="Think Larp:  Academic Writings from KP2011" inbound="true"/>
+    <link type="rpg" id="194811" value="Through Dungeons Deep: A Fantasy Gamers&#039; Handbook" inbound="true"/>
+    <link type="rpg" id="236019" value="Through Dungeons Deeper: A Survival Guide for Dungeoneers as Written by a Survivor" inbound="true"/>
+    <link type="rpg" id="48612" value="The Kobold Guide to Game Design, Volume 2: How to Pitch,  Playtest &amp; Publish" inbound="true"/>
+    <link type="rpg" id="344134" value="Tracks in the Sand: Advice on Railroads and Sandboxes in Tabletop Gaming" inbound="true"/>
+    <link type="rpg" id="464789" value="Transformative Role-Playing Game Design" inbound="true"/>
+    <link type="rpg" id="183444" value="The Truth About Dungeons &amp; Dragons" inbound="true"/>
+    <link type="rpg" id="429964" value="The Ultimate RPG Game Master&#039;s Guide" inbound="true"/>
+    <link type="rpg" id="332226" value="The Ultimate RPG Game Master&#039;s Worldbuilding Guide" inbound="true"/>
+    <link type="rpg" id="110252" value="Understanding Gamers" inbound="true"/>
+    <link type="rpg" id="160416" value="Unframed: The Art of Improvisation for Game Masters" inbound="true"/>
+    <link type="rpg" id="421066" value="Watch Us Roll: Essays on Actual Play and Performance in Tabletop Role-Playing Games" inbound="true"/>
+    <link type="rpg" id="337257" value="Way With Worlds Book 1: Crafting Great Fictional Settings" inbound="true"/>
+    <link type="rpg" id="337258" value="Way With Worlds Book 2: Details And Discussion" inbound="true"/>
+    <link type="rpg" id="61666" value="What is Dungeons and Dragons?" inbound="true"/>
+    <link type="rpg" id="274707" value="Wizards, Warriors and Wellness: The Therapeutic Application of Role Playing Games" inbound="true"/>
+    <link type="rpg" id="149087" value="Writing a Larp Script" inbound="true"/>
+    <link type="rpg" id="284700" value="Writing Games for Publication" inbound="true"/>
+    <link type="rpg" id="258222" value="Writing with Style: An Editor&#039;s Advice for RPG Writers" inbound="true"/>
+    <link type="rpg" id="166119" value="2013 Wyrd Con Companion Book: Wyrd Con 2013 Companion Book" inbound="true"/>
+    <link type="rpg" id="187901" value="Wyrd Con 2014 Companion Book" inbound="true"/>
+    <link type="rpg" id="166074" value="2012 Wyrd Con Companion Book: Wyrd Con Companion 2012" inbound="true"/>
+    <link type="rpg" id="183856" value="Yaruki Zero: Collected Thoughts on Role-Playing Games" inbound="true"/>
+    <link type="rpg" id="359424" value="You Are The Hero Part 2" inbound="true"/>
+    <link type="rpg" id="253093" value="You Are The Hero: A History of Fighting Fantasy Gamebooks" inbound="true"/>
+    <link type="rpg" id="109806" value="Zogonia: Slice of Death" inbound="true"/>
+    <link type="rpg" id="25621" value="Designers &amp; Dragons" inbound="true"/>
+    <link type="rpg" id="39638" value="HAWK &amp; MOOR" inbound="true"/>
+    <link type="rpg" id="3512" value="Kobold Guides" inbound="true"/>
+    <link type="rpgmechanic" id="2142" value="Reading (for Periodicals, Adventure Books, etc)" />
+    <videos total="0">
+    </videos>
+    <versions></versions>
+    <comments page="1" totalitems="2">
+      <comment username="MJ Harnish" rating="5" value="" />
+      <comment username="dysjunct" rating="6" value="Kind of a silly thing to rate, but I like reading commentary about the hobby." />
+    </comments>
+    <statistics page="1">
+      <ratings >
+        <usersrated value="2" />
+        <average value="5.5" />
+        <bayesaverage value="0" />
+        <ranks>
+          <rank type="subtype" id="17" name="rpg" friendlyname="RPG Rank" value="Not Ranked" bayesaverage="Not Ranked" />
+        </ranks>
+        <stddev value="0.5" />
+        <median value="0" />
+        <owned value="16" />
+        <trading value="0" />
+        <wanting value="0" />
+        <wishing value="0" />
+        <numcomments value="2" />
+        <numweights value="0" />
+        <averageweight value="0" />
+      </ratings>
+    </statistics>
+  </item>
+</items>

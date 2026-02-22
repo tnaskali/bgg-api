@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- /xmlapi2/plays?id=1000&type=thing -->
+<plays total="32" page="1" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+  <play id="106339298" userid="224195" date="2025-11-22" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="102358218" userid="24438" date="2025-08-09" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="75289989" userid="825923" date="2023-08-03" quantity="4" length="60" incomplete="0" nowinstats="0" location="Home">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <comments>comments go here</comments>
+    <players>
+      <player username="" userid="0" name="Non-BGG Friend" startposition="1" color="blue" score="18" new="0" rating="7" win="1" />
+      <player username="tnaskali" userid="825923" name="" startposition="" color="" score="" new="1" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="75289932" userid="825923" date="2023-08-03" quantity="1" length="60" incomplete="0" nowinstats="0" location="Home">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <comments>comments go here</comments>
+    <players>
+      <player username="" userid="0" name="Non-BGG Friend" startposition="1" color="blue" score="18" new="0" rating="7" win="1" />
+      <player username="tnaskali" userid="825923" name="" startposition="" color="" score="" new="1" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="62664880" userid="16399" date="2022-07-26" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="55722879" userid="2844678" date="2021-11-17" quantity="1" length="0" incomplete="0" nowinstats="0" location="Ratskeller Tübingen">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <players>
+      <player username="" userid="0" name="Anonymous player" startposition="" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Anonymous player" startposition="" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Martin" startposition="" color="" score="" new="1" rating="0" win="0" />
+      <player username="" userid="0" name="Anonymous player" startposition="" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Anonymous player" startposition="" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Anonymous player" startposition="" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Anonymous player" startposition="" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Anonymous player" startposition="" color="" score="" new="0" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="54900690" userid="570459" date="2021-10-13" quantity="1" length="0" incomplete="0" nowinstats="0" location="Chico Mendes, Aachen">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <players>
+      <player username="" userid="0" name="Steffen T." startposition="1" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Christoph K." startposition="2" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Lukas K." startposition="3" color="" score="" new="0" rating="0" win="0" />
+      <player username="TheBeelzebuth" userid="570459" name="Andre S." startposition="4" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Bärbel N." startposition="5" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Belal" startposition="6" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Jan W." startposition="7" color="" score="" new="0" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="49031722" userid="830346" date="2021-02-05" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="45803815" userid="1248698" date="2020-09-15" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="45750399" userid="508298" date="2020-09-15" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="41608218" userid="419765" date="2020-03-12" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="49200801" userid="1065010" date="2020-01-01" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="38584729" userid="2026499" date="2019-08-31" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="33345944" userid="937569" date="2019-01-19" quantity="1" length="0" incomplete="0" nowinstats="0" location="自宅">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="31574839" userid="1604758" date="2018-10-09" quantity="1" length="30" incomplete="0" nowinstats="0" location="Flagstaff, AZ">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <players>
+      <player username="" userid="0" name="Anonymous player" startposition="" color="" score="0" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Anonymous player" startposition="" color="" score="0" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Anonymous player" startposition="" color="" score="0" new="0" rating="0" win="0" />
+      <player username="kevinruss" userid="1604758" name="Kevin Russ" startposition="" color="" score="0" new="1" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="31398366" userid="1460532" date="2018-10-07" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="31397654" userid="449909" date="2018-10-07" quantity="1" length="11" incomplete="0" nowinstats="0" location="Rose Inn, Kennington">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <comments>6/10: peculiar game from the 70’s, need s bit more brain than I had available at 9:30 in the evening.</comments>
+    <players>
+      <player username="" userid="0" name="John Games" startposition="" color="" score="8" new="1" rating="0" win="1" />
+      <player username="" userid="0" name="Ed Gamer" startposition="" color="" score="-5" new="1" rating="0" win="0" />
+      <player username="" userid="0" name="Ian Rickards" startposition="" color="" score="4" new="1" rating="0" win="0" />
+      <player username="" userid="0" name="Adam Gamer" startposition="" color="" score="-1" new="1" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="17123671" userid="731957" date="2016-01-04" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="78256920" userid="499127" date="2014-02-08" quantity="1" length="0" incomplete="0" nowinstats="0" location="tmp Bietigheim">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <players>
+      <player username="" userid="0" name="Frank Ba." startposition="" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Inge P." startposition="" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Klaus Pa." startposition="" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Michael We." startposition="" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Sandra Th." startposition="" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Stephie Ba." startposition="" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="_Thomas Pa.‍" startposition="" color="" score="" new="0" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="5490798" userid="11516" date="2011-03-05" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="4958466" userid="267700" date="2010-11-05" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="4587830" userid="333394" date="2010-07-27" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="4548227" userid="174466" date="2010-07-16" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="4547770" userid="70158" date="2010-07-16" quantity="1" length="0" incomplete="0" nowinstats="0" location="Oxshott">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="88153397" userid="110592" date="2010-01-31" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <players>
+      <player username="maertenl" userid="110592" name="Laurent Maerten" startposition="" color="" score="" new="1" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="3889957" userid="58445" date="2010-01-24" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="2810208" userid="728" date="2009-04-05" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="599325" userid="29346" date="2006-07-08" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="544390" userid="711" date="2001-11-04" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+    <players>
+      <player username="" userid="0" name="Carrie" startposition="" color="" score="" new="0" rating="0" win="0" />
+      <player username="" userid="0" name="Gamer" startposition="" color="" score="" new="0" rating="0" win="1" />
+      <player username="mkgray" userid="711" name="Matthew" startposition="" color="" score="" new="0" rating="0" win="0" />
+    </players>
+  </play>
+  <play id="181549" userid="50925" date="1990-03-13" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="1535051" userid="16399" date="1990-01-01" quantity="2" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+  <play id="330183" userid="50925" date="1975-10-10" quantity="1" length="0" incomplete="0" nowinstats="0" location="">
+    <item name="Corona" objecttype="thing" objectid="1000">
+      <subtypes>
+        <subtype value="boardgame" />
+      </subtypes>
+    </item>
+  </play>
+</plays>

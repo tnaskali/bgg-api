@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- /xmlapi2/person?id=2&type=boardgamedesigner&videos=1&versions=1&stats=1 -->
+<items termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+  <item type="boardgamedesigner" id="2">
+    <thumbnail>https://cf.geekdo-images.com/shDlOkQued8T1R6cDNJuKg__small/img/XxsxSDS5LD8UEVXrZmS6TxXEBAc=/fit-in/200x150/filters:strip_icc()/pic9061128.png</thumbnail>
+    <image>https://cf.geekdo-images.com/shDlOkQued8T1R6cDNJuKg__original/img/ubJbAH_Ksey_8lf25NaOsVl-cgo=/0x0/filters:format(png)/pic9061128.png</image>
+    <videos total="26">
+      <video id="591164" title="Reiner Knizia Interview Part 2" category="interview" language="English" link="http://www.youtube.com/watch?v=iMhgRrqfBhQ" username="boardgamegeektv" userid="473702" postdate="2026-01-06T11:00:06-06:00" />
+      <video id="581073" title="Tigris, Euphrates, and Everything In Between: Knizia Unplugged" category="interview" language="English" link="http://www.youtube.com/watch?v=HzvJBxbKXJA" username="boardgamegeektv" userid="473702" postdate="2025-11-04T12:31:32-06:00" />
+      <video id="572730" title="TOP 5 JUEGOS de Reiner KNIZIA" category="review" language="Spanish" link="http://www.youtube.com/watch?v=6YFAt9DPzvM" username="sanz33" userid="1298987" postdate="2025-09-19T07:07:04-05:00" />
+      <video id="570480" title="Interview with Dr. Reiner Knizia - The Game Schooler Podcast" category="interview" language="English" link="http://www.youtube.com/watch?v=R6j5VGzKdtQ" username="GameSchoolerU" userid="3207451" postdate="2025-09-05T15:06:38-05:00" />
+      <video id="536402" title="Interview Reiner Knizia on Las Cartas Sobre la Mesa (Spanish subtitles) | Episodio 50 | T2E22 " category="interview" language="English" link="http://www.youtube.com/watch?v=c9QJvWlIY0I" username="turmoil23" userid="940247" postdate="2025-02-05T11:13:44-06:00" />
+      <video id="535476" title="Interview with Reiner Knizia" category="interview" language="English" link="http://www.youtube.com/watch?v=jcA0DM8QZYc" username="ClubDeJuegosRosario" userid="3776061" postdate="2025-01-31T17:57:02-06:00" />
+      <video id="487652" title="Let&#039;s talk about... Reiner Knizia (Designer Series)" category="review" language="English" link="http://www.youtube.com/watch?v=vCgGS2d5j-o" username="Sofaux" userid="2770002" postdate="2024-03-26T09:47:04-05:00" />
+      <video id="485806" title="Spieleautor REINER KNIZIA im Interview - Spielwarenmesse 2024 - Spiel doch mal! " category="interview" language="German" link="http://www.youtube.com/watch?v=dHwYyHSsmKs" username="Spiel doch mal" userid="1133148" postdate="2024-03-15T07:36:36-05:00" />
+      <video id="474496" title="Reiner Knizia&#039;s designer journey" category="interview" language="English" link="http://www.youtube.com/watch?v=J9IbUBZ66bc" username="Labeste" userid="1482822" postdate="2024-01-10T07:17:01-06:00" />
+      <video id="372173" title="Reiner Knizia: Design Philosophy - interview at Pöydällä Digital by Joonas Konstig" category="interview" language="English" link="http://www.youtube.com/watch?v=QizXwSJ-o48" username="Diffler" userid="454077" postdate="2022-03-21T06:08:13-05:00" />
+      <video id="274556" title="Interview mit dem &quot;My City&quot; Autor Reiner Knizia -Nominiert zum Spiel des Jahres - Spiel doch mal...!" category="interview" language="German" link="http://www.youtube.com/watch?v=1vsHdt-rZCE" username="Spiel doch mal" userid="1133148" postdate="2020-07-28T03:46:31-05:00" />
+      <video id="254222" title="Autoren FAQ - Reiner Knizia im Interview - Spiel doch mal...! - Spielwarenmesse - Nürnberg" category="interview" language="German" link="http://www.youtube.com/watch?v=1KQPadUuAIQ" username="Spiel doch mal" userid="1133148" postdate="2020-03-03T00:31:33-06:00" />
+      <video id="228039" title="Spieleautor Reiner Knizia im Interview auf der Spiel des Jahres Verleihung - Berlin" category="interview" language="German" link="http://www.youtube.com/watch?v=Joe4dbIEhy8" username="Spiel doch mal" userid="1133148" postdate="2019-08-06T00:13:49-05:00" />
+      <video id="171708" title="TCbH Interviews # 027 -  Reiner Knizia" category="interview" language="English" link="http://www.youtube.com/watch?v=LyVN9RjEPyQ" username="jeddy lee" userid="460040" postdate="2018-03-30T01:35:57-05:00" />
+      <video id="168774" title="Designer&#039;s Best: Reiner Knizia" category="review" language="English" link="http://www.youtube.com/watch?v=PY21xhNtKco" username="TomVasel" userid="722" postdate="2018-03-04T13:01:02-06:00" />
+    </videos>
+    <versions>
+      <item type="boardgameversion" id="31248">
+        <thumbnail>https://cf.geekdo-images.com/1Evyveh97FeXPsWKzh8jAA__small/img/AN59bNy-yH-Ti1WqlcqwG9_XgBo=/fit-in/200x150/filters:strip_icc()/pic179534.jpg</thumbnail>
+        <image>https://cf.geekdo-images.com/1Evyveh97FeXPsWKzh8jAA__original/img/oucVJCSlEI__94N7pcBzEj-82jU=/0x0/filters:format(jpeg)/pic179534.jpg</image>
+        <canonicalname value="Code Knacker"></canonicalname>
+        <link type="boardgameversion" id="27613" value="Code Cracker" inbound="true"/>
+        <name type="primary" sortindex="1" value="German edition" />
+        <link type="boardgamepublisher" id="34" value="Ravensburger" />
+        <link type="boardgameartist" id="12879" value="Celia Johnson" />
+        <link type="boardgameartist" id="2" value="Reiner Knizia" />
+        <yearpublished value="2007" />
+        <productcode value="27 134 4" />
+        <width value="5.03937" />
+        <length value="7.00787" />
+        <depth value="1.49606" />
+        <weight value="0" />
+        <link type="language" id="2188" value="German" />
+      </item>
+      <item type="boardgameversion" id="708260">
+        <thumbnail>https://cf.geekdo-images.com/pEc9gcvbWzkkHRYIs1KKFA__small/img/7azdL-8_L26h8dKOL3qprp8XBgc=/fit-in/200x150/filters:strip_icc()/pic8115896.jpg</thumbnail>
+        <image>https://cf.geekdo-images.com/pEc9gcvbWzkkHRYIs1KKFA__original/img/A4lY1KaUSiGXCHwLxASWW97evBc=/0x0/filters:format(jpeg)/pic8115896.jpg</image>
+        <canonicalname value="Würfelspiel: Kriss Kross – Wer erreicht die höchste Punktzahl?"></canonicalname>
+        <link type="boardgameversion" id="220988" value="Criss Cross" inbound="true"/>
+        <name type="primary" sortindex="1" value="German edition 2024" />
+        <link type="boardgamepublisher" id="52645" value="Edition Michael Fischer GmbH (EMF Verlag)" />
+        <link type="boardgameartist" id="2" value="Reiner Knizia" />
+        <yearpublished value="2024" />
+        <productcode value="" />
+        <width value="6.02362" />
+        <length value="4.13386" />
+        <depth value="0" />
+        <weight value="0.34833" />
+        <link type="language" id="2188" value="German" />
+      </item>
+      <item type="boardgameversion" id="31154">
+        <thumbnail>https://cf.geekdo-images.com/uQLh4MmExpyOPenlA4tgOw__small/img/Cd-2RKDgs8U88jWU_Aips3WHJlU=/fit-in/200x150/filters:strip_icc()/pic220264.jpg</thumbnail>
+        <image>https://cf.geekdo-images.com/uQLh4MmExpyOPenlA4tgOw__original/img/6L6oqYNfF1GB8K3_0o6KLLgB8E8=/0x0/filters:format(jpeg)/pic220264.jpg</image>
+        <canonicalname value="Blue Moon City"></canonicalname>
+        <link type="boardgameversion" id="21882" value="Blue Moon City" inbound="true"/>
+        <name type="primary" sortindex="1" value="Polish edition" />
+        <link type="boardgamepublisher" id="4617" value="Galakta" />
+        <link type="boardgameartist" id="13948" value="Daren Bader" />
+        <link type="boardgameartist" id="2" value="Reiner Knizia" />
+        <link type="boardgameartist" id="12090" value="Michael Phillippi" />
+        <yearpublished value="2006" />
+        <productcode value="" />
+        <width value="11.7" />
+        <length value="11.7" />
+        <depth value="2.8" />
+        <weight value="0" />
+        <link type="language" id="2199" value="Polish" />
+      </item>
+      <item type="boardgameversion" id="448627">
+        <thumbnail>https://cf.geekdo-images.com/Lia65tt36D90BUCAamk7rA__small/img/2slzwJqD5f7HvXPcdnQbv5fEoKE=/fit-in/200x150/filters:strip_icc()/pic4619312.png</thumbnail>
+        <image>https://cf.geekdo-images.com/Lia65tt36D90BUCAamk7rA__original/img/4P9eenAqAJ6v7mISXsuyYTFF1Dk=/0x0/filters:format(png)/pic4619312.png</image>
+        <canonicalname value="Hot Wheels Speed Rally"></canonicalname>
+        <link type="boardgameversion" id="91545" value="Hot Wheels Speed Rallye" inbound="true"/>
+        <name type="primary" sortindex="1" value="Second edition" />
+        <link type="boardgamepublisher" id="34" value="Ravensburger" />
+        <link type="boardgameartist" id="2" value="Reiner Knizia" />
+        <yearpublished value="2011" />
+        <productcode value="" />
+        <width value="7.48031" />
+        <length value="10.9449" />
+        <depth value="2.08661" />
+        <weight value="0.952397" />
+        <link type="language" id="2184" value="English" />
+        <link type="language" id="2193" value="Italian" />
+        <link type="language" id="2203" value="Spanish" />
+      </item>
+    </versions>
+    <statistics page="1">
+      <ratings >
+        <usersrated value="" />
+        <average value="" />
+        <bayesaverage value="" />
+        <ranks>
+        </ranks>
+        <stddev value="" />
+        <median value="" />
+        <owned value="" />
+        <trading value="" />
+        <wanting value="" />
+        <wishing value="" />
+        <numcomments value="" />
+        <numweights value="" />
+        <averageweight value="" />
+      </ratings>
+    </statistics>
+  </item>
+</items>

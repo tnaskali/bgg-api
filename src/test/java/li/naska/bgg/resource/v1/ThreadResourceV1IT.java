@@ -49,7 +49,7 @@ public class ThreadResourceV1IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given {
 
-      final String mockResponseBody = readFileContent("responses/api/v1/thread/200_OK.xml");
+      final String mockResponseBody = readFileContent("responses/bgg/xmlapi/v1/thread/200_OK.xml");
 
       @BeforeEach
       public void setup() {

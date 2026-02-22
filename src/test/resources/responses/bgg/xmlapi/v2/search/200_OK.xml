@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- /xmlapi2/search?query=SETI -->
+<items total="20" termsofuse="https://boardgamegeek.com/xmlapi/termsofuse">
+  <item type="boardgame" id="190743">
+    <name type="primary" value="Kemet: Skills and Black Power Tile For Ta-Seti"/>
+    <yearpublished value="2015" />
+  </item>
+  <item type="boardgame" id="161842">
+    <name type="primary" value="Kemet: Ta-Seti"/>
+    <yearpublished value="2015" />
+  </item>
+  <item type="boardgame" id="17785">
+    <name type="primary" value="Seti"/>
+    <yearpublished value="1979" />
+  </item>
+  <item type="boardgame" id="418059">
+    <name type="primary" value="SETI: Search for Extraterrestrial Intelligence"/>
+    <yearpublished value="2024" />
+  </item>
+  <item type="boardgame" id="456891">
+    <name type="primary" value="SETI: Search for Extraterrestrial Intelligence – DLR Promo Card"/>
+    <yearpublished value="2025" />
+  </item>
+  <item type="boardgame" id="437940">
+    <name type="primary" value="SETI: Search for Extraterrestrial Intelligence – Gateway to Mars Promo Card"/>
+    <yearpublished value="2025" />
+  </item>
+  <item type="boardgame" id="430027">
+    <name type="primary" value="SETI: Search for Extraterrestrial Intelligence – Pluto Promo Card"/>
+    <yearpublished value="2024" />
+  </item>
+  <item type="boardgame" id="445048">
+    <name type="primary" value="SETI: Space Agencies"/>
+    <yearpublished value="2025" />
+  </item>
+  <item type="boardgame" id="453310">
+    <name type="primary" value="SETI: Space Agencies – Space Agencies Promo Card"/>
+    <yearpublished value="2025" />
+  </item>
+  <item type="boardgameexpansion" id="190743">
+    <name type="primary" value="Kemet: Skills and Black Power Tile For Ta-Seti"/>
+    <yearpublished value="2015" />
+  </item>
+  <item type="boardgameexpansion" id="161842">
+    <name type="primary" value="Kemet: Ta-Seti"/>
+    <yearpublished value="2015" />
+  </item>
+  <item type="boardgameexpansion" id="456891">
+    <name type="primary" value="SETI: Search for Extraterrestrial Intelligence – DLR Promo Card"/>
+    <yearpublished value="2025" />
+  </item>
+  <item type="boardgameexpansion" id="437940">
+    <name type="primary" value="SETI: Search for Extraterrestrial Intelligence – Gateway to Mars Promo Card"/>
+    <yearpublished value="2025" />
+  </item>
+  <item type="boardgameexpansion" id="430027">
+    <name type="primary" value="SETI: Search for Extraterrestrial Intelligence – Pluto Promo Card"/>
+    <yearpublished value="2024" />
+  </item>
+  <item type="boardgameexpansion" id="445048">
+    <name type="primary" value="SETI: Space Agencies"/>
+    <yearpublished value="2025" />
+  </item>
+  <item type="boardgameexpansion" id="453310">
+    <name type="primary" value="SETI: Space Agencies – Space Agencies Promo Card"/>
+    <yearpublished value="2025" />
+  </item>
+  <item type="rpgitem" id="133881">
+    <name type="primary" value="Arth Campaign Seting"/>
+    <yearpublished value="2012" />
+  </item>
+  <item type="rpgitem" id="44428">
+    <name type="primary" value="Clanbook: Setites (1st Edition)"/>
+    <yearpublished value="1995" />
+  </item>
+  <item type="rpgitem" id="112330">
+    <name type="primary" value="Crônicas da Sétima Lua Cenário de Campanha"/>
+    <yearpublished value="2007" />
+  </item>
+  <item type="rpgitem" id="112331">
+    <name type="primary" value="Crônicas da Sétima Lua Guia de Isaldar"/>
+    <yearpublished value="2008" />
+  </item>
+</items>

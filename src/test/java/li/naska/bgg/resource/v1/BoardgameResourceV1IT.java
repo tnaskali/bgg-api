@@ -49,7 +49,46 @@ public class BoardgameResourceV1IT extends AbstractMockServerIT {
     class Given_1 {
 
       final String mockResponseBody =
-          readFileContent("responses/api/v1/boardgame/200_NOT_FOUND.xml");
+          readFileContent("responses/bgg/xmlapi/v1/boardgame/200_NOT_FOUND.xml");
+
+      @BeforeEach
+      public void setup() {
+        enqueueXml(200, mockResponseBody);
+      }
+
+      @Nested
+      @DisplayName("when valid request")
+      class When {
+
+        private final Supplier<WebTestClient.ResponseSpec> test = () -> Do.this.partialTest.apply(
+            10000000, new LinkedMultiValueMap<>(), MediaType.APPLICATION_XML);
+
+        @Nested
+        @DisplayName("then")
+        class Then {
+
+          private WebTestClient.ResponseSpec result;
+
+          @BeforeEach
+          public void setup() {
+            result = test.get();
+          }
+
+          @Test
+          @DisplayName("should answer 404")
+          void should() {
+            result.expectStatus().isNotFound();
+          }
+        }
+      }
+    }
+
+    @Nested
+    @DisplayName("given remote repository answers 200 with message Item not found")
+    class Given_2 {
+
+      final String mockResponseBody =
+          readFileContent("responses/bgg/xmlapi/v1/boardgame/200_NOT_FOUND.xml");
 
       @BeforeEach
       public void setup() {
@@ -85,9 +124,9 @@ public class BoardgameResourceV1IT extends AbstractMockServerIT {
 
     @Nested
     @DisplayName("given remote repository answers 200")
-    class Given_2 {
+    class Given_3 {
 
-      final String mockResponseBody = readFileContent("responses/api/v1/boardgame/200_OK.xml");
+      final String mockResponseBody = readFileContent("responses/bgg/xmlapi/v1/boardgame/200_OK.xml");
 
       @BeforeEach
       public void setup() {
@@ -132,7 +171,7 @@ public class BoardgameResourceV1IT extends AbstractMockServerIT {
 
         private final Function<MediaType, WebTestClient.ResponseSpec> partialTest =
             (MediaType mediaType) ->
-                Do.this.partialTest.apply(71317, new LinkedMultiValueMap<>(), mediaType);
+                Do.this.partialTest.apply(822, new LinkedMultiValueMap<>(), mediaType);
 
         @Nested
         @DisplayName("when accept XML")
@@ -157,7 +196,7 @@ public class BoardgameResourceV1IT extends AbstractMockServerIT {
             void should_1() {
               verify(
                   1,
-                  getRequestedFor(urlEqualTo("/xmlapi/boardgame/71317"))
+                  getRequestedFor(urlEqualTo("/xmlapi/boardgame/822"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,
@@ -201,7 +240,7 @@ public class BoardgameResourceV1IT extends AbstractMockServerIT {
             void should_1() {
               verify(
                   1,
-                  getRequestedFor(urlEqualTo("/xmlapi/boardgame/71317"))
+                  getRequestedFor(urlEqualTo("/xmlapi/boardgame/822"))
                       .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
                       .withHeader(
                           HttpHeaders.ACCEPT_CHARSET,
@@ -220,9 +259,7 @@ public class BoardgameResourceV1IT extends AbstractMockServerIT {
               result
                   .expectBody()
                   .jsonPath("$.boardgames[0].objectid")
-                  .isEqualTo(71317)
-                  .jsonPath("$.boardgames[0].subtypemismatch")
-                  .isEqualTo(true);
+                  .isEqualTo(822);
             }
           }
         }

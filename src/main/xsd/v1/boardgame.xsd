@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://bgg.naska.li/xml/common">
+  <xs:import schemaLocation="../common.xsd" namespace="http://bgg.naska.li/xml/common"/>
 
   <xs:element name="boardgames" type="boardgames"/>
 
@@ -12,46 +13,89 @@
 
   <xs:complexType name="boardgame">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:element name="yearpublished" type="xs:nonNegativeInteger"/>
-      <xs:element name="minplayers" type="xs:positiveInteger"/>
-      <xs:element name="maxplayers" type="xs:positiveInteger"/>
-      <xs:element name="playingtime" type="xs:positiveInteger"/>
-      <xs:element name="minplaytime" type="xs:positiveInteger"/>
-      <xs:element name="maxplaytime" type="xs:positiveInteger"/>
-      <xs:element name="age" type="xs:positiveInteger"/>
+      <xs:element name="yearpublished" type="common:optionalInteger"/>
+      <xs:element name="minplayers" type="common:optionalInteger"/>
+      <xs:element name="maxplayers" type="common:optionalInteger"/>
+      <xs:element name="playingtime" type="common:optionalInteger"/>
+      <xs:element name="minplaytime" type="common:optionalInteger"/>
+      <xs:element name="maxplaytime" type="common:optionalInteger"/>
+      <xs:element name="age" type="common:optionalInteger"/>
       <xs:element name="name" type="name" maxOccurs="unbounded"/>
       <xs:element name="description" type="xs:string"/>
       <xs:element name="thumbnail" type="xs:anyURI"/>
       <xs:element name="image" type="xs:anyURI"/>
-      <xs:element name="boardgame" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgameaccessory" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgameartist" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgamecategory" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgamecompilation" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgamedesigner" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgamedeveloper" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgameeditor" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgameexpansion" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgamefamily" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgamegraphicdesigner" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgamehonor" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgameimplementation" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgameinsertdesigner" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgameintegration" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgameissue" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgameissueversion" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgamemechanic" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgamepodcastepisode" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgamepublisher" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgamesculptor" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgamesolodesigner" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgamesubdomain" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgameversion" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="boardgamewriter" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="commerceweblink" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="videogamebg" type="link" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="poll" type="poll" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="comment" type="comment" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="boardgame" type="link"/>
+      <xs:element name="boardgameaccessory" type="link"/>
+      <xs:element name="boardgameartist" type="link"/>
+      <xs:element name="boardgamecategory" type="link"/>
+      <xs:element name="boardgamecompilation" type="link"/>
+      <xs:element name="boardgamedesigner" type="link"/>
+      <xs:element name="boardgamedeveloper" type="link"/>
+      <xs:element name="boardgameeditor" type="link"/>
+      <xs:element name="boardgameexpansion" type="link"/>
+      <xs:element name="boardgamefamily" type="link"/>
+      <xs:element name="boardgamegraphicdesigner" type="link"/>
+      <xs:element name="boardgamehonor" type="link"/>
+      <xs:element name="boardgameimplementation" type="link"/>
+      <xs:element name="boardgameinsertdesigner" type="link"/>
+      <xs:element name="boardgameintegration" type="link"/>
+      <xs:element name="boardgameissue" type="link"/>
+      <xs:element name="boardgameissueversion" type="link"/>
+      <xs:element name="boardgamemechanic" type="link"/>
+      <xs:element name="boardgameperiodical" type="link"/>
+      <xs:element name="boardgamepodcast" type="link"/>
+      <xs:element name="boardgamepodcastepisode" type="link"/>
+      <xs:element name="boardgamepublisher" type="link"/>
+      <xs:element name="boardgamesculptor" type="link"/>
+      <xs:element name="boardgamesolodesigner" type="link"/>
+      <xs:element name="boardgamesubdomain" type="link"/>
+      <xs:element name="boardgameversion" type="link"/>
+      <xs:element name="boardgamewriter" type="link"/>
+      <xs:element name="cardset" type="link"/>
+      <xs:element name="commerceweblink" type="link"/>
+      <xs:element name="puzzle" type="link"/>
+      <xs:element name="puzzlecategory" type="link"/>
+      <xs:element name="puzzledesigner" type="link"/>
+      <xs:element name="puzzlefamily" type="link"/>
+      <xs:element name="puzzlehonor" type="link"/>
+      <xs:element name="puzzlematerial" type="link"/>
+      <xs:element name="puzzlemechanism" type="link"/>
+      <xs:element name="puzzleproducer" type="link"/>
+      <xs:element name="puzzletype" type="link"/>
+      <xs:element name="puzzleversion" type="link"/>
+      <xs:element name="rpg" type="link"/>
+      <xs:element name="rpgartist" type="link"/>
+      <xs:element name="rpgcategory" type="link"/>
+      <xs:element name="rpgdesigner" type="link"/>
+      <xs:element name="rpgfamily" type="link"/>
+      <xs:element name="rpggenre" type="link"/>
+      <xs:element name="rpghonor" type="link"/>
+      <xs:element name="rpgitemversion" type="link"/>
+      <xs:element name="rpgperiodical" type="link"/>
+      <xs:element name="rpgpodcast" type="link"/>
+      <xs:element name="rpgpodcastepisode" type="link"/>
+      <xs:element name="rpgproducer" type="link"/>
+      <xs:element name="rpgpublisher" type="link"/>
+      <xs:element name="rpgseries" type="link"/>
+      <xs:element name="rpgsetting" type="link"/>
+      <xs:element name="rpgsystem" type="link"/>
+      <xs:element name="vgcharacterversion" type="link"/>
+      <xs:element name="videogamebg" type="link"/>
+      <xs:element name="videogamecharacter" type="link"/>
+      <xs:element name="videogamedeveloper" type="link"/>
+      <xs:element name="videogameexpansion" type="link"/>
+      <xs:element name="videogamefranchise" type="link"/>
+      <xs:element name="videogamegenre" type="link"/>
+      <xs:element name="videogamehonor" type="link"/>
+      <xs:element name="videogamemode" type="link"/>
+      <xs:element name="videogameplatform" type="link"/>
+      <xs:element name="videogamepublisher" type="link"/>
+      <xs:element name="videogameseries" type="link"/>
+      <xs:element name="videogametheme" type="link"/>
+      <xs:element name="videogameversion" type="link"/>
+      <xs:element name="poll" type="poll"/>
+      <xs:element name="poll-summary" type="pollSummary"/>
+      <xs:element name="comment" type="comment"/>
       <xs:element name="statistics" type="statistics" minOccurs="0"/>
     </xs:choice>
     <xs:attribute name="objectid" type="xs:positiveInteger" use="required"/>
@@ -70,14 +114,15 @@
   <xs:complexType name="link">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute name="objectid" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="objectid" type="xs:nonNegativeInteger" use="required"/>
+        <xs:attribute name="inbound" type="xs:boolean"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
 
   <xs:complexType name="poll">
     <xs:sequence>
-      <xs:element name="results" type="results"/>
+      <xs:element name="results" type="results" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="title" type="xs:string" use="required"/>
@@ -86,14 +131,28 @@
 
   <xs:complexType name="results">
     <xs:sequence>
-      <xs:element name="result" type="result"/>
+      <xs:element name="result" type="pollResult" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
+    <xs:attribute name="numplayers" type="xs:string"/>
   </xs:complexType>
 
-  <xs:complexType name="result">
+  <xs:complexType name="pollResult">
     <xs:attribute name="level" type="xs:positiveInteger"/>
     <xs:attribute name="value" type="xs:string" use="required"/>
     <xs:attribute name="numvotes" type="xs:nonNegativeInteger" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="pollSummary">
+    <xs:sequence>
+      <xs:element name="result" type="pollSummaryResult" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="title" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="pollSummaryResult">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="comment">
@@ -107,9 +166,8 @@
 
   <xs:complexType name="statistics">
     <xs:sequence>
-      <xs:element name="ratings" type="ratings" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="ratings" type="ratings"/>
     </xs:sequence>
-    <xs:attribute name="page" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="ratings">
