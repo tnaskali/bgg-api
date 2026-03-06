@@ -39,7 +39,7 @@ jobs:
       # build image
 
       - name: Build image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: dockerfiles/Dockerfile
@@ -79,7 +79,7 @@ jobs:
 
       - name: Deploy image
         if: github.ref == 'refs/heads/master'
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: dockerfiles/Dockerfile
