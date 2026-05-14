@@ -58,7 +58,7 @@ Steps :
 
 1. run `docker pull ghcr.io/tnaskali/bgg-api:master` (or any other tag)
 2. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
-3. run `docker run --rm -p 8080:80 -e BGG_APPLICATION_TOKEN=${BGG_APPLICATION_TOKEN} ghcr.io/tnaskali/bgg-api:master`
+3. run `docker run --rm -p 8080:8080 -e BGG_APPLICATION_TOKEN=${BGG_APPLICATION_TOKEN} ghcr.io/tnaskali/bgg-api:master`
 
 ## pull and run a docker native image (Linux / MacOS only)
 
@@ -69,7 +69,7 @@ Steps :
 1. run `docker pull ghcr.io/tnaskali/bgg-api-native:master` (or any other tag)
 2. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
 3. run
-   `docker run --rm -p 8080:80 -e BGG_APPLICATION_TOKEN=${BGG_APPLICATION_TOKEN} ghcr.io/tnaskali/bgg-api-native:master`
+   `docker run --rm -p 8080:8080 -e BGG_APPLICATION_TOKEN=${BGG_APPLICATION_TOKEN} ghcr.io/tnaskali/bgg-api-native:master`
 
 # Usage
 
