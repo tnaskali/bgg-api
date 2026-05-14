@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/base-debian12:latest
+FROM gcr.io/distroless/base-debian13:latest
 
 ENV SERVER_PORT=8080
 EXPOSE ${SERVER_PORT}
