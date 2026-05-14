@@ -1,0 +1,6 @@
+# Send ONLY the pre-built artifact to Docker — nothing else is needed.
+# The CI pipeline (see .github/workflows/) builds the JAR/binary in a
+# previous step, then passes the artifact via the build context.
+*
+!target/bgg-api*.jar
+!target/bgg-api
