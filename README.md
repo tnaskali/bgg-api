@@ -1,7 +1,7 @@
 # BGG-API
 
-![build status](https://github.com/tnaskali/bgg-api/actions/workflows/build-image.yml/badge.svg)
-![build status](https://github.com/tnaskali/bgg-api/actions/workflows/build-native-image.yml/badge.svg)
+![build status](https://github.com/tnaskali/bgg-api/actions/workflows/build.yml/badge.svg)
+![build status](https://github.com/tnaskali/bgg-api/actions/workflows/build-native.yml/badge.svg)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tnaskali_bgg-api&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tnaskali_bgg-api)
 
 [![BGG-API Logo](https://cf.geekdo-images.com/HZy35cmzmmyV9BarSuk6ug__small/img/gbE7sulIurZE_Tx8EQJXnZSKI6w=/fit-in/200x150/filters:strip_icc()/pic7779581.png)](https://boardgamegeek.com/using_the_xml_api#toc13)
@@ -26,10 +26,38 @@ persisting data, in a more user-friendly and developer-friendly way.
 
 ## Getting a BGG application token
 
-To use this application, you need to request and obtain an application token from BoardGameGeek. The steps are described
-in [this page](https://boardgamegeek.com/using_the_xml_api).
+To use the endpoints backend by the BGG XML API (v1, v2 and graphQL), you need to request and obtain an application
+token from BoardGameGeek. The steps are described in [this page](https://boardgamegeek.com/using_the_xml_api).
 
-## build and run a java application locally
+## run from a docker image (java)
+
+Prerequisites: have docker installed and running
+
+Steps (docker compose):
+
+1. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
+2. run `docker compose -f https://github.com/tnaskali/bgg-api.git up` to start the application
+
+Steps (docker run):
+
+1. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
+2. run `docker run --rm -p 8080:8080 -e BGG_APPLICATION_TOKEN=${BGG_APPLICATION_TOKEN} ghcr.io/tnaskali/bgg-api:master`
+
+## run from a docker image (native)
+
+Prerequisites: have docker installed and running
+
+Steps (docker compose):
+
+1. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
+2. run `docker compose -f https://github.com/tnaskali/bgg-api.git#master:docker-compose.native.yml up` to start the application
+
+Steps (docker run):
+
+1. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
+2. run `docker run --rm -p 8080:8080 -e BGG_APPLICATION_TOKEN=${BGG_APPLICATION_TOKEN} ghcr.io/tnaskali/bgg-api-native:master`
+
+## build and run an application locally (java)
 
 Prerequisites : have Java 17+ and maven installed on your machine
 
@@ -39,7 +67,7 @@ Steps :
 2. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
 3. run `mvn spring-boot:run`
 
-## build and run a native application locally
+## build and run an application locally (native)
 
 Prerequisites : have GraalVM JDK 17+ and maven installed on your machine
 
@@ -49,27 +77,6 @@ Steps :
 2. run `mvn native:compile -Pnative` to build the native image (takes about 10 minutes)
 3. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
 4. run `./target/bgg-api`
-
-## pull and run a docker java image (Linux / MacOS only)
-
-Prerequisites : have docker installed on your machine
-
-Steps :
-
-1. run `docker pull ghcr.io/tnaskali/bgg-api:master` (or any other tag)
-2. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
-3. run `docker run --rm -p 8080:8080 -e BGG_APPLICATION_TOKEN=${BGG_APPLICATION_TOKEN} ghcr.io/tnaskali/bgg-api:master`
-
-## pull and run a docker native image (Linux / MacOS only)
-
-Prerequisites : have docker installed on your machine
-
-Steps :
-
-1. run `docker pull ghcr.io/tnaskali/bgg-api-native:master` (or any other tag)
-2. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
-3. run
-   `docker run --rm -p 8080:8080 -e BGG_APPLICATION_TOKEN=${BGG_APPLICATION_TOKEN} ghcr.io/tnaskali/bgg-api-native:master`
 
 # Usage
 
