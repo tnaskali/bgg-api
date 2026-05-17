@@ -65,7 +65,7 @@ jobs:
       - name: Publish Maven artifacts
         if: github.ref == 'refs/heads/master'
         run: |
-          mvn --batch-mode deploy:deploy -DaltDeploymentRepository=github::default::${{ env.GITHUB_PACKAGE_URL }}
+          mvn --batch-mode jar:jar deploy:deploy -DaltDeploymentRepository=github::${{ env.GITHUB_PACKAGE_URL }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
