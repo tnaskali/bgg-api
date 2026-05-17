@@ -1,4 +1,4 @@
-name: build image
+name: build
 
 on:
   push:
@@ -7,14 +7,22 @@ on:
   pull_request:
     branches: [ 'master' ]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
+  APP_NAME: bgg-api
   DOCKER_REGISTRY: ghcr.io
   DOCKER_IMAGE: ${{ github.repository }}
+  DOCKER_FILE: Dockerfile
+  DOCKER_COMPOSE_FILE: docker-compose.yml
   GITHUB_PACKAGE_URL: https://maven.pkg.github.com/${{ github.repository }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: read
       packages: write
@@ -25,40 +33,39 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v6
 
-      - name: Set up Java
+      - name: Set up JDK and Maven
         uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 25
           cache: maven
 
-      - name: Build artefacts
+      - name: Build with Maven
         run: |
           mvn --batch-mode verify
 
-      # build image
-
-      - name: Build image
+      - name: Build Docker image
         uses: docker/build-push-action@v7
         with:
           context: .
-          file: dockerfiles/Dockerfile
+          file: ${{ env.DOCKER_FILE }}
           load: true
-          tags: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+          tags: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}:master
 
-      - name: Test image
+      - name: Test Docker image
+        env:
+          BGG_APPLICATION_TOKEN: dummy
         run: |
-          DOCKER_PID=$(docker run -d -p 8080:8080 --rm ${{ env.DOCKER_IMAGE }}:${{ github.sha }} 2>/dev/null)
-          sleep 10s
-          curl --fail http://localhost:8080/bgg-api/actuator/health
-          docker stop $DOCKER_PID
+          trap 'docker compose -f ${{ env.DOCKER_COMPOSE_FILE }} down --remove-orphans' EXIT
+          docker compose -f ${{ env.DOCKER_COMPOSE_FILE }} up -d --wait --wait-timeout 60
+          docker compose -f ${{ env.DOCKER_COMPOSE_FILE }} ps --format json | grep -q '"Health":"healthy"'
 
-      # deploy
+      # publish
 
-      - name: Deploy artefacts
+      - name: Publish Maven artifacts
         if: github.ref == 'refs/heads/master'
         run: |
-          mvn --batch-mode validate jar:jar deploy:deploy -DaltDeploymentRepository=github::default::${{ env.GITHUB_PACKAGE_URL }}
+          mvn --batch-mode deploy:deploy -DaltDeploymentRepository=github::default::${{ env.GITHUB_PACKAGE_URL }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -77,12 +84,12 @@ jobs:
         with:
           images: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}
 
-      - name: Deploy image
+      - name: Publish Docker image
         if: github.ref == 'refs/heads/master'
         uses: docker/build-push-action@v7
         with:
           context: .
-          file: dockerfiles/Dockerfile
+          file: ${{ env.DOCKER_FILE }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -93,13 +100,13 @@ jobs:
     if: github.ref == 'refs/heads/master'
     environment:
       name: staging
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}/bgg-api/actuator/health
+      url: ${{ steps.deploy-to-azure-webapp.outputs.webapp-url }}/bgg-api/actuator/health
 
     steps:
       - name: Deploy to Azure Web App
-        id: deploy-to-webapp
+        id: deploy-to-azure-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: bgg-api-staging
+          app-name: ${{ env.APP_NAME }}-staging
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_STAGING }}
           images: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}:master
