@@ -126,7 +126,8 @@ public class BoardgameResourceV1IT extends AbstractMockServerIT {
     @DisplayName("given remote repository answers 200")
     class Given_3 {
 
-      final String mockResponseBody = readFileContent("responses/bgg/xmlapi/v1/boardgame/200_OK.xml");
+      final String mockResponseBody =
+          readFileContent("responses/bgg/xmlapi/v1/boardgame/200_OK.xml");
 
       @BeforeEach
       public void setup() {
@@ -256,10 +257,7 @@ public class BoardgameResourceV1IT extends AbstractMockServerIT {
             @Test
             @DisplayName("should render JSON")
             void should_3() {
-              result
-                  .expectBody()
-                  .jsonPath("$.boardgames[0].objectid")
-                  .isEqualTo(822);
+              result.expectBody().jsonPath("$.boardgames[0].objectid").isEqualTo(822);
             }
           }
         }

@@ -73,8 +73,9 @@ public class BggCollectionV2Repository {
           }
           return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
         })
-        .doOnNext(
-            body -> xmlProcessor.xPathValue(body, "/errors/error/message").ifPresent(message -> {
+        .doOnNext(body -> xmlProcessor
+            .xPathValue(body, "/errors/error/message")
+            .ifPresent(message -> {
               if (message.equals("Invalid username specified")) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
               } else {

@@ -74,8 +74,9 @@ public class BggCollectionV1Repository {
           }
           return clientResponse.bodyToMono(String.class).defaultIfEmpty("");
         })
-        .doOnNext(
-            body -> xmlProcessor.xPathValue(body, "/errors/error/message").ifPresent(message -> {
+        .doOnNext(body -> xmlProcessor
+            .xPathValue(body, "/errors/error/message")
+            .ifPresent(message -> {
               if (message.equals("Invalid username specified")) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid username");
               } else {
