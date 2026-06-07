@@ -8,8 +8,8 @@ enum UserDomain {
 type PageInfo {
     hasPreviousPage: Boolean!
     hasNextPage: Boolean!
-    startIndex: Int!
-    endIndex: Int!
+    startCursor: String
+    endCursor: String
 }
 
 type Query {
@@ -43,18 +43,18 @@ type User {
     designerid: Int
     publisherid: Int
     microbadges: [Microbadge!]
-    collectionitems(subtype: CollectionSubtype!, first: Int, after: Int): CollectionItemPage
+    collectionitems(subtype: CollectionSubtype!, first: Int, after: String): CollectionItemConnection
 }
 
-type CollectionItemPage {
+type CollectionItemConnection {
+    edges: [CollectionItemEdge!]!
     pageInfo: PageInfo!
-    pageItems: [CollectionItemPageItem!]!
-    totalItems: Int!
+    totalCount: Int!
 }
 
-type CollectionItemPageItem {
-    index: Int!
-    item: CollectionItem!
+type CollectionItemEdge {
+    cursor: String!
+    node: CollectionItem!
 }
 
 enum CollectionSubtype {
