@@ -3,6 +3,7 @@ package li.naska.bgg.repository;
 import com.boardgamegeek.xml.geeklist.v1.Geeklist;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import li.naska.bgg.exception.BggAuthorizationException;
 import li.naska.bgg.exception.BggResponseNotReadyException;
 import li.naska.bgg.exception.UnexpectedBggResponseException;
 import li.naska.bgg.repository.model.BggGeeklistV1QueryParams;
@@ -54,7 +55,9 @@ public class BggGeeklistV1Repository {
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() == HttpStatus.ACCEPTED) {
+          if (clientResponse.statusCode() == HttpStatus.UNAUTHORIZED) {
+            throw new BggAuthorizationException(clientResponse);
+          } else if (clientResponse.statusCode() == HttpStatus.ACCEPTED) {
             // retry later as BGG might queue the request
             throw new BggResponseNotReadyException();
           } else if (clientResponse.statusCode() != HttpStatus.OK

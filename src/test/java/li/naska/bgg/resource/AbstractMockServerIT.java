@@ -27,6 +27,13 @@ public abstract class AbstractMockServerIT {
   @LocalServerPort
   protected int port;
 
+  protected void enqueueText(int responseCode, String mockResponseBody) {
+    enqueue(aResponse()
+        .withStatus(responseCode)
+        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
+        .withBody(mockResponseBody));
+  }
+
   protected void enqueueXml(int responseCode, String mockResponseBody) {
     enqueue(aResponse()
         .withStatus(responseCode)

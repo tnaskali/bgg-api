@@ -47,7 +47,7 @@ public class ThreadResourceV1IT extends AbstractMockServerIT {
 
     @Nested
     @DisplayName("given remote repository answers 200")
-    class Given {
+    class Given_1 {
 
       final String mockResponseBody = readFileContent("responses/bgg/xmlapi/v1/thread/200_OK.xml");
 
@@ -186,6 +186,70 @@ public class ThreadResourceV1IT extends AbstractMockServerIT {
                   .jsonPath("$.channel.title")
                   .isEqualTo("The Lord of the Rings | General Comment | BoardGameGeek");
             }
+          }
+        }
+      }
+    }
+
+    @Nested
+    @DisplayName("given remote repository answers 401")
+    class Given_2 {
+
+      @BeforeEach
+      public void setup() {
+        enqueueText(401, "Unauthorized. See https://boardgamegeek.com/using_the_xml_api");
+      }
+
+      @Nested
+      @DisplayName("when valid request")
+      class When {
+
+        private final Supplier<WebTestClient.ResponseSpec> test = () -> Do.this.partialTest.apply(
+            381021, new LinkedMultiValueMap<>(), MediaType.APPLICATION_JSON);
+
+        @Nested
+        @DisplayName("then")
+        class Then {
+
+          private WebTestClient.ResponseSpec result;
+
+          @BeforeEach
+          public void setup() {
+            result = test.get();
+          }
+
+          @Test
+          @DisplayName("should forward request")
+          void should_1() {
+            verify(
+                1,
+                getRequestedFor(urlEqualTo("/xmlapi/thread/381021"))
+                    .withHeader(HttpHeaders.ACCEPT, equalTo(MediaType.APPLICATION_XML_VALUE))
+                    .withHeader(
+                        HttpHeaders.ACCEPT_CHARSET,
+                        equalTo(StandardCharsets.UTF_8.displayName().toLowerCase())));
+          }
+
+          @Test
+          @DisplayName("should answer 401")
+          void should_2() {
+            result.expectStatus().isUnauthorized();
+          }
+
+          @Test
+          @DisplayName("should have BGG error fields")
+          void should_3() {
+            result
+                .expectBody()
+                .jsonPath("$.message")
+                .isEqualTo(
+                    "Authentication to BoardGameGeek API failed. Check your application token.")
+                .jsonPath("$.bggResponseStatusCode")
+                .isEqualTo(401)
+                .jsonPath("$.bggResponseContentType")
+                .isEqualTo("text/plain")
+                .jsonPath("$.bggRequestUri")
+                .isEqualTo("http://localhost:" + wireMock.port() + "/xmlapi/thread/381021");
           }
         }
       }

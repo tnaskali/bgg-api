@@ -2,6 +2,7 @@ package li.naska.bgg.repository;
 
 import com.boardgamegeek.xml.user.v2.User;
 import java.nio.charset.StandardCharsets;
+import li.naska.bgg.exception.BggAuthorizationException;
 import li.naska.bgg.exception.UnexpectedBggResponseException;
 import li.naska.bgg.repository.model.BggUserV2QueryParams;
 import li.naska.bgg.util.QueryParameters;
@@ -50,7 +51,9 @@ public class BggUserV2Repository {
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() == HttpStatus.NOT_FOUND
+          if (clientResponse.statusCode() == HttpStatus.UNAUTHORIZED) {
+            throw new BggAuthorizationException(clientResponse);
+          } else if (clientResponse.statusCode() == HttpStatus.NOT_FOUND
               || (clientResponse.statusCode() == HttpStatus.OK
                   && clientResponse
                       .headers()
