@@ -1,14 +1,11 @@
 package li.naska.bgg.graphql.controller;
 
-import graphql.schema.DataFetchingEnvironment;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import li.naska.bgg.graphql.data.*;
 import li.naska.bgg.graphql.model.*;
 import li.naska.bgg.graphql.model.enums.CollectionSubtype;
-import li.naska.bgg.graphql.pagination.ListPageDataFetcher;
-import li.naska.bgg.graphql.pagination.Page;
 import li.naska.bgg.graphql.service.GraphQLCollectionService;
 import li.naska.bgg.graphql.service.GraphQLUsersService;
 import li.naska.bgg.xml.common.IntegerValue;
@@ -225,11 +222,12 @@ public class UserController {
   }
 
   @SchemaMapping
-  public Mono<Page<CollectionItem>> collectionitems(
+  public Mono<CollectionItemConnection> collectionitems(
       @Argument CollectionSubtype subtype,
+      @Argument Integer first,
+      @Argument String after,
       User user,
-      DataLoader<CollectionV2Items.CollectionItemsKey, CollectionV2Items> collectionItemsLoader,
-      DataFetchingEnvironment environment) {
+      DataLoader<CollectionV2Items.CollectionItemsKey, CollectionV2Items> collectionItemsLoader) {
     return Mono.fromFuture(collectionItemsLoader.load(
             new CollectionV2Items.CollectionItemsKey(user.username(), subtype)))
         .map(collectionItems -> collectionItems.items().getItems().stream()
@@ -246,6 +244,6 @@ public class UserController {
                 .numplays(item.getNumplays())
                 .build())
             .toList())
-        .map(items -> new ListPageDataFetcher<>(items).get(environment));
+        .map(items -> CollectionItemConnection.of(items, first, after));
   }
 }
