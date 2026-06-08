@@ -2,6 +2,7 @@ package li.naska.bgg.repository;
 
 import com.boardgamegeek.xml.forumlist.v2.Forums;
 import java.nio.charset.StandardCharsets;
+import li.naska.bgg.exception.BggAuthorizationException;
 import li.naska.bgg.exception.UnexpectedBggResponseException;
 import li.naska.bgg.repository.model.BggForumlistV2QueryParams;
 import li.naska.bgg.util.QueryParameters;
@@ -49,7 +50,9 @@ public class BggForumlistV2Repository {
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK) {
+          if (clientResponse.statusCode() == HttpStatus.UNAUTHORIZED) {
+            throw new BggAuthorizationException(clientResponse);
+          } else if (clientResponse.statusCode() != HttpStatus.OK) {
             throw new UnexpectedBggResponseException(clientResponse);
           }
           return clientResponse.bodyToMono(String.class).defaultIfEmpty("");

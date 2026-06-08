@@ -4,6 +4,7 @@ import com.boardgamegeek.xml.collection.v2.Items;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.Optional;
+import li.naska.bgg.exception.BggAuthorizationException;
 import li.naska.bgg.exception.BggResponseNotReadyException;
 import li.naska.bgg.exception.UnexpectedBggResponseException;
 import li.naska.bgg.repository.model.BggCollectionV2QueryParams;
@@ -60,7 +61,9 @@ public class BggCollectionV2Repository {
         .acceptCharset(StandardCharsets.UTF_8)
         .headers(headers -> cookie.ifPresent(c -> headers.add(HttpHeaders.COOKIE, c)))
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() == HttpStatus.ACCEPTED) {
+          if (clientResponse.statusCode() == HttpStatus.UNAUTHORIZED) {
+            throw new BggAuthorizationException(clientResponse);
+          } else if (clientResponse.statusCode() == HttpStatus.ACCEPTED) {
             // retry later as BGG might queue the request
             throw new BggResponseNotReadyException();
           } else if (clientResponse.statusCode() != HttpStatus.OK

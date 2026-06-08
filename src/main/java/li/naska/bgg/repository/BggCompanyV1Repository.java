@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import li.naska.bgg.exception.BggAuthorizationException;
 import li.naska.bgg.exception.UnexpectedBggResponseException;
 import li.naska.bgg.util.XmlProcessor;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,7 +53,9 @@ public class BggCompanyV1Repository {
         .accept(MediaType.APPLICATION_XML)
         .acceptCharset(StandardCharsets.UTF_8)
         .exchangeToMono(clientResponse -> {
-          if (clientResponse.statusCode() != HttpStatus.OK
+          if (clientResponse.statusCode() == HttpStatus.UNAUTHORIZED) {
+            throw new BggAuthorizationException(clientResponse);
+          } else if (clientResponse.statusCode() != HttpStatus.OK
               || clientResponse
                   .headers()
                   .contentType()
