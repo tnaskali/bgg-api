@@ -28,7 +28,7 @@ jobs:
       # build
 
       - name: Checkout project
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Set up JDK and Maven
         uses: graalvm/setup-graalvm@v1
