@@ -58,6 +58,7 @@ debug: false
 
 server:
   port: 8080
+  address: 127.0.0.1
 
 spring:
   graphql:
