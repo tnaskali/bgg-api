@@ -3,7 +3,6 @@ package li.naska.bgg.resource.v1;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
-import jakarta.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -24,8 +23,8 @@ public class CollectionResourceV1IT extends AbstractMockServerIT {
 
   private WebTestClient webTestClient;
 
-  @PostConstruct
-  private void postConstruct() {
+  @BeforeEach
+  void postConstruct() {
     webTestClient = WebTestClient.bindToServer()
         .baseUrl("http://localhost:" + port + "/bgg-api/api/v1/collection/{username}")
         .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(2 * 1024 * 1024))

@@ -2,7 +2,6 @@ package li.naska.bgg.resource.v1;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
-import jakarta.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -23,8 +22,8 @@ public class BoardgameResourceV1IT extends AbstractMockServerIT {
 
   private WebTestClient webTestClient;
 
-  @PostConstruct
-  private void postConstruct() {
+  @BeforeEach
+  void postConstruct() {
     webTestClient = WebTestClient.bindToServer()
         .baseUrl("http://localhost:" + port + "/bgg-api/api/v1/boardgame/{id}")
         .build();

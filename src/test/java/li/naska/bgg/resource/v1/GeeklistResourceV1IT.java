@@ -3,7 +3,6 @@ package li.naska.bgg.resource.v1;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
-import jakarta.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.function.Function;
@@ -25,8 +24,8 @@ public class GeeklistResourceV1IT extends AbstractMockServerIT {
 
   private WebTestClient webTestClient;
 
-  @PostConstruct
-  private void postConstruct() {
+  @BeforeEach
+  void postConstruct() {
     webTestClient = WebTestClient.bindToServer()
         .baseUrl("http://localhost:" + port + "/bgg-api/api/v1/geeklist/{id}")
         .responseTimeout(Duration.ofSeconds(20))

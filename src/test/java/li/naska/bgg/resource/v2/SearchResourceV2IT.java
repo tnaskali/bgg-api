@@ -3,7 +3,6 @@ package li.naska.bgg.resource.v2;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
 
-import jakarta.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -24,8 +23,8 @@ public class SearchResourceV2IT extends AbstractMockServerIT {
 
   private WebTestClient webTestClient;
 
-  @PostConstruct
-  private void postConstruct() {
+  @BeforeEach
+  void postConstruct() {
     webTestClient = WebTestClient.bindToServer()
         .baseUrl("http://localhost:" + port + "/bgg-api/api/v2/search")
         .build();
