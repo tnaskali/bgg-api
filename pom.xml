@@ -68,6 +68,7 @@
     <sonar.junit.reportPaths>${project.basedir}/target/surefire-reports/,${project.basedir}/target/failsafe-reports/</sonar.junit.reportPaths>
     <springdoc-openapi.version>3.1.0</springdoc-openapi.version>
     <wiremock.version>4.2.2</wiremock.version>
+    <xalan.version>2.7.3</xalan.version>
   </properties>
 
   <dependencyManagement>
@@ -106,6 +107,18 @@
         <groupId>org.wiremock.integrations</groupId>
         <artifactId>wiremock-spring-boot</artifactId>
         <version>${wiremock.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>xalan</groupId>
+        <artifactId>xalan</artifactId>
+        <version>${xalan.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>xalan</groupId>
+        <artifactId>serializer</artifactId>
+        <version>${xalan.version}</version>
+        <scope>test</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -199,6 +212,17 @@
       <artifactId>wiremock-spring-boot</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <!-- explicit interpretive XSLT engine, required for native-image -->
+      <groupId>xalan</groupId>
+      <artifactId>xalan</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>xalan</groupId>
+      <artifactId>serializer</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -260,6 +284,10 @@
                 <version>${lombok.version}</version>
               </path>
             </annotationProcessorPaths>
+            <compilerArgs>
+              <arg>-Xlint:deprecation</arg>
+              <arg>-Werror</arg>
+            </compilerArgs>
           </configuration>
         </plugin>
         <plugin>
@@ -657,6 +685,36 @@
   </build>
 
   <profiles>
+    <profile>
+      <id>nativeTest</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <executions>
+              <!-- during native tests, process IT classes early -->
+              <execution>
+                <id>integration-test-ids</id>
+                <phase>process-test-classes</phase>
+                <goals>
+                  <goal>test</goal>
+                </goals>
+                <configuration>
+                  <includes>
+                    <include>**/*IT.java</include>
+                  </includes>
+                  <systemPropertyVariables>
+                    <junit.platform.listeners.uid.tracking.enabled>true</junit.platform.listeners.uid.tracking.enabled>
+                    <junit.platform.listeners.uid.tracking.output.dir>${project.build.directory}/test-ids</junit.platform.listeners.uid.tracking.output.dir>
+                  </systemPropertyVariables>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
     <profile>
       <id>mac-intel</id>
       <activation>
