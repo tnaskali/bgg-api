@@ -5,6 +5,10 @@ maven = "3.9.16"
 [env]
 GRAALVM_VERSION = "graalvm-community-25"
 
+[tasks."clean"]
+description = "Clean the project (delete target/)"
+run = "mvn --batch-mode clean"
+
 [tasks."check"]
 description = "Run all checks (formatting, linting)"
 depends = ["check:*"]
@@ -36,18 +40,55 @@ run = "mvn spring-boot:run"
 [tasks."native:build"]
 description = "Build the GraalVM native image"
 run = "mvn --batch-mode native:compile -Pnative"
-tools = { java = "{{env.GRAALVM_VERSION}}" }
-env = { GRAALVM_HOME = "{{env.JAVA_HOME}}" }
+tools = {
+  java = "{{env.GRAALVM_VERSION}}"
+}
+env = {
+  GRAALVM_HOME = "{{env.JAVA_HOME}}",
+  GRAALVM_QUICK_BUILD = "true"
+}
 sources = ["src/main/**/*", "src/test/**/*", "pom.xml"]
 outputs = ["target/bgg-api"]
 
 [tasks."native:test"]
 description = "Run the full test suite against a native image"
 run = "mvn --batch-mode test -PnativeTest"
-tools = { java = "{{env.GRAALVM_VERSION}}" }
-env = { GRAALVM_HOME = "{{env.JAVA_HOME}}" }
+tools = {
+  java = "{{env.GRAALVM_VERSION}}"
+}
+env = {
+  GRAALVM_HOME = "{{env.JAVA_HOME}}",
+  GRAALVM_QUICK_BUILD = "true"
+}
 
 [tasks."native:run"]
 description = "Run the compiled native image"
 run = "./target/bgg-api"
 depends = ["native:build"]
+
+[tasks."native:tracing-agent"]
+description = "Run the test suite with the GraalVM tracing agent to discover missing native-image hints"
+run = "mvn --batch-mode verify -DargLine=\"-agentlib:native-image-agent=config-output-dir=target/native-agent-config\""
+tools = {
+  java = "{{env.GRAALVM_VERSION}}"
+}
+
+[tasks."docker:build"]
+description = "Build the Docker image (standard JVM jar)"
+depends = ["build"]
+run = "docker compose -f docker-compose.yml build"
+
+[tasks."docker:run"]
+description = "Run the application in Docker (standard JVM jar)"
+depends = ["docker:build"]
+run = "docker compose -f docker-compose.yml up"
+
+[tasks."docker:build:native"]
+description = "Build the Docker image (GraalVM native executable)"
+depends = ["native:build"]
+run = "docker compose -f docker-compose.native.yml build"
+
+[tasks."docker:run:native"]
+description = "Run the application in Docker (GraalVM native executable)"
+depends = ["docker:build:native"]
+run = "docker compose -f docker-compose.native.yml up"
