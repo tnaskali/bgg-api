@@ -1,6 +1,5 @@
 package li.naska.bgg.configuration;
 
-import io.swagger.v3.core.util.PrimitiveType;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -21,10 +20,6 @@ import org.springframework.context.annotation.ImportRuntimeHints;
 @SecurityScheme(name = "basicAuth", type = SecuritySchemeType.HTTP, scheme = "basic")
 @ImportRuntimeHints(OpenApiConfiguration.OpenApiRuntimeHints.class)
 public class OpenApiConfiguration {
-
-  static {
-    PrimitiveType.enablePartialTime();
-  }
 
   @Bean
   public GroupedOpenApi bggApiV1() {
