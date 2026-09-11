@@ -6,104 +6,76 @@
 
 [![BGG-API Logo](https://cf.geekdo-images.com/HZy35cmzmmyV9BarSuk6ug__small/img/gbE7sulIurZE_Tx8EQJXnZSKI6w=/fit-in/200x150/filters:strip_icc()/pic7779581.png)](https://boardgamegeek.com/using_the_xml_api#toc13)
 
-Spring Boot application acting as a proxy to
-BoardGameGeek's [XML API](https://boardgamegeek.com/wiki/page/BGG_XML_API), [XML API 2](https://boardgamegeek.com/wiki/page/BGG_XML_API2)
-and [JSON API](https://boardgamegeek.com/wiki/page/BGG_JSON_API). Its purpose is to expose the same functionalities,
-mainly retrieving but also
-persisting data, in a more user-friendly and developer-friendly way.
+Spring Boot application acting as a proxy to BoardGameGeek's
+[XML API](https://boardgamegeek.com/wiki/page/BGG_XML_API), [XML API 2](https://boardgamegeek.com/wiki/page/BGG_XML_API2)
+and [JSON API](https://boardgamegeek.com/wiki/page/BGG_JSON_API), exposing the same data in a more user- and
+developer-friendly way.
 
-# Features
+## Features
 
-- Static BGG XML API schemas in XSD format (located under [src/main/xsd](src/main/xsd))
-- Proxied XML and Json API for querying data based on their public API (no authentication required)
-- Proxied Json API for mutating data (e.g. logging games) based on their public API (basic authentication required)
-- (in progress) custom GraphQL API unifying these different API endpoints (schema
-  under [src/main/resources/graphql](src/main/resources/graphql)) and GraphiQL UI (/bgg-api/graphiql) web interface
-- OpenAPI definition and Swagger UI (/bgg-api/swagger-ui.html) web interface
-- Support for building both Java and native artifacts and images
+- Static BGG XML API schemas in XSD format (under [src/main/xsd](src/main/xsd))
+- Proxied XML/JSON API for querying data (no authentication required)
+- Proxied JSON API for mutating data, e.g. logging plays (basic authentication required)
+- (in progress) Custom GraphQL API unifying these endpoints (schema under
+  [src/main/resources/graphql](src/main/resources/graphql)), with a GraphiQL UI
+- OpenAPI definition with a Swagger UI
+- Java and GraalVM native builds/images
 
-# Setup
+## Prerequisites
 
-## Getting a BGG application token
+- A BGG application token, required for the XML API v1, v2 and GraphQL endpoints: request one from
+  [this page](https://boardgamegeek.com/using_the_xml_api)
+- One of
+  - run `mise install` after [installing Mise](https://mise.jdx.dev/getting-started.html) to bootstrap the pinned
+    Java, Maven and GraalVM versions from [mise.toml](mise.toml) in one step
+  - install Maven, a JDK 17+ or a GraalVM JDK 17+ (only for native builds)
+- Docker if planning to build and run the app in a container
 
-To use the endpoints backend by the BGG XML API (v1, v2 and graphQL), you need to request and obtain an application
-token from BoardGameGeek. The steps are described in [this page](https://boardgamegeek.com/using_the_xml_api).
+## Getting started
 
-## run from a docker image (java)
+Set your token once:
 
-Prerequisites: have docker installed and running
+```shell
+export BGG_APPLICATION_TOKEN=your-token-here
+```
 
-Steps (docker compose):
+Then start the application with any of the following.
 
-1. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
-2. run `docker compose -f https://github.com/tnaskali/bgg-api.git up` to start the application
+Out of the box, using published images — only Docker required:
 
-Steps (docker run):
+| tool | JVM | Native image |
+| --- | --- | --- |
+| Docker | `docker run --rm -p 8080:8080 -e BGG_APPLICATION_TOKEN=${BGG_APPLICATION_TOKEN} ghcr.io/tnaskali/bgg-api` | `docker run --rm -p 8080:8080 -e BGG_APPLICATION_TOKEN=${BGG_APPLICATION_TOKEN} ghcr.io/tnaskali/bgg-api-native` |
+| Docker Compose | `docker compose -f https://github.com/tnaskali/bgg-api.git up` | `docker compose -f https://github.com/tnaskali/bgg-api.git#master:docker-compose.native.yml up` |
 
-1. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
-2. run `docker run --rm -p 8080:8080 -e BGG_APPLICATION_TOKEN=${BGG_APPLICATION_TOKEN} ghcr.io/tnaskali/bgg-api:master`
+From a local clone, building from source — Mise or the whole build toolchain required:
 
-## run from a docker image (native)
+| tool | JVM | Native image |
+| --- | --- | --- |
+| Mise | `mise run run` | `mise run native:run` |
+| Mise (Docker) | `mise run docker:run` | `mise run docker:run:native` |
+| Maven | `mvn spring-boot:run` | `mvn native:compile -Pnative && ./target/bgg-api` |
+| Maven + Docker | `mvn package && docker compose up --build` | `mvn native:compile -Pnative && docker compose -f docker-compose.native.yml up --build` |
 
-Prerequisites: have docker installed and running
+Once running, the API is available at http://localhost:8080/bgg-api.
 
-Steps (docker compose):
+## Usage
 
-1. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
-2. run `docker compose -f https://github.com/tnaskali/bgg-api.git#master:docker-compose.native.yml up` to start the application
+### Web interfaces
 
-Steps (docker run):
+- Swagger UI: http://localhost:8080/bgg-api/swagger-ui.html
+- GraphiQL UI: http://localhost:8080/bgg-api/graphiql
 
-1. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
-2. run `docker run --rm -p 8080:8080 -e BGG_APPLICATION_TOKEN=${BGG_APPLICATION_TOKEN} ghcr.io/tnaskali/bgg-api-native:master`
+### Authentication
 
-## build and run an application locally (java)
+Some JSON API endpoints require basic authentication using your BGG username and password, which is exchanged
+under the hood for a session cookie used to authenticate requests to BGG. Credentials are sent over plain HTTP
+between your client and the locally running application, and kept in memory only for the duration of the session;
+BGG itself is always accessed over HTTPS.
 
-Prerequisites : have Java 17+ and maven installed on your machine
+### Sample request: log a play
 
-Steps :
-
-1. clone this repository on your local machine
-2. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
-3. run `mvn spring-boot:run`
-
-## build and run an application locally (native)
-
-Prerequisites : have GraalVM JDK 17+ and maven installed on your machine
-
-Steps :
-
-1. clone this repository on your local machine
-2. run `mvn native:compile -Pnative` to build the native image (takes about 10 minutes)
-3. set your BGG application token through the `BGG_APPLICATION_TOKEN` environment variable
-4. run `./target/bgg-api`
-
-# Usage
-
-## Web interfaces
-
-### Swagger UI
-
-The Swagger UI is available at http://localhost:8080/bgg-api/swagger-ui.html once the application is running.
-
-### GraphiQL UI
-
-The GraphiQL UI is available at http://localhost:8080/bgg-api/graphiql once the application is running.
-
-## Authentication
-
-Some JSON API endpoints require authentication. Only basic authentication using your BGG username and password is
-supported. Under the hood, these will be exchanged for a session cookie used to authenticate requests to BGG.
-
-### A word about security
-
-Credentials will be transmitted in clear using unsecured HTTP protocol from your browser to the locally running Spring
-Boot application and will only be kept in memory for the duration of the session. The API itself will use a secure HTTPS
-connection to perform authentication to BGG.
-
-## Sample request body for logging a play
-
-endpoint: /bgg-api/api/v3/geekplay (POST, basic auth)
+`POST /bgg-api/api/v3/geekplay` (basic auth)
 
 ```json
 {
@@ -134,9 +106,9 @@ endpoint: /bgg-api/api/v3/geekplay (POST, basic auth)
 }
 ```
 
-## Sample graphQL user query
+### Sample request: GraphQL user query
 
-endpoint: /bgg-api/graphql (POST, no auth)
+`POST /bgg-api/graphql` (no auth)
 
 ```graphql
 {
@@ -184,25 +156,30 @@ endpoint: /bgg-api/graphql (POST, no auth)
 }
 ```
 
-# Terms of use
+## Development
 
-This is just a proxy to BoardGameGeek's API, so
-[their terms of use](https://boardgamegeek.com/wiki/page/XML_API_Terms_of_Use#) still apply. Be sure to read them
-before deciding to use this API.
+Build and test commands can be run either directly with Maven or, if you have [Mise](https://mise.jdx.dev)
+installed, via the task shortcuts it defines in [mise.toml](mise.toml) (Mise also pins the exact Java, Maven and
+GraalVM versions used by this project — entirely optional).
 
-# Credits and inspirations
+| task | mvn | Mise |
+| --- | --- | --- |
+| clean `target/` | `mvn clean` | `mise run clean` |
+| check formatting/linting | `mvn spotless:check` | `mise run check` |
+| apply formatting | `mvn spotless:apply` | `mise run fix` |
+| package (+ unit tests) | `mvn package` | `mise run build` |
+| full test suite (unit + IT) | `mvn verify` | `mise run test` |
+| build native image | `mvn native:compile -Pnative` | `mise run native:build` |
+| test suite against native image | `mvn test -PnativeTest` | `mise run native:test` |
+| build Docker image (JVM) | `docker compose -f docker-compose.yml build` | `mise run docker:build` |
+| build Docker image (native) | `docker compose -f docker-compose.native.yml build` | `mise run docker:build:native` |
 
-- BGG's XML API 2 : https://boardgamegeek.com/wiki/page/BGG_XML_API2
-- BGG's database structure : https://boardgamegeek.com/wiki/page/Database_Structure
-- Fisico's thread on BGG forum : https://boardgamegeek.com/thread/1010057/xml-schema-for-bgg-xml-api2
-- Reddit Thread on how to log plays
-  programmatically : https://www.reddit.com/r/boardgames/comments/ez86me/uploading_games_plays_to_bgg_programmatically/
-- Baeldung's tutorial on Spring Security Custom Authentication
-  Provider : https://www.baeldung.com/spring-security-authentication-provider
+## Terms of use
 
-# Extras
+This is just a proxy to BoardGameGeek's API, so [their terms of use](https://boardgamegeek.com/wiki/page/XML_API_Terms_of_Use#)
+still apply.
 
-## BGG Data model
+## Data model
 
 ```mermaid
 classDiagram
@@ -259,3 +236,15 @@ classDiagram
     Geekitem <|-- Weblink
 
 ```
+
+## Credits
+
+- BGG's XML API 2: https://boardgamegeek.com/wiki/page/BGG_XML_API2
+- BGG's database structure: https://boardgamegeek.com/wiki/page/Database_Structure
+- Fisico's thread on BGG forum: https://boardgamegeek.com/thread/1010057/xml-schema-for-bgg-xml-api2
+- Reddit thread on how to log plays programmatically: https://www.reddit.com/r/boardgames/comments/ez86me/uploading_games_plays_to_bgg_programmatically/
+- Baeldung's tutorial on Spring Security custom authentication provider: https://www.baeldung.com/spring-security-authentication-provider
+
+## License
+
+[Unlicense](LICENSE) — public domain.
