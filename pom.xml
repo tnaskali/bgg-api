@@ -67,7 +67,7 @@
     <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml,${project.basedir}/target/site/jacoco-it/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     <sonar.junit.reportPaths>${project.basedir}/target/surefire-reports/,${project.basedir}/target/failsafe-reports/</sonar.junit.reportPaths>
     <springdoc-openapi.version>3.1.1</springdoc-openapi.version>
-    <wiremock.version>4.2.2</wiremock.version>
+    <wiremock.version>4.2.3</wiremock.version>
     <xalan.version>2.7.3</xalan.version>
   </properties>
 
