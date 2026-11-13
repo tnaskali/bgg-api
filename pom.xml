@@ -58,7 +58,7 @@
     <java.version>17</java.version>
     <jsoup.version>1.24.1</jsoup.version>
     <maven.jacoco.version>0.8.16</maven.jacoco.version>
-    <maven.jaxb2.version>4.2.0</maven.jaxb2.version>
+    <maven.jaxb2.version>4.3.0</maven.jaxb2.version>
     <maven.sonar.version>5.8.0.7211</maven.sonar.version>
     <maven.spotless.version>3.11.0</maven.spotless.version>
     <palantir-java-format.version>2.103.0</palantir-java-format.version>
